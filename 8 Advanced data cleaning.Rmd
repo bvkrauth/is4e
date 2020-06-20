@@ -1,0 +1,46 @@
+---
+title: "Chapter 6: Advanced data cleaning with Excel"
+author: "ECON 233, Brian Krauth"
+date: "Spring 2021"
+output: 
+  html_document:
+    theme: paper
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter overview
+
+In this chapter we will learn how to:
+
+ - DDD
+ - EEE
+ 
+
+# Finding data
+
+# Managing data files
+
+## CSV files
+
+## Files in other formats
+
+### Fixed width
+
+### Tab-delimited
+
+### Text to columns
+
+# Excel Tables
+
+https://support.office.com/en-us/article/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c. 
+
+# Linking and merging data across tables
+
+## Using HLOOKUP and VLOOKUP
+

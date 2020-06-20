@@ -1,0 +1,257 @@
+---
+title: "Chapter 4: Basic data analysis with Excel"
+author: "ECON 233, Brian Krauth"
+date: "Spring 2021"
+output: 
+  html_document:
+    theme: paper
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter overview
+
+In this chapter we will:
+
+ - Follow good data management practices 
+ - Use formulas in Excel
+ - Gather resources and tools, including all needed computer software.
+
+# Preliminaries
+
+1. Make a new working copy of [data file]. Call it Chapter4.xlsx.
+2. Open your new file.
+
+# Some basic statistics
+
+We will start by calculating simple averages for all of our variables
+and reporting them at the bottom of the table.
+
+1. Go to cell C7 in Table 1. We are going to calculate and report the
+   average value of this variable (Income).
+2. Enter "=AVERAGE(C2:C5)" in cell C7.
+   - You will see that cell C7 now displays the average income in the
+     table.
+3. Copy the contents of cell C7 to cells A7:F7.
+  - For numeric variables, row 7 now displays the column average.
+  - For text variables, row 7 displays the error code "#DIV/0!"
+    because there are no numbers to average. This is kind of ugly
+    but we will leave it alone for now.
+
+You will notice that we left an empty row between our data and
+these averages. That is on purpose: that empty row
+tells Excel that the rows below it are not part of the data.
+For example, you can still use sorting and filtering on the
+data.
+
+We could add all sorts of additional statistics below our
+averages, but let's go a little fancier.
+
+# Constructing a table of summary statistics
+
+We are going to create a nice table of summary statistics
+for all of our variables, and put it in a separate worksheet.
+In the course of doing so, we will learn some new tricks.
+
+First we will create a new worksheet:
+
+1. Click on the "+" button at the bottom of the screen to 
+   create a blank new worksheet. 
+  - Excel will give it some default name like "Sheet1"
+2. Double click on the new worksheet tab, and enter 
+   a better name for the worksheet: "Table 1 summary"
+   
+The first column will be the names of the statistics themselves.
+
+- Enter "Statistic" in cell A1
+- Enter "Count" in cell A2
+- Enter "Average" in cell A3
+- Enter "StdDev" in cell A4
+- Enter "Min" in cell A5
+- Enter "Median" in cell A6
+- Enter "Max" in cell A7
+
+The first row will be the names of the variables. We could just copy-paste
+them from the other worksheet but let's do something more sophisticated:
+
+1. Go to cell B1. Type "=" but *don't hit enter*.
+2. Click on the tab for Table 1, and then click on cell A1 in Table 1.
+   - The formula bar now says "='Table 1'!A1"
+3. Hit enter. 
+   - You should now be back in cell B1 in Table 2.
+   - The contents of cell B2 should be listed in the formula bar as "='Table 1'!A1" 
+   - Cell B2 should display "Name" (the contents of cell A1 in Table 1!).
+4. Copy the contents of cell B1 to cells C1:F1.
+   
+What have we done here? We have constructed a formula that successfully 
+references a cell in another worksheet. Note that the relative references
+are even copied over correctly. 
+
+Now let's fill in the statistics, starting with column D (Income).
+
+- Report the number of (numeric) values in row 2, using the function COUNT().
+- Report the average in row 3, using the function AVERAGE().
+- Report the standard deviation in row 4, using the function STDEV.S().
+- Report the minimum in row 5, using the function MIN().
+- Report the median in row 6, using the function MEDIAN().
+- Report the maximum in row 7, using the function MAX().
+
+Our table now has all of the information we need, but it is still
+kind of ugly. 
+
+The first problem is that the columns may be too narrow or too
+wide. If a column is too narrow, some of its values will display
+as "####". There are many different ways to adjust row heights 
+and column widths, but here is the simplest:
+
+1. Select the whole sheet by clicking in the upper left corner.
+2. Select "Format" from the ribbon, and then "AutoFit Column Width".
+
+Not only will this make everything fit, it will automatically adjust
+the width as necessary when anything changes.
+
+The second problem is that the non-numeric 
+variables have error codes for several statistics, and nonsense
+values for some others (the minimum value of "Name" is reported
+as 0). We could just exclude these variables, but it's better
+to just improve the reporting.
+
+1. Cell B2 (count) is fine and can be left alone.
+2. Cell B3 (average) gives an error code. We can make this nicer by using the IF()
+   function.  Replace "=AVERAGE('Table 1'!A2:A5)" with 
+   "=IF(B2>0,AVERAGE('Table 1'!A2:A5),"")"
+   - Cell B3 now displays as blank 
+   - It isn't really blank, it contains a formula
+     that returns the zero-length string ""
+3. Copy cell B3 to cells C3:F3.
+   - The non-numeric variables display as blank
+   - The numeric variables display the average.
+4. Do the same thing for the other statistics.
+
+Finally, let's make the display formatting a little nicer.
+
+1. Select the top row and make it **bold**.
+2. Select the first column and make it *italics*.
+3. Adjust the number formats to look nice. 
+   - There are many options here, so play with it 
+     and see what works.  
+   - Remember that the number display format has no effect 
+     on the number itself.
+   - By default, Excel (and most similar programs) reports
+     results to more decimal places than necessary.
+     There is no need to report average income to the 
+     nearest cent, or average log income to the 12th 
+     decimal place. Use the "Decrease Decimal"
+     button aggressively to make your table more 
+     readable.
+
+# Constructing a bar graph
+
+Now we are going to start constructing some basic graphs.
+
+The simplest kind of graph is a ***bar graph***.
+It takes a categorical variable and uses bars of different length
+to represent the number of observations in each category.
+
+## Initial construction
+
+To start constructing a bar graph:
+
+1. Select "Insert" from the menu.
+2. Highlight cells C2:C5.
+3. Click on the "Recommended charts" button.
+4. Excel will recommend a bar graph here, so just click "OK".
+
+Excel will create a new worksheet containing your bar graph.
+
+As you can see, basic bar graphs are quite simple: there 
+is a bar for each category, and the length of the bar 
+tells us the total number of observations that fall in 
+each category.
+
+## Adjusting the format
+
+The default graph conveys more or less the information 
+we want, so we could just leave it as is. But 
+we might want to make it look nicer for a presentation.
+Here are a few things we can do:
+
+- The default graph uses vertical bars (what Excel calls a 
+  "column chart") but we might prefer horizontal bars
+  (what Excel calls a "bar chart").  To do this just:
+  1. Click on the graph
+  2. Select "Design" from the menu. 
+  3. Click on "Change Chart Type" in the ribbon.
+  4. Select "Bar" from the list on the left and click on the "OK" button.
+- You can switch between preset chart "styles" 
+  1. Click on the graph
+  2. Select "Design" from the menu. 
+  3. The ribbon will now display several styles, you can just click on any of them.
+     You can also click on "Change colors" to use a different color scheme.
+- You can change the style or content of individual elements. For example,
+  suppose you want to change the title. Just:
+  1. Double-click on the current title
+  2. Type a new title.
+
+There are other things that you *could* do that I do not recommend:
+
+- You could make your bar chart a 3D bar chart.
+- You could make your bar chart a pie chart.
+
+Both 3D bar charts and pie charts (and especially 3D pie charts)
+are popular because they look cool.  But research on how people
+process information usually find that they are *less* informative
+in practice because people are much better at evaluating 
+the relative size of two lines or rectangles than they are at
+evaluating the relative size of two 3D boxes or pie slices.
+
+## Adjusting the structure
+
+By default, our bar chart shows the total *number* of observations
+in each category. We might be more interested in seeing 
+how many observations are in each category as a *percentage*
+of all observations. 
+
+Unfortunately, figuring out how to do that requires that we get
+into the weeds of Excel's "PivotChart" tools. Fortunately,
+I've figured out and will just tell you how to do it:
+
+1. Click on the graph
+2. Find the button in the graph marked "Count of Gender" and 
+   right-click on it. It will open a little menu (context menu).
+3. Select "Value Field Settings" from the context menu.
+   A dialog box will appear.
+4. Click on the "Show Values As" tab.
+5. Go to the drop-down list and select "% of Grand Total", then click
+   the OK button.
+   
+Your graph will now display percentages rather than counts. Notice
+that the appearance of the graph hasn't changed, only the units.
+
+# Constructing a histogram
+
+A ***histogram*** is a special kind of bar graph for numeric
+variables.  It is constructed by sorting the variable's values 
+into some number of equally-sized ***bins*** and then
+plotting a bar graph of the bins.
+
+## A simple histogram
+
+Let's construct a histogram of our Income variable.
+
+1. Select cells C2:C5.
+2. Select "Insert" from the menu bar.
+3. Click on the ribbon button marked "Insert statistic chart" and then select the histogram.
+
+Our graph will appear.  To explain what's going on: 
+
+- Excel has decided to form two bins, one covering the income range from 30k-75k, and 
+  the other covering the range from 75k-120k.  
+- There are three observations (Betty, Joe, and Sue)in the first 
+  bin, and one observation (Al) in the second bin.
+

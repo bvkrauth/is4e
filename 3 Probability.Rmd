@@ -1,0 +1,896 @@
+---
+title: 'Chapter 3: Probability and random events'
+author: "ECON 233, Brian Krauth"
+date: "Spring 2021"
+output:
+  html_document:
+    number_sections: yes
+    theme: paper
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(VennDiagram)
+library(RColorBrewer)
+```
+
+# Chapter overview
+
+In this chapter we will learn how to:
+
+ - Model random events using the tools of probability
+ - Calculate and interpret marginal, joint, and conditional probabilities
+ - Interpret and use the assumptions of independence and equal outcome probability
+
+We will also review some math needed to learn these skills.
+
+   - Sets
+   - Functions
+   - Sequences, limits and summations
+
+# Mathematical background
+
+I'll start by reviewing some math we will use. All of this math is covered
+in an introductory calculus class so most of you have seen it before.
+Those of you who are currently taking introductory calculus will see
+it in that class soon enough.
+
+But you may have forgotten it, or never understood it in the first place.
+So I will go briefly through the most important terminology and ideas.
+If there's anything you don't understand please ask me to clarify. 
+
+## Sets
+
+The most fundamental notion in mathematics is the idea of a ***set***. 
+A set is typically described as a collection or gathering
+of distinct objects. These objects are called the ***elements*** 
+of the set.
+
+### Defining a set
+
+We have several ways of defining or describing sets. The simplest is ***enumeration***, 
+which means you just list the elements:
+$$A = \{1,2,3\}$$
+$$B = \{Avocado, Banana\}$$
+
+Notice that the list of elements is surrounded by curly brackets.
+
+A second way of defining a set is to use ***set-builder notation***.
+Set builder notation defines sets in terms of rules they must satisfy.
+For example:
+
+$$C = \{x \in B: x \textrm{ is yellow} \}$$
+
+We read this as "$C$ is the set of all $x$ in the set $B$ such that $x$ is yellow." In other words:
+
+ - Avocados are not in set $C$ because they are not yellow. 
+ - Bananas are in set $C$ because they are in set $B$ and they are yellow. 
+ - Lemons are not in set $C$ because they are not in set $B$.
+
+We sometimes leave the initial set implicit:
+   $$C = \{x: x \textrm{ is yellow} \}$$
+We would interpret this as saying that $C$ is the set of *everything* that is yellow.
+
+There are a few special sets defined by convention:
+
+ - The ***empty set***, usually written $\emptyset$,
+   is a set with no elements.
+ - The ***universal set*** (usually written $\mathbb{U}$) 
+   is the set of "everything" we might be talking about in
+   a given context. The universal set is usually implicit, 
+   though we will occasionally need to define it explicitly.
+ - The set of ***integers*** is usually written as $\mathbb{Z}$.
+ - The set of ***rational*** numbers is usually written as $\mathbb{Q}$.
+ - The set of ***real numbers*** is usually written as $\mathbb{R}$.
+ - The set of positive integers is $\mathbb{Z}_+$, the set of 
+   positive real numbers is $\mathbb{R}_+$, etc.
+
+Finally, we will often use ***Venn diagrams***, which 
+visually depict the relationship between one or more sets.
+Some students find them helpful in understanding these relationships,
+and in learning some of the terms and results we will be discussing
+shortly.  The Venn diagrams below show an arbitrary set $A$ 
+whose elements are members of the universal set $\mathbb{U}$.
+
+```{r, venn_a, echo = FALSE}
+grid.draw(venn.diagram(
+  main = "This Venn diagram depicts a single set A within a universal set U",
+  x = list(c(1),
+           c(1,2,3,4,5,6,7,8)),
+  category.names = c("A", "U" ),
+  fill = c("blue",
+           "white"),
+  cat.dist = -0.01,
+  alpha = 0.5,
+  cex = 0,
+#  output=TRUE,
+  filename = NULL
+))
+```
+
+### Characteristics of a set
+
+The ***cardinality*** of the set $A$, usually written $|A|$, 
+is simply the number of elements it has. For example:
+
+$$|\{1,2,3\}| = 3$$
+$$|\{Avocado,Banana\}| = 2$$
+$$|\mathbb{Z}| = \infty$$ 
+$$|\emptyset| = 0$$
+
+- $A$ is a ***singleton*** if $|A| = 1$.
+- $A$ is a ***finite set*** if $|A|$ is a finite number. 
+
+### Set algebra
+ 
+Let $A$ and $B$ be two sets. We have several ways of describing
+how they are related:
+
+ - $A$ and $B$ are ***identical*** (written $A = B$) if they contain the same elements.
+   Order does not matter. For example:
+   $$\{1,2\} = \{1,2\}$$
+   $$\{1,2\} = \{2,1\}$$
+   $$\{1,2\} \neq \{1,2,3\}$$
+   $$\{1,2\} \neq \{1,3\}$$
+ - $A$ and $B$ are ***disjoint*** if they have no elements in common. 
+   For example:
+   - $\{1,2\}$ and $\{3,4\}$ are disjoint.
+   - $\{1,2,3\}$ and $\{3,4\}$ are not disjoint.
+ - $A$ is a ***subset*** of $B$ (written $A \subseteq B$ or $A \subset B$ ) if all elements 
+   of $A$ are also elements of $B$. 
+   For example:
+   $$\{1,2\} \subset \{1,2\}$$
+   $$\{1,2\} \subset \{1,2,3\}$$
+   $$\{1,2\} \not\subset \{1,3\}$$
+ - $A$ is a ***strict subset*** of $B$ (written $A \subsetneq B$) if 
+   $A \subseteq B$ and $A \neq B$. 
+   For example:
+   $$\{1,2\} \not\subsetneq \{1,2\}$$
+   $$\{1,2\} \subsetneq \{1,2,3\}$$
+   $$\{1,2\} \not\subsetneq \{1,3\}$$
+
+
+```{r, venn_disjoint, echo = FALSE}
+grid.draw(venn.diagram(
+  main = "This Venn diagram depicts two disjoint sets A and B",
+  x = list(c(1,2),
+           c(3,4)),
+  category.names = c("A", "B"),
+  fill = c("blue",
+           "blue"),
+  cat.dist = -0.01,
+  alpha = 0.5,
+  cex = 0,
+  filename = NULL
+))
+```
+
+
+```{r, venn_subset, echo = FALSE}
+grid.draw(venn.diagram(
+  main = "This Venn diagram depicts a set A that is a subset of another set B",
+  x = list(c(2),
+           c(1,2,3,4)),
+  category.names = c("A", "B"),
+  fill = c("blue",
+           "blue"),
+  cat.dist = -0.01,
+  alpha = 0.5,
+  cex = 0,
+  filename = NULL
+))
+```
+
+We can also perform various mathematical operations on sets.
+
+- The ***intersection*** of $A$ and $B$ (usually written $A \cap B$) 
+   is the set of everything that is an element of both $A$ *and* $B$.
+   $$A \cap B = \{x: x \in A \textrm{ and } x \in B\}$$
+   For example:
+   $$\{1,2\} \cap \{3,4\} = \emptyset$$
+   $$\{1,2,3\} \cap \{3,4\} = \{3\}$$
+- The ***union*** of $A$ and $B$ (usually written $A \cup B$)
+   is the set of everything that is in $A$ *or* $B$ (or both):
+      $$A \cup B = \{x: x \in A \textrm{ or } x \in B\}$$
+   For example:
+   $$\{1,2\} \cup \{3,4\} = \{1,2,3,4\}$$
+   $$\{1,2,3\} \cup \{3,4\} = \{1,2,3,4\}$$
+- The ***complement*** of $A$ ***in*** $B$, also called the ***set difference***
+   is written as $B - A$ or $B \setminus A$ and defined as the set of everything 
+   in $B$ that is *not* in $A$:
+   $$ B - A = \{x \in B: x \notin A\}$$
+
+   We will also refer to the ***complement*** of $A$, which is written
+   $A'$, $\neg A$ or $A^c$, and is simply everything that is not in $A$:
+   $$ A^c = \mathbb{U} - A = \{x: x \notin A\}$$
+
+The combination of these basic definitions, relationships (identity, 
+element, subset) and operations (union, intersection, complement) 
+are collectively called ***set algebra***.
+   
+```{r, venn_intersection, echo = FALSE}
+grid.draw(venn.diagram(
+  main = "The dark-shaded area is the intersection of A and B. The union is all shaded areas",
+  x = list(c(1,2,3,4),
+           c(4,5,6,7)),
+  category.names = c("A", "B"),
+  fill = c("blue",
+           "blue"),
+  cat.dist = -0.01,
+  alpha = 0.25,
+  cex = 0,
+  filename = NULL
+))
+```
+
+
+```{r, venn_complement, echo = FALSE}
+grid.draw(venn.diagram(
+  main = "A' is the shaded area",
+  x = list(c(1),
+           c(1,2,3)),
+  category.names = c("A", "U"),
+  fill = c("white",
+           "blue"),
+  cat.dist = -0.01,
+  alpha = c(1,0.25),
+  cex = 0,
+  filename = NULL
+))
+```
+
+### Standard results about sets
+
+Given the basic components of set algebra, we can establish many useful rules. 
+This is not a course on set theory, so I will simply list some of the most important rules
+for your reference. None of these rules is difficult to prove, and most of them should 
+make intuitive sense to you.
+
+   - Non-negative cardinality: 
+      $$|A| \geq 0$$
+   - Cardinality of unions: 
+      $$|A \cup B| = |A| + |B| -|A \cap B| \leq |A| + |B|$$
+   - Cardinality of intersections: 
+      $$|A \cap B| \leq min(|A|,|B|)$$
+   - Commutative laws:
+      $$A \cup B = B \cup A$$
+      $$A \cap B = B \cap A$$
+   - Associative laws:
+      $$(A \cup B) \cup C = A \cup (B \cup C)$$
+      $$(A \cap B) \cap C = A \cap (B \cap C)$$
+   - Distributive laws:
+      $$A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
+      $$A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
+   - Identity laws:
+      $$A \cup \emptyset = A$$
+      $$A \cap \mathbb{U} = A$$
+   - Complement laws:
+      $$A \cup A^c = \mathbb{U}$$
+      $$A \cap A^c = \emptyset$$
+      $$\mathbb{U}^c = \emptyset$$
+      $$\emptyset^c = \mathbb{U}$$
+   - Double-complement law:
+      $$(A^c)^c = A$$
+   - Idempotent laws:
+      $$A \cup A = A$$
+      $$A \cap A = A$$
+   - Domination laws:
+      $$A \cup \mathbb{U} = \mathbb{U}$$
+      $$A \cap \emptyset = \emptyset$$
+   - DeMorgan's laws:
+      $$(A \cup B)^c = A^c \cap B^c$$
+      $$(A \cap B)^c = A^c \cup B^c$$
+
+Notice that these rules generally come in pairs, with union and intersection switched. This
+duality is a general feature of set algebra.
+
+## Functions
+
+### Definition of a function
+
+A ***function*** is a rule that matches ("maps") elements of one set (called the ***domain***
+of the function) to elements of another set (called the ***range*** of the function).
+
+We will use the notation $f: D \rightarrow R$ to declare that a particular function $f$ has 
+domain $D$ and range $R$. For example:
+
+   - $f:\mathbb{R} \rightarrow \mathbb{R}$ means that the function $f$ takes a
+      real number, and returns a real number.
+   - $g:\mathbb{Z}_+ \rightarrow \{0,1\}$ means that the function $g$ takes a
+      positive integer, and returns either zero or one.
+   - $s: \{Avocado,Banana,Cantaloupe\} \rightarrow \mathbb{Z}$ means that the function $s$
+      takes either $Avocado$, $Banana$ or $Cantaloupe$ and returns an integer.
+
+If a function has a finite domain, we can define it by enumeration. For example:
+   $$s(Avocado) = 1$$
+   $$s(Banana) = 0$$
+   $$s(Cantaloupe) = 500$$
+We can also define a function by mathematical expression:
+   $$f(x) = x^2$$
+   $$g(y) = \ln(y)$$
+Finally we can just refer to a function without defining exactly what it is,
+just like we can talk about a variable $x$ or a set $A$ without assigning
+it a particular value.
+
+WARNING: Students sometimes confuse functions and multiplication because of the way we 
+conventionally write functions, students sometimes get confused. Suppose I write this:
+   $$z = f(x+y)$$
+There are two possible interpretations of this statement:
+
+   1. $f$ is a number, so $z$ is equal to the number $f$ times the number $(x+y)$.
+   2. $f$ is a function, so $z$ is equal to the function $f$ applied to the 
+      number $(x+y)$.
+
+It is sometimes clear from the context which  of these interpretations is correct 
+in a given problem. But please ask if you aren't sure.
+
+### The indicator function
+
+The ***indicator function*** is a special kind of function whose argument
+is a *statement*. The indicator function returns a value of 1
+if the statement is true, and 0 if it is false. For example:
+
+$$I(3 < 5) = 1$$
+$$I(3 = 5) = 0$$
+$$I(\textrm{Ottawa is the capital of Canada}) = 1$$
+$$I(\textrm{Ottawa is in Alberta}) = 0$$
+We use indicator functions all the time in statistics because they allow us
+to convert a qualitative statement such as "Bob is employed" 
+into a quantitative statement: $I(\textrm{Bob is employed}) = 1$.
+
+## Sequences, limits and summations
+
+### Cartesian products
+
+The ***Cartesian product*** of two sets $A$ and $B$, usually written 
+$A \times B$, is the set of all ordered pairs of elements in the two sets.
+For example, if $A = \{1,2\}$ and $B = \{3,4\}$ then
+$$ A \times B = \{(1,3),(1,4),(2,3),(3,4)\}$$
+Another example of a Cartesian product is:
+   $$\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$$
+the set of ordered pairs of real numbers.  For example $(0,3)$ and $(0.427,2000)$ 
+are both elements of $\mathbb{R}^2$.
+
+We will also be interested in the set of ordered ***sequences*** of $n$ real 
+numbers (where $n$ is some positive integer):
+   $$\mathbb{R}^n = \mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R}$$
+For example the ordered sequence $(1,3,5,7)$ is an element of the set $\mathbb{R}^4$.
+
+### Sequences 
+
+A sequence is much like a set but with two important differences:
+
+1. Order matters. For example:  
+   - $\{1,2\} = \{2,1\}$ 
+   - $(1,2) \neq (2,1)$.
+2. Elements can be repeated.  For example 
+   - $\{1,3,1\}$ is not a valid set.
+   - $(1,3,1)$ is a valid sequence 
+
+Like sets, sequences can be empty, finite, or infinite. 
+
+- $()$ is an empty sequence.
+- $(2,4,6)$ is a finite sequence.
+- $(2,4,6,\ldots)$ is an infinite sequence.
+
+As you can see from the examples above, we usually distinguish between sequences
+and sets by using parentheses for sequences and curly brackets for 
+sets.
+
+We usually number each element in a sequence. The number assigned to a 
+given element is called its ***index***. Typically, the first 
+element in a sequence is numbered either 0 or 1, and the 
+remaining elements are numbered sequentially after that.
+
+We can define sequences by simple enumeration as in the examples
+above. These are a few other ways of defining a sequence:
+
+ - As variables with subscripts: $(x_1,x_2,x_3)$. We will usually 
+   use a variable as the subscript $x_i$ when we want to talk
+   about an arbitrary element of the sequence.
+ - As functions of other sequences: $y_i = \ln(x_i)$.
+ - As functions of the index itself $x_i = a^i$
+
+### Limits
+
+Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.
+We say that $x^*$ is the ***limit*** of this 
+sequence if $x_i$ gets closer and closer to $x^*$ as
+$i$ gets bigger and bigger.
+
+- The limit of a sequence can be a number.
+- The limit of a sequence can be $\infty$ or $-\infty$.
+- Not all sequences have limits.
+
+For example:
+$$ \lim (1,1,1,\ldots) = 1$$
+$$\lim\left(1,\frac{1}{2},\frac{1}{3},\ldots\right) = 0$$
+$$\lim(1,2,3,\ldots) = \infty$$
+$$\lim(-1,-2,-3,\ldots) = -\infty$$
+$$\lim(0,1,0,1,0,1,\ldots) \textrm{ does not exist}$$
+
+You will learn or have learned the formal definition of a limit in your 
+calculus course.  I won't make you re-learn it for this class, but here it is: 
+
+*Definition of a limit*: Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that 
+the number $c$ is the limit of this sequence: 
+   $$\lim_{i\rightarrow \infty} x_i = c$$
+if for any $\delta > 0$ there exists an $N_{\delta}$ such that
+   $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
+
+### Summations
+
+Many statistics we are calculating are constructed by adding 
+up a sequence of numbers. It will be convenient to 
+use the ***summation operator***, which looks like this:
+
+$$\sum_{i=1}^3 x_i = x_1 + x_2 + x_3$$ 
+$$\sum_{i=1}^n x_i = x_1 + x_2 + \cdots + x_n$$
+$$\sum_{i=1}^{\infty} x_i = x_1 + x_2 + \cdots$$
+$$\sum_{i \in \{1,2,3\}} x_i = x_1 + x_2 + x_3$$ 
+Notice that an expression using the summation operator has several components:
+
+   - The summation sign $\sum$.
+   - An expression identifying the index variable, and what values it takes on. The 
+      index variable is usually but not always called $i$.
+      - $\sum_{i \in \{1,2,3\}}$ means we add up over all of the values  
+         in the set $\{1,2,3\}$.
+      - $\sum_{i = 1}^{n}$ means we add up over all of the integers between 1
+         and $n$.
+   - An expression identifying what is to be added up. It is usually but not always
+      a function of the index variable. For example:
+         $$\sum_{i=1}^3 \ln(x_i) = \ln(x_1) + \ln(x_2) + \ln(x_3)$$
+         $$\sum_{j=1}^3 \beta^j = \beta + \beta^2 + \beta^3$$
+         $$\sum_{i=1}^3 3 = 3 + 3 + 3 = 9$$
+         $$\sum_{i=1}^3 2x = 2x + 2x + 2x = 6x$$
+
+We can also use multiple summation operators in an expression. For example:
+$$\sum_{j=1}^2 \sum_{i=1}^2 x_iy_j = \sum_{j=1}^2 (x_1y_j + x_2y_j) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$$ 
+
+The summation operator looks fancy, but remember it is just a concise way
+of describing a sum. You learned the basic properties of addition 
+and multiplication in Grade 3:
+
+- Associative property: 
+   $$(a + b) + c = a + (b+c)$$
+   $$(ab)c = a(bc)$$
+- Commutative property: 
+   $$a + b = b + a$$
+   $$ab = ba$$
+- Distributive property: 
+   $$a(b+c) = ab + ac$$
+
+Summation operators also obey these properties:
+
+- The associative and commutative properties allow you to switch any two summation
+   operators:
+  $$\sum_{i \in A} \sum_{j \in B} x_iy_j = \sum_{j \in B} \sum_{i \in A}  x_iy_j$$
+- The distributive property allows you to take any constant out of the summation 
+   operator
+  $$\sum_{i=1}^n ax_i = a \sum_{i=1}^n x_i $$
+
+We will use these two results later on.
+
+# Random outcomes, random events and probability
+
+Having reviewed the math, we now go on to develop the basic concepts in probability.
+
+## An example application: Roulette
+
+We will develop ieas by considering the casino game of **Roulette**.
+Here are the rules for this game:
+
+- It features a spinning wheel, a ball, and 37 colored 
+  slots that the ball might land in. 
+- The slots are numbered from 0 to 36,
+  - The slot numbered 0 is colored green
+  - 18 of the remaining slots are colored red
+  - the other 18 are colored black.
+  - In an American roulette table, there is an additional green slot labeled "00",
+    but I will assume our roulette table is a European one.
+- Players can place various bets, but I will mention three:
+  - Red (ball lands in a red slot) pays \$1 for every \$1 bet
+  - Black (ball lands in a black slot) pays \$1 for every \$1 bet
+  - A straight bet on any specific number (ball lands on that number)
+    pays \$35 for every \$1 bet
+
+The picture below shows what a roulette wheel and table look like.
+
+![roulette wheel image](roulette.svg)
+Source: <a href="https://www.vecteezy.com/free-vector/roulette">Roulette Vectors by Vecteezy</a>
+
+Like other casino games, a roulette game is an example of a random process.
+Things happen, it matters (to the players and the casino) which thing
+happens, but we don't know in advance which thing will happen.
+
+***Probability*** is a method of mathematically modeling a random process
+like this one, so that we can understand it and/or make 
+predictions about its future results. Probability is an extremely useful
+tool for a casino; it is also useful for banks, insurance companies, 
+and other businesses that manage risks.
+
+***Statistics*** is a method of using data from a random process
+to make inferences about that process. Again, the purpose is to understand
+the process, and maybe to make predictions for the future.
+
+## Basic components of a probabilistic model
+
+### Outcomes, events and sample spaces
+
+To build a probabilistic model of a random process, we start by defining
+the ***outcome*** we are interested in.  An outcome can be a simple yes/no
+result, it can be a number, or it can be a much more complex object.
+
+ - In our roulette example, the outcome can be defined as the number of 
+   the slot in which the ball lands.  Call that number $b$.
+
+The set of all possible outcomes is called the ***sample space***
+
+ - In our roulette example, the sample space can be defined as 
+   $$\Omega = \{0,1,2,\ldots,36\}$$
+
+Next, we define a set of ***events*** that we are interested in.
+We can think of an event as either:
+
+ - A statement that is either true or false, depending on the outcome.
+   For example these are events that are well-defined for our sample space: 
+   $$b = 0$$
+   $$b \textrm{ is one of the red numbers}$$
+ - A subset of the sample space, for example: 
+   $$S_{15} = \{15\}$$
+   $$Red = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
+
+These two concepts are equivalent, though the subset concept 
+makes the math clearer.
+
+Since events are sets, we can use the terminology and mathematical
+tools for sets. For example
+
+ - The event "the ball lands on 12" and "a straight bet on 12 wins"
+     are identical because ($\{12\} = \{12\}$), even though their 
+     descriptions are not identical.
+ - The event "the ball lands on 12"  implies the event 
+   "a bet on Red wins" because $\{12\} \subset RED$.
+ - The events "a bet on Red wins" and "a bet on Black wins"
+   are disjoint because $RED \cap BLACK = \emptyset$.
+
+### Probability distributions
+
+Our final step is to define a ***probability distribution***
+for this random process, which is a function that assigns
+a number to each possible event.  The number is called 
+the event's ***probability***. 
+
+Probabilties are normally between zero and one:
+
+- If an event has probability zero, it definitely *will
+  not* happen
+- If an event has probability strictly between zero and
+  one, it *might* happen.
+- If an event has probability one, it definitely *will* 
+  happen.
+
+In order for a probability distribution to be valid, it
+must obey the following three conditions:
+
+1. The probability of any event $A$ is a non-negative number.
+   $$\Pr(A) \geq 0$$
+2. The probability of one of the outcomes in the sample space
+   occuring is equal to one.
+   $$\Pr(\Omega) = 1$$
+3. For any two disjoint events $A$ and $B$, 
+   $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
+
+
+#### Example {-}
+
+Let's construct a plausible probability distribution for roulette.
+To do that we need to make some assumptions about how the
+roulette wheel works. In particular, let's assume that the roulette 
+wheel is "fair" in the sense that each outcome has the same probability.
+Call that probability $p$:
+   $$p = \Pr(b = 0) = \Pr(b = 1) = \cdots = \Pr(b = 36)$$
+Now, I should emphasize that this doesn't have to be the case,
+it's just an assumption.  But it's a reasonable one in this 
+case: casinos are required by law to run fair roulette wheels
+and would be subject to heavy penalties if this assumption could
+be proven false. Later on, we will use statistics to confirm
+that a roulette wheel is fair.
+
+The outcomes are disjoint (only one of them can happen at a time), 
+so by the rules of probability:
+$$ \Pr(\Omega) = \Pr(\{0\} \cup \{1\} \cup \cdots \cup \{36\}) = p + p + \cdots + p = 37p$$
+But $\Pr(\Omega) = 1$, so we can solve for $p$ and get:
+$$ p = 1/37$$
+That is, each of the 37 outcomes have a probability of $1/37$.
+
+We can use this result to find the probability of any event $A$:
+$$ \Pr(A) = |A|/37$$
+which implies that:
+$$ \Pr(Red) = 18/37 \approx 0.486$$
+We could use the same result to calculate the probability of any other
+event. 
+
+What does it mean to say that the probability of the ball landing in 
+a red slot is about 0.486? That's actually a tough question. There
+are two standard interpretations for probabilities:
+
+- Frequentist or classical interpretation: we are thinking of 
+  the random process as something that could be repeated many times,
+  and the probability of an event is the approximate fraction of times
+  that the event will occur.  That is, if we say the probability
+  of the ball landing on red is 0.486, that means 
+- Subjectivist or Bayesian interpretation: the random process
+  is a one-time occurence, but we have limited information about
+  it and the probability of event represents the strength of 
+  our belief that the event will happen.
+
+The frequentist interpretation of probability is well-suited
+for simple repeated settings like casino games or car insurance,
+while the Bayesian interpretation makes more sense for things
+like predicting election results.
+
+### Some standard results about probabilities
+
+Let $A$ and $B$ be two events.  Then:
+
+- Probabilities cannot be higher than one.
+   $$\Pr(A) \leq 1$$
+- Probabilities of identical events are identical:
+   $$A = B \implies \Pr(A) = \Pr(B)$$
+- Probabilities of implied events are larger:
+   $$A \subset B \implies \Pr(A) \leq \Pr(B)$$
+- The probability of an event *not* happening is:
+   $$\Pr(A^C) = 1 - \Pr(A)$$
+- The probability of nothing happening is:
+   $$\Pr(\emptyset) = 0$$
+- The probability of either $A$ or $B$ is:
+  $$\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \leq \Pr(A) +\Pr(B)$$
+
+These results all follow from the basic rules of probability. They
+are not hard to prove, but I will not go through the proofs.
+
+## Joint and conditional probabilities
+
+Sometimes are interested in more than one event, and want to talk about how they are 
+related. 
+ - Maybe we have some (incomplete) information about the outcome and want to make 
+   predictions. For example, we have polls and want to predict the winner of an 
+   election, or we have data on current economic conditions and want to predict 
+   next month's unemployment rate.
+   
+
+### Joint probabilities
+
+The ***joint probability*** of two events $A$ and $B$ is the probability that they
+both happen:
+  $$\Pr(A \cap B)$$
+
+For example, consider two events:
+  $$Red = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
+  $$Even = \{2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36\}$$
+Suppose you are interested in the probability that the ball lands on a number that is both 
+red and even. 
+  $$\Pr(Red \cap Even) = \Pr(\{12,14,16,18,30,32,34,36\}) = 8/37 \approx 0.216$$
+Joint probabilities are just probabilities, so they obey all of the rules of probability.
+
+### Conditional probabilities
+
+The ***conditional probability*** of an event $A$ ***given*** another event $B$ 
+is defined as:
+   $$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)}$$
+The conditional probability answers the question: if we already know that $B$ is true,
+what are the chances that $A$ is true?
+
+In our example:
+   $$\Pr(Red|Even) = \frac{\Pr(Red \cap Even)}{\Pr(Even)} = \frac{8/37}{18/37} \approx 0.444$$
+   $$\Pr(b = 26|Even) = \frac{\Pr(b = 26 \cap Even)}{\Pr(Even)} = \frac{1/37}{18/37} \approx 0.056$$
+
+Conditional probabilities are just probabilities, so they obey all of the rules
+of probability.
+
+### Independent events 
+
+One common way of modeling joint and conditional probabilities is to assume
+that certain events are unrelated to each other.  
+
+We say that two events $A$ and $B$ are ***independent*** 
+if their joint probability is just the two individual 
+probabilities multiplied together:
+  $$\Pr(A \cap B) = \Pr(A)\Pr(B)$$
+We usually express independence with the notation $A \bot B$.
+
+This definition is not very intuitive, but we can improve upon it.
+First, suppose that both events have nonzero probability.
+Then independence of $A$ and $B$ implies that 
+  $$\Pr(A|B) = \Pr(A)$$
+and
+  $$\Pr(B|A) = \Pr(B)$$
+In other words, knowing that one of these events are true 
+tells you nothing useful about whether the other the other event
+is true.
+
+Most events we are interested in are not independent because 
+they are physically or logically related. For example,
+pick any two events in roulette.  I'll pick the events "Red wins"
+and the event "even wins":
+  $$\Pr(Red) = 18/37$$
+  $$\Pr(Even) = 18/37$$
+  $$\Pr(Red \cap Even) = 8/37 \approx 0.216$$
+  $$\Pr(Red)\Pr(Even) = (18/37)*(18/37) \approx 0.237$$ 
+Since $0.216 \neq 0.237$, these two events are not independent.
+
+When would it be reasonable to assume events are independent? 
+The typical scenario would be where there is simply no 
+physical or logical relationship between them, usually due
+to a separation in time and space.
+
+For example, these events can be assumed to be independent:
+
+ - The result of a roulette game played this afternoon 
+   and another roulette game played tomorrow.
+ - The rainfall in Vancouver today and the rainfall in Vancouver 
+   three months from today.
+   
+while these events are probably not independent:
+
+ - The team that wins the 2022 World Cup and the team that wins
+   the 2026 World Cup.
+ - The rainfall in Vancouver today and the rainfall in Burnaby 
+   tomorrow.
+
+For example, suppose that I bring \$100 to a casino this afternoon 
+for a few games of roulette. I put all of my money on red on the first spin. 
+After that, I keep all of my money (both the initial \$100 and any winnings)
+on red for the next spin. If I lose, I am broke and stop playing.  
+After 3 spins:
+
+ - If all 3 spins are Red, I have $w = \$800$.
+ - Otherwise, I have nothing $w = \$0$
+
+What is the probability of each of these events?  Since we can 
+assume that each spin is independent, this is an easy problem:
+
+  $$\Pr(w = \$800) = \Pr(Red_1 \cap Red_2 \cap Red_3) = \Pr(Red_1)\Pr(Red_2)\Pr(Red_3) = (18/37)^3 \approx 0.115$$
+   $$\Pr(w = \$0) = 1 - \Pr(w = \$800) \approx 0.885$$
+
+### Some standard results about joint and conditional probability
+
+- Bayes' rule:
+  $$\Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$
+- Law of total probability:
+  $$\Pr(A) = \Pr(A|B)\Pr(B) + \Pr(A|B^c)\Pr(B^c)$$
+
+# Problems
+
+## Easy
+
+1. Let 
+   $$A = \{Avocado,Banana\}$$
+   $$B = \{Banana,Cantaloupe\}$$
+   $$C = \{Cantaloupe\}$$
+   a. Find $|A|$, $|B|$ and $|C|$
+   b. Find $A \cap B$, $A \cap C$, and $B \cap C$.
+   c. Find $A \cup B$, $A \cup C$, and $B \cup C$.
+   d. Find $A - B$, $B - A$, and $A - C$.
+   e. Find $A \times B$.
+   f. Classify each of the following statements as true or false:
+      i. $A$ and $B$ are disjoint
+      ii. $A$ and $C$ are disjoint
+      iii. $B$ and $C$ are disjoint
+      iv. $A \subset B$ 
+      v. $B \subset B$ 
+      vi. $C \subset B$ 
+      vii. $A \subsetneq B$ 
+      viii. $B \subsetneq B$ 
+      ix. $C \subsetneq B$ 
+      iv. $A = B$ 
+      v. $B = B$ 
+      vi. $C = B$ 
+   g. Find $\{x \in B: x \in A \textrm{ OR } x \in C\}$. 
+
+2. Suppose $s$ is a function giving the number of seeds typically
+   found in a given fruit.  For example $s(Avocado) = 1$, $s(Banana) = 0$
+   and $s(Cantaloupe) = 500$.
+   
+   a. What is the domain of this function?
+   b. What is the range of this function?
+
+3. Find the limit of each of these sequences:
+
+   a. $2,4,8,16,\ldots$ $(x_i = 2^i)$
+   b. $1, -1/2, 1/4, -1/8, 1/16, \ldots$ i.e., $(x_i = (-0.5)^i)$
+   c. $1, 1/2, 1/3, 1/4, 1/5, \ldots$ i.e., $(x_i = 1/i)$
+   
+5. Write out each of these summations as a simple sum:
+
+   a. $\sum_{i=1}^4 x_i/4$. 
+   b. $\sum_{i=1}^3 \sum_{j=1}^2 x_iy_j$. 
+   c. $\sum_{j=1}^2 \sum_{i=1}^3 x_iy_j$. 
+
+## Medium
+
+1. Some set algebra problems.
+
+
+
+## Difficult
+
+1. In stock markets, some participants are active traders, buying and selling
+   individual stocks on a regular basis. Active traders believe that they can 
+   earn higher returns than the market as a whole. Other participants are passive
+   investors buying and holding a broad-based index fund that duplicates the 
+   performance of the market as a whole. 
+   
+   Suppose the probability of an active trader beating the market in one year is 0.5.
+   Suppose that excess returns are independent across traders and across years.
+   
+   a. What is the probability that a particular trader beats the market every year
+      over the next 10 years?
+      
+      A: 0.5^10 = 0.0009765625
+      
+   b. Suppose there are 1000 active traders. What is the probability that at least
+      one active trader beats the market over the next 10 years?
+      
+      A: 1 - (1 - 0.5^10)^1000 = 0.62357620194
+      
+   c. Suppose that trader A has beaten the market in each of the last 10 years.
+      What is the probability that trader A will beat the market next year?
+      
+      A: 0.5
+      
+2. In April 2020, researchers at Stanford University tested 3,300 residents of 
+   Santa Clara county in California for COVID-19 antibodies, and found that 1.5\% 
+   of respondents tested positive. This number was much higher than expected and,
+   if true, implied that the fatality rate from COVID-19 was much lower than 
+   expected. 
+   
+   Let I = 1 if a person has been infected, and 0 if not. Let P = 1 if a person 
+   tests positive, and 0 if not. If a test is perfectly accurate, then P = I.
+   Unfortunately most real-world medical tests are not 100\% accurate; they
+   can yield false positives (non-infected people testing positive: I=0,P=1)
+   or false negatives (infected people testing negative: I=1,P=0).
+   
+   Suppose that:
+   
+     - The false negative rate of the test is zero: $\Pr(P=0|I=1) = 0$.
+     - The false postive rate of the test is $f$: $\Pr(P=1|I=0) = f$
+     - The results of the test are as described above: $\Pr(P=1) = 0.015$.
+     - The actual infection rate is $i$: $\Pr(I=1) = i$.
+     
+   a. Find the probability that an infected person will test positive.
+      A: 1
+   b. Find the probability that a non-infected person will test negative.
+      A: 1-f
+   c. Find the probability that a person will test positive, as a function of
+      $f$ and $i$.
+      A: i + (1-i)f
+   d. We know that the probability that a person will test positive is 0.015.
+      Use this information and your answer to (c) to calculate the infection
+      rate as a function of $f$.
+      A: i = (0.015 -f)/(1-f)
+   e. The test used by the researchers has a low rate of false positives,
+      somewhere between 0-2\% (0.00-0.02). Table ? below gives the infection 
+      rate implied by a given false positive rate.  Fill in the missing values
+      
+      Positive test rate | False positive rate | True infection rate 
+      -------------------+---------------------+---------------------
+      0.015              |          0          |    0.015
+      0.015              |          0.005      |    0.010
+      0.015              |          0.010      |    0.005
+      0.015              |          0.015      |    0.000
+
+   f. Suppose the true infection rate is 0.005, and the false positive rate is 0.010.
+      If you test positive, what is the probability that you have been infected?
+      A: $Pr(I=1|P=1) = \frac{Pr(P=1|I=1)Pr(I=1)}{Pr(P=1)} = 0.005/0.015 = 1/3$
+
+
+## Answer key
+
+1. Answer
+2. Answer

@@ -1,0 +1,836 @@
+---
+title: "Chapter 2: Cleaning data with Excel"
+author: "ECON 233, Brian Krauth"
+date: "Spring 2021"
+output: 
+  html_document:
+    theme: paper
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter overview
+
+In this chapter we will learn how to:
+
+ - Follow good data management practices 
+ - Use Excel tools to view data, including:
+   - Sorting
+   - Filtering
+   - Freezing panes
+ - Use Excel tools to enter new data and "clean" existing data, including
+   - Fill and series
+   - Formulas
+   - Functions
+ - Learn basic Excel terminology and concepts including:
+   - Workbooks, worksheets, and cells
+   - Cell contents and display format
+   - Relative and absolute cell addresses
+   - Ranges of cells
+
+# Get started
+
+## Reproducible research 
+
+The goal of most data analysis is to get some interesting results that we can
+report to our audience.  Sometimes our audience is decision-makers in business
+or government, sometimes it is the public, and sometimes it is other
+researchers.
+
+In all of these cases, it is important that our analysis is
+***reproducible***. Reproducible research provides all information needed to
+confirm and possibly extend the results of the research.  Why is
+reproducibility important?
+
+- It guards against fraudulent research by making it easier to detect. 
+- It guards against errors by making them easier to detect. 
+- It allows for researchers to build on research by developing additional
+  findings
+
+The key to reproducibility is to carefully maintain a record of all data and
+analysis steps leading to every result that is ever reported. This record can
+then be shared with others who (hopefully) can then reproduce the results for
+themselves. 
+
+### Workflow and version control
+
+Think about the last time you wrote a paper for school.  Did you just sit down
+and write from the beginning to the end, and then turn in the result?
+Probably not.  There was probably exploration, learning, and 
+trial-and-error. You probabaly threw away entire paragraphs, had little scraps 
+of writing, and went through several revisions. Data analysis follows a similar
+process.  Most of what you do will not end up in the final version, 
+and it would be a huge burden to have to maintain a record of everything
+you do. So what should we do?
+
+The standard solution to this problem is to plan your ***workflow*** in advance.
+Your workflow is a system of rules and procedures you follow to organize your work,
+and needs to include some kind of ***version control*** system.  A 
+version control system maintains multiple versions of your files in a way that
+makes it easy to experiment without having to repeat steps.
+
+Serious programmers and data analysts often work in large teams 
+on massive projects that may take many years. The person who originally 
+wrote a particular piece of the code may have left the 
+company decades ago, and the system as a whole may be so complex that no one
+individual understands every detail.  These teams need to be constantly adding 
+new capabilities and fixing errors (bugs) without accidentally introducing new 
+errors or getting in one another's way. 
+
+To deal with these issues, serious programmers and data analysts use 
+specialized software to implement version control. The most commonly 
+used version control system combines two tools called Git and GitHub.
+We will not use these tools in this course, but I'd like to describe
+them so you have an idea what a robust version control system looks 
+like:
+
+- Git is a computer program that maintains a distributed 
+  database of file versions for a single project.
+  - Every time you edit a file, the changes are logged in the database.
+  - Past changes can be viewed and can easily be undone.
+  - There is always a "master" version of each project file.  It is usually
+    under the exclusive control of a single user.
+  - Any user can create a local copy called a "branch", and can edit the 
+    files in their branch without affecting the master version.
+  - The user who controls the master version can "pull" 
+    changes in from any branch to the master. Usually this is done after the 
+    branch owner issues a "pull request."
+- GitHub is an online user interface to Git that provides various other features
+  like access control, task lists, and bug tracking.
+
+Both Git and GitHub are free for most users, but we will not use them
+in this course. You are working alone, and your projects are simple.
+
+Instead we will follow some of the basic principles of version control
+without using any fancy software.
+
+## Setting up your project
+
+Our simple verison control system will be a set of four rules.
+
+1. Organize work into projects and keep all project-related files together.
+2. Keep all original ("raw") data separate and document its sources.
+3. Avoid changing data; use existing data to make new data instead.
+4. Maintain a master version, but keep selected intermediate versions as well.
+
+We will now set up our first project according to these rules.
+
+### Make a project folder
+
+**RULE #1: Organize work into projects, and keep all project-related files together.** 
+
+For this class, it is natural to think of each chapter or assignment as a
+separate project.
+
+1. Decide where on your computer you want to keep your work for this course. 
+   - I will refer to that location as ```[mywork]```.
+2. Create a folder called ```[mywork]\Chapter3```
+3. Create the following subfolders:
+   -  ```[mywork]\Chapter3\raw```
+   -  ```[mywork]\Chapter3\doc```
+
+### Get external data
+
+**RULE #2: Keep all original ("raw") data separate and document its sources.** 
+
+1. Download the file [LINK HERE] and put it in your ```raw``` folder.
+2. Create a text file in your ```raw``` folder called ```README.txt```
+   and type the line:
+   ```[filename] dowloaded [today's date] from [link]```
+   and save. 
+   
+Every time you add a file to the ```raw``` folder, you should add the
+corresponding line of information to ```README.txt```.
+
+### Make working copies
+
+**RULE #3: Avoid changing data; use existing data to make new data instead.** 
+
+The ```raw``` directory is intended to contain the unaltered, original data
+files as you received them.  Aside from the ```README.txt``` file, you should
+*never* alter the data files in the ```raw``` directory. Why not?
+
+- Editing the raw data kills reproducibility, because the changes you have
+  made are not documented.
+- It is very easy to make a mistake when editing data directly, and these
+  mistakes are undetectible if you don't have the original data.
+
+But the whole point of analysis is that we want to do something to the data,
+so what do we do? This is an easy problem to solve in R, because R keeps the
+data and analysis in separate files. In Excel the problem is more difficult
+because Excel keeps the data and analysis in the same file. We will solve the
+problem by making a  ***working copy*** of the original data, and editing the
+working copy.
+
+1. Copy [filename] from the ```raw``` subfolder to your main project folder.
+   - This is your working copy.
+2. (optional) Rename the working copy if you like.
+   - You should choose a brief but clear name. Avoid names like "my file.xlsx."
+   - I usually put the current date at the end of my filenames, for example
+     "NLSY wage data 200614.xlsx" This allows me to keep earlier versions of a file
+     while still knowing which version is the current one.
+3. Open the working copy. 
+
+### Maintain a master version
+
+**RULE #4: Maintain a master version, but keep selected intermediate versions as well.** 
+
+Think about the last time you wrote a paper for school. Did you just start at the
+beginning, write until you reached the end, and turn in the result?  Probably not.
+You may have written an outline, then filled in different sections in a random order.
+You may have decided you didn't like a paragraph, deleted it, and then decided to 
+put it back.  After several rounds of this, you eventually settled on the version
+you turned in.
+
+Here's what I recommend:
+
+1. Number versions of files sequentially (e.g. "Wage analysis 1", Wage analysis 2", etc.)
+   or by date (e.g. "Wage analysis 200614"m "Wage analysis 200706", etc.)
+2. The file you are currently working on is your working copy. Feel free
+   to do whatever you want with the working copy.  All other copies should be read-only.
+3. At regular intervals you should:
+   a. Make your working copy the master copy.
+   b. Make a copy of this new master copy and call that your new working copy.
+
+When should you make the working copy the master copy? It depends on the nature of the work.
+Most people would do this upon completion of a significant step in the project.
+Others might do it at the end of each working day. Ideally, these two will often
+coincide. It all depends on what works best for you.
+
+
+## A quick tour of Excel
+
+When you open your working copy of the data in Excel, 
+your screen should look something like this:
+
+[INSERT PICTURE HERE]
+
+When giving instructions, I will refer to various elements of Excel's user
+interface by name. You may have been using these elements for years without
+ever knowing their names, so I will list them here:
+
+- The ***menu bar*** is the top row of text marked ```File Home Insert Draw ...```:
+   ![menu bar](Excel menu bar.jpg)
+- The ***ribbon*** is the row of buttons below the menu bar:
+   ![ribbon](Excel ribbon.jpg)
+  - The ribbon has buttons for performing simple actions.
+  - The buttons are grouped by function, for example there is a group called
+    "Clipboard" and another called "Font".
+    - Within each function group, there is usually a little icon in the
+      lower-right corner that you can click on to access additional options.
+  - If your ribbon is not visible:
+    - You can make it visible by clicking "Home" (or anything else) on the
+      menu bar. 
+    - Once you have made the ribbon visible, you can keep it visible by
+      clicking on the little thumbtack icon in its lower right corner.
+  - The contents of the ribbon depend on the currently-active menu bar option
+    (usually but not always ```Home```). 
+    - I will assume that Home is the currently-active option; if it isn't
+      you can just click on ```Home``` to make it the currently-active option.
+- The ***formula bar*** is the long white box just below the ribbon:
+   ![formula bar](Excel formula bar.jpg)
+   - It shows the contents of the current cell.
+   - You can type in it to change the contents of the current cell.
+- The ***insert function*** button is the little "fx" button to the left of the formula bar:
+  ![insert function button](Excel insert function button.jpg)
+   - We will learn to use this later.
+- Most of the screen displays a grid of ***cells*** that is called 
+   a ***spreadsheet*** or ***worksheet***:
+   ![cell grid](Excel cell grid.jpg)
+  - Columns are identified by letter.
+    ![column](Excel column.jpg)
+  - Rows are identified by number.
+    ![row](Excel row.jpg)
+  - The cell in column A, row 2 is called cell A2.
+  - The active/selected cell is shaded or has a box around it:
+   ![active cell](Excel active cell.jpg)
+    - You can select an individual cell by clicking on it.
+    - You can select any rectangluar group of cells.
+    - You can select an entire column by clicking on the letter at the top of the column.
+    - You can select an entire row by clicking on the number at the left of the row.
+    - You can select all cells by clicking in the upper-left corner.
+- Below the worksheet is a row of tabs named (in this particular case)
+  "Table 1" and "Table 2".  
+  ![tabs](Excel tabs.jpg)
+  - You can click on a tab to switch to that worksheet.
+  - You can double-click on a tab to change its name.
+  - You can click on the "+" button to add a new worksheet.
+
+# Viewing our data
+
+## Tidy data
+
+The data in [filename] takes the form of what data scientists sometimes
+call **tidy** data. Tidy data takes a simple and convenient format:
+
+- Data is arranged in one or more simple rectangular grids or ***tables***.
+  - In Excel, it is best if the table starts in the top left cell
+    (cell A1). 
+- Each column in a table represents a distinct **variable** or attribute.
+  - In this example, the first row gives informative names for each variable.
+  - In Excel, it is best if the row of variable names is in
+    **boldface** and every non-empty column has a unique variable name.
+- Each row in a table represents a distinct **observation** or ***case***.
+  - In this example, the first column provides a unique identifier for 
+    each observation.
+- All observations in a table come from the same **unit of observation**
+  - In this example, the unit of observation is the [TBD]. That is,
+    each row represents a different [TBD].
+  - If we have data at another unit of observation (for example, if we have data
+    for each [TBD2]), that data should should be in another table.
+- The order in which observations are listed is irrelevant to the analysis.
+  - In this example, the observations are listed in [describe sorted order]. But we could
+    re-order it by [alternative sorted order] without changing the meaning of
+    the data set.
+  - If there is a natural ordering of the data, that ordering should be expressed in 
+    a variable. For example, a data set on annual GDP should not just be a list of GDP
+    values, it should also include a variable for the year.
+
+If we are lucky, our data is tidy. But many data sources are messy, and we
+will sometimes need to convert data from a messy to a tidy format before 
+starting our analysis.
+
+## Excel tools for viewing data
+
+We will start by learning a few tools for viewing our data.
+
+### Contents versus display format
+
+The ***contents*** of a cell can be:
+
+- Empty/blank
+- A value, which is either 
+  - A text string
+  - A number
+  - A logical value (TRUE or FALSE)
+  - An error value
+- A formula, which is a rule for calculating a value.
+
+In Excel, we need to distinguish between a cell's contents and its 
+***display format***. For example:
+
+1. Take a look at cell C2.  As you can see it shows ```$80,000.00```.
+2. Move your cursor to cell C2 and look at the formula bar
+   to see the cell contents. You will see the number ```80000``` 
+   and not ```$80,000.00```.  
+
+Any calculations using a cell are based on its contents and not on its display
+format. For example, cells are often rounded for display but any calculations
+involving those cells will be based on its un-rounded value.
+
+### Changing the display format
+
+We can change the display format of a cell or group of cells without changing
+its contents. For example, suppose we want to see income in dollars rather
+than cents (e.g. ```$80,000`` rather than ```$80,000.00``). Then all we need
+to do is:
+
+1. Select the cell(s) we want to change
+  - You can select cell C2 individually or the range C2:C5.
+  - You can also select the entire column C by clicking on the column header.
+2. Look for a drop-down box in the middle of the ribbon (it will say either
+   "General" or "Accounting"), and click on it. You should see a list of
+   number formats to choose from, including "Time," "Percentage," etc.
+3. Select "More number formats." This will take you to a dialog box with many 
+   options. We want to change the number of decimal places from its current
+   value of two to zero. Do that, and click on "OK"
+
+The cells you have selected should now show ```$80,000```.
+
+You can change many aspects of display formatting: font,
+bold/italics/underline, text color, background color, cell borders, alignment
+(left/right/center as well as top/bottom/middle), number format (what we have
+just changed), and many other features. 
+
+### Sorting
+
+The original data are in alphabetic order by name. But suppose we wanted it to
+be in order by income (with the highest incomes on top and the lowest at the
+bottom) instead. Here's all we need to do:
+
+1. Place the cursor in any cell in the "Income" column.
+2. Click on the button marked "Sort and Filter". A drop-down list of options
+   will appear.
+3. Select "Sort Largest to Smallest".
+
+As you can see, the data set is now in order by income.
+
+A few things to notice here:
+
+- If you have tidy data, Excel can tell whether a column contains numbers
+  or text, and will sort accordingly.
+- You can sort on multiple columns by selecting the "Custom sort" option.
+
+### Filtering
+
+We will often want to look at a particular subgroup of observations.
+This is called  ***filtering***.
+
+Suppose we only want to see data for males. Here's what we can do:
+
+1. Click on the button marked "Sort and Filter". A drop-down list of options
+   will appear.
+2. Select "Filter." If you look at the column headers in your sheet you will
+   see that they have become drop-down boxes.
+3. Click on the drop-down box for "Gender".  You will see some check boxes at
+   the bottom; they will all be checked.  Uncheck "Female" (the box for
+   "Select All" will also change) and then click "OK".
+
+At this point, the data on females is hidden. Don't worry, it's still there.
+
+We can undo the filter and remove the drop-down boxes by clicking 
+on the "Sort and Filter" button and selecting "Filter" again. 
+
+This is a simple example, but we can construct much more complex filters
+such as "all females with income above $50,000 whose last names begin with C."
+
+### Freezing panes
+
+Go down to row 50 in your data set. Notice that you can't see the variable 
+names in row 1 any more. The solution to this problem is to 
+***freeze panes***, which means to keep some rows and/or columns visible
+regardless of which cell the cursor is in.
+
+1. Go back to the top of the sheet.
+2. Click on "View"
+3. Click on "Freeze Panes", and then select "Freeze Top Row"
+
+Now go back down to row 50. You will see that the top row is still displayed
+and you can see the variable names.
+
+To undo this, click on "Freeze Panes" and then select "Unfreeze Panes"
+
+# Cleaning our data
+
+We are now ready to start cleaning our data. 
+
+Remember: we want to leave the original data alone whenever possible. 
+So we will create new variables rather than changing the original variables. 
+
+## Entering new data
+
+The simplest way to add variables to an Excel table is by entering data
+directly.
+
+### Manual data entry
+
+We will start by simply typing in some new data.
+
+The "Province" column gives the name of each person's province of residence.
+It might be more convenient to use the two-letter postal abbreviation instead,
+so let's add that as a new variable. Here's the table of abbreviations
+for your reference:
+
+| Province             | ProvAbb |
+|----------------------|:-------:|
+| Alberta                   | AB |
+| British Columbia          | BC |
+| Manitoba                  | MB |
+| New Brunswick             | NB |
+| Newfoundland and Labrador | NL | 
+| Northwest Territories     | NT |
+| Nova Scotia               | NS |
+| Nunavut                   | NU |
+| Ontario                   | ON |
+| Prince Edward Island      | PE | 
+| Quebec                    | QC |
+| Saskatchewan              | SK |
+| Yukon                     | YT |
+
+So let's add our variable:
+
+1. Name the variable "ProvAbb" by entering that text in cell D1.
+2. Fill in the remaining cells with the correct postal abbreviation.
+
+That's all we need to do.
+
+### Using Fill and Series
+
+Ideally, one of the variables in our table serves as a ***unique identifier***
+for observations. A unique identifier is a text or numeric (integer) variable
+that takes on a different value for each observation. 
+
+Let's create a unique ID variable for our data set. We could use the name as a
+unique ID, but that would not work in a larger data set with many people named
+"Doug Smith" or "Amandeep Singh". A simple way to give each observation a
+unique ID is to just number the cases sequentially, so that's what we will do.
+
+1. It would be particularly convenient if the ID variable were in the first
+   column. Move the cursor to any cell in column A, and then click on "Insert"
+   and then "Insert Sheet Columns".  This inserts an empty column to the left
+   of (what used to be) column A.
+2. Give our variable a name by entering "ID" in cell A1.
+3. We can enter the ID numbers by hand, but there is an easier way. Enter 1 in
+   cell A2.
+4. Select cells A2:A5.
+5. Look in the menu ribbon for the "Fill" button (it will be a little box with
+   a downwards arrow in it). Click on the Fill button and select "Series..."
+   The Series dialog box will appear.
+5. There are several options for constructing a series. Fortunately, the
+   default is exactly what we want, so click the "OK" button.
+
+As you can see, column A now contains a unique identifier.
+
+We can also use the Fill button to fill in a group of cells with the same
+value.
+
+## Formulas
+
+Most of the time our new variables will be calcuated from existing variables.
+To do this, we will use ***formulas***. A formula is just a rule for
+calculating a value from some other values.
+
+### A simple formula
+
+We will start with a very simple formula. Suppose we want to add a new
+variable "Savings", which is calculated by subrtracting ```Spending```
+from```Income```
+
+1. Enter "Savings" in cell E1 to name the variable.
+2. Enter "= C2 - D2" in cell E2.
+
+Cell E2 now displays "$60,000," which is in fact the value in cell C2 
+minus the value in cell D2. Notice that the formula bar shows "=C2-D2" and 
+*not* "$60,000". That is because the true contents of the cell are the 
+calculation itself (the formula) and not the results of the calculation
+(the value).
+
+Because the cell contains the formula and not its result, the value displayed
+in cell E2 will change if the data changes.  To see this:
+
+1. Change the value in cell C2 from 80000 to 40000.
+   - The value displayed in cell E2 changes to ?? 
+2. Change the value in cell C2 back to 80000.
+   - The value displayed in cell E2 changes back to its original value.
+   
+Excel will usually recalculate all formulas in the sheet whenever anything is 
+changed.
+
+### Copying, pasting and relative references
+
+We haven't yet filled in the remaining cells in column E. It would be 
+inconvenient to type a formula into each cell, and would quickly become
+very time-consuming with a larger data set.
+
+Fortunately, we can copy the formula in cell E2 and paste it to 
+the other cells. 
+
+1. Select cell E2 and copy it.
+2. Select the other cells in column E, and paste.
+
+Now, go to cell E3 and take a look at the formula bar. You'll notice that
+while the original cell E2 contains "=C2-D2", cell E3 actually contains
+"=C3-D3". Excel is smart and normally treats cell addresses in formulas 
+as ***relative references*** rather than ***absolute references***
+when copying and pasting cells.  This is usually exactly what we want it to
+do.
+
+Sometimes we will want Excel to treat a cell reference as absolute and not
+relative. Fortunately there is a way to do this - we will do that soon.
+
+## Functions
+
+Excel has about 500 built-in functions that we can use in formulas. It also
+has extensive tools for finding the function you need for a particular
+calculation task, and for figuring out what arguments to use in the function.
+
+### A simple function
+
+Suppose we want to add a new variable for the (natural) log of income.
+
+1. Enter "LogIncome" in cell F1 to give the variable a name.
+2. Move to cell F2. Now we need to find the name and format 
+   of the Excel function that calculates the natural log. 
+3. To the left of the formula bar there is a little button 
+   marked "f_x". Click on that button and the "Insert Function" 
+   dialog box will appear.  It will have a very long list 
+   of functions. You will want to narrow this list down: 
+   - There is a box in which you can enter search text,
+     for example "logarithm".
+   - You can select a category, for example "Math & Trig"
+4. Once you have narrowed the list down, it is easy to find
+   the function you want (LN). Select "LN" from the list
+   box, and then click the "OK" button. 
+   - You will now see the Function Arguments dialog box
+     for the LN function.
+5. As you can see, the LN function takes one argument
+   (the number you want the log of). You want to take the 
+   log of cell C2, so you could just enter the text "C2"
+   here.  But let's try something new: click on cell C2
+   itself. You will see several things happen:
+   - the text box will now contain "C2"
+   - the dialog box will display the value in cell C2
+     as well as the calculated value for the log of cell
+     C2.
+6. Click the "OK" button.
+
+You will see that cell F2 now contains "=LN(C2)" which displays as 11.29. Note
+that if you already knew the function and arguments you needed, you could have
+just typed "=LN(C2)" into cell F2 instead.
+
+### Using Fill instead of copy-and-paste
+
+Now that we have the formula we want in cell F2, we want to copy it into the
+rest of column F.  We could copy-and-paste just like before, but let's try a
+slightly different way.
+
+1. Select cells F2:F5.
+2. Click on the "Fill" button.
+3. Select "Down"
+
+As you can see, the contents of cell F2 have been filled in to the other
+cells, which is what we wanted.
+
+## More on cell references
+
+### Cell ranges
+
+Some functions like SUM() and AVERAGE() operate on a ***range*** of cells
+rather than a single cell or list of cells. A range is just a 
+rectangular set of cells, and is described by its upper-left and lower-right 
+cells, separated by a colon (":"). For example:
+
+- Range A2:A5 consists of cells A2, A3, A4 and A5.
+- Range A2:C2 consists of cells A2, B2, and C2.
+- Range A2:B3 consists of cells A2, B2, A3, and C3.
+
+Suppose we want to create a new variable that reports the average income
+across all observations in the data. The function to do that is AVERAGE(). 
+
+1. Enter "AvgIncome" in cell F1 to give the variable a name,
+   and then move to cell F2.
+2. Enter "=AVERAGE(C2:C5)" in cell F2.  
+
+Cell F2 should display $52,500, which is indeed the average of cells C2:C5.
+
+### Absolute references 
+
+Let's complete our AvgIncome variable by copying cell F2 to the remaining
+cells in column F.  You will notice something strange: the other cells don't
+show the same number as cell F2.  Why is this?
+
+Remember that Excel normally interprets cell references
+as *relative to the current cell* when performing copy-and-paste
+or fill operations. This is normally what we want Excel to
+do. But in this case it results in cell F3 (for example)
+containing the average of cells A3:A6 rather than the average
+of A2:A5 like we want.
+
+To fix this, we need to tell Excel that we want 
+certain references to be treated as absolute rather than relative.
+To do that, we add the character "$" before each such reference.
+
+1. Go back to cell F2.
+2. Change "=AVERAGE(C2:C5)" to "=AVERAGE(C$2:C$5)"
+3. Use copy-and-paste or fill to fill in the rest of the column.
+
+Now all cells in column F display the same value ($52,500), and the same
+contents "=AVERAGE(C$2:C$5)".  This is what we want.
+
+### Combining absolute and relative references
+
+Sometimes we will want to combine absolute and relative references in the
+same formula.
+
+Suppose we want to create a new variable that is the person's income *rank*.
+That is, the person with the highest income has a rank of 1, second highest
+has a rank of 2, etc. The function to do that is RANK.EQ()
+
+1. Enter "IncomeRank" in cell F1 to give the variable a name, and go to cell
+   F2.
+2. Use the Insert Function tool to access the arguments for RANK.EQ(). Enter
+   the appropriate arguments and press "OK":
+   - Number is the number we wish to rank: enter C2
+   - Ref is the set of values we want to rank within: enter the range C2:C5.
+   - Order is an optional argument: leave it blank.
+
+As you can see, Excel displays the correct rank (1) for this row. Before 
+we copy this formula to the rest of column F, think about what we want
+to change and what we want to stay the same.
+
+- The Number argument should change from C2 to C3. Leave it as a relative
+  reference.
+- The Ref argument should stay the same. Change it to an absolute reference
+
+So our next step is:
+
+4. Change "=RANK(C2,C2:C5)" to "=RANK(C2,C$2:C$5)"
+5. Use copy-and-paste or fill to fill in the rest of column F.
+
+As you can see, Excel displays the correct ranks. We can check this by sorting
+on Income and seeing if IncomeRank is also sorted.
+
+## Using logical values
+
+In addition to text and numbers, cells can also contain ***logical***
+values (TRUE or FALSE). Logical values can be entered directly in 
+a cell, can be used in a formula, and can be the result of a formula.
+
+To see how the logical values work, go to cell F2.
+
+- You can use the comparison operators ("=", ">", "<", etc.) to produce
+  logical results.  For example:
+  - Enter ```=(B2="Male")`` in cell F2. It will display "TRUE".
+  - Enter ```=(C2 < 50)``` in cell F2. It will display "FALSE".
+- There are some functions that expect logical arguments. These 
+  include IF(), AND(), OR(), and NOT().
+- Excel will convert logical values to numeric values, and vice versa.
+  - If you use TRUE in a numeric calculation, it will be treated as 1.
+    For example the value of TRUE + TRUE is 1 + 1 = 2.
+  - If you use FALSE in a numeric calculation, it will be treated as 0.
+    For example the value of FALSE - 5 is 0 - 5  = -5.
+  - If you use a number in a logical calculation, zero will be treated
+    as FALSE and all other values will be treated as TRUE.
+
+Let's use some of these tools to clean our data. Our Gender variable is
+a text variable that contains either "Male" or "Female". We need to convert
+this text variable into a numerical form in to do statistical analysis.
+We will call our variable "Male" and set it to 1 for males, and 0 for females.
+
+1. Enter "Male" in cell F1 to give the variable a name.
+2. Go to cell F2 to enter the formula. 
+   We will use the IF() function. Use the Insert Function button
+   to find it and view its three arguments. Enter the arguments below and 
+   presss "OK:
+   - logical_test: enter B2="Male"
+   - value_if_true: enter 1
+   - value_if_false: enter 0
+
+This should display as 1.  Fill in the rest of the column, and you should see
+1 for all of the males and 0 for all of the females.
+
+# Saving, exporting and importing
+
+Once you have followed all of the steps in this chapter, you should clean up
+your file:
+
+- Undo any undesirable formatting or content changes.
+- Fill in any incomplete columns
+
+and save it to your project folder. We will use it again soon.
+
+## CSV files
+
+Normally, Excel works with files in its native format, ```.xlsx``` files.
+
+However, Excel is not the only program that works with data,
+and so we will often find data in other formats. We will also sometimes
+want to save our data in a format that can be read by other programs,
+for example R.
+
+The most common and useful general-purpose format for tabular data
+is called the "comma separated values" or ***CSV*** file format.
+A CSV file is just a text file with the following features:
+
+- Each line in the file represents a row in the table
+- Within each row, cell values are separated or ***delimited*** by commas.
+- Where necessary, text values are enclosed in quotes.
+
+For example, this CSV file:
+```
+Name,Year of birth,Year of death
+"Mary, Queen of Scots",1542,1547
+Mary I,1516,1558
+Elizabeth I,1533,1603
+```
+will appear in Excel as the table:
+
+CSV files have several important limitations relative to Excel 
+files:
+
+1. A CSV file can only contain one table, while an Excel file
+   can contain multiple tables.
+2. A CSV file can only contain cell values, and cannot contain:
+   - Formulas
+   - Formatting
+   - Graphs
+   - Any other fancy Excel features
+   
+These limitations are also the main advantage of the CSV file: they are simple
+ways of reporting tabular data and can be read by virtually any program.
+
+## Exporting CSV files from Excel
+
+Let's save our Excel worksheet as a CSV file.
+
+1. Open [filename] in Excel, and go to [sheet]
+2. Click on ```File```, and then ```Save As```. You will see:
+   - a text box giving the name of the file (currently [filename]) 
+   - a drop-down box giving the file format (currently 
+     ```Excel Workbook (*.xlsx)```).
+3. Select ```CSV (Comma delimited) (*.csv)``` from the drop-down
+   box and enter a filename in the text box.
+4. Click on the ```Save``` button.
+   - You will get a warning message: "The selected file type does
+     not support workbooks that contain multiple sheets. To save only
+     the active sheet click OK...."
+5. Click on the ```OK``` button.
+6. Close Excel.
+   - You will get another warning message: "Want to save your changes
+     to [filename].csv?"  Click ```Don't save```.
+     
+You have created a CSV file.
+
+## Importing CSV files into Excel
+
+Let's take a look at our CSV file. You can open it in Excel by just 
+double-clicking on it. You may notice that it is somewhat different from the 
+Excel file:
+
+- The cells are unformatted, no boldface, no special number formats, etc.
+- The columns are all the same width; in some cases this might mean that a 
+  cell's value appears as "#####". You can fix this by changing the
+  width of the column.
+- All of the other worksheets and all of the graphics are gone.
+
+This is of course, what the CSV file is supposed to do.  You can now 
+add formatting, formulas, and any other Excel feature to the table.
+Just remember to save it as an Excel file and not a CSV file so that
+these features are saved too.
+
+## Other file formats
+
+In addition to CSV files, we will run into other file formats.
+These include:
+
+- Text files in which cells are delimited by spaces or tab characters.
+  ```
+  Name "Year of birth" "Year of death"
+  "Mary, Queen of Scots" 1542 1547
+  "Mary I" 1516 1558
+  "Elizabeth I" 1533 1603
+  ```
+- Text files in which cells are of a fixed width:
+  ```
+  Name                   Year of birth   Year of death
+  Mary, Queen of Scots   1542            1547
+  Mary I                 1516            1558
+  Elizabeth I            1533            1603
+  ```
+
+You can open these files in Excel too.
+
+Excel also has a wide variety of tools for obtaining data from various
+databases, online services, etc. We do not have time to explore all of these
+tools, but you can click ```Data``` on the menu bar and look around to see
+what is available.
+
+## Text to columns
+
+Sometimes you will run into an Excel sheet that looks like this:
+
+[Insert picture here]
+
+This will happen if a text file has been incorrectly imported,
+or if you have copied-and-pasted data from a PDF file or web 
+page.  Fortunately, Excel has a way of fixing that:
+
+1. Select the column with the data.
+2. Select ```Data``` from the menu, then ```Text to Columns```.
+3. The "Text to Columns Wizard" will appear; answer its questions
+   and you will be good to go.

@@ -1,0 +1,551 @@
+---
+title: 'Chapter 4: Random variables'
+author: "ECON 233, Brian Krauth"
+date: "Spring 2021"
+output:
+  html_document:
+    number_sections: yes
+    theme: paper
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    number_sections: yes
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter overview
+
+In economics, the random events we are interested in are usually
+***quantitative***, that is, they can be described by a number.
+Quantitative outcomes are also called "random variables", and we 
+have many tools for working with them.
+
+In this chapter we will learn how to:
+
+ - Calculate and interpret the CDF and PDF of a random variable,
+   or several random variables
+ - Calculate and interpret the expected value of a discrete random 
+   variable from its PDF
+ - Calculate and interpret the variance and standard deviation of a 
+   discrete random variable from its PDF
+ - Calculate and interpret conditional distributions and conditional
+   expectations
+
+# Random variables
+
+Most of the time, the outcomes we are interested in are numbers
+or can be described using numbers. This opens up some additional 
+possibilities.
+
+## Definition of a random variable
+
+A ***random variable*** is a number whose value depends
+on a random outcome. The idea here is that we are going to use a random
+variable to describe some (but not necessarily every) aspect 
+of the outcome.
+
+Returning to our roulette example, here are a few random variables we
+could define:
+
+   - The original outcome $b$. 
+   - The net payout of a \$1 bet on red:
+      $$ w_{red} = w_{red}(b) = \begin{cases}  1 & \textrm{ if } b \in RED \\ -1 & \textrm{ if } b \in RED^c \end{cases} $$
+      That is, a player who bets \$1 on red wins \$1 if the ball lands on red 
+      $b \in RED$ and loses \$1 if the ball lands anywhere else $b \in RED^c$.
+   - The net payout of a \$1 bet on 12:
+      $$ w_{12} = w_{12}(b) = \begin{cases}  35 & \textrm{ if } b = 12 \\ -1 & \textrm{ if } b \neq 12 \end{cases} $$
+      That is, a player who bets \$1 on 12 wins \$35 if the ball lands on 12 
+      ($b = 12$) and loses \$1 if the ball lands anywhere else ($b \neq 12$).
+
+Notice that a random variable can always be thought of as a function of the original
+outcome (in this case $b$). For convenience, we usually leave its dependence on
+the original outcome implicit, and write it as if it were an ordinary 
+variable.
+
+## The probability distribution of a random variable
+
+A random variable has its own sample space (normally $\mathbb{R}$) 
+and probability distribution.  This probability distribution can 
+be derived from the probability distribution of the underlying outcome.
+
+Returning to our example:
+
+   - The probability distribution for $b$ is:
+      $$\Pr(b = 0) = 1/37 \approx 0.027$$
+      $$\Pr(b = 1) = 1/37 \approx 0.027$$
+      $$\vdots$$
+      $$\Pr(b = 36) = 1/37 \approx 0.027$$
+      All other values of $b$ have probability zero.
+   - The probability distribution for $w_{red}$ is:
+      $$\Pr(w_{red} = 1) = \Pr(b \in RED) = 18/37 \approx 0.486$$
+      $$\Pr(w_{red} = -1) = \Pr(b \notin RED) = 19/37 \approx 0.514$$
+      All other values of $w_{red}$ have probability zero.
+   - The probability distribution for $w_{12}$ is:
+      $$\Pr(w_{12} = 35) = \Pr(b = 12) = 1/37 \approx 0.027$$
+      $$\Pr(w_{12} = -1) = \Pr(b \neq 12) = 36/37 \approx 0.973$$
+      All other values of $w_{12}$ have probability zero.
+
+Notice that all of these random variables are related to each other because
+they all depend on the same underlying outcome. We will talk later about how
+to talk about those relationships.
+
+The ***support*** of a random variable $x$ is the smallest[^1] set $S_x \subset \mathbb{R}$
+such that $\Pr(x \in S_x) = 1$.
+
+[^1]: Technically, it is the smallest *closed* set, but let's ignore that for now.
+
+In our example:
+
+  - The support of $b$ is $S_{b} = \{0,1,2,\ldots,36\}$.
+  - The support of $w_{Red}$ is $S_{Red} = \{-1,1\}$.
+  - The support of $w_{12}$ is $S_{12} = \{-1,35\}$.
+
+The distinction between the sample space and the support may not be obvious.
+The way I would put it is that the sample space is the set of outcomes 
+we *allow* to be possible and the support is the set of outcomes that actually
+*are* possible.  
+
+All three random variables in our roulette example have  ***discrete*** 
+support. That is, the support is a set of isolated points.  Not all
+random variables are discrete: for example, physical conditions
+such as temperature or mass.  Random variables that are not discrete
+are typically called ***continuous***. 
+
+### The CDF
+
+We can describe the probability distribution of any random
+variable with a function called the ***cumulative distribution function*** (CDF).
+
+Let $x$ be any random variable.  Then its CDF is a the 
+function $F_x:\mathbb{R} \rightarrow [0,1]$ defined by:
+
+$$F_x(a) = Pr(x \leq a)$$
+For example $F_x(5) = \Pr(x \leq 5)$.
+
+In our example:
+
+   - The CDF of $b$ is:
+         $$F_b(a) = \begin{cases}
+                     0 & a < 0 \\
+                     1/37 & 0 \leq a < 1 \\
+                     2/37 & 1 \leq a < 2 \\
+                     \vdots & \vdots \\
+                     36/37 & 35 \leq a < 36 \\
+                     1 & a \geq 36 \\
+                  \end{cases}$$
+   - The CDF of $w_{red}$ is:
+      $$F_{red}(a) = \begin{cases}
+                  0 & a < -1 \\
+                  19/37 & -1 \leq a < 1 \\
+                  1 & a \geq 1 \\
+                  \end{cases}$$
+   - The CDF of $w_{12}$ is:
+      $$F_{12}(a) = \begin{cases}
+                  0 & a < -1 \\
+                  36/37 & -1 \leq a < 35 \\
+                  1 & a \geq 35 \\
+                  \end{cases}$$
+
+
+```{r CDF_red, echo = FALSE}
+plot(x=c(-5,-1,1,5),y=c(0,19/37,1,1),type="s",xlab="a",ylab=expression(Pr(w[red] <= a)),bty="l",xaxp=c(-5,5,10),yaxp=c(0,1,2))
+abline(h=0.5,lty=2,col="gray")
+```
+
+Notice that all of these CDFs start out as zero, then rise in a stair-step fashion
+at each point in the variable's support, and eventually reach one. These are  
+general properties of the CDF of a discrete random variable. 
+
+The CDF of a continuous random variable also starts at zero and rises until it
+reaches one, but it is rises continuously.
+
+```{r CDF_normal, echo = FALSE}
+plot(x=seq(from=-5,to=5,length.out=100),y=pnorm(seq(from=-5,to=5,length.out=100)),type="l",xlab="a",ylab=expression(Pr(x <= a)),bty="l",xaxp=c(-5,5,10),yaxp=c(0,1,2))
+abline(h=0.5,lty=2,col="gray")
+```
+
+
+More precisely:
+
+   1. The CDF is a probability, so it always ranges from zero to one.
+   2. The CDF is nondecreasing.  That is, for any $a_1 \leq a_2$:
+      - The event $x \leq a_1$ implies the event $x \leq a_2$.
+      - Therefore $F_x(a_1) \leq F_x(a_2)$.
+
+All of these CDFs also look like "stair steps", but they can also be continuous.
+
+### The PDF
+
+We can describe the probability distribution of a random
+variable with a function called the ***probability density function*** (PDF).
+The PDF of a random variable depends on whether its support 
+***continuous*** or ***discrete***. 
+
+The PDF of a discrete random variable is defined as:
+$$f_x(a) = \Pr(x = a)$$
+
+The PDF of a continuous random variable is defined as:
+$$f_x(a) = \frac{dF_x(a)}{da}$$
+
+Returning to our roulette example, both $b$ and $w_{red}$ are discrete random 
+variables.  The PDF of $w_{red}$ is:
+$$f_{red}(a) = \begin{cases}0.514 & a = -1 \\ 0.486 & a = 1 \\ 0 & a = \textrm{anything else} \\ \end{cases}$$ 
+and its CDF is:
+$$F_{red}(a) = \begin{cases}0 & a < -1 \\ 0.514 & -1 \leq a < 1 \\ 1 & a \geq 1 \\ \end{cases}$$ 
+
+> INSERT PLOT HERE.
+
+We will also use continuous random variables, but I won't make you do any 
+math with them. They involve integration which is more trouble than it's worth.
+
+### Modes
+
+Roughly speaking, the ***mode*** of a random variable is its most likely 
+value (i.e., the value with the highest PDF).
+
+In our roulette example:
+
+ - The mode of $w_{red}$ is $-1$. That is, losing \$1 is the most likely outcome.
+ - The mode of $w_{12}$ is also $-1$.
+
+What is the mode of $b$, since it takes on one of 37 equally-likely values?
+In order to answer that, we need to come up with a more precise definition 
+than just "the most likely outcome." But we won't worry about that for now.
+
+### Medians, quantiles and percentiles
+
+Roughly speaking, the ***median*** of a random variable is the value in the 
+"middle"of the distribution, i.e., we have the same probability of being 
+above the median as we do of being below the median.
+ 
+As with the mode, this simple definition works fine in some cases but not
+others. But in this case, let's fine-tune the definition so it always works.
+
+We will start by defining something more general called a ***quantile*** or
+***percentile***.  Let $x$ be a random variable with CDF $F_x$, and let
+$\alpha$ be any number between zero and one.  Then the $\alpha$ quantile
+of $x$ is defined as:
+
+$$q_a(x) = \min\{a: \Pr(x \leq a) \geq \alpha\} = \min\{a: F_x(a) \geq \alpha\}$$
+The $\alpha$ quantile of a distribution is also called the $100*\alpha$
+percentile; for example the 0.25 quantile of $x$ is also called the 25th
+percentile of $x$.
+
+For example, since 
+$$F_{red}(a) = \begin{cases}0 & a < -1 \\ 0.514 & -1 \leq a < 1 \\ 1 & a \geq 1 \\ \end{cases}$$ 
+the 0.25 quantile (25th percentile) of $w_{red}$ is:
+$$q_{0.25}(w_{red}) = \min\{a: \Pr(w_{red} \leq a) \geq 0.25\} = \min\{-1,1\} = -1$$
+and the 0.75 quantile (75th percentile) is:
+$$q_{0.75}(w_{red}) = \min\{a: \Pr(w_{red} \leq a) \geq 0.75\} = \min\{1\} = 1$$
+
+We can now define the median of a distribution: the median is 
+the 0.5 quantile, or 50th percentile.
+
+## The expected value of a random variable
+
+The median and mode are often interpreted as measures of a random variable's
+"central tendancy", or as predictions of its "typical" value. The expected 
+value (also called the mean) is another measure of central tendancy. 
+
+### Definition of expected value
+
+The ***expected value*** of a discrete random variable $x$ is written
+$E(x)$ and is defined as:
+
+$$E(x) = \sum_{a \in S_x} a\Pr(x=a) = \sum_{a \in S_x} af_x(a)$$
+We can think of the expected value as weighted average of the possible values in the support, with weights equal to the probability of observing that value.
+
+The expected value of a continuous random variable is defined as:
+$$E(x) = \int_{-\infty}^{\infty} af_x(a)da$$
+Don't worry, I won't make you take an integral!
+
+Returning to our roulette example:
+$$E(w_{red}) = -1*0.514 + 1*0.486 = -0.028$$
+That is, each dollar bet on red leads to an average loss of 2.8 cents for the bettor.
+
+Problems:
+
+ - Let $h_{red}$ be the net gain to the house (casino) from a dollar bet on red.
+   Find its sample space, PDF, CDF, and expected value.
+ - Let $w_{12}$ be the net gain to the bettor from a \$1 straight bet on $b = 12$ (remember
+   that this bet pays \$35 for every \$1 bet). Find its sample space, PDF, CDF, and expected value.
+
+### Properties of the expected value
+
+The expected value is a sum, and so it has some of the same properties
+as sums.
+
+The first is that the expected value of a constant is just the constant itself:
+$$E(a) = a$$
+The second is that we can always take a constant out of the expected value:
+$$E(ax) = aE(x)$$
+The third is that we can take any sum out of the expected value:
+$$E(x + y) = E(x) + E(y)$$
+We can summarize these three rules in a single rule:
+$$E(ax+by+c) = aE(x) + bE(y) + c$$
+This is called the linearity of the expected value.
+
+Now you might think from that result that you can take the expected value inside
+of any function. For example is $E(x^2) = E(x)^2$? Is $\ln(E(x)) = E(\ln x)$?
+NO!
+
+### Variances and standard deviations
+
+If $x$ is a random variable, any function of $x$ is also a random variable.
+So we can talk about its PDF, CDF, and expected value.  There 
+are several functions of $x$ whose expected values are of particular interest.
+
+The ***variance*** of a random variable $x$ is defined as:
+$$\sigma_x^2 = var(x) = E((x-E(x))^2)$$
+The ***standard deviation*** of a random variable 
+is just the square root of its variance.
+$$\sigma_x = sd(x) = \sqrt{var(x)}$$
+Both variance and standard deviation can be thought of as 
+measures of how much $x$ tends to vary.  
+
+
+# Standard probability distributions
+
+## Bernoulli
+
+The ***Bernoulli*** probability distribution is usually written:
+$$x \sim Bernoulli(p)$$
+It has discrete support $S_x = \{0,1\}$ and PDF:
+$$f_x(a) = \begin{cases} (1-p) & a = 0 \\ p & a = 1 \\ 0 & a = \textrm{anything else}\\ \end{cases}$$
+
+Its mean and variance are:
+$$E(x) = (1-p)*0 + p*1 = p$$
+$$var(x) = E[(x-E(x))^2] = E[(x-p)^2] = (1-p)(0-p)^2 + p(1-p)^2 = p(1-p)$$
+
+## Binomial
+
+The ***binomial*** probability distribution is usually written:
+$$x \sim Binomial(n,p)$$
+It has discrete support $S_x = \{0,1,2,\ldots,n\}$ where:
+$$\Pr(x = a) = \begin{cases} \frac{n!}{a!(n-a)!} p^a(1-p)^{n-a} & a \in S_x \\ 0 & \textrm{anything else} \\ \end{cases}$$
+
+We can show that:
+$$E(x) = np$$
+$$var(x) = np(1-p)$$
+The binomial and Bernoulli distributions are closely related.
+In particular the $Binomial(n,p)$ distribution corresponds th
+the sum of $n$ independent draws from the $Bernoulli(p)$ 
+distribution. 
+
+## Uniform
+
+The ***uniform*** probability distribution is usually written
+$$x \sim U(L,H)$$
+where $L < H$. It is a continuous probability distribution with 
+support $S_x = [L,H]$ and PDF:
+$$x \sim U(L,H) \iff f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
+The uniform probability distribution has the properties that:
+$$E(x) = \frac{L+H}{2}$$
+$$var(x) = \frac{(H-L)^2}{12}$$
+
+The $uniform(0,1)$ distribution is also called the 
+***standard uniform distribution***. 
+
+## Normal
+
+The ***normal distribution*** or ***Gaussian distribution***
+is typically written as:
+$$ x \sim N(\mu,\sigma^2)$$ 
+It is a continuous distribution with support $S_x = \mathbb{R}$
+and PDF:
+$$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
+Its properties are:
+$$E(x) = \mu$$
+$$var(x) = \sigma^2$$
+
+The normal distribution also has an important property that most
+other distributions don't have: any linear function of a normal
+random variable is also normal.  That is, if $x \sim N(\mu,\sigma^2)$
+then
+$$(ax + b) \sim N(a\mu + b,a^2\sigma^2)$$
+
+The $N(0,1)$ distribution is also called the ***standard normal distribution***
+The standard normal distribution is so useful that we have special
+symbol for its PDF:
+$$\phi(a) = \frac{1}{\sqrt{2\pi}} e^{-\frac{a^2}{2}}$$
+and its CDF:
+$$\Phi(a) = \int_{-\infty}^a \phi(b)db$$
+The standard normal CDF $\Phi(.)$ does not have a closed form
+solution, but is easy to calculate on a computer.
+
+Why is this useful?  Well remember that linear functions of normal random variables
+are also normal.  Then if $x \sim N(\mu,\sigma^2)$
+$$ z = \frac{x-\mu}{\sigma} \sim N(0,1)$$
+which implies:
+$$F_x(a) = \Pr\left(x \leq a\right) = \Pr\left( \frac{x-\mu}{\sigma} \leq \frac{a-\mu}{\sigma}\right) = \Pr\left( z \leq \frac{a-\mu}{\sigma}\right) = \Phi\left(\frac{a-\mu}{\sigma}\right)$$
+
+# Multiple random variables
+
+## The joint distribution of two random variables
+
+## Conditional distributions and independence
+
+## Conditional expectations
+
+## Covariances and correlations
+
+The ***covariance*** of two random variables $x$ and $y$ 
+is defined as:
+$$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
+and their ***correlation** is defined as:
+$$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
+Both the covariance and correlation are measures of how $x$ and $y$ tend to move together.
+
+A few results:
+
+- The variance of a constant is zero:
+  $$var(a) = 0$$
+- The variance of a random variable is its covariance with itself:
+  $$cov(x,x) = var(x)$$
+- Covariances are products, so:
+  $$cov(ax+by+c, dx+ey+f) = ad \, var(x) + be \, var(y) + (bd + ae) \, cov(x,y)$$
+- The variance of a sum is:
+  $$var(ax+by+c) = a^2var(x) + b^2var(y) + 2abcov(x,y)$$ 
+- The correlation is always between -1 and 1:
+  $$-1 \leq \rho_{xy} \leq 1$$
+
+# Economics and probability
+
+Before moving on, I'd like to make a few points about economics.
+
+The first is to think through the economics of our casino example. A casino is
+first and foremost a business, and exists to make a profit.  At minimum, 
+that means that a casino will always build a "house advantage" into the rules 
+of every game it offers:
+
+ - Many table games pay at "even money" (a \$1 bet pays \$1 in winnings) 
+   but have slightly less than 50\% probability of winning.
+   - A bet on red wins with probability $18/37 \approx 0.486$
+     in European roulette (for a house advantage of 2.7\%) 
+     and probability $18/38 \approx 0.474$ (for a house advantage of 5.3\%)
+     in American roulette.
+   - The standard bet in craps (the "pass line" bet) wins with probability
+     $244/495 \approx 0.493$, for a house advantage of 1.4\% or 1.4 cents per dollar bet. 
+     This is typically the lowest house advantage available to an unskilled player
+     in most casinos.
+   - The house advantage in blackjack depends on the details of the game and 
+      the skill of the player, but it is typically estimated at about 5\% 
+      for a low-skill player following a simple strategy and about 1\% for a
+      high-skill player following an ideal strategy (of course the true 
+      ideal strategy is not to play!).
+   - Slot machines typically have the highest house advantage of all. In British
+     Columbia, slot machines are regulated to a house advantage of 8\%.
+ - Some games are set up so that players are betting against each other, and 
+   the casino always wins (or at least doesn't lose).
+   - If you play poker, the house takes a fixed percentage ("rake", also
+     called the "vigorish" or "vig") of every bet.
+   - If you bet on a horse race or football game, the house adjusts the payouts 
+     or point spread dynamically as bets come in to ensure that the losing bets 
+     can be used to pay the winners.
+
+What stops the casino from setting an even larger house advantage?  One reason
+is regulation. Another reason is supply and demand, and competition: the house 
+advantage is a cost to the gambler, so gamblers may respond to an increased
+house advantage by reduce their betting or by going to other 
+casinos (legal or illegal) that offer a better deal.
+
+Now, gambling is an interesting business but is it an important one to the economy?
+Probably not, unless you live in Las Vegas or Macau. But it turns out that the 
+insurance industry (and many companies in
+the finance industry) operates on the same principles as a casino.
+
+An insurance company:
+
+ - takes in bets (insurance premiums).
+ - pays out winnings (insurance claims) based on certain uncertain events such
+   as car accidents, medical expenses, etc.
+ - carefully calculates the probabilities of each of these events, and 
+   sets premiums to ensure that the company always makes money. 
+   
+As in the casino industry, some combination of competition and regulation
+keeps insurance premiums down. 
+
+
+If you are good at probability and statistics and find it at least somewhat interesting,
+# Problems
+
+1. In stock markets, some participants are active traders, buying and selling
+   individual stocks on a regular basis. Active traders believe that they can 
+   earn higher returns than the market as a whole. Other participants are passive
+   investors buying and holding a broad-based index fund that duplicates the 
+   performance of the market as a whole. 
+   
+   Suppose the probability of an active trader beating the market in one year is 0.5.
+   Suppose that excess returns are independent across traders and across years.
+   
+   a. What is the probability that a particular trader beats the market every year
+      over the next 10 years?
+      
+      A: 0.5^10 = 0.0009765625
+      
+   b. Suppose there are 1000 active traders. What is the probability that at least
+      one active trader beats the market over the next 10 years?
+      
+      A: 1 - (1 - 0.5^10)^1000 = 0.62357620194
+      
+   c. Suppose that trader A has beaten the market in each of the last 10 years.
+      What is the probability that trader A will beat the market next year?
+      
+      A: 0.5
+      
+2. In April 2020, researchers at Stanford University tested 3,300 residents of 
+   Santa Clara county in California for COVID-19 antibodies, and found that 1.5\% 
+   of respondents tested positive. This number was much higher than expected and,
+   if true, implied that the fatality rate from COVID-19 was much lower than 
+   expected. 
+   
+   Let I = 1 if a person has been infected, and 0 if not. Let P = 1 if a person 
+   tests positive, and 0 if not. If a test is perfectly accurate, then P = I.
+   Unfortunately most real-world medical tests are not 100\% accurate; they
+   can yield false positives (non-infected people testing positive: I=0,P=1)
+   or false negatives (infected people testing negative: I=1,P=0).
+   
+   Suppose that:
+   
+     - The false negative rate of the test is zero: $\Pr(P=0|I=1) = 0$.
+     - The false postive rate of the test is $f$: $\Pr(P=1|I=0) = f$
+     - The results of the test are as described above: $\Pr(P=1) = 0.015$.
+     - The actual infection rate is $i$: $\Pr(I=1) = i$.
+     
+   a. Find the probability that an infected person will test positive.
+      A: 1
+   b. Find the probability that a non-infected person will test negative.
+      A: 1-f
+   c. Find the probability that a person will test positive, as a function of
+      $f$ and $i$.
+      A: i + (1-i)f
+   d. We know that the probability that a person will test positive is 0.015.
+      Use this information and your answer to (c) to calculate the infection
+      rate as a function of $f$.
+      A: i = (0.015 -f)/(1-f)
+   e. The test used by the researchers has a low rate of false positives,
+      somewhere between 0-2\% (0.00-0.02). Table ? below gives the infection 
+      rate implied by a given false positive rate.  Fill in the missing values
+      
+      Positive test rate | False positive rate | True infection rate 
+      -------------------+---------------------+---------------------
+      0.015              |          0          |    0.015
+      0.015              |          0.005      |    0.010
+      0.015              |          0.010      |    0.005
+      0.015              |          0.015      |    0.000
+
+   f. Suppose the true infection rate is 0.005, and the false positive rate is 0.010.
+      If you test positive, what is the probability that you have been infected?
+      A: $Pr(I=1|P=1) = \frac{Pr(P=1|I=1)Pr(I=1)}{Pr(P=1)} = 0.005/0.015 = 1/3$
+
+you may want to look into a career as an actuary.  Actuaries estimate probabilities
+for insurance companies and help them set premiums.  It's a pretty good job if you have the talent, because it is well-paid but does not usually require long hours or high stress.
+
+## Answer key
+
+1. Answer
+2. Answer
