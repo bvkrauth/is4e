@@ -1,5 +1,5 @@
 ---
-title: "Chapter 7: Advanced data analysis with Excel"
+title: "Chapter 10: Advanced data analysis with Excel"
 author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
 output: 
@@ -20,13 +20,11 @@ In this chapter we will learn how to:
 
  - DDD
  - EEE
- 
 
 # Pivot tables
 
 # Bivariate statistics
 
 # Statistical inference
-
 
 

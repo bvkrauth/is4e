@@ -1,5 +1,5 @@
 ---
-title: "Chapter 5: Statistics"
+title: "Chapter 6: Statistics"
 author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
 output: 
@@ -36,9 +36,10 @@ The basic idea of statistical analysis is that we will
 - Our model of the DGP will often include one
   or more unknown features called *parameters*.
 - Construct statistics to estimate
-  
-  
-## Random samples from a population
+
+## A general framework
+
+## Random sampling from a population
 
 Let $D = (x_1,x_2,\ldots,x_n)$ be a data set with
 one variable and $n$ observations.  We can use
@@ -82,7 +83,11 @@ example, Canada's unemployment rate is calculated using data from the
 Labour Force Survey (LFS). The LFS is a random sample (sort of) of the 
 civilian non-institutionalized working-age population of Canada.
 
-## The sampling distribution of a statistic
+## Alternative sampling models
+
+# Statistics
+
+## What is a statistic?
 
 Let $s = s(D)$ be some statistic calculated from the data set $D$.
 To give a few examples
@@ -92,6 +97,9 @@ To give a few examples
   $$\hat{f}_A = \sum_{i=1}^n I(x \in A)$$
 - The ***sample median*** of $x_i$ is defined as:
   $$\hat{m}_x = m: \begin{cases} \hat{f}_{x < m} \leq 0.5 \\ \hat{f}_{x > m} \leq 0.5 \\ \end{cases}$$
+
+
+## The sampling distribution of a statistic
 
 Since the data itself is a collection of random variables, any statistic
 calculated from that data is also a random variable, with a probability
@@ -118,7 +126,7 @@ An ***estimator*** is a statistic that is being used to ***estimate***
 (guess at the value of) an unknown parameter.  It is sometimes useful
 to distinguish between 
 
-- the ***estimand** is the thing being estimated
+- the ***estimand*** is the thing being estimated
 - the estimate is the specific number calculated from
   our particular data set.
 - the estimator is either the formula used to calculate the estimate
@@ -194,9 +202,9 @@ $$E(\bar{y}) = E(y_i) = 0*\Pr(x_i \notin A) + 1*\Pr(x_i \in A) = \Pr(x_i \in A)$
 In other words the sample frequency of an event is an unbiased estimator 
 of the event's probability.
 
-# Asymptotics
+# Asymptotic properties of statistics
 
-## Asymptotic versus finite sample properties
+## Large samples and small samples
 
 So far, we have described statistics and estimators in terms
 of their probability distribution and the mean, variance
@@ -297,5 +305,6 @@ event like a natural disaster, pandemic or financial crisis
 that affects everyone.  Here the independence needed for the LLN
 does not apply.
 
+## The Central Limit Theorem
 
 

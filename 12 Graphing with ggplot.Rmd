@@ -1,5 +1,5 @@
 ---
-title: "Chapter 7: Advanced data analysis with Excel"
+title: "Chapter 12: Graphing with ggplot"
 author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
 output: 

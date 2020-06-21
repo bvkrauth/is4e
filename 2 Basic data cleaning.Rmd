@@ -203,7 +203,9 @@ Others might do it at the end of each working day. Ideally, these two will often
 coincide. It all depends on what works best for you.
 
 
-## A quick tour of Excel
+# A quick tour of Excel
+
+## Excel terminology and user interface
 
 When you open your working copy of the data in Excel, 
 your screen should look something like this:
@@ -260,8 +262,6 @@ ever knowing their names, so I will list them here:
   - You can click on a tab to switch to that worksheet.
   - You can double-click on a tab to change its name.
   - You can click on the "+" button to add a new worksheet.
-
-# Viewing our data
 
 ## Tidy data
 
@@ -704,133 +704,3 @@ We will call our variable "Male" and set it to 1 for males, and 0 for females.
 This should display as 1.  Fill in the rest of the column, and you should see
 1 for all of the males and 0 for all of the females.
 
-# Saving, exporting and importing
-
-Once you have followed all of the steps in this chapter, you should clean up
-your file:
-
-- Undo any undesirable formatting or content changes.
-- Fill in any incomplete columns
-
-and save it to your project folder. We will use it again soon.
-
-## CSV files
-
-Normally, Excel works with files in its native format, ```.xlsx``` files.
-
-However, Excel is not the only program that works with data,
-and so we will often find data in other formats. We will also sometimes
-want to save our data in a format that can be read by other programs,
-for example R.
-
-The most common and useful general-purpose format for tabular data
-is called the "comma separated values" or ***CSV*** file format.
-A CSV file is just a text file with the following features:
-
-- Each line in the file represents a row in the table
-- Within each row, cell values are separated or ***delimited*** by commas.
-- Where necessary, text values are enclosed in quotes.
-
-For example, this CSV file:
-```
-Name,Year of birth,Year of death
-"Mary, Queen of Scots",1542,1547
-Mary I,1516,1558
-Elizabeth I,1533,1603
-```
-will appear in Excel as the table:
-
-CSV files have several important limitations relative to Excel 
-files:
-
-1. A CSV file can only contain one table, while an Excel file
-   can contain multiple tables.
-2. A CSV file can only contain cell values, and cannot contain:
-   - Formulas
-   - Formatting
-   - Graphs
-   - Any other fancy Excel features
-   
-These limitations are also the main advantage of the CSV file: they are simple
-ways of reporting tabular data and can be read by virtually any program.
-
-## Exporting CSV files from Excel
-
-Let's save our Excel worksheet as a CSV file.
-
-1. Open [filename] in Excel, and go to [sheet]
-2. Click on ```File```, and then ```Save As```. You will see:
-   - a text box giving the name of the file (currently [filename]) 
-   - a drop-down box giving the file format (currently 
-     ```Excel Workbook (*.xlsx)```).
-3. Select ```CSV (Comma delimited) (*.csv)``` from the drop-down
-   box and enter a filename in the text box.
-4. Click on the ```Save``` button.
-   - You will get a warning message: "The selected file type does
-     not support workbooks that contain multiple sheets. To save only
-     the active sheet click OK...."
-5. Click on the ```OK``` button.
-6. Close Excel.
-   - You will get another warning message: "Want to save your changes
-     to [filename].csv?"  Click ```Don't save```.
-     
-You have created a CSV file.
-
-## Importing CSV files into Excel
-
-Let's take a look at our CSV file. You can open it in Excel by just 
-double-clicking on it. You may notice that it is somewhat different from the 
-Excel file:
-
-- The cells are unformatted, no boldface, no special number formats, etc.
-- The columns are all the same width; in some cases this might mean that a 
-  cell's value appears as "#####". You can fix this by changing the
-  width of the column.
-- All of the other worksheets and all of the graphics are gone.
-
-This is of course, what the CSV file is supposed to do.  You can now 
-add formatting, formulas, and any other Excel feature to the table.
-Just remember to save it as an Excel file and not a CSV file so that
-these features are saved too.
-
-## Other file formats
-
-In addition to CSV files, we will run into other file formats.
-These include:
-
-- Text files in which cells are delimited by spaces or tab characters.
-  ```
-  Name "Year of birth" "Year of death"
-  "Mary, Queen of Scots" 1542 1547
-  "Mary I" 1516 1558
-  "Elizabeth I" 1533 1603
-  ```
-- Text files in which cells are of a fixed width:
-  ```
-  Name                   Year of birth   Year of death
-  Mary, Queen of Scots   1542            1547
-  Mary I                 1516            1558
-  Elizabeth I            1533            1603
-  ```
-
-You can open these files in Excel too.
-
-Excel also has a wide variety of tools for obtaining data from various
-databases, online services, etc. We do not have time to explore all of these
-tools, but you can click ```Data``` on the menu bar and look around to see
-what is available.
-
-## Text to columns
-
-Sometimes you will run into an Excel sheet that looks like this:
-
-[Insert picture here]
-
-This will happen if a text file has been incorrectly imported,
-or if you have copied-and-pasted data from a PDF file or web 
-page.  Fortunately, Excel has a way of fixing that:
-
-1. Select the column with the data.
-2. Select ```Data``` from the menu, then ```Text to Columns```.
-3. The "Text to Columns Wizard" will appear; answer its questions
-   and you will be good to go.

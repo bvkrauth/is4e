@@ -1,12 +1,12 @@
 ---
-title: "Chapter 4: Basic data analysis with Excel"
+title: "Chapter 5: Basic data analysis with Excel"
 author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
 output: 
   html_document:
     theme: paper
     toc: true
-    toc_float: true
+    toc_float: false
     number_sections: true
 ---
 
@@ -22,12 +22,14 @@ In this chapter we will:
  - Use formulas in Excel
  - Gather resources and tools, including all needed computer software.
 
-# Preliminaries
+# Statistics in Excel
+
+## Preliminaries
 
 1. Make a new working copy of [data file]. Call it Chapter4.xlsx.
 2. Open your new file.
 
-# Some basic statistics
+## Some basic statistics
 
 We will start by calculating simple averages for all of our variables
 and reporting them at the bottom of the table.
@@ -52,7 +54,7 @@ data.
 We could add all sorts of additional statistics below our
 averages, but let's go a little fancier.
 
-# Constructing a table of summary statistics
+## Constructing a table of summary statistics
 
 We are going to create a nice table of summary statistics
 for all of our variables, and put it in a separate worksheet.
@@ -150,7 +152,9 @@ Finally, let's make the display formatting a little nicer.
      button aggressively to make your table more 
      readable.
 
-# Constructing a bar graph
+# Graphs in Excel 
+
+## Constructing a bar graph
 
 Now we are going to start constructing some basic graphs.
 
@@ -158,7 +162,7 @@ The simplest kind of graph is a ***bar graph***.
 It takes a categorical variable and uses bars of different length
 to represent the number of observations in each category.
 
-## Initial construction
+### Initial construction
 
 To start constructing a bar graph:
 
@@ -174,7 +178,7 @@ is a bar for each category, and the length of the bar
 tells us the total number of observations that fall in 
 each category.
 
-## Adjusting the format
+### Adjusting the format
 
 The default graph conveys more or less the information 
 we want, so we could just leave it as is. But 
@@ -210,7 +214,7 @@ in practice because people are much better at evaluating
 the relative size of two lines or rectangles than they are at
 evaluating the relative size of two 3D boxes or pie slices.
 
-## Adjusting the structure
+### Adjusting the structure
 
 By default, our bar chart shows the total *number* of observations
 in each category. We might be more interested in seeing 
@@ -233,14 +237,14 @@ I've figured out and will just tell you how to do it:
 Your graph will now display percentages rather than counts. Notice
 that the appearance of the graph hasn't changed, only the units.
 
-# Constructing a histogram
+## Constructing a histogram
 
 A ***histogram*** is a special kind of bar graph for numeric
 variables.  It is constructed by sorting the variable's values 
 into some number of equally-sized ***bins*** and then
 plotting a bar graph of the bins.
 
-## A simple histogram
+### A simple histogram
 
 Let's construct a histogram of our Income variable.
 
