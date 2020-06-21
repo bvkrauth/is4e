@@ -1,39 +1,51 @@
 ---
-title: "Chapter 1 - presentation"
+title: "Chapter 1: Introduction"
 author: "Brian Krauth"
-date: "4/12/2020"
-output: ioslides_presentation
+date: "Spring 2021"
+output:
+  powerpoint_presentation: 
+    slide_level : 2
+  ioslides_presentation: default
+  beamer_presentation: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-# This is a section header slide
 
-It can have a subtitle
+# Course goals and context
 
-## R Markdown
+## Why this is an important course
 
 This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
 
-## Slide with Bullets
+## Educational goals
 
 - Bullet 1
 - Bullet 2
 - Bullet 3
 
-## Slide with R Output
+## Related courses
 
 ```{r cars, echo = TRUE}
 summary(cars)
 ```
 
-## Slide with Plot
+## My expectations
 
 ```{r pressure}
 plot(pressure)
 ```
 
+# Computer resources
+
+## Requirements
+
+## Installing Microsoft Excel
+
+## Installing R and RStudio
+
+## Other resources
