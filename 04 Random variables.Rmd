@@ -93,8 +93,9 @@ Notice that all of these random variables are related to each other because
 they all depend on the same underlying outcome. We will talk later about how
 to talk about those relationships.
 
-The ***support*** of a random variable $x$ is the smallest[^1] set $S_x \subset \mathbb{R}$
-such that $\Pr(x \in S_x) = 1$.
+### The support
+
+The ***support*** of a random variable $x$ is the smallest[^1] set $S_x \subset \mathbb{R}$ such that $\Pr(x \in S_x) = 1$.
 
 [^1]: Technically, it is the smallest *closed* set, but let's ignore that for now.
 
@@ -104,104 +105,229 @@ In our example:
   - The support of $w_{Red}$ is $S_{Red} = \{-1,1\}$.
   - The support of $w_{12}$ is $S_{12} = \{-1,35\}$.
 
-The distinction between the sample space and the support may not be obvious.
-The way I would put it is that the sample space is the set of outcomes 
-we *allow* to be possible and the support is the set of outcomes that actually
-*are* possible.  
+All three of these random variables have  ***discrete*** 
+support. That is, the support is a set of isolated points 
+each of which has a strictly positive probability.
 
-All three random variables in our roulette example have  ***discrete*** 
-support. That is, the support is a set of isolated points.  Not all
-random variables are discrete: for example, physical conditions
-such as temperature or mass.  Random variables that are not discrete
-are typically called ***continuous***. 
+Not all random variables are discrete: for example, physical conditions
+such as temperature or mass are fundamentally continuous. If 
+you buy a 5kg bag of flour at the grocery store
+it almost certainly won't contain exactly 5kg of flour; 
+it may contain 4.98 kg or 5.01 kg, or any number in between.
+This complicates matters substantially because there are an infinite
+number of possible values, and this infinite number of probabilities
+somehow needs to sum to one.  We will need some calculus to
+deal with this case, but first let's explore the discrete case.
 
-### The CDF
+### The PDF of a discrete random variable
 
-We can describe the probability distribution of any random
-variable with a function called the ***cumulative distribution function*** (CDF).
+We can describe the probability distribution of a random
+variable with a function called its ***probability density function (PDF)*** .
 
-Let $x$ be any random variable.  Then its CDF is a the 
-function $F_x:\mathbb{R} \rightarrow [0,1]$ defined by:
-
-$$F_x(a) = Pr(x \leq a)$$
-For example $F_x(5) = \Pr(x \leq 5)$.
+The PDF of a discrete random variable is defined as:
+  $$f_x(a) = \Pr(x = a)$$
+That is, it takes any number and returns the probability that $x$ will be 
+that number.
 
 In our example:
 
-   - The CDF of $b$ is:
-         $$F_b(a) = \begin{cases}
-                     0 & a < 0 \\
-                     1/37 & 0 \leq a < 1 \\
-                     2/37 & 1 \leq a < 2 \\
-                     \vdots & \vdots \\
-                     36/37 & 35 \leq a < 36 \\
-                     1 & a \geq 36 \\
-                  \end{cases}$$
-   - The CDF of $w_{red}$ is:
-      $$F_{red}(a) = \begin{cases}
-                  0 & a < -1 \\
-                  19/37 & -1 \leq a < 1 \\
-                  1 & a \geq 1 \\
-                  \end{cases}$$
-   - The CDF of $w_{12}$ is:
-      $$F_{12}(a) = \begin{cases}
-                  0 & a < -1 \\
-                  36/37 & -1 \leq a < 35 \\
-                  1 & a \geq 35 \\
-                  \end{cases}$$
+  $$f_b(a) = \Pr(b = a) = \begin{cases}
+            1/37 & a \in \{0,1,\ldots,36\} \\
+            0 & a \notin \{0,1,\ldots,36\} \\
+          \end{cases}$$
+  $$f_{red}(a) = \Pr(w_{red} = a) = \begin{cases}
+            19/37 & a = -1 \\
+            18/37 & a = 1 \\
+            0 & a \notin \{-1,1\} \\
+          \end{cases}$$
+  $$f_{12}(a) = \Pr(w_{12} = a) = \begin{cases}
+            36/37 & a = -1 \\
+            1/37 & a = 35 \\
+            0 & a \notin \{-1,35\} \\
+          \end{cases}$$
 
+We can calculate any probability from the PDF by simple addition.
+  $$\Pr(x \in A) = \sum_{s \in S_x} f_x(s)I(s \in A)$$
 
-```{r CDF_red, echo = FALSE}
-plot(x=c(-5,-1,1,5),y=c(0,19/37,1,1),type="s",xlab="a",ylab=expression(Pr(w[red] <= a)),bty="l",xaxp=c(-5,5,10),yaxp=c(0,1,2))
+For example:
+  $$\Pr(b \leq 3) = f_b(0) + f_b(1) + f_b(2) + f_b(3) = 4/37$$
+
+The PDF of a discrete random variable has several general properties:
+
+  - It is always between zero and one:
+    $$0 \leq f_x(a) \leq 1$$
+    since it is a probability.
+  - It is strictly positive for all values in the support:
+    $$a \in S_x \implies f_x(a) > 0$$
+  - It sums up to one over the support:
+    $$\sum_{a \in S_x} f_x(a) = \Pr(x \in S_x) = 1$$
+    since the support has probability one by definition.
+
+### The CDF
+
+We can also describe the probability distribution of a random
+variable with a function called its 
+***cumulative distribution function (CDF)***. 
+Unlike with the PDF, the CDF always has the same definition 
+whether or not the random variable is discrete.
+
+The CDF of the random variable $x$ is the 
+function $F_x:\mathbb{R} \rightarrow [0,1]$ defined by:
+  $$F_x(a) = Pr(x \leq a)$$
+That is, it takes any number and returns the probability that $x$ 
+will be less than or equal to that number.
+  
+The CDF has several properties:
+
+  1. It always lies between zero and one:
+      $$0 \leq F_x(a) \leq 1$$
+     since it is a probability.
+  2. It starts at zero and ends at one:
+      $$F_x(-\infty) = \Pr(x \leq -\infty) = 0$$
+      $$F_x(\infty) = \Pr(x \leq \infty) = 1$$
+  2. It is non-decreasing.  That is, for any $a_1 \leq a_2$
+      $$F_x(a_1) \leq F_x(a_2)$$
+     This is because the event $x \leq a_2$ implies the event $x \leq a_1$,
+     so it must be at least as probable.
+  3. For any $a_1 < a_2$,
+      $$\Pr(a_1 < x \leq a_2) = F_x(a_2) - F_x(a_1)$$
+
+As I said earlier, the CDF is well-defined and has these properties
+whether $x$ is discrete or continuous. 
+
+If a random variable is discrete, we can construct its CDF
+by just adding up the PDF:
+  $$F_x(a) = \Pr(x \leq a) = \sum_{s \in S_x} f_x(s)I(s \leq a)$$
+We can also construct the PDF from the CDF.  Pick some positive but
+small number $\epsilon$.  Then:
+  $$f_x(a) = F_x(a) - F_x(a-\epsilon)$$
+as long as $\epsilon$ is small enough.
+
+In our example:
+
+  - The CDF of $b$ is:
+     $$F_b(a) = \begin{cases}
+                   0 & a < 0 \\
+                   1/37 & 0 \leq a < 1 \\
+                   2/37 & 1 \leq a < 2 \\
+                   \vdots & \vdots \\
+                   36/37 & 35 \leq a < 36 \\
+                   1 & a \geq 36 \\
+                \end{cases}$$
+  - The CDF of $w_{red}$ is:
+    $$F_{red}(a) = \begin{cases}
+                0 & a < -1 \\
+                19/37 & -1 \leq a < 1 \\
+                1 & a \geq 1 \\
+                \end{cases}$$
+  - The CDF of $w_{12}$ is:
+    $$F_{12}(a) = \begin{cases}
+                0 & a < -1 \\
+                36/37 & -1 \leq a < 35 \\
+                1 & a \geq 35 \\
+                \end{cases}$$
+
+Figure ??? below graphs these CDFs. Notice that they show all of the 
+general properties described above.  In addition, they all have a 
+distinctive "stair-step" shape, jumping up at each point in $S_x$ 
+and flat between those points,  This is a general property of CDFs 
+for discrete random variables.
+
+```{r CDF_all, echo = FALSE, fig.margin = TRUE, fig.cap = "CDFs for the roulette example"}
+plot(x=c(-40,-1,1,40),
+     y=c(0,19/37,1,1)-0.001,
+     type="s",
+     col="red",
+     xlab="a",
+     ylab="F(a)",
+     bty="l",
+     xaxp=c(-40,40,10),
+     yaxp=c(0,1,2))
+lines(x=c(-40,seq(from=0,to=36,by=1),40),
+      y=c(0,seq(from=0,to=1,length=37),1)+0.001,
+      type="s",
+      col="green")
+lines(x=0.1+ c(-40,-1,35,40),
+      y=0.01+c(0,36/37,1,1),
+      type="s",
+      col="blue")
 abline(h=0.5,lty=2,col="gray")
 ```
 
-Notice that all of these CDFs start out as zero, then rise in a stair-step fashion
-at each point in the variable's support, and eventually reach one. These are  
-general properties of the CDF of a discrete random variable. 
+### Continuous random variables
 
-The CDF of a continuous random variable also starts at zero and rises until it
-reaches one, but it is rises continuously.
+A ***continuous random variable*** has the property that the the probability
+of any specific *value* is zero:
+  $$\Pr(x=a) = 0$$
+but the probability of it being in a specific *range* can be non-zero.
+
+This is easiest to describe by examples:  
+
+- Returning to our bag of flour example, there is effectively no chance 
+  that the flour weighs exactly 5 kg, but there is a very good chance 
+  it is between 4.9 kg and 5.1 kg.
+- Other characteristics of our world like location, time, temperature, etc. 
+  seem to have this property (whether they actually do
+  is a matter for theoretical physics).
+- Economic quantities, like income, spending, profits, and revenues
+  are often literally discrete (measured in dollars and cents)
+  but can take on so many nearly-equivalent values that we think
+  of them as continuous.
+
+Now, in order to work with continuous random variables we would need to
+use integral calculus. Integral calculus is taught in MATH 158, which 
+is not a prerequisite for the course, So:
+
+  - Most of my examples will be for discrete case.
+  - I will briefly show you the math for the continuous case, 
+    but I will not expect you to do it.
+  - Most of the results I give you will apply for both cases.
+
+Like a discrete random variable, a continuous random variable has a CDF
+that starts out at zero and rises to one. However, instead of rising in
+a series of jumps, it rises continuously as in Figure ??? below.  
 
 ```{r CDF_normal, echo = FALSE}
 plot(x=seq(from=-5,to=5,length.out=100),y=pnorm(seq(from=-5,to=5,length.out=100)),type="l",xlab="a",ylab=expression(Pr(x <= a)),bty="l",xaxp=c(-5,5,10),yaxp=c(0,1,2))
 abline(h=0.5,lty=2,col="gray")
 ```
 
-
-More precisely:
-
-   1. The CDF is a probability, so it always ranges from zero to one.
-   2. The CDF is nondecreasing.  That is, for any $a_1 \leq a_2$:
-      - The event $x \leq a_1$ implies the event $x \leq a_2$.
-      - Therefore $F_x(a_1) \leq F_x(a_2)$.
-
-All of these CDFs also look like "stair steps", but they can also be continuous.
-
-### The PDF
-
-We can describe the probability distribution of a random
-variable with a function called the ***probability density function*** (PDF).
-The PDF of a random variable depends on whether its support 
-***continuous*** or ***discrete***. 
-
-The PDF of a discrete random variable is defined as:
-$$f_x(a) = \Pr(x = a)$$
-
 The PDF of a continuous random variable is defined as:
 $$f_x(a) = \frac{dF_x(a)}{da}$$
+Figure ?? below shows the PDF associated with the CDF shown
+in Figure ?? above.
 
-Returning to our roulette example, both $b$ and $w_{red}$ are discrete random 
-variables.  The PDF of $w_{red}$ is:
-$$f_{red}(a) = \begin{cases}0.514 & a = -1 \\ 0.486 & a = 1 \\ 0 & a = \textrm{anything else} \\ \end{cases}$$ 
-and its CDF is:
-$$F_{red}(a) = \begin{cases}0 & a < -1 \\ 0.514 & -1 \leq a < 1 \\ 1 & a \geq 1 \\ \end{cases}$$ 
+The PDF can be interpreted as follows.  Pick any number 
+$a$ and some small positive number $\delta$. Then the probability 
+that $x$ lies within $\delta/2$ of $a$ is:
+  $$\Pr( |x-a| < \delta/2) \approx \delta f_x(a) $$
+where "$\approx$" means that this relationship is approximate rather than
+exact. In other words, if $f_x(a_1)$ is twice as large as $f_x(a_2)$, then
+values of $x$ are twice as likely to be close to $a_1$ as they are to be
+close to $a_2$.
 
-> INSERT PLOT HERE.
+The PDF is defined from the CDF, but we can also go the other way.  That
+is, if we know the PDF we can calculate the CDF:
+  $$F_x(a) = \int_{-\infty}^a f_x(v)dv$$
+More generally the probability of $x$ being between any two numbers is:
+  $$\Pr(a \leq x \leq b) = F_x(b) - F_x(a) = \int_a^b f_x(v)dv$$
+Since most of you don't know integral calculus, you probably have 
+no idea what this is or how to solve it.  That's OK!  All you need
+to know is that it can be solved.
 
-We will also use continuous random variables, but I won't make you do any 
-math with them. They involve integration which is more trouble than it's worth.
+```{r PDF_normal, echo = FALSE}
+plot(x=seq(from=-5,to=5,length.out=100),y=dnorm(seq(from=-5,to=5,length.out=100)),type="l",xlab="a",ylab=expression(Pr(x <= a)),bty="l",xaxp=c(-5,5,10),yaxp=c(0,1,2))
+abline(h=0.5,lty=2,col="gray")
+```
 
+The PDF of a continuous random variable has several properties:
+
+- Its PDF integrates to one
+  $$\int_{-\infty}^{\infty} f_x(a)dx = \Pr(x \in \mathbb{R}) = 1$$
+- Its PDF is nonnegative 
+  $$f_x(a) \geq 0$$
+  but unlike the discrete PDF it can be greater than one.
+    
 ### Modes
 
 Roughly speaking, the ***mode*** of a random variable is its most likely 
@@ -209,12 +335,13 @@ value (i.e., the value with the highest PDF).
 
 In our roulette example:
 
- - The mode of $w_{red}$ is $-1$. That is, losing \$1 is the most likely outcome.
+ - The mode of $w_{red}$ is $-1$. That is, losing \$1 is the 
+    most likely outcome.
  - The mode of $w_{12}$ is also $-1$.
 
 What is the mode of $b$, since it takes on one of 37 equally-likely values?
 In order to answer that, we need to come up with a more precise definition 
-than just "the most likely outcome." But we won't worry about that for now.
+than just "the most likely outcome." But let's just leave it at that.
 
 ### Medians, quantiles and percentiles
 
@@ -253,19 +380,20 @@ value (also called the mean) is another measure of central tendancy.
 
 ### Definition of expected value
 
-The ***expected value*** of a discrete random variable $x$ is written
-$E(x)$ and is defined as:
+The ***expected value*** or ***mean*** of a random variable $x$ is written
+$E(x)$. When $x$ is discrete, it is defined as:
 
 $$E(x) = \sum_{a \in S_x} a\Pr(x=a) = \sum_{a \in S_x} af_x(a)$$
 We can think of the expected value as weighted average of the possible values in the support, with weights equal to the probability of observing that value.
 
-The expected value of a continuous random variable is defined as:
+If $x$ is continuous, its expected value is defined as:
 $$E(x) = \int_{-\infty}^{\infty} af_x(a)da$$
-Don't worry, I won't make you take an integral!
+Notice that this looks just like the definition for the discrete case, but
+with the sum replaced by an integral sign.
 
 Returning to our roulette example:
 $$E(w_{red}) = -1*0.514 + 1*0.486 = -0.028$$
-That is, each dollar bet on red leads to an average loss of 2.8 cents for the bettor.
+That is, each dollar bet on red leads to an average loss of 2.8 cents for the bettor. 
 
 Problems:
 
@@ -276,28 +404,24 @@ Problems:
 
 ### Properties of the expected value
 
-The expected value is a sum, and so it has some of the same properties
-as sums.
+In addition to taking the expected value of $x$, we can also take the
+expected value of any function of $x$:
+  $$E(g(x)) = \sum_{s \in S_x} g(s)\Pr(x = s) = \sum_{s \in S_x} g(s)f_x(s)$$
+Now, remember that the expected value is a sum, and so it has some 
+of the same properties as sums. In particular, the associative and
+distributive rules apply, which means:
+  $$E(a + bx) =  a + bE(x)$$
+That is, we can take the expected value "inside" any linear function.
+This will turn out to be a very handy property.
 
-The first is that the expected value of a constant is just the constant itself:
-$$E(a) = a$$
-The second is that we can always take a constant out of the expected value:
-$$E(ax) = aE(x)$$
-The third is that we can take any sum out of the expected value:
-$$E(x + y) = E(x) + E(y)$$
-We can summarize these three rules in a single rule:
-$$E(ax+by+c) = aE(x) + bE(y) + c$$
-This is called the linearity of the expected value.
-
-Now you might think from that result that you can take the expected value inside
-of any function. For example is $E(x^2) = E(x)^2$? Is $\ln(E(x)) = E(\ln x)$?
-NO!
+Unfortunately, this handy property pplies only to linear functions. If
+$g(\cdot)$ is not a linear function than $E(g(x)) \neq g(E(x))$. For 
+example:
+  $$E(x^2) \neq E(x)^2$$
+  $$E( 1/x ) \neq 1 / E(x)$$
+Students frequently make this mistake, so try to avoid it.
 
 ### Variances and standard deviations
-
-If $x$ is a random variable, any function of $x$ is also a random variable.
-So we can talk about its PDF, CDF, and expected value.  There 
-are several functions of $x$ whose expected values are of particular interest.
 
 The ***variance*** of a random variable $x$ is defined as:
 $$\sigma_x^2 = var(x) = E((x-E(x))^2)$$
@@ -305,52 +429,113 @@ The ***standard deviation*** of a random variable
 is just the square root of its variance.
 $$\sigma_x = sd(x) = \sqrt{var(x)}$$
 Both variance and standard deviation can be thought of as 
-measures of how much $x$ tends to vary.  
+measures of how much $x$ tends to deviate from its usual 
+value $E(x)$.
 
+The variance and standard deviation have several standard 
+properties:
+  
+- They are always non-negative:
+  $$var(x) \geq 0$$
+  $$sd(x) \geq 0$$
+- For any constants $a$ and $b$:
+  $$var(a +bx) = b^2 var(x)$$
+  $$sd(a +bx) = b sd(x)$$
+- The variance can be written as:
+  $$var(x) = E(x-E(x))^2 = E(x^2) - E(x)^2$$
 
-# Standard probability distributions
+## Standard probability distributions
 
-## Bernoulli
+Some probability distributions appear so often in applications that
+we have given them names. We will go through a few of the most 
+important ones below.
+
+### Discrete uniform
+
+The ***discrete uniform*** distribution is a distribution with 
+that puts equal probability on every value in a discrete set 
+$S_x$. Its PDF is:
+$$f_x(a) = \begin{cases}
+          1/|S_x| & a \in S_x \\
+          0 & a \notin S_x \\
+          \end{cases}$$
+Discrete uniform distributions appear in gambling and similar 
+applications.  For example, the outcome $b$ in our roulette 
+example has a discrete uniform distribution.
+
+### Bernoulli
 
 The ***Bernoulli*** probability distribution is usually written:
 $$x \sim Bernoulli(p)$$
 It has discrete support $S_x = \{0,1\}$ and PDF:
 $$f_x(a) = \begin{cases} (1-p) & a = 0 \\ p & a = 1 \\ 0 & a = \textrm{anything else}\\ \end{cases}$$
+We use Bernoulli random variables to model the probability of some
+event.  That is, for any event $A$, we can define 
+$$x = I(A) = \begin{cases} 
+  1 & \textrm{if $A$} \\ 
+  0 & \textrm{if not $A$} \\ 
+  \end{cases}$$
+Then $x \sim Bernouilli(p)$ where $p = \Pr(A)$.
 
-Its mean and variance are:
+The mean and variance are:
 $$E(x) = (1-p)*0 + p*1 = p$$
 $$var(x) = E[(x-E(x))^2] = E[(x-p)^2] = (1-p)(0-p)^2 + p(1-p)^2 = p(1-p)$$
 
-## Binomial
+### Binomial
 
 The ***binomial*** probability distribution is usually written:
 $$x \sim Binomial(n,p)$$
-It has discrete support $S_x = \{0,1,2,\ldots,n\}$ where:
-$$\Pr(x = a) = \begin{cases} \frac{n!}{a!(n-a)!} p^a(1-p)^{n-a} & a \in S_x \\ 0 & \textrm{anything else} \\ \end{cases}$$
+It has discrete support $S_x = \{0,1,2,\ldots,n\}$ and its PDF is:
+$$f_x(a) = 
+  \begin{cases} 
+    \frac{n!}{a!(n-a)!} p^a(1-p)^{n-a} & a \in S_x \\ 
+    0 & \textrm{anything else} \\ 
+  \end{cases}$$
+We use the binomial distribution to model frequencies or counts.
+That is, let $(b_1,b_2,\ldots,b_n)$ be a sequence of 
+$n$ independent random variables from the $Bernoulli(p)$ distribution,
+and let:
+  $$x = \sum_{i=1}^n b_i$$
+count up the number of times that $b_i$ is equal to one (i.e., the event
+modeled by $b_i$ happened).  Then $y \sim Binomial(n,p)$.
 
-We can show that:
-$$E(x) = np$$
-$$var(x) = np(1-p)$$
-The binomial and Bernoulli distributions are closely related.
-In particular the $Binomial(n,p)$ distribution corresponds th
-the sum of $n$ independent draws from the $Bernoulli(p)$ 
-distribution. 
+I won't derive the formula for the binomial PDF, but the intuition
+is simple: $\frac{n!}{a!(n-a)!}$ is the number of outcomes in 
+which $x=a$ and the $p^a(1-p)^{n-a}$ is the probability 
+of each of those outcomes.
 
-## Uniform
+The mean and variance of a binomial random variable are:
+  $$E(x) = np$$
+  $$var(x) = np(1-p)$$
+
+### Uniform and standard uniform
 
 The ***uniform*** probability distribution is usually written
 $$x \sim U(L,H)$$
 where $L < H$. It is a continuous probability distribution with 
 support $S_x = [L,H]$ and PDF:
-$$x \sim U(L,H) \iff f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
-The uniform probability distribution has the properties that:
-$$E(x) = \frac{L+H}{2}$$
-$$var(x) = \frac{(H-L)^2}{12}$$
+$$f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
+The uniform distribution puts equal probability on all values between $L$ 
+and $H$. It is commonly used by computers because:
 
-The $uniform(0,1)$ distribution is also called the 
-***standard uniform distribution***. 
+- It is easy for a computer to generate a random number from the $U(0,1)$ 
+  distribution, also known as the ***standard uniform distribution***.
+- You can generate a random variable with any probability distribution 
+  you like by following these steps:
+    1. Generate a random variable $w \sim U(0,1)$.
+    2. Calculate $x = F^{-1}(w)$ where $F^{-1}$ is the inverse CDF of 
+      the distribution you want.
 
-## Normal
+Every video game you have ever played is constantly generating
+$U(0,1)$ random numbers and using them to determine the behavior of non-player
+characters, the location of resources, etc.  Without that element of randomess,
+these games would be way too predictable to be much fun.
+
+Its mean and variance are:
+  $$E(x) = \frac{L+H}{2}$$
+  $$var(x) = \frac{(H-L)^2}{12}$$
+
+### Normal and standard normal
 
 The ***normal distribution*** or ***Gaussian distribution***
 is typically written as:
@@ -358,52 +543,128 @@ $$ x \sim N(\mu,\sigma^2)$$
 It is a continuous distribution with support $S_x = \mathbb{R}$
 and PDF:
 $$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
-Its properties are:
+The normal distribution looks very strange, but it turns out to be a very 
+important one in statistics for two reasons:
+
+  1. Any linear function of a normally distributed random variable 
+    is also normally distributed.  That is, suppose that 
+    $x \sim N(\mu,\sigma^2)$ and let $y = a + bx$.  Then 
+    $y \sim N(a+b\mu,b^2\sigma^2)$.
+  2. A very important result called the Central Limit Theorem tells
+      us that many random variables have a distribution that is
+      well-approximated by the normal distribution. We will discuss 
+      this in much more detail later.
+
+Its mean and variance are:
 $$E(x) = \mu$$
 $$var(x) = \sigma^2$$
-
-The normal distribution also has an important property that most
-other distributions don't have: any linear function of a normal
-random variable is also normal.  That is, if $x \sim N(\mu,\sigma^2)$
-then
-$$(ax + b) \sim N(a\mu + b,a^2\sigma^2)$$
 
 The $N(0,1)$ distribution is also called the ***standard normal distribution***
 The standard normal distribution is so useful that we have special
 symbol for its PDF:
-$$\phi(a) = \frac{1}{\sqrt{2\pi}} e^{-\frac{a^2}{2}}$$
+  $$\phi(a) = \frac{1}{\sqrt{2\pi}} e^{-\frac{a^2}{2}}$$
 and its CDF:
-$$\Phi(a) = \int_{-\infty}^a \phi(b)db$$
+  $$\Phi(a) = \int_{-\infty}^a \phi(b)db$$
 The standard normal CDF $\Phi(.)$ does not have a closed form
 solution, but is easy to calculate on a computer.
 
-Why is this useful?  Well remember that linear functions of normal random variables
-are also normal.  Then if $x \sim N(\mu,\sigma^2)$
+Why is this useful?  Well remember that linear functions of 
+normal random variables are also normal.  Then if $x \sim N(\mu,\sigma^2)$
 $$ z = \frac{x-\mu}{\sigma} \sim N(0,1)$$
 which implies:
 $$F_x(a) = \Pr\left(x \leq a\right) = \Pr\left( \frac{x-\mu}{\sigma} \leq \frac{a-\mu}{\sigma}\right) = \Pr\left( z \leq \frac{a-\mu}{\sigma}\right) = \Phi\left(\frac{a-\mu}{\sigma}\right)$$
+In other words, we can use the standard normal CDF to calculate the
+CDF of any normally distributed random variable.
 
 # Multiple random variables
 
-## The joint distribution of two random variables
+We will often be interested in the relationship between two or more
+random variables. In order to talk about that relationship we
+will need to 
 
-## Conditional distributions and independence
+## Joint distributions
 
-## Conditional expectations
+Let $x = x(b)$ and $y = y(b)$ be two random variables
+defined in terms of the same underlying outcome $b$.
+Their joint probability distribution assigns a probability
+to every event that can be defined in terms of $x$ and $y$,
+for example $\Pr(x < y \leq 0)$.
 
-## Covariances and correlations
+This joint distribution can be fully described by the 
+***joint CDF***
+$$F_{x,y}(a,b) = \Pr(x \leq a \cap y \leq b)$$
+It can also be described by the ***joint PDF***
+$$f_{x,y}(a,b) = \begin{cases}
+      \Pr(x = a \cap y = b) & \textrm{if $x$ and $y$ are discrete} \\
+      \frac{\partial F_{x,y}(a,b)}{\partial a \partial b} & \textrm{if $x$ and $y$ are continuous} \\
+      \end{cases}$$
+
+The joint distribution tells you about the relationship between the
+two variables as well as the characteristics of the variables themselves.
+That is, we can always get the ***marginal*** distributions from the 
+joint distributions:
+$$F_x(a) = \Pr(x \leq a) = \Pr(x \leq a \cap y \leq \infty) = F_{x,y}(a,\infty)$$
+$$F_y(b) = \Pr(y \leq n) = \Pr(x \leq \infty \cap y \leq b) = F_{x,y}(\infty,b)$$
+but it is not possible to get the joint distribution from the marginal
+distributions.
+
+## Conditional distributions, marginal distributions, and independence
+
+Having defined joint distributions, we can now define conditional 
+distributions of the form:
+$$\Pr(x \in A| y \in B)$$
+By the definition of a conditional probability:
+$$\Pr(x \in A| y \in B) = \frac{\Pr(x \in A \cap y \in B)}{\Pr(y \in B)}$$
+So we can define the conditional CDF:
+  $$F_{y|x}(a,b) = \Pr(y \leq a|x=b)$$
+Conditional distributions can be derived from the joint distribution,
+but it isn't always easy.
+
+We say that $x$ and $y$ are ***independent*** if every event defined in 
+terms of $x$ is independent of every event defined in terms of $y$.
+  $$\Pr(x \in A \cap y \in B) = \Pr(x \in A)\Pr(y \in B)$$
+Notice that independence allows us to write all joint and conditional probabilities in terms of marginal probabilities:
+  $$F_{x,y}(a,b) = F_x(a)F_y(b)$$
+  $$F_{y|x}(a,b) = F_y(a)$$
+This is very handy, but remember: independence is an *assumption* that
+we can only make when it's reasonable to do so.
+
+## Expected value, covariance and correlation
+
+We can take the expected value of any function of $x$ and $y$.
+When $x$ and $y$ are both discrete:
+  $$E(g(x,y)) = \sum_{a \in S_x} \sum_{b \in S_y} g(a,b)\Pr( x=a \cap y = b)$$
+and when they are both continuous:
+  $$E(g(x,y)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(a,b)f_{x,y}(a,b)dadb$$
+As with a single random variable, you can take the expected value inside
+a linear function:
+  $$E(ax + by + c) = aE(x) + bE(y) + c$$
+but not inside most other functions.  For example:
+  $$E(xy) \neq E(x)E(y)$$
+  $$E(x/y) \neq E(x)/E(y)$$
+etc.
+
+There is one exception to this.  When $x$ and $y$ are independent:
+  $$E(xy) = E(x)E(y)$$
+But remember, this is only true *if* we can assume $x$ and $y$ are 
+independent, and we usually cannot make that assumption.
 
 The ***covariance*** of two random variables $x$ and $y$ 
 is defined as:
 $$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
 and their ***correlation** is defined as:
 $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
-Both the covariance and correlation are measures of how $x$ and $y$ tend to move together.
+Both the covariance and correlation are measures of how $x$ and $y$ tend to 
+move together.  Positive correlation means that they tend to move in the same 
+direction: above-normal values of $x$ tend to conicide with above-normal 
+values of $y$.  Negative correlation means that they tend 
+to move in opposite directions: above-normal values of $x$ tend to coincide
+with below-normal values of $y$.
 
 A few results:
 
-- The variance of a constant is zero:
-  $$var(a) = 0$$
+- The covariance can be written:
+  $$cov(x,y) = E(xy) - E(x)E(y)
 - The variance of a random variable is its covariance with itself:
   $$cov(x,x) = var(x)$$
 - Covariances are products, so:
@@ -412,140 +673,8 @@ A few results:
   $$var(ax+by+c) = a^2var(x) + b^2var(y) + 2abcov(x,y)$$ 
 - The correlation is always between -1 and 1:
   $$-1 \leq \rho_{xy} \leq 1$$
+- If $x$ and $y$ are independent, then
+  $$cov(x,y) = corr(x,y) = 0$$
+  Note that this does not go both ways; it is easy to find cases in which
+  $cov(x,y) = 0$ but $x$ and $y$ are not independent.
 
-# Economics and probability
-
-Before moving on, I'd like to make a few points about economics.
-
-The first is to think through the economics of our casino example. A casino is
-first and foremost a business, and exists to make a profit.  At minimum, 
-that means that a casino will always build a "house advantage" into the rules 
-of every game it offers:
-
- - Many table games pay at "even money" (a \$1 bet pays \$1 in winnings) 
-   but have slightly less than 50\% probability of winning.
-   - A bet on red wins with probability $18/37 \approx 0.486$
-     in European roulette (for a house advantage of 2.7\%) 
-     and probability $18/38 \approx 0.474$ (for a house advantage of 5.3\%)
-     in American roulette.
-   - The standard bet in craps (the "pass line" bet) wins with probability
-     $244/495 \approx 0.493$, for a house advantage of 1.4\% or 1.4 cents per dollar bet. 
-     This is typically the lowest house advantage available to an unskilled player
-     in most casinos.
-   - The house advantage in blackjack depends on the details of the game and 
-      the skill of the player, but it is typically estimated at about 5\% 
-      for a low-skill player following a simple strategy and about 1\% for a
-      high-skill player following an ideal strategy (of course the true 
-      ideal strategy is not to play!).
-   - Slot machines typically have the highest house advantage of all. In British
-     Columbia, slot machines are regulated to a house advantage of 8\%.
- - Some games are set up so that players are betting against each other, and 
-   the casino always wins (or at least doesn't lose).
-   - If you play poker, the house takes a fixed percentage ("rake", also
-     called the "vigorish" or "vig") of every bet.
-   - If you bet on a horse race or football game, the house adjusts the payouts 
-     or point spread dynamically as bets come in to ensure that the losing bets 
-     can be used to pay the winners.
-
-What stops the casino from setting an even larger house advantage?  One reason
-is regulation. Another reason is supply and demand, and competition: the house 
-advantage is a cost to the gambler, so gamblers may respond to an increased
-house advantage by reduce their betting or by going to other 
-casinos (legal or illegal) that offer a better deal.
-
-Now, gambling is an interesting business but is it an important one to the economy?
-Probably not, unless you live in Las Vegas or Macau. But it turns out that the 
-insurance industry (and many companies in
-the finance industry) operates on the same principles as a casino.
-
-An insurance company:
-
- - takes in bets (insurance premiums).
- - pays out winnings (insurance claims) based on certain uncertain events such
-   as car accidents, medical expenses, etc.
- - carefully calculates the probabilities of each of these events, and 
-   sets premiums to ensure that the company always makes money. 
-   
-As in the casino industry, some combination of competition and regulation
-keeps insurance premiums down. 
-
-
-If you are good at probability and statistics and find it at least somewhat interesting,
-# Problems
-
-1. In stock markets, some participants are active traders, buying and selling
-   individual stocks on a regular basis. Active traders believe that they can 
-   earn higher returns than the market as a whole. Other participants are passive
-   investors buying and holding a broad-based index fund that duplicates the 
-   performance of the market as a whole. 
-   
-   Suppose the probability of an active trader beating the market in one year is 0.5.
-   Suppose that excess returns are independent across traders and across years.
-   
-   a. What is the probability that a particular trader beats the market every year
-      over the next 10 years?
-      
-      A: 0.5^10 = 0.0009765625
-      
-   b. Suppose there are 1000 active traders. What is the probability that at least
-      one active trader beats the market over the next 10 years?
-      
-      A: 1 - (1 - 0.5^10)^1000 = 0.62357620194
-      
-   c. Suppose that trader A has beaten the market in each of the last 10 years.
-      What is the probability that trader A will beat the market next year?
-      
-      A: 0.5
-      
-2. In April 2020, researchers at Stanford University tested 3,300 residents of 
-   Santa Clara county in California for COVID-19 antibodies, and found that 1.5\% 
-   of respondents tested positive. This number was much higher than expected and,
-   if true, implied that the fatality rate from COVID-19 was much lower than 
-   expected. 
-   
-   Let I = 1 if a person has been infected, and 0 if not. Let P = 1 if a person 
-   tests positive, and 0 if not. If a test is perfectly accurate, then P = I.
-   Unfortunately most real-world medical tests are not 100\% accurate; they
-   can yield false positives (non-infected people testing positive: I=0,P=1)
-   or false negatives (infected people testing negative: I=1,P=0).
-   
-   Suppose that:
-   
-     - The false negative rate of the test is zero: $\Pr(P=0|I=1) = 0$.
-     - The false postive rate of the test is $f$: $\Pr(P=1|I=0) = f$
-     - The results of the test are as described above: $\Pr(P=1) = 0.015$.
-     - The actual infection rate is $i$: $\Pr(I=1) = i$.
-     
-   a. Find the probability that an infected person will test positive.
-      A: 1
-   b. Find the probability that a non-infected person will test negative.
-      A: 1-f
-   c. Find the probability that a person will test positive, as a function of
-      $f$ and $i$.
-      A: i + (1-i)f
-   d. We know that the probability that a person will test positive is 0.015.
-      Use this information and your answer to (c) to calculate the infection
-      rate as a function of $f$.
-      A: i = (0.015 -f)/(1-f)
-   e. The test used by the researchers has a low rate of false positives,
-      somewhere between 0-2\% (0.00-0.02). Table ? below gives the infection 
-      rate implied by a given false positive rate.  Fill in the missing values
-      
-      Positive test rate | False positive rate | True infection rate 
-      -------------------+---------------------+---------------------
-      0.015              |          0          |    0.015
-      0.015              |          0.005      |    0.010
-      0.015              |          0.010      |    0.005
-      0.015              |          0.015      |    0.000
-
-   f. Suppose the true infection rate is 0.005, and the false positive rate is 0.010.
-      If you test positive, what is the probability that you have been infected?
-      A: $Pr(I=1|P=1) = \frac{Pr(P=1|I=1)Pr(I=1)}{Pr(P=1)} = 0.005/0.015 = 1/3$
-
-you may want to look into a career as an actuary.  Actuaries estimate probabilities
-for insurance companies and help them set premiums.  It's a pretty good job if you have the talent, because it is well-paid but does not usually require long hours or high stress.
-
-## Answer key
-
-1. Answer
-2. Answer

@@ -24,42 +24,60 @@ In this chapter we will:
 
 # Data and the data generating process
 
+Suppose we have a data set. We would like to use that data set to learn
+something about the mechanisms by which the data set was generated.
+This process of learning from data is statistical analysis.
+
 The basic idea of statistical analysis is that we will 
 
-- Treat our data as the result of a random process
-  called the ***data generating process***
-- Write down a model of the data generating process
-  using the tools of probability. 
-  - Both the data itself and any statistics 
-    calculated from that data can be considered 
-    random variables derived from the DGP.
-- Our model of the DGP will often include one
-  or more unknown features called *parameters*.
-- Construct statistics to estimate
+- Treat our data as the result of a random process called 
+  the ***data generating process***
+- Write down a model of the data generating process using the tools of
+  probability. 
+  - Our model of the DGP will typically include one or more unknown 
+    features called *parameters*.
+  - Both the data itself and any numbers (statistics) calculated from that 
+    data can be considered random variables whose probability distribution
+    could be derived from the DGP *if we knew the DGP*.
+- Construct statistics to estimate the unknown parameters of the DGP.
+  - We will want to use statistics that have a high probability of 
+    prividing provide accurate estimates. 
 
 ## A general framework
 
-## Random sampling from a population
+Let $D = (x_1,x_2,\ldots,x_n)$ be a data set with one variable 
+and $n$ observations.  We can use $x_i$ to refer to an arbitrary 
+observation $i$.
 
-Let $D = (x_1,x_2,\ldots,x_n)$ be a data set with
-one variable and $n$ observations.  We can use
-$x_i$ to refer to an arbitrary observation $i$.
+We think of $D$ as a set of random variables with unknown
+joint distribution $P_D$. We have some ***statistic*** $s =s(D)$,
+i.e., a number that is calculated from the data.  Since the elements of 
+$D$ are random variables, $s$ is also a random variable with a
+well-defined probability distribution that depends on $P_D$.
+
+Often we are interested in some parameter $\theta = \theta(P_D)$ that 
+describes some aspect of that joint distribution, and we are using
+$s$ as a guess or ***estimate*** of the value of $\theta$.  This 
+parameter $\theta$ is called our ***parameter of interest***.
+
+## Random sampling from a population
 
 In order to model the data generating process, we need to
 model the entire joint distribution of $D$.  This
 means:
 
 - The probability distribution of each $x_i$
-- The relationship between the $x_i$'s
+- The relationship between each of the $x_i$'s
 
 Fortunately, we often can simplify this joint distribution
 quite a bit by assuming that $D$ 
 is ***independent and identically distributed*** (IID) 
-or a ***random sample*** from a ***population***.
+or a ***simple random sample*** from a large ***population***.
+
 This means that:
 
-1. Each $x_i$ is independent of the others.
-2. Each $x_i$ has the same probability distribution.
+1. Each $x_i$ comes from the same (unknown) probability distribution.
+2. Each $x_i$ is independent of the others.
 
 The reason we call this "independent and identically distributed"
 is hopefully obvious, but what does it mean to say we have a 
@@ -72,32 +90,92 @@ The idea is to suppose we have a very large number of cases
    - The subset is called our ***sample***
    - "Purely random" here means some mechanism like a coin flip
      or a computer's random number generator.
+   - As a technical matter, the assumption of independence requires
+      that we sample *with replacement*. This means we allow
+      for the possibility that we sample the same case more than once.
+      In practice this doesn't matter as long as the sample is small 
+      relative to the population.
 2. Collect data from our sample.
 
 This process will produce IID data. It will turn out that a moderately-sized
 random/IID sample will usually provide surprisingly accurate information on
 the underlying population.
 
-Not all data sets come from a random sample, but many of them do. For 
-example, Canada's unemployment rate is calculated using data from the 
-Labour Force Survey (LFS). The LFS is a random sample (sort of) of the 
-civilian non-institutionalized working-age population of Canada.
-
 ## Alternative sampling models
 
-# Statistics
+Not all useful data sets come from a simple random sample. For example:
 
-## What is a statistic?
+- Some sample designs can be treated as if they were from a simple 
+  random sample, or can be handled with minor modifications on
+  the techniques used for simple random samples:
+  - ***Stratified samples*** are gathered by dividing the population into
+    strata based on some observable characteristics, and then randomly
+    sampling a predetermined number of cases within each strata. 
+      - Most professional surveys are constructed from stratified samples 
+        rather than random samples.
+      - Stratified sampling is often combined with *oversampling* of 
+        some strata that are relatively small in number but of 
+        particular interest to the data users.  For example, 
+        the Labour Force Survey oversamples residents of Prince Edward
+        Island.
+  - ***Cluster samples*** are gathered by dividing the population
+    into ***clusters***, randomly selecting some of these clusters, and
+    sampling cases within the cluster.  Data on students is often 
+    gathered this way: we pick a random sample of schools, and then
+    interview the students within those schools.
+  - Some data sets cover the entire population under study.  For example,
+    we might have data on all 50 US states, or all 10 Canadian provinces,
+    or all of the countries of the world. Data from administrative sources
+    such as tax records or school records often cover the entire population
+    of interest as well.
+- Most macroeconomic data are ***time series***; that is they are observations
+  of a particular quantity at regularly-spaced points in time.
+  Time series have two features that are inconsistent with the random 
+  sampling assumption:
+    1. They usually have clear time trends.  For example, Canada's real 
+      GDP has been steadily growing for as long as we have observed it.
+      This means that 2010 GDP is drawn from a distribution with a higher
+      expected value than the distribution for 1910 GDP.
+    e. They usually exhibit what is called autocorrelation. Shocks to
+      the economy that affect this year's GDP are likely to have 
+      a similar (if smaller) effect on next year's GDP.  So the time periods
+      close together are more closely related than time periods that 
+      are far apart, even after we have accounted for the time trend.
+  Time series data sometimes require more advanced techniques
+  than we will learn in this class.
+- A ***convenience sample*** is gathered by whatever method is convenient.
+  For example, we might gather a survey from people who walk by,
+  or we might recruit our friends to participate in the survey.
+  Convenience samples are the worst-case scenario; in many cases they
+  simply aren't usable for accurate statistical analysis.
+ 
+Many data sets combine several of these elements.  For example,
+Canada's unemployment rate is calculated using data from the 
+Labour Force Survey (LFS). The LFS is built from a stratified 
+sample of the civilian non-institutionalized working-age population 
+of Canada. There is also some clustering: the LFS will typically
+interview whole households, and will do some geographic clustering
+to save on travel costs. The LFS is gathered monthly, and the
+resulting unemployment rate is a time series.
+
+# Statistics and their properties
+
+## Three examples
 
 Let $s = s(D)$ be some statistic calculated from the data set $D$.
-To give a few examples
+We will focus on three examples:
+
+- The ***sample frequency*** or ***relative sample frequency***
+  of the event $x_i \in A$ is defined as the proportion of cases
+  in which the event occurs:
+  $$\hat{f}_A = \frac{1}{n} \sum_{i=1}^n I(x \in A)$$
+  A closely-related statistic is the ***absolute sample frequency***
+  $n\hat{f}_A$ which is the *number* of cases in which the event 
+  occurs.
 - The ***sample average*** of $x_i$ is defined as: 
   $$\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$$
-- The ***sample frequency*** of the event $x_i \in A$ is defined as:
-  $$\hat{f}_A = \sum_{i=1}^n I(x \in A)$$
 - The ***sample median*** of $x_i$ is defined as:
   $$\hat{m}_x = m: \begin{cases} \hat{f}_{x < m} \leq 0.5 \\ \hat{f}_{x > m} \leq 0.5 \\ \end{cases}$$
-
 
 ## The sampling distribution of a statistic
 
@@ -105,12 +183,36 @@ Since the data itself is a collection of random variables, any statistic
 calculated from that data is also a random variable, with a probability
 distribution that can be derived from the DGP.
 
-We will focus on the sample average in an IID sample.  Let $\mu_x = E(x_i)$
-and $\sigma_x^2 = var(x_i)$.  Then:
+This is easy to do for the sample frequency, so we will start there.  Let 
+$y_i = I(x_i \in A)$ and let $p = \Pr(x_i \in A)$. This implies that:
+  $$y_i \sim Bernoulli(p)$$
+and
+  $$n\hat{f}_A \sim Binomial(n,p)$$
+In other words, we can calculate the exact probability distribution of
+the sample frequency using the formula for the binomial distribution.
+
+Unfortunately, calculating the exact probability distribution of 
+most other statistics is more difficult.  We will return to that later,
+but for now the important thing is just to remember that this probability
+distribution $exists$.
+
+## The mean and variance of a statistic
+
+If our statistic has a probability distribution, it (usually) has a mean
+and variance as well. 
+
+Since the sample frequency has the binomial distribution, we have 
+already seen its mean and variance:
+  $$E(\hat{f}_A) = p$$
+  $$var(\hat{f}_A) = \frac{p(1-p)}{n}$$
+where $p = \Pr(x_i \in A)$.
+
+We can also calculate the mean and variance of the sample average.
+Let $\mu_x = E(x_i)$ be the mean of $x_i$  Then the mean of $\bar{x}$ is:
 $$E(\bar{x}) = E\left( \frac{1}{n} \sum_{i=1}^n x_i\right) = \frac{1}{n} \sum_{i=1}^n E\left( x_i\right) = \frac{1}{n} \sum_{i=1}^n \mu_x = \mu_x$$
 
-We can also calculate $var(\bar{x})$:
-
+Let $\sigma_x^2 = var(x_i)$ be the variance of $x_i$. Then the
+variance of $\bar{x}$ is:
 $$var(\bar{x}) = cov(\bar{x},\bar{x}) = E\left[\left( \frac{1}{n} \sum_{i=1}^n x_i-\mu\right)\left(\frac{1}{n} \sum_{i=1}^n x_i - \mu\right)\right] = \frac{1}{n^2} \sum_{i=1}^n\sum_{j=1}^n E\left((x_i-\mu)(x_j-\mu)\right) = \frac{1}{n^2} \sum_{i=1}^n\sum_{j=1}^n cov(x_i,x_j)$$
 $$cov(x_i,x_j) = \begin{cases} \sigma_x^2 & i = j \\ 0 & i \neq j \\ \end{cases}$$ 
 so:
@@ -123,58 +225,109 @@ if $x_i$ is a random sample from the $N(\mu,\sigma^2)$ distribution,
 then both $\mu$ and $\sigma$ are parameters.
 
 An ***estimator*** is a statistic that is being used to ***estimate***
-(guess at the value of) an unknown parameter.  It is sometimes useful
-to distinguish between 
+(guess at the value of) an unknown parameter of interest.  The distinction
+between estimator and estimate is a subtle one: we use "estimate" when
+talking about our statistic as a number calculated for a specific data set
+and "estimator" when talking about it as a random variable.
 
-- the ***estimand*** is the thing being estimated
-- the estimate is the specific number calculated from
-  our particular data set.
-- the estimator is either the formula used to calculate the estimate
-  or the random variable that the estimate represents a draw from
-  
-We want estimators to be *good* guesses of the unknown parameter.
-That is, we want it to have a high probability of being close to
-the correct value.  
+Let $s$ be a statistic we are using as an estimator of some parameter 
+of interest $\theta$.  We can define its ***error*** as:
+  $$err = s - \theta$$
+In principle, we want $s$ to be a good estimator of $\theta$, i.e.,
+we want $err$ to be as close to zero as possible.  There
+are several major complications to keep in mind:
 
-The ***error*** of the estimator relative to the parameter is
-defined as:
-$$err = s - \theta$$
-We want the error to be as close to zero as possible.
+1. Always remember that $err$ is not an inherent property of the
+  statistic - it is a property of the relationship between the statistic
+  and the parameter of interest. A given statistic may be a good
+  estimator of one parameter, and a bad estimator of another parameter.
+2. Since $s$ is a random variable with a probability distribution, 
+  so is $err$ is also a random variable with a proability distribution. 
+3. Since the value of $\theta$ is unknown, the value of $err$ is also 
+  unknown.
 
-We have a few criteria to consider.
+## Bias and mean squared error
+
+In choosing an estimator, we can consider several criteria.
 
 The first is the ***bias*** of the estimator, which is defined as:
 $$bias(s) = E(s - \theta) = E(s) - \theta$$
 The bias represents the average error we would expect over multiple
-trials. Ideally we would want $bias(s)$ to be zero, in which case
+trials. 
+
+Ideally we would want $bias(s)$ to be zero, in which case
 we would say that $s$ is an ***unbiased*** estimator of $\theta$.
 Note that bias is always defined relative to the parameter we wish 
 to estimate, and is not an inherent property of the statistic.
 
-The second consideration is the ***variance*** of the estimator,
-which is *not* defined relative to the parameter:
-$$var(s) = E[(s-(E(s))^2]$$
-We would want variance to be as low as possible.
+For example, consider the sample average $\bar{x}$ in a random sample
+as an estimator of the parameter $\mu_x = E(x_i)$. The bias is:
+  $$bias(\bar{x}) = E(\bar{x}) - \mu_x = \mu_x - \mu_x = 0$$
+That is, the sample average is an unbiased estimator of the population mean.
+However, it is not the only unbiased estimator.  For example, suppose we 
+simply take the value of $x_i$ in the first observation and throw
+away the rest of the data.  This is also an unbiased estimator of $\mu_x$:
+  $$bias(x_1) = E(x_1 - \mu_x) = \mu_x - \mu_x = 0$$
+If there is one unbiased estimator, there are usually many. So we will
+need another criterion to choose among unbiased estimators.
 
-A final consideration is the ***mean squared error*** of the estimator,
-which is defined as:
+One option for the second criterion is the ***variance*** of the
+estimator:
+  $$var(s) = E[(s-(E(s))^2]$$
+Low variance is better than high variance. 
+
+Returning to our example, we have already found that the variance of 
+the sample average is:
+  $$var(\bar{x}) = \sigma^2/n$$
+and the variance of the "first observation estimator: is:
+  $$var(x_i) = \sigma^2$$
+Since $\sigma^2/n < \sigma^2$, the sample average $\bar{x}$ has
+lower variance than the first observation estimator $x_i$.
+In fact, we can prove that $\bar{x}$ is the 
+***minimum variance unbiased estimator*** of $\mu_x$, i.e.,
+the unbiased estimator with the lowest variance.
+
+Unfortunately, once we move beyond this simple case we run
+into some complications:
+
+- An unbiased estimator may not exist for a particular parameter, 
+  in which case there is no minimum variance unbiased 
+  estimator.
+- There may be a slightly biased estimator that has much lower variance
+  than any unbiased estimator. In fact, we can find examples
+  in which the biased estimator *always$ has smaller error 
+  than any unbiased estimator.
+
+This suggests that we need a criterion that allows for a trade-off
+between variance and bias.
+
+The ***mean squared error*** of the estimator is defined as:
 $$MSE(s) = E[(s-\theta)^2]$$
 We can do a little math and show that:
 $$MSE(s) = var(s) + [bias(s)]^2$$
 The MSE criterion allows us to choose a biased estimator with low variance
-over an unbiased estimator with high variance.
+over an unbiased estimator with high variance, and also allows us to choose
+between biased estimators when no unbiased estimator exists.
 
+Returning to our example, the mean squared error of the sample average is:
+  $$MSE(\bar{x}) = var(\bar{x}) + [bias(\bar{x})]^2 = \frac{\sigma_x^2}{n} + 0^2 = \frac{\sigma_x^2}{n}$$
+and the mean squared error of the first observation estimator is:
+  $$MSE(x_1) = \sigma_x^2$$
+Again the sample average is the preferred estimator.
 
-For example, consider the sample average $\bar{x}$ in a random sample
-as an estimator of $\mu_x = E(x_i)$.
-$$bias(\bar{x}) = E(\bar{x}) - \mu_x = \mu_x - \mu_x = 0$$
-That is, the sample average is an unbiased estimator of the population mean.
-
-We have already found that $var(\bar{x}) = \sigma^2/n$, and we can use these
-two pieces of information to calculate the mean squared error:
-$$MSE(\bar{x}) = var(\bar{x}) + [bias(\bar{x})]^2 = \frac{\sigma_x^2}{n} + 0^2 = \frac{\sigma_x^2}{n}$$
-This is beyond the scope of this course, but we can prove that the sample
-average has a smaller MSE than any other unbiased estimator of $\mu_x$.
+The sample median is an example of a biased estimator for the population
+median. To see this, consider a simple example in which
+$x_i \sim Bernoulli(0.6)$ and $n = 1$.  Then the population median is:
+  $$m_x = 1$$
+and the sample median is:
+  $$\hat{m}_x = x_1$$
+The mean of $\hat{m}_x$ is:
+  $$E(\hat{m}_x) = E(x_1) = p$$
+and so the bias is 
+  $$E(\hat{m}_x - m_x) = p - 1$$
+Now this is a very simple example, but the basic idea applies more generally:
+there is usually no unbiased estimator for the population median
+or any other population quantile. (note exception for symmetric distributions)
 
 Here's an example of a biased estimator that has lower MSE than any unbiased
 estimator.  Suppose that $x_i \sim N(\mu_x,\sigma_x^2)$ where we already 
@@ -188,21 +341,8 @@ this alternative estimator is biased:
 $$E(s) > E(\bar{x}) = \mu_x$$
 but has lower MSE than the (unbiased) sample average:
 $$MSE(s) < MSE(\bar{x})$$
-## The sample frequency as an estimator
 
-Suppose we are interested in estimating the probability of a 
-particular event $x_i \in A$, where $A$ is some set.
-
-Let $y_i$ be an indicator for whether $x_i \in A$ is true or false:
-$$y_i = \begin{cases} 0 & x_i \notin A \\ 1 & x_i \in A \\ \end{cases}$$
-and let $\bar{y}$ be its sample average:
-$$\bar{y} = \frac{1}{n} \sum_{i=1}^n y_i$$
-Since it is a sample average, 
-$$E(\bar{y}) = E(y_i) = 0*\Pr(x_i \notin A) + 1*\Pr(x_i \in A) = \Pr(x_i \in A)$$
-In other words the sample frequency of an event is an unbiased estimator 
-of the event's probability.
-
-# Asymptotic properties of statistics
+# Asymptotic analysis
 
 ## Large samples and small samples
 
@@ -222,8 +362,10 @@ approximations based on the ***asymptotic*** properties
 of the statistics.  Asymptotic properties are properties 
 that hold approximately, with the approximation getting 
 closer and closer to the truth as the sample size gets 
-larger. Properties that hold exactly for any sample 
-size (for example, the result we established earlier that
+larger. 
+
+Properties that hold exactly for any sample size 
+(for example, the result we established earlier that
 the sample average is an unbiased estimator for the mean)
 are sometimes called ***exact*** or ***finite sample***
 properties.
@@ -261,7 +403,7 @@ What does this all mean?
 - The LLN tells me that I can find a sample size $n$ that is 
   "big enough" to guarantee that:
   $$\Pr(|\bar{x}-\mu_x| < \epsilon) > 1-\delta$$
-ANother way of saying this is that $\bar{x}_n$ ***converges in probability***
+Another way of saying this is that $\bar{x}_n$ ***converges in probability***
 to $\mu_x$, or:
 $$\bar{x}_n \rightarrow^p \mu_x$$
 
@@ -307,4 +449,55 @@ does not apply.
 
 ## The Central Limit Theorem
 
+The Central Limit Theorem is an even more powerful result in statistics.
 
+
+**CENTRAL LIMIT THEOREM**: Let $\bar{x}_n$ be the sample average 
+from a random sample of size $n$ on the random variable $x_i$ with
+mean $E(x_i) = \mu_x$ and variance $var(x_i) = \sigma_x^2$. Let
+  $$z_n = \sqrt{n} \frac{\bar{x}_n - \mu_x}{\sigma_x}$$
+and let $F_n$ be the CDF of $z_n$.  Then for every $a \in \mathbb{R}$:
+  $$\lim_{n \rightarrow \infty} |F_n(a) - \Phi(a)| = 0$$
+where $\Phi(\cdot)$ is the CDF of the $N(0,1)$ distribution.
+
+Another way of saying this is that $z_n$ ***converges in distribution***
+to a $N(0,1) random variable, or:
+  $$z_n \rightarrow^D N(0,1)$$
+
+What does the central limit theorem mean?
+
+  - Fundamentally, it means that if $n$ is big enough then the probability
+    distribution of $\bar{x}_n$ is approximately normal 
+    *no matter what the original distribution of $x_i$ looks like.*
+  - In order for the CLT to apply, we need to rescale $\bar{x}_n$
+    so that it has zero mean (by subtracting $E(\bar{x}_n) = \mu_x$) 
+    and constant variance as $n$ increases (by dividing by 
+    $sd(\bar{x}_n) = \sigma_x/\sqrt{n}$)).  That rescaled sample
+    average is $z_n$.  
+  - In practice, we don't usually know $\mu_x$ or $\sigma_x$ so 
+    we can't calculate $z_n$ from data. Fortunately, there are some
+    tricks for getting around this problem that we will talk
+    about later.
+    
+## Slutsky's theorem
+
+Our final tool is a result called **Slutsky's theorem**
+
+**SLUTSKY THEOREM**: Let $g(\cdot)$ be a continuous function. Then:
+  $$w_n \rightarrow^p w \implies g(w_n) \rightarrow^p g(w)$$
+and:
+  $$w_n \rightarrow^D w \implies g(w_n) \rightarrow^D g(w)$$
+
+What is the importance of Slutsky's theorem?
+
+  - It extends the law of large numbers to any continuous function
+    of a sample average. This is important because:
+    - Most commonly-used statistics can be written as a continuous
+      function of sample averages, so the LLN applies to them
+    - As a result of this, most commonly used statistics 
+      (e.g., the sample median) can be shown to be consistent
+      estimators of the population parameters they are typically
+      used to estmate.
+  - It extends the central limit theorem to any continuous function
+    of the transformed sample average $z_n$. This will turn
+    out to be very important when we get to hypothesis testing.
