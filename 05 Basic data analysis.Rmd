@@ -22,14 +22,12 @@ In this chapter we will:
  - Use formulas in Excel
  - Gather resources and tools, including all needed computer software.
 
-# Statistics in Excel
+# Univariate statistics in Excel
 
 ## Preliminaries
 
 1. Make a new working copy of [data file]. Call it Chapter4.xlsx.
 2. Open your new file.
-
-## Some basic statistics
 
 We will start by calculating simple averages for all of our variables
 and reporting them at the bottom of the table.
@@ -60,6 +58,34 @@ We are going to create a nice table of summary statistics
 for all of our variables, and put it in a separate worksheet.
 In the course of doing so, we will learn some new tricks.
 
+Functions to learn:
+
+- Simple univariate statistics:
+  - COUNT (there is also a COUNTIF and COUNTIFS)
+  - AVERAGE
+  - MEDIAN
+  - MIN and MAX
+  - VAR.P and/or VAR.S
+  - STDEV.P and/or STDEV.S (have them calculate a standard error too)
+- More complex univariate statistics
+  - FREQUENCY
+  - PERCENTILE.INC/PERCENTILE.EXC and PERCENTRANK.INC/PERCENTRANK.EXC
+  - AVERAGEIF and/or AVERAGEIFS
+- Multivariate statistics
+  - CORREL
+  - COVARIANCE.P and/or COVARIANCE.S
+- Probability distributions:
+  - NORM.DIST, NORM.INV (there is also a NORM.S.DIST and NORM.S.INV)
+  - PHI (the standard normal PDF)
+  - RAND (generates U(0,1) random number)
+- Testing:
+  - Calculate standard errrors
+  - T.TEST, T.DIST, T.DIST.2T and T.DIST.RT
+  - Z.TEST
+  - Calculate a confidence interval
+
+### Constructing the table
+
 First we will create a new worksheet:
 
 1. Click on the "+" button at the bottom of the screen to 
@@ -75,8 +101,10 @@ The first column will be the names of the statistics themselves.
 - Enter "Average" in cell A3
 - Enter "StdDev" in cell A4
 - Enter "Min" in cell A5
-- Enter "Median" in cell A6
-- Enter "Max" in cell A7
+- Enter "10th percentile" in cell A6
+- Enter "Median" in cell A7
+- Enter "90th percentile" in cell A8
+- Enter "Max" in cell A9
 
 The first row will be the names of the variables. We could just copy-paste
 them from the other worksheet but let's do something more sophisticated:
@@ -96,12 +124,34 @@ are even copied over correctly.
 
 Now let's fill in the statistics, starting with column D (Income).
 
-- Report the number of (numeric) values in row 2, using the function COUNT().
+- Report the count in row 2, using the function COUNT().
+  - The count is the number of observations with numeric values 
+    for the variable.
 - Report the average in row 3, using the function AVERAGE().
+  - The average is a measure of central tendency and is calculated:
+    $$\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$$
 - Report the standard deviation in row 4, using the function STDEV.S().
+  - The standard deviation is a measure of variation and is calculated:
+    $$s_x = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
+  - There is an alternative formula for the standard deviation:
+    $$s_x^p = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2$$
+    This formula is used in the Excel function STDEV.P(). We will
+    discuss the difference between these two statistics later.
 - Report the minimum in row 5, using the function MIN().
-- Report the median in row 6, using the function MEDIAN().
-- Report the maximum in row 7, using the function MAX().
+  - The minimum is the lowest value observed in the data
+- Report the 10th percentile in row 6, using the function PERCENTILE.INC().
+  - The 10th percentile is a number that is above 10\% of observations
+    and below the other 90\% of observations.
+- Report the median in row 7, using the function MEDIAN().
+  - The median is a measure of central tendency, and is a number 
+    that is above half of observations and below the other half.
+- Report the 90th percentile in row 8, using the function PERCENTILE.INC().
+  - The 90th percentile is a number that is above 90\% of observations, 
+    and below the other 10\% of observations.
+- Report the maximum in row 9, using the function MAX().
+  - The maximum is the highest value observed in the data
+
+### Cleaning up the table
 
 Our table now has all of the information we need, but it is still
 kind of ugly. 
@@ -124,8 +174,8 @@ as 0). We could just exclude these variables, but it's better
 to just improve the reporting.
 
 1. Cell B2 (count) is fine and can be left alone.
-2. Cell B3 (average) gives an error code. We can make this nicer by using the IF()
-   function.  Replace "=AVERAGE('Table 1'!A2:A5)" with 
+2. Cell B3 (average) gives an error code. We can make this nicer by using the 
+    IF() function.  Replace "=AVERAGE('Table 1'!A2:A5)" with 
    "=IF(B2>0,AVERAGE('Table 1'!A2:A5),"")"
    - Cell B3 now displays as blank 
    - It isn't really blank, it contains a formula
@@ -152,7 +202,19 @@ Finally, let's make the display formatting a little nicer.
      button aggressively to make your table more 
      readable.
 
+## More advanced summary statistics
+
+### Frequencies
+
+Excel function is FREQUENCY
+
+### Conditional averages
+
+Excel functions are AVERAGEIF, AVERAGEIFS, COUNTIF and COUNTIFS
+
 # Graphs in Excel 
+
+Next, we will learn to construct some simple graphs in Excel.
 
 ## Constructing a bar graph
 
@@ -162,7 +224,7 @@ The simplest kind of graph is a ***bar graph***.
 It takes a categorical variable and uses bars of different length
 to represent the number of observations in each category.
 
-### Initial construction
+### Bar graph basics
 
 To start constructing a bar graph:
 
@@ -244,7 +306,7 @@ variables.  It is constructed by sorting the variable's values
 into some number of equally-sized ***bins*** and then
 plotting a bar graph of the bins.
 
-### A simple histogram
+### Histogram basics
 
 Let's construct a histogram of our Income variable.
 
@@ -258,4 +320,10 @@ Our graph will appear.  To explain what's going on:
   the other covering the range from 75k-120k.  
 - There are three observations (Betty, Joe, and Sue)in the first 
   bin, and one observation (Al) in the second bin.
+
+## Constructing a time series (line) graph
+
+To be added, need data.
+
+### Line graph basics
 
