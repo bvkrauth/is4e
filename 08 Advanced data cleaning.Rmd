@@ -24,9 +24,32 @@ In this chapter we will learn how to:
 - Link and merge data across multiple files
 - Construct lookup tables using HLOOKUP and VLOOKUP
 
-# Finding and managing data files
 
-## Finding data online
+# Advanced data cleaning in Excel
+
+## Errors in formulas
+
+Go to any blank cell and enter the formula `=ln(B2)`. You will see
+that the cell displays the text `#VALUE!`.  This is an example of
+an error code - cell B2 contains the string "Male", so you are asking 
+Excel to calculate ln("Male"). Excel's most commonly-used error 
+codes are:
+
+- `#VALUE!` means you have given a function the wrong type of argument
+  (for example, giving the `ln()` function a string rather than the number.
+- `#NAME?` means you have referenced a function that does not
+  exist.
+- `DIV/0!` means you have divided by zero.  For example, this appears
+  when you take the average of a set of empty or non-numeric cells.
+- `#REF!` means you have referenced a cell that does not exist.  This
+  usually happens when you delete rows or columns.
+- `#NUM!` means that the result of your numeric calculation is not a 
+  number.  For example, if you take the square root of a negative number.
+- `#NA` means that a lookup function (vlookup or hlookup) was unable to
+  find a match.  I'll explain what that means later on when we talk 
+  about vlookup.
+
+An error code is sometimes helpful in figuring out what has gone wrong.
 
 ## CSV files
 
@@ -39,6 +62,9 @@ for example R.
 
 The most common and useful general-purpose format for tabular data
 is called the "comma separated values" or ***CSV*** file format.
+
+### What is a CSV file?
+
 A CSV file is just a text file with the following features:
 
 - Each line in the file represents a row in the table
@@ -68,7 +94,7 @@ files:
 These limitations are also the main advantage of the CSV file: they are simple
 ways of reporting tabular data and can be read by virtually any program.
 
-## Exporting CSV files from Excel
+### Exporting CSV files from Excel
 
 Let's save our Excel worksheet as a CSV file.
 
@@ -90,7 +116,7 @@ Let's save our Excel worksheet as a CSV file.
      
 You have created a CSV file.
 
-## Importing CSV files into Excel
+### Importing CSV files into Excel
 
 Let's take a look at our CSV file. You can open it in Excel by just 
 double-clicking on it. You may notice that it is somewhat different from the 
@@ -107,7 +133,7 @@ add formatting, formulas, and any other Excel feature to the table.
 Just remember to save it as an Excel file and not a CSV file so that
 these features are saved too.
 
-## Other file formats
+### Other file formats
 
 In addition to CSV files, we will run into other file formats.
 These include:
@@ -134,7 +160,7 @@ databases, online services, etc. We do not have time to explore all of these
 tools, but you can click ```Data``` on the menu bar and look around to see
 what is available.
 
-## Text to columns
+### Text to columns
 
 Sometimes you will run into an Excel sheet that looks like this:
 
@@ -149,11 +175,139 @@ page.  Fortunately, Excel has a way of fixing that:
 3. The "Text to Columns Wizard" will appear; answer its questions
    and you will be good to go.
 
-# Excel Tables
+## Linking and merging data across tables
 
+Column J in our data set provides the student's state of residence
+using the state's two-letter postal abbreviation. Suppose we want 
+to create another variable giving the state's full name. We can
+do this by constructing a ***lookup table*** and using the 
+`vlookup()` function. 
+
+Our lookup table already exists, in the worksheet called `States`. It
+has several features:
+
+- The first column has the state identifier (postal abbreviation).
+  - The vlookup command requires that the identifier be in the first
+    column.
+- The remaining columns have information about the states.  
+  - The one we want is the `StateName` variable in column 2.
+
+Let's add our state list:
+
+1. Enter "StateName" in cell K1.
+2. Enter `=VLOOKUP(J2,States!$A$1:$B$3,2)` in cell K2.
+3. Copy/paste or fill this into the rest of column K.
+
+The vlookup function takes three arguments:
+
+1. The cell containing the identifier for the current observation. 
+  - In our example, this is cell   
+2. The full cell range of the the lookup table.
+  - In our example this is the full table of state data in cells
+    States!A$1:B$3. 
+  - Notice that I use absolute references here so the fill works.
+3. The column in the lookup table we want to retrieve values from.
+  - In our example, this is the StateName column in the lookup table,
+    which is located in column 2.
+ 
+A few things to notice about this:
+
+- In order for vlookup to work, we need the first column in the 
+  lookup table to be the identifier.  This should be the case
+  if you are following good data practices.
+- If vlookup does not find a match, it returns `#N/A`.
+- vlookup is short for "vertical lookup" because it assumes that 
+  your data has variables in columns and observations in rows.  
+- There is also a function called hlookup that works with variables in rows and observations
+  in columns.
+
+## Aggregating by group
+
+Suppose you want to create a new variable that gives the average income
+among students in the same state.  This is an example of aggregation by 
+group.
+
+1. Enter "AvgStateInc" in cell L1.
+2. Enter "=AVERAGEIF(J$2:J$5,J2,C$2:C$5)" in cell L2.
+  - The first argument `J$2:J$5` gives the range of state values to look up.
+  - The second argument `J2` gives the state value of the current row.
+  - The third argument gives the range of income values to average over.
+3. Copy/paste or fill into the remaining cells in column L.
+
+You can see that this formula takes on one value for the Michigan students,
+and another value for the Texas students.
+
+## Excel Tables
+
+### Creating a table
+
+To create an Excel table, go to any cell in your table, and
+select `Home` and then `Format as Table` from the menu. A set of
+visual styles will drop down.  Select whichever one looks nice to
+you.
+
+A dialog box will come up that looks like this:
+
+> Insert Format As Table dialog box here.
+
+Excel will try to guess the range of your table, and whether your
+table has headers (it should).  Correct Excel's guesses if necessary, and press OK. You have a table!
+
+### Some things you can do with tables
+
+There are several things you can do with tables.  Most of them
+are on the ribbon associated with the `Design` menu option. Note
+that the `Design` menu is context-dependent - it only appears if
+the currently-selected cell is in a table.
+
+Here are a few things you can do:
+
+- Change the name of your table:
+  - By default your table will be named Table1 (or Table2, Table3,
+    etc.).  
+  - You can change its name in the upper right corner of the `Design`
+    ribbon. 
+  - You can refer to the table by name in formulas.
+- Convert it back to a normal range 
+  - Select  `Convert to Range` from the `Design` ribbon.
+- Sort and filter
+  - Click on the drop-down boxes in the header row.
+
+Another nice feature of Excel tables is that it automatically uses
+variable names rather than cell addresses in formulas. To see
+how this works, click in cell H3 and look at the formula box.  The formula used to say `= D3 - C3` but now it says `=[@Income]-[@Spending]`. This
+feature makes it much easier to tell the content of a formula and to
+avoid making mistakes.
+
+### Adding observations, variables and totals  
+
+You can add observations (rows) to the bottom of a table, and Excel will
+automatically fill in any formulas.
+
+1. Make sure that the `Total row` check box is unchecked.
+2. Enter "Fred" in cell A6.
+
+As you can see, Excel has added row 6 to the table, and filled in
+all calculated cells automatically.
+
+You can also add variables (columns) to the end of the table.
+
+1. Go to cell J1 and enter `LogSavings`. 
+  - As you can see, Excel automatically extends the table to include 
+    this variable.
+2. Go to cell J2 and enter `=ln(H2)` or `=LN([@Savings])`. 
+  - As you can see, Excel automatically fills in the formula 
+    for all other rows.
+
+Finally, you can add a summary row (Excel calls it a "total row"):
+
+1. Click on the `Total Row` check box in the `Design` ribbon.
+  - By default, Excel will only show a total for the last column.
+2. Go to cell C6. You will notice a drop-down box appears in the
+  cell. Select "Average" from the drop-down box
+  - The average value for this variable now displays in the cell
+  - You can show the sum, count, standard deviation, etc. instead 
+    of the average.
+    
 https://support.office.com/en-us/article/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c. 
-
-# Linking and merging data across tables
-
-## Using HLOOKUP and VLOOKUP
 
