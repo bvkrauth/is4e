@@ -1,5 +1,5 @@
 ---
-title: "Chapter 12: Graphing with ggplot"
+title: "Chapter 12: Using R and ggplot"
 author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
 output: 
@@ -12,21 +12,833 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library("tidyverse")
+simdat <- tibble(xval=sort(rnorm(100)),
+                 yval=sign(xval)+0.3*rnorm(100),
+                 zval=as.integer(round(runif(100))))
+simdat$tmpval <- simdat$xval
+simdat$tmpval[simdat$xval < 0] <- NA
 ```
 
 # Chapter overview
 
 In this chapter we will learn how to:
 
- - DDD
- - EEE
- 
+ - Write and execute a simple script in R
+ - Perform basic tasks for reading and processing data
+  in R.
+ - Calculate summary statistics in R.
+ - Produce simple graphs in R.
+ - Manage R: install and load libraries, etc.
 
-# Pivot tables
+# R basics
 
-# Bivariate statistics
+## A brief tour of RStudio
 
-# Statistical inference
+Start the program RStudio. You should see something that looks like
+this:
+
+> INSERT RSTUDIO SCREENSHOT HERE.
+  
+You may wonder what the difference is between R and RStudio.
+
+- R is the program we use to do statistical analysis. 
+- RStudio is an *integrated development environment* for R. It combines 
+  R with a set of additional tools that are helpful for using it: 
+  - an interactive session of R (running in the "Console" window).
+  - a text editor for writing R scripts.
+  - the ability to run R scripts in batch mode 
+  - tools for managing files and packages used by R
+  - tools for comparing and combining scripts and other files
+  - help and documentation
+  -  many other features
+
+You can also just use R directly, it just won't have all of these 
+extra features.
+
+RStudio normally displays four open windows, each with tabs you can 
+select. We will not use most of them, but some of them will be very handy 
+indeed.
+
+## Using the command line
+
+Like most programming languages, R is designed to execute a series
+of commands provided by the user.
+
+- You can type commands into the "Console" window (lower left corner), 
+  and they will be executed as you enter them.
+- Or you can type a series of commands into a text file (a ***script***)
+  and tell R to execute them all in sequence.
+
+Let's start with the command line.  Move your cursor into the console 
+window, type the command `print("Hello world!")` and press the `Enter` key to
+execute the command.  
+```{r}
+print("Hello world!")
+```
+Congratulations, you have successfully executed an R command.
+
+### Accessing the command history
+
+Suppose you decide you want to say "Hello [your name]!" instead. You
+*could* type the command in again, but there's an easier way:
+RStudio maintains a history of previously executed commands for your 
+convenience. You can access it in one of two ways:
+
+1. Press the up arrow key in the console window to show the most recently 
+  executed command. If you press it a second time it gives you the 
+  command before that, and so on.
+2. Click on the "History" tab in the upper right corner of your screen to
+  see the full command history.  You can double-click on any command in this
+  history and have it copied to the console.
+  
+Use either of those methods to copy your previous command to the console
+and then edit it to look the way you want:
+```{r}
+print("Hello Brian")
+```
+
+## Using scripts
+
+The command line is ideal for basic tasks and trying things out, and 
+we will continue using it regularly.  But in order to create reproducible
+research and take full advantage of R's capabilities, we will need 
+to write and execute ***scripts***. 
+
+An script is just a text file containing a sequence of R commands.  By 
+convention an R script has the .R extension but any text file will 
+work. Let's open and run an existing R script:
+
+1. Open the script [filename] in RStudio.  
+  - If you are already running RStudio, you can do this by selecting 
+    `file` and then `open file` from the menu, and following 
+    the usual procedure for opening a file.
+  - You can also do this by double-clicking on the file.
+  Once you have opened the file it should look like this 
+  > INSERT FIGURE HERE
+2. Look for the button in the top of that sub-window marked `Source`, 
+  and click on it. 
+  - You will see a stream of results appearing in the Console 
+    window.  This is your script running.
+
+Once the script has completed running (I have set it up to display "DONE" 
+once it is done), let's look around.
+
+  - If you look in the console window, you will see the output from
+    the script: all the statistical calculations we did in Excel earlier.
+  - If you click on the Plots tab in the lower-right window, you can 
+    see the graphs produced by the script.
+
+Let's go back and take a look at the script itself.  There are a few 
+elements that I'd like to point out:
+
+- The first line in the script is `remove(list=objects())
+  - Without going into unnecessary details, this command tells R
+    to clear its memory before proceeding.
+  - It should be the first line in every script. In order for your
+    analysis to be reproducible, you want this script to do the 
+    exact same thing every time you run it.
+- There are some lines that begin with "#".  
+  - These are comments. 
+  - R will ignore anything on a line that appears after the # character.
+- RStudio uses color to distinguish different language
+  elements like functions, strings and comments.
+
+Now let's write our own script.  
+
+1. Select `File`, then `New File` and then `R Script` from the menu 
+  to create a blank file.
+2. Enter a valid command in the file, for example `print("hello world")`
+  and then save the file by selecing `File` and then `Save` from the
+  menu.
+3. Execute the file again by clicking on the button marked `Source`.
+
+Having written our first script, let's return to the console window.
+
+## Basic language elements
+
+Like Excel, R can perform various mathematical calculations. For example, 
+enter the command "sqrt(2)" in the console window:
+```{r}
+sqrt(2)
+```
+As you can see, R read in your command, executed it and displayed the 
+result.  There are hundreds of built-in mathematical and statistical 
+functions in R.
+
+### Objects and assignment
+
+In addition to performing calculations, we can assign the results of
+the calculation to named ***objects***.  An object is basically a piece
+of information that R keeps in its memory and can be referred to later.
+
+We use the assignment operator `<-` to create or redefine an object. Once
+an object is defined, we can use it in other commands. We can display
+the contents of an object using the `print()` function, or by simply
+entering its name:
+```{r}
+x <- 5
+print(x) 
+x <- sqrt(2) 
+print(x)
+print(x - 1)
+y <- x*x
+print(y)
+y
+```
+
+### Vectors
+
+The primary data structure in R is a ***vector***, which is just 
+an ordered list of elements.  The simplest type of vector is 
+called an ***atomic vector*** - its elements are normally: 
+
+  - strings OR
+  - numbers OR
+  - logical values (either TRUE  or FALSE)
+  
+The elements of an atomic vector need to be all part of the same 
+atomic type; a single vector cannot contain both strings and numbers,
+for example. 
+  
+We can construct a vector by enumeration using the `c()` function:
+```{r}
+fruits <- c("Avocado","Banana","Cantaloupe")
+print(fruits)
+```
+There are many other functions that can be used to construct vectors. Two
+particularly useful ones are `rep` which repeats something a particular
+number of times, and `seq` which creates a sequence:
+```{r}
+ones <- rep(1,times=10)
+print(ones)
+evens <- seq(from=2,to=20,by=2)
+print(evens)
+```
+
+Mathematical functions in R operate directly on vectors, and automatically
+expand scalars (single numbers) to vectors as needed:
+```{r}
+# This adds one to every element of evens
+odds <- evens - 1
+print(odds)
+# This does the same
+odds <- evens - ones
+print(odds)
+```
+
+To select part of a vector you use the subscript operator `[]`. You can
+enumerate the indexes of the elements you want:
+```{r}
+# You can specify a single index:
+x <- evens[2]
+print(x)
+# You can give a vector of indices
+x <- evens[c(2,5)]
+print(x)
+# You can provide a range of indices
+x <- evens[2:5]
+print(x)
+```
+
+Instead of providing a list of atomic elements, you can provide a list of
+logical values. R will then operate on those elements whose corresponding
+list has the value TRUE:
+```{r}
+forexample <- (evens < 10)
+print(forexample)
+x <- evens[forexample]
+print(x)
+x <- evens[evens > 5]
+print(x)
+```
+
+Vector subscripting works on both sides of the assignment vector:
+```{r}
+x <- evens
+print(x)
+x[2] <- 1000
+print(x)
+```
+
+### Lists and other object types 
+
+The other type of vector is a ***list***.  A list is a vector whose
+elements are other objects. These objects can be any type, so we can
+use lists inside lists to build very complex objects.  Lists can
+be built using the `list()` function:
+```{r}
+everything <- list(fruits,evens,odds)
+print(everything)
+```
+You can access part of a list by specifying its index inside of the 
+`[[]]` operator:
+```{r}
+print(everything[[2]])
+```
+You can also assign names to the elements of a list, and then reference 
+them by name using either `[[]]` or `$` notation:
+```{r}
+everything <- list(fruits=fruits,evens=evens,odds=odds)
+print(everything)
+x <- everything[["evens"]]
+print(x)
+x <- everything$fruits
+print(x)
+```
+You can add elements to an existing list using the `$` notation:
+```{r}
+everything$allnumbers <- c(evens,odds)
+print(everything)
+```
+
+### Attributes of an object
+
+Finally, any object can also have ***attributes***.  This is a list 
+associated with the object that provides additional information. Let's see
+if any of the objects we have created have attributes:
+```{r}
+print(attributes(fruits))
+print(attributes(evens))
+print(attributes(everything))
+```
+Note that:
+
+- our two atomic vectors have attributes NULL. That's
+  R's way of saying they have no attributes
+- our list stores the names of its three elements in 
+  the `$names` attribute.  
+
+R has hundreds of other object types that are built from atomic vectors,
+lists, and attributes.  These object types include matrices, arrays,
+objects structured as the output of a particular statistical analysis,
+descriptions of graphs, and so on.  Users can also define their own object
+types, and there is an extensive system for generic functions and
+object-based programming (if you know what that is). We will not go 
+into any of that.  
+
+### Functions and operators
+
+Our last basic language element is the ***function***.  Let's get to know
+the main features of functions in R by considering the `seq()` function.
+
+Functions have the following features:
+
+- Every function has a name. In our example, the functions name
+  is `seq`.
+- You can obtain help on any function by entering `?` and its name
+  in the console window, for example `? seq`.
+- Most functions accept one or more ***arguments***. For example,
+  the seq functions arguments include `from`, `to`, `by` and 
+  `length.out`
+  - Every argument has a *name* and a *position*.  For example,
+    the `from` argument is in position one, the `to` argument
+    is in position two, etc.
+  - Arguments can be passed to the function by *name* or by *position*.
+    - Passing by name looks like this:`seq(from=1,to=5)`
+    - Passing by position looks like this: `seq(1,5)
+    - You can mix both methods: `seq(1,5,length.out=10)`
+    - I recommend passing by position for simple functions, 
+      and passing by name for more complex functions, but it
+      is really just a matter of what works for you.
+  - Some arguments are required. They must be provided every time the
+    function is called, or else the function will return an error. 
+  - Some arguments are optional. They *can* be provided, but have
+    a default value if not provided. All arguments to `seq()` are
+    optional; execute the command `seq()` to see what happens.
+- Every function returns a value.  This is even true for functions 
+  like `print()`.  To see this: execute the command:
+  
+```{r}
+y <- print("Hello world")
+print(y)
+```
+  As you can see, `print("Hello world")` returns "Hello world" as its
+  value.
+- Some functions also produce ***side effects***.  For example, the
+  `print()` function causes its argument to be printed to the console
+  window, and the `save()` function causes a file to be saved on your
+  computer.  In some cases like these two examples, the "side effects"
+  are actually the main reason for calling the function.
+R has hundreds of built-in functions, and users can easily define their
+own functions.  We will not do that in this class.
+
+In addition to functions, R has the usual binary mathematical 
+***operators*** such as `+`, `-`, `*` and `/`.  Operators are
+just another way of expressing functions.  For example
+the `+` operator is really just another way of calling 
+the `sum()` function:
+```{r}
+# These two statements are equivalent
+2+2
+sum(2,2)
+```
+There are several other commonly used operators:
+```{r}
+# Basic arithmetic operators
+2 + 3
+2 - 3
+2 * 3
+2 / 3
+2 ^ 3
+# Comparison operators
+2 < 3
+2 == 3
+2 > 3
+# Logical operators
+TRUE & FALSE # this is logical AND
+TRUE | FALSE # this is logical OR
+```
+The assignment operator is also an operator. It is equivalent to the 
+`assign()` function:
+```{r}
+# These two statments are equivalent:
+x <- 2
+assign(y,2)
+print(x)
+print(y)
+# The assign function returns its own value, so you can do this:
+x <- y <- 3
+print(x)
+print(y)
+```
 
 
+## Packages and the tidyverse
+
+R has many useful built-in functions and features.  
+
+But one of its most useful features is how easy it can be extended 
+by users, and the fact that it has a large user community who have 
+provided ***packages*** of useful new functions and data.  
+
+We will use one of these packages called the ***tidyverse***. The tidyverse
+was created by the data scientist Hadley Wickham (also one of the key
+people behind RStudio) as a way of solving some problems with R.
+The basic structure of R dates back to 1976 (R itself was created in the early
+1990s but is closely based on an earlier program called S). Computer science
+has advanced a lot since 1976, so some aspects of R seemed like a good idea 
+at the time but would be designed differently today.  There are many
+different ways of doing the same thing, there are many rarely-used functions,
+and there are a few functions that don't do what they should. But if we
+change any of the functions in base R that will cause thousands of existing
+programs to stop working.
+
+The tidyverse addresses this problem by replacing many Base R 
+functions with an alternative versions that are easier to use, 
+better-designed, and usually faster. It does this in part by 
+being "opinionated" - for example, functions for data analysis
+assume that you have put the data into tidy format.
+
+Before you can use a package, it needs to be ***installed*** on your 
+computer using the `install.packages()` function.
+
+- Most commonly-used packages including the tidyverse are available 
+  online from the Comprehensive R Archive Network (CRAN). You can
+  get a list of all available CRAN packages by simply executing
+  the `install.packages()` function with no arguments:
+```{r}
+#install.packages()
+```
+- If you know the name of the CRAN package you want to install, 
+  you can provide it as the argument:
+```{r}
+#install.packages("tidyverse")
+```
+You only need to install each package once.
+
+However, installing a package only puts the files on your computer. In order
+to actually use the features of a package you need to load it into 
+memory during your current R session using the `library()` function:
+```{r}
+library("tidyverse")
+```
+
+## Let's do something useful
+
+Let's finish this introductory material by doing something useful with R.
+Suppose we want to plot the $N(0,1)$ PDF.  How do we go about doing that?
+We start by describing step-by-step what we need to do:
+
+1. Construct a vector $x$ of values at which to plot the PDF.
+2. Calculate a vector $p = \phi(x)$, where $\phi(\cdot)$ is the
+  $N(0,1)$ PDF.
+3. Plot $p$ against $x$.
+
+Then we need to figure out how to accomplish each step.
+
+Step 1 can be acccomplished using the `seq()` function, which we have already
+used. If you know the name of the function you want to use, you can
+access its help page by executing the command `? [function name here]`:
+```{r}
+# ? seq
+```
+As you can see, the `seq()` function takes arguments `from=` (for the 
+starting point), `to=` (for the end point), and `length.out=` (for the
+total number of points).  Let's plot the function at 10 points betwen -4 
+and 4:
+```{r}
+x <- seq(from=-4,to=4,length.out=10)
+print(x)
+```
+
+Next we need to calculate the standard normal PDF at each of these points. R
+is a program for statisticians, so it presumably has that PDF available as 
+a built-in function. But what if we don't know its name? We can just Google
+"normal pdf in r" and click on a page or two to find out that the function
+we need is called `dnorm()`. 
+```{r}
+p <- dnorm(x)
+print(p)
+```
+Now all we have to do is plot $p$ against $x$. We could Google, or we
+could guess that the function for creating plots is called `plot()`
+and try something out.
+```{r}
+plot(x,p)
+```
+You will see this plot in the "plots" tab in the lower right corner of your 
+screen.
+
+Well, that's not too bad! At the same time, we might want to make some improvements in this plot:
+
+- plot it at more points (100 rather than 10, for example)
+- connect the points with a line
+- add a title
+
+So we can read through the documentation for the `plot()` function,
+try a few things out, and we can produce a much prettier graph
+by just adding a few options:
+
+```{r}
+
+x <- seq(from=-4,to=4,length.out=100)
+p <- dnorm(x)
+plot(x,p,type="l",ylab=expression(phi(x)),main="PDF of N(0,1) distribution")
+```
+We are done for now, so close RStudio. When you do that you
+will get a warning message that looks something like this:
+
+> INSERT SCREENSHOT OF SAVE WORKSPACE IMAGE
+
+You should never click on the `Save` button here, as it would cause R to
+save the current state of its memory and re-load it next time you start R.
+In the interest of reproducibility, you should start R "clean" every time.
+Click on the `Dont Save` button, and you will exit RStudio.
+
+## For more information
+
+https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf
+
+
+# Data analysis with R
+
+## Reading data from a CSV file
+
+Our first step will be reading the data in from the CSV file. The tidyverse 
+function to do this is called `read_csv()`:
+```{r}
+book1 <- read_csv("book1.csv")
+print(book1)
+```
+
+
+## Tibbles
+
+The `read_csv()` function creates an object called a ***tibble***. A 
+tibble is an object type that corresponds to a table in tidy data. Each 
+row in the tibble is an observation, and each column is a variable with 
+a name. The base R equivalent of a tibble is called a data.frame. In most applications tibbles and data.frames are interchangeable, but tibbles
+have some additional features that make them work better.
+
+We can obtain the column names of a tibble using the `names()` function:
+```{r}
+names(book1)
+```
+and we can count the rows and columns with `nrow()` and `ncol()` respectively:
+```{r}
+nrow(book1)
+ncol(book1)
+```
+We can access any variable by name using the `$` notation:
+```{r}
+print(book1$Gender)
+```
+We can also access any row (or rows) in  our tibble by number or logical condition,
+and any column by number or name:
+```{r}
+print(book1[1,])
+print(book1[,"Gender"])
+print(book1[book1$Gender == "Male","Name"])
+```
+
+
+## Some basic statistical functions
+
+### Summary statistics
+
+Summary statistics:
+```{r}
+summary(simdat)
+```
+
+
+### Means
+
+Means
+```{r}
+# Mean of a single variable
+mean(simdat$xval)
+# if a variable has any NA values, its mean will be NA 
+mean(simdat$tmpval)
+# unless you tell R to remove them
+mean(simdat$tmpval,na.rm=TRUE)
+# Mean of each column
+colMeans(simdat,na.rm=TRUE)
+```
+
+### Other univariate statistics
+
+Variance and standard deviation:
+```{r}
+var(simdat$xval,na.rm = TRUE)
+sd(simdat$xval,na.rm = TRUE)
+apply(simdat,2,var,na.rm=TRUE)
+apply(simdat,2,sd,na.rm=TRUE)
+
+```
+
+Counts
+```{r}
+count(simdat,zval)
+count(simdat,cut_width(xval,0.5))
+```
+
+### Multivariate statistics
+
+Covariance and correlation:
+```{r}
+# For two specific 
+cov(simdat$xval,simdat$yval)
+cor(simdat$xval,simdat$yval)
+cov(simdat)
+cor(simdat)
+```
+Dealing with missing values is a little more complicated for covariances and correlations because there are two different ways to drop them:
+
+1. Pairwise deletion: when calculating the covariance
+  of two variables, drop observations with a missing
+  values for either of *those two* variables.
+2. Casewise or listwise deletion: when calculating the covariance
+  of two variables, drop observations with a missing
+  value for *any* variable.
+
+```{r}
+# Pairwise deletion 
+cov(simdat,use="pairwise.complete.obs")
+# Casewise deletion 
+cov(simdat,use="complete.obs")
+```
+
+### Probability distributions
+
+R has a family built-in functions for each commonly-used probability
+distribution.  We have already seen `dnorm()` function, which 
+gives the normal PDF:
+```{r}
+# The N(0,1) PDF, evaluated at 1.96
+dnorm(1.96)
+# The N(1,4) PDF, evaluated at 1.96
+dnorm(1.96,mean=1,sd=4)
+# The N(0,1) CDF, evaluated at 1.96
+pnorm(1.97)
+# The 2.5 percentile of the N(0,1) CDF
+qnorm(0.025)
+# Four random numbers from the N(0,1) distribution
+rnorm(4)
+```
+There is a similar set of functions available for the 
+uniform distribution (dunif, punif, qunif,runif), the
+binomial distribution (dbinom,,pbinom,qbinom,rbinom),
+and Student's T distribution (dt,pt,qt,rt), along 
+with many others.
+
+# Graphing with ggplot
+
+## Making a simple graph
+
+### Making a histogram
+
+We can make a histogram
+```{r}
+ggplot(data=simdat,mapping=aes(x=xval)) + 
+  geom_histogram()
+```
+This is already a pretty nice graph, though it could use some customization.
+
+The `ggplot()` function has a non-standard syntax, so I'd like to go over 
+it. 
+
+- The first part `ggplot(data=simdat,mapping=aes(x=xval))` sets up
+  the basic characteristics of the graph:
+    - The `data` argument tells R which data set (tibble) will be
+      used
+    - the `mapping` argument describes the basic ***aesthetics***
+      of the graph, i.e., the relationship in the data we will
+      be graphing.
+- The rest of the command is one or more statements separated by 
+  a `+` sign.  These are called ***geometries*** and are geometric
+  elements to be included in the plot.
+    - The geom_hist() geometry produces a histogram
+
+
+Explain this...
+```{r}
+# The default is to plot the number of cases
+# But often we want to plot the proportion of cases
+ggplot(data=simdat,mapping=aes(x=xval)) + 
+  geom_histogram(aes(y=..density..))
+```
+
+
+### Making a line graph
+
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_line()
+```
+
+
+### Making a scatter plot
+
+We can also make a scatter plot
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point()
+```
+This is different from our histogram in two ways:
+  - The geometry is geom_point rather than geom_hist.
+  - The aesthetic also includes a `y` value, as require to plot $(x,y)$
+
+
+## Customizing your graph
+
+### Titles and labels
+
+Titles: You can add a title and subtitle, and you can change the axis titles: 
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point() + 
+  labs(title="Main title here",
+      subtitle="subtitle here",
+      caption="caption here",
+      tag="tag here") +
+  xlab("x label here") +
+  ylab("y label here")
+```
+
+### Color and shapes
+
+Using color: you can change the color of any geometric element
+using the `col=` argument:
+```{r}
+# You can fix the color of a geographic element at a preferred value
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point(col="red") 
+```
+
+You can also color-code a geographic element based on some other variable by including it as part of the aesthetic
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point(aes(col=as.factor(zval)))
+```
+
+Using shapes: you want to make sure your graph can be read by a reader
+who is color blind or is printing in black and white. So we can use 
+shapes in addition to color:
+```{r}
+# You can also color-code a geographic element based on some other variable
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point(aes(col=as.factor(zval),shape=as.factor(zval)))
+```
+
+## Adding plot elements 
+
+We can include multiple geometries in the same graph.
+
+For example, suppose we want to add a smooth fit to our scatter 
+plot. We can do that with the `geom_smooth()` geometry:
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point() +
+  geom_smooth()
+```
+Notice that by default, the graph includes both the fitted line
+(in blue) and a 95\% confidence interval (the shaded area around
+the line).  
+
+Alternatively, we could add a linear fit:
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point() +
+  geom_smooth(method="lm") 
+```
+
+Finally, there is no built-in option to generate a binned 
+scatterplot, but we can do it with a little work:
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+ geom_point(size=0.5) +
+  stat_summary_bin(fun='mean', bins=20,
+                   col="blue", size=3, geom='point') +
+  stat_summary_bin(fun='mean', bins=20,
+                   col="blue", size=0.5, geom='line')
+```
+It took me a little while to figure this one out - I wouldn't 
+expect you to do anything so complicated.
+
+## A few other graphs
+
+The histogram, time series (line) graph and scatter plot 
+are the core graphs I want you to be able to produce. But ggplot2
+has many other pretty and useful graphs, so I would like to show
+you a few of them.
+
+Some alternatives to the histogram include:
+```{r}
+# A smooth density (PDF) function too
+ggplot(data=simdat,mapping=aes(x=xval)) +
+  geom_density()
+# Histograms don't work well for discrete variables
+ggplot(data=simdat,mapping=aes(x=zval)) +
+  geom_histogram()
+# geom_freqpoly is recommended instead
+ggplot(data=simdat,mapping=aes(x=zval)) +
+  geom_freqpoly()
+# This is called a box plot. It shows the mean
+ggplot(data=simdat,mapping=aes(x=xval,y=as.factor(zval))) + 
+  geom_boxplot()
+```
+We can put two densities in the same graph for comparison: 
+```{r}
+# The fill option changes the color under the density
+# The alpha option makes the fill partially transparent
+ggplot(data=simdat) + 
+  geom_density(aes(x=xval),fill="red",alpha=0.5) +
+  geom_density(aes(x=yval),fill="blue",alpha=0.5)
+```
+
+# Data cleaning with R (if time allows)
+
+
+## Some basic data-cleaning functions
+
+### filter
+
+
+### select
+
+### arrange
+
+### mutate
 
