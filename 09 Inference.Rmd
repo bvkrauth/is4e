@@ -20,8 +20,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 In this chapter we will learn how to:
 
- - Construct and perform a hypothesis test
+ - Construct and perform a simple hypothesis test
  - Construct a confidence interval
+ - Correctly interpret both hypothesis tests and confidence intervals
 
 # Hypothesis tests
 

@@ -19,21 +19,26 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Chapter overview
 
-In economics, the random events we are interested in are usually
+In the previous chapter, we learned a framework for modeling random
+events. In economics, the random events we are interested in are usually
 ***quantitative***, that is, they can be described by a number.
 Quantitative outcomes are also called "random variables", and we 
-have many tools for working with them.
+have many tools for working with them.  
 
 In this chapter we will learn how to:
 
- - Calculate and interpret the CDF and PDF of a random variable,
-   or several random variables
- - Calculate and interpret the expected value of a discrete random 
-   variable from its PDF
- - Calculate and interpret the variance and standard deviation of a 
-   discrete random variable from its PDF
- - Calculate and interpret conditional distributions and conditional
-   expectations
+- Calculate and interpret the CDF and PDF of a random variable,
+  or several random variables.
+- Calculate and interpret the expected value of a discrete random 
+  variable from its PDF.
+- Calculate and interpret the variance and standard deviation of a 
+  discrete random variable from its PDF.
+- Work with common probability distributions including the Bernoulli,
+  binomial, uniform and normal.
+- Calculate and interpret the covariance and correlation coefficient of 
+  two discrete random variables.
+- Calculate and interpret conditional distributions and conditional
+  expectations.
 
 # Random variables
 
@@ -105,19 +110,13 @@ In our example:
   - The support of $w_{Red}$ is $S_{Red} = \{-1,1\}$.
   - The support of $w_{12}$ is $S_{12} = \{-1,35\}$.
 
-All three of these random variables have  ***discrete*** 
-support. That is, the support is a set of isolated points 
-each of which has a strictly positive probability.
+All three of these random variables have  ***discrete*** support. That 
+is, the support is a set of isolated points each of which has a strictly 
+positive probability.
 
-Not all random variables are discrete: for example, physical conditions
-such as temperature or mass are fundamentally continuous. If 
-you buy a 5kg bag of flour at the grocery store
-it almost certainly won't contain exactly 5kg of flour; 
-it may contain 4.98 kg or 5.01 kg, or any number in between.
-This complicates matters substantially because there are an infinite
-number of possible values, and this infinite number of probabilities
-somehow needs to sum to one.  We will need some calculus to
-deal with this case, but first let's explore the discrete case.
+Not all random variables have a discrete support. That will complicate
+the math quite a bit: we need calculus to model non-discrete random
+variables.
 
 ### The PDF of a discrete random variable
 

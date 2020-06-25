@@ -16,11 +16,21 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Chapter overview
 
-In this chapter we will:
+In chapter 2, we learned how to obtain and clean a simple data set. The 
+next step is to learn some tools for analyzing it. We will start with
+***univariate*** statistics, i.e., statistics that describe a single 
+variable.  Later in the term we will learn some ***multivariate*** 
+statistics that describe the relationship between two or more variables.
 
- - Follow good data management practices 
- - Use formulas in Excel
- - Gather resources and tools, including all needed computer software.
+In this chapter we will to:
+
+ - Calculate and interpret the main univariate summary statistics in Excel  - 
+ - Construct and interpret frequency tables in Excel
+ - Construct and interpret conditional averages in Excel
+ - Construct and interpret bar graphs, histograms and time series graphs in Excel
+
+In the next chapter, we will use the tools of probability and random
+variables to understand these statistics more deeply.
 
 # Univariate statistics in Excel
 

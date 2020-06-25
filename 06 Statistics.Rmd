@@ -16,11 +16,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Chapter overview
 
+So far, we have learned how to model random events and random numbers, 
+and we have learned how to calculate some commonly-used statistics from 
+data.  This chapter ties all of that work together.
+
 In this chapter we will:
 
- - Follow good data management practices 
- - Use formulas in Excel
- - Gather resources and tools, including all needed computer software.
+- Use the theory of probability and random variables to model the random
+  process generating our data set and the statistics we have calculated 
+  from it.
+- Apply and interpret the assumption of simple random sampling, and compare
+  it to other sampling schemes.
+- Calculate and interpret the mean and variance of a statistic from
+  its sampling distribution.
+- Calculate and interpret bias and mean squared error.
+- Explain the law of large numbers, central limit theorem, and Slutsky's 
+  theorem.
+
 
 # Data and the data generating process
 

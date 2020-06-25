@@ -18,18 +18,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 In this chapter we will learn how to:
 
- - DDD
- - EEE
+- Find economic data from key sources.
+- Move data files across multiple file formats and platforms.
+- Work with Excel tables
+- Link and merge data across multiple files
+- Construct lookup tables using HLOOKUP and VLOOKUP
 
 # Finding and managing data files
 
-Once you have followed all of the steps in this chapter, you should clean up
-your file:
-
-- Undo any undesirable formatting or content changes.
-- Fill in any incomplete columns
-
-and save it to your project folder. We will use it again soon.
+## Finding data online
 
 ## CSV files
 
