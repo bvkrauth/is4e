@@ -6,7 +6,7 @@ output:
   html_document:
     theme: paper
     toc: true
-    toc_float: false
+    toc_float: true
     number_sections: true
 ---
 
@@ -34,65 +34,13 @@ variables to understand these statistics more deeply.
 
 # Univariate statistics in Excel
 
-## Preliminaries
+Make a new working copy of [data file] and open it. 
 
-1. Make a new working copy of [data file]. Call it Chapter4.xlsx.
-2. Open your new file.
-
-We will start by calculating simple averages for all of our variables
-and reporting them at the bottom of the table.
-
-1. Go to cell C7 in Table 1. We are going to calculate and report the
-   average value of this variable (Income).
-2. Enter "=AVERAGE(C2:C5)" in cell C7.
-   - You will see that cell C7 now displays the average income in the
-     table.
-3. Copy the contents of cell C7 to cells A7:F7.
-  - For numeric variables, row 7 now displays the column average.
-  - For text variables, row 7 displays the error code "#DIV/0!"
-    because there are no numbers to average. This is kind of ugly
-    but we will leave it alone for now.
-
-You will notice that we left an empty row between our data and
-these averages. That is on purpose: that empty row
-tells Excel that the rows below it are not part of the data.
-For example, you can still use sorting and filtering on the
-data.
-
-We could add all sorts of additional statistics below our
-averages, but let's go a little fancier.
-
-## Constructing a table of summary statistics
+## Summary statistics
 
 We are going to create a nice table of summary statistics
 for all of our variables, and put it in a separate worksheet.
 In the course of doing so, we will learn some new tricks.
-
-Functions to learn:
-
-- Simple univariate statistics:
-  - COUNT (there is also a COUNTIF and COUNTIFS)
-  - AVERAGE
-  - MEDIAN
-  - MIN and MAX
-  - VAR.P and/or VAR.S
-  - STDEV.P and/or STDEV.S (have them calculate a standard error too)
-- More complex univariate statistics
-  - FREQUENCY
-  - PERCENTILE.INC/PERCENTILE.EXC and PERCENTRANK.INC/PERCENTRANK.EXC
-  - AVERAGEIF and/or AVERAGEIFS
-- Multivariate statistics
-  - CORREL
-  - COVARIANCE.P and/or COVARIANCE.S
-- Probability distributions:
-  - NORM.DIST, NORM.INV (there is also a NORM.S.DIST and NORM.S.INV)
-  - PHI (the standard normal PDF)
-  - RAND (generates U(0,1) random number)
-- Testing:
-  - Calculate standard errrors
-  - T.TEST, T.DIST, T.DIST.2T and T.DIST.RT
-  - Z.TEST
-  - Calculate a confidence interval
 
 ### Constructing the table
 
@@ -102,22 +50,29 @@ First we will create a new worksheet:
    create a blank new worksheet. 
   - Excel will give it some default name like "Sheet1"
 2. Double click on the new worksheet tab, and enter 
-   a better name for the worksheet: "Table 1 summary"
+   a better name for the worksheet: "Summary statistics"
    
-The first column will be the names of the statistics themselves.
+A table of summary statistics reports various univariate statistics 
+for each variable in our data set.  We will want our table to look like
+this:
 
-- Enter "Statistic" in cell A1
-- Enter "Count" in cell A2
-- Enter "Average" in cell A3
-- Enter "StdDev" in cell A4
-- Enter "Min" in cell A5
-- Enter "10th percentile" in cell A6
-- Enter "Median" in cell A7
-- Enter "90th percentile" in cell A8
-- Enter "Max" in cell A9
+| Statistic | *(variable name 1)* | *(variable name 2)* | *(etc.)* |
+|-----------|---------------------|---------------------|----------|
+| Count     | *(count of valid observations)*
+| Average   | *(average)*
+| StdDev    | *(standard deviation)*
+| Min
+| 10th percentile
+| Median
+| 90th percentile
+| Max
 
-The first row will be the names of the variables. We could just copy-paste
-them from the other worksheet but let's do something more sophisticated:
+The first column specifies the statistics to be reported. Fill in 
+cells A1:A9 as in the table above.
+
+The first row specifies the variables for which we are reporting statistics. We 
+could just copy-paste them from the other worksheet but let's do something 
+more sophisticated and robust:
 
 1. Go to cell B1. Type "=" but *don't hit enter*.
 2. Click on the tab for Table 1, and then click on cell A1 in Table 1.
@@ -134,7 +89,7 @@ are even copied over correctly.
 
 Now let's fill in the statistics, starting with column D (Income).
 
-- Report the count in row 2, using the function COUNT().
+- Report the count in row 2, using the function `COUNT()`.
   - The count is the number of observations with numeric values 
     for the variable.
 - Report the average in row 3, using the function AVERAGE().
@@ -166,7 +121,7 @@ Now let's fill in the statistics, starting with column D (Income).
 Our table now has all of the information we need, but it is still
 kind of ugly. 
 
-The first problem is that the columns may be too narrow or too
+*Column widths*: The first problem is that the columns may be too narrow or too
 wide. If a column is too narrow, some of its values will display
 as "####". There are many different ways to adjust row heights 
 and column widths, but here is the simplest:
@@ -177,29 +132,30 @@ and column widths, but here is the simplest:
 Not only will this make everything fit, it will automatically adjust
 the width as necessary when anything changes.
 
-The second problem is that the non-numeric 
-variables have error codes for several statistics, and nonsense
+*Error codes*: The second problem is that the non-numeric 
+variables report error codes for several statistics, and nonsense
 values for some others (the minimum value of "Name" is reported
 as 0). We could just exclude these variables, but it's better
-to just improve the reporting.
+to just improve the reporting. We will use the `IF()` function
+for this purpose:
 
 1. Cell B2 (count) is fine and can be left alone.
 2. Cell B3 (average) gives an error code. We can make this nicer by using the 
-    IF() function.  Replace "=AVERAGE('Table 1'!A2:A5)" with 
-   "=IF(B2>0,AVERAGE('Table 1'!A2:A5),"")"
+    IF() function.  Replace `=AVERAGE('Table 1'!A2:A5)` with 
+   `=IF(B2>0,AVERAGE('Table 1'!A2:A5),"")`
    - Cell B3 now displays as blank 
    - It isn't really blank, it contains a formula
      that returns the zero-length string ""
 3. Copy cell B3 to cells C3:F3.
-   - The non-numeric variables display as blank
-   - The numeric variables display the average.
+   - The numeric variables display the average, just like before.
+   - The non-numeric variables now display as blank.
 4. Do the same thing for the other statistics.
 
-Finally, let's make the display formatting a little nicer.
+*Display formatting:* Finally, let's make the display formatting a little nicer.
 
 1. Select the top row and make it **bold**.
 2. Select the first column and make it *italics*.
-3. Adjust the number formats to look nice. 
+3. Adjust the number display formats to look nice. 
    - There are many options here, so play with it 
      and see what works.  
    - Remember that the number display format has no effect 
@@ -212,117 +168,457 @@ Finally, let's make the display formatting a little nicer.
      button aggressively to make your table more 
      readable.
 
-## More advanced summary statistics
+## Frequency tables
 
-### Frequencies
+### Frequency tables for discrete or categorical variables
 
-Excel function is FREQUENCY
+The frequency table for a discrete or categorical variable looks like this:
 
-### Conditional averages
+| Value  | Count         | Percentage      |
+|--------|---------------|-----------------|
+| Male   | *(# Males)*   | *(% Males)*     |
+| Female | *(# Females)* | *(% Females)*   |
 
-Excel functions are AVERAGEIF, AVERAGEIFS, COUNTIF and COUNTIFS
+where:
+
+- the `Value` column lists all possible values of the variable 
+- the `Count` column reports the number of observations in which the 
+  variable matches that value
+- the `Percentage` column reports the count as a percentage of the 
+  total number of observations.
+
+Let's create a frequency table for the Gender variable in our data set:
+
+1. Create a new sheet, name it "Gender distribution"
+2. Fill in row 1 and column A as in the table above.
+
+We will fill in the `Count` column using the Excel function
+`COUNTIFS()` This function takes two arguments:
+
+- `criteria_range` gives the range of data values we should be
+  looking at.  
+  - In our case, this is the range of data on Gender in
+    our main data sheet. 
+- `criteria` is the criteria we want to match.  
+  - In this case, we want to match the contents of the cell in column A.
+
+So the formula should be `=COUNTIFS(Students!B2:B5,A2)`.  Enter that 
+formula in cell B2, and the result displayed should be the number
+of observations in our data that have `Gender` (the contents of the range 
+`B2:B5`) equal to "Male" (the contents of cell `A2`).
+
+Next, copy that formula into the next cell to get the count of observations 
+with `Gender` equal to "Female."  Before doing so, we should change some 
+of our relative references to absolute references. I'll leave it to you 
+to figure out which references need to be changed. 
+
+Next, we need to fill in the "percentage" column.  
+
+1. To do that we just need to divide the cell in the Count column 
+  (number of Male observations) by the sum of all the cells in that column
+  (total number of observations).  So the formula should be `=B2/SUM(B2:B3)`
+2. Change relative references to absolute references, and copy the formula 
+  into cell C3.
+3. By default, the percentages are displayed as numbers (e.g, 0.5).  To
+  display them as percentages, highlight cell range C2:C3, select `Home`
+  from the menu and click on the "%" icon in the ribbon.
+
+We now have a frequency table.
+
+### Frequency tables for continuous variables
+
+Frequency tables for continuous variables are a little more complicated to 
+construct.  We need to divide the data range into a set of sub-ranges or 
+***bins*** and then calculate the number, proportion or percentage of 
+observations falling within each bin.  
+
+For example, we might create the following table for our income variable
+
+| From | To | Count | Percentage |
+|------|----|-------|------------|
+
+- `Count` is the number of observations for Income that are *greater than* 
+  that row's `From` value and *less than or equal to* the row's `To` value.
+- `Percentage` is the count expressed as a percentage of the total count.
+
+In constructing the bins, we need to keep in mind a few requirements and 
+considerations:
+
+- The bins need to cover the full range of the data.  In particular:
+  - The lower bound of the lowest bin should be lower than the lowest 
+    value in the data, and the upper bound of the highest bin should
+    be higher than the highest value in the data.
+  - Each bin's upper bound should be the lower bound of the next bin.
+  - Ties should be addressed in a consistent manner.  
+    - For example, if we have a bin for income levels from \$70,000 
+    to \$80,000 and another for income levels from \$80,000 to \$90,000,
+    we need a consistent rule for which bin an observation with income of 
+    exactly \$80,000 should be in.
+    - The usual rule is that the upper bound is inclusive, i.e., \$80,000
+      goes into the \$70,000-\$80,000 bin.
+- We often want the bins to be equally sized. 
+  - But that isn't always the case. For example, the wealthiest person in
+    Canada (David Thomson, chairman of Thomson Reuters) is estimated to 
+    have a net wealth of \$39 billion, and the second wealthiest (Joseph 
+    Tsai, vice-chairman of Alibaba) has \$10 billion. If wealth in Canada 
+    ranges from 0 to \$39 billion and we divide the distribution into
+    3 equally-sized bins, we get 1 observation in the \$26-\$39 billion
+    bin,0 observations in the \$13-\$26 billion bin, and 37.6 million
+    observations in the 0-\$13 billion bin. 
+- We often want the upper and lower bounds of the bins to be nice round 
+  numbers.
+  - This is less important when we are constructing graphs.
+
+OK, let's create our frequency table:
+
+1. Create a new sheet, and enter the column headers in row 1, 
+  and the From and To values in columns A and B.
+2. To fill in the count we need to use `COUNTIFS()` with multiple
+  criteria.
+  - The criteria_range1 is the data range for the Income variable.
+  - The criteria1 is the string ">0" or equivalently the contents
+    of cell A2
+  - The criteria_range2 is also the data range for the Income variable.
+  - The criteria2 is the string "<=60000" or equivalently the contents
+    of cell B2
+  So the overall formula is 
+  `=COUNTIFS(Students!C2:C5,A2,Students!C2:C5,B2)`. 
+3. Fill in the remaining counts.
+4. Fill in the Percentage column in the same way you did in the previous
+  section, and change its display format to Percent.
+
+> Another way to do this is by using the `FREQUENCY()` function.  However,
+> this function is a tricky one to learn, and Microsoft recently 
+> changed how it works.  So we will skip it.
 
 # Graphs in Excel 
 
 Next, we will learn to construct some simple graphs in Excel.
 
-## Constructing a bar graph
+## A time series (line) graph
 
-Now we are going to start constructing some basic graphs.
+A ***time series graph*** plots one or more variables at multiple points in
+time.  Conventionally, time is on the horizontal axis and the variable's
+value is on the vertical axis.
 
-The simplest kind of graph is a ***bar graph***.
-It takes a categorical variable and uses bars of different length
-to represent the number of observations in each category.
+In Excel, time series graphs can be implemented using either the Line
+graph or the Scatter Plot graph.  Line graphs are simpler, so we will
+start with that.
+
+### Line graph basics
+
+Open the file `1410028701-eng.xlsx`. This file contains Canadian employment statistics
+for the first five months of 2020. We want to create a time series graph of 
+the unemployment rate, the labour force participation rate, and the employment 
+rate.  Here are the steps to create the graph:
+
+1. Click anywhere in the table.
+2. Select `Insert > Recommended Charts` from the menu.
+3. The dialog box will recommend a few charts.  None of them are what we
+  are looking for, so click on the `All Charts` tab at the top.
+4. Now the dialog box will show a list of chart types. 
+  - Click to to see what different chart types are available. We will
+    not use most of them in this course, but you might find some of them 
+    useful in the future.
+  - Once you are done poking around, click on `Line` to see the line graph 
+    options
+5. The dialog box gives you several different types of line graph - line,
+  stacked line, line with markers, etc. It also displays two different 
+  ways of interpreting the data. Fortunately the graph we want is the default,
+  so just click on `OK`.
+  
+We have our time series graph, but it needs some changes.
+
+> INSERT SCREENSHOT OF GRAPH HERE.
+
+The most important issue that we have lots of extra variables and 
+need to get rid of them.  We have several ways of doing this:
+
+- We can just click on individual lines, and hit the `Delete` key.
+- We can select `Design > Select Data` and use the dialog box to exclude 
+variables.
+
+Follow either of these procedures to remove the "extra" variables.
+
+> INSERT SCREENSHOT OF GRAPH HERE.
+
+This looks like the graph we want, so all we need to do is tidy up the 
+formatting.
+
+### Time series graph design
+
+There are several things I would want to change about this chart. Like other
+elements of a presentation, graphs should be clear, informative, concise,
+and professional in appearance.  To that end, I would want to make several 
+modifications.
+
+- To make the graph clearer and more informative:
+  - Add an informative title. The title should explain what the graph is 
+    about. I would go with "Canadian employment statistics 2020"
+  - Add a label to the vertical axis to identify the units. I would go with "%".
+  - Add visual cues to supplement the use of color. The current graph plots
+    each of the time series in a different color.  This is great - color
+    is a very useful way of conveying information - but it is not 
+    enough.  Some in your audience might be colorblind, or they may
+    be looking at a printed (black and white) copy of your chart. 
+  - Consider modifying the scale of the graph. Right now, we have two 
+    variables (participation and employment) that vary from 52-65
+    and one variable that varies from 5-14. Plotting these very different
+    variables on the same scale ends up being misleading because it
+    "flattens" each time series out.  Looking at the graph, you might
+    conclude that not much was changing during this time period, while
+    in fact the unemployment rate more than *doubled*. 
+- To make the graph more concise:
+  - I would remove the grid lines, though this is a matter of taste.
+- To make the graph more professional in appearance
+  - Experiment with colors, legend placement and other aspects.
+
+### Formatting our line graph
+
+Excel charts are composed of "elements" that can be added, deleted, or 
+modified. At this point, our chart has ten elements: Chart Area, Chart 
+Title, Horizontal (Category) Axis, Legend, Plot Area, Vertical (Value) 
+Axis, Vertical (Value) Axis Major Gridlines, Series "Unemployment Rate", 
+Series "Participation Rate", and Series "Employment Rate".
+
+Let's start with something simple: changing the plot title: 
+
+1. Click on "Chart Title", then click anywhere inside the text box
+  to start editing.
+2. Enter your new title.  I went with "Canadian employment statistics, 2020"
+3. Click anywhere else in the graph to stop editing.
+
+Now, let's add a chart element: a title for the vertical axis:
+
+1. Select `Design > Add Chart Element > Axis Titles > Primary Vertical`
+  from the menu.  An axis title  appears on the graph.
+2. Change the axis title "Axis title" to "%"
+  
+Now let's delete a chart element: the horizontal grid lines:
+
+1. Select `Design > Add Chart Element > Gridlines > Primary Major Horizontal`
+
+Now let's add visual cues to supplement the use of color.  Remember, we need a way
+for readers who can't see color to distinguish the three time series.  There
+are three basic options: 
+
+1. Use a different *line style* (e.g., solid, dashed, dotted) for each series.
+2. Add markers for each data point and use a different *marker style* for each series.
+3. Add a *text label* to each series.
+
+Let's go with markers:
+
+1. First we need to add markers.  The easiest way to do that is by changing the 
+  chart type slightly. Select `Design > Change Chart Type` from the menu.
+2. Select the "Line with Markers" option from the top of the page, and click
+  `OK`. 
+  
+You will see markers appear, but unfortunately they are all the same.  So 
+we need to change the markers so they look different. For each series:
+
+1. Click (or double-click) on the line for the series. The "Format Data Series" 
+  box should appear on the right.  Click on the little paint can icon and then 
+  click on "Marker" to get to the marker options.
+2. Select "Built-in" and then choose a marker style from the drop-down box.
+  - Some of the marker styles are not easy to tell apart, so you may need 
+    to try out different marker styles until you have a good one (I chose
+    circle, square and triangle).
+  - You may also need to make the markers larger (I chose to increase the size
+    from 5 to 8).
+
+Our graph is now more accessible, if maybe a little less elegant.
+
+Finally, we need to address the scale issue. We have three options:
+
+1. Leave the graph as is.
+2. Create two separate graphs, one for the employment and participation rates,
+  and another for the unemployment rate.  Ideally, we would stack these two
+  graphs vertically so we can make comparisons over time.
+3. Add a *secondary axis*.
+
+We will try out a secondary axis:
+
+1. Click or double-click on the unemployment rate time series to open the 
+  Format Data Series box.
+2. Click on the little bar chart icon to access the series options.  You
+  will see an option to "Plot Series On" either "Primary Axis" or "Secondary
+  Axis". 
+3. Select "secondary Axis".
+
+The graph will now look like this:
+
+> INSERT SCREENSHOT HERE
+
+To explain what we are looking at:
+
+- The primary (left) vertical axis runs from 0 to 70, and is used for the
+  Participation rate and Employment rate series.
+- The secondary (right) vertical axis runs from 0 to 16, and is used
+  for the Unemployment rate.
+  
+This graph is improved in some ways - it is much clearer that unemployment changed 
+a lot, for example.  But it is also more complex, and harder to interpret. One
+barrier to interpretation is that it is not clear which series belongs to which 
+axis. The result is that this is not *obviously* an improvement, it depends
+on what we are trying to convey. 
+
+> Knaflic's recommendation: avoid secondary axes if possible
+
+Now that we have added a secondary axis, another issue has become clearer: the 
+axis range for the participation and employment rates goes from 0 to 70, while 
+the range of the data only goes from 50 to 70.  This brings us to a very
+contentious issue in the presentation of data: 
+
+- should we always include zero in our graph?
+- or should we graph over the range of the data?
+
+Again, the answer here depends on context and what we are trying to say. 
+
+Let's suppose though, that we would like to change the primary axis from 0-70 to
+50-70.  How do we do that?
+
+1. Click on the axis to open the "Format axis" box.
+2. Click on the little bar chart icon to find "Axis options"
+3. Currently the axis Bounds are set to 0 (Auto) and 70.0 (Auto).  Change the
+  minimum bound from 0 to 50.
+  
+As you can see, the graph now shows a much larger change in the participation 
+and employment series since the range has been narrowed.
+
+Is this a good thing?  Again, it depends on the context and on what information
+we are trying to convey.  If we are trying to show that something big 
+happened to the Canadian labour market in March and April of 2020, this graph
+shows this information more clearly.
+
+Another way of making your graphs more informative and professional is to
+use color and text labels.  Let's add a text label:
+
+1. Select `Format` from the menu and click on the text box icon.
+2. Use the cursor to draw your text box right above the last point 
+  on the Unemployment rate series.  Don't worry you can adjust its size 
+  and location later.
+3. Type "Unemployment" into the text box.
+4. Resize and move the text box so that the word all fits on one line,
+  and text is in an attractive position above the line.
+  
+Now, the label on the unemployment line is black.  But it would be nicer
+if it was the same color as the unemployment line itself.
+
+1. Select the text box if it is not already selected.
+2. Select `Format > Text Fill` from the menu.  Select the color from the 
+  "Theme colors" that most closely matches the line. 
+  
+Now do the same thing for the participation and employment series. This
+is a nice improvement of the graph in two ways:
+
+1. It makes relevant information closer and more salient - we no longer 
+  have to look at the legend to figure out which series each line
+  represents.
+2. We no longer need the legend, and can delete it.
+3. We no longer need the markers, and can delete them.
+
+Finally, let's look at color a little more.  
+
+- Like most other modern computer programs, Excel theoretically allows you 
+  to choose from over 16 million colors.
+- Real-world devices such as printers, projectors and monitors have fewer 
+  colors so two theoretically different colors may end up being rendered 
+  identically.
+- Professional-looking graphs and documents stay within a small ***palette***
+  of colors that has been carefully selected to go well together. Many large
+  organizations (including SFU) have a professionally-designed brand palette 
+  that is recommended for all documents from that organization.
+- Both Excel and R support palettes, allow users to create custom palettes,
+  and include a few built-in palettes. The current palette used our graphs
+  is called "Colorful Palette 1".
+  
+Select `Design > Change Colors` from the menu to access other palettes.  Try
+a few of them out to see which one you like best. 
+
+## A frequency (bar/column) graph for a discrete variable
+
+We will use a ***bar graph*** to represent the frequency distribution of a 
+categorical variable.  Bar graphs use bars of different length
+to represent the value of some aggregate variable in each category.
 
 ### Bar graph basics
 
 To start constructing a bar graph:
 
-1. Select "Insert" from the menu.
-2. Highlight cells C2:C5.
-3. Click on the "Recommended charts" button.
-4. Excel will recommend a bar graph here, so just click "OK".
+1. Click in your fequency table for Gender.
+2. Select `Insert > Recommended Charts` from the menu.
+3. Click on the "All Charts" tab to see the full list of options.
+4. Select either "Bar" or "Column".  Bar and column graphs are the same
+  thing, but bar graphs have horizontal bars and column graphs 
+  have vertical bars.
 
-Excel will create a new worksheet containing your bar graph.
+As you can see, basic bar graphs are quite simple.  There is a bar
+for each category (the first column of the table) and variable
+(the other columns), and the length of each bar corresponds to its 
+value. 
 
-As you can see, basic bar graphs are quite simple: there 
-is a bar for each category, and the length of the bar 
-tells us the total number of observations that fall in 
-each category.
+As with our line graph, the current graph contains more information
+than we actually want - it shows the count *and* the percentage, and we
+really only need one of those.  Use `Design > Select Data` to get rid
+of the count.  
 
-### Adjusting the format
+### Bar graph design
 
-The default graph conveys more or less the information 
-we want, so we could just leave it as is. But 
-we might want to make it look nicer for a presentation.
-Here are a few things we can do:
+There are several basic design considerations with bar charts. The key 
+thing to understand is that the size of the bar is meant to visually
+represent the value of the variable it is depicting. So the graph 
+construction should reflect which comparisons we want to help 
+our audience see:
 
-- The default graph uses vertical bars (what Excel calls a 
-  "column chart") but we might prefer horizontal bars
-  (what Excel calls a "bar chart").  To do this just:
-  1. Click on the graph
-  2. Select "Design" from the menu. 
-  3. Click on "Change Chart Type" in the ribbon.
-  4. Select "Bar" from the list on the left and click on the "OK" button.
-- You can switch between preset chart "styles" 
-  1. Click on the graph
-  2. Select "Design" from the menu. 
-  3. The ribbon will now display several styles, you can just click on any of them.
-     You can also click on "Change colors" to use a different color scheme.
-- You can change the style or content of individual elements. For example,
-  suppose you want to change the title. Just:
-  1. Double-click on the current title
-  2. Type a new title.
+- Bar graphs should almost always start at zero.  Otherwise relative sizes
+  can be misleading. 
+  - For example, compare the two graphs of the unemployment
+    rate below. The first graph shows (accurately) that unemployment more than
+    doubled from February to April. The second graph shows the same data, but
+    with the origin at 4\% rather than zero. This graph is visually misleading
+    because the bar depicting April unemployment is roughly ten times as 
+    large as the bar depicting February unemployment.
+- When using multiple categories, you can either group bars or you can stack them.
 
-There are other things that you *could* do that I do not recommend:
+> INSERT GRAPH OF 2020 UNEMPLOYMENT WITH AXIS STARTING AT ZERO
+> INSERT GRAPH OF 2020 UNEMPLOYMENT WITH AXIS STARTING AT 4%.
 
-- You could make your bar chart a 3D bar chart.
-- You could make your bar chart a pie chart.
+There are alternatives to bar graphs that I do not recommend:
+
+- 3D bar charts.
+- Pie or donut charts.
 
 Both 3D bar charts and pie charts (and especially 3D pie charts)
 are popular because they look cool.  But research on how people
 process information usually find that they are *less* informative
 in practice because people are much better at evaluating 
 the relative size of two lines or rectangles than they are at
-evaluating the relative size of two 3D boxes or pie slices.
+evaluating the relative size of two 3D boxes or pie slices. 
 
-### Adjusting the structure
+### Formatting our bar graph
 
-By default, our bar chart shows the total *number* of observations
-in each category. We might be more interested in seeing 
-how many observations are in each category as a *percentage*
-of all observations. 
+The basics of adjusting the formatting of a bar graph are similar
+to what we have already learned for line graphs.  To test your skills,
+try the following:
 
-Unfortunately, figuring out how to do that requires that we get
-into the weeds of Excel's "PivotChart" tools. Fortunately,
-I've figured out and will just tell you how to do it:
+- Modify or delete the chart title
+- Change the vertical axis from decimal to percentage.
 
-1. Click on the graph
-2. Find the button in the graph marked "Count of Gender" and 
-   right-click on it. It will open a little menu (context menu).
-3. Select "Value Field Settings" from the context menu.
-   A dialog box will appear.
-4. Click on the "Show Values As" tab.
-5. Go to the drop-down list and select "% of Grand Total", then click
-   the OK button.
-   
-Your graph will now display percentages rather than counts. Notice
-that the appearance of the graph hasn't changed, only the units.
+## A histogram
 
-## Constructing a histogram
-
-A ***histogram*** is a special kind of bar graph for numeric
-variables.  It is constructed by sorting the variable's values 
-into some number of equally-sized ***bins*** and then
-plotting a bar graph of the bins.
+A ***histogram*** is just a frequency bar/column graph for 
+a continuous variable.  It is constructed by sorting the variable's values 
+into some number of equally-sized ***bins*** and then plotting a bar for each
+bin representing counts or percentages.
 
 ### Histogram basics
 
 Let's construct a histogram of our Income variable.
 
-1. Select cells C2:C5.
-2. Select "Insert" from the menu bar.
-3. Click on the ribbon button marked "Insert statistic chart" and then select the histogram.
+1. Select cells C1:C5.
+2. Select `Insert > Recommended Charts" from the menu bar, then
+  click on the "All Charts" tab to see the full set of options.
+3. Select "Histogram" and click the "OK" button.
 
 Our graph will appear.  To explain what's going on: 
 
@@ -331,9 +627,27 @@ Our graph will appear.  To explain what's going on:
 - There are three observations (Betty, Joe, and Sue)in the first 
   bin, and one observation (Al) in the second bin.
 
-## Constructing a time series (line) graph
+### Histogram design
 
-To be added, need data.
+There are two main choices in histogram design:
 
-### Line graph basics
+- How many bins and how should they be determined?
+- Should we depict frequencies as counts or percentages?
+
+By default Excel has chosen just two equally-sized bins, and is depicting
+frequencies as counts. 
+
+### Modifying our histogram
+
+First, let's increase the number of bins.
+
+1. Click on the horizontal axis to open "Format Axis"
+2. Select the little bar graph icon, followed by "Axis options".
+3. Change "Number of bins" from 2 to 4.
+
+Second, let's make the graph look a little nicer:
+
+- Change or delete the title
+- Add an axis title (I would suggest "Income") to the horizontal axis.
+- Add an axis title (I would suggest "Frequency") to the vertical axis.
 
