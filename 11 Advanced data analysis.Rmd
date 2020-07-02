@@ -1,0 +1,303 @@
+---
+title: "Chapter 10: Advanced data analysis"
+author: "ECON 233, Brian Krauth"
+date: "Spring 2021"
+output: 
+  html_document:
+    theme: paper
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# Chapter overview
+
+In this chapter we will learn how to:
+
+- Implement and interpret a simple hypothesis test.
+- Calculate and interpret common multivariate statistics such as covariance 
+  and correlation.
+- Construct and interpret a pivot table.
+- Construct and intepret a scatter plot.
+
+
+# Multivariate statistics
+
+## Scatter plots 
+
+Figure ??? below is an example of a ***scatter plot***. We use scatter plots
+to visualize the relationship between two variables in a data set. Each
+observation is represented by a single point.
+
+```{r}
+dat <- tibble(xval=rnorm(100),yval=1+0.5*xval+0.2*rnorm(100))
+ggplot(data=dat, mapping=aes(x=xval,y=yval)) +
+    geom_point() + ggtitle("An example of a scatter plot")
+```
+
+### Creating a scatter plot in Excel
+
+To create a scatter plot in Excel:
+
+1. Select the data you want to use in your scatter plot.
+    - In this example, it will be [add instructions here]
+2. Select `Insert > Recommended Charts` from the menu.
+3. The `Insert Chart` dialog box will show a few suggested charts, but
+  let's ignore those.  Instead click on the tab at the top marked
+  `All charts`.
+4. The dialog box will now show a large number of chart types. 
+    - While we are here, take a look at these options for future reference.
+    - The one we want is called "X Y (Scatter)", so click on that button.
+5. You will see two options. Click the one on the right, and then click "OK".
+
+Now we have a scatter plot.  
+
+### Scatter plot design
+
+
+
+### Modifying your scatter plot
+
+Although we have created our scatter plot, there are many ways it
+isn't exactly what we might like.  
+
+Let's start by changing the title of the graph from its default 
+of "Chart Title":
+
+1. Double-click on "Chart Title" 
+2. Type in the revised title [insert title here].
+3. Click somewhere else.
+  
+In general if you want to change someting already in the graph, click 
+or double-click on it.
+
+Now let's add some axis labels to tell our viewer what these numbers refer
+to.  
+
+1. Click on the chart. You should now be seeing the `Design` ribbon.
+2. Click on the `Add Chart Element` button on the Design ribbon. Select
+  `Axis Titles` and then `Primary Horizontal`.
+    - You should now see the title "Axis title" on the horizontal 
+      axis. 
+3. Double click on "Axis title" to change the axis title to "Income"
+4. Repeat the steps 2-3 above to add the vertical axis title "Spending."
+
+We can also use the `Add Chart Element` button to remove elements, or we
+can just click on them and press the `Delete` key.
+
+As with most other objects, you can resize, move, copy-and-paste, and 
+delete Excel graphs.
+
+## Sample covariance and correlation
+
+To calculate the covariance of two variables, use the `COVARIANCE.S()` 
+function.
+
+To calculate the correlation of two variables, use the `CORREL()` 
+function.
+
+## Conditional averages
+
+You can use the `AVERAGEIFS()` function to calculate 
+the conditional average of one variable given a condition on another 
+variable (or even the same variable).
+
+These functions both require three pieces of information:
+
+- The variable to average
+- The variable used to calculate the condition.
+- The condition for inclusion in the average
+
+For example, suppose we want to calculate the average income of men
+in our data:
+
+- The variable to average is Income (cells C2:C5)
+- The variable used to calculate the condition is Gender (cells B2:B5).
+- The condition is "Male"
+
+so go to cell ?? and enter `=AVERAGEIFS(C2:C5,B2:B5,"Male")`  The cell
+will now display the average income of males in our data.
+
+The `AVERAGEIF()` function can also be used for this purpose, but
+its format is slightly different and it is less powerful than 
+`AVERAGEIFS()`.
+
+## Pivot tables
+
+Pivot tables are quite powerful but somewhat tricky to use. 
+
+### A simple pivot table
+
+Let's start by creating a simple pivot table
+
+1. Click anywhere in your data table.
+2. Select `Insert` and then `PivotTable` 
+3. Excel will display a dialog box allowing you to specify the range of
+  your data along with a few other options.  THe default here is fine,
+  so click on `OK`.
+  
+You will now see something like this:
+
+> INSERT SCREENSHOT HERE.
+
+Let's start with a simple one-variable table. Check the box next to "Gender,"
+and you will see something like this:
+
+> INSERT SCREENSHOT HERE.
+
+We now can report various statistics broken down by gender.  Let's start with 
+a simple count.  Drag "Gender" into the box marked "$\Sigma$ values". You
+will see something like this:
+
+> INSERT SCREENSHOT HERE.
+
+As we can see, it shows the number of observations for each value of Gender.
+Suppose we want to change it from a count to a percentage.  Then right-click
+on "Count of Gender", then on "Show Values As" and then on "% of column total."
+You will now see a screen like this:
+
+> INSERT SCREENSHOT HERE.
+
+Now let's see what income by gender looks like.  Drag "Income" into the 
+box marked "$\Sigma$ values".  You will now see a screen that looks like 
+this:
+
+> INSERT SCREENSHOT HERE.
+
+Unfortunately, we wanted to see the average income by gender, but instead
+we see the sum of income for each gender.  We can change that by right-clicking
+on "Sum of Income", then on "Summarize Values By" and then "Average".
+
+We can keep adding variables, and ways to summarize them. But there
+are other things we can do.
+
+### Improving our pivot table
+
+- We can sort rows by any column in the table.
+- We can filter rows out of the table:
+  - We can do this on our row label by clicking on the first column header
+    and selecting the filter we want.
+  - We can also filter on any other variable by dragging that variable name
+    into the "Filters" box.
+
+# Connecting theory and data
+
+## Probability distributions
+
+Excel includes many functions for calculating the PDF, CDF and inverse CDF
+of various standard probability distributions. 
+
+- The `NORM.S.DIST()` function calculates the PDF or CDF of the standard
+  normal or $N(0,1)$ distribution.  It takes two arguments:
+  - `Z` is the value at which to report the PDF or CDF.
+  - `Cumulative` is a logical value that tells Excel whether to 
+    report the CDF (if `TRUE`) or the PDF (if `FALSE`).
+
+  For example, `NORM.S.DIST(0,TRUE)` returns $\Phi(0)$ or 0.5,
+  while `NORM.S.DIST(0,FALSE)` returns $\phi(0)$ or about 0.399.
+- The `NORM.S.INV()` function calculates the inverse CDF of the standard
+  normal distribution.  It takes one argument:
+  - `Probability` is the quantile (between 0 and 1) or probability 
+    at which to calculate the inverse CDF or quantile function.  
+  
+  For example,`NORM.S.INV(0.95)` reports the 95th percentile of 
+  the $N(0,1)$ distribution, or about 1.645.
+- `NORM.DIST()` and `NORM.INV()` are similar functions for the general
+  normal $N(\mu,\sigma)$ distribution.
+- `T.DIST()` and `T.INV()` are similar functions for the $T_{n-1}$ 
+  distribution.
+
+## Simulation 
+
+  - RAND (generates U(0,1) random number)
+
+
+## Statistical inference
+
+### Finite-sample inference on the mean
+
+Let $x_i$ be the value of the `Income` variable in our data.
+
+Let $\mu_x = E(x_i)$. Suppose we want to test the null hypothesis:
+  $$H_0: \mu_x = 30000$$
+against the alternative:
+  $$H_1: \mu_x \neq 30000$$
+at a significance level of 5\%. 
+
+1. Open a new worksheet and name it "Finite sample inference"
+2. Write the following headings in the first row, starting with cell A1:
+
+| Ho | Size | n | xbar | s_x | T | cL | cH | A/R | p-value |CI_low | CI_high |
+|----|------|---|------|-----|---|----|----|-----|---------|-------|---------|
+
+2. Set the characteristics of the test we want to perform:
+    - Fill in cell A2 with 30000, our value of $\mu_x$ under the null.
+    - Fill in cell B2 with 0.05, our desired significance level under the null.
+3. Calculate our test statistic:
+    - Use Excel's `COUNT()` function to fill in cell C2 with the number of
+      (numeric) observations on `Income` in our data set.
+    - Use Excel's `AVERAGE()` function to fill in cell D2 with the average 
+      value of `Income` in our data set.
+    - Use Excel's `STDEV.S()` function to fill in cell E2 with the standard 
+      deviation of `Income` in our data set.
+    - Calculate the test statistic in cell F2, using the statistics you
+      have already calculated.
+4. Calculate the critical values:
+    - Use Excel's `T.INV()` function to calculate the critical values 
+      for your test from the $t_{n-1}$ distribution in cells G2 and H2.
+    - Use Excel's `IFS()` function to display "Accept" or "Reject"
+      based on your test statistic and critical values in cell I2.
+5. Calculate p-values:
+    - I have not taught you the formula for a p-value, so I will just
+      give it to you.
+    - Enter `=T.DIST.2T(F2,C2-1)` in cell J2 to get the p-value of this test.
+6. Calculate a confidence interval:
+    - Use the results you have already calculated to generate a 95\% confidence
+      interval in cells K2 and L2.
+
+If you want to run a different test, you can change the null hypothesis 
+in A2 or the significance level in B2, and the test will automatically update.
+
+You can also copy everything in row 2 to another row (you will need to make
+some cell references absolute rather than relative) and run additional tests.
+
+### Asymptotic inference on the mean
+
+Next we will try the same result, but using asymptotic approximations.
+
+1. Copy the "Finite sample inference" worksheet and name the
+  new worksheet "Asymptotic inference".
+  
+We are already almost done! Remember that the only difference between
+finite sample and asymptotic inference is the assumed distribution
+of the test statistic under the null:
+
+- In finite sample inference, the test statistic is (exactly) $T_{n-1}$
+  under the null.
+- In asymptotic inference, the test statistic is (approximately) $N(0,1)$
+  under the null.
+
+So all we need to do is:
+
+1. Change the critical value calculation in cells G2 and H2 to use the correct
+  distribution.  
+  - The Excel function to calculate the inverse CDF of the $N(0,1)$ distribution 
+    is `NORM.S.INV()`
+2. Change the p-value calculation in cell J2 to use the correct distribution.
+  - The Excel function to calculate the CDF of the normal distribution is
+    `NORM.S.DIST()`
+  - The specific formula you will want is `=2*(1-NORM.S.DIST(F2,TRUE))`
+
+That's it, we have asymptotic inference.
+
+# To be added
+
+Remaining functions to learn:
+
+  - FREQUENCY
+
