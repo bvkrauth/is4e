@@ -46,7 +46,7 @@ Most of the time, the outcomes we are interested in are numbers
 or can be described using numbers. This opens up some additional 
 possibilities.
 
-## Definition of a random variable
+## What is a random variable?
 
 A ***random variable*** is a number whose value depends
 on a random outcome. The idea here is that we are going to use a random
@@ -71,7 +71,7 @@ outcome (in this case $b$). For convenience, we usually leave its dependence on
 the original outcome implicit, and write it as if it were an ordinary 
 variable.
 
-## The probability distribution of a random variable
+## Probability distributions
 
 A random variable has its own sample space (normally $\mathbb{R}$) 
 and probability distribution.  This probability distribution can 
@@ -371,7 +371,7 @@ $$q_{0.75}(w_{red}) = \min\{a: \Pr(w_{red} \leq a) \geq 0.75\} = \min\{1\} = 1$$
 We can now define the median of a distribution: the median is 
 the 0.5 quantile, or 50th percentile.
 
-## The expected value of a random variable
+## Expected values
 
 The median and mode are often interpreted as measures of a random variable's
 "central tendancy", or as predictions of its "typical" value. The expected 

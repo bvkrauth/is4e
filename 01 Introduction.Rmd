@@ -253,6 +253,3 @@ TO BE ADDED:
 - Lecture structure
 - Canvas
 - Exams
-
-
-

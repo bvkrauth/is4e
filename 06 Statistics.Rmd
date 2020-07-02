@@ -266,7 +266,7 @@ We will focus on four examples:
 - The ***sample median*** of $x_i$ is defined as:
   $$\hat{m}_x = m: \begin{cases} \hat{f}_{x < m} \leq 0.5 \\ \hat{f}_{x > m} \leq 0.5 \\ \end{cases}$$
 
-## The sampling distribution of a statistic
+## The sampling distribution
 
 Since the data itself is a collection of random variables, any statistic
 calculated from that data is also a random variable, with a probability
@@ -285,7 +285,7 @@ most other statistics is more difficult.  We will return to that later,
 but for now the important thing is just to remember that this probability
 distribution $exists$.
 
-## The mean and variance of a statistic
+## The mean and variance
 
 If our statistic has a probability distribution, it (usually) has a mean
 and variance as well. 
@@ -456,7 +456,7 @@ useful properties that we will use later.
 
 # Asymptotic analysis
 
-## Large samples and small samples
+## Small and large samples
 
 So far, we have described statistics and estimators in terms
 of their probability distribution and the mean, variance
@@ -559,7 +559,7 @@ event like a natural disaster, pandemic or financial crisis
 that affects everyone.  Here the independence needed for the LLN
 does not apply.
 
-## The Central Limit Theorem
+## The central limit theorem
 
 The Central Limit Theorem is an even more powerful result in statistics.
 

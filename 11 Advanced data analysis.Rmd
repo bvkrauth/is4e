@@ -1,5 +1,5 @@
 ---
-title: "Chapter 10: Advanced data analysis"
+title: "Chapter 11: Advanced data analysis"
 author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
 output: 
@@ -295,9 +295,4 @@ So all we need to do is:
 
 That's it, we have asymptotic inference.
 
-# To be added
-
-Remaining functions to learn:
-
-  - FREQUENCY
 

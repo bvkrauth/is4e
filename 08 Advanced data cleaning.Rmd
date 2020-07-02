@@ -313,10 +313,6 @@ https://support.office.com/en-us/article/overview-of-excel-tables-7ab0bb7d-3a9e-
 
 ### Using Slicers
 
-
-
-
 ## Data validation
-
 
 ## Power Query

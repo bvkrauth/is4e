@@ -36,7 +36,7 @@ In this chapter we will learn how to:
    - Relative and absolute cell addresses
    - Ranges of cells
 
-# Get started
+# Data and project management
 
 ## Some basic principles
 
@@ -216,7 +216,7 @@ coincide. It all depends on what works best for you.
 
 ## A quick tour of Excel
 
-### Excel terminology and user interface
+### Terminology and interface
 
 When you open your working copy of the data in Excel, 
 your screen should look something like this:
@@ -310,7 +310,7 @@ starting our analysis.
 
 We will start by learning a few tools for viewing our data.
 
-### Contents versus display format
+### Contents and display format
 
 The ***contents*** of a cell can be:
 
@@ -416,7 +416,7 @@ and you can see the variable names.
 
 To undo this, click on "Freeze Panes" and then select "Unfreeze Panes"
 
-# Cleaning our data
+# Cleaning data
 
 We are now ready to start cleaning our data. 
 
@@ -597,7 +597,7 @@ slightly different way.
 As you can see, the contents of cell F2 have been filled in to the other
 cells, which is what we wanted.
 
-## More on cell references
+## Cell references
 
 ### Cell ranges
 
@@ -678,7 +678,7 @@ on Income and seeing if IncomeRank is also sorted.
 
 > DO WE ALSO WANT TO DO PERCENTRANK HERE?  IT ISN'T USED ANYWHERE ELSE.
 
-## Working with logical values
+## Logical data
 
 In addition to text and numbers, cells can also contain ***logical***
 values (TRUE or FALSE). Logical values can be entered directly in 
@@ -719,7 +719,7 @@ This should display as 1.  Fill in the rest of the column, and you should see
 
 ALSO COVER SWITCH()
 
-## Working with text
+## Text data
 
 While normal arithmetic operations like addition or multiplication do not 
 operate on text, there are many useful functions to manipulate text strings
@@ -737,7 +737,7 @@ in Excel:
 - `FIND()` allows you to find a particular substring within a larger string,
    and `REPLACE()` allows you to replace part of a string.
 
-## Working with dates and times
+## Date and time data
 
 Let's see what Excel can do with dates and times:
 
@@ -777,7 +777,5 @@ back to General.
 
 
 ## Extras
-
-### Documenting
 
 You can type in a link or add the function HYPERLINK().

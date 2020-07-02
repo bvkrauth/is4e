@@ -33,11 +33,11 @@ In this chapter we will learn how to:
 
 # Multivariate statistical methods
 
-## Conditional frequencies
+## Joint and conditional frequencies
 
 See conditional averages below.
 
-## The sample covariance and correlation
+## Estimating covariance and correlation
 
 The sample covariance of $x_i$ and $y_i$ is:
   $$s_{x,y} = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})$$
@@ -71,9 +71,9 @@ The sample covariance and correlation have several properties:
 - As with the population correlation, the sample correlation ranges 
   from -1 to 1.
 
-## Estimating the conditional expectation function
+## Estimating conditional expectations
 
-### Simple conditional averages
+### Conditional averages
 
 When our conditioning variable $x_i$ only takes on a 
 few values, the CEF can be estimated by constructing ***conditional averages***:
@@ -110,7 +110,7 @@ with the conditional average:
 
 So we will also need some other techniques.
 
-### Simple linear regression
+### Linear regression
 
 One solution is to assume that the CEF is a straight line, or can be
 well-approximated by a straight line.  In that case we can estimate

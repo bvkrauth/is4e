@@ -475,11 +475,11 @@ Summation operators also obey these properties:
 
 We will use these two results later on.
 
-# Random outcomes, random events and probability
+# Random events and probability
 
 Having reviewed the math, we now go on to develop the basic concepts in probability.
 
-## An example application: Roulette
+## Example application: Roulette
 
 We will develop ieas by considering the casino game of **Roulette**.
 Here are the rules for this game:
@@ -517,7 +517,7 @@ and other businesses that manage risks.
 to make inferences about that process. Again, the purpose is to understand
 the process, and maybe to make predictions for the future.
 
-## Basic components of a probabilistic model
+## Modeling random events
 
 ### Outcomes, events and sample spaces
 
@@ -654,7 +654,7 @@ Let $A$ and $B$ be two events.  Then:
 These results all follow from the basic rules of probability. They
 are not hard to prove, but I will not go through the proofs.
 
-## Joint and conditional probabilities
+## Multiple events
 
 Sometimes are interested in more than one event, and want to talk about how they are 
 related. 

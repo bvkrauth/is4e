@@ -295,7 +295,7 @@ OK, let's create our frequency table:
 
 Next, we will learn to construct some simple graphs in Excel.
 
-## A time series (line) graph
+## Time series (line) graphs
 
 A ***time series graph*** plots one or more variables at multiple points in
 time.  Conventionally, time is on the horizontal axis and the variable's
@@ -535,7 +535,7 @@ Finally, let's look at color a little more.
 Select `Design > Change Colors` from the menu to access other palettes.  Try
 a few of them out to see which one you like best. 
 
-## A frequency (bar/column) graph for a discrete variable
+## Frequency (bar/column) graphs
 
 We will use a ***bar graph*** to represent the frequency distribution of a 
 categorical variable.  Bar graphs use bars of different length
@@ -604,7 +604,7 @@ try the following:
 - Modify or delete the chart title
 - Change the vertical axis from decimal to percentage.
 
-## A histogram
+## Histograms
 
 A ***histogram*** is just a frequency bar/column graph for 
 a continuous variable.  It is constructed by sorting the variable's values 

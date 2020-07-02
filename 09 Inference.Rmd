@@ -638,7 +638,4 @@ depending on which tail we want.
 
 ## Estimating the variance and standard deviation
 
-## Standard errors
-
-
 ## Testing multiple linear restrictions
