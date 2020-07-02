@@ -4,13 +4,13 @@ author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
 output:
   html_document:
-    number_sections: yes
     theme: paper
     toc: yes
     toc_float: yes
-  pdf_document:
     number_sections: yes
+  pdf_document:
     toc: yes
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}

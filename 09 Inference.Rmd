@@ -4,12 +4,13 @@ author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
 output:
   html_document:
-    number_sections: yes
     theme: paper
     toc: yes
     toc_float: yes
+    number_sections: yes
   pdf_document:
     toc: yes
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -626,9 +627,9 @@ We can also invert one-tailed hypothesis tests to generate one-tailed
 confidence intervals. Continuing on with our mean example, the 
 one-tailed 95\% asymptotic confidence interval for $\mu_x$ 
 is either:
-  $$(-\infty,\bar{x}+1.645 s_x/\sqrt{n})$
+  $$(-\infty,\bar{x}+1.645 s_x/\sqrt{n})$$
 or
-  $$(\bar{x} - 1.645 s_x/\sqrt{n}, \infty)$
+  $$(\bar{x} - 1.645 s_x/\sqrt{n}, \infty)$$
 depending on which tail we want.
 
 
