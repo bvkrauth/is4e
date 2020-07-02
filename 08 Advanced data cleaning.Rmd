@@ -20,9 +20,9 @@ In this chapter we will learn how to:
 
 - Find economic data from key sources.
 - Move data files across multiple file formats and platforms.
-- Work with Excel tables
 - Link and merge data across multiple files
 - Construct lookup tables using HLOOKUP and VLOOKUP
+- Work with Excel tables
 
 
 # Advanced data cleaning in Excel
@@ -175,7 +175,7 @@ page.  Fortunately, Excel has a way of fixing that:
 3. The "Text to Columns Wizard" will appear; answer its questions
    and you will be good to go.
 
-## Linking and merging data across tables
+## Linking data and lookup tables
 
 Column J in our data set provides the student's state of residence
 using the state's two-letter postal abbreviation. Suppose we want 
@@ -311,3 +311,12 @@ Finally, you can add a summary row (Excel calls it a "total row"):
     
 https://support.office.com/en-us/article/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c. 
 
+### Using Slicers
+
+
+
+
+## Data validation
+
+
+## Power Query
