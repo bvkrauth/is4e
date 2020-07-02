@@ -1,23 +1,6 @@
----
-title: "Chapter 8: Advanced data cleaning with Excel"
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output: 
-  html_document:
-    theme: paper
-    toc: true
-    toc_float: true
-    number_sections: true
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Advanced data cleaning with Excel
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Chapter overview
+## Chapter 8 overview
 
 In this chapter we will learn how to:
 
@@ -27,10 +10,9 @@ In this chapter we will learn how to:
 - Construct lookup tables using HLOOKUP and VLOOKUP
 - Work with Excel tables
 
+## Advanced data cleaning in Excel
 
-# Advanced data cleaning in Excel
-
-## Errors in formulas
+### Errors in formulas
 
 Go to any blank cell and enter the formula `=ln(B2)`. You will see
 that the cell displays the text `#VALUE!`.  This is an example of
@@ -54,9 +36,9 @@ codes are:
 
 An error code is sometimes helpful in figuring out what has gone wrong.
 
-## CSV files
+### CSV files
 
-Normally, Excel works with files in its native format, ```.xlsx``` files.
+Normally, Excel works with files in its native format, `.xlsx` files.
 
 However, Excel is not the only program that works with data,
 and so we will often find data in other formats. We will also sometimes
@@ -66,7 +48,7 @@ for example R.
 The most common and useful general-purpose format for tabular data
 is called the "comma separated values" or ***CSV*** file format.
 
-### What is a CSV file?
+#### What is a CSV file?
 
 A CSV file is just a text file with the following features:
 
@@ -97,29 +79,29 @@ files:
 These limitations are also the main advantage of the CSV file: they are simple
 ways of reporting tabular data and can be read by virtually any program.
 
-### Exporting CSV files from Excel
+#### Exporting CSV files from Excel
 
 Let's save our Excel worksheet as a CSV file.
 
 1. Open [filename] in Excel, and go to [sheet]
-2. Click on ```File```, and then ```Save As```. You will see:
+2. Click on `File >  Save As`. You will see:
    - a text box giving the name of the file (currently [filename]) 
    - a drop-down box giving the file format (currently 
-     ```Excel Workbook (*.xlsx)```).
-3. Select ```CSV (Comma delimited) (*.csv)``` from the drop-down
+     `Excel Workbook (*.xlsx)`).
+3. Select `CSV (Comma delimited) (*.csv)` from the drop-down
    box and enter a filename in the text box.
-4. Click on the ```Save``` button.
+4. Click on the `Save` button.
    - You will get a warning message: "The selected file type does
      not support workbooks that contain multiple sheets. To save only
      the active sheet click OK...."
-5. Click on the ```OK``` button.
+5. Click on the `OK` button.
 6. Close Excel.
    - You will get another warning message: "Want to save your changes
-     to [filename].csv?"  Click ```Don't save```.
+     to [filename].csv?"  Click `Don't save`.
      
 You have created a CSV file.
 
-### Importing CSV files into Excel
+#### Importing CSV files into Excel
 
 Let's take a look at our CSV file. You can open it in Excel by just 
 double-clicking on it. You may notice that it is somewhat different from the 
@@ -136,7 +118,7 @@ add formatting, formulas, and any other Excel feature to the table.
 Just remember to save it as an Excel file and not a CSV file so that
 these features are saved too.
 
-### Other file formats
+#### Other file formats
 
 In addition to CSV files, we will run into other file formats.
 These include:
@@ -160,10 +142,10 @@ You can open these files in Excel too.
 
 Excel also has a wide variety of tools for obtaining data from various
 databases, online services, etc. We do not have time to explore all of these
-tools, but you can click ```Data``` on the menu bar and look around to see
+tools, but you can click `Data` on the menu bar and look around to see
 what is available.
 
-### Text to columns
+#### Text to columns
 
 Sometimes you will run into an Excel sheet that looks like this:
 
@@ -174,11 +156,11 @@ or if you have copied-and-pasted data from a PDF file or web
 page.  Fortunately, Excel has a way of fixing that:
 
 1. Select the column with the data.
-2. Select ```Data``` from the menu, then ```Text to Columns```.
+2. Select `Data` from the menu, then `Text to Columns`.
 3. The "Text to Columns Wizard" will appear; answer its questions
    and you will be good to go.
 
-## Linking data and lookup tables
+### Linking data and lookup tables
 
 Column J in our data set provides the student's state of residence
 using the state's two-letter postal abbreviation. Suppose we want 
@@ -207,7 +189,7 @@ The vlookup function takes three arguments:
   - In our example, this is cell   
 2. The full cell range of the the lookup table.
   - In our example this is the full table of state data in cells
-    States!A$1:B$3. 
+    `States!A$1:B$3`. 
   - Notice that I use absolute references here so the fill works.
 3. The column in the lookup table we want to retrieve values from.
   - In our example, this is the StateName column in the lookup table,
@@ -224,7 +206,7 @@ A few things to notice about this:
 - There is also a function called hlookup that works with variables in rows and observations
   in columns.
 
-## Aggregating by group
+### Aggregating by group
 
 Suppose you want to create a new variable that gives the average income
 among students in the same state.  This is an example of aggregation by 
@@ -240,9 +222,9 @@ group.
 You can see that this formula takes on one value for the Michigan students,
 and another value for the Texas students.
 
-## Excel Tables
+### Excel Tables
 
-### Creating a table
+#### Creating a table
 
 To create an Excel table, go to any cell in your table, and
 select `Home` and then `Format as Table` from the menu. A set of
@@ -256,7 +238,7 @@ A dialog box will come up that looks like this:
 Excel will try to guess the range of your table, and whether your
 table has headers (it should).  Correct Excel's guesses if necessary, and press OK. You have a table!
 
-### Some things you can do with tables
+#### Some things you can do with tables
 
 There are several things you can do with tables.  Most of them
 are on the ribbon associated with the `Design` menu option. Note
@@ -282,7 +264,7 @@ how this works, click in cell H3 and look at the formula box.  The formula used 
 feature makes it much easier to tell the content of a formula and to
 avoid making mistakes.
 
-### Adding observations, variables and totals  
+#### Adding observations, variables and totals  
 
 You can add observations (rows) to the bottom of a table, and Excel will
 automatically fill in any formulas.
@@ -314,8 +296,14 @@ Finally, you can add a summary row (Excel calls it a "total row"):
     
 https://support.office.com/en-us/article/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c. 
 
-### Using Slicers
+#### Using Slicers
 
-## Data validation
+To be added.
 
-## Power Query
+### Data validation
+
+To be added.
+
+### Power Query
+
+To be added.

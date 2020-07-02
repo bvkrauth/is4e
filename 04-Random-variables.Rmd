@@ -1,23 +1,6 @@
----
-title: 'Chapter 4: Random variables'
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output:
-  html_document:
-    theme: paper
-    toc: yes
-    toc_float: yes
-    number_sections: yes
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Random variables
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Chapter overview
+## Chapter 4 overview
 
 In the previous chapter, we learned a framework for modeling random
 events. In economics, the random events we are interested in are usually
@@ -40,13 +23,13 @@ In this chapter we will learn how to:
 - Calculate and interpret conditional distributions and conditional
   expectations.
 
-# Random variables
+## Introduction to random variables
 
 Most of the time, the outcomes we are interested in are numbers
 or can be described using numbers. This opens up some additional 
 possibilities.
 
-## What is a random variable?
+### What is a random variable?
 
 A ***random variable*** is a number whose value depends
 on a random outcome. The idea here is that we are going to use a random
@@ -71,7 +54,7 @@ outcome (in this case $b$). For convenience, we usually leave its dependence on
 the original outcome implicit, and write it as if it were an ordinary 
 variable.
 
-## Probability distributions
+### Probability distributions
 
 A random variable has its own sample space (normally $\mathbb{R}$) 
 and probability distribution.  This probability distribution can 
@@ -98,7 +81,7 @@ Notice that all of these random variables are related to each other because
 they all depend on the same underlying outcome. We will talk later about how
 to talk about those relationships.
 
-### The support
+#### The support
 
 The ***support*** of a random variable $x$ is the smallest[^1] set $S_x \subset \mathbb{R}$ such that $\Pr(x \in S_x) = 1$.
 
@@ -118,7 +101,7 @@ Not all random variables have a discrete support. That will complicate
 the math quite a bit: we need calculus to model non-discrete random
 variables.
 
-### The PDF of a discrete random variable
+#### The PDF of a discrete random variable
 
 We can describe the probability distribution of a random
 variable with a function called its ***probability density function (PDF)*** .
@@ -162,7 +145,7 @@ The PDF of a discrete random variable has several general properties:
     $$\sum_{a \in S_x} f_x(a) = \Pr(x \in S_x) = 1$$
     since the support has probability one by definition.
 
-### The CDF
+#### The CDF
 
 We can also describe the probability distribution of a random
 variable with a function called its 
@@ -253,7 +236,7 @@ lines(x=0.1+ c(-40,-1,35,40),
 abline(h=0.5,lty=2,col="gray")
 ```
 
-### Continuous random variables
+#### Continuous random variables
 
 A ***continuous random variable*** has the property that the the probability
 of any specific *value* is zero:
@@ -327,7 +310,7 @@ The PDF of a continuous random variable has several properties:
   $$f_x(a) \geq 0$$
   but unlike the discrete PDF it can be greater than one.
     
-### Modes
+#### Modes
 
 Roughly speaking, the ***mode*** of a random variable is its most likely 
 value (i.e., the value with the highest PDF).
@@ -342,7 +325,7 @@ What is the mode of $b$, since it takes on one of 37 equally-likely values?
 In order to answer that, we need to come up with a more precise definition 
 than just "the most likely outcome." But let's just leave it at that.
 
-### Medians, quantiles and percentiles
+#### Medians, quantiles and percentiles
 
 Roughly speaking, the ***median*** of a random variable is the value in the 
 "middle"of the distribution, i.e., we have the same probability of being 
@@ -371,13 +354,13 @@ $$q_{0.75}(w_{red}) = \min\{a: \Pr(w_{red} \leq a) \geq 0.75\} = \min\{1\} = 1$$
 We can now define the median of a distribution: the median is 
 the 0.5 quantile, or 50th percentile.
 
-## Expected values
+### Expected values
 
 The median and mode are often interpreted as measures of a random variable's
 "central tendancy", or as predictions of its "typical" value. The expected 
 value (also called the mean) is another measure of central tendancy. 
 
-### Definition of expected value
+#### Definition of expected value
 
 The ***expected value*** or ***mean*** of a random variable $x$ is written
 $E(x)$. When $x$ is discrete, it is defined as:
@@ -401,7 +384,7 @@ Problems:
  - Let $w_{12}$ be the net gain to the bettor from a \$1 straight bet on $b = 12$ (remember
    that this bet pays \$35 for every \$1 bet). Find its sample space, PDF, CDF, and expected value.
 
-### Properties of the expected value
+#### Properties of the expected value
 
 In addition to taking the expected value of $x$, we can also take the
 expected value of any function of $x$:
@@ -420,7 +403,7 @@ example:
   $$E( 1/x ) \neq 1 / E(x)$$
 Students frequently make this mistake, so try to avoid it.
 
-### Variances and standard deviations
+#### Variances and standard deviations
 
 The ***variance*** of a random variable $x$ is defined as:
 $$\sigma_x^2 = var(x) = E((x-E(x))^2)$$
@@ -443,13 +426,13 @@ properties:
 - The variance can be written as:
   $$var(x) = E(x-E(x))^2 = E(x^2) - E(x)^2$$
 
-## Standard probability distributions
+### Standard probability distributions
 
 Some probability distributions appear so often in applications that
 we have given them names. We will go through a few of the most 
 important ones below.
 
-### Discrete uniform
+#### Discrete uniform
 
 The ***discrete uniform*** distribution is a distribution with 
 that puts equal probability on every value in a discrete set 
@@ -462,7 +445,7 @@ Discrete uniform distributions appear in gambling and similar
 applications.  For example, the outcome $b$ in our roulette 
 example has a discrete uniform distribution.
 
-### Bernoulli
+#### Bernoulli
 
 The ***Bernoulli*** probability distribution is usually written:
 $$x \sim Bernoulli(p)$$
@@ -480,7 +463,7 @@ The mean and variance are:
 $$E(x) = (1-p)*0 + p*1 = p$$
 $$var(x) = E[(x-E(x))^2] = E[(x-p)^2] = (1-p)(0-p)^2 + p(1-p)^2 = p(1-p)$$
 
-### Binomial
+#### Binomial
 
 The ***binomial*** probability distribution is usually written:
 $$x \sim Binomial(n,p)$$
@@ -507,7 +490,7 @@ The mean and variance of a binomial random variable are:
   $$E(x) = np$$
   $$var(x) = np(1-p)$$
 
-### Uniform and standard uniform
+#### Uniform and standard uniform
 
 The ***uniform*** probability distribution is usually written
 $$x \sim U(L,H)$$
@@ -534,7 +517,7 @@ Its mean and variance are:
   $$E(x) = \frac{L+H}{2}$$
   $$var(x) = \frac{(H-L)^2}{12}$$
 
-### Normal and standard normal
+#### Normal and standard normal
 
 The ***normal distribution*** or ***Gaussian distribution***
 is typically written as:
@@ -575,13 +558,13 @@ $$F_x(a) = \Pr\left(x \leq a\right) = \Pr\left( \frac{x-\mu}{\sigma} \leq \frac{
 In other words, we can use the standard normal CDF to calculate the
 CDF of any normally distributed random variable.
 
-# Multiple random variables
+## Multiple random variables
 
 We will often be interested in the relationship between two or more
 random variables. In order to talk about that relationship we
 will need to 
 
-## Joint distributions
+### Joint distributions
 
 Let $x = x(b)$ and $y = y(b)$ be two random variables
 defined in terms of the same underlying outcome $b$.
@@ -607,7 +590,7 @@ $$F_y(b) = \Pr(y \leq n) = \Pr(x \leq \infty \cap y \leq b) = F_{x,y}(\infty,b)$
 but it is not possible to get the joint distribution from the marginal
 distributions.
 
-## Conditional distributions, marginal distributions, and independence
+### Conditional distributions, marginal distributions, and independence
 
 Having defined joint distributions, we can now define conditional 
 distributions of the form:
@@ -628,7 +611,7 @@ Notice that independence allows us to write all joint and conditional probabilit
 This is very handy, but remember: independence is an *assumption* that
 we can only make when it's reasonable to do so.
 
-## Expected value, covariance and correlation
+### Expected value, covariance and correlation
 
 We can take the expected value of any function of $x$ and $y$.
 When $x$ and $y$ are both discrete:

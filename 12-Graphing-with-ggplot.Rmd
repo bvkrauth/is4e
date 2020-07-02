@@ -1,16 +1,6 @@
----
-title: "Chapter 12: Using R and ggplot"
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output: 
-  html_document:
-    theme: paper
-    toc: true
-    toc_float: true
-    number_sections: true
----
+# Using R and ggplot
 
-```{r setup, include=FALSE}
+```{r setup12, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library("tidyverse")
 simdat <- tibble(xval=sort(rnorm(100)),
@@ -20,7 +10,7 @@ simdat$tmpval <- simdat$xval
 simdat$tmpval[simdat$xval < 0] <- NA
 ```
 
-# Chapter overview
+## Chapter 12 overview
 
 In this chapter we will learn how to:
 
@@ -31,9 +21,9 @@ In this chapter we will learn how to:
  - Produce simple graphs in R.
  - Manage R: install and load libraries, etc.
 
-# R basics
+## R basics
 
-## A brief tour of RStudio
+### A brief tour of RStudio
 
 Start the program RStudio. You should see something that looks like
 this:
@@ -60,7 +50,7 @@ RStudio normally displays four open windows, each with tabs you can
 select. We will not use most of them, but some of them will be very handy 
 indeed.
 
-## Using the command line
+### Using the command line
 
 Like most programming languages, R is designed to execute a series
 of commands provided by the user.
@@ -78,7 +68,7 @@ print("Hello world!")
 ```
 Congratulations, you have successfully executed an R command.
 
-### Accessing the command history
+#### Accessing the command history
 
 Suppose you decide you want to say "Hello [your name]!" instead. You
 *could* type the command in again, but there's an easier way:
@@ -98,7 +88,7 @@ and then edit it to look the way you want:
 print("Hello Brian")
 ```
 
-## Using scripts
+### Using scripts
 
 The command line is ideal for basic tasks and trying things out, and 
 we will continue using it regularly.  But in order to create reproducible
@@ -155,7 +145,7 @@ Now let's write our own script.
 
 Having written our first script, let's return to the console window.
 
-## Basic language elements
+### Basic language elements
 
 Like Excel, R can perform various mathematical calculations. For example, 
 enter the command "sqrt(2)" in the console window:
@@ -166,7 +156,7 @@ As you can see, R read in your command, executed it and displayed the
 result.  There are hundreds of built-in mathematical and statistical 
 functions in R.
 
-### Objects and assignment
+#### Objects and assignment
 
 In addition to performing calculations, we can assign the results of
 the calculation to named ***objects***.  An object is basically a piece
@@ -187,7 +177,7 @@ print(y)
 y
 ```
 
-### Vectors
+#### Vectors
 
 The primary data structure in R is a ***vector***, which is just 
 an ordered list of elements.  The simplest type of vector is 
@@ -261,7 +251,7 @@ x[2] <- 1000
 print(x)
 ```
 
-### Lists and other object types 
+#### Lists and other object types 
 
 The other type of vector is a ***list***.  A list is a vector whose
 elements are other objects. These objects can be any type, so we can
@@ -292,7 +282,7 @@ everything$allnumbers <- c(evens,odds)
 print(everything)
 ```
 
-### Attributes of an object
+#### Attributes of an object
 
 Finally, any object can also have ***attributes***.  This is a list 
 associated with the object that provides additional information. Let's see
@@ -317,7 +307,7 @@ types, and there is an extensive system for generic functions and
 object-based programming (if you know what that is). We will not go 
 into any of that.  
 
-### Functions and operators
+#### Functions and operators
 
 Our last basic language element is the ***function***.  Let's get to know
 the main features of functions in R by considering the `seq()` function.
@@ -403,8 +393,7 @@ print(x)
 print(y)
 ```
 
-
-## Packages and the tidyverse
+### Packages and the tidyverse
 
 R has many useful built-in functions and features.  
 
@@ -454,7 +443,7 @@ memory during your current R session using the `library()` function:
 library("tidyverse")
 ```
 
-## Let's do something useful
+### Let's do something useful
 
 Let's finish this introductory material by doing something useful with R.
 Suppose we want to plot the $N(0,1)$ PDF.  How do we go about doing that?
@@ -526,14 +515,14 @@ save the current state of its memory and re-load it next time you start R.
 In the interest of reproducibility, you should start R "clean" every time.
 Click on the `Dont Save` button, and you will exit RStudio.
 
-## For more information
+### For more information
 
 https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf
 
 
-# Data analysis with R
+## Data analysis with R
 
-## Reading data from a CSV file
+### Reading data from a CSV file
 
 Our first step will be reading the data in from the CSV file. The tidyverse 
 function to do this is called `read_csv()`:
@@ -543,7 +532,7 @@ print(book1)
 ```
 
 
-## Tibbles
+### Tibbles
 
 The `read_csv()` function creates an object called a ***tibble***. A 
 tibble is an object type that corresponds to a table in tidy data. Each 
@@ -573,9 +562,9 @@ print(book1[book1$Gender == "Male","Name"])
 ```
 
 
-## Some basic statistical functions
+### Some basic statistical functions
 
-### Summary statistics
+#### Summary statistics
 
 Summary statistics:
 ```{r}
@@ -583,7 +572,7 @@ summary(simdat)
 ```
 
 
-### Means
+#### Means
 
 Means
 ```{r}
@@ -597,7 +586,7 @@ mean(simdat$tmpval,na.rm=TRUE)
 colMeans(simdat,na.rm=TRUE)
 ```
 
-### Other univariate statistics
+#### Other univariate statistics
 
 Variance and standard deviation:
 ```{r}
@@ -614,7 +603,7 @@ count(simdat,zval)
 count(simdat,cut_width(xval,0.5))
 ```
 
-### Multivariate statistics
+#### Multivariate statistics
 
 Covariance and correlation:
 ```{r}
@@ -640,7 +629,7 @@ cov(simdat,use="pairwise.complete.obs")
 cov(simdat,use="complete.obs")
 ```
 
-### Probability distributions
+#### Probability distributions
 
 R has a family built-in functions for each commonly-used probability
 distribution.  We have already seen `dnorm()` function, which 
@@ -663,11 +652,11 @@ binomial distribution (dbinom,,pbinom,qbinom,rbinom),
 and Student's T distribution (dt,pt,qt,rt), along 
 with many others.
 
-# Graphing with ggplot
+## Graphing with ggplot
 
-## Making a simple graph
+### Making a simple graph
 
-### Making a histogram
+#### Making a histogram
 
 We can make a histogram
 ```{r}
@@ -701,7 +690,7 @@ ggplot(data=simdat,mapping=aes(x=xval)) +
 ```
 
 
-### Making a line graph
+#### Making a line graph
 
 ```{r}
 ggplot(data=simdat,aes(x=xval,y=yval)) + 
@@ -709,7 +698,7 @@ ggplot(data=simdat,aes(x=xval,y=yval)) +
 ```
 
 
-### Making a scatter plot
+#### Making a scatter plot
 
 We can also make a scatter plot
 ```{r}
@@ -721,9 +710,9 @@ This is different from our histogram in two ways:
   - The aesthetic also includes a `y` value, as require to plot $(x,y)$
 
 
-## Customizing your graph
+### Customizing your graph
 
-### Titles and labels
+#### Titles and labels
 
 Titles: You can add a title and subtitle, and you can change the axis titles: 
 ```{r}
@@ -737,7 +726,7 @@ ggplot(data=simdat,aes(x=xval,y=yval)) +
   ylab("y label here")
 ```
 
-### Color and shapes
+#### Color and shapes
 
 Using color: you can change the color of any geometric element
 using the `col=` argument:
@@ -762,7 +751,7 @@ ggplot(data=simdat,aes(x=xval,y=yval)) +
   geom_point(aes(col=as.factor(zval),shape=as.factor(zval)))
 ```
 
-## Adding plot elements 
+### Adding plot elements 
 
 We can include multiple geometries in the same graph.
 
@@ -797,7 +786,7 @@ ggplot(data=simdat,aes(x=xval,y=yval)) +
 It took me a little while to figure this one out - I wouldn't 
 expect you to do anything so complicated.
 
-## A few other graphs
+### A few other graphs
 
 The histogram, time series (line) graph and scatter plot 
 are the core graphs I want you to be able to produce. But ggplot2
@@ -828,17 +817,17 @@ ggplot(data=simdat) +
   geom_density(aes(x=yval),fill="blue",alpha=0.5)
 ```
 
-# Data cleaning with R (if time allows)
+## Data cleaning with R (if time allows)
 
 
-## Some basic data-cleaning functions
+### Some basic data-cleaning functions
 
-### filter
+#### filter
 
 
-### select
+#### select
 
-### arrange
+#### arrange
 
-### mutate
+#### mutate
 

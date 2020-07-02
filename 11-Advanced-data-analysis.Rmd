@@ -1,24 +1,11 @@
----
-title: "Chapter 11: Advanced data analysis"
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output: 
-  html_document:
-    theme: paper
-    toc: true
-    toc_float: true
-    number_sections: true
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Advanced data analysis
 
-```{r setup, include=FALSE}
+```{r setup11, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-# Chapter overview
+## Chapter 11 overview
 
 In this chapter we will learn how to:
 
@@ -29,9 +16,9 @@ In this chapter we will learn how to:
 - Construct and intepret a scatter plot.
 
 
-# Multivariate statistics
+## Multivariate statistics
 
-## Scatter plots 
+### Scatter plots 
 
 Figure ??? below is an example of a ***scatter plot***. We use scatter plots
 to visualize the relationship between two variables in a data set. Each
@@ -43,7 +30,7 @@ ggplot(data=dat, mapping=aes(x=xval,y=yval)) +
     geom_point() + ggtitle("An example of a scatter plot")
 ```
 
-### Creating a scatter plot in Excel
+#### Creating a scatter plot in Excel
 
 To create a scatter plot in Excel:
 
@@ -60,11 +47,11 @@ To create a scatter plot in Excel:
 
 Now we have a scatter plot.  
 
-### Scatter plot design
+#### Scatter plot design
 
 
 
-### Modifying your scatter plot
+#### Modifying your scatter plot
 
 Although we have created our scatter plot, there are many ways it
 isn't exactly what we might like.  
@@ -96,7 +83,7 @@ can just click on them and press the `Delete` key.
 As with most other objects, you can resize, move, copy-and-paste, and 
 delete Excel graphs.
 
-## Sample covariance and correlation
+### Sample covariance and correlation
 
 To calculate the covariance of two variables, use the `COVARIANCE.S()` 
 function.
@@ -104,7 +91,7 @@ function.
 To calculate the correlation of two variables, use the `CORREL()` 
 function.
 
-## Conditional averages
+### Conditional averages
 
 You can use the `AVERAGEIFS()` function to calculate 
 the conditional average of one variable given a condition on another 
@@ -130,11 +117,11 @@ The `AVERAGEIF()` function can also be used for this purpose, but
 its format is slightly different and it is less powerful than 
 `AVERAGEIFS()`.
 
-## Pivot tables
+### Pivot tables
 
 Pivot tables are quite powerful but somewhat tricky to use. 
 
-### A simple pivot table
+#### A simple pivot table
 
 Let's start by creating a simple pivot table
 
@@ -179,7 +166,7 @@ on "Sum of Income", then on "Summarize Values By" and then "Average".
 We can keep adding variables, and ways to summarize them. But there
 are other things we can do.
 
-### Improving our pivot table
+#### Improving our pivot table
 
 - We can sort rows by any column in the table.
 - We can filter rows out of the table:
@@ -188,9 +175,9 @@ are other things we can do.
   - We can also filter on any other variable by dragging that variable name
     into the "Filters" box.
 
-# Connecting theory and data
+## Connecting theory and data
 
-## Probability distributions
+### Probability distributions
 
 Excel includes many functions for calculating the PDF, CDF and inverse CDF
 of various standard probability distributions. 
@@ -215,14 +202,14 @@ of various standard probability distributions.
 - `T.DIST()` and `T.INV()` are similar functions for the $T_{n-1}$ 
   distribution.
 
-## Simulation 
+### Simulation 
 
   - RAND (generates U(0,1) random number)
 
 
-## Statistical inference
+### Statistical inference
 
-### Finite-sample inference on the mean
+#### Finite-sample inference on the mean
 
 Let $x_i$ be the value of the `Income` variable in our data.
 
@@ -269,7 +256,7 @@ in A2 or the significance level in B2, and the test will automatically update.
 You can also copy everything in row 2 to another row (you will need to make
 some cell references absolute rather than relative) and run additional tests.
 
-### Asymptotic inference on the mean
+#### Asymptotic inference on the mean
 
 Next we will try the same result, but using asymptotic approximations.
 

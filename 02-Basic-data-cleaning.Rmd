@@ -1,23 +1,6 @@
----
-title: 'Chapter 2: Cleaning data with Excel'
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output:
-  html_document:
-    theme: paper
-    toc: yes
-    toc_float: yes
-    number_sections: yes
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Cleaning data with Excel
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Chapter overview
+## Chapter 2 overview
 
 In this chapter we will learn how to:
 
@@ -36,11 +19,11 @@ In this chapter we will learn how to:
    - Relative and absolute cell addresses
    - Ranges of cells
 
-# Data and project management
+## Data and project management
 
-## Some basic principles
+### Some basic principles
 
-### Reproducible analysis 
+#### Reproducible analysis 
 
 The goal of most data analysis is to get some interesting results that we can
 report to our audience.  Sometimes our audience is decision-makers in business
@@ -67,7 +50,7 @@ The key to accuracy, transparency and reproducibility is to carefully
 maintain a record of all data and analysis steps leading to every result 
 that is ever reported. This record can then be shared with others.      
 
-### Workflow and version control
+#### Workflow and version control
 
 Think about the last time you wrote a paper for school.  Did you just sit down
 and write from the beginning to the end, and then turn in the result?
@@ -119,7 +102,7 @@ in this course. You are working alone, and your projects are simple.
 Instead we will follow some of the basic principles of version control
 without using any fancy software.
 
-## Setting up your project
+### Setting up your project
 
 Our simple verison control system will be a set of four rules.
 
@@ -130,7 +113,7 @@ Our simple verison control system will be a set of four rules.
 
 We will now set up our first project according to these rules.
 
-### Make a project folder
+#### Make a project folder
 
 **RULE #1: Organize work into projects, and keep all project-related files together.** 
 
@@ -138,32 +121,32 @@ For this class, it is natural to think of each chapter or assignment as a
 separate project.
 
 1. Decide where on your computer you want to keep your work for this course. 
-   - I will refer to that location as ```[mywork]```.
-2. Create a folder called ```[mywork]\Chapter3```
+   - I will refer to that location as `[mywork]`.
+2. Create a folder called `[mywork]\Chapter3`
 3. Create the following subfolders:
-   -  ```[mywork]\Chapter3\raw```
-   -  ```[mywork]\Chapter3\doc```
+   -  `[mywork]\Chapter3\raw`
+   -  `[mywork]\Chapter3\doc`
 
-### Get external data
+#### Get external data
 
 **RULE #2: Keep all original ("raw") data separate and document its sources.** 
 
-1. Download the file [LINK HERE] and put it in your ```raw``` folder.
-2. Create a text file in your ```raw``` folder called ```README.txt```
+1. Download the file [LINK HERE] and put it in your `raw` folder.
+2. Create a text file in your ```raw``` folder called `README.txt`
    and type the line:
-   ```[filename] dowloaded [today's date] from [link]```
+   `[filename] dowloaded [today's date] from [link]`
    and save. 
    
-Every time you add a file to the ```raw``` folder, you should add the
-corresponding line of information to ```README.txt```.
+Every time you add a file to the `raw` folder, you should add the
+corresponding line of information to `README.txt`.
 
-### Make working copies
+#### Make working copies
 
 **RULE #3: Avoid changing data; use existing data to make new data instead.** 
 
-The ```raw``` directory is intended to contain the unaltered, original data
-files as you received them.  Aside from the ```README.txt``` file, you should
-*never* alter the data files in the ```raw``` directory. Why not?
+The `raw` directory is intended to contain the unaltered, original data
+files as you received them.  Aside from the `README.txt` file, you should
+*never* alter the data files in the `raw` directory. Why not?
 
 - Editing the raw data kills reproducibility, because the changes you have
   made are not documented.
@@ -177,7 +160,7 @@ because Excel keeps the data and analysis in the same file. We will solve the
 problem by making a  ***working copy*** of the original data, and editing the
 working copy.
 
-1. Copy [filename] from the ```raw``` subfolder to your main project folder.
+1. Copy [filename] from the `raw` subfolder to your main project folder.
    - This is your working copy.
 2. Rename the working copy.
    - You should choose a brief but clear name. Avoid names like "my file.xlsx."
@@ -187,7 +170,7 @@ working copy.
       version is the current one.
 3. Open the working copy. 
 
-### Maintain a master version
+#### Maintain a master version
 
 **RULE #4: Maintain a master version, but keep selected intermediate versions too.** 
 
@@ -214,9 +197,9 @@ Others might do it at the end of each working day. Ideally, these two will often
 coincide. It all depends on what works best for you.
 
 
-## A quick tour of Excel
+### A quick tour of Excel
 
-### Terminology and interface
+#### Terminology and interface
 
 When you open your working copy of the data in Excel, 
 your screen should look something like this:
@@ -227,7 +210,7 @@ When giving instructions, I will refer to various elements of Excel's user
 interface by name. You may have been using these elements for years without
 ever knowing their names, so I will list them here:
 
-- The ***menu bar*** is the top row of text marked ```File Home Insert Draw ...```:
+- The ***menu bar*** is the top row of text marked `File Home Insert Draw ...`:
    ![menu bar](Excel menu bar.jpg)
 - The ***ribbon*** is the row of buttons below the menu bar:
    ![ribbon](Excel ribbon.jpg)
@@ -242,9 +225,9 @@ ever knowing their names, so I will list them here:
     - Once you have made the ribbon visible, you can keep it visible by
       clicking on the little thumbtack icon in its lower right corner.
   - The contents of the ribbon depend on the currently-active menu bar option
-    (usually but not always ```Home```). 
+    (usually but not always `Home`). 
     - I will assume that Home is the currently-active option; if it isn't
-      you can just click on ```Home``` to make it the currently-active option.
+      you can just click on `Home` to make it the currently-active option.
 - The ***formula bar*** is the long white box just below the ribbon:
    ![formula bar](Excel formula bar.jpg)
    - It shows the contents of the current cell.
@@ -274,7 +257,7 @@ ever knowing their names, so I will list them here:
   - You can double-click on a tab to change its name.
   - You can click on the "+" button to add a new worksheet.
 
-### Tidy data
+#### Tidy data
 
 The data in [filename] takes the form of what data scientists sometimes
 call **tidy** data. Tidy data takes a simple and convenient format:
@@ -306,11 +289,11 @@ If we are lucky, our data is tidy. But many data sources are messy, and we
 will sometimes need to convert data from a messy to a tidy format before 
 starting our analysis.
 
-## Excel tools for viewing data
+### Excel tools for viewing data
 
 We will start by learning a few tools for viewing our data.
 
-### Contents and display format
+#### Contents and display format
 
 The ***contents*** of a cell can be:
 
@@ -325,20 +308,20 @@ The ***contents*** of a cell can be:
 In Excel, we need to distinguish between a cell's contents and its 
 ***display format***. For example:
 
-1. Take a look at cell C2.  As you can see it shows ```$80,000.00```.
+1. Take a look at cell C2.  As you can see it shows `$80,000.00`.
 2. Move your cursor to cell C2 and look at the formula bar
-   to see the cell contents. You will see the number ```80000``` 
-   and not ```$80,000.00```.  
+   to see the cell contents. You will see the number `80000` 
+   and not `$80,000.00`.  
 
 Any calculations using a cell are based on its contents and not on its display
 format. For example, cells are often rounded for display but any calculations
 involving those cells will be based on its un-rounded value.
 
-### Changing the display format
+#### Changing the display format
 
 We can change the display format of a cell or group of cells without changing
 its contents. For example, suppose we want to see income in dollars rather
-than cents (e.g. ```$80,000`` rather than ```$80,000.00``). Then all we need
+than cents (e.g. `$80,000` rather than `$80,000.00`). Then all we need
 to do is:
 
 1. Select the cell(s) we want to change
@@ -351,14 +334,14 @@ to do is:
    options. We want to change the number of decimal places from its current
    value of two to zero. Do that, and click on "OK"
 
-The cells you have selected should now show ```$80,000```.
+The cells you have selected should now show `$80,000`.
 
 You can change many aspects of display formatting: font,
 bold/italics/underline, text color, background color, cell borders, alignment
 (left/right/center as well as top/bottom/middle), number format (what we have
 just changed), and many other features. 
 
-### Sorting
+#### Sorting
 
 The original data are in alphabetic order by name. But suppose we wanted it to
 be in order by income (with the highest incomes on top and the lowest at the
@@ -377,7 +360,7 @@ A few things to notice here:
   or text, and will sort accordingly.
 - You can sort on multiple columns by selecting the "Custom sort" option.
 
-### Filtering
+#### Filtering
 
 We will often want to look at a particular subgroup of observations.
 This is called  ***filtering***.
@@ -400,7 +383,7 @@ on the "Sort and Filter" button and selecting "Filter" again.
 This is a simple example, but we can construct much more complex filters
 such as "all females with income above $50,000 whose last names begin with C."
 
-### Freezing panes
+#### Freezing panes
 
 Go down to row 50 in your data set. Notice that you can't see the variable 
 names in row 1 any more. The solution to this problem is to 
@@ -416,19 +399,19 @@ and you can see the variable names.
 
 To undo this, click on "Freeze Panes" and then select "Unfreeze Panes"
 
-# Cleaning data
+## Cleaning data
 
 We are now ready to start cleaning our data. 
 
 Remember: we want to leave the original data alone whenever possible. 
 So we will create new variables rather than changing the original variables. 
 
-## Entering new data
+### Entering new data
 
 The simplest way to add variables to an Excel table is by entering data
 directly.
 
-### Manual data entry
+#### Manual data entry
 
 We will start by simply typing in some new data.
 
@@ -460,7 +443,7 @@ So let's add our variable:
 
 That's all we need to do.
 
-### Using Fill and Series
+#### Using Fill and Series
 
 Ideally, one of the variables in our table serves as a ***unique identifier***
 for observations. A unique identifier is a text or numeric (integer) variable
@@ -490,17 +473,17 @@ As you can see, column A now contains a unique identifier.
 We can also use the Fill button to fill in a group of cells with the same
 value.
 
-## Formulas
+### Formulas
 
 Most of the time our new variables will be calcuated from existing variables.
 To do this, we will use ***formulas***. A formula is just a rule for
 calculating a value from some other values.
 
-### A simple formula
+#### A simple formula
 
 We will start with a very simple formula. Suppose we want to add a new
-variable "Savings", which is calculated by subrtracting ```Spending```
-from```Income```
+variable "Savings", which is calculated by subrtracting `Spending`
+from `Income`
 
 1. Enter "Savings" in cell E1 to name the variable.
 2. Enter "= C2 - D2" in cell E2.
@@ -522,7 +505,7 @@ in cell E2 will change if the data changes.  To see this:
 Excel will usually recalculate all formulas in the sheet whenever anything is 
 changed.
 
-### Copying, pasting and relative references
+#### Copying, pasting and relative references
 
 We haven't yet filled in the remaining cells in column E. It would be 
 inconvenient to type a formula into each cell, and would quickly become
@@ -544,13 +527,13 @@ do.
 Sometimes we will want Excel to treat a cell reference as absolute and not
 relative. Fortunately there is a way to do this - we will do that soon.
 
-## Functions
+### Functions
 
 Excel has about 500 built-in functions that we can use in formulas. It also
 has extensive tools for finding the function you need for a particular
 calculation task, and for figuring out what arguments to use in the function.
 
-### A simple function
+#### A simple function
 
 Suppose we want to add a new variable for the (natural) log of income.
 
@@ -584,7 +567,7 @@ You will see that cell F2 now contains "=LN(C2)" which displays as 11.29. Note
 that if you already knew the function and arguments you needed, you could have
 just typed "=LN(C2)" into cell F2 instead.
 
-### Using Fill instead of copy-and-paste
+#### Using Fill instead of copy-and-paste
 
 Now that we have the formula we want in cell F2, we want to copy it into the
 rest of column F.  We could copy-and-paste just like before, but let's try a
@@ -597,9 +580,9 @@ slightly different way.
 As you can see, the contents of cell F2 have been filled in to the other
 cells, which is what we wanted.
 
-## Cell references
+### Cell references
 
-### Cell ranges
+#### Cell ranges
 
 Some functions like SUM() and AVERAGE() operate on a ***range*** of cells
 rather than a single cell or list of cells. A range is just a 
@@ -619,7 +602,7 @@ across all observations in the data. The function to do that is AVERAGE().
 
 Cell F2 should display $52,500, which is indeed the average of cells C2:C5.
 
-### Absolute references 
+#### Absolute references 
 
 Let's complete our AvgIncome variable by copying cell F2 to the remaining
 cells in column F.  You will notice something strange: the other cells don't
@@ -643,7 +626,7 @@ To do that, we add the character "$" before each such reference.
 Now all cells in column F display the same value ($52,500), and the same
 contents "=AVERAGE(C$2:C$5)".  This is what we want.
 
-### Combining absolute and relative references
+#### Combining absolute and relative references
 
 Sometimes we will want to combine absolute and relative references in the
 same formula.
@@ -678,7 +661,7 @@ on Income and seeing if IncomeRank is also sorted.
 
 > DO WE ALSO WANT TO DO PERCENTRANK HERE?  IT ISN'T USED ANYWHERE ELSE.
 
-## Logical data
+### Logical data
 
 In addition to text and numbers, cells can also contain ***logical***
 values (TRUE or FALSE). Logical values can be entered directly in 
@@ -688,8 +671,8 @@ To see how the logical values work, go to cell F2.
 
 - You can use the comparison operators ("=", ">", "<", etc.) to produce
   logical results.  For example:
-  - Enter ```=(B2="Male")`` in cell F2. It will display "TRUE".
-  - Enter ```=(C2 < 50)``` in cell F2. It will display "FALSE".
+  - Enter `=(B2="Male")` in cell F2. It will display "TRUE".
+  - Enter `=(C2 < 50)` in cell F2. It will display "FALSE".
 - There are some functions that expect logical arguments. These 
   include IF(), AND(), OR(), and NOT().
 - Excel will convert logical values to numeric values, and vice versa.
@@ -719,7 +702,7 @@ This should display as 1.  Fill in the rest of the column, and you should see
 
 ALSO COVER SWITCH()
 
-## Text data
+### Text data
 
 While normal arithmetic operations like addition or multiplication do not 
 operate on text, there are many useful functions to manipulate text strings
@@ -737,7 +720,7 @@ in Excel:
 - `FIND()` allows you to find a particular substring within a larger string,
    and `REPLACE()` allows you to replace part of a string.
 
-## Date and time data
+### Date and time data
 
 Let's see what Excel can do with dates and times:
 
@@ -776,6 +759,6 @@ To see the internal value of a date in Excel, you can just change the formatting
 back to General.
 
 
-## Extras
+### Extras
 
 You can type in a link or add the function HYPERLINK().

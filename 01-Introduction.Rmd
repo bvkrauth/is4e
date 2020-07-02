@@ -1,32 +1,15 @@
----
-title: 'Chapter 1: Introduction'
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output:
-  html_document:
-    theme: paper
-    toc: yes
-    toc_float: yes
-    number_sections: yes
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Introduction
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Chapter overview
+## Chapter 1 overview
 
 In this chapter we will:
 
  - Review educational goals and establish course expectations
  - Gather resources and tools, including all needed computer software.
 
-# Course goals and context
+## Course goals and context
 
-## Why this is an important course
+### Why this is an important course
 
 In ECON 233 you will learn some basic techniques for data analysis using 
 Excel and R, as well as the statistical theory underlying these techniques. 
@@ -83,34 +66,34 @@ of the underlying statistical principles, and the ability to
 recognize the economic considerations in a situation, you
 will do quite well.
 
-## Educational goals
+### Educational goals
 
 By the end of the course you will be able to:
 
- 1. Clean and analyze data in Excel.
- 2. Analyze data in R.
- 3. Follow recomended practices for data management and reproducible analysis.
- 4. Construct and interpret common charts including histograms, scatter plots,
-    and time-series plots.
- 5. Construct and interpret freqency tables and cross-tabulations.
- 6. Construct and interpret common univariate and bivariate statistics,
+1. Clean and analyze data in Excel.
+2. Analyze data in R.
+3. Follow recomended practices for data management and reproducible analysis.
+4. Construct and interpret common charts including histograms, scatter plots,
+  and time-series plots.
+5. Construct and interpret freqency tables and cross-tabulations.
+6. Construct and interpret common univariate and bivariate statistics,
     including	mean, variance, standard deviation, covariance and correlation.
- 7. Construct and interpret hypothesis tests and confidence intervals.
- 8. Explain the relationship between population and sample.
- 9. Calculate and interpret probabilities and expected values.
- 10. Describe the properties of a statistic or estimator including its
-    probability distribution, expected value, variance, bias, and mean 
-    squared error.
- 11. State and apply the law of large numbers and central limit theorem.
+7. Construct and interpret hypothesis tests and confidence intervals.
+8. Explain the relationship between population and sample.
+9. Calculate and interpret probabilities and expected values.
+10. Describe the properties of a statistic or estimator including its
+  probability distribution, expected value, variance, bias, and mean 
+  squared error.
+11. State and apply the law of large numbers and central limit theorem.
 
 We will be switching back and forth between data analysis and underlying
 theory. Both are important.
 
-## Related courses
+### Related courses
 
 ECON 233 is the first course in the two-course econometrics sequence 
 that is required for all economics majors.  If you've never seen the word
-before, ``econometrics'' just means statistics and data analysis for
+before, "econometrics" just means statistics and data analysis for
 economics.  In the second course (ECON 333) you will learn more advanced
 techniques including linear regression, you will use R more extensively, 
 and you will go deeper into the theory.
@@ -151,7 +134,7 @@ so you may be wondering what the difference is.  The key differences are:
 
 Either course is suitable preparation for ECON 333.
 
-## My expectations
+### My expectations
 
 This book is constructed under the assumptions that:
 
@@ -167,9 +150,9 @@ This is not a class in introductory economics, high school math, or basic
 computer skills.  If you are a little behind in those skills
 you will need to ask for help, but I am happy to help anyone who asks.
 
-# Computer resources
+## Computer resources
 
-## Requirements
+### Requirements
 
 To do the computer work you will need:
 
@@ -184,7 +167,7 @@ I will teach the course using Windows, and can provide technical support for
 Windows.  All of the necessary tools are also available for macOS, but my
 ability to provide technical support is more limited. I'll do the best I can.
 
-## Installing Microsoft Excel
+### Installing Microsoft Excel
 
 Microsoft Excel is a spreadsheet program and is available for both Windows 
 and macOS. Alternatives to Excel include Google Sheets and Apple Numbers.
@@ -207,7 +190,7 @@ and opening it. You should see something that looks like this:
 Many students have already used Excel, but just to be safe, let's go over 
 some of its basic characteristics and terminology:
 
-- An Excel file (in Windows it normally has the extension ```.xlsx```) 
+- An Excel file (in Windows it normally has the extension `.xlsx`) 
   is called a ***workbook***.
 - Each workbook contains one or more ***worksheets***.
 - Each worksheet is a rectangular grid of ***cells***. 
@@ -220,7 +203,7 @@ some of its basic characteristics and terminology:
   - For example, the cell in the third column (column *C*) and fifth row 
     (row *5*) is called cell *C5*. 
 
-## Installing R and RStudio
+### Installing R and RStudio
 
 Later in the semester, we will also be using a more specialized statistical
 program called R and a related program called RStudio.  Both programs are
@@ -240,11 +223,11 @@ opening RStudio.  You should see something like this:
 We won't do anything with R or RStudio for a while, so go ahead and close it.
 
 One of the most useful features of R is that it allows users write and
-distribute ``packages'' that extend its capabilities.
+distribute "packages" that extend its capabilities.
 Later on this term we will install some of the most useful packages, but feel
 free to skip ahead to [insert reference here].
 
-## Other resources
+### Other resources
 
 TO BE ADDED:
 

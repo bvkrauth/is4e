@@ -1,23 +1,6 @@
----
-title: 'Chapter 6: Statistics'
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output: 
-  html_document:
-    theme: paper
-    toc: true
-    toc_float: true
-    number_sections: true
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Statistics
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Chapter overview
+## Chapter 6 overview
 
 So far, we have learned how to model random events and random numbers, 
 and we have learned how to calculate some commonly-used statistics from 
@@ -37,7 +20,7 @@ In this chapter we will:
   theorem.
 
 
-# Data and the data generating process
+## Data and the data generating process
 
 Suppose we have a data set. We would like to use that data set to learn
 something about the mechanisms by which the data set was generated.
@@ -58,7 +41,7 @@ The basic idea of statistical analysis is that we will
   - We will want to use statistics that have a high probability of 
     prividing provide accurate estimates. 
 
-## A general framework
+### A general framework
 
 Let $D$ be our data set.  We think of $D$ as a set of random variables 
 with unknown joint distribution $P_D$.  This joint distribution
@@ -96,9 +79,9 @@ of $\theta$:
 In this chapter we will focus on estimation.  We will cover statistical
 inference in a later chapter.
 
-## Sampling
+### Sampling
 
-### Random sampling from a population
+#### Random sampling from a population
 
 In order to model the data generating process, we need to
 model the entire joint distribution of $D$.  This
@@ -140,7 +123,7 @@ generating an IID sample is to:
 It will turn out that a moderately-sized random sample provides 
 surprisingly accurate information on the underlying population.
 
-### Sample selection and representativeness
+#### Sample selection and representativeness
 
 In the real world, a simple random is quite difficult to collect
 from humans. Even if we are able to randomly select cases, we often
@@ -183,7 +166,7 @@ careful thought instead.  If we are imputing values, do we believe that
 our imputation method is reasonable?  If we are redefining the population,
 is that population one we care about?
 
-### Alternatives to simple random sampling 
+#### Alternatives to simple random sampling 
 
 Not all useful data sets come from a simple random sample. For example:
 
@@ -246,9 +229,9 @@ to save on travel costs. The LFS is gathered monthly, and the
 resulting unemployment rate is a time series.
 
 
-# Statistics and their properties
+## Statistics and their properties
 
-## Four examples
+### Four examples
 
 Let $s = s(D)$ be some statistic calculated from the data set $D$.
 We will focus on four examples:
@@ -269,7 +252,7 @@ We will focus on four examples:
 - The ***sample median*** of $x_i$ is defined as:
   $$\hat{m}_x = m: \begin{cases} \hat{f}_{x < m} \leq 0.5 \\ \hat{f}_{x > m} \leq 0.5 \\ \end{cases}$$
 
-## The sampling distribution
+### The sampling distribution
 
 Since the data itself is a collection of random variables, any statistic
 calculated from that data is also a random variable, with a probability
@@ -288,12 +271,12 @@ most other statistics is more difficult.  We will return to that later,
 but for now the important thing is just to remember that this probability
 distribution $exists$.
 
-## The mean and variance
+### The mean and variance
 
 If our statistic has a probability distribution, it (usually) has a mean
 and variance as well. 
 
-### The mean and variance of the sample frequency
+#### The mean and variance of the sample frequency
 
 Since the sample frequency has the binomial distribution, we have 
 already seen its mean and variance:
@@ -301,7 +284,7 @@ already seen its mean and variance:
   $$var(\hat{f}_A) = \frac{p(1-p)}{n}$$
 where $p = \Pr(x_i \in A)$.
 
-### The mean and variance of the sample average
+#### The mean and variance of the sample average
 
 We can also calculate the mean and variance of the sample average.
 Let $\mu_x = E(x_i)$ be the mean of $x_i$  Then the mean of $\bar{x}$ is:
@@ -314,7 +297,7 @@ $$cov(x_i,x_j) = \begin{cases} \sigma_x^2 & i = j \\ 0 & i \neq j \\ \end{cases}
 so:
 $$var(\bar{x}) = \frac{1}{n^2} \sum_{i=1}^n \sigma_x^2 = \frac{n\sigma_x^2}{n^2} = \frac{\sigma_x^2}{n}$$
 
-## Parameters and estimators
+### Parameters and estimators
 
 A ***parameter*** is an unknown number characterizing a DGP. For example,
 if $x_i$ is a random sample from the $N(\mu,\sigma^2)$ distribution,
@@ -342,7 +325,7 @@ are several major complications to keep in mind:
 3. Since the value of $\theta$ is unknown, the value of $err$ is also 
   unknown.
 
-## Bias and mean squared error
+### Bias and mean squared error
 
 In choosing an estimator, we can consider several criteria.
 
@@ -438,7 +421,7 @@ $$E(s) > E(\bar{x}) = \mu_x$$
 but has lower MSE than the (unbiased) sample average:
 $$MSE(s) < MSE(\bar{x})$$
 
-## Sample variances and standard errors
+### Sample variances and standard errors
 
 We can prove that the sample variance is an unbiased estimator
 of the population variance:
@@ -457,9 +440,9 @@ In general, the standard error of a statistic is an estimator of the statistic's
 standard deviation. It is not exactly unbiased, but is close and it has some other
 useful properties that we will use later.
 
-# Asymptotic analysis
+## Asymptotic analysis
 
-## Small and large samples
+### Small and large samples
 
 So far, we have described statistics and estimators in terms
 of their probability distribution and the mean, variance
@@ -485,7 +468,7 @@ the sample average is an unbiased estimator for the mean)
 are sometimes called ***exact*** or ***finite sample***
 properties.
 
-## The law of large numbers
+### The law of large numbers
 
 The ***law of large numbers*** says that for a large enough random
 sample, the sample average is very likely to be very close to the
@@ -562,7 +545,7 @@ event like a natural disaster, pandemic or financial crisis
 that affects everyone.  Here the independence needed for the LLN
 does not apply.
 
-## The central limit theorem
+### The central limit theorem
 
 The Central Limit Theorem is an even more powerful result in statistics.
 
@@ -594,7 +577,7 @@ What does the central limit theorem mean?
     tricks for getting around this problem that we will talk
     about later.
     
-## Slutsky's theorem
+### Slutsky's theorem
 
 Our final tool is a result called **Slutsky's theorem**
 

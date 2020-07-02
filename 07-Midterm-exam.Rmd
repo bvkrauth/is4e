@@ -1,23 +1,6 @@
----
-title: 'Midterm exam'
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output:
-  pdf_document:
-    number_sections: yes
-    toc: no
-  html_document:
-    number_sections: yes
-    theme: paper
-    toc: yes
-    toc_float: yes
----
+# Midterm exam
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Problem
+## Problem
 
 a. Test
 
@@ -26,6 +9,5 @@ a. Test
 b. Another Test
 
 
-# Problem
 
 

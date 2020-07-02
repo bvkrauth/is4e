@@ -1,23 +1,6 @@
----
-title: 'Chapter 5: Basic data analysis with Excel'
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output: 
-  html_document:
-    theme: paper
-    toc: yes
-    toc_float: yes
-    number_sections: yes
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Basic data analysis with Excel
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Chapter overview
+## Chapter 5 overview
 
 In chapter 2, we learned how to obtain and clean a simple data set. The 
 next step is to learn some tools for analyzing it. We will start with
@@ -35,17 +18,17 @@ In this chapter we will to:
 In the next chapter, we will use the tools of probability and random
 variables to understand these statistics more deeply.
 
-# Univariate statistics in Excel
+## Univariate statistics in Excel
 
 Make a new working copy of [data file] and open it. 
 
-## Summary statistics
+### Summary statistics
 
 We are going to create a nice table of summary statistics
 for all of our variables, and put it in a separate worksheet.
 In the course of doing so, we will learn some new tricks.
 
-### Constructing the table
+#### Constructing the table
 
 First we will create a new worksheet:
 
@@ -119,7 +102,7 @@ Now let's fill in the statistics, starting with column D (Income).
 - Report the maximum in row 9, using the function MAX().
   - The maximum is the highest value observed in the data
 
-### Cleaning up the table
+#### Cleaning up the table
 
 Our table now has all of the information we need, but it is still
 kind of ugly. 
@@ -171,9 +154,9 @@ for this purpose:
      button aggressively to make your table more 
      readable.
 
-## Frequency tables
+### Frequency tables
 
-### Frequency tables for discrete or categorical variables
+#### Frequency tables for discrete or categorical variables
 
 The frequency table for a discrete or categorical variable looks like this:
 
@@ -228,7 +211,7 @@ Next, we need to fill in the "percentage" column.
 
 We now have a frequency table.
 
-### Frequency tables for continuous variables
+#### Frequency tables for continuous variables
 
 Frequency tables for continuous variables are a little more complicated to 
 construct.  We need to divide the data range into a set of sub-ranges or 
@@ -294,11 +277,11 @@ OK, let's create our frequency table:
 > this function is a tricky one to learn, and Microsoft recently 
 > changed how it works.  So we will skip it.
 
-# Graphs in Excel 
+## Graphs in Excel 
 
 Next, we will learn to construct some simple graphs in Excel.
 
-## Time series (line) graphs
+### Time series (line) graphs
 
 A ***time series graph*** plots one or more variables at multiple points in
 time.  Conventionally, time is on the horizontal axis and the variable's
@@ -308,7 +291,7 @@ In Excel, time series graphs can be implemented using either the Line
 graph or the Scatter Plot graph.  Line graphs are simpler, so we will
 start with that.
 
-### Line graph basics
+#### Line graph basics
 
 Open the file `1410028701-eng.xlsx`. This file contains Canadian employment statistics
 for the first five months of 2020. We want to create a time series graph of 
@@ -348,7 +331,7 @@ Follow either of these procedures to remove the "extra" variables.
 This looks like the graph we want, so all we need to do is tidy up the 
 formatting.
 
-### Time series graph design
+#### Time series graph design
 
 There are several things I would want to change about this chart. Like other
 elements of a presentation, graphs should be clear, informative, concise,
@@ -376,7 +359,7 @@ modifications.
 - To make the graph more professional in appearance
   - Experiment with colors, legend placement and other aspects.
 
-### Formatting our line graph
+#### Formatting our line graph
 
 Excel charts are composed of "elements" that can be added, deleted, or 
 modified. At this point, our chart has ten elements: Chart Area, Chart 
@@ -538,13 +521,13 @@ Finally, let's look at color a little more.
 Select `Design > Change Colors` from the menu to access other palettes.  Try
 a few of them out to see which one you like best. 
 
-## Frequency (bar/column) graphs
+### Frequency (bar/column) graphs
 
 We will use a ***bar graph*** to represent the frequency distribution of a 
 categorical variable.  Bar graphs use bars of different length
 to represent the value of some aggregate variable in each category.
 
-### Bar graph basics
+#### Bar graph basics
 
 To start constructing a bar graph:
 
@@ -565,7 +548,7 @@ than we actually want - it shows the count *and* the percentage, and we
 really only need one of those.  Use `Design > Select Data` to get rid
 of the count.  
 
-### Bar graph design
+#### Bar graph design
 
 There are several basic design considerations with bar charts. The key 
 thing to understand is that the size of the bar is meant to visually
@@ -598,7 +581,7 @@ in practice because people are much better at evaluating
 the relative size of two lines or rectangles than they are at
 evaluating the relative size of two 3D boxes or pie slices. 
 
-### Formatting our bar graph
+#### Formatting our bar graph
 
 The basics of adjusting the formatting of a bar graph are similar
 to what we have already learned for line graphs.  To test your skills,
@@ -607,14 +590,14 @@ try the following:
 - Modify or delete the chart title
 - Change the vertical axis from decimal to percentage.
 
-## Histograms
+### Histograms
 
 A ***histogram*** is just a frequency bar/column graph for 
 a continuous variable.  It is constructed by sorting the variable's values 
 into some number of equally-sized ***bins*** and then plotting a bar for each
 bin representing counts or percentages.
 
-### Histogram basics
+#### Histogram basics
 
 Let's construct a histogram of our Income variable.
 
@@ -630,7 +613,7 @@ Our graph will appear.  To explain what's going on:
 - There are three observations (Betty, Joe, and Sue)in the first 
   bin, and one observation (Al) in the second bin.
 
-### Histogram design
+#### Histogram design
 
 There are two main choices in histogram design:
 
@@ -640,7 +623,7 @@ There are two main choices in histogram design:
 By default Excel has chosen just two equally-sized bins, and is depicting
 frequencies as counts. 
 
-### Modifying our histogram
+#### Modifying our histogram
 
 First, let's increase the number of bins.
 

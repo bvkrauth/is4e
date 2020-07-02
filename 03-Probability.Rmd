@@ -1,25 +1,12 @@
----
-title: 'Chapter 3: Probability and random events'
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output:
-  html_document:
-    theme: paper
-    toc: yes
-    toc_float: yes
-    number_sections: yes
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Probability and random events
 
-```{r setup, include=FALSE}
+```{r setup3, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(VennDiagram)
 library(RColorBrewer)
 ```
 
-# Chapter overview
+## Chapter 3 overview
 
 In this chapter we will learn how to:
 
@@ -33,7 +20,7 @@ We will also review some math needed to learn these skills.
    - Functions
    - Sequences, limits and summations
 
-# Mathematical background
+## Mathematical background
 
 I'll start by reviewing some math we will use. All of this math is covered
 in an introductory calculus class so most of you have seen it before.
@@ -44,14 +31,14 @@ But you may have forgotten it, or never understood it in the first place.
 So I will go briefly through the most important terminology and ideas.
 If there's anything you don't understand please ask me to clarify. 
 
-## Sets
+### Sets
 
 The most fundamental notion in mathematics is the idea of a ***set***. 
 A set is typically described as a collection or gathering
 of distinct objects. These objects are called the ***elements*** 
 of the set.
 
-### Defining a set
+#### Defining a set
 
 We have several ways of defining or describing sets. The simplest is ***enumeration***, 
 which means you just list the elements:
@@ -113,7 +100,7 @@ grid.draw(venn.diagram(
 ))
 ```
 
-### Characteristics of a set
+#### Characteristics of a set
 
 The ***cardinality*** of the set $A$, usually written $|A|$, 
 is simply the number of elements it has. For example:
@@ -126,7 +113,7 @@ $$|\emptyset| = 0$$
 - $A$ is a ***singleton*** if $|A| = 1$.
 - $A$ is a ***finite set*** if $|A|$ is a finite number. 
 
-### Set algebra
+#### Set algebra
  
 Let $A$ and $B$ be two sets. We have several ways of describing
 how they are related:
@@ -244,7 +231,7 @@ grid.draw(venn.diagram(
 ))
 ```
 
-### Standard results about sets
+#### Standard results about sets
 
 Given the basic components of set algebra, we can establish many useful rules. 
 This is not a course on set theory, so I will simply list some of the most important rules
@@ -289,9 +276,9 @@ make intuitive sense to you.
 Notice that these rules generally come in pairs, with union and intersection switched. This
 duality is a general feature of set algebra.
 
-## Functions
+### Functions
 
-### Definition of a function
+#### Definition of a function
 
 A ***function*** is a rule that matches ("maps") elements of one set (called the ***domain***
 of the function) to elements of another set (called the ***range*** of the function).
@@ -329,7 +316,7 @@ There are two possible interpretations of this statement:
 It is sometimes clear from the context which  of these interpretations is correct 
 in a given problem. But please ask if you aren't sure.
 
-### The indicator function
+#### The indicator function
 
 The ***indicator function*** is a special kind of function whose argument
 is a *statement*. The indicator function returns a value of 1
@@ -343,9 +330,9 @@ We use indicator functions all the time in statistics because they allow us
 to convert a qualitative statement such as "Bob is employed" 
 into a quantitative statement: $I(\textrm{Bob is employed}) = 1$.
 
-## Sequences, limits and summations
+### Sequences, limits and summations
 
-### Cartesian products
+#### Cartesian products
 
 The ***Cartesian product*** of two sets $A$ and $B$, usually written 
 $A \times B$, is the set of all ordered pairs of elements in the two sets.
@@ -361,7 +348,7 @@ numbers (where $n$ is some positive integer):
    $$\mathbb{R}^n = \mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R}$$
 For example the ordered sequence $(1,3,5,7)$ is an element of the set $\mathbb{R}^4$.
 
-### Sequences 
+#### Sequences 
 
 A sequence is much like a set but with two important differences:
 
@@ -396,7 +383,7 @@ above. These are a few other ways of defining a sequence:
  - As functions of other sequences: $y_i = \ln(x_i)$.
  - As functions of the index itself $x_i = a^i$
 
-### Limits
+#### Limits
 
 Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.
 We say that $x^*$ is the ***limit*** of this 
@@ -423,7 +410,7 @@ the number $c$ is the limit of this sequence:
 if for any $\delta > 0$ there exists an $N_{\delta}$ such that
    $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
 
-### Summations
+#### Summations
 
 Many statistics we are calculating are constructed by adding 
 up a sequence of numbers. It will be convenient to 
@@ -476,11 +463,11 @@ Summation operators also obey these properties:
 
 We will use these two results later on.
 
-# Random events and probability
+## Random events and probability
 
 Having reviewed the math, we now go on to develop the basic concepts in probability.
 
-## Example application: Roulette
+### Example application: Roulette
 
 We will develop ieas by considering the casino game of **Roulette**.
 Here are the rules for this game:
@@ -501,7 +488,7 @@ Here are the rules for this game:
 
 The picture below shows what a roulette wheel and table look like.
 
-![roulette wheel image](roulette.svg)
+`![roulette wheel image](roulette.svg)`
 Source: <a href="https://www.vecteezy.com/free-vector/roulette">Roulette Vectors by Vecteezy</a>
 
 Like other casino games, a roulette game is an example of a random process.
@@ -518,9 +505,9 @@ and other businesses that manage risks.
 to make inferences about that process. Again, the purpose is to understand
 the process, and maybe to make predictions for the future.
 
-## Modeling random events
+### Modeling random events
 
-### Outcomes, events and sample spaces
+#### Outcomes, events and sample spaces
 
 To build a probabilistic model of a random process, we start by defining
 the ***outcome*** we are interested in.  An outcome can be a simple yes/no
@@ -559,7 +546,7 @@ tools for sets. For example
  - The events "a bet on Red wins" and "a bet on Black wins"
    are disjoint because $RED \cap BLACK = \emptyset$.
 
-### Probability distributions
+#### Probability distributions
 
 Our final step is to define a ***probability distribution***
 for this random process, which is a function that assigns
@@ -587,7 +574,7 @@ must obey the following three conditions:
    $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
 
 
-#### Example {-}
+##### Example {-}
 
 Let's construct a plausible probability distribution for roulette.
 To do that we need to make some assumptions about how the
@@ -635,7 +622,7 @@ for simple repeated settings like casino games or car insurance,
 while the Bayesian interpretation makes more sense for things
 like predicting election results.
 
-### Some standard results about probabilities
+#### Some standard results about probabilities
 
 Let $A$ and $B$ be two events.  Then:
 
@@ -655,7 +642,7 @@ Let $A$ and $B$ be two events.  Then:
 These results all follow from the basic rules of probability. They
 are not hard to prove, but I will not go through the proofs.
 
-## Multiple events
+### Multiple events
 
 Sometimes are interested in more than one event, and want to talk about how they are 
 related. 
@@ -665,7 +652,7 @@ related.
    next month's unemployment rate.
    
 
-### Joint probabilities
+#### Joint probabilities
 
 The ***joint probability*** of two events $A$ and $B$ is the probability that they
 both happen:
@@ -679,7 +666,7 @@ red and even.
   $$\Pr(Red \cap Even) = \Pr(\{12,14,16,18,30,32,34,36\}) = 8/37 \approx 0.216$$
 Joint probabilities are just probabilities, so they obey all of the rules of probability.
 
-### Conditional probabilities
+#### Conditional probabilities
 
 The ***conditional probability*** of an event $A$ ***given*** another event $B$ 
 is defined as:
@@ -694,7 +681,7 @@ In our example:
 Conditional probabilities are just probabilities, so they obey all of the rules
 of probability.
 
-### Independent events 
+#### Independent events 
 
 One common way of modeling joint and conditional probabilities is to assume
 that certain events are unrelated to each other.  
@@ -759,16 +746,16 @@ assume that each spin is independent, this is an easy problem:
   $$\Pr(w = \$800) = \Pr(Red_1 \cap Red_2 \cap Red_3) = \Pr(Red_1)\Pr(Red_2)\Pr(Red_3) = (18/37)^3 \approx 0.115$$
    $$\Pr(w = \$0) = 1 - \Pr(w = \$800) \approx 0.885$$
 
-### Some standard results about joint and conditional probability
+#### Some standard results about joint and conditional probability
 
 - Bayes' rule:
   $$\Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$
 - Law of total probability:
   $$\Pr(A) = \Pr(A|B)\Pr(B) + \Pr(A|B^c)\Pr(B^c)$$
 
-# Problems
+## Problems
 
-## Easy
+### Easy
 
 1. Let 
    $$A = \{Avocado,Banana\}$$
@@ -813,13 +800,13 @@ assume that each spin is independent, this is an easy problem:
    b. $\sum_{i=1}^3 \sum_{j=1}^2 x_iy_j$. 
    c. $\sum_{j=1}^2 \sum_{i=1}^3 x_iy_j$. 
 
-## Medium
+### Medium
 
 1. Some set algebra problems.
 
 
 
-## Difficult
+### Difficult
 
 1. In stock markets, some participants are active traders, buying and selling
    individual stocks on a regular basis. Active traders believe that they can 
@@ -891,7 +878,7 @@ assume that each spin is independent, this is an easy problem:
       A: $Pr(I=1|P=1) = \frac{Pr(P=1|I=1)Pr(I=1)}{Pr(P=1)} = 0.005/0.015 = 1/3$
 
 
-## Answer key
+### Answer key
 
 1. Answer
 2. Answer

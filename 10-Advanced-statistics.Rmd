@@ -1,23 +1,6 @@
----
-title: "Chapter 10: Advanced topics in statistics"
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output: 
-  html_document:
-    theme: paper
-    toc: true
-    toc_float: true
-    number_sections: true
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Advanced topics in statistics
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Chapter overview
+## Chapter 10 overview
 
 In this chapter we will learn how to:
 
@@ -34,13 +17,13 @@ In this chapter we will learn how to:
   (conditional averages, linear regression, and smoothing)
   and interpret an estimated CEF.
 
-# Multivariate statistical methods
+## Multivariate statistical methods
 
-## Joint and conditional frequencies
+### Joint and conditional frequencies
 
 See conditional averages below.
 
-## Estimating covariance and correlation
+### Estimating covariance and correlation
 
 The sample covariance of $x_i$ and $y_i$ is:
   $$s_{x,y} = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})$$
@@ -74,9 +57,9 @@ The sample covariance and correlation have several properties:
 - As with the population correlation, the sample correlation ranges 
   from -1 to 1.
 
-## Estimating conditional expectations
+### Estimating conditional expectations
 
-### Conditional averages
+#### Conditional averages
 
 When our conditioning variable $x_i$ only takes on a 
 few values, the CEF can be estimated by constructing ***conditional averages***:
@@ -113,7 +96,7 @@ with the conditional average:
 
 So we will also need some other techniques.
 
-### Linear regression
+#### Linear regression
 
 One solution is to assume that the CEF is a straight line, or can be
 well-approximated by a straight line.  In that case we can estimate
@@ -124,7 +107,7 @@ regression calculates the straight line that fits the data best.
 
 You will learn much more about linear regression in ECON 333.
 
-### Binning and smoothing
+#### Binning and smoothing
 
 Figure ??? below shows an example in which $x_i$ takes on many values 
 (so conditional averages won't work) and the relationship betwee
@@ -164,9 +147,9 @@ way of setting these parameters so the results look reasonable.
 > EXAMPLE PLOT HERE: binned fit, fewer bins and more bins
 > EXAMPLE PLOT HERE: scatter plot with smoothed fit, oversmoothed and undersmoothed
 
-# Applications of statistics
+## Applications of statistics
 
-## Description
+### Description
 
 The simplest application of statistics is the one we have emphasized so
 far: using statistics calculated from a random sample as estimates
@@ -177,7 +160,7 @@ unemployment rate among the approximately 100,000 respondents to the
 Labour Force Survey to estimate the unemployment rate among the much 
 larger population of approximately 30 million working-age Canadians.
   
-## Prediction
+### Prediction
 
 Another important application of statistics is to form ***predictions***.
 For example, we might use data to learn the historical relationship 
@@ -199,6 +182,6 @@ This is a reasonable thing to do, but there are some common issues:
   cases in which $x_i=a$) or we must have a model (e.g. a linear model)
   that allows extrapolation.
 
-## Causal inference (TO BE ADDED)
+### Causal inference (TO BE ADDED)
 
 

@@ -1,23 +1,6 @@
----
-title: 'Chapter 9: Statistical inference'
-author: "ECON 233, Brian Krauth"
-date: "Spring 2021"
-output:
-  html_document:
-    theme: paper
-    toc: yes
-    toc_float: yes
-    number_sections: yes
-  pdf_document:
-    toc: yes
-    number_sections: yes
----
+# Statistical inference
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Chapter overview
+## Chapter 9 overview
 
 In this chapter we will learn how to:
 
@@ -25,7 +8,7 @@ In this chapter we will learn how to:
  - Construct a confidence interval
  - Correctly interpret both hypothesis tests and confidence intervals
 
-# Hypothesis tests
+## Hypothesis tests
 
 Suppose we have a data set $D$ with unknown joint distribution $P_D$. 
 Suppose we have a parameter of interest $\theta = \theta(P_D)$
@@ -53,7 +36,7 @@ what values of $\theta$ we can confidently rule out.
 The set of procedures for constructing confidence intervals and 
 hypothesis tests is called statistical ***inference***.
 
-## A general framework 
+### A general framework 
 
 We will start with hypothesis tests. 
 
@@ -72,7 +55,7 @@ whether we have a fair game?  Intuitively:
   
 We need a well-justified criterion for making these decisions.
 
-### The null and alternative hypotheses
+#### The null and alternative hypotheses
 
 The first step in a hypothesis test is to define the 
 ***null hypothesis***.  The null hypothesis is a statement
@@ -92,7 +75,7 @@ In our roulette example, our null hypothesis is:
 and the alternative hypothesis is:
   $$H_1: p_{red} \neq 18/37 \approx 0.486$$
 
-### The test statistic
+#### The test statistic
 
 Our next step is to construct a usable ***test statistic***. A
 test statistic for a given null hypothesis is a statistic that
@@ -124,7 +107,7 @@ and under the alternative the distribution is different:
 Intuitively, the frequency will be close to $0.486n$ when the null
 is true, and far from $0.486n$ when the null is false.
 
-### Significance and critical values
+#### Significance and critical values
 
 Once we have our test statistic $t$, the next thing is to choose 
 ***critical values***.  The critical values are two numbers
@@ -195,7 +178,7 @@ In other words we reject the null (at 5\% significance) that
 the roulette wheel is fair if red wins fewer than 39 spins 
 or more than 58 spins.
 
-### The power of a test
+#### The power of a test
 
 As mentioned above, the power of a test is defined as the probability 
 of rejecting the null when it is false, and the alternative is true.
@@ -252,7 +235,7 @@ abline(h=0.05,lty=2,col="gray")
 points(x=18/37,y=0.05,col="red")
 ```
 
-### P-values
+#### P-values
 
 The convention of using a conventional significance level such 
 as 5\% for hypothesis tests is somewhat arbitrary and has some
@@ -282,7 +265,7 @@ The p-value of a test is simple to calculate from the test statistic and
 its distribution under the null.  I won't go through that calculation 
 here.
 
-## Application: the mean of a random variable
+### Application: the mean of a random variable
 
 Suppose that $D = (x_1,\ldots,x_n)$ is a random sample of size $n$
 on some random variable $x_i$ with unknown mean $E(x_i) = \mu_x$
@@ -313,7 +296,7 @@ are two standard solutions to this problem:
   2. Use the central limit theorem to get an approximate probability
     distribution.
 
-### An asymptotic test
+#### An asymptotic test
 
 We will start with solution \#2. We know from the central limit 
 theorem that the distribution of:
@@ -349,7 +332,7 @@ distribution, so we can get critical values for a 5\% test:
 This kind of test is so common that I want you to remember these
 numbers.
 
-### A finite-sample test
+#### A finite-sample test
 
 An alternative to asymptotic tests is to make specific assumptions
 about the probability distribution of our DGP. Specifically,
@@ -451,9 +434,9 @@ observations so economists tend to use asymptotic tests
 unless they have a very small sample.
 
 
-# Extensions
+## Extensions
 
-## Confidence intervals 
+### Confidence intervals 
 
 Hypothesis tests have one very important limitation: although they 
 allow us to rule out $\theta = \theta_0$ for a single value of $\theta_0$, 
@@ -560,7 +543,7 @@ more challenging than we need for this course.
 Fortunately, some other confidence intervals can be easily worked 
 out by pen and paper, and we will move on to those next.
 
-## One-tailed tests and confidence intervals
+### One-tailed tests and confidence intervals
 
 Our simple testing setup assumed we wanted to test a single
 point null:
@@ -633,10 +616,11 @@ or
 depending on which tail we want.
 
 
-# Things I have skipped
+## Things I have skipped
 
-## Testing linear restrictions on multiple parameters  
+### Testing linear restrictions on multiple parameters  
 
-## Estimating the variance and standard deviation
+### Estimating the variance and standard deviation
 
-## Testing multiple linear restrictions
+### Testing multiple linear restrictions
+  
