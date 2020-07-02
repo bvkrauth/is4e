@@ -1,13 +1,16 @@
 ---
-title: "Chapter 2: Cleaning data with Excel"
+title: 'Chapter 2: Cleaning data with Excel'
 author: "ECON 233, Brian Krauth"
 date: "Spring 2021"
-output: 
+output:
   html_document:
     theme: paper
-    toc: true
-    toc_float: true
-    number_sections: true
+    toc: yes
+    toc_float: yes
+    number_sections: yes
+  pdf_document:
+    toc: yes
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -35,27 +38,34 @@ In this chapter we will learn how to:
 
 # Get started
 
-## Reproducible research 
+## Some basic principles
+
+### Reproducible analysis 
 
 The goal of most data analysis is to get some interesting results that we can
 report to our audience.  Sometimes our audience is decision-makers in business
 or government, sometimes it is the public, and sometimes it is other
-researchers.
+researchers.  For our audience it is important for the results of our
+analysis to be:
 
-In all of these cases, it is important that our analysis is
-***reproducible***. Reproducible research provides all information needed to
-confirm and possibly extend the results of the research.  Why is
-reproducibility important?
+- **Clear**: the audience can understand the information you are conveying.
+- **Informative**: the information is new and useful.
+- **Concise**: the relevant information is not obscured by irrelevant 
+   information.
+- **Professional**:  the presentation of our results is visually attractive
+   and follows the professional conventions of your field.
 
-- It guards against fraudulent research by making it easier to detect. 
-- It guards against errors by making them easier to detect. 
-- It allows for researchers to build on research by developing additional
-  findings
+At the same time, the underlying analysis needs to be:
 
-The key to reproducibility is to carefully maintain a record of all data and
-analysis steps leading to every result that is ever reported. This record can
-then be shared with others who (hopefully) can then reproduce the results for
-themselves. 
+- **Accurate**: errors are minimized, and no "shortcuts" (e.g. fraudulent
+   data) are taken
+- **Transparent**: another analyst can determine how each result was obtained.
+   - this other analyst may be you in 6 months!
+- **Reproducible**: another analyst can derive, explore, and extend the results.
+
+The key to accuracy, transparency and reproducibility is to carefully 
+maintain a record of all data and analysis steps leading to every result 
+that is ever reported. This record can then be shared with others.      
 
 ### Workflow and version control
 
@@ -169,16 +179,17 @@ working copy.
 
 1. Copy [filename] from the ```raw``` subfolder to your main project folder.
    - This is your working copy.
-2. (optional) Rename the working copy if you like.
+2. Rename the working copy.
    - You should choose a brief but clear name. Avoid names like "my file.xlsx."
-   - I usually put the current date at the end of my filenames, for example
-     "NLSY wage data 200614.xlsx" This allows me to keep earlier versions of a file
-     while still knowing which version is the current one.
+   - I usually put the current date in YYMMDD format at the end of my filenames, 
+      for example "NLSY wage data 200614.xlsx" This makes it easier to keep earlier 
+      versions of a file while still knowing how they are related and which 
+      version is the current one.
 3. Open the working copy. 
 
 ### Maintain a master version
 
-**RULE #4: Maintain a master version, but keep selected intermediate versions as well.** 
+**RULE #4: Maintain a master version, but keep selected intermediate versions too.** 
 
 Think about the last time you wrote a paper for school. Did you just start at the
 beginning, write until you reached the end, and turn in the result?  Probably not.
@@ -203,9 +214,9 @@ Others might do it at the end of each working day. Ideally, these two will often
 coincide. It all depends on what works best for you.
 
 
-# A quick tour of Excel
+## A quick tour of Excel
 
-## Excel terminology and user interface
+### Excel terminology and user interface
 
 When you open your working copy of the data in Excel, 
 your screen should look something like this:
@@ -263,7 +274,7 @@ ever knowing their names, so I will list them here:
   - You can double-click on a tab to change its name.
   - You can click on the "+" button to add a new worksheet.
 
-## Tidy data
+### Tidy data
 
 The data in [filename] takes the form of what data scientists sometimes
 call **tidy** data. Tidy data takes a simple and convenient format:
@@ -665,7 +676,9 @@ So our next step is:
 As you can see, Excel displays the correct ranks. We can check this by sorting
 on Income and seeing if IncomeRank is also sorted.
 
-## Using logical values
+> DO WE ALSO WANT TO DO PERCENTRANK HERE?  IT ISN'T USED ANYWHERE ELSE.
+
+## Working with logical values
 
 In addition to text and numbers, cells can also contain ***logical***
 values (TRUE or FALSE). Logical values can be entered directly in 
@@ -704,3 +717,67 @@ We will call our variable "Male" and set it to 1 for males, and 0 for females.
 This should display as 1.  Fill in the rest of the column, and you should see
 1 for all of the males and 0 for all of the females.
 
+ALSO COVER SWITCH()
+
+## Working with text
+
+While normal arithmetic operations like addition or multiplication do not 
+operate on text, there are many useful functions to manipulate text strings
+in Excel:
+
+- `LEN()` calculates the length (number of characters) of a string. For 
+   example, `LEN("Hello world!")` returns the value of 12. 
+- `MID()` allows you to extract part of a string.  For example `MID("Hello world!",2,3)`
+   returns a value of "ell".  
+- `CONCAT()` allows you to join (concatenate) two or more strings.  For example
+   `CONCAT("Hello","world")` returns a value "Helloworld".
+- `UPPER()`, `LOWER()` and `PROPER()` allow you to change the case of a string. For
+   example `UPPER("Hello world!")` returns "HELLO WORLD!", `LOWER("Hello world!")` 
+   returns "hello world!", and `PROPER("Hello world!")` returns "Hello World!".
+- `FIND()` allows you to find a particular substring within a larger string,
+   and `REPLACE()` allows you to replace part of a string.
+
+## Working with dates and times
+
+Let's see what Excel can do with dates and times:
+
+1. Open a blank new worksheet.
+2. In cell A1 enter the date of our final exam.
+3. In cell A2 enter `=TODAY()` to automatically fill in today's date.
+4. In cell A3 enter `=A1-A2` to calculate the number of days until the final exam.
+
+We can go even further than that
+
+1. In cell B1 enter the date and time of our final exam (for example "9/1/2020 9 am")
+2. In cell B2 enter `=NOW()` to automatically fill in today's date and time.
+3. In cell B3 enter `=B1-B2` to calculate the number of days (including partial days)
+   until the final exam.
+
+How does this all work? 
+
+- Computer programs typically store dates and times as the number of days 
+   or seconds that have passed since some standard base time. 
+- In Excel, dates are stored as the number of days that have passed
+   since the beginning of January 1900, and times are stored as fractions
+   of a day.  For example:
+   - 1 = January 1, 1900, 12:00:00 am (midnight)
+   - 1.5 = January 1, 1900 12:00:00 pm (noon)
+   - 2 = January 2, 1900, midnight
+   - 44,075.5 = September 1, 2020 12:00:00 pm (noon)
+- Excel automatically recognizes when you enter a date or time, and changes the
+   cell's formatting accordingly.  So when you entered "9/1/2020" in cell
+   A1, Excel did the following:
+   - Recognized that "9/1/2020" is a date, and converted it to 44,075.
+   - Set the cell's value to 44,075.
+   - Changed the cell's formatting on the cell from General to Date so that the 
+      value 44075 displays as 9/1/2020.
+
+To see the internal value of a date in Excel, you can just change the formatting
+back to General.
+
+
+## Extras
+
+### Documenting
+
+You can type in a link or add the function HYPERLINK().
