@@ -17,3 +17,9 @@
 *.jfif
 *.svg
 *.gz
+
+BOOK.Rmd
+
+Old/
+_book/
+_bookdown_files/
