@@ -176,6 +176,18 @@ In other words we reject the null (at 5\% significance) that
 the roulette wheel is fair if red wins fewer than 39 spins 
 or more than 58 spins.
 
+| Test component | General case | Specific case |
+|----------------|--------------|---------------|
+| Parameter      |    $p = \Pr(\textrm{some event})$  | $p = \Pr(RED)$ |
+| Null hypothesis | $H_0:p = p_0$ |  $H_0:p = 18/37$ | 
+| Alternative hypothesis | $H_1: p \neq p_0$ | $H_1: p \neq 18/37$ |
+| Test statistic | $t = n\hat{f}_{\textrm{event}}$ | $t = n\hat{f}_{RED}$ | 
+| Null distribution | $Binomial(n,p_0)$ | $Binomial(100,18/37)$ |
+| Critical value $c_L$ | 2.5 percentile of $Binomial(n,p_0)$ | 39 |
+| Critical value $c_H$ | 97.5 percentile of $Binomial(n,p_0)$ | 58 |
+| Decision | Reject if $t \notin [c_L,c_H]$ | Reject if $t \notin [39,58]$ |
+
+
 #### The power of a test
 
 As mentioned above, the power of a test is defined as the probability 
