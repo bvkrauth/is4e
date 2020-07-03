@@ -5,8 +5,6 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-## Chapter 11 overview
-
 In this chapter we will learn how to:
 
 - Implement and interpret a simple hypothesis test.

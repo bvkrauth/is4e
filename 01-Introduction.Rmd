@@ -1,7 +1,5 @@
 # Introduction
 
-## Chapter 1 overview
-
 In this chapter we will:
 
  - Review educational goals and establish course expectations

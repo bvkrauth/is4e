@@ -6,8 +6,6 @@ library(VennDiagram)
 library(RColorBrewer)
 ```
 
-## Chapter 3 overview
-
 In this chapter we will learn how to:
 
  - Model random events using the tools of probability

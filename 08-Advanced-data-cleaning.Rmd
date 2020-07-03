@@ -1,7 +1,5 @@
 # Advanced data cleaning with Excel
 
-## Chapter 8 overview
-
 In this chapter we will learn how to:
 
 - Find economic data from key sources.

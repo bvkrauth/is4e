@@ -1,7 +1,5 @@
 # Statistical inference
 
-## Chapter 9 overview
-
 In this chapter we will learn how to:
 
  - Construct and perform a simple hypothesis test

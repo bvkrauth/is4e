@@ -16,7 +16,12 @@ site: bookdown::bookdown_site
 
 # About this book {-}
 
-This book was written for use as a textbook for ECON 233.
+This book has been written for use as a textbook for ECON 233, the introductory
+statistics course for economics majors at Simon Fraser University. 
+
+## About the author {-}
+
+Brian Krauth is Associate Professor of Economics at Simon Fraser University.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

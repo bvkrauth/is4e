@@ -1,7 +1,5 @@
 # Random variables
 
-## Chapter 4 overview
-
 In the previous chapter, we learned a framework for modeling random
 events. In economics, the random events we are interested in are usually
 ***quantitative***, that is, they can be described by a number.

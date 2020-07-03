@@ -10,8 +10,6 @@ simdat$tmpval <- simdat$xval
 simdat$tmpval[simdat$xval < 0] <- NA
 ```
 
-## Chapter 12 overview
-
 In this chapter we will learn how to:
 
  - Write and execute a simple script in R

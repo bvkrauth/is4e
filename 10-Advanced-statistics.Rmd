@@ -1,7 +1,5 @@
 # Advanced topics in statistics
 
-## Chapter 10 overview
-
 In this chapter we will learn how to:
 
 - Describe the relationship between two random variables

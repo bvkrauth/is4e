@@ -1,7 +1,5 @@
 # Basic data analysis with Excel
 
-## Chapter 5 overview
-
 In chapter 2, we learned how to obtain and clean a simple data set. The 
 next step is to learn some tools for analyzing it. We will start with
 ***univariate*** statistics, i.e., statistics that describe a single 

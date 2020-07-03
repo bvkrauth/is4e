@@ -1,7 +1,5 @@
 # Statistics
 
-## Chapter 6 overview
-
 So far, we have learned how to model random events and random numbers, 
 and we have learned how to calculate some commonly-used statistics from 
 data.  This chapter ties all of that work together.

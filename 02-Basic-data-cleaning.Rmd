@@ -1,7 +1,5 @@
 # Cleaning data with Excel
 
-## Chapter 2 overview
-
 In this chapter we will learn how to:
 
  - Follow good data management practices 
