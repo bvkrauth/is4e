@@ -7,29 +7,54 @@ In this chapter we will:
 
 ## Course goals and context
 
-### Why this is an important course
+By the end of this course you will develop computer skills:
 
-In ECON 233 you will learn some basic techniques for data analysis using 
-Excel and R, as well as the statistical theory underlying these techniques. 
+1. Clean and analyze data in Excel.
+2. Analyze and graph data in R.
+3. Follow recomended practices for data management and reproducible analysis.
+
+you will be familiar with basic statistical concepts:
+
+4. Explain the relationship between population and sample.
+5. Calculate and interpret probabilities and expected values.
+6. Describe the properties of a statistic or estimator including its
+  probability distribution, expected value, variance, bias, and mean 
+  squared error.
+7. State and apply the law of large numbers and central limit theorem.
+
+and you will be able to apply these skills in combination to analyze 
+real-world economic data:
+
+8. Construct and interpret common charts including histograms, scatter plots,
+  and time-series plots.
+9. Construct and interpret freqency tables and cross-tabulations.
+10. Construct and interpret common univariate and bivariate statistics,
+    including	mean, variance, standard deviation, covariance and correlation.
+11. Construct and interpret hypothesis tests and confidence intervals.
+
+We will be switching back and forth between theory, data analysis and
+applications.  All three skill sets are valuable.
+
+### Why this is an important course
 
 Hopefully you are in this course because you are fascinated by the course
 material, and would take it even if it wasn't required for the economics 
-major. But I'd like to motivate everyone to take this course as an
-opportunity to learn some very useful skills.
+major. But that isn't the case for many of you, so I'd like to motivate
+everyone to take this course as an opportunity to learn some very useful
+skills.
 
-The world of today is awash in data: retailers maintain databases
-of transactions, manufacturers track product quality and costs, 
-marketers collect data on customers and potential customers,
-government records everyone's interactions with schools, 
-tax authorities, social welfare, healthcare and criminal justice, and
-employers maintain detailed personnel records. Data can be found
-in places that aren't obvious: a large fraction of Internet traffic
-is computer programs (bots) "visiting" web pages to gather 
-information on their content.  These databases can
-be linked and analyzed in various ways, and this analysis impacts 
-decisions in ways that you might not know about:
-Many of the world's most successful companies rely heavily
-on the innovative gathering and usage of data:
+Today's world is awash in data: 
+
+- retailers maintain databases of transactions
+- manufacturers track product quality and costs
+- marketers collect data on customers and potential customers
+- government records everyone's interactions with schools,
+    tax authorities, social welfare, healthcare and criminal justice, 
+- employers maintain detailed personnel records. 
+ 
+These databases can be linked and analyzed in various ways, and many 
+of the world's most successful companies rely heavily on the innovative
+gathering and usage of data:
 
 - Google's core product (the search engine) is built on the 
   analysis of massive amounts of data.
@@ -64,29 +89,6 @@ of the underlying statistical principles, and the ability to
 recognize the economic considerations in a situation, you
 will do quite well.
 
-### Educational goals
-
-By the end of the course you will be able to:
-
-1. Clean and analyze data in Excel.
-2. Analyze data in R.
-3. Follow recomended practices for data management and reproducible analysis.
-4. Construct and interpret common charts including histograms, scatter plots,
-  and time-series plots.
-5. Construct and interpret freqency tables and cross-tabulations.
-6. Construct and interpret common univariate and bivariate statistics,
-    including	mean, variance, standard deviation, covariance and correlation.
-7. Construct and interpret hypothesis tests and confidence intervals.
-8. Explain the relationship between population and sample.
-9. Calculate and interpret probabilities and expected values.
-10. Describe the properties of a statistic or estimator including its
-  probability distribution, expected value, variance, bias, and mean 
-  squared error.
-11. State and apply the law of large numbers and central limit theorem.
-
-We will be switching back and forth between data analysis and underlying
-theory. Both are important.
-
 ### Related courses
 
 ECON 233 is the first course in the two-course econometrics sequence 
@@ -99,16 +101,16 @@ and you will go deeper into the theory.
 If you find you enjoy and/or do well in this course, I would strongly
 encourage you to take further courses in econometrics:
 
- - **ECON 334: Data visualization and economic analysis** is an elective
-   focusing on exploratory data analysis and visualization
- - **ECON 335: Introduction to causal inference and policy evaluation** is an
-   elective focusing on the problem of inferring cause-and-effect from
+- [ECON 334: Data Visualization and Economic Analysis](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/334.html) 
+  is an elective focusing on exploratory data analysis and visualization
+ - [ECON 335: Introduction to Causal Inference and Policy Evaluation](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/335.html)
+  is an elective focusing on the problem of inferring cause-and-effect from
    economic data. As we will learn later this term, this problem
    is often quite difficult but crucial for economic policy choices.
- - **ECON 433 (NEW TITLE)** is an advanced elective focusing on techniques 
+ - [ECON 433: Financial and Time Series Econometrics](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/433.html) is an advanced elective focusing on techniques 
    for analyzing the kind of time series data that is used in macroeconomics
    and financial markets.
- - **ECON 435: Econometric methods** is an advanced course in statistics 
+ - [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html) is an advanced course in statistics 
    and econometrics that is part of our honours sequence. It gives you the
    opportunity and tools to write a serious empirical research
    paper.  Non-honours students are eligible to take it if they have 
@@ -116,23 +118,24 @@ encourage you to take further courses in econometrics:
    
 I would also encourage you to take courses outside of the economics
 department, and to consider a minor in the Statistics department or the new
-interdisciplinary Social Data Analysis (SDA) minor. 
+interdisciplinary [Social Data Analytics (SDA) minor](http://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html) . 
 
-Finally, all economics majors have the option of taking ECON 233 or BUS 232,
-so you may be wondering what the difference is.  The key differences are:
+Finally, all economics majors have the option of taking ECON 233 or 
+BUS 232, so you may be wondering what the difference is. Either course 
+is suitable preparation for ECON 333, but there are some key differences: 
 
-- ECON 233 emphasizes economics applications, while BUS 232 emphasizes
-  business applications.
-- ECON 233 uses both Excel and R, while BUS 232 uses Excel. You are likely 
-  to use R in ECON 333 and other upper-division ECON courses, so it is nice
-  to get used to it now.
-- ECON 233 is part of the Social Data and Analytics (SDA) minor; if you 
-  are an economics student and are interested in that minor you are 
-  recommended to take ECON 233.
+- *Tools:* ECON 233 uses both Excel and R, while BUS 232 uses Excel. 
+  - You are likely to use R in ECON 333 and other upper-division ECON
+    courses, so it is nice to get used to it now.
+- *Applications:* ECON 233 emphasizes economics applications, while 
+  BUS 232 emphasizes business applications.
 
-Either course is suitable preparation for ECON 333.
+ECON 233 is part of the Social Data and Analytics (SDA) minor; if you 
+are an economics student and are interested in that minor you are 
+recommended to take ECON 233.
 
-### My expectations
+
+## Course organization
 
 This book is constructed under the assumptions that:
 
@@ -150,16 +153,14 @@ you will need to ask for help, but I am happy to help anyone who asks.
 
 ## Computer resources
 
-### Requirements
+To do the computer work you will need a computer with internet access and
+the following software packages installed:
 
-To do the computer work you will need:
-
-- A computer
 - Microsoft Excel
-- R and RStudio
+- R 
+- RStudio
 
-The required software packages are available on all campus lab computers, but
-if you want to use your personal computer you might need to install them.
+The required software packages are available free of charge for SFU students.  They are also installed on all campus lab computers, 
 
 I will teach the course using Windows, and can provide technical support for
 Windows.  All of the necessary tools are also available for macOS, but my
@@ -177,60 +178,36 @@ Installation instructions are available at
 https://www.sfu.ca/itservices/technical/software/office365.html.
 
 Once you have installed Excel, you should confirm that it is working by
-downloading the file:
-
-[INSERT LINK HERE] 
-
-and opening it. You should see something that looks like this:
+starting the program. You should see something that looks like this:
 
 ![Excel screenshot](ExcelScreenshot.jpg)
-
-Many students have already used Excel, but just to be safe, let's go over 
-some of its basic characteristics and terminology:
-
-- An Excel file (in Windows it normally has the extension `.xlsx`) 
-  is called a ***workbook***.
-- Each workbook contains one or more ***worksheets***.
-- Each worksheet is a rectangular grid of ***cells***. 
-- Each cell contains one of the following:
-  - Nothing (blank)
-  - A ***value***, usually a number or text string 
-  - A ***formula*** for calculating a value.
-- Each cell has a corresponding ***address***, which identifies its column by
-  letter and its row by number. 
-  - For example, the cell in the third column (column *C*) and fifth row 
-    (row *5*) is called cell *C5*. 
 
 ### Installing R and RStudio
 
 Later in the semester, we will also be using a more specialized statistical
-program called R and a related program called RStudio.  Both programs are
-open-source, and are available free of charge for both Windows and macOS.
+program called R, and a related program called RStudio. 
 
-Installation instructions for both R and RStudio are available at 
+- R is a programming language used for statistical analysis.
+- RStudio is an "Integrated Development Environment" for R, that is
+  it is an integrated set of tools for building and running R 
+  programs.
+
+Both R and RStudio are open-source, and are available free of charge for both Windows and macOS. Installation instructions are available at:
 
 https://rstudio.com/products/rstudio/download/#download.
 
-Please note that you should install R first, then RStudio.
+NOTE: install R first, then RStudio.
 
 After installing R and RStudio, you should confirm that they are working by
 opening RStudio.  You should see something like this:
 
 ![RStudio screenshot](RStudio open screenshot.jpg)
 
-We won't do anything with R or RStudio for a while, so go ahead and close it.
-
 One of the most useful features of R is that it allows users write and
 distribute "packages" that extend its capabilities.
 Later on this term we will install some of the most useful packages, but feel
 free to skip ahead to [insert reference here].
 
-### Other resources
+### Canvas
 
-TO BE ADDED:
-
-- How to obtain and submit assignments
-- Lab and tutorial structure
-- Lecture structure
-- Canvas
-- Exams
+The course Canvas page is available at https://canvas.sfu.ca/courses/59191.
