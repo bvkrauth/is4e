@@ -305,3 +305,186 @@ To be added.
 ### Power Query
 
 To be added.
+
+
+
+
+
+
+## Data and project management
+
+### Some basic principles
+
+#### Reproducible analysis 
+
+The goal of most data analysis is to get some interesting results that we can
+report to our audience.  Sometimes our audience is decision-makers in business
+or government, sometimes it is the public, and sometimes it is other
+researchers.  For our audience it is important for the results of our
+analysis to be:
+
+- **Clear**: the audience can understand the information you are conveying.
+- **Informative**: the information is new and useful.
+- **Concise**: the relevant information is not obscured by irrelevant 
+   information.
+- **Professional**:  the presentation of our results is visually attractive
+   and follows the professional conventions of your field.
+
+At the same time, the underlying analysis needs to be:
+
+- **Accurate**: errors are minimized, and no "shortcuts" (e.g. fraudulent
+   data) are taken
+- **Transparent**: another analyst can determine how each result was obtained.
+   - this other analyst may be you in 6 months!
+- **Reproducible**: another analyst can derive, explore, and extend the results.
+
+The key to accuracy, transparency and reproducibility is to carefully 
+maintain a record of all data and analysis steps leading to every result 
+that is ever reported. This record can then be shared with others.      
+
+#### Workflow and version control
+
+Think about the last time you wrote a paper for school.  Did you just sit down
+and write from the beginning to the end, and then turn in the result?
+Probably not.  There was probably exploration, learning, and 
+trial-and-error. You probabaly threw away entire paragraphs, had little scraps 
+of writing, and went through several revisions. Data analysis follows a similar
+process.  Most of what you do will not end up in the final version, 
+and it would be a huge burden to have to maintain a record of everything
+you do. So what should we do?
+
+The standard solution to this problem is to plan your ***workflow*** in advance.
+Your workflow is a system of rules and procedures you follow to organize your work,
+and needs to include some kind of ***version control*** system.  A 
+version control system maintains multiple versions of your files in a way that
+makes it easy to experiment without having to repeat steps.
+
+Serious programmers and data analysts often work in large teams 
+on massive projects that may take many years. The person who originally 
+wrote a particular piece of the code may have left the 
+company decades ago, and the system as a whole may be so complex that no one
+individual understands every detail.  These teams need to be constantly adding 
+new capabilities and fixing errors (bugs) without accidentally introducing new 
+errors or getting in one another's way. 
+
+To deal with these issues, serious programmers and data analysts use 
+specialized software to implement version control. The most commonly 
+used version control system combines two tools called Git and GitHub.
+We will not use these tools in this course, but I'd like to describe
+them so you have an idea what a robust version control system looks 
+like:
+
+- Git is a computer program that maintains a distributed 
+  database of file versions for a single project.
+  - Every time you edit a file, the changes are logged in the database.
+  - Past changes can be viewed and can easily be undone.
+  - There is always a "master" version of each project file.  It is usually
+    under the exclusive control of a single user.
+  - Any user can create a local copy called a "branch", and can edit the 
+    files in their branch without affecting the master version.
+  - The user who controls the master version can "pull" 
+    changes in from any branch to the master. Usually this is done after the 
+    branch owner issues a "pull request."
+- GitHub is an online user interface to Git that provides various other features
+  like access control, task lists, and bug tracking.
+
+Both Git and GitHub are free for most users, but we will not use them
+in this course. You are working alone, and your projects are simple.
+
+Instead we will follow some of the basic principles of version control
+without using any fancy software.
+
+### Setting up your project
+
+Our simple verison control system will be a set of four rules.
+
+1. Organize work into projects and keep all project-related files together.
+2. Keep all original ("raw") data separate and document its sources.
+3. Avoid changing data; use existing data to make new data instead.
+4. Maintain a master version, but keep selected intermediate versions as well.
+
+We will now set up our first project according to these rules.
+
+#### Make a project folder
+
+**RULE #1: Organize work into projects, and keep all project-related files together.** 
+
+For this class, it is natural to think of each chapter or assignment as a
+separate project.
+
+1. Decide where on your computer you want to keep your work for this course. 
+   - I will refer to that location as `[mywork]`.
+2. Create a folder called `[mywork]\Chapter3`
+3. Create the following subfolders:
+   -  `[mywork]\Chapter3\raw`
+   -  `[mywork]\Chapter3\doc`
+
+#### Get external data
+
+**RULE #2: Keep all original ("raw") data separate and document its sources.** 
+
+1. Download the file [LINK HERE] and put it in your `raw` folder.
+2. Create a text file in your ```raw``` folder called `README.txt`
+   and type the line:
+   `[filename] dowloaded [today's date] from [link]`
+   and save. 
+   
+Every time you add a file to the `raw` folder, you should add the
+corresponding line of information to `README.txt`.
+
+#### Make working copies
+
+**RULE #3: Avoid changing data; use existing data to make new data instead.** 
+
+The `raw` directory is intended to contain the unaltered, original data
+files as you received them.  Aside from the `README.txt` file, you should
+*never* alter the data files in the `raw` directory. Why not?
+
+- Editing the raw data kills reproducibility, because the changes you have
+  made are not documented.
+- It is very easy to make a mistake when editing data directly, and these
+  mistakes are undetectible if you don't have the original data.
+
+But the whole point of analysis is that we want to do something to the data,
+so what do we do? This is an easy problem to solve in R, because R keeps the
+data and analysis in separate files. In Excel the problem is more difficult
+because Excel keeps the data and analysis in the same file. We will solve the
+problem by making a  ***working copy*** of the original data, and editing the
+working copy.
+
+1. Copy [filename] from the `raw` subfolder to your main project folder.
+   - This is your working copy.
+2. Rename the working copy.
+   - You should choose a brief but clear name. Avoid names like "my file.xlsx."
+   - I usually put the current date in YYMMDD format at the end of my filenames, 
+      for example "NLSY wage data 200614.xlsx" This makes it easier to keep earlier 
+      versions of a file while still knowing how they are related and which 
+      version is the current one.
+3. Open the working copy. 
+
+#### Maintain a master version
+
+**RULE #4: Maintain a master version, but keep selected intermediate versions too.** 
+
+Think about the last time you wrote a paper for school. Did you just start at the
+beginning, write until you reached the end, and turn in the result?  Probably not.
+You may have written an outline, then filled in different sections in a random order.
+You may have decided you didn't like a paragraph, deleted it, and then decided to 
+put it back.  After several rounds of this, you eventually settled on the version
+you turned in.
+
+Here's what I recommend:
+
+1. Number versions of files sequentially (e.g. "Wage analysis 1", Wage analysis 2", etc.)
+   or by date (e.g. "Wage analysis 200614"m "Wage analysis 200706", etc.)
+2. The file you are currently working on is your working copy. Feel free
+   to do whatever you want with the working copy.  All other copies should be read-only.
+3. At regular intervals you should:
+   a. Make your working copy the master copy.
+   b. Make a copy of this new master copy and call that your new working copy.
+
+When should you make the working copy the master copy? It depends on the nature of the work.
+Most people would do this upon completion of a significant step in the project.
+Others might do it at the end of each working day. Ideally, these two will often
+coincide. It all depends on what works best for you.
+
