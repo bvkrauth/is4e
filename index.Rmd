@@ -16,12 +16,13 @@ site: bookdown::bookdown_site
 
 # About this book {-}
 
-This book has been written for use as a textbook for ECON 233, the introductory
-statistics course for economics majors at Simon Fraser University. 
+This book has been written for use as a textbook for ECON 233, the
+introductory statistics course for economics majors at Simon Fraser
+University. 
 
-The current version of the book can be obtained at [link]. The book itself
-is written using Bookdown, and its source code is available at
-https://github.com/bvkrauth/econ233. 
+The current version of the book can be obtained at **INSERT LINK HERE**. 
+The book itself is written using Bookdown, and its source code is 
+available at https://github.com/bvkrauth/econ233. 
 
 ## About the author {-}
 

@@ -1,9 +1,14 @@
 # Introduction
 
+::: goals
+**Chapter goals**
+
 In this chapter we will:
 
  - Review educational goals and establish course expectations
  - Gather resources and tools, including all needed computer software.
+
+:::
 
 ## Course goals and context
 
@@ -15,8 +20,8 @@ By the end of this course you will develop computer skills:
 
 you will be familiar with basic statistical concepts:
 
-4. Explain the relationship between population and sample.
-5. Calculate and interpret probabilities and expected values.
+4. Calculate and interpret probabilities and expected values.
+5. Explain the relationship between population and sample.
 6. Describe the properties of a statistic or estimator including its
   probability distribution, expected value, variance, bias, and mean 
   squared error.
@@ -168,7 +173,7 @@ ability to provide technical support is more limited. I'll do the best I can.
 
 ### Installing Microsoft Excel
 
-Microsoft Excel is a spreadsheet program and is available for both Windows 
+Microsoft Excel is a well-known spreadsheet program that is available for both Windows 
 and macOS. Alternatives to Excel include Google Sheets and Apple Numbers.
 
 SFU has a licensing agreement with Microsoft that allows its students 
@@ -180,7 +185,7 @@ https://www.sfu.ca/itservices/technical/software/office365.html.
 Once you have installed Excel, you should confirm that it is working by
 starting the program. You should see something that looks like this:
 
-![Excel screenshot](ExcelScreenshot.jpg)
+![Excel screenshot](ExcelBlankWorkbook.png) 
 
 ### Installing R and RStudio
 
@@ -200,14 +205,33 @@ NOTE: install R first, then RStudio.
 
 After installing R and RStudio, you should confirm that they are working by
 opening RStudio.  You should see something like this:
-
 ![RStudio screenshot](RStudio open screenshot.jpg)
 
-One of the most useful features of R is that it allows users write and
-distribute "packages" that extend its capabilities.
-Later on this term we will install some of the most useful packages, but feel
-free to skip ahead to [insert reference here].
+### Installing the Tidyverse package for R
+
+One of the most useful features of R is that it allows users to write and
+distribute ***packages*** that extend its capabilities.
+
+One of the most popular and useful packages is called the ***Tidyverse***. R 
+is a very powerful program, but it is also a very old one: the underlying
+language (called "S") was originally created in 1976. The result of this 
+is that some of the original commands are outdated in design and aren't
+well suited for modern capabilities or principles of software development.
+The Tidyverse solves this problem by adding new, more modern versions of these
+commands. You can learn more about the Tidyverse at https://www.tidyverse.org/. 
+
+To install the Tidyverse package:
+
+1. Open RStudio if it isn't already open.
+2. Click in the `Console` window (you will see it towards the bottom of the screen)
+3. Type `install.packages("tidyverse")` and hit <enter>.
+
+Once the installation is concluded and the `>` prompt reappears you can test 
+to make sure the installation worked by entering the command line: `library(tidyverse)`
+
+If you run into trouble, don't worry. We will not need the Tidyverse for 
+a few weeks, so there is plenty of time to get help.
 
 ### Canvas
 
-The course Canvas page is available at https://canvas.sfu.ca/courses/59191.
+The course Canvas page is available at https://canvas.sfu.ca/courses/59191. It includes information on lectures, tutorials, quizzes, and assignments.
