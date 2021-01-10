@@ -16,3 +16,7 @@
 div.economics {
  background-image: url("supply and demand.png");
 }
+
+div.example {
+    padding-left: 5px;
+}
