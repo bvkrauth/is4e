@@ -6,6 +6,9 @@ library(VennDiagram)
 library(RColorBrewer)
 ```
 
+::: goals
+**Chapter goals**
+
 In this chapter we will learn how to:
 
  - Model random events using the tools of probability
@@ -17,6 +20,7 @@ We will also review some math needed to learn these skills.
    - Sets
    - Functions
    - Sequences, limits and summations
+:::
 
 ## Mathematical background
 
@@ -465,86 +469,113 @@ We will use these two results later on.
 
 Having reviewed the math, we now go on to develop the basic concepts in probability.
 
-### Example application: Roulette
+::: example
+**Example application: Roulette**
 
-We will develop ieas by considering the casino game of **Roulette**.
-Here are the rules for this game:
+We will develop ideas by considering the casino game of **Roulette**.
+The picture below shows what a roulette wheel looks like.
 
-- It features a spinning wheel, a ball, and 37 colored 
-  slots that the ball might land in. 
-- The slots are numbered from 0 to 36,
-  - The slot numbered 0 is colored green
-  - 18 of the remaining slots are colored red
-  - the other 18 are colored black.
-  - In an American roulette table, there is an additional green slot labeled "00",
-    but I will assume our roulette table is a European one.
-- Players can place various bets, but I will mention three:
-  - Red (ball lands in a red slot) pays \$1 for every \$1 bet
-  - Black (ball lands in a black slot) pays \$1 for every \$1 bet
-  - A straight bet on any specific number (ball lands on that number)
-    pays \$35 for every \$1 bet
-
-The picture below shows what a roulette wheel and table look like.
-
-`![roulette wheel image](roulette.svg)`
+![roulette wheel image](roulette.svg)
 Source: <a href="https://www.vecteezy.com/free-vector/roulette">Roulette Vectors by Vecteezy</a>
 
+Here are the rules:
+
+- It features 
+  - a ball.
+  - a spinning wheel with numbered/colored slots. 
+- The slots are numbered from 0 to 36
+  - Slot number 0 is green
+  - 18 slots are red
+  - 18 slots are black.
+  - The picture above depicts an American roulette table, which has an 
+    additional green slot labeled "00",
+  - I will assume we have a European roulette table, which doe snot include
+    the "00" slot.
+- Players can place various bets on the table including:
+  - Red (ball lands in a red slot) pays \$1 per \$1 bet
+  - Black (ball lands in a black slot) pays \$1 per \$1 bet
+  - A straight bet on any specific number (ball lands on that number)
+    pays \$35 per \$1 bet
+
 Like other casino games, a roulette game is an example of a random process.
-Things happen, it matters (to the players and the casino) which thing
-happens, but we don't know in advance which thing will happen.
+Something will happen, it matters (to the players and the casino) what
+will happen, but we don't know in advance what will happen.
+:::
 
 ***Probability*** is a method of mathematically modeling a random process
-like this one, so that we can understand it and/or make 
-predictions about its future results. Probability is an extremely useful
-tool for a casino; it is also useful for banks, insurance companies, 
-and other businesses that manage risks.
+so that we can understand it and/or make predictions about its future 
+results. Probability is an essential tool for casinos, as well as for
+banks, insurance companies, and any other businesses that manage risks.
 
 ***Statistics*** is a method of using data from a random process
 to make inferences about that process. Again, the purpose is to understand
-the process, and maybe to make predictions for the future.
+the process, and maybe to make predictions for the future.  We will
+talk about statistics in later chapters.
 
-### Modeling random events
-
-#### Outcomes, events and sample spaces
+### Outcomes and events
 
 To build a probabilistic model of a random process, we start by defining
 the ***outcome*** we are interested in.  An outcome can be a simple yes/no
 result, it can be a number, or it can be a much more complex object.
 
- - In our roulette example, the outcome can be defined as the number of 
-   the slot in which the ball lands.  Call that number $b$.
+::: example
+In our roulette example, the outcome can be defined as the number of 
+the slot in which the ball lands.  Call that number $b$.
+:::
 
 The set of all possible outcomes is called the ***sample space***
 
- - In our roulette example, the sample space can be defined as 
+::: example
+In our roulette example, the sample space can be defined as
+the set of all numbers the ball can land on:
    $$\Omega = \{0,1,2,\ldots,36\}$$
+:::
 
 Next, we define a set of ***events*** that we are interested in.
 We can think of an event as either:
 
- - A statement that is either true or false, depending on the outcome.
-   For example these are events that are well-defined for our sample space: 
-   $$b = 0$$
-   $$b \textrm{ is one of the red numbers}$$
- - A subset of the sample space, for example: 
-   $$S_{15} = \{15\}$$
-   $$Red = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
+ - A statement that is either true or false OR
+ - A subset of the sample space 
 
 These two concepts are equivalent, though the subset concept 
 makes the math clearer.
+ 
+::: example
+
+These roulette events are well-defined for our sample space: 
+
+- Ball lands on 15:
+  $$b \in \{15\}$$
+- Ball lands on red:
+$$b \in RED = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
+- Ball lands on black:
+$$b \in BLACK = \{2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35\}$$
+- Ball lands on one of the first 12 numbers:
+$$b \in FIRST12 = \{1,2,3,4,5,6,7,8,9,10,11,12\}$$
+:::
 
 Since events are sets, we can use the terminology and mathematical
-tools for sets. For example
+tools for sets. 
 
- - The event "the ball lands on 12" and "a straight bet on 12 wins"
-     are identical because ($\{12\} = \{12\}$), even though their 
-     descriptions are not identical.
- - The event "the ball lands on 12"  implies the event 
-   "a bet on Red wins" because $\{12\} \subset RED$.
- - The events "a bet on Red wins" and "a bet on Black wins"
-   are disjoint because $RED \cap BLACK = \emptyset$.
+::: example
+In our roulette example:
 
-#### Probability distributions
+- Events are *identical* if they contain the same outcomes:
+  - The event "ball lands on 12 " and "a bet on 12 wins"
+    are identical since $\{12\} = \{12\}$.
+- An event *implies* another event if all of its outcomes are also in 
+  the implied event 
+  - The event "ball lands on 12"  implies the event "ball lands on red" 
+    since $\{12\} \subset RED$.
+- Events are *disjoint* if they share no outcomes:
+  - The events "ball lands on red" and "ball lands on black" are disjoint 
+    since $RED \cap BLACK = \emptyset$.
+- Any two non-identical outcomes are disjoint
+   - The events "ball lands on 12" and "ball lands on 15" are disjoint
+     since $\{12\} \cap \{15\} = \emptyset$.
+:::
+
+### Probabilities
 
 Our final step is to define a ***probability distribution***
 for this random process, which is a function that assigns
@@ -563,53 +594,75 @@ Probabilties are normally between zero and one:
 In order for a probability distribution to be valid, it
 must obey the following three conditions:
 
-1. The probability of any event $A$ is a non-negative number.
+1. Probabilities are never negative:
    $$\Pr(A) \geq 0$$
-2. The probability of one of the outcomes in the sample space
-   occuring is equal to one.
+2. One of the outcomes will definitely happen:
    $$\Pr(\Omega) = 1$$
-3. For any two disjoint events $A$ and $B$, 
+3. For any two *disjoint* events $A$ and $B$, the probability that
+   $A$ or $B$ happen is the sum of their individual probabilities:
    $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
 
+::: example
+Let's assume that the roulette wheel is "fair" in the sense that each 
+outcome has the same probability. Now, I should emphasize that this 
+doesn't have to be the case, it's just an assumption.  But it's a 
+reasonable one in this case because casinos are required
+by law to run fair roulette wheels and would be subject to heavy 
+penalties if they run unfair wheels. Later on, we will use statistics
+to confirm that a roulette wheel is fair.
 
-##### Example {-}
-
-Let's construct a plausible probability distribution for roulette.
-To do that we need to make some assumptions about how the
-roulette wheel works. In particular, let's assume that the roulette 
-wheel is "fair" in the sense that each outcome has the same probability.
 Call that probability $p$:
    $$p = \Pr(b = 0) = \Pr(b = 1) = \cdots = \Pr(b = 36)$$
-Now, I should emphasize that this doesn't have to be the case,
-it's just an assumption.  But it's a reasonable one in this 
-case: casinos are required by law to run fair roulette wheels
-and would be subject to heavy penalties if this assumption could
-be proven false. Later on, we will use statistics to confirm
-that a roulette wheel is fair.
-
-The outcomes are disjoint (only one of them can happen at a time), 
-so by the rules of probability:
-$$ \Pr(\Omega) = \Pr(\{0\} \cup \{1\} \cup \cdots \cup \{36\}) = p + p + \cdots + p = 37p$$
-But $\Pr(\Omega) = 1$, so we can solve for $p$ and get:
-$$ p = 1/37$$
+To find the value of $p$ we use the rules of probablity. 
+By rule #2 of probability, one of the outcomes will happen:
+   $$\Pr(\Omega) = 1$$
+Since the different outcomes are disjoint, rule #3 implies that:
+   $$\underbrace{\Pr(\Omega))}_{1} = \underbrace{\Pr(\{0\})}_{p} + \underbrace{\Pr(\{1\})}_{p} + \cdots + \underbrace{\Pr(\{36\})}_{p}$$
+Summarizing this equation:
+   $$1 = 37p$$
+Solving for $p$ we get:
+   $$p = 1/37 \approx 0.027$$
 That is, each of the 37 outcomes have a probability of $1/37$.
+:::
 
-We can use this result to find the probability of any event $A$:
-$$ \Pr(A) = |A|/37$$
-which implies that:
-$$ \Pr(Red) = 18/37 \approx 0.486$$
-We could use the same result to calculate the probability of any other
-event. 
 
-What does it mean to say that the probability of the ball landing in 
+
+
+
+
+::: Example
+We can find the probability of any event $A$:
+$$ \Pr(A) = |A|*p$$
+For example:
+$$ \Pr(b=12) = |\{12\}|*p = 1/37 \approx 0.027$$
+$$\Pr(RED) = |\{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}|*p = 18/37 \approx 0.486$$
+$$\Pr(EVEN) = |\{2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36\}|*p = 18/37 \approx 0.486$$
+$$\Pr(FIRST12) = |\{1,2,3,4,5,6,7,8,9,10,11,12\}|*p = 12/37 \approx 0.324$$
+:::
+
+Since this is an introductory course, our sample space will usually 
+contain a finite number of outcomes, as in our roulette example.  In
+that case, probability calculations are pretty simple:
+
+- Find the probability of each outcome.
+- To find the probability of a specific event, just add up the probabilities
+  of its outcomes.
+  
+However, not all sample spaces contain a finite number of outcomes.  For
+example, suppose we are interested in using probability to model the
+unemployment rate, or a person's income.  Those are real numbers, and can 
+take on any of an infinite number of values.  
+
+::: fyi
+What does it really mean to say that the probability of the ball landing in 
 a red slot is about 0.486? That's actually a tough question. There
 are two standard interpretations for probabilities:
 
 - Frequentist or classical interpretation: we are thinking of 
   the random process as something that could be repeated many times,
   and the probability of an event is the approximate fraction of times
-  that the event will occur.  That is, if we say the probability
-  of the ball landing on red is 0.486, that means 
+  that the event will occur.  That is, if you go to a casino and
+  bet 1000 times on Red, you will win about 486 times. 
 - Subjectivist or Bayesian interpretation: the random process
   is a one-time occurence, but we have limited information about
   it and the probability of event represents the strength of 
@@ -619,6 +672,23 @@ The frequentist interpretation of probability is well-suited
 for simple repeated settings like casino games or car insurance,
 while the Bayesian interpretation makes more sense for things
 like predicting election results.
+:::
+
+
+### Related events
+
+Sometimes are interested in more than one event, and want to talk about how they are 
+related. For example:
+
+ - In some casino games like poker or blackjack, players take an additional 
+   action after partial information about the outcome is revealed.
+ - In politics we often want to predict the winner of an election based on 
+   some polls.
+ - In economics we often have data on current economic conditions and want 
+   to predict future economic conditions.
+
+This section will develop some tools for dealing with the relationship
+between different random events.
 
 #### Some standard results about probabilities
 
@@ -634,249 +704,180 @@ Let $A$ and $B$ be two events.  Then:
    $$\Pr(A^C) = 1 - \Pr(A)$$
 - The probability of nothing happening is:
    $$\Pr(\emptyset) = 0$$
-- The probability of either $A$ or $B$ is:
+- The probability of either $A$ or $B$ happening is:
   $$\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \leq \Pr(A) +\Pr(B)$$
 
 These results all follow from the basic rules of probability. They
 are not hard to prove, but I will not go through the proofs.
 
-### Multiple events
-
-Sometimes are interested in more than one event, and want to talk about how they are 
-related. 
- - Maybe we have some (incomplete) information about the outcome and want to make 
-   predictions. For example, we have polls and want to predict the winner of an 
-   election, or we have data on current economic conditions and want to predict 
-   next month's unemployment rate.
-   
-
 #### Joint probabilities
 
-The ***joint probability*** of two events $A$ and $B$ is the probability that they
-both happen:
+The ***joint probability*** of two events $A$ *and* $B$ is the probability that
+they *both* happen:
   $$\Pr(A \cap B)$$
 
-For example, consider two events:
+::: example
+For example, consider two roulette events:
   $$Red = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
   $$Even = \{2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36\}$$
 Suppose you are interested in the probability that the ball lands on a number that is both 
 red and even. 
   $$\Pr(Red \cap Even) = \Pr(\{12,14,16,18,30,32,34,36\}) = 8/37 \approx 0.216$$
-Joint probabilities are just probabilities, so they obey all of the rules of probability.
+:::
+
+Joint probabilities are just probabilities, so they obey all of the rules of probability.  For example, all joint probabilities are between zero and one.
 
 #### Conditional probabilities
 
-The ***conditional probability*** of an event $A$ ***given*** another event $B$ 
-is defined as:
+The ***conditional probability*** of an event $A$ ***given*** another
+event $B$ is defined as:
    $$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)}$$
-The conditional probability answers the question: if we already know that $B$ is true,
-what are the chances that $A$ is true?
+The conditional probability answers the question: if we already know that 
+$B$ is true, what are the chances that $A$ is true?
 
-In our example:
+Conditional probabilities are very important when playing poker. At the beginning
+of the game, every player has equal chance of having a winning hand.
+But that is no longer true after you see your cards - having "good" cards increases
+your chance of winning, and having "bad" cards decreases that chance. In other
+words, your bet should be based on $\Pr(win|cards)$ rather than $\Pr(win)$. Good
+poker players have detailed knowledge of these conditional probabilities.
+
+::: example
+In our roulette example:
    $$\Pr(Red|Even) = \frac{\Pr(Red \cap Even)}{\Pr(Even)} = \frac{8/37}{18/37} \approx 0.444$$
    $$\Pr(b = 26|Even) = \frac{\Pr(b = 26 \cap Even)}{\Pr(Even)} = \frac{1/37}{18/37} \approx 0.056$$
+:::
 
-Conditional probabilities are just probabilities, so they obey all of the rules
-of probability.
+Like joint probabilities, conditional probabilities are just probabilities,
+so they obey all of the rules of probability.
 
 #### Independent events 
 
 One common way of modeling joint and conditional probabilities is to assume
-that certain events are unrelated to each other.  
+that certain events are unrelated to each other.
 
-We say that two events $A$ and $B$ are ***independent*** 
-if their joint probability is just the two individual 
-probabilities multiplied together:
+We say that two events $A$ and $B$ are ***independent*** if their joint
+probability is just the two individual probabilities multiplied together:
   $$\Pr(A \cap B) = \Pr(A)\Pr(B)$$
 We usually express independence with the notation $A \bot B$.
 
-This definition is not very intuitive, but we can improve upon it.
-First, suppose that both events have nonzero probability.
-Then independence of $A$ and $B$ implies that 
-  $$\Pr(A|B) = \Pr(A)$$
-and
+This definition is not very intuitive, but we can improve upon it by 
+doing a little math.  Consider two independent events $A$ and $B$ that
+have nonzero probability.  Then by the definition of independence:
+  $$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A)$$
+By the same reasoning:
   $$\Pr(B|A) = \Pr(B)$$
 In other words, knowing that one of these events are true 
 tells you nothing useful about whether the other the other event
 is true.
 
 Most events we are interested in are not independent because 
-they are physically or logically related. For example,
-pick any two events in roulette.  I'll pick the events "Red wins"
-and the event "even wins":
-  $$\Pr(Red) = 18/37$$
-  $$\Pr(Even) = 18/37$$
-  $$\Pr(Red \cap Even) = 8/37 \approx 0.216$$
-  $$\Pr(Red)\Pr(Even) = (18/37)*(18/37) \approx 0.237$$ 
-Since $0.216 \neq 0.237$, these two events are not independent.
+they are physically or logically related. 
+
+::: example
+Consider the roulette events "Red wins" and "even wins".  We earlier
+showed that the unconditional probability of red wins is:
+  $$\Pr(Red) = 18/37 \approx 0.486$$
+The conditional probability of red given even is:
+   $$\Pr(Red|Even) = 8/18 \approx 0.444$$
+Since $0.44 \neq 0.486$, these two events are *not* independent.
+:::
 
 When would it be reasonable to assume events are independent? 
 The typical scenario would be where there is simply no 
 physical or logical relationship between them, usually due
 to a separation in time and space.
 
-For example, these events can be assumed to be independent:
+::: example
+Suppose that I bring \$100 to a casino this afternoon for a few games 
+of roulette. I bet all of my money on red for the first game.
 
- - The result of a roulette game played this afternoon 
-   and another roulette game played tomorrow.
- - The rainfall in Vancouver today and the rainfall in Vancouver 
-   three months from today.
-   
-while these events are probably not independent:
+- If I lose, I am broke and stop playing.
+- If I win, I keep all of my money (both my intial bet and my winnings)
+  on red for the next spin.  
+- I keep playing until I run out of money.
 
- - The team that wins the 2022 World Cup and the team that wins
-   the 2026 World Cup.
- - The rainfall in Vancouver today and the rainfall in Burnaby 
-   tomorrow.
+After 3 games:
 
-For example, suppose that I bring \$100 to a casino this afternoon 
-for a few games of roulette. I put all of my money on red on the first spin. 
-After that, I keep all of my money (both the initial \$100 and any winnings)
-on red for the next spin. If I lose, I am broke and stop playing.  
-After 3 spins:
-
- - If all 3 spins are Red, I have $w = \$800$.
+ - If red wins all 3 games, I have $w = \$800$.
  - Otherwise, I have nothing $w = \$0$
 
 What is the probability of each of these events?  Since we can 
-assume that each spin is independent, this is an easy problem:
+assume that each game's outcome is independent, this is an easy
+problem:
 
   $$\Pr(w = \$800) = \Pr(Red_1 \cap Red_2 \cap Red_3) = \Pr(Red_1)\Pr(Red_2)\Pr(Red_3) = (18/37)^3 \approx 0.115$$
    $$\Pr(w = \$0) = 1 - \Pr(w = \$800) \approx 0.885$$
+:::
 
 #### Some standard results about joint and conditional probability
 
-- Bayes' rule:
+In addition to the results we have already discussed, there are two
+important results on conditional probabilities:
+
+The first is ***Bayes' law***, which is a rule for determining 
+conditional probabilities:
   $$\Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$
-- Law of total probability:
+The second is the ***Law of total probability*** which
+is a rule for determining unconditional probabilities 
+from conditional probabilities:
   $$\Pr(A) = \Pr(A|B)\Pr(B) + \Pr(A|B^c)\Pr(B^c)$$
+These rules follow from our existing results, combined with the
+definition of conditional probabilities.  They are easy to
+prove, but I won't prove them here.  Instead, I will use
+an example to show how they can be useful.
 
-## Problems
+::: example
+Example: False positives in medical testing
 
-### Easy
+When someone is tested for a disease, the test comes back either
+"positive" (the person has the disease) or "negative" (the person does
+not have the disease). However, no test is perfect. Sometimes people
+who do not have the disease test positive ("false positives") and 
+sometimes people who do have the disease test negative 
+("false negative").
 
-1. Let 
-   $$A = \{Avocado,Banana\}$$
-   $$B = \{Banana,Cantaloupe\}$$
-   $$C = \{Cantaloupe\}$$
-   a. Find $|A|$, $|B|$ and $|C|$
-   b. Find $A \cap B$, $A \cap C$, and $B \cap C$.
-   c. Find $A \cup B$, $A \cup C$, and $B \cup C$.
-   d. Find $A - B$, $B - A$, and $A - C$.
-   e. Find $A \times B$.
-   f. Classify each of the following statements as true or false:
-      i. $A$ and $B$ are disjoint
-      ii. $A$ and $C$ are disjoint
-      iii. $B$ and $C$ are disjoint
-      iv. $A \subset B$ 
-      v. $B \subset B$ 
-      vi. $C \subset B$ 
-      vii. $A \subsetneq B$ 
-      viii. $B \subsetneq B$ 
-      ix. $C \subsetneq B$ 
-      iv. $A = B$ 
-      v. $B = B$ 
-      vi. $C = B$ 
-   g. Find $\{x \in B: x \in A \textrm{ OR } x \in C\}$. 
+Let the event $T$ mean a particular patient tests positive
+for a disease, and let the event $D$ mean that this patient 
+actually has the disease. 
 
-2. Suppose $s$ is a function giving the number of seeds typically
-   found in a given fruit.  For example $s(Avocado) = 1$, $s(Banana) = 0$
-   and $s(Cantaloupe) = 500$.
+The *sensitivity* of the test is an infected patient's probability
+of testing positive:
+   $$\Pr(T|D) = p$$
+the *specitivity* of the test is a healthy patient's probability
+of testing negative:
+   $$\Pr(T^c|D^c) = q$$
+and the *prevalence* of the infection is the probability that
+a given patient has the disease:
+   $$\Pr(D) = d$$
+Suppose that a patient has tested positive.  What is the
+probability that he has the disease, i.e. what the value of
+$\Pr(D|T)$?
+
+This is a classic probability question, as it makes use
+of Bayes' law and the law of total probability, and it has
+important practical usage.  We start by applying
+Bayes' rule:
+   $$\Pr(D|T) = = \frac{\Pr(T|D)\Pr(D)}{\Pr(T)}$$
+We know that $\Pr(T|D)=p$ and $\Pr(D)=r$, so all we need is to find $\Pr(T)$.
+Using the law of total probability:
+   $$\Pr(T) = \underbrace{\Pr(T|D)}_{p}
+              \underbrace{\Pr(D)}_{d} 
+            + \underbrace{\Pr(T|D^c)}_{1-q}
+              \underbrace{\Pr(D^c)}_{1-d}$$
+Plugging these results into our formula:
+   $$\Pr(D|T) = = \frac{pd}{pd + (1-q)(1-d)}$$
    
-   a. What is the domain of this function?
-   b. What is the range of this function?
+Now, let's try out some numbers:
 
-3. Find the limit of each of these sequences:
-
-   a. $2,4,8,16,\ldots$ $(x_i = 2^i)$
-   b. $1, -1/2, 1/4, -1/8, 1/16, \ldots$ i.e., $(x_i = (-0.5)^i)$
-   c. $1, 1/2, 1/3, 1/4, 1/5, \ldots$ i.e., $(x_i = 1/i)$
-   
-5. Write out each of these summations as a simple sum:
-
-   a. $\sum_{i=1}^4 x_i/4$. 
-   b. $\sum_{i=1}^3 \sum_{j=1}^2 x_iy_j$. 
-   c. $\sum_{j=1}^2 \sum_{i=1}^3 x_iy_j$. 
-
-### Medium
-
-1. Some set algebra problems.
-
-
-
-### Difficult
-
-1. In stock markets, some participants are active traders, buying and selling
-   individual stocks on a regular basis. Active traders believe that they can 
-   earn higher returns than the market as a whole. Other participants are passive
-   investors buying and holding a broad-based index fund that duplicates the 
-   performance of the market as a whole. 
-   
-   Suppose the probability of an active trader beating the market in one year is 0.5.
-   Suppose that excess returns are independent across traders and across years.
-   
-   a. What is the probability that a particular trader beats the market every year
-      over the next 10 years?
-      
-      A: 0.5^10 = 0.0009765625
-      
-   b. Suppose there are 1000 active traders. What is the probability that at least
-      one active trader beats the market over the next 10 years?
-      
-      A: 1 - (1 - 0.5^10)^1000 = 0.62357620194
-      
-   c. Suppose that trader A has beaten the market in each of the last 10 years.
-      What is the probability that trader A will beat the market next year?
-      
-      A: 0.5
-      
-2. In April 2020, researchers at Stanford University tested 3,300 residents of 
-   Santa Clara county in California for COVID-19 antibodies, and found that 1.5\% 
-   of respondents tested positive. This number was much higher than expected and,
-   if true, implied that the fatality rate from COVID-19 was much lower than 
-   expected. 
-   
-   Let I = 1 if a person has been infected, and 0 if not. Let P = 1 if a person 
-   tests positive, and 0 if not. If a test is perfectly accurate, then P = I.
-   Unfortunately most real-world medical tests are not 100\% accurate; they
-   can yield false positives (non-infected people testing positive: I=0,P=1)
-   or false negatives (infected people testing negative: I=1,P=0).
-   
-   Suppose that:
-   
-     - The false negative rate of the test is zero: $\Pr(P=0|I=1) = 0$.
-     - The false postive rate of the test is $f$: $\Pr(P=1|I=0) = f$
-     - The results of the test are as described above: $\Pr(P=1) = 0.015$.
-     - The actual infection rate is $i$: $\Pr(I=1) = i$.
-     
-   a. Find the probability that an infected person will test positive.
-      A: 1
-   b. Find the probability that a non-infected person will test negative.
-      A: 1-f
-   c. Find the probability that a person will test positive, as a function of
-      $f$ and $i$.
-      A: i + (1-i)f
-   d. We know that the probability that a person will test positive is 0.015.
-      Use this information and your answer to (c) to calculate the infection
-      rate as a function of $f$.
-      A: i = (0.015 -f)/(1-f)
-   e. The test used by the researchers has a low rate of false positives,
-      somewhere between 0-2\% (0.00-0.02). Table ? below gives the infection 
-      rate implied by a given false positive rate.  Fill in the missing values
-      
-      Positive test rate | False positive rate | True infection rate 
-      -------------------+---------------------+---------------------
-      0.015              |          0          |    0.015
-      0.015              |          0.005      |    0.010
-      0.015              |          0.010      |    0.005
-      0.015              |          0.015      |    0.000
-
-   f. Suppose the true infection rate is 0.005, and the false positive rate is 0.010.
-      If you test positive, what is the probability that you have been infected?
-      A: $Pr(I=1|P=1) = \frac{Pr(P=1|I=1)Pr(I=1)}{Pr(P=1)} = 0.005/0.015 = 1/3$
-
-
-### Answer key
-
-1. Answer
-2. Answer
+- Suppose that false positives are rare ($q = 0.99$), false negatives never happen
+  ($p=1$) and the disease itself is fairly common ($d = 0.10$).  Then:
+   $$\Pr(D|T) = = \frac{1*0.1}{1*0.1 + (1-0.99)*(1-0.1)} \approx 0.917$$
+- Suppose that false positives are rare and false negatives never happen, but the 
+  disease itself is also rare ($d = 0.001$).  Then
+   $$\Pr(D|T) = = \frac{1*0.001}{1*0.001 + (1-0.99)*(1-0.001)} \approx 0.091$$
+In other words, the same test has a very different meaning depending
+on the prevalence in the population: when the disease is common a positive
+test means a 91.7% chance of having the disease, and when the disease
+is rare a positive test result means a 9.1% chance of having the disease.
+:::
