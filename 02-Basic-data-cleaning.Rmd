@@ -1,36 +1,38 @@
 # Basic data cleaning with Excel
 
+Excel is the most commonly-used example of a ***spreadsheet***, a software 
+program designed for the tabulation, analysis, and display of data. Its main 
+competitors include Google Sheets and Apple Numbers. It is widely used
+in business and government, so good Excel skills are valuable in the labour
+market.
+
 ::: goals
 **Chapter goals**
 
 In this chapter we will learn how to:
 
- - Learn basic Excel terminology and concepts including:
+ - Use basic Excel terminology and concepts including:
    - Workbooks, worksheets, and cells
    - Cell contents and display format
    - Cell ranges
    - Relative and absolute cell addresses
+   - Numeric, text, date, and logical  data tpes
  - Use Excel tools to view data, including:
    - Sorting
    - Filtering
    - Freezing panes
+   - Changing cell size
  - Use Excel tools to enter new data and "clean" existing data, including
    - Fill and series
    - Formulas
    - Functions
- - Identify Excel's primary data types
+   - Number formats
  - Follow good data management practices 
    - Practice data documentation and version control
    - Identify the characteristics of tidy data
 :::
 
 ## A quick tour of Excel
-
-Excel is the most commonly-used example of a ***spreadsheet***, a software 
-program designed for the tabulation, analysis, and display of data. Its main 
-competitors include Google Sheets and Apple Numbers. It is widely used
-in business and government, so good Excel skills are valuable in the labour
-market.
 
 Many of you have probably used Excel before, but there are many features
 you are probably not yet familiar with.  We will start by going over some
