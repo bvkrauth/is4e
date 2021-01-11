@@ -778,6 +778,12 @@ Excel handles these issues as follows:
    - converts what you have entered to the internal form
    - changes the display format to what Excel thinks it should be.
    
+::: fyi
+Excel will treat times as partial days. For example,
+Excel will store `11/1/2020  12:00:00 PM` as day number `44136.5`
+and `11/1/2020  1:00:00 PM` as day number `44136.5416666667`. 
+:::
+
 To see how this all works, let's go back to the `MonthYr` variable
 in column G.
 
@@ -811,11 +817,6 @@ was:
       November 1, 2020 and today.
 5. If you have not already done so, save your data file.
 
-::: fyi
-Excel will treat times as partial days. For example,
-Excel will store `11/1/2020  12:00:00 PM` as day number `44136.5`
-and `11/1/2020  1:00:00 PM` as day number `44136.5416666667`. 
-:::
 
 ::: fyi
 Most of the time, Excel's handling of dates works seamlessly and is
