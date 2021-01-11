@@ -6,6 +6,16 @@ library(VennDiagram)
 library(RColorBrewer)
 ```
 
+***Probability*** is a method of mathematically modeling a random process
+so that we can understand it and/or make predictions about its future 
+results. Probability is an essential tool for casinos, as well as for
+banks, insurance companies, and any other businesses that manage risks.
+
+***Statistics*** is a method of using data from a random process
+to make inferences about that process. Again, the purpose is to understand
+the process, and maybe to make predictions for the future.  We will
+talk about statistics in later chapters.
+
 ::: goals
 **Chapter goals**
 
@@ -502,15 +512,6 @@ Something will happen, it matters (to the players and the casino) what
 will happen, but we don't know in advance what will happen.
 :::
 
-***Probability*** is a method of mathematically modeling a random process
-so that we can understand it and/or make predictions about its future 
-results. Probability is an essential tool for casinos, as well as for
-banks, insurance companies, and any other businesses that manage risks.
-
-***Statistics*** is a method of using data from a random process
-to make inferences about that process. Again, the purpose is to understand
-the process, and maybe to make predictions for the future.  We will
-talk about statistics in later chapters.
 
 ### Outcomes and events
 
