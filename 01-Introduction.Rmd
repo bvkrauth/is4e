@@ -19,13 +19,15 @@ economics.
 ::: goals
 **Course goals**
 
-By the end of this course you will develop computer skills:
+By the end of this course:
+
+You will develop computer skills:
 
 1. Clean and analyze data in Excel.
 2. Analyze and graph data in R.
 3. Follow recomended practices for data management and reproducible analysis.
 
-you will be familiar with basic statistical concepts:
+You will become familiar with basic statistical concepts:
 
 4. Calculate and interpret probabilities and expected values.
 5. Explain the relationship between population and sample.
@@ -34,7 +36,7 @@ you will be familiar with basic statistical concepts:
   squared error.
 7. State and apply the law of large numbers and central limit theorem.
 
-and you will be able to apply these skills in combination to analyze 
+You will be able to apply these skills in combination to analyze 
 real-world economic data:
 
 8. Construct and interpret common charts including histograms, scatter plots,
