@@ -591,8 +591,8 @@ Probabilties are normally between zero and one:
 - If an event has probability one, it definitely *will* 
   happen.
 
-In order for a probability distribution to be valid, it
-must obey the following three conditions:
+All valid probability distributions must obey the 
+following three conditions:
 
 1. Probabilities are never negative:
    $$\Pr(A) \geq 0$$
@@ -601,6 +601,9 @@ must obey the following three conditions:
 3. For any two *disjoint* events $A$ and $B$, the probability that
    $A$ or $B$ happen is the sum of their individual probabilities:
    $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
+
+Probability distributions have many other properties, but they
+can all be derived from these three.
 
 ::: example
 Let's assume that the roulette wheel is "fair" in the sense that each 
@@ -625,21 +628,6 @@ Solving for $p$ we get:
 That is, each of the 37 outcomes have a probability of $1/37$.
 :::
 
-
-
-
-
-
-::: Example
-We can find the probability of any event $A$:
-$$ \Pr(A) = |A|*p$$
-For example:
-$$ \Pr(b=12) = |\{12\}|*p = 1/37 \approx 0.027$$
-$$\Pr(RED) = |\{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}|*p = 18/37 \approx 0.486$$
-$$\Pr(EVEN) = |\{2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36\}|*p = 18/37 \approx 0.486$$
-$$\Pr(FIRST12) = |\{1,2,3,4,5,6,7,8,9,10,11,12\}|*p = 12/37 \approx 0.324$$
-:::
-
 Since this is an introductory course, our sample space will usually 
 contain a finite number of outcomes, as in our roulette example.  In
 that case, probability calculations are pretty simple:
@@ -648,6 +636,19 @@ that case, probability calculations are pretty simple:
 - To find the probability of a specific event, just add up the probabilities
   of its outcomes.
   
+
+::: example
+In the roulette example, the probability of any event $A$ is
+just the number of outcomes in the event $|A|$ times the 
+probability of each outcome $1/37$:
+   $$ \Pr(A) = |A|*1/37$$
+For example:
+$$\Pr(b=12) = |\{12\}|*1/37 = 1/37 \approx 0.027$$
+$$\Pr(RED) = |RED|*1/37 = 18/37 \approx 0.486$$
+$$\Pr(EVEN) = |EVEN|*1/37 = 18/37 \approx 0.486$$
+$$\Pr(FIRST12) = |FIRST12|*1/37 = 12/37 \approx 0.324$$
+:::
+
 However, not all sample spaces contain a finite number of outcomes.  For
 example, suppose we are interested in using probability to model the
 unemployment rate, or a person's income.  Those are real numbers, and can 
