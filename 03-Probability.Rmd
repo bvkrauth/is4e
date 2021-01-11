@@ -40,15 +40,14 @@ Those of you who are currently taking introductory calculus will see
 it in that class soon enough.
 
 But you may have forgotten it, or never understood it in the first place.
-So I will go briefly through the most important terminology and ideas.
-If there's anything you don't understand please ask me to clarify. 
+So we will briefly review the most important terminology and ideas.
 
 ### Sets
 
 The most fundamental notion in mathematics is the idea of a ***set***. 
 A set is typically described as a collection or gathering
 of distinct objects. These objects are called the ***elements*** 
-of the set.
+of the set.  Sets are not ordered, and elements cannot be repeated.
 
 #### Defining a set
 
@@ -89,55 +88,71 @@ There are a few special sets defined by convention:
  - The set of positive integers is $\mathbb{Z}_+$, the set of 
    positive real numbers is $\mathbb{R}_+$, etc.
 
+Finally we can just refer to an abstract set without specifying its
+contents, just like we can refer to a variable in algebra without 
+specifying its value.
 
 #### Characteristics of a set
 
 The size or ***cardinality*** of the set $A$, usually written $|A|$, 
-is simply the number of elements it has. For example:
-
-$$|\{1,2,3\}| = 3$$
-$$|\{Avocado,Banana\}| = 2$$
-$$|\mathbb{Z}| = \infty$$ 
-$$|\emptyset| = 0$$
+is simply the number of elements it has. 
 
 - $A$ is a ***singleton*** if $|A| = 1$.
 - $A$ is a ***finite set*** if $|A|$ is a finite number. 
+  Otherwise it is an ***infinite set***.
+
+::: example
+**Cardinality**
+
+These are infinite sets:
+   $$|\mathbb{Z}| = \infty$$ 
+   $$|\mathbb{R}| = \infty$$ 
+
+These are finite sets:
+   $$|\{1,2,3\}| = 3$$
+   $$|\{Avocado\}| = 1$$
+   $$|\emptyset| = 0$$
+In addition, $\{Avocado\}$ is a singleton.
+:::
 
 #### Set algebra
  
 Let $A$ and $B$ be two sets. We have several ways of describing
 how they are related:
 
- - $A$ and $B$ are ***identical*** (written $A = B$) if they contain the same elements. For example:
-   $$\{1,2\} = \{1,2\}$$
-   $$\{1,2\} = \{2,1\}$$
-   $$\{1,2\} \neq \{1,2,3\}$$
-   $$\{1,2\} \neq \{1,3\}$$
+ - $A$ and $B$ are ***identical*** (written $A = B$) if they contain the same elements. 
  - $A$ and $B$ are ***disjoint*** if they have no elements in common. 
-   For example:
-   - $\{1,2\}$ and $\{3,4\}$ are disjoint.
-   - $\{1,2,3\}$ and $\{3,4\}$ are not disjoint.
  - $A$ is a ***subset*** of $B$ (written $A \subseteq B$ or $A \subset B$ ) if all elements 
    of $A$ are also elements of $B$. 
-   For example:
+
+::: example
+**Set relationships**
+
+These sets are identical:
+   $$\{1,2\} = \{1,2\}$$
+   $$\{1,2\} = \{2,1\}$$
+These sets are not identical:
+   $$\{1,2\} \neq \{1,2,3\}$$
+   $$\{1,2\} \neq \{1,3\}$$
+These sets are disjoint
+   $$\{1,2\} \textrm{ and } \{3,4\}$$
+These sets are not disjoint
+   $$\{1,2,3\} \textrm{ and } \{3,4\}$$
+The first of these sets is a subset of the second set:
    $$\{1,2\} \subset \{1,2\}$$
    $$\{1,2\} \subset \{1,2,3\}$$
+The first of these sets is not a subset of the second set:
    $$\{1,2\} \not\subset \{1,3\}$$
+:::
 
 We can also perform various mathematical operations on sets.
 
 - The ***intersection*** of $A$ and $B$ (usually written $A \cap B$) 
    is the set of everything that is an element of both $A$ *and* $B$.
    $$A \cap B = \{x: x \in A \textrm{ and } x \in B\}$$
-   For example:
-   $$\{1,2\} \cap \{3,4\} = \emptyset$$
-   $$\{1,2,3\} \cap \{3,4\} = \{3\}$$
 - The ***union*** of $A$ and $B$ (usually written $A \cup B$)
    is the set of everything that is in $A$ *or* $B$ (or both):
       $$A \cup B = \{x: x \in A \textrm{ or } x \in B\}$$
-   For example:
-   $$\{1,2\} \cup \{3,4\} = \{1,2,3,4\}$$
-   $$\{1,2,3\} \cup \{3,4\} = \{1,2,3,4\}$$
 - The ***complement*** of $A$ ***in*** $B$, also called the ***set difference***
    is written as $B - A$ or $B \setminus A$ and defined as the set of everything 
    in $B$ that is *not* in $A$:
@@ -146,6 +161,21 @@ We can also perform various mathematical operations on sets.
    We will also refer to the ***complement*** of $A$, which is written
    $A'$, $\neg A$ or $A^c$, and is simply everything that is not in $A$:
    $$ A^c = \mathbb{U} - A = \{x: x \notin A\}$$
+
+::: example
+**Set operations**
+
+Intersections take all common elements from the two sets:
+   $$\{1,2\} \cap \{3,4\} = \emptyset$$
+   $$\{1,2,3\} \cap \{3,4\} = \{3\}$$
+Unions take all elements from the two sets:
+   $$\{1,2\} \cup \{3,4\} = \{1,2,3,4\}$$
+   $$\{1,2,3\} \cup \{3,4\} = \{1,2,3,4\}$$
+Complements take elements out of the first set if 
+they are in the second set:
+   $$\{1,2\} \setminus \{3,4\} = \{1,2\}$$
+   $$\{1,2,3\} \setminus \{3,4\} = \{1,2\}$$
+:::
 
 The combination of these basic definitions, relationships (identity, 
 element, subset) and operations (union, intersection, complement) 
@@ -203,10 +233,12 @@ duality is a general feature of set algebra.
 #### Definition of a function
 
 A ***function*** is a rule that matches ("maps") elements of one set (called the ***domain***
-of the function) to elements of another set (called the ***range*** of the function).
+of the function) to elements of another set (called the ***range*** of the function). We use the notation 
+   $$f: D \rightarrow R$$
+to declare that a particular function $f$ has domain $D$ and range $R$. 
 
-We will use the notation $f: D \rightarrow R$ to declare that a particular function $f$ has 
-domain $D$ and range $R$. For example:
+::: example
+**Domain and range of a function**
 
    - $f:\mathbb{R} \rightarrow \mathbb{R}$ means that the function $f$ takes a
       real number, and returns a real number.
@@ -214,17 +246,33 @@ domain $D$ and range $R$. For example:
       positive integer, and returns either zero or one.
    - $s: \{Avocado,Banana,Cantaloupe\} \rightarrow \mathbb{Z}$ means that the function $s$
       takes either $Avocado$, $Banana$ or $Cantaloupe$ and returns an integer.
+:::
 
-If a function has a finite domain, we can define it by enumeration. For example:
+If a function has a finite domain, we can define the function by
+simple enumeration. 
+
+::: example
+**A function defined by enumeration**
+
+Since the function $s: \{Avocado,Banana,Cantaloupe\} \rightarrow \mathbb{Z}$ 
+has a finite domain, we can define it by listing all of its
+values:
    $$s(Avocado) = 1$$
    $$s(Banana) = 0$$
    $$s(Cantaloupe) = 500$$
-We can also define a function by mathematical expression:
-   $$f(x) = x^2$$
-   $$g(y) = \ln(y)$$
-Finally we can just refer to a function without defining exactly what it is,
-just like we can talk about a variable $x$ or a set $A$ without assigning
-it a particular value.
+We could also make a table:
+
+| $fruit$ | $s(fruit)$ |
+|-------|------------|
+| Avocado | 1 |
+| Banana | 0 |
+| Cantaloupe | 500|
+:::
+
+We can also define a function by a mathematical expression, or 
+we can just refer to a function without defining exactly what it is,
+just like we can talk about a variable $x$ or a set $A$ without 
+assigning it a particular value.
 
 ::: fyi
 **Function or multiplication?**
@@ -244,17 +292,22 @@ in a given problem. But please ask if you aren't sure.
 
 #### The indicator function
 
-The ***indicator function*** is a special kind of function whose argument
-is a *statement*. The indicator function returns a value of 1
-if the statement is true, and 0 if it is false. For example:
+The ***indicator function*** is a special function whose argument
+is a *statement*. The indicator function is typically represented by $I(\cdot)$ or $\mathbb{1}(\cdot)$.  It returns a value of 1
+if the statement is true, and 0 if it is false. 
+
+::: example
+**Indicator functions**
 
 $$I(3 < 5) = 1$$
 $$I(3 = 5) = 0$$
 $$I(\textrm{Ottawa is the capital of Canada}) = 1$$
 $$I(\textrm{Ottawa is in Alberta}) = 0$$
-We use indicator functions all the time in statistics because they allow us
-to convert a qualitative statement such as "Bob is employed" 
-into a quantitative statement: $I(\textrm{Bob is employed}) = 1$.
+:::
+
+We use indicator functions all the time in probability and statistics because they allow us
+to convert a qualitative statement like "Bob is employed" 
+into a quantitative statement like $I(\textrm{Bob is employed}) = 1$.
 
 ### Sequences, limits and summations
 
@@ -262,38 +315,49 @@ into a quantitative statement: $I(\textrm{Bob is employed}) = 1$.
 
 The ***Cartesian product*** of two sets $A$ and $B$, usually written 
 $A \times B$, is the set of all ordered pairs of elements in the two sets.
-For example, if $A = \{1,2\}$ and $B = \{3,4\}$ then
+
+::: example
+**Cartesian products**
+
+If $A = \{1,2\}$ and $B = \{3,4\}$ then
 $$ A \times B = \{(1,3),(1,4),(2,3),(3,4)\}$$
-Another example of a Cartesian product is:
+:::
+
+A particularly important example of a Cartesian product is:
    $$\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$$
 the set of ordered pairs of real numbers.  For example $(0,3)$ and $(0.427,2000)$ 
 are both elements of $\mathbb{R}^2$.
 
+#### Sequences 
+
 We will also be interested in the set of ordered ***sequences*** of $n$ real 
 numbers (where $n$ is some positive integer):
    $$\mathbb{R}^n = \mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R}$$
-For example the ordered sequence $(1,3,5,7)$ is an element of the set $\mathbb{R}^4$.
-
-#### Sequences 
+We usually distinguish between sequences
+and sets by using parentheses for sequences and curly brackets for 
+sets.
 
 A sequence is much like a set but with two important differences:
 
-1. Order matters. For example:  
-   - $\{1,2\} = \{2,1\}$ 
-   - $(1,2) \neq (2,1)$.
+1. Order matters. 
 2. Elements can be repeated.  For example 
-   - $\{1,3,1\}$ is not a valid set.
-   - $(1,3,1)$ is a valid sequence 
 
 Like sets, sequences can be empty, finite, or infinite. 
 
-- $()$ is an empty sequence.
-- $(2,4,6)$ is a finite sequence.
-- $(2,4,6,\ldots)$ is an infinite sequence.
+::: example
+**Sequences and sets**
 
-As you can see from the examples above, we usually distinguish between sequences
-and sets by using parentheses for sequences and curly brackets for 
-sets.
+Order matters for sequences but not for sets:
+   $$\{1,2\} = \{2,1\}$$
+   $$(1,2) \neq (2,1)$$
+Sequences can include repeated elements, but sets cannot
+   $$\{1,3,1\} \textrm{ is not a valid set.}$$
+   $$(1,3,1) \textrm{ is a valid sequence.}$$
+Sequences have cardinality (size)
+   $$() \textrm{ is an empty sequence.}$$
+   $$(2,4,6) \textrm{ is a finite sequence.}$$
+   $$(2,4,6,\ldots) \textrm{ is an infinite sequence.}$$
+:::
 
 We usually number each element in a sequence. The number assigned to a 
 given element is called its ***index***. Typically, the first 
@@ -303,7 +367,8 @@ remaining elements are numbered sequentially after that.
 We can define sequences by simple enumeration as in the examples
 above. These are a few other ways of defining a sequence:
 
- - As variables with subscripts: $(x_1,x_2,x_3)$. We will usually 
+ - As a sequence of variables with subscripts: 
+   $(x_1,x_2,x_3)$. We will usually 
    use a variable as the subscript $x_i$ when we want to talk
    about an arbitrary element of the sequence.
  - As functions of other sequences: $y_i = \ln(x_i)$.
@@ -320,54 +385,70 @@ $i$ gets bigger and bigger.
 - The limit of a sequence can be $\infty$ or $-\infty$.
 - Not all sequences have limits.
 
-For example:
+::: example
+**Limits**
+
 $$ \lim (1,1,1,\ldots) = 1$$
 $$\lim\left(1,\frac{1}{2},\frac{1}{3},\ldots\right) = 0$$
 $$\lim(1,2,3,\ldots) = \infty$$
 $$\lim(-1,-2,-3,\ldots) = -\infty$$
 $$\lim(0,1,0,1,0,1,\ldots) \textrm{ does not exist}$$
+:::
 
 You will learn or have learned the formal definition of a limit in your 
-calculus course.  I won't make you re-learn it for this class, but here it is: 
+calculus course.  I won't make you re-learn it for this class, but the
+formal definition is provided below for your reference.
 
-*Definition of a limit*: Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that 
+::: fyi
+**Definition of a limit**
+
+Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that 
 the number $c$ is the limit of this sequence: 
    $$\lim_{i\rightarrow \infty} x_i = c$$
 if for any $\delta > 0$ there exists an $N_{\delta}$ such that
    $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
+:::
 
 #### Summations
 
 Many statistics we are calculating are constructed by adding 
 up a sequence of numbers. It will be convenient to 
 use the ***summation operator***, which looks like this:
-
-$$\sum_{i=1}^3 x_i = x_1 + x_2 + x_3$$ 
-$$\sum_{i=1}^n x_i = x_1 + x_2 + \cdots + x_n$$
-$$\sum_{i=1}^{\infty} x_i = x_1 + x_2 + \cdots$$
-$$\sum_{i \in \{1,2,3\}} x_i = x_1 + x_2 + x_3$$ 
+   $$\sum_{(\textrm{index}) \in (\textrm{set})} (\textrm{variable that depends on index})$$
 Notice that an expression using the summation operator has several components:
 
    - The summation sign $\sum$.
    - An expression identifying the index variable, and what values it takes on. The 
       index variable is usually but not always called $i$.
-      - $\sum_{i \in \{1,2,3\}}$ means we add up over all of the values  
-         in the set $\{1,2,3\}$.
-      - $\sum_{i = 1}^{n}$ means we add up over all of the integers between 1
-         and $n$.
    - An expression identifying what is to be added up. It is usually but not always
-      a function of the index variable. For example:
-         $$\sum_{i=1}^3 \ln(x_i) = \ln(x_1) + \ln(x_2) + \ln(x_3)$$
-         $$\sum_{j=1}^3 \beta^j = \beta + \beta^2 + \beta^3$$
-         $$\sum_{i=1}^3 3 = 3 + 3 + 3 = 9$$
-         $$\sum_{i=1}^3 2x = 2x + 2x + 2x = 6x$$
+      a function of the index variable. 
+      
+::: example
+**Summations**
 
-We can also use multiple summation operators in an expression. For example:
-$$\sum_{j=1}^2 \sum_{i=1}^2 x_iy_j = \sum_{j=1}^2 (x_1y_j + x_2y_j) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$$ 
+$\sum_{i \in A}$ means we add up over all of the values in the set $A$:
+   $$\sum_{i \in \{1,2,3\}} x_i = x_1 + x_2 + x_3$$ 
 
+$\sum_{i = start}^{end}$ means we add up over all of the integers between
+$start$ and $end$.
+   $$\sum_{i=1}^3 x_i = x_1 + x_2 + x_3$$ 
+   $$\sum_{i=1}^n x_i = x_1 + x_2 + \cdots + x_n$$
+The index set can be infinite:
+   $$\sum_{i=1}^{\infty} x_i = x_1 + x_2 + \cdots$$
+The summation can be of any expression that depends on the index:
+   $$\sum_{i=1}^3 \ln(x_i) = \ln(x_1) + \ln(x_2) + \ln(x_3)$$
+   $$\sum_{j=1}^3 \beta^j = \beta + \beta^2 + \beta^3$$
+But the expression does not have to vary with the index:
+   $$\sum_{i=1}^3 2x = 2x + 2x + 2x = 6x$$
+   $$\sum_{i=1}^3 3 = 3 + 3 + 3 = 9$$
+We can use multiple summation operators in an expression:
+   $$\sum_{j=1}^2 \sum_{i=1}^2 x_iy_j = \sum_{j=1}^2 (x_1y_j + x_2y_j) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$$ 
 The summation operator looks fancy, but remember it is just a concise way
-of describing a sum. You learned the basic properties of addition 
-and multiplication in Grade 3:
+of describing a sum. If you are ever struggling with understanding a
+summation, write it out.
+:::
+
+You learned the basic properties of addition and multiplication in Grade 3:
 
 - Associative property: 
    $$(a + b) + c = a + (b+c)$$
@@ -378,16 +459,19 @@ and multiplication in Grade 3:
 - Distributive property: 
    $$a(b+c) = ab + ac$$
 
-Summation operators also obey these properties:
+An expressions using the sumamtion operator describes a sum, so
+it also obeys these properties:
 
 - The associative and commutative properties allow you to switch any two summation
-   operators:
-  $$\sum_{i \in A} \sum_{j \in B} x_iy_j = \sum_{j \in B} \sum_{i \in A}  x_iy_j$$
+  operators:
+   $$\sum_{i \in A} \sum_{j \in B} x_iy_j = \sum_{j \in B} \sum_{i \in A}  x_iy_j$$
+  and to take the summation operator "into" or "out of" a sum.
+   $$\sum_{i \in A} (x_i + y_i) = \left(\sum_{i \in A} x_i\right) + \left(\sum_{i \in A} y_i \right)$$ 
 - The distributive property allows you to take any constant out of the summation 
    operator
   $$\sum_{i=1}^n ax_i = a \sum_{i=1}^n x_i $$
 
-We will use these two results later on.
+We will use these three results later on.
 
 ## Random events and probability
 
@@ -414,7 +498,7 @@ Here are the rules:
   - 18 slots are black.
   - The picture above depicts an American roulette table, which has an 
     additional green slot labeled "00",
-  - I will assume we have a European roulette table, which doe snot include
+  - I will assume we have a European roulette table, which does not include
     the "00" slot.
 - Players can place various bets on the table including:
   - Red (ball lands in a red slot) pays \$1 per \$1 bet
@@ -427,24 +511,31 @@ Something will happen, it matters (to the players and the casino) what
 will happen, but we don't know in advance what will happen.
 :::
 
-
 ### Outcomes and events
 
 To build a probabilistic model of a random process, we start by defining
 the ***outcome*** we are interested in.  An outcome can be a simple yes/no
-result, it can be a number, or it can be a much more complex object.
+result, it can be a number, or it can be a much more complex object. The
+outcome should be a complete description of the random process, in the
+sense that everything we are interested in can be defined in terms of
+the outcome.
 
 ::: example
-In our roulette example, the outcome can be defined as the number of 
+**Outcomes in roulette**
+
+The outcome of a single game of roulette can be defined as the number of 
 the slot in which the ball lands.  Call that number $b$.
 :::
 
 The set of all possible outcomes is called the ***sample space***
 
 ::: example
-In our roulette example, the sample space can be defined as
+**The sample space in roulette**
+
+The sample space for a game of roulette can be defined as
 the set of all numbers the ball can land on:
    $$\Omega = \{0,1,2,\ldots,36\}$$
+This sample space has $|\Omega| = 37$ elements.
 :::
 
 Next, we define a set of ***events*** that we are interested in.
@@ -457,23 +548,29 @@ These two concepts are equivalent, though the subset concept
 makes the math clearer.
  
 ::: example
+**Events in roulette**
 
 These roulette events are well-defined for our sample space: 
 
 - Ball lands on 15:
   $$b \in \{15\}$$
 - Ball lands on red:
-$$b \in RED = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
+   $$b \in RED = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
 - Ball lands on black:
-$$b \in BLACK = \{2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35\}$$
+   $$b \in BLACK = \{2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35\}$$
 - Ball lands on one of the first 12 numbers:
-$$b \in FIRST12 = \{1,2,3,4,5,6,7,8,9,10,11,12\}$$
+   $$b \in FIRST12 = \{1,2,3,4,5,6,7,8,9,10,11,12\}$$
+
+We could define many more events, depending on what bets
+we are interested in.
 :::
 
 Since events are sets, we can use the terminology and mathematical
 tools for sets. 
 
 ::: example
+**Relationships among events**
+
 In our roulette example:
 
 - Events are *identical* if they contain the same outcomes:
@@ -522,6 +619,8 @@ Probability distributions have many other properties, but they
 can all be derived from these three.
 
 ::: example
+**Outcome probabilities for a fair roulette game**
+
 Let's assume that the roulette wheel is "fair" in the sense that each 
 outcome has the same probability. Now, I should emphasize that this 
 doesn't have to be the case, it's just an assumption.  But it's a 
@@ -554,6 +653,8 @@ that case, probability calculations are pretty simple:
   
 
 ::: example
+**Event probabilities for a fair roulette game**
+
 In the roulette example, the probability of any event $A$ is
 just the number of outcomes in the event $|A|$ times the 
 probability of each outcome $1/37$:
@@ -571,16 +672,18 @@ unemployment rate, or a person's income.  Those are real numbers, and can
 take on any of an infinite number of values.  
 
 ::: fyi
+**What do probabilities really mean?**
+
 What does it really mean to say that the probability of the ball landing in 
 a red slot is about 0.486? That's actually a tough question. There
 are two standard interpretations for probabilities:
 
-- Frequentist or classical interpretation: we are thinking of 
+- *Frequentist or classical interpretation*: we are thinking of 
   the random process as something that could be repeated many times,
   and the probability of an event is the approximate fraction of times
   that the event will occur.  That is, if you go to a casino and
   bet 1000 times on Red, you will win about 486 times. 
-- Subjectivist or Bayesian interpretation: the random process
+- *Bayesian or subjectivist interpretation*: the random process
   is a one-time occurence, but we have limited information about
   it and the probability of event represents the strength of 
   our belief that the event will happen.
@@ -609,7 +712,8 @@ between different random events.
 
 #### Some standard results about probabilities
 
-Let $A$ and $B$ be two events.  Then:
+Let $A$ and $B$ be two events.  Then our three basic rules
+of probability imply several additional rules:
 
 - Probabilities cannot be higher than one.
    $$\Pr(A) \leq 1$$
@@ -624,8 +728,8 @@ Let $A$ and $B$ be two events.  Then:
 - The probability of either $A$ or $B$ happening is:
   $$\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \leq \Pr(A) +\Pr(B)$$
 
-These results all follow from the basic rules of probability. They
-are not hard to prove, but I will not go through the proofs.
+These results are not hard to prove, but I will not go through the proofs.
+However, I will use these results so you should be familiar with them.
 
 #### Joint probabilities
 
@@ -634,7 +738,9 @@ they *both* happen:
   $$\Pr(A \cap B)$$
 
 ::: example
-For example, consider two roulette events:
+**Joint probabilities for roulette bets**
+
+Consider two events for a game of roulette:
   $$Red = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
   $$Even = \{2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36\}$$
 Suppose you are interested in the probability that the ball lands on a number that is both 
@@ -660,9 +766,11 @@ words, your bet should be based on $\Pr(win|cards)$ rather than $\Pr(win)$. Good
 poker players have detailed knowledge of these conditional probabilities.
 
 ::: example
+**Conditional probabilties in roulette**
+
 In our roulette example:
    $$\Pr(Red|Even) = \frac{\Pr(Red \cap Even)}{\Pr(Even)} = \frac{8/37}{18/37} \approx 0.444$$
-   $$\Pr(b = 26|Even) = \frac{\Pr(b = 26 \cap Even)}{\Pr(Even)} = \frac{1/37}{18/37} \approx 0.056$$
+   $$\Pr(b = 12|Even) = \frac{\Pr(b = 12 \cap Even)}{\Pr(Even)} = \frac{1/37}{18/37} \approx 0.056$$
 :::
 
 Like joint probabilities, conditional probabilities are just probabilities,
@@ -678,9 +786,22 @@ probability is just the two individual probabilities multiplied together:
   $$\Pr(A \cap B) = \Pr(A)\Pr(B)$$
 We usually express independence with the notation $A \bot B$.
 
-This definition is not very intuitive, but we can improve upon it by 
-doing a little math.  Consider two independent events $A$ and $B$ that
-have nonzero probability.  Then by the definition of independence:
+::: fyi
+**Events are not always independent**
+
+A common mistake by students who are new to probability and
+statistics is to take results that *only* apply under independence
+and use them when there is no reason to believe that independence
+holds.
+
+Don't make this mistake: independence is an assumption, and one that
+is unreasonable in many cases.
+:::
+
+The definition of independence is not very intuitive, but we can clarify
+it by doing a little math.  Consider two independent events $A$
+and $B$ that have nonzero[^1] probability.  Then by the definition of
+independence:
   $$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A)$$
 By the same reasoning:
   $$\Pr(B|A) = \Pr(B)$$
@@ -688,11 +809,17 @@ In other words, knowing that one of these events are true
 tells you nothing useful about whether the other the other event
 is true.
 
-Most events we are interested in are not independent because 
-they are physically or logically related. 
+[^1]: You may wonder: if it makes more sense to describe independence 
+      in terms of conditional probabilities, why do we define it in 
+      terms of joint probabilities?  The key is the requirement that
+      the events have nonzero probability. When $B$ has zero
+      probability the conditional probability $\Pr(A|B)$ is not
+      well defined since its denominator is zero.
 
 ::: example
-Consider the roulette events "Red wins" and "even wins".  We earlier
+**Independence in a roulette game**
+
+Consider the roulette events "Red wins" and "Even wins".  We earlier
 showed that the unconditional probability of red wins is:
   $$\Pr(Red) = 18/37 \approx 0.486$$
 The conditional probability of red given even is:
@@ -706,17 +833,19 @@ physical or logical relationship between them, usually due
 to a separation in time and space.
 
 ::: example
+**Independence across roulette games**
+
 Suppose that I bring \$100 to a casino this afternoon for a few games 
-of roulette. I bet all of my money on red for the first game.
+of roulette. I bet all of my money on Red for the first game.
 
 - If I lose, I am broke and stop playing.
 - If I win, I keep all of my money (both my intial bet and my winnings)
-  on red for the next spin.  
+  on Red for the next spin.  
 - I keep playing until I run out of money.
 
 After 3 games:
 
- - If red wins all 3 games, I have $w = \$800$.
+ - If Red wins all 3 games, I have $w = \$800$.
  - Otherwise, I have nothing $w = \$0$
 
 What is the probability of each of these events?  Since we can 
@@ -793,6 +922,7 @@ Now, let's try out some numbers:
 - Suppose that false positives are rare and false negatives never happen, but the 
   disease itself is also rare ($d = 0.001$).  Then
    $$\Pr(D|T) = = \frac{1*0.001}{1*0.001 + (1-0.99)*(1-0.001)} \approx 0.091$$
+
 In other words, the same test has a very different meaning depending
 on the prevalence in the population: when the disease is common a positive
 test means a 91.7% chance of having the disease, and when the disease
