@@ -7,10 +7,17 @@ In this chapter we will:
 
  - Review educational goals and establish course expectations
  - Gather resources and tools, including all needed computer software.
-
 :::
 
 ## Course goals and context
+
+ECON 233 is the first course in the two-course econometrics sequence 
+that is required for all economics majors.  If you've never seen the word
+before, "econometrics" just means statistics and data analysis for
+economics.  
+
+::: goals
+**Course goals**
 
 By the end of this course you will develop computer skills:
 
@@ -39,8 +46,7 @@ real-world economic data:
 
 We will be switching back and forth between theory, data analysis and
 applications.  All three skill sets are valuable.
-
-### Why this is an important course
+:::
 
 Hopefully you are in this course because you are fascinated by the course
 material, and would take it even if it wasn't required for the economics 
@@ -94,13 +100,11 @@ of the underlying statistical principles, and the ability to
 recognize the economic considerations in a situation, you
 will do quite well.
 
-### Related courses
+::: fyi
+**Related courses**
 
-ECON 233 is the first course in the two-course econometrics sequence 
-that is required for all economics majors.  If you've never seen the word
-before, "econometrics" just means statistics and data analysis for
-economics.  In the second course (ECON 333) you will learn more advanced
-techniques including linear regression, you will use R more extensively, 
+In ECON 333, you will learn more advanced techniques including 
+linear regression, you will use R more extensively, 
 and you will go deeper into the theory.
 
 If you find you enjoy and/or do well in this course, I would strongly
@@ -138,11 +142,13 @@ is suitable preparation for ECON 333, but there are some key differences:
 ECON 233 is part of the Social Data and Analytics (SDA) minor; if you 
 are an economics student and are interested in that minor you are 
 recommended to take ECON 233.
+:::
 
+## Organization and expectations
 
-## Course organization
+The course Canvas page is available at https://canvas.sfu.ca/courses/59191. It includes information on lectures, tutorials, quizzes, and assignments.
 
-This book is constructed under the assumptions that:
+The course is constructed under the assumptions that:
 
 - You have taken introductory microeconomics (ECON 103 at SFU) and
   introductory macroeconomics (ECON 105 at SFU).
@@ -232,6 +238,35 @@ to make sure the installation worked by entering the command line: `library(tidy
 If you run into trouble, don't worry. We will not need the Tidyverse for 
 a few weeks, so there is plenty of time to get help.
 
-### Canvas
+## Conventions of this book
 
-The course Canvas page is available at https://canvas.sfu.ca/courses/59191. It includes information on lectures, tutorials, quizzes, and assignments.
+
+This book uses consistent visual conventions to convey information.
+
+- Chapters:
+  - Each chapter corresponds to roughly a week of the course.
+- Typography:
+  - Computer code or other inputs are shown `like this`.
+  - When new terminology is introduced, it is shown ***like this***.
+- Boxes:
+  - Pull-out information is shown in a variety of boxes.
+  
+::: example
+Boxes like this are for examples
+:::
+
+::: goals
+Boxes that look like this are for showing course
+or chapter goals.
+:::
+
+::: economics
+Boxes like this are for providing economic background
+:::
+
+::: fyi
+Boxes like this are for providing optional information that
+might be of interest to some students.
+:::
+
+
