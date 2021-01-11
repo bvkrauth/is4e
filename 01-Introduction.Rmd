@@ -70,7 +70,7 @@ of the world's most successful companies rely heavily on the innovative
 gathering and usage of data:
 
 - Google's core product (the search engine) is built on the 
-  analysis of massive amounts of data.
+  innovative analysis of massive amounts of data.
 - Both Google and the major social media companies 
   are based on providing valuable "free" 
   services in order to gather data on consumers that can 
@@ -84,6 +84,7 @@ much of it is done by economists: for example, Amazon is the
 second-largest employer of PhD economists in the US 
 (after the Federal Reserve System).
 
+::: economics
 I always tell students thinking about the future to remember 
 supply and demand in the labour market.  In the labour market
 your skills and effort are the product, and you are the seller.
@@ -101,37 +102,9 @@ a reasonable level of computer skills with writing, knowledge
 of the underlying statistical principles, and the ability to
 recognize the economic considerations in a situation, you
 will do quite well.
+:::
 
-::: fyi
-**Related courses**
-
-In ECON 333, you will learn more advanced techniques including 
-linear regression, you will use R more extensively, 
-and you will go deeper into the theory.
-
-If you find you enjoy and/or do well in this course, I would strongly
-encourage you to take further courses in econometrics:
-
-- [ECON 334: Data Visualization and Economic Analysis](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/334.html) 
-  is an elective focusing on exploratory data analysis and visualization
- - [ECON 335: Introduction to Causal Inference and Policy Evaluation](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/335.html)
-  is an elective focusing on the problem of inferring cause-and-effect from
-   economic data. As we will learn later this term, this problem
-   is often quite difficult but crucial for economic policy choices.
- - [ECON 433: Financial and Time Series Econometrics](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/433.html) is an advanced elective focusing on techniques 
-   for analyzing the kind of time series data that is used in macroeconomics
-   and financial markets.
- - [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html) is an advanced course in statistics 
-   and econometrics that is part of our honours sequence. It gives you the
-   opportunity and tools to write a serious empirical research
-   paper.  Non-honours students are eligible to take it if they have 
-   a 3.0 CGPA and the course prerequisites.
-   
-I would also encourage you to take courses outside of the economics
-department, and to consider a minor in the Statistics department or the new
-interdisciplinary [Social Data Analytics (SDA) minor](http://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html) . 
-
-Finally, all economics majors have the option of taking ECON 233 or 
+All economics majors have the option of taking ECON 233 or 
 BUS 232, so you may be wondering what the difference is. Either course 
 is suitable preparation for ECON 333, but there are some key differences: 
 
@@ -144,6 +117,38 @@ is suitable preparation for ECON 333, but there are some key differences:
 ECON 233 is part of the Social Data and Analytics (SDA) minor; if you 
 are an economics student and are interested in that minor you are 
 recommended to take ECON 233.
+
+::: fyi
+**Related courses**
+
+ECON 333 is the second course in the two-course econometrics
+sequence requirred for all economics majors.  In ECON 333, 
+you will learn more advanced techniques including 
+linear regression, you will use R more extensively, 
+and you will go deeper into the theory.
+
+If you find you enjoy and/or do well in this course, I would strongly
+encourage you to take further courses in econometrics:
+
+- [ECON 334: Data Visualization and Economic Analysis](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/334.html) 
+  is an elective focusing on exploratory data analysis and visualization
+ - [ECON 335: Introduction to Causal Inference and Policy Evaluation](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/335.html)
+  is an elective focusing on the problem of inferring cause-and-effect from
+   economic data, and using data to forecast the effects of economic
+   policies.
+ - [ECON 433: Financial and Time Series Econometrics](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/433.html) is an advanced elective focusing on techniques 
+   for analyzing the kind of time series data that is used in macroeconomics
+   and financial markets.
+ - [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html) is an advanced course in statistics 
+   and econometrics that is part of our honours sequence. It gives you the
+   opportunity and tools to write a serious empirical research
+   paper.  Non-honours students are eligible to take it if they have 
+   a 3.0 CGPA and the course prerequisites.
+   
+I would also encourage you to take courses outside of the economics
+department, and to consider a [Statistics minor](http://www.sfu.ca/students/calendar/2021/spring/programs/statistics/minor.html) or the new
+interdisciplinary [Social Data Analytics (SDA) minor](http://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html) . 
+
 :::
 
 ## Organization and expectations
@@ -157,7 +162,8 @@ The course is constructed under the assumptions that:
 	We will use ideas from those courses in applications and examples.
 - You have seen some probability and statistics content in high school, 
   though you may not remember much.
-- You can do high-school level math including algebra and basic set theory. 
+- You can do high-school level math including algebra and basic set theory
+  and have taken or are currently taken an introductory calculus course.
 - You have access to a desktop or laptop computer, and basic computer skills.
 
 This is not a class in introductory economics, high school math, or basic
@@ -192,8 +198,7 @@ https://www.sfu.ca/itservices/technical/software/office365.html.
 
 Once you have installed Excel, you should confirm that it is working by
 starting the program. You should see something that looks like this:
-
-![Excel screenshot](ExcelBlankWorkbook.png) 
+![Excel blank workbook](ExcelBlankWorkbook.png) 
 
 ### Installing R and RStudio
 
@@ -213,7 +218,7 @@ NOTE: install R first, then RStudio.
 
 After installing R and RStudio, you should confirm that they are working by
 opening RStudio.  You should see something like this:
-![RStudio screenshot](RStudio open screenshot.jpg)
+![RStudio open screenshot](RStudio open screenshot.jpg)
 
 ### Installing the Tidyverse package for R
 
@@ -232,10 +237,14 @@ To install the Tidyverse package:
 
 1. Open RStudio if it isn't already open.
 2. Click in the `Console` window (you will see it towards the bottom of the screen)
-3. Type `install.packages("tidyverse")` and hit <enter>.
+3. Enter `install.packages("tidyverse")` (i.e., type it and hit the `<enter>` key)
 
 Once the installation is concluded and the `>` prompt reappears you can test 
-to make sure the installation worked by entering the command line: `library(tidyverse)`
+to make sure the installation worked.
+
+4. Enter `library(tidyverse)` in the console window.  
+   - If you don't get an error message, the installation worked.
+   - If you get an error message, drop by office hours to get help.
 
 If you run into trouble, don't worry. We will not need the Tidyverse for 
 a few weeks, so there is plenty of time to get help.
@@ -245,13 +254,13 @@ a few weeks, so there is plenty of time to get help.
 
 This book uses consistent visual conventions to convey information.
 
-- Chapters:
-  - Each chapter corresponds to roughly a week of the course.
+- Organization:
+  - Each chapter corresponds to one week of the course.
 - Typography:
   - Computer code or other inputs are shown `like this`.
   - When new terminology is introduced, it is shown ***like this***.
 - Boxes:
-  - Pull-out information is shown in a variety of boxes.
+  - Pull-out information is shown in colored boxes.
   
 ::: example
 Boxes like this are for examples
