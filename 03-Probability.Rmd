@@ -227,6 +227,8 @@ just like we can talk about a variable $x$ or a set $A$ without assigning
 it a particular value.
 
 ::: fyi
+**Function or multiplication?**
+
 Students sometimes confuse functions and multiplication because of the way we 
 conventionally write functions, students sometimes get confused. Suppose I write this:
    $$z = f(x+y)$$
@@ -405,6 +407,7 @@ Here are the rules:
 - It features 
   - a ball.
   - a spinning wheel with numbered/colored slots. 
+  - a table on which to place bets
 - The slots are numbered from 0 to 36
   - Slot number 0 is green
   - 18 slots are red
@@ -742,7 +745,7 @@ prove, but I won't prove them here.  Instead, I will use
 an example to show how they can be useful.
 
 ::: example
-Example: False positives in medical testing
+**False positives in medical testing**
 
 When someone is tested for a disease, the test comes back either
 "positive" (the person has the disease) or "negative" (the person does
