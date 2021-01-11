@@ -89,28 +89,6 @@ There are a few special sets defined by convention:
  - The set of positive integers is $\mathbb{Z}_+$, the set of 
    positive real numbers is $\mathbb{R}_+$, etc.
 
-Finally, we will often use ***Venn diagrams***, which 
-visually depict the relationship between one or more sets.
-Some students find them helpful in understanding these relationships,
-and in learning some of the terms and results we will be discussing
-shortly.  The Venn diagrams below show an arbitrary set $A$ 
-whose elements are members of the universal set $\mathbb{U}$.
-
-```{r, venn_a, echo = FALSE}
-grid.draw(venn.diagram(
-  main = "This Venn diagram depicts a single set A within a universal set U",
-  x = list(c(1),
-           c(1,2,3,4,5,6,7,8)),
-  category.names = c("A", "U" ),
-  fill = c("blue",
-           "white"),
-  cat.dist = -0.01,
-  alpha = 0.5,
-  cex = 0,
-#  output=TRUE,
-  filename = NULL
-))
-```
 
 #### Characteristics of a set
 
@@ -154,36 +132,8 @@ how they are related:
    $$\{1,2\} \not\subsetneq \{1,3\}$$
 
 
-```{r, venn_disjoint, echo = FALSE}
-grid.draw(venn.diagram(
-  main = "This Venn diagram depicts two disjoint sets A and B",
-  x = list(c(1,2),
-           c(3,4)),
-  category.names = c("A", "B"),
-  fill = c("blue",
-           "blue"),
-  cat.dist = -0.01,
-  alpha = 0.5,
-  cex = 0,
-  filename = NULL
-))
-```
 
 
-```{r, venn_subset, echo = FALSE}
-grid.draw(venn.diagram(
-  main = "This Venn diagram depicts a set A that is a subset of another set B",
-  x = list(c(2),
-           c(1,2,3,4)),
-  category.names = c("A", "B"),
-  fill = c("blue",
-           "blue"),
-  cat.dist = -0.01,
-  alpha = 0.5,
-  cex = 0,
-  filename = NULL
-))
-```
 
 We can also perform various mathematical operations on sets.
 
@@ -212,36 +162,6 @@ The combination of these basic definitions, relationships (identity,
 element, subset) and operations (union, intersection, complement) 
 are collectively called ***set algebra***.
    
-```{r, venn_intersection, echo = FALSE}
-grid.draw(venn.diagram(
-  main = "The dark-shaded area is the intersection of A and B. The union is all shaded areas",
-  x = list(c(1,2,3,4),
-           c(4,5,6,7)),
-  category.names = c("A", "B"),
-  fill = c("blue",
-           "blue"),
-  cat.dist = -0.01,
-  alpha = 0.25,
-  cex = 0,
-  filename = NULL
-))
-```
-
-
-```{r, venn_complement, echo = FALSE}
-grid.draw(venn.diagram(
-  main = "A' is the shaded area",
-  x = list(c(1),
-           c(1,2,3)),
-  category.names = c("A", "U"),
-  fill = c("white",
-           "blue"),
-  cat.dist = -0.01,
-  alpha = c(1,0.25),
-  cex = 0,
-  filename = NULL
-))
-```
 
 #### Standard results about sets
 
