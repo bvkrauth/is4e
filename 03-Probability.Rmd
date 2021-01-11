@@ -92,7 +92,7 @@ There are a few special sets defined by convention:
 
 #### Characteristics of a set
 
-The ***cardinality*** of the set $A$, usually written $|A|$, 
+The size or ***cardinality*** of the set $A$, usually written $|A|$, 
 is simply the number of elements it has. For example:
 
 $$|\{1,2,3\}| = 3$$
@@ -108,8 +108,7 @@ $$|\emptyset| = 0$$
 Let $A$ and $B$ be two sets. We have several ways of describing
 how they are related:
 
- - $A$ and $B$ are ***identical*** (written $A = B$) if they contain the same elements.
-   Order does not matter. For example:
+ - $A$ and $B$ are ***identical*** (written $A = B$) if they contain the same elements. For example:
    $$\{1,2\} = \{1,2\}$$
    $$\{1,2\} = \{2,1\}$$
    $$\{1,2\} \neq \{1,2,3\}$$
@@ -124,16 +123,6 @@ how they are related:
    $$\{1,2\} \subset \{1,2\}$$
    $$\{1,2\} \subset \{1,2,3\}$$
    $$\{1,2\} \not\subset \{1,3\}$$
- - $A$ is a ***strict subset*** of $B$ (written $A \subsetneq B$) if 
-   $A \subseteq B$ and $A \neq B$. 
-   For example:
-   $$\{1,2\} \not\subsetneq \{1,2\}$$
-   $$\{1,2\} \subsetneq \{1,2,3\}$$
-   $$\{1,2\} \not\subsetneq \{1,3\}$$
-
-
-
-
 
 We can also perform various mathematical operations on sets.
 
@@ -161,9 +150,9 @@ We can also perform various mathematical operations on sets.
 The combination of these basic definitions, relationships (identity, 
 element, subset) and operations (union, intersection, complement) 
 are collectively called ***set algebra***.
-   
 
-#### Standard results about sets
+::: fyi
+**Some standard results about sets**
 
 Given the basic components of set algebra, we can establish many useful rules. 
 This is not a course on set theory, so I will simply list some of the most important rules
@@ -207,6 +196,7 @@ make intuitive sense to you.
 
 Notice that these rules generally come in pairs, with union and intersection switched. This
 duality is a general feature of set algebra.
+:::
 
 ### Functions
 
@@ -236,7 +226,8 @@ Finally we can just refer to a function without defining exactly what it is,
 just like we can talk about a variable $x$ or a set $A$ without assigning
 it a particular value.
 
-WARNING: Students sometimes confuse functions and multiplication because of the way we 
+::: fyi
+Students sometimes confuse functions and multiplication because of the way we 
 conventionally write functions, students sometimes get confused. Suppose I write this:
    $$z = f(x+y)$$
 There are two possible interpretations of this statement:
@@ -247,6 +238,7 @@ There are two possible interpretations of this statement:
 
 It is sometimes clear from the context which  of these interpretations is correct 
 in a given problem. But please ask if you aren't sure.
+:::
 
 #### The indicator function
 
