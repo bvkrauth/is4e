@@ -91,7 +91,7 @@ ever knowing their names, so I will list them here:
 
 ### Tidy data
 
-Download the data file at ***ADD LINK HERE*** and open it in Excel.
+Download the data file at https://bvkrauth.github.io/files/CanadaEmploymentNov2020.xlsx and open it in Excel.
    ![Excel screenshot](EmploymentData.png) 
 This data file provides the main employment statistics for Canadian provinces
 in November 2020.
