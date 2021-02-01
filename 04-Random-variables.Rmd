@@ -1,5 +1,16 @@
 # Random variables
 
+Chapter \@ref(probability-and-random-events) developed a general framework for
+modeling random outcomes and events. This framework can be applied to
+any set of random outcomes, no matter how complex.
+
+However, many of the random outcomes we are interested in are quantitative,
+that is, they can be described by a number. Quantitative outcomes 
+are also called "random variables." In addition to the basic 
+tools of probability developed in Chapter \@ref(probability-and-random-events),
+we have some extremely useful specialized tools for random variables. This
+chapter will develop these tools.
+
 ::: goals
 **Chapter goals**
 
@@ -21,39 +32,37 @@ In this chapter we will learn how to:
 
 ## Introduction to random variables
 
-In the previous chapter, we learned a framework for modeling random
-outcomes events. In economics, the outcomes we are interested in are
-usually quantitative, that is, they can be described by a number.
-Quantitative outcomes are also called "random variables", and we 
-have many tools for working with them.  
-
-### What is a random variable?
-
 A ***random variable*** is a number whose value depends
 on a random outcome. The idea here is that we are going to use a random
 variable to describe some (but not necessarily every) aspect 
 of the outcome.
 
 ::: example
-Returning to our roulette example, here are a few random variables we
-could define:
+**Random variables in roulette**
+
+Here are a few random variables we could define in a roulette
+game:
 
 - The original outcome $b$. 
 - An indicator for whether a bet on red wins:
-  $$r = I(b \in RED)=\begin{cases}1 & b \in RED\\ 0 & b \notin RED \\ \end{cases}$$
+  $$r = I(b \in Red)=\begin{cases}1 & b \in Red\\ 0 & b \notin Red \\ \end{cases}$$
 - The net payout from a \$1 bet on red:
-      $$ w_{red} = w_{red}(b) = \begin{cases}  1 & \textrm{ if } b \in RED \\ -1 & \textrm{ if } b \in RED^c \end{cases} $$
+      $$ w_{red} = w_{red}(b) = \begin{cases}  1 & \textrm{ if } b \in Red \\ -1 & \textrm{ if } b \in Red^c \end{cases} $$
       That is, a player who bets \$1 on red wins \$1 if the ball lands on red 
       and loses \$1 if the ball lands anywhere else.
-- The net payout from a \$1 bet on 12:
-      $$ w_{12} = w_{12}(b) = \begin{cases}  35 & \textrm{ if } b = 12 \\ -1 & \textrm{ if } b \neq 12 \end{cases} $$
-      That is, a player who bets \$1 on 12 wins \$35 if the ball lands on 12 
+- The net payout from a \$1 bet on 14:
+      $$ w_{14} = w_{14}(b) = \begin{cases}  35 & \textrm{ if } b = 14 \\ -1 & \textrm{ if } b \neq 14 \end{cases} $$
+      That is, a player who bets \$1 on 14 wins \$35 if the ball lands on 14 
       and loses \$1 if the ball lands anywhere else.
 
+All of these random variables are defined in terms of the underlying
+outcome, but we can also define random variables in terms of other
+random variables.  For example, we could have defined $w_{red}$
+as $w_{red} = 2r-1$.
 :::
 
-A random variable can always be thought of as a function of the original
-outcome. For convenience, we usually leave its dependence on the original
+A random variable is always a function of the original outcome, but
+for convenience, we usually leave its dependence on the original
 outcome implicit, and write it as if it were an ordinary variable.
 
 ### Probability distributions
@@ -63,7 +72,7 @@ and probability distribution.  This probability distribution can
 be derived from the probability distribution of the underlying outcome.
 
 ::: example
-In our roulette example:
+**Probability distributions for roulette**
 
    - The probability distribution for $b$ is:
       $$\Pr(b = 0) = 1/37 \approx 0.027$$
@@ -72,17 +81,18 @@ In our roulette example:
       $$\Pr(b = 36) = 1/37 \approx 0.027$$
       All other values of $b$ have probability zero.
    - The probability distribution for $w_{red}$ is:
-      $$\Pr(w_{red} = 1) = \Pr(b \in RED) = 18/37 \approx 0.486$$
-      $$\Pr(w_{red} = -1) = \Pr(b \notin RED) = 19/37 \approx 0.514$$
+      $$\Pr(w_{red} = 1) = \Pr(b \in Red) = 18/37 \approx 0.486$$
+      $$\Pr(w_{red} = -1) = \Pr(b \notin Red) = 19/37 \approx 0.514$$
       All other values of $w_{red}$ have probability zero.
-   - The probability distribution for $w_{12}$ is:
-      $$\Pr(w_{12} = 35) = \Pr(b = 12) = 1/37 \approx 0.027$$
-      $$\Pr(w_{12} = -1) = \Pr(b \neq 12) = 36/37 \approx 0.973$$
-      All other values of $w_{12}$ have probability zero.
+   - The probability distribution for $w_{14}$ is:
+      $$\Pr(w_{14} = 35) = \Pr(b = 14) = 1/37 \approx 0.027$$
+      $$\Pr(w_{14} = -1) = \Pr(b \neq 14) = 36/37 \approx 0.973$$
+      All other values of $w_{14}$ have probability zero.
 
 Notice that these random variables are related to each other since
-they all depend on the same underlying outcome. We will talk later about how
-to talk about those relationships.
+they all depend on the same underlying outcome. Section
+\@ref(multiple-random-variables) will explain how we can describe
+and analyze those relationships.
 :::
 
 #### The support
@@ -95,11 +105,13 @@ In plain language the support is the set of all values in the sample space
 that have some chance of actually happening. 
 
 ::: example
-In our roulette example:
+**The support in roulette**
+
+The support is just the set of values with non-zero probability:
 
   - The support of $b$ is $S_{b} = \{0,1,2,\ldots,36\}$.
   - The support of $w_{Red}$ is $S_{Red} = \{-1,1\}$.
-  - The support of $w_{12}$ is $S_{12} = \{-1,35\}$.
+  - The support of $w_{14}$ is $S_{14} = \{-1,35\}$.
 
 :::
 
@@ -110,19 +122,26 @@ That will complicate the math quite a bit, as we will need to use calculus.
 
 ### The PDF and CDF
 
+The PDF and CDF are both functions that allow us to describe the
+probability distribution of a random variable.
+
 #### The PDF of a discrete random variable
 
 We can describe the probability distribution of a random
-variable with a function called its ***probability density function (PDF)*** .
+variable with a function called its ***probability density function (PDF)***.
 
 The PDF of a discrete random variable is defined as:
   $$f_x(a) = \Pr(x = a)$$
 where $a$ is any number.  By convention, we typically use a 
-lower-case $f$ to represent a PDF, and we use the subscript to 
-clarify which specific random variable we are talking about.
+lower-case $f$ to represent a PDF, and we use the subscript when needed
+to clarify which specific random variable we are talking about.
 
 ::: example
-In our roulette example:
+**The PDF in roulette**
+
+Our three random variables are all discrete, and each has its own
+PDF:
+
   $$f_b(a) = \Pr(b = a) = \begin{cases}
             1/37 & a \in \{0,1,\ldots,36\} \\
             0 & a \notin \{0,1,\ldots,36\} \\
@@ -132,16 +151,17 @@ In our roulette example:
             18/37 & a = 1 \\
             0 & a \notin \{-1,1\} \\
           \end{cases}$$
-  $$f_{12}(a) = \Pr(w_{12} = a) = \begin{cases}
+  $$f_{14}(a) = \Pr(w_{14} = a) = \begin{cases}
             36/37 & a = -1 \\
             1/37 & a = 35 \\
             0 & a \notin \{-1,35\} \\
           \end{cases}$$
-Figure ??? below shows these three PDFs.
-```{r PDF_all, echo = FALSE, fig.margin = TRUE, fig.cap = "PDFs for the roulette example"}
+Figure \@ref(fig:PDFAll) below shows these three PDFs.
+```{r PDFAll, echo = FALSE, fig.margin = TRUE, fig.cap = "PDFs for the roulette example"}
 plot(x=0:36,
      y=rep(1/37,times=37),
      type="p",
+     pch=17,
      col="blue",
      xlab="a",
      ylab="f(a)",
@@ -150,19 +170,40 @@ plot(x=0:36,
      ylim=c(0,1),
      xaxp=c(-2,36,38),
      yaxp=c(0,1,4))
-points(x=c(-1,1),y=c(19/37,18/37),col="red")
-points(x=c(-1,35),y=c(36/37,1/37),col="green")
+text(x=4,y=4/37,label="f_b(a)",col="blue",cex=0.75)
+points(x=c(-1,1),y=c(19/37,18/37),pch=16,col="red")
+text(x=4,y=18/37,label="f_red(a)",col="red",cex=0.75)
+points(x=c(-1,35),y=c(36/37,1/37),pch=18,col="green")
+text(x=2,y=36/37,label="f_14(a)",col="green",cex=0.75)
 abline(h=1/37,lty=2,col="gray")
 ```
 :::
 
-We can calculate any probability from the PDF by simple addition.
+We can calculate any probability from the PDF by simple addition. That
+is:
   $$\Pr(x \in A) = \sum_{s \in S_x} f_x(s)I(s \in A)$$
+where $A \subset \mathbb{R}$ is any event defined for $x$.
 
 ::: example
-In our roulette example:
-  $$\Pr(b \leq 3) = \sum_{s=0}^{36}f_x(s)I(s \leq 3) = f_b(0) + f_b(1) + f_b(2) + f_b(3) = 4/37$$
-  $$\Pr(b \in EVEN) = \sum_{s=0}^{36}f_x(s)I(s \in EVEN) = f_b(2) + f_b(4) + \cdots + f_b(36) = 18/37$$
+**Some event probabilities in roulette**
+
+Since the outcome in roulette is discrete, we can calculate
+any event probability by adding up the probabilities of the
+event's outcomes.
+
+The probability of the event $b \leq 3$ can be calculated:
+  \begin{align}
+    \Pr(b \leq 3) &= \sum_{s=0}^{36}f_x(s)I(s \leq 3) \\
+      &= f_b(0) + f_b(1) + f_b(2) + f_b(3) \\
+      &= 4/37 
+  \end{align}
+  
+The probability of the event $b \in Even$ can be calculated:
+  \begin{align}
+    \Pr(b \in Even) &= \sum_{s=0}^{36}f_x(s)I(s \in Even) \\
+        &= f_b(2) + f_b(4) + \cdots + f_b(36) \\
+        &= 18/37 
+  \end{align}
 
 :::
 
@@ -217,14 +258,16 @@ whether $x$ is discrete or continuous.
 
 If a random variable is discrete, we can construct its CDF
 by just adding up the PDF:
-  $$F_x(a) = \Pr(x \leq a) = \sum_{s \in S_x} f_x(s)I(s \leq a)$$
-We can also construct the PDF from the CDF.  Pick some positive but
-small number $\epsilon$.  Then:
-  $$f_x(a) = F_x(a) - F_x(a-\epsilon)$$
-as long as $\epsilon$ is small enough.
+  \begin{align}
+    F_x(a) &= \Pr(x \leq a) \\
+      &= \sum_{s \in S_x} f_x(s)I(s \leq a)
+  \end{align}
+This formula leads to a "stair-step" appearance: the CDF is flat for
+all values outside of the support, and then jumps up at all values
+in the support.
 
 ::: example
-In our roulette example:
+**CDFs for roulette**
 
   - The CDF of $b$ is:
      $$F_b(a) = \begin{cases}
@@ -241,32 +284,35 @@ In our roulette example:
                 19/37 & -1 \leq a < 1 \\
                 1 & a \geq 1 \\
                 \end{cases}$$
-  - The CDF of $w_{12}$ is:
-    $$F_{12}(a) = \begin{cases}
+  - The CDF of $w_{14}$ is:
+    $$F_{14}(a) = \begin{cases}
                 0 & a < -1 \\
                 36/37 & -1 \leq a < 35 \\
                 1 & a \geq 35 \\
                 \end{cases}$$
 
-Figure ??? below graphs these CDFs. 
-```{r CDF_all, echo = FALSE, fig.margin = TRUE, fig.cap = "CDFs for the roulette example"}
-plot(x=c(-40,-1,1,40),
+Figure \@ref(fig:CDFAll) below graphs these CDFs. 
+```{r CDFAll, echo = FALSE, fig.margin = TRUE, fig.cap = "CDFs for the roulette example"}
+plot(x=c(-5,-1,1,40),
      y=c(0,19/37,1,1)-0.001,
      type="s",
      col="red",
      xlab="a",
      ylab="F(a)",
      bty="l",
-     xaxp=c(-40,40,10),
+     xaxp=c(-5,40,10),
      yaxp=c(0,1,2))
-lines(x=c(-40,seq(from=0,to=36,by=1),40),
-      y=c(0,seq(from=0,to=1,length=37),1)+0.001,
-      type="s",
-      col="green")
-lines(x=0.1+ c(-40,-1,35,40),
-      y=0.01+c(0,36/37,1,1),
+text(x=4,y=0.55,label="F_red(a)",col="red",cex=0.75)
+lines(x=c(-5,seq(from=0,to=36,by=1),40),
+      y=c(0,seq(from=0,to=1,length=37),1)-0.001,
       type="s",
       col="blue")
+text(x=24,y=0.55,label="F_b(a)",col="blue",cex=0.75)
+lines(x=0.1+ c(-5,-1,35,40),
+      y=0.01+c(0,36/37,1,1),
+      type="s",
+      col="green")
+text(x=-4,y=0.75,label="F_14(a)",col="green",cex=0.75)
 abline(h=0.5,lty=2,col="gray")
 ```
 Notice that they show all of the general properties described above. In 
@@ -275,6 +321,17 @@ each point in $S_x$ and flat between those points,  This is a general
 property of CDFs for discrete random variables.
 :::
 
+We can also go the other way, and construct the PDF of a discrete random 
+variable from its CDF. Each little jump in the CDF is a point in the support,
+and the size of the jump is exactly equal to the PDF.
+
+::: fyi
+In more formal mathematics, the formula for deriving the PDF of a discrete
+random variable from its CDF would be written:
+
+  $$f_x(a) = \lim_{\epsilon \rightarrow 0} F_x(a) - F_x(a-|\epsilon|)$$
+but we can just think of it as the size of the jump.
+:::
 
 #### Continuous random variables
 
@@ -309,15 +366,16 @@ distribution. What that means is that:
 
 The CDF of the standard uniform distribution is:
   $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
-Figure ??? below shows the CDF of the standard uniform distribution. 
-```{r CDF_uniform, echo = FALSE}
-plot(x=seq(from=-2,to=2,length.out=100),y=punif(seq(from=-2,to=2,length.out=100)),type="l",xlab="a",ylab=expression(Pr(x <= a)),bty="l",xaxp=c(-2,2,10),yaxp=c(0,1,2))
+Figure \@ref(fig:CDFUniform) below shows the CDF of the standard uniform distribution. 
+```{r CDFUniform, echo = FALSE, fig.cap = "CDF for the standard uniform distribution"}
+plot(x=seq(from=-2,to=2,length.out=100),y=punif(seq(from=-2,to=2,length.out=100)),type="l",xlab="a",ylab=expression(Pr(x <= a)),bty="l",xaxp=c(-2,2,10),yaxp=c(0,1,2),col="blue")
+text(x=1,y=0.6,col="blue",label="F_x(a)",cex=0.75)
 abline(h=0.5,lty=2,col="gray")
 ```
-In all of the discrete examples we have considered so far, the CDF rises in 
-a "stair-step" manner: a series of alternating vertical jumps and 
-flat spots. In contrast, the standard uniform CDF rises continuously with
-no jumps.  All continuous random variables have a CDF with this property.
+As we have seen, the CDF of a discrete random variable rises in 
+a "stair-step" manner. In contrast, the standard uniform CDF rises 
+smoothly with no jumps.  All continuous random variables have a CDF with
+this property.
 
 Let $a_1$ and $a_2$ be any two numbers between 0 and 1, and let $a_1 < a_2$.
 Then the probability of $x$ being between $a_1$ and $a_2$ is:
@@ -326,15 +384,19 @@ As $a_2$ gets closer and closer to $a_1$ this number gets closer and closer
 to zero, so the probability of $x$ being *exactly* $a_1$ is zero.
 :::
 
-The PDF of a continuous random variable is defined as:
+The PDF of a continuous random variable is defined as just the
+derivative of its CDF:
   $$f_x(a) = \frac{dF_x(a)}{da}$$
-  
+
 ::: example
+**The PDF of the standard uniform distribution**
+
 The PDF of a standard uniform random variable is:
   $$f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}$$
 which looks like this:
-```{r PDF_uniform, echo = FALSE}
-plot(x=seq(from=-2,to=2,length.out=1000),y=dunif(seq(from=-2,to=2,length.out=1000)),type="l",xlab="a",ylab=expression(Pr(x <= a)),bty="l",xaxp=c(-2,2,10),yaxp=c(0,1,2))
+```{r PDFUniform, echo = FALSE, fig.cap = "PDF for the standard uniform distribution"}
+plot(x=seq(from=-2,to=2,length.out=1000),y=dunif(seq(from=-2,to=2,length.out=1000)),type="l",xlab="a",ylab="f(a)",bty="l",xaxp=c(-2,2,10),yaxp=c(0,1,2),col="blue")
+text(x=1.2,y=0.8,col="blue",label="f_x(a)",cex=0.75)
 ```
 :::
 
@@ -349,27 +411,43 @@ is not a prerequisite for the course, So:
 
 ::: fyi
 **Integral calculus for continuous random variables**
-I have defined PDF based on the CDF, but we can also go the other way.  That
-is, if we know the PDF we can calculate the CDF:
+
+I have defined the PDF for a continuous random variable based on its CDF,
+but we can also go the other way and calculate the CDF from the PDF.
+The formula for that calculation is:
   $$F_x(a) = \int_{-\infty}^a f_x(v)dv$$
 More generally the probability of $x$ being between any two numbers is:
+
   $$\Pr(a \leq x \leq b) = F_x(b) - F_x(a) = \int_a^b f_x(v)dv$$
-Since most of you don't know integral calculus, you probably have 
+
+Unless you have taken MATH 152 or MATH 158, you may have 
 no idea what this is or how to solve it.  That's OK!  All you need
-to know is that it can be solved.
+to know for this course is that it *can* be solved.
 :::
 
-#### Modes
+## The properties of a random variable
+
+The probability distribution of a random variable is fully described
+by its PDF or CDF.  However, we will often be interested in 
+describing the random variable with a few simple summary numbers.
+
+For example, we might be interested in the most common value (also
+called the mode), or we might be interested in a "typical" value,
+or we might be interested in a simple measure of how much the 
+random variable tends to vary.  All of these quantities
+can be defined and calculated from on the PDF or CDF.
+
+### The mode
 
 Roughly speaking, the ***mode*** of a random variable is its most likely 
 value (i.e., the value with the highest PDF).
 
 :::example
-In our roulette example:
+**The mode in roulette**
 
- - The mode of $w_{red}$ is $-1$. That is, losing \$1 is the 
-    most likely outcome.
- - The mode of $w_{12}$ is also $-1$.
+- The mode of $w_{red}$ is $-1$. That is, losing \$1 is the 
+  most likely outcome.
+- The mode of $w_{14}$ is also $-1$.
 
 What is the mode of $b$, since it takes on one of 37 equally-likely values?
 In order to answer that, we would need to define the mode more precisely than
@@ -377,7 +455,21 @@ just "the most likely outcome." But this is an introductory course,
 so let's just leave it at that.
 :::
 
-#### Medians, quantiles and percentiles
+### Range
+
+The ***range*** of a random variable is the interval from the
+minimum value in its support to the maximum value in the support.
+
+:::example
+**The range in roulette**
+
+- The range of $w_{red}$ is $[-1,1]$.
+- The range of $w_{14}$ is $[-1,35]$.
+- The range of $b$ is $[0,36]$.
+
+:::
+
+### Medians, quantiles and percentiles
 
 Roughly speaking, the ***median*** of a random variable is the value in the 
 "middle"of the distribution, i.e., we have the same probability of being 
@@ -397,13 +489,16 @@ percentile; for example the 0.25 quantile of $x$ is also called the 25th
 percentile of $x$.
 
 ::: example
-In our roulette example: 
+**Quantiles in roulette**
+
+The CDF of $w_{red}$ is:
   $$F_{red}(a) = \begin{cases}0 & a < -1 \\ 0.514 & -1 \leq a < 1 \\ 1 & a \geq 1 \\ \end{cases}$$ 
-the 0.25 quantile (25th percentile) of $w_{red}$ is:
+  
+So its 0.25 quantile (25th percentile) is:
   $$q_{0.25}(w_{red}) = \min\{a: \Pr(w_{red} \leq a) \geq 0.25\} = \min [-1,1] = -1$$
-the 0.5 quantile (50th percentile) of $w_{red}$ is:
+its 0.5 quantile (50th percentile) is:
   $$q_{0.5}(w_{red}) = \min\{a: \Pr(w_{red} \leq a) \geq 0.5\} = \min [-1,1] = -1$$
-and the 0.75 quantile (75th percentile) is:
+and its 0.75 quantile (75th percentile) is:
   $$q_{0.75}(w_{red}) = \min\{a: \Pr(w_{red} \leq a) \geq 0.75\} = \min\{1\} = 1$$
 :::
 
@@ -412,10 +507,11 @@ define the median: the median is the 0.5 quantile or 50th percentile.
 
 
 ::: example
-In our roulette example, the median is:
+**The median in roulette**
+
+The median of $w_{red}$ is just its 0.5 quantile or 50th percentile:
   $$median(w_{red}) = q_{0.5}(w_{red}) = -1$$
 :::
-
 
 ### The expected value
 
@@ -425,20 +521,29 @@ value (also called the mean) is another measure of central tendency.
 
 #### Definition of expected value
 
-The ***expected value*** or ***mean*** of a random variable $x$ is written
+The ***expected value*** of a random variable $x$ is written
 $E(x)$. When $x$ is discrete, it is defined as:
 
 $$E(x) = \sum_{a \in S_x} a\Pr(x=a) = \sum_{a \in S_x} af_x(a)$$
-We can think of the expected value as weighted average of the possible values in the support, with weights equal to the probability of observing that value.
+The expected value is also called the ***mean***, the ***population mean***
+or the ***expectation*** of the random variable.
 
 
 ::: example
-In our roulette example:
+**The expected value in roulette**
+
+The expected value of $b$ is:
   $$E(b) = 0*\underbrace{f_b(0)}_{1/37} + 1*\underbrace{f_b(1)}_{1/37} + \cdots 36*\underbrace{f_b(36)}_{1/37} = 18$$
+  
+The expected value of $w_{red}$ is:
     $$E(w_{red}) = -1*\underbrace{f_{red}(-1)}_{19/37} + 1*\underbrace{f_{red}(1)}_{18/37} \approx -0.027$$
-    $$E(w_{12}) = -1*\underbrace{f_{12}(-1)}_{36/37} + 35*\underbrace{f_{12}(35)}_{1/37} \approx -0.027$$
-That is, each dollar bet on red leads to an average loss of 2.7 cents for the bettor, as does each dollar bet on 12.
+The expected value of $w_{14}$ is:
+    $$E(w_{14}) = -1*\underbrace{f_{14}(-1)}_{36/37} + 35*\underbrace{f_{14}(35)}_{1/37} \approx -0.027$$
+That is, each dollar bet on red leads to an average loss of 2.7 cents for the bettor, as does each dollar bet on 14.
 :::
+
+We can think of the expected value as a weighted average of its possible
+values, with each value weighted by the probability of observing that value.
 
 ::: fyi
 **The expected value for a continuous random variable**
@@ -476,25 +581,35 @@ example:
 Students frequently make this mistake, so try to avoid it.
 
 ::: example
-Suppose we bet \$100 on red.  Our net payout will be $100 \, w_{red}$
+**Using the linearity of the expected value**
+
+Suppose we bet \$100 on red.  Our net payout will be $100w_{red}$
 so our expected payout will be:
-  $$E(100 \, w_{red}) = 100 \, E(w_{red}) = 100*(-0.027) = -2.7$$
+  $$E(100 w_{red}) = 100 \, E(w_{red}) = 100*(-0.027) = -2.7$$
 In other words, the average result of a \$100 bet on red is a loss
 of \$2.70.
 :::
 
 ### Variance and standard deviation
 
+The mode, median and expected value all aim to describe a typical
+or central value of the random variable.  We are also interested in
+measures of how much the random variable varies.  We have already
+seen one - the range - but there are others, including the
+variance and standard deviation.
+
 The ***variance*** of a random variable $x$ is defined as:
 $$\sigma_x^2 = var(x) = E((x-E(x))^2)$$
 The ***standard deviation*** of a random variable 
-is defined as the square root of its variance.
+is defined as the (positive) square root of its variance.
 $$\sigma_x = sd(x) = \sqrt{var(x)}$$
 Both variance and standard deviation can be thought of as 
 measures of how much $x$ tends to deviate from its central
 tendency $E(x)$. 
 
 ::: example
+**Variance and standard deviation in roulette**
+
 The variance of $r$ is:
   $$var(r) = (0-\underbrace{E(r)}_{18/37})^2 *\frac{19}{37} + (1-\underbrace{E(r)}_{18/37})^2 * \frac{18}{37} \approx 0.25$$
 and its standard deviation is:
@@ -504,34 +619,36 @@ The variance of $w_{red}$ is:
   $$var(w_{red}) = (-1-\underbrace{E(w_{red})}_{\approx 0.027})^2 * \frac{19}{37} + (1-\underbrace{E(w_{red})}_{\approx 0.027})^2 * \frac{18}{37} \approx 1.0$$
 and its standard deviation is
   $$sd(w_{red}) = \sqrt{var(w_{red})} \approx 1.0$$ 
-The variance of $w_{12}$ is 
-  $$var(w_{12}) = (-1-\underbrace{E(w_{12})}_{\approx 0.027})^2 * \frac{36}{37} + (35-\underbrace{E(w_{12})}_{\approx 0.027})^2 * \frac{1}{37} \approx 34.1$$
+  
+The variance of $w_{14}$ is 
+  $$var(w_{14}) = (-1-\underbrace{E(w_{14})}_{\approx 0.027})^2 * \frac{36}{37} + (35-\underbrace{E(w_{14})}_{\approx 0.027})^2 * \frac{1}{37} \approx 34.1$$
 and its standard deviation is
-  $$sd(w_{12}) = \sqrt{var(w_{12})} \approx 5.8$$ 
-That is, a bet on 12 has the same expected payout as a bet on red, but
-the payout is much more variable.
+  $$sd(w_{14}) = \sqrt{var(w_{14})} \approx 5.8$$ 
+That is, a bet on 14 has the same expected payout as a bet on red, but
+its payout is much more variable.
 :::
 
-The variance and standard deviation have several standard properties:
+The variance is the expected value (sum) of a square, which implies 
+several standard properties:
   
-- They are always non-negative:
+- It is always non-negative:
   $$var(x) \geq 0$$
   $$sd(x) \geq 0$$
 - For any constants $a$ and $b$:
   $$var(a +bx) = b^2 var(x)$$
-  $$sd(a +bx) = b sd(x)$$
+  $$sd(a +bx) = b \, sd(x)$$
 - The variance can be written as:
-  $$var(x) = E(x-E(x))^2 = E(x^2) - E(x)^2$$
+  $$var(x) = E(x^2) - E(x)^2$$
 
 We can easily derive these properties but we will skip that now.
 
-### Standard distributions
+## Standard distributions
 
 Some probability distributions appear so often in applications that
 we have given them names. We will go through a few of the most 
 important ones below.
 
-#### Discrete uniform
+### Discrete uniform
 
 The ***discrete uniform*** distribution is a distribution with 
 that puts equal probability on every value in a discrete set 
@@ -544,28 +661,33 @@ Discrete uniform distributions appear in gambling and similar
 applications.  
 
 ::: example
+**The discrete uniform distribution in roulette**
+
 In our roulette example, the outcome $b$ has a discrete 
 uniform distribution on $\Omega = \{0,1,\ldots,36\}$.
 :::
 
-#### Bernoulli
+### Bernoulli
 
 The ***Bernoulli*** probability distribution is usually written:
 $$x \sim Bernoulli(p)$$
 It has discrete support $S_x = \{0,1\}$ and PDF:
 $$f_x(a) = \begin{cases} (1-p) & a = 0 \\ p & a = 1 \\ 0 & a = \textrm{anything else}\\ \end{cases}$$
 We typically use Bernoulli random variables to model the probability of some
-event.
+event $A$. If we define $x$ as the indicator variable $x=I(A)$, 
+then $x \sim Bernoulli(p)$ where $p=\Pr(A)$.
 
-The mean and variance are:
+The mean and variance of a $Bernoulli(p)$ random variable are:
 $$E(x) = (1-p)*0 + p*1 = p$$
 $$var(x) = E[(x-E(x))^2] = E[(x-p)^2] = (1-p)(0-p)^2 + p(1-p)^2 = p(1-p)$$
 
 ::: example
-In our roulette example, $r$ has the $Bernoulli(18/37)$ distribution.
+**The Bernoulli distribution in roulette**
+
+The variable $r = I(Red)$ has the $Bernoulli(18/37)$ distribution.
 :::
 
-#### Binomial
+### Binomial
 
 The ***binomial*** probability distribution is usually written:
 $$x \sim Binomial(n,p)$$
@@ -594,13 +716,16 @@ The mean and variance of a binomial random variable are:
   $$var(x) = np(1-p)$$
 
 ::: example
+**The binomial distribution in roulette**
+
 Suppose we play 50 games of roulette, and bet on red in every game.
-Let $WIN50$ be the number of times we win.  Since the outcome
-of a single bet on red is $r \sim Bernoulli(18/37)$, this means
-that $WIN50$ has the $Binomial(50,18/37)$ distribution.
+Let $WIN50$ be the number of times we win.  
+
+Since the outcome of a single bet on red is $r \sim Bernoulli(18/37)$, 
+this means that $WIN50 \sim Binomial(50,18/37)$.
 :::
 
-#### Uniform and standard uniform
+### Uniform and standard uniform
 
 The ***uniform*** probability distribution is usually written
 $$x \sim U(L,H)$$
@@ -618,35 +743,39 @@ Uniform distributions are commonly used by computers because:
   uniform distribution.
 - You can generate a random variable with any probability distribution 
   you like by following these steps:
-    1. Generate a random variable $w \sim U(0,1)$.
-    2. Calculate $x = F^{-1}(w)$ where $F^{-1}$ is the inverse CDF of 
+    1. Generate a random variable $q \sim U(0,1)$.
+    2. Calculate $x = F^{-1}(q)$ where $F^{-1}$ is the inverse CDF of 
       the distribution you want.
 
 Every video game you have ever played is constantly generating
-$U(0,1)$ random numbers and using them to determine the behavior of non-player
-characters, the location of resources, etc.  Without that element of randomess,
-these games would be way too predictable to be much fun.
+$U(0,1)$ random numbers and using them to determine the behavior of 
+non-player characters, the location of resources, etc.  Without that
+element of randomess, these games would be way too predictable to be 
+much fun.
 :::
 
 The mean and variance of the $U(L,H)$ distribution are:
   $$E(x) = \frac{L+H}{2}$$
   $$var(x) = \frac{(H-L)^2}{12}$$
+As with all continuous random variables, these calculations would
+require integration which is beyond the scope of this course.
 
-#### Normal and standard normal
+### Normal and standard normal
 
-The ***normal distribution*** or ***Gaussian distribution***
-is typically written as:
+The ***normal distribution*** is typically written as:
 $$ x \sim N(\mu,\sigma^2)$$ 
 It is a continuous distribution with support $S_x = \mathbb{R}$
 and PDF:
 $$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
+The normal distribution is also called the ***Gaussian*** distribution.
+
 The normal distribution looks strange, but it turns out to be a very 
 important one in statistics for two reasons:
 
   1. Any linear function of a normally distributed random variable 
     is also normally distributed.  That is, suppose that 
-    $x \sim N(\mu,\sigma^2)$ and let $y = a + bx$.  Then 
-    $y \sim N(a+b\mu,b^2\sigma^2)$.
+    $x \sim N(\mu,\sigma^2)$ and let $y = a + bx$ where $a$ and 
+    $b$ are any constants.  Then $y \sim N(a+b\mu,b^2\sigma^2)$.
   2. A very important result called the Central Limit Theorem tells
       us that many random variables have a distribution that is
       well-approximated by the normal distribution. We will discuss 
@@ -663,15 +792,30 @@ symbol for its PDF:
 and its CDF:
   $$\Phi(a) = \int_{-\infty}^a \phi(b)db$$
 The standard normal CDF $\Phi(.)$ does not have a closed form
-solution, but is easy to calculate on a computer.
+solution, but is easy to calculate on a computer and is available
+as a built-in function in Excel, R or any other program used to
+analyze data.
 
 Why is this useful?  Well remember that linear functions of 
-normal random variables are also normal.  Then if $x \sim N(\mu,\sigma^2)$
-$$ z = \frac{x-\mu}{\sigma} \sim N(0,1)$$
-which implies:
-$$F_x(a) = \Pr\left(x \leq a\right) = \Pr\left( \frac{x-\mu}{\sigma} \leq \frac{a-\mu}{\sigma}\right) = \Pr\left( z \leq \frac{a-\mu}{\sigma}\right) = \Phi\left(\frac{a-\mu}{\sigma}\right)$$
-In other words, we can use the standard normal CDF to calculate the
-CDF of any normally distributed random variable.
+normal random variables are also normal.  This will allow
+us to calculate the CDF of any $N(\mu,\sigma^2)$ random
+variable using the standard normal CDF.
+
+Consider a random variable $x \sim N(\mu,\sigma^2)$. Define another
+random variable $z = \frac{x-\mu}{\sigma}$. Then:
+  $$z \sim N\left(\mu*\frac{1}{\sigma}- \frac{\mu}{\sigma},\sigma^2*\left(\frac{1}{\sigma}\right)^2\right)$$
+or equivalently $z \sim N(0,1)$.
+
+This implies:
+  \begin{align}
+    F_x(a) &= \Pr\left(x \leq a\right) \\
+      &= \Pr\left( \frac{x-\mu}{\sigma} \leq \frac{a-\mu}{\sigma}\right)\\
+      &= \Pr\left( z \leq \frac{a-\mu}{\sigma}\right) \\ 
+      &= \Phi\left(\frac{a-\mu}{\sigma}\right)
+  \end{align}
+Since the standard normal CDF is available as a built-in function in Excel
+or R, so we can use this result to calculate the CDF for any normally
+distributed random variable.
 
 ## Multiple random variables
 
@@ -699,23 +843,44 @@ $$f_{x,y}(a,b) = \begin{cases}
 
 The joint distribution tells you about the relationship between the
 two variables as well as the characteristics of the variables themselves.
-That is, we can always get the ***marginal*** distributions from the 
-joint distributions:
+That is, we can always get the ***marginal*** distributions of the two 
+individual random variables from their joint distribution:
 $$F_x(a) = \Pr(x \leq a) = \Pr(x \leq a \cap y \leq \infty) = F_{x,y}(a,\infty)$$
 $$F_y(b) = \Pr(y \leq n) = \Pr(x \leq \infty \cap y \leq b) = F_{x,y}(\infty,b)$$
-but it is not possible to get the joint distribution from the marginal
-distributions.
+However, it is not possible to get the joint distribution from the 
+marginal distributions.
 
 ::: example
-In our roulette example, the joint PDF of $w_{red}$ and 
-$w_{12}$ can be derived from the original outcome.
+**The joint PDF in roulette**
 
-If $b=12$, then both red and 12 win:
-  $$f_{red,12}(1,35) = \Pr(w_{red}=1 \cap w_{12} = 35 = \Pr(b \in \{12\}) = 1/37$$
-If $b \in RED$ but $b \neq 12$, then red wins but 12 loses:
-  $$f_{red,12}(1,-1) = \Pr(b \in \{1,3,5,7,9,14,16,18,19,21,23,25,27,30,32,34,36\}) = 17/37$$
-Otherwise both red and 12 lose:
-  $$f_{red,12}(-1,-1) = \Pr(b \in \{0,2,4,6,7,10,11,13,15,17,20,22,24,26,28,31,33,35\}) = 19/37$$
+In our roulette example, the joint PDF of $w_{red}$ and 
+$w_{14}$ can be derived from the original outcome.
+
+If $b=14$, then both red and 14 win:
+  \begin{align}
+    f_{red,14}(1,35) &= \Pr(w_{red}=1 \cap w_{14} = 35) \\
+      &= \Pr(b \in \{14\}) = 1/37
+  \end{align}
+If $b \in Red$ but $b \neq 14$, then red wins but 14 loses:
+  \begin{align}
+    f_{red,14}(1,-1) &= \Pr(w_{red} = 1 \cap w_{14} = -1) \\
+      &= \Pr\left(b \in \left\{
+        \begin{gathered}
+          1,3,5,7,9,12,16,18,19,21,\\
+          23,25,27,30,32,34,36
+        \end{gathered}\right\}\right)  \\
+      &= 17/37
+  \end{align}
+Otherwise both red and 14 lose:
+  \begin{align}
+    f_{red,14}(-1,-1) &= \Pr(w_{red} = -1 \cap w_{14} = -1) \\
+      &= \Pr\left(b \in \left\{
+        \begin{gathered}
+          0,2,4,6,7,10,11,13,15,17, \\
+          20,22,24,26,28,31,33,35
+        \end{gathered}\right\}\right)  \\
+      &= 19/37
+  \end{align}
 All other values have probability zero.
 :::
 
@@ -730,12 +895,20 @@ Conditional distributions can be derived from the joint distribution,
 but it isn't always easy.
 
 ::: example
-In our roulette example, let's find the conditional PDF of the payout
-for a bet on 12 given the payout for a bet on red. 
-  $$\Pr(w_{12}=-1|w_{red}=-1) = \frac{\Pr(w_{12}=-1 \cap w_{red}=-1)}{\Pr(w_{red}=-1)}=\frac{19/37}{19/37} = 1$$
-  $$\Pr(w_{12}=35|w_{red}=-1) = \frac{\Pr(w_{12}=35 \cap w_{red}=-1)}{\Pr(w_{red}=-1)}=\frac{0}{19/37} = 0$$
-  $$\Pr(w_{12}=-1|w_{red}=1) = \frac{\Pr(w_{12}=-1 \cap w_{red}=1)}{\Pr(w_{red}=1)}=\frac{17/37}{18/37} \approx 0.944$$
-  $$\Pr(w_{12}=35|w_{red}=1) = \frac{\Pr(w_{12}=35 \cap w_{red}=1)}{\Pr(w_{red}=1)}=\frac{1/37}{18/37} \approx 0.056$$
+**Conditional PDFs in roulette**
+
+Let's find the conditional PDF of the payout for a bet on 
+14 given the payout for a bet on red. 
+  \begin{align}
+    \Pr(w_{14}=-1|w_{red}=-1) &= \frac{\Pr(w_{14}=-1 \cap w_{red}=-1)}{\Pr(w_{red}=-1)} \\
+      &=\frac{19/37}{19/37} = 1 \\
+  \Pr(w_{14}=35|w_{red}=-1) &= \frac{\Pr(w_{14}=35 \cap w_{red}=-1)}{\Pr(w_{red}=-1)} \\
+    &=\frac{0}{19/37} = 0 \\
+  \Pr(w_{14}=-1|w_{red}=1) &= \frac{\Pr(w_{14}=-1 \cap w_{red}=1)}{\Pr(w_{red}=1)} \\
+    &= \frac{17/37}{18/37} \approx 0.944 \\
+  \Pr(w_{14}=35|w_{red}=1) &= \frac{\Pr(w_{14}=35 \cap w_{red}=1)}{\Pr(w_{red}=1)} \\
+    &= \frac{1/37}{18/37} \approx 0.056
+  \end{align}
 :::
 
 ### Independence
@@ -747,24 +920,38 @@ Independence allows us to write all joint and conditional probabilities
 in terms of marginal probabilities:
   $$F_{x,y}(a,b) = F_x(a)F_y(b)$$
   $$F_{y|x}(a,b) = F_y(a)$$
-This is very handy, but remember: independence is an *assumption* that
+As with independence of events, this will be very handy in simplifying the
+analysis.  But remember: independence is an *assumption* that
 we can only make when it's reasonable to do so.
 
 ::: example
-In our roulette example, the winnings from a bet on red ($w_{red}$) and
-the winnings from a bet on 12 ($w_{12}$) in the same game
-are *not* independent. However the winnings from a bet on red and
-a bet on 12 in two different games *are* independent since the
-underlying outcomes are independent.
+**Independence in roulette**
+
+The winnings from a bet on red ($w_{red}$) and the winnings from 
+a bet on 14 ($w_{14}$) in the same game are *not* independent. However
+the winnings from a bet on red and a bet on 14 in two different 
+games *are* independent since the underlying outcomes are independent.
 :::
 
 ### Covariance and correlation
 
-We can take the expected value of any function of $x$ and $y$.
+We earlier showed that if $x$ is a random variable, we can take the
+expected value of any function of $x$.  In addition, when $x$ and 
+$y$ are random variables with a well-defined joint distribution, 
+we can take the expected value of any function of $x$ and $y$.
+
 When $x$ and $y$ are both discrete:
   $$E(g(x,y)) = \sum_{a \in S_x} \sum_{b \in S_y} g(a,b)\Pr( x=a \cap y = b)$$
-and when they are both continuous:
+That is, we add up $g(x,y)$ across all possible values for the pair $(x,y)$
+with each value weighted by its probability.
+
+::: fyi
+When $x$ and $y$ are both continuous:
   $$E(g(x,y)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(a,b)f_{x,y}(a,b)dadb$$
+Again, this looks similar to the formula for the discrete case,
+but uses an integral instead of a sum.
+:::
+
 As with a single random variable, you can take the expected value inside
 a linear function:
   $$E(ax + by + c) = aE(x) + bE(y) + c$$
@@ -774,52 +961,90 @@ but not inside most other functions.  For example:
 etc.
 
 ::: example
-Suppose we go to the roulette table and bet \$100 on red
-and \$10 on 12. Our net payout is:
-  $$w_{total} = 100*w_{red} + 10*w_{12}$$
+**Multiple bets in roulette**
+
+Suppose we bet \$100 on red and \$10 on 14. Our net payout will be:
+  $$w_{total} = 100*w_{red} + 10*w_{14}$$
 which has expected value:
-  $$E(c) = E(100 w_{red} + 10 w_{12}) = 100 \, \underbrace{E(w_{red})}_{\approx -0.027} + 10 \, \underbrace{E(w_{12})}_{\approx -0.027} \approx -3 $$
+  \begin{align}
+    E(w_{total}) &= E(100 w_{red} + 10 w_{14}) \\
+      &= 100 \, \underbrace{E(w_{red})}_{\approx -0.027} + 10 \, \underbrace{E(w_{14})}_{\approx -0.027} \\
+      &\approx -3 
+  \end{align}
 That is we expect this betting strategy to lose an average of 
 about \$3 per game.
 :::
 
 The ***covariance*** of two random variables $x$ and $y$ 
 is defined as:
-$$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
+  $$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
 and their ***correlation*** is defined as:
-$$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
+  $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
 Both the covariance and correlation are measures of how $x$ and $y$ tend to 
-move together.  Positive correlation means that they tend to move in the same 
-direction: above-normal values of $x$ tend to conicide with above-normal 
-values of $y$.  Negative correlation means that they tend 
-to move in opposite directions: above-normal values of $x$ tend to coincide
-with below-normal values of $y$.
+move together.  
+
+- When the covariance or correlation is *positive*, then that means that
+  $x$ and $y$ tend to move in the *same* direction. When $x$ is high, $y$ is
+  typically high, and when $x$ is low, $y$ is typically low.
+- When the covariance or correlation is *negative*, then that means that
+  $x$ and $y$ tend to move in *opposite* directions. When $x$ is high, $y$ is
+  typically low, and when $x$ is low, $y$ is typically high.
+- When the covariance or correlation is *zero* or close to zero, 
+  then that means that $x$ and $y$ tend *not* to move together.
+- Since the standard deviations $\sigma_x$ and $\sigma_y$ are always[^3]
+  positive, the covariance and correlation always have the same sign.
+- When $x$ and $y$ are independent, their covariance and correlation
+  are both exactly zero.  
+  - However, it does not go the other way around.  There are many
+    pairs of random variables that have a correlation of zero but
+    are not independent.
+- The covariance always lies somewhere between $-\sigma_x\sigma_y$ and
+  $\sigma_x\sigma_y$, and so the correlation always lies between 
+  $-1$ and $1$.
+  
+[^3]: More precisely, one or both of $\sigma_x$ and $\sigma_y$ could be zero.
+In that case the covariance will also be zero, and the correlation will be 
+undefined (since it is zero divided by zero).
 
 ::: example
-The covariance of $w_{red}$ and $w_{12}$ is:
-  $$cov(w_{red},w_{12}) = 
-    (1-\underbrace{E(w_{red})}_{\approx -0.027})(35-\underbrace{E(w_{12})}_{\approx -0.027})\underbrace{f_{red,12}(1,35)}_{1/37} 
-    + (1-\underbrace{E(w_{red})}_{\approx -0.027})(-1-\underbrace{E(w_{12})}_{\approx -0.027})\underbrace{f_{red,12}(1,-1)}_{17/37} 
-    + (-1-\underbrace{E(w_{red})}_{\approx -0.027})(-1-\underbrace{E(w_{12})}_{\approx -0.027})\underbrace{f_{red,12}(-1,-1)}_{19/37} \approx 0.999 $$
+**Covariance and correlation in roulettte**
+
+The covariance of $w_{red}$ and $w_{14}$ is:
+  \begin{align}
+    cov(w_{red},w_{14}) &= \begin{aligned}[t]
+        & (1-\underbrace{E(w_{red})}_{\approx -0.027})(35-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
+        &+ (1-\underbrace{E(w_{red})}_{\approx -0.027})(-1-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
+        &+ (-1-\underbrace{E(w_{red})}_{\approx -0.027})(-1-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
+        \end{aligned} \\
+      &\approx 0.999 
+    \end{align}
 and its correlation is:
-  $$corr(w_{red},w_{12}) = \frac{cov(w_{red},w_{12})}{\sqrt{var(w_{red})*var(w_{12})}} \approx \frac{0.999}{\sqrt{1.0*34.1}} \approx 0.17$$
+  \begin{align}
+    corr(w_{red},w_{14}) 
+    &= \frac{cov(w_{red},w_{14})}{\sqrt{var(w_{red})*var(w_{14})}} \\
+     &\approx \frac{0.999}{\sqrt{1.0*34.1}} \\
+     &\approx 0.17
+  \end{align}
 :::
 
-A few results:
+
+The covariance is the expected value of a product, and the expected
+value is a sum, which implies several convenient properties:
 
 - The covariance can be written:
   $$cov(x,y) = E(xy) - E(x)E(y)$$
+- Covariances of sums can be written:
+  \begin{align}
+    cov(ax+by+c, dx+ey+f) &= 
+    \begin{aligned}[t]
+      & ad \, var(x) + be \, var(y) \\
+      &+ (bd + ae) \, cov(x,y) \\
+    \end{aligned}
+  \end{align}
 - The variance of a random variable is its covariance with itself:
   $$cov(x,x) = var(x)$$
-- Covariances are products, so:
-  $$cov(ax+by+c, dx+ey+f) = ad \, var(x) + be \, var(y) + (bd + ae) \, cov(x,y)$$
-- The variance of a sum is:
+  
+- The variance of a sum can be written:
   $$var(ax+by+c) = a^2 \, var(x) + b^2 \, var(y) + 2ab \, cov(x,y)$$ 
-- The correlation is always between -1 and 1:
-  $$-1 \leq \rho_{xy} \leq 1$$
-- If $x$ and $y$ are independent, then
-  $$E(xy) = E(x)E(y)$$
-  and
-  $$cov(x,y) = corr(x,y) = 0$$
-  Note that this does not go both ways; it is easy to find cases in which
-  $cov(x,y) = 0$ but $x$ and $y$ are not independent.
+
+I will occasionally make use of these properties.
