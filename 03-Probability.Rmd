@@ -1,20 +1,9 @@
-# Probability and random events
-
-```{r setup3, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(VennDiagram)
-library(RColorBrewer)
-```
+# Probability and random events {#probability-and-random-events}
 
 ***Probability*** is a method of mathematically modeling a random process
 so that we can understand it and/or make predictions about its future 
 results. Probability is an essential tool for casinos, as well as for
 banks, insurance companies, and any other businesses that manage risks.
-
-***Statistics*** is a method of using data from a random process
-to make inferences about that process. Again, the purpose is to understand
-the process, and maybe to make predictions for the future.  We will
-talk about statistics in later chapters.
 
 ::: goals
 **Chapter goals**
@@ -24,458 +13,11 @@ In this chapter we will learn how to:
  - Model random events using the tools of probability
  - Calculate and interpret marginal, joint, and conditional probabilities
  - Interpret and use the assumptions of independence and equal outcome probability
-
-We will also review some math needed to learn these skills.
-
-   - Sets
-   - Functions
-   - Sequences, limits and summations
 :::
 
-## Mathematical background
-
-I'll start by reviewing some math we will use. All of this math is covered
-in an introductory calculus class so most of you have seen it before.
-Those of you who are currently taking introductory calculus will see
-it in that class soon enough.
-
-But you may have forgotten it, or never understood it in the first place.
-So we will briefly review the most important terminology and ideas.
-
-### Sets
-
-The most fundamental notion in mathematics is the idea of a ***set***. 
-A set is typically described as a collection or gathering
-of distinct objects. These objects are called the ***elements*** 
-of the set.  Sets are not ordered, and elements cannot be repeated.
-
-#### Defining a set
-
-We have several ways of defining or describing sets. The simplest is ***enumeration***, 
-which means you just list the elements:
-$$A = \{1,2,3\}$$
-$$B = \{Avocado, Banana\}$$
-
-Notice that the list of elements is surrounded by curly brackets.
-
-A second way of defining a set is to use ***set-builder notation***.
-Set builder notation defines sets in terms of rules they must satisfy.
-For example:
-
-$$C = \{x \in B: x \textrm{ is yellow} \}$$
-
-We read this as "$C$ is the set of all $x$ in the set $B$ such that $x$ is yellow." In other words:
-
- - Avocados are not in set $C$ because they are not yellow. 
- - Bananas are in set $C$ because they are in set $B$ and they are yellow. 
- - Lemons are not in set $C$ because they are not in set $B$.
-
-We sometimes leave the initial set implicit:
-   $$C = \{x: x \textrm{ is yellow} \}$$
-We would interpret this as saying that $C$ is the set of *everything* that is yellow.
-
-There are a few special sets defined by convention:
-
- - The ***empty set***, usually written $\emptyset$,
-   is a set with no elements.
- - The ***universal set*** (usually written $\mathbb{U}$) 
-   is the set of "everything" we might be talking about in
-   a given context. The universal set is usually implicit, 
-   though we will occasionally need to define it explicitly.
- - The set of ***integers*** is usually written as $\mathbb{Z}$.
- - The set of ***rational*** numbers is usually written as $\mathbb{Q}$.
- - The set of ***real numbers*** is usually written as $\mathbb{R}$.
- - The set of positive integers is $\mathbb{Z}_+$, the set of 
-   positive real numbers is $\mathbb{R}_+$, etc.
-
-Finally we can just refer to an abstract set without specifying its
-contents, just like we can refer to a variable in algebra without 
-specifying its value.
-
-#### Characteristics of a set
-
-The size or ***cardinality*** of the set $A$, usually written $|A|$, 
-is simply the number of elements it has. 
-
-- $A$ is a ***singleton*** if $|A| = 1$.
-- $A$ is a ***finite set*** if $|A|$ is a finite number. 
-  Otherwise it is an ***infinite set***.
-
-::: example
-**Cardinality**
-
-These are infinite sets:
-   $$|\mathbb{Z}| = \infty$$ 
-   $$|\mathbb{R}| = \infty$$ 
-
-These are finite sets:
-   $$|\{1,2,3\}| = 3$$
-   $$|\{Avocado\}| = 1$$
-   $$|\emptyset| = 0$$
-In addition, $\{Avocado\}$ is a singleton.
-:::
-
-#### Set algebra
- 
-Let $A$ and $B$ be two sets. We have several ways of describing
-how they are related:
-
- - $A$ and $B$ are ***identical*** (written $A = B$) if they contain the same elements. 
- - $A$ and $B$ are ***disjoint*** if they have no elements in common. 
- - $A$ is a ***subset*** of $B$ (written $A \subseteq B$ or $A \subset B$ ) if all elements 
-   of $A$ are also elements of $B$. 
-
-::: example
-**Set relationships**
-
-These sets are identical:
-   $$\{1,2\} = \{1,2\}$$
-   $$\{1,2\} = \{2,1\}$$
-These sets are not identical:
-   $$\{1,2\} \neq \{1,2,3\}$$
-   $$\{1,2\} \neq \{1,3\}$$
-These sets are disjoint
-   $$\{1,2\} \textrm{ and } \{3,4\}$$
-These sets are not disjoint
-   $$\{1,2,3\} \textrm{ and } \{3,4\}$$
-The first of these sets is a subset of the second set:
-   $$\{1,2\} \subset \{1,2\}$$
-   $$\{1,2\} \subset \{1,2,3\}$$
-The first of these sets is not a subset of the second set:
-   $$\{1,2\} \not\subset \{1,3\}$$
-:::
-
-We can also perform various mathematical operations on sets.
-
-- The ***intersection*** of $A$ and $B$ (usually written $A \cap B$) 
-   is the set of everything that is an element of both $A$ *and* $B$.
-   $$A \cap B = \{x: x \in A \textrm{ and } x \in B\}$$
-- The ***union*** of $A$ and $B$ (usually written $A \cup B$)
-   is the set of everything that is in $A$ *or* $B$ (or both):
-      $$A \cup B = \{x: x \in A \textrm{ or } x \in B\}$$
-- The ***complement*** of $A$ ***in*** $B$, also called the ***set difference***
-   is written as $B - A$ or $B \setminus A$ and defined as the set of everything 
-   in $B$ that is *not* in $A$:
-   $$ B - A = \{x \in B: x \notin A\}$$
-
-   We will also refer to the ***complement*** of $A$, which is written
-   $A'$, $\neg A$ or $A^c$, and is simply everything that is not in $A$:
-   $$ A^c = \mathbb{U} - A = \{x: x \notin A\}$$
-
-::: example
-**Set operations**
-
-Intersections take all common elements from the two sets:
-   $$\{1,2\} \cap \{3,4\} = \emptyset$$
-   $$\{1,2,3\} \cap \{3,4\} = \{3\}$$
-Unions take all elements from the two sets:
-   $$\{1,2\} \cup \{3,4\} = \{1,2,3,4\}$$
-   $$\{1,2,3\} \cup \{3,4\} = \{1,2,3,4\}$$
-Complements take elements out of the first set if 
-they are in the second set:
-   $$\{1,2\} \setminus \{3,4\} = \{1,2\}$$
-   $$\{1,2,3\} \setminus \{3,4\} = \{1,2\}$$
-:::
-
-The combination of these basic definitions, relationships (identity, 
-element, subset) and operations (union, intersection, complement) 
-are collectively called ***set algebra***.
-
-::: fyi
-**Some standard results about sets**
-
-Given the basic components of set algebra, we can establish many useful rules. 
-This is not a course on set theory, so I will simply list some of the most important rules
-for your reference. None of these rules is difficult to prove, and most of them should 
-make intuitive sense to you.
-
-   - Non-negative cardinality: 
-      $$|A| \geq 0$$
-   - Cardinality of unions: 
-      $$|A \cup B| = |A| + |B| -|A \cap B| \leq |A| + |B|$$
-   - Cardinality of intersections: 
-      $$|A \cap B| \leq min(|A|,|B|)$$
-   - Commutative laws:
-      $$A \cup B = B \cup A$$
-      $$A \cap B = B \cap A$$
-   - Associative laws:
-      $$(A \cup B) \cup C = A \cup (B \cup C)$$
-      $$(A \cap B) \cap C = A \cap (B \cap C)$$
-   - Distributive laws:
-      $$A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
-      $$A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
-   - Identity laws:
-      $$A \cup \emptyset = A$$
-      $$A \cap \mathbb{U} = A$$
-   - Complement laws:
-      $$A \cup A^c = \mathbb{U}$$
-      $$A \cap A^c = \emptyset$$
-      $$\mathbb{U}^c = \emptyset$$
-      $$\emptyset^c = \mathbb{U}$$
-   - Double-complement law:
-      $$(A^c)^c = A$$
-   - Idempotent laws:
-      $$A \cup A = A$$
-      $$A \cap A = A$$
-   - Domination laws:
-      $$A \cup \mathbb{U} = \mathbb{U}$$
-      $$A \cap \emptyset = \emptyset$$
-   - DeMorgan's laws:
-      $$(A \cup B)^c = A^c \cap B^c$$
-      $$(A \cap B)^c = A^c \cup B^c$$
-
-Notice that these rules generally come in pairs, with union and intersection switched. This
-duality is a general feature of set algebra.
-:::
-
-### Functions
-
-#### Definition of a function
-
-A ***function*** is a rule that matches ("maps") elements of one set (called the ***domain***
-of the function) to elements of another set (called the ***range*** of the function). We use the notation 
-   $$f: D \rightarrow R$$
-to declare that a particular function $f$ has domain $D$ and range $R$. 
-
-::: example
-**Domain and range of a function**
-
-   - $f:\mathbb{R} \rightarrow \mathbb{R}$ means that the function $f$ takes a
-      real number, and returns a real number.
-   - $g:\mathbb{Z}_+ \rightarrow \{0,1\}$ means that the function $g$ takes a
-      positive integer, and returns either zero or one.
-   - $s: \{Avocado,Banana,Cantaloupe\} \rightarrow \mathbb{Z}$ means that the function $s$
-      takes either $Avocado$, $Banana$ or $Cantaloupe$ and returns an integer.
-:::
-
-If a function has a finite domain, we can define the function by
-simple enumeration. 
-
-::: example
-**A function defined by enumeration**
-
-Since the function $s: \{Avocado,Banana,Cantaloupe\} \rightarrow \mathbb{Z}$ 
-has a finite domain, we can define it by listing all of its
-values:
-   $$s(Avocado) = 1$$
-   $$s(Banana) = 0$$
-   $$s(Cantaloupe) = 500$$
-We could also make a table:
-
-| $fruit$ | $s(fruit)$ |
-|-------|------------|
-| Avocado | 1 |
-| Banana | 0 |
-| Cantaloupe | 500|
-:::
-
-We can also define a function by a mathematical expression, or 
-we can just refer to a function without defining exactly what it is,
-just like we can talk about a variable $x$ or a set $A$ without 
-assigning it a particular value.
-
-::: fyi
-**Function or multiplication?**
-
-Students sometimes confuse functions and multiplication because of the way we 
-conventionally write functions, students sometimes get confused. Suppose I write this:
-   $$z = f(x+y)$$
-There are two possible interpretations of this statement:
-
-   1. $f$ is a number, so $z$ is equal to the number $f$ times the number $(x+y)$.
-   2. $f$ is a function, so $z$ is equal to the function $f$ applied to the 
-      number $(x+y)$.
-
-It is sometimes clear from the context which  of these interpretations is correct 
-in a given problem. But please ask if you aren't sure.
-:::
-
-#### The indicator function
-
-The ***indicator function*** is a special function whose argument
-is a *statement*. The indicator function is typically represented by $I(\cdot)$ or $\mathbb{1}(\cdot)$.  It returns a value of 1
-if the statement is true, and 0 if it is false. 
-
-::: example
-**Indicator functions**
-
-$$I(3 < 5) = 1$$
-$$I(3 = 5) = 0$$
-$$I(\textrm{Ottawa is the capital of Canada}) = 1$$
-$$I(\textrm{Ottawa is in Alberta}) = 0$$
-:::
-
-We use indicator functions all the time in probability and statistics because they allow us
-to convert a qualitative statement like "Bob is employed" 
-into a quantitative statement like $I(\textrm{Bob is employed}) = 1$.
-
-### Sequences, limits and summations
-
-#### Cartesian products
-
-The ***Cartesian product*** of two sets $A$ and $B$, usually written 
-$A \times B$, is the set of all ordered pairs of elements in the two sets.
-
-::: example
-**Cartesian products**
-
-If $A = \{1,2\}$ and $B = \{3,4\}$ then
-$$ A \times B = \{(1,3),(1,4),(2,3),(3,4)\}$$
-:::
-
-A particularly important example of a Cartesian product is:
-   $$\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$$
-the set of ordered pairs of real numbers.  For example $(0,3)$ and $(0.427,2000)$ 
-are both elements of $\mathbb{R}^2$.
-
-#### Sequences 
-
-We will also be interested in the set of ordered ***sequences*** of $n$ real 
-numbers (where $n$ is some positive integer):
-   $$\mathbb{R}^n = \mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R}$$
-We usually distinguish between sequences
-and sets by using parentheses for sequences and curly brackets for 
-sets.
-
-A sequence is much like a set but with two important differences:
-
-1. Order matters. 
-2. Elements can be repeated.  For example 
-
-Like sets, sequences can be empty, finite, or infinite. 
-
-::: example
-**Sequences and sets**
-
-Order matters for sequences but not for sets:
-   $$\{1,2\} = \{2,1\}$$
-   $$(1,2) \neq (2,1)$$
-Sequences can include repeated elements, but sets cannot
-   $$\{1,3,1\} \textrm{ is not a valid set.}$$
-   $$(1,3,1) \textrm{ is a valid sequence.}$$
-Sequences have cardinality (size)
-   $$() \textrm{ is an empty sequence.}$$
-   $$(2,4,6) \textrm{ is a finite sequence.}$$
-   $$(2,4,6,\ldots) \textrm{ is an infinite sequence.}$$
-:::
-
-We usually number each element in a sequence. The number assigned to a 
-given element is called its ***index***. Typically, the first 
-element in a sequence is numbered either 0 or 1, and the 
-remaining elements are numbered sequentially after that.
-
-We can define sequences by simple enumeration as in the examples
-above. These are a few other ways of defining a sequence:
-
- - As a sequence of variables with subscripts: 
-   $(x_1,x_2,x_3)$. We will usually 
-   use a variable as the subscript $x_i$ when we want to talk
-   about an arbitrary element of the sequence.
- - As functions of other sequences: $y_i = \ln(x_i)$.
- - As functions of the index itself $x_i = a^i$
-
-#### Limits
-
-Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.
-We say that $x^*$ is the ***limit*** of this 
-sequence if $x_i$ gets closer and closer to $x^*$ as
-$i$ gets bigger and bigger.
-
-- The limit of a sequence can be a number.
-- The limit of a sequence can be $\infty$ or $-\infty$.
-- Not all sequences have limits.
-
-::: example
-**Limits**
-
-$$ \lim (1,1,1,\ldots) = 1$$
-$$\lim\left(1,\frac{1}{2},\frac{1}{3},\ldots\right) = 0$$
-$$\lim(1,2,3,\ldots) = \infty$$
-$$\lim(-1,-2,-3,\ldots) = -\infty$$
-$$\lim(0,1,0,1,0,1,\ldots) \textrm{ does not exist}$$
-:::
-
-You will learn or have learned the formal definition of a limit in your 
-calculus course.  I won't make you re-learn it for this class, but the
-formal definition is provided below for your reference.
-
-::: fyi
-**Definition of a limit**
-
-Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that 
-the number $c$ is the limit of this sequence: 
-   $$\lim_{i\rightarrow \infty} x_i = c$$
-if for any $\delta > 0$ there exists an $N_{\delta}$ such that
-   $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
-:::
-
-#### Summations
-
-Many statistics we are calculating are constructed by adding 
-up a sequence of numbers. It will be convenient to 
-use the ***summation operator***, which looks like this:
-   $$\sum_{(\textrm{index}) \in (\textrm{set})} (\textrm{variable that depends on index})$$
-Notice that an expression using the summation operator has several components:
-
-   - The summation sign $\sum$.
-   - An expression identifying the index variable, and what values it takes on. The 
-      index variable is usually but not always called $i$.
-   - An expression identifying what is to be added up. It is usually but not always
-      a function of the index variable. 
-      
-::: example
-**Summations**
-
-$\sum_{i \in A}$ means we add up over all of the values in the set $A$:
-   $$\sum_{i \in \{1,2,3\}} x_i = x_1 + x_2 + x_3$$ 
-
-$\sum_{i = start}^{end}$ means we add up over all of the integers between
-$start$ and $end$.
-   $$\sum_{i=1}^3 x_i = x_1 + x_2 + x_3$$ 
-   $$\sum_{i=1}^n x_i = x_1 + x_2 + \cdots + x_n$$
-The index set can be infinite:
-   $$\sum_{i=1}^{\infty} x_i = x_1 + x_2 + \cdots$$
-The summation can be of any expression that depends on the index:
-   $$\sum_{i=1}^3 \ln(x_i) = \ln(x_1) + \ln(x_2) + \ln(x_3)$$
-   $$\sum_{j=1}^3 \beta^j = \beta + \beta^2 + \beta^3$$
-But the expression does not have to vary with the index:
-   $$\sum_{i=1}^3 2x = 2x + 2x + 2x = 6x$$
-   $$\sum_{i=1}^3 3 = 3 + 3 + 3 = 9$$
-We can use multiple summation operators in an expression:
-   $$\sum_{j=1}^2 \sum_{i=1}^2 x_iy_j = \sum_{j=1}^2 (x_1y_j + x_2y_j) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$$ 
-The summation operator looks fancy, but remember it is just a concise way
-of describing a sum. If you are ever struggling with understanding a
-summation, write it out.
-:::
-
-You learned the basic properties of addition and multiplication in Grade 3:
-
-- Associative property: 
-   $$(a + b) + c = a + (b+c)$$
-   $$(ab)c = a(bc)$$
-- Commutative property: 
-   $$a + b = b + a$$
-   $$ab = ba$$
-- Distributive property: 
-   $$a(b+c) = ab + ac$$
-
-An expressions using the sumamtion operator describes a sum, so
-it also obeys these properties:
-
-- The associative and commutative properties allow you to switch any two summation
-  operators:
-   $$\sum_{i \in A} \sum_{j \in B} x_iy_j = \sum_{j \in B} \sum_{i \in A}  x_iy_j$$
-  and to take the summation operator "into" or "out of" a sum.
-   $$\sum_{i \in A} (x_i + y_i) = \left(\sum_{i \in A} x_i\right) + \left(\sum_{i \in A} y_i \right)$$ 
-- The distributive property allows you to take any constant out of the summation 
-   operator
-  $$\sum_{i=1}^n ax_i = a \sum_{i=1}^n x_i $$
-
-We will use these three results later on.
-
-## Random events and probability
-
-Having reviewed the math, we now go on to develop the basic concepts in probability.
+This chapter uses mathematical notation and terminology that you
+have seen before but may need to review.  If you have difficulty with
+the math, please refer to the sections on [Sets](#sets) and on [Functions](#sets) in the [Math Review](#math-review) appendix.
 
 ::: example
 **Example application: Roulette**
@@ -511,7 +53,7 @@ Something will happen, it matters (to the players and the casino) what
 will happen, but we don't know in advance what will happen.
 :::
 
-### Outcomes and events
+## Outcomes and events
 
 To build a probabilistic model of a random process, we start by defining
 the ***outcome*** we are interested in.  An outcome can be a simple yes/no
@@ -552,14 +94,14 @@ makes the math clearer.
 
 These roulette events are well-defined for our sample space: 
 
-- Ball lands on 15:
-  $$b \in \{15\}$$
+- Ball lands on 14:
+  $$b \in \{14\}$$
 - Ball lands on red:
-   $$b \in RED = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
+   $$b \in Red = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
 - Ball lands on black:
-   $$b \in BLACK = \{2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35\}$$
+   $$b \in Black = \{2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35\}$$
 - Ball lands on one of the first 12 numbers:
-   $$b \in FIRST12 = \{1,2,3,4,5,6,7,8,9,10,11,12\}$$
+   $$b \in First12 = \{1,2,3,4,5,6,7,8,9,10,11,12\}$$
 
 We could define many more events, depending on what bets
 we are interested in.
@@ -573,22 +115,28 @@ tools for sets.
 
 In our roulette example:
 
-- Events are *identical* if they contain the same outcomes:
-  - The event "ball lands on 12 " and "a bet on 12 wins"
-    are identical since $\{12\} = \{12\}$.
+- Events are *identical* if they contain exactly the same outcomes:
+  - The event "ball lands on 14" and "a bet on 14 wins"
+    are identical since $\{14\} = \{14\}$.
+  - Intuitively, identical means they are just two different ways of describing
+    the same event.
 - An event *implies* another event if all of its outcomes are also in 
   the implied event 
-  - The event "ball lands on 12"  implies the event "ball lands on red" 
-    since $\{12\} \subset RED$.
+  - The event "ball lands on 14"  implies the event "ball lands on red" 
+    since $\{14\} \subset Red$.
+  - When an event happens, any event it implies also happens.
 - Events are *disjoint* if they share no outcomes:
   - The events "ball lands on red" and "ball lands on black" are disjoint 
-    since $RED \cap BLACK = \emptyset$.
-- Any two non-identical outcomes are disjoint
-   - The events "ball lands on 12" and "ball lands on 15" are disjoint
-     since $\{12\} \cap \{15\} = \emptyset$.
+    since $Red \cap Black = \emptyset$.
+  - If two events are disjoint, they cannot both happen.
+  - But they can both fail to happen.  For example, if the ball lands in the
+    green zero slot ($b = 0$), neither red nor black wins.
+- Any two outcomes are either identical or disjoint
+   - The events "ball lands on 14" and "ball lands on 25" are disjoint
+     since $\{14\} \cap \{25\} = \emptyset$.
 :::
 
-### Probabilities
+## Probabilities
 
 Our final step is to define a ***probability distribution***
 for this random process, which is a function that assigns
@@ -604,8 +152,9 @@ Probabilties are normally between zero and one:
 - If an event has probability one, it definitely *will* 
   happen.
 
-All valid probability distributions must obey the 
-following three conditions:
+### The axioms of probability
+
+All valid probability distributions must obey the following three conditions:
 
 1. Probabilities are never negative:
    $$\Pr(A) \geq 0$$
@@ -615,6 +164,7 @@ following three conditions:
    $A$ or $B$ happen is the sum of their individual probabilities:
    $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
 
+These conditions are sometimes called the ***axioms*** of probability.
 Probability distributions have many other properties, but they
 can all be derived from these three.
 
@@ -655,21 +205,24 @@ that case, probability calculations are pretty simple:
 ::: example
 **Event probabilities for a fair roulette game**
 
-In the roulette example, the probability of any event $A$ is
-just the number of outcomes in the event $|A|$ times the 
-probability of each outcome $1/37$:
+In the roulette example, the probability of any event $A$ is just the number
+of outcomes in $A$ times the probability of each outcome $1/37$:
    $$ \Pr(A) = |A|*1/37$$
+The notation $|A|$ just means the size of (number of elements in) the set $A$.
+
 For example:
-$$\Pr(b=12) = |\{12\}|*1/37 = 1/37 \approx 0.027$$
-$$\Pr(RED) = |RED|*1/37 = 18/37 \approx 0.486$$
-$$\Pr(EVEN) = |EVEN|*1/37 = 18/37 \approx 0.486$$
-$$\Pr(FIRST12) = |FIRST12|*1/37 = 12/37 \approx 0.324$$
+$$\Pr(b=25) = |\{25\}|*1/37 = 1/37 \approx 0.027$$
+$$\Pr(Red) = |Red|*1/37 = 18/37 \approx 0.486$$
+$$\Pr(Even) = |Even|*1/37 = 18/37 \approx 0.486$$
+$$\Pr(First12) = |First12|*1/37 = 12/37 \approx 0.324$$
 :::
 
 However, not all sample spaces contain a finite number of outcomes.  For
 example, suppose we are interested in using probability to model the
 unemployment rate, or a person's income.  Those are real numbers, and can 
-take on any of an infinite number of values.  
+take on any of an infinite number of values.  This adds a few complications,
+and is the reason that the probability axioms refer to events (sets of
+outcomes) and not individual outcomes.
 
 ::: fyi
 **What do probabilities really mean?**
@@ -695,24 +248,25 @@ like predicting election results.
 :::
 
 
-### Related events
+## Related events
 
-Sometimes are interested in more than one event, and want to talk about how they are 
-related. For example:
+We are often interested in more than one event, and want to talk about how 
+they are related. For example:
 
  - In some casino games like poker or blackjack, players take an additional 
    action after partial information about the outcome is revealed.
- - In politics we often want to predict the winner of an election based on 
-   some polls.
- - In economics we often have data on current economic conditions and want 
+ - Politicians often use polls to predict the winner of an election.
+ - Finance people often want to model multiple market scenarios and 
+   forecast a company's earnings under each of them.
+ - Economists often have data on current economic conditions and want 
    to predict future economic conditions.
 
 This section will develop some tools for dealing with the relationship
 between different random events.
 
-#### Some standard results about probabilities
+### Some rules for probabilities
 
-Let $A$ and $B$ be two events.  Then our three basic rules
+Let $A$ and $B$ be two events.  Then our three axioms
 of probability imply several additional rules:
 
 - Probabilities cannot be higher than one.
@@ -726,16 +280,21 @@ of probability imply several additional rules:
 - The probability of nothing happening is:
    $$\Pr(\emptyset) = 0$$
 - The probability of either $A$ or $B$ happening is:
-  $$\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \leq \Pr(A) +\Pr(B)$$
+  \begin{align}
+    \Pr(A \cup B) &= \Pr(A) + \Pr(B) - \Pr(A \cap B) \\
+      &\leq \Pr(A) +\Pr(B)
+  \end{align}
 
 These results are not hard to prove, but I will not go through the proofs.
 However, I will use these results so you should be familiar with them.
 
-#### Joint probabilities
+### Joint probabilities
 
 The ***joint probability*** of two events $A$ *and* $B$ is the probability that
 they *both* happen:
   $$\Pr(A \cap B)$$
+Remember that the intersection ($\cap$) of $A$ and $B$ is the set of all 
+outcomes that are in both $A$ and $B$.
 
 ::: example
 **Joint probabilities for roulette bets**
@@ -750,7 +309,7 @@ red and even.
 
 Joint probabilities are just probabilities, so they obey all of the rules of probability.  For example, all joint probabilities are between zero and one.
 
-#### Conditional probabilities
+### Conditional probabilities
 
 The ***conditional probability*** of an event $A$ ***given*** another
 event $B$ is defined as:
@@ -770,16 +329,17 @@ poker players have detailed knowledge of these conditional probabilities.
 
 In our roulette example:
    $$\Pr(Red|Even) = \frac{\Pr(Red \cap Even)}{\Pr(Even)} = \frac{8/37}{18/37} \approx 0.444$$
-   $$\Pr(b = 12|Even) = \frac{\Pr(b = 12 \cap Even)}{\Pr(Even)} = \frac{1/37}{18/37} \approx 0.056$$
+   $$\Pr(b = 14|Even) = \frac{\Pr(b = 14 \cap Even)}{\Pr(Even)} = \frac{1/37}{18/37} \approx 0.056$$
 :::
 
 Like joint probabilities, conditional probabilities are just probabilities,
 so they obey all of the rules of probability.
 
-#### Independent events 
+### Independent events 
 
-One common way of modeling joint and conditional probabilities is to assume
-that certain events are unrelated to each other.
+One common "trick" in modeling joint and conditional probabilities is to assume
+that certain events are unrelated to each other. This can simplify the math
+significantly.
 
 We say that two events $A$ and $B$ are ***independent*** if their joint
 probability is just the two individual probabilities multiplied together:
@@ -795,7 +355,7 @@ and use them when there is no reason to believe that independence
 holds.
 
 Don't make this mistake: independence is an assumption, and one that
-is unreasonable in many cases.
+can easily be incorrect.
 :::
 
 The definition of independence is not very intuitive, but we can clarify
@@ -820,9 +380,9 @@ is true.
 **Independence in a roulette game**
 
 Consider the roulette events "Red wins" and "Even wins".  We earlier
-showed that the unconditional probability of red wins is:
+showed that the unconditional probability that Red wins is:
   $$\Pr(Red) = 18/37 \approx 0.486$$
-The conditional probability of red given even is:
+The conditional probability that Red wins given that Even wins is:
    $$\Pr(Red|Even) = 8/18 \approx 0.444$$
 Since $0.44 \neq 0.486$, these two events are *not* independent.
 :::
@@ -834,6 +394,11 @@ to a separation in time and space.
 
 ::: example
 **Independence across roulette games**
+
+We have already shown that events related to a *single* roulette game
+are not necessarily independent.  But the outcomes/events of 
+*two different* roulette games can be reasonably assumed to be independent
+of one another.
 
 Suppose that I bring \$100 to a casino this afternoon for a few games 
 of roulette. I bet all of my money on Red for the first game.
@@ -851,27 +416,48 @@ After 3 games:
 What is the probability of each of these events?  Since we can 
 assume that each game's outcome is independent, this is an easy
 problem:
+  \begin{align}
+    \Pr(w = \$800) &= \Pr(Red_1 \cap Red_2 \cap Red_3) \\
+      &= \Pr(Red_1) \times \Pr(Red_2) \times \Pr(Red_3) (\#eq:indep) \\
+      &= (18/37) \times (18/37) \times (18/37) \approx 0.115 \\
+    \Pr(w = \$0) &= 1 - \Pr(w = \$800) \\
+      &\approx 0.885 \\
+  \end{align}
+So we have an 11.5\% chance of winning big, and an 88.5\% chance
+of going broke.
 
-  $$\Pr(w = \$800) = \Pr(Red_1 \cap Red_2 \cap Red_3) = \Pr(Red_1)\Pr(Red_2)\Pr(Red_3) = (18/37)^3 \approx 0.115$$
-   $$\Pr(w = \$0) = 1 - \Pr(w = \$800) \approx 0.885$$
+Very important: equation \@ref(eq:indep) only follows from the previous
+equation because we have assumed the events $Red_1$, $Red_2$, and $Red_3$
+are independent.
 :::
 
-#### Some standard results about joint and conditional probability
+### Two "laws" of probability
 
 In addition to the results we have already discussed, there are two
-important results on conditional probabilities:
+important results using conditional probabilities:
 
-The first is ***Bayes' law***, which is a rule for determining 
-conditional probabilities:
-  $$\Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$
-The second is the ***Law of total probability*** which
+The first is the ***law of total probability*** which
 is a rule for determining unconditional probabilities 
 from conditional probabilities:
+
   $$\Pr(A) = \Pr(A|B)\Pr(B) + \Pr(A|B^c)\Pr(B^c)$$
-These rules follow from our existing results, combined with the
-definition of conditional probabilities.  They are easy to
-prove, but I won't prove them here.  Instead, I will use
-an example to show how they can be useful.
+
+The law of total probability allows us to create a set of scenarios,
+calculate probabilities under each scenario, and then add them up. It 
+is useful when we are modeling random outcomes that occur in multiple
+stages, for example a poker game or an energy company making a series of
+investments to develop an oil field.
+
+The second is ***Bayes' law***, which is a rule for determining 
+conditional probabilities:
+  $$\Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$
+Bayes' law is particularly useful in evaluating evidence, because
+it allows us to restate one conditional probability in terms of
+another.  
+
+Both the law of total probability and Bayes' law follow from the definition of
+conditional probabilities.  They are easy to prove, but I won't prove them
+here.  Instead, I will use an example to show how they can be useful.
 
 ::: example
 **False positives in medical testing**
@@ -890,7 +476,7 @@ actually has the disease.
 The *sensitivity* of the test is an infected patient's probability
 of testing positive:
    $$\Pr(T|D) = p$$
-the *specitivity* of the test is a healthy patient's probability
+the *specificity* of the test is a healthy patient's probability
 of testing negative:
    $$\Pr(T^c|D^c) = q$$
 and the *prevalence* of the infection is the probability that
@@ -902,29 +488,50 @@ $\Pr(D|T)$?
 
 This is a classic probability question, as it makes use
 of Bayes' law and the law of total probability, and it has
-important practical usage.  We start by applying
-Bayes' rule:
+obvious practical usage.  
+
+Since we want a condtional probability, we start by stating Bayes' law:
    $$\Pr(D|T) = = \frac{\Pr(T|D)\Pr(D)}{\Pr(T)}$$
-We know that $\Pr(T|D)=p$ and $\Pr(D)=r$, so all we need is to find $\Pr(T)$.
-Using the law of total probability:
+Bayes' law will allow us to calculate $\Pr(D|T)$ if we can find 
+the components of the right side of this equation. 
+We already know that $\Pr(T|D)=p$ and $\Pr(D)=r$, so all we need 
+is to find $\Pr(T)$.
+
+Since $\Pr(T)$ is an unconditional probability, we can use
+the law of total probability:
    $$\Pr(T) = \underbrace{\Pr(T|D)}_{p}
               \underbrace{\Pr(D)}_{d} 
             + \underbrace{\Pr(T|D^c)}_{1-q}
               \underbrace{\Pr(D^c)}_{1-d}$$
-Plugging these results into our formula:
+Plugging these results into our formula we get:
    $$\Pr(D|T) = = \frac{pd}{pd + (1-q)(1-d)}$$
-   
-Now, let's try out some numbers:
+which is the result we need.
 
-- Suppose that false positives are rare ($q = 0.99$), false negatives never happen
-  ($p=1$) and the disease itself is fairly common ($d = 0.10$).  Then:
+Now, let's try out some numbers.  Suppose that false positives are rare 
+($q = 0.99$), and false negatives never happen ($p=1$).
+
+- Suppose the disease itself is fairly common ($d = 0.10$).  Then:
    $$\Pr(D|T) = = \frac{1*0.1}{1*0.1 + (1-0.99)*(1-0.1)} \approx 0.917$$
-- Suppose that false positives are rare and false negatives never happen, but the 
-  disease itself is also rare ($d = 0.001$).  Then
+- Suppose the disease itself is quite rare ($d = 0.001$).  Then
    $$\Pr(D|T) = = \frac{1*0.001}{1*0.001 + (1-0.99)*(1-0.001)} \approx 0.091$$
 
-In other words, the same test has a very different meaning depending
+In other words, the exact same test has a very different meaning depending
 on the prevalence in the population: when the disease is common a positive
 test means a 91.7% chance of having the disease, and when the disease
 is rare a positive test result means a 9.1% chance of having the disease.
+
+This general issue (even a small false positive rate can have a big impact
+when prevalence is low) appeared repeatedly in March and April of 2020. Several 
+studies by well-known researchers[^2] dramatically overestimated the early
+prevalence of the COVID-19 virus and thus dramatically underestimated its
+fatality rate. These studies were regularly cited as support by those who 
+wanted to substantially relax public health restrictions in April 2020,
+and had substantial real world consequences.
 :::
+
+[^2]: If you are interested in learning more about this, an 
+[article in Science](https://www.sciencemag.org/news/2020/04/antibody-surveys-suggesting-vast-undercount-coronavirus-infections-may-be-unreliable) 
+provides an overview of the controversy, and a 
+[blog post by statistician Andrew Gelman](https://statmodeling.stat.columbia.edu/2020/04/19/fatal-flaws-in-stanford-study-of-coronavirus-prevalence/) 
+provides a thourough discussion 
+of the statistical issues.

@@ -1,0 +1,452 @@
+# (APPENDIX) Appendix {-}
+
+# Math review 
+
+I'll start by reviewing some math we will use. All of it is covered
+in high school or in introductory calculus. Since introductory calculus
+is a co-requisite for this course, most of you have already seen it
+in that course, and the rest of you have seen it soon.  But you may 
+have forgotten it, or never understood it in the first place.
+
+If you have trouble with a few of these ideas, don't panic.  This is
+not a math class. For example, if you forget what it means for two sets
+to be "disjoint", you can always ask - during the lecture, or even during
+the exam.
+
+## Sets
+
+The most fundamental notion in mathematics is the idea of a ***set***. 
+A set is typically described as a collection or gathering
+of distinct objects. These objects are called the ***elements*** 
+of the set.  Sets are not ordered, and elements cannot be repeated.
+
+### Defining a set
+
+We have several ways of defining or describing sets. The simplest is ***enumeration***, 
+which means you just list the elements:
+$$A = \{1,2,3\}$$
+$$B = \{Avocado, Banana\}$$
+
+Notice that the list of elements is surrounded by curly brackets.
+
+A second way of defining a set is to use ***set-builder notation***.
+Set builder notation defines sets in terms of rules they must satisfy.
+For example:
+
+$$C = \{x \in B: x \textrm{ is yellow} \}$$
+
+We read this as "$C$ is the set of all $x$ in the set $B$ such that $x$ is yellow." In other words:
+
+ - Avocados are not in set $C$ because they are not yellow. 
+ - Bananas are in set $C$ because they are in set $B$ and they are yellow. 
+ - Lemons are not in set $C$ because they are not in set $B$.
+
+We sometimes leave the initial set implicit:
+   $$C = \{x: x \textrm{ is yellow} \}$$
+We would interpret this as saying that $C$ is the set of *everything* that is yellow.
+
+There are a few special sets defined by convention:
+
+ - The ***empty set***, usually written $\emptyset$,
+   is a set with no elements.
+ - The ***universal set*** (usually written $\mathbb{U}$) 
+   is the set of "everything" we might be talking about in
+   a given context. The universal set is usually implicit, 
+   though we will occasionally need to define it explicitly.
+ - The set of ***integers*** is usually written as $\mathbb{Z}$.
+ - The set of ***rational*** numbers is usually written as $\mathbb{Q}$.
+ - The set of ***real numbers*** is usually written as $\mathbb{R}$.
+ - The set of positive integers is $\mathbb{Z}_+$, the set of 
+   positive real numbers is $\mathbb{R}_+$, etc.
+
+Finally we can just refer to an abstract set without specifying its
+contents, just like we can refer to a variable in algebra without 
+specifying its value.
+
+### Characteristics of a set
+
+The size or ***cardinality*** of the set $A$, usually written $|A|$, 
+is simply the number of elements it has. 
+
+- $A$ is a ***singleton*** if $|A| = 1$.
+- $A$ is a ***finite set*** if $|A|$ is a finite number. 
+  Otherwise it is an ***infinite set***.
+
+::: example
+**Cardinality (size)**
+
+The integers ($\mathbb{Z}$) and real numbers ($\mathbb{R}$) are infinite sets:
+   $$|\mathbb{Z}| = \infty$$ 
+   $$|\mathbb{R}| = \infty$$ 
+
+These are finite sets:
+   $$|\{1,2,3\}| = 3$$
+   $$|\{Avocado\}| = 1$$
+   $$|\emptyset| = 0$$
+In addition, $\{Avocado\}$ is a singleton.
+:::
+
+### Set algebra
+ 
+Let $A$ and $B$ be two sets. We have several ways of describing
+how they are related:
+
+ - $A$ and $B$ are ***identical*** (written $A = B$) if they contain the same elements. 
+ - $A$ and $B$ are ***disjoint*** if they have no elements in common. 
+ - $A$ is a ***subset*** of $B$ (written $A \subseteq B$ or $A \subset B$ ) if all elements 
+   of $A$ are also elements of $B$. 
+
+::: example
+**Set relationships**
+
+These sets are identical:
+   $$\{1,2\} = \{1,2\}$$
+   $$\{1,2\} = \{2,1\}$$
+These sets are not identical:
+   $$\{1,2\} \neq \{1,2,3\}$$
+   $$\{1,2\} \neq \{1,3\}$$
+These sets are disjoint
+   $$\{1,2\} \textrm{ and } \{3,4\}$$
+These sets are not disjoint
+   $$\{1,2,3\} \textrm{ and } \{3,4\}$$
+The first of these sets is a subset of the second set:
+   $$\{1,2\} \subset \{1,2\}$$
+   $$\{1,2\} \subset \{1,2,3\}$$
+The first of these sets is not a subset of the second set:
+   $$\{1,2\} \not\subset \{1,3\}$$
+:::
+
+We can also perform various mathematical operations on sets.
+
+- The ***intersection*** of $A$ and $B$ (usually written $A \cap B$) 
+   is the set of everything that is an element of both $A$ *and* $B$.
+   $$A \cap B = \{x: x \in A \textrm{ and } x \in B\}$$
+- The ***union*** of $A$ and $B$ (usually written $A \cup B$)
+   is the set of everything that is in $A$ *or* $B$ (or both):
+      $$A \cup B = \{x: x \in A \textrm{ or } x \in B\}$$
+- The ***set difference*** between $A$ and $B$ is written as $B - A$ or 
+   $B \setminus A$ and defined as the set of everything 
+   in $B$ that is *not* in $A$:
+   $$ B - A = \{x \in B: x \notin A\}$$
+   We will not use the set difference, but it helps to define
+   the complement, which we will use.
+- The ***complement*** of $A$ is written $A'$, $\neg A$ or $A^c$,
+   and is simply everything that is not in $A$:
+   $$ A^c = \mathbb{U} - A = \{x: x \notin A\}$$
+
+::: example
+**Set operations**
+
+Intersections take all common elements from the two sets:
+   $$\{1,2\} \cap \{3,4\} = \emptyset$$
+   $$\{1,2,3\} \cap \{3,4\} = \{3\}$$
+Unions take all elements from the two sets:
+   $$\{1,2\} \cup \{3,4\} = \{1,2,3,4\}$$
+   $$\{1,2,3\} \cup \{3,4\} = \{1,2,3,4\}$$
+Set differences take elements out of the first set if 
+they are in the second set:
+   $$\{1,2\} - \{3,4\} = \{1,2\}$$
+   $$\{1,2,3\} - \{3,4\} = \{1,2\}$$
+The complement of a set is everything (in the universal set, whatever that is)
+else:
+
+   - The complement of "people in the labour force" is "people not in the labour force" (the universal set is "people")
+   - The complement of "the Canucks win" is "the Canucks do not win"
+:::
+
+The combination of these basic definitions, relationships (identity, 
+element, subset) and operations (union, intersection, complement) 
+are collectively called ***set algebra***.
+
+::: fyi
+**Some standard results about sets**
+
+Given the basic components of set algebra, we can establish many useful rules. 
+This is not a course on set theory, so I will simply list some of the most important rules
+for your reference. None of these rules is difficult to prove, and most of them should 
+make intuitive sense to you.
+
+   - Non-negative cardinality: 
+      $$|A| \geq 0$$
+   - Cardinality of unions: 
+      $$|A \cup B| = |A| + |B| -|A \cap B| \leq |A| + |B|$$
+   - Cardinality of intersections: 
+      $$|A \cap B| \leq min(|A|,|B|)$$
+   - Commutative laws:
+      $$A \cup B = B \cup A$$
+      $$A \cap B = B \cap A$$
+   - Associative laws:
+      $$(A \cup B) \cup C = A \cup (B \cup C)$$
+      $$(A \cap B) \cap C = A \cap (B \cap C)$$
+   - Distributive laws:
+      $$A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
+      $$A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
+   - Identity laws:
+      $$A \cup \emptyset = A$$
+      $$A \cap \mathbb{U} = A$$
+   - Complement laws:
+      $$A \cup A^c = \mathbb{U}$$
+      $$A \cap A^c = \emptyset$$
+      $$\mathbb{U}^c = \emptyset$$
+      $$\emptyset^c = \mathbb{U}$$
+   - Double-complement law:
+      $$(A^c)^c = A$$
+   - Idempotent laws:
+      $$A \cup A = A$$
+      $$A \cap A = A$$
+   - Domination laws:
+      $$A \cup \mathbb{U} = \mathbb{U}$$
+      $$A \cap \emptyset = \emptyset$$
+   - DeMorgan's laws:
+      $$(A \cup B)^c = A^c \cap B^c$$
+      $$(A \cap B)^c = A^c \cup B^c$$
+
+Notice that these rules generally come in pairs, with union and intersection switched. This
+duality is a general feature of set algebra.
+:::
+
+## Functions
+
+### Definition of a function
+
+A ***function*** is a rule that matches ("maps") elements of one set (called the ***domain***
+of the function) to elements of another set (called the ***range*** of the function). We use the notation 
+   $$f: D \rightarrow R$$
+to declare that a particular function $f$ has domain $D$ and range $R$. 
+
+::: example
+**Domain and range of a function**
+
+   - $f:\mathbb{R} \rightarrow \mathbb{R}$ means that the function $f$ takes a
+      real number, and returns a real number.
+   - $g:\mathbb{Z}_+ \rightarrow \{0,1\}$ means that the function $g$ takes a
+      positive integer, and returns either zero or one.
+   - $s: \{Avocado,Banana,Cantaloupe\} \rightarrow \mathbb{Z}$ means that the function $s$
+      takes either $Avocado$, $Banana$ or $Cantaloupe$ and returns an integer.
+:::
+
+If a function has a finite domain, we can define the function by
+simple enumeration. 
+
+::: example
+**A function defined by enumeration**
+
+Since the function $s: \{Avocado,Banana,Cantaloupe\} \rightarrow \mathbb{Z}$ 
+has a finite domain, we can define it by listing all of its
+values:
+   $$s(Avocado) = 1$$
+   $$s(Banana) = 0$$
+   $$s(Cantaloupe) = 500$$
+We could also make a table:
+
+| $fruit$ | $s(fruit)$ |
+|-------|------------|
+| Avocado | 1 |
+| Banana | 0 |
+| Cantaloupe | 500|
+:::
+
+We can also define a function by a mathematical expression, or 
+we can just refer to a function without defining exactly what it is,
+just like we can talk about a variable $x$ or a set $A$ without 
+assigning it a particular value.
+
+::: fyi
+**Function or multiplication?**
+
+Students sometimes confuse functions and multiplication because of the way we 
+conventionally write functions, students sometimes get confused. Suppose I write this:
+   $$z = f(x+y)$$
+There are two possible interpretations of this statement:
+
+   1. $f$ is a number, so $z$ is equal to the number $f$ times the number $(x+y)$.
+   2. $f$ is a function, so $z$ is equal to the function $f$ applied to the 
+      number $(x+y)$.
+
+It is sometimes clear from the context which  of these interpretations is correct 
+in a given problem. But please ask if you aren't sure.
+:::
+
+### The indicator function
+
+The ***indicator function*** is a special function whose argument
+is a *statement*. The indicator function is typically represented by $I(\cdot)$ or $\mathbb{1}(\cdot)$.  It returns a value of 1
+if the statement is true, and 0 if it is false. 
+
+::: example
+**Indicator functions**
+
+$$I(3 < 5) = 1$$
+$$I(3 = 5) = 0$$
+$$I(\textrm{Ottawa is the capital of Canada}) = 1$$
+$$I(\textrm{Ottawa is in Alberta}) = 0$$
+:::
+
+We use indicator functions all the time in probability and statistics because they allow us
+to convert a qualitative statement like "Bob is employed" 
+into a quantitative statement like $I(\textrm{Bob is employed}) = 1$.
+
+## Sequences, limits and summations
+
+### Cartesian products
+
+The ***Cartesian product*** of two sets $A$ and $B$, usually written 
+$A \times B$, is the set of all ordered pairs of elements in the two sets.
+
+::: example
+**Cartesian products**
+
+If $A = \{1,2\}$ and $B = \{3,4\}$ then
+$$ A \times B = \{(1,3),(1,4),(2,3),(3,4)\}$$
+:::
+
+A particularly important example of a Cartesian product is:
+   $$\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$$
+the set of ordered pairs of real numbers.  For example $(0,3)$ and $(0.427,2000)$ 
+are both elements of $\mathbb{R}^2$.
+
+### Sequences 
+
+We will also be interested in the set of ordered ***sequences*** of $n$ real 
+numbers (where $n$ is some positive integer):
+   $$\mathbb{R}^n = \mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R}$$
+We usually distinguish between sequences
+and sets by using parentheses for sequences and curly brackets for 
+sets.
+
+A sequence is much like a set but with two important differences:
+
+1. Order matters. 
+2. Elements can be repeated.  For example 
+
+Like sets, sequences can be empty, finite, or infinite. 
+
+::: example
+**Sequences and sets**
+
+Order matters for sequences but not for sets:
+   $$\{1,2\} = \{2,1\}$$
+   $$(1,2) \neq (2,1)$$
+Sequences can include repeated elements, but sets cannot
+   $$\{1,3,1\} \textrm{ is not a valid set.}$$
+   $$(1,3,1) \textrm{ is a valid sequence.}$$
+Sequences have cardinality (size)
+   $$() \textrm{ is an empty sequence.}$$
+   $$(2,4,6) \textrm{ is a finite sequence.}$$
+   $$(2,4,6,\ldots) \textrm{ is an infinite sequence.}$$
+:::
+
+We usually number each element in a sequence. The number assigned to a 
+given element is called its ***index***. Typically, the first 
+element in a sequence is numbered either 0 or 1, and the 
+remaining elements are numbered sequentially after that.
+
+We can define sequences by simple enumeration as in the examples
+above. These are a few other ways of defining a sequence:
+
+ - As a sequence of variables with subscripts: 
+   $(x_1,x_2,x_3)$. We will usually 
+   use a variable as the subscript $x_i$ when we want to talk
+   about an arbitrary element of the sequence.
+ - As functions of other sequences: $y_i = \ln(x_i)$.
+ - As functions of the index itself $x_i = a^i$
+
+### Limits
+
+Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.
+We say that $x^*$ is the ***limit*** of this 
+sequence if $x_i$ gets closer and closer to $x^*$ as
+$i$ gets bigger and bigger.
+
+- The limit of a sequence can be a number.
+- The limit of a sequence can be $\infty$ or $-\infty$.
+- Not all sequences have limits.
+
+::: example
+**Limits**
+
+$$ \lim (1,1,1,\ldots) = 1$$
+$$\lim\left(1,\frac{1}{2},\frac{1}{3},\ldots\right) = 0$$
+$$\lim(1,2,3,\ldots) = \infty$$
+$$\lim(-1,-2,-3,\ldots) = -\infty$$
+$$\lim(0,1,0,1,0,1,\ldots) \textrm{ does not exist}$$
+:::
+
+You will learn or have learned the formal definition of a limit in your 
+calculus course.  I won't make you re-learn it for this class, but the
+formal definition is provided below for your reference.
+
+::: fyi
+**Definition of a limit**
+
+Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that 
+the number $c$ is the limit of this sequence: 
+   $$\lim_{i\rightarrow \infty} x_i = c$$
+if for any $\delta > 0$ there exists an $N_{\delta}$ such that
+   $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
+:::
+
+### Summations
+
+Many statistics we are calculating are constructed by adding 
+up a sequence of numbers. It will be convenient to 
+use the ***summation operator***, which looks like this:
+   $$\sum_{(\textrm{index}) \in (\textrm{set})} (\textrm{variable that depends on index})$$
+Notice that an expression using the summation operator has several components:
+
+   - The summation sign $\sum$.
+   - An expression identifying the index variable, and what values it takes on. The 
+      index variable is usually but not always called $i$.
+   - An expression identifying what is to be added up. It is usually but not always
+      a function of the index variable. 
+      
+::: example
+**Summations**
+
+$\sum_{i \in A}$ means we add up over all of the values in the set $A$:
+   $$\sum_{i \in \{1,2,3\}} x_i = x_1 + x_2 + x_3$$ 
+
+$\sum_{i = start}^{end}$ means we add up over all of the integers between
+$start$ and $end$.
+   $$\sum_{i=1}^3 x_i = x_1 + x_2 + x_3$$ 
+   $$\sum_{i=1}^n x_i = x_1 + x_2 + \cdots + x_n$$
+The index set can be infinite:
+   $$\sum_{i=1}^{\infty} x_i = x_1 + x_2 + \cdots$$
+The summation can be of any expression that depends on the index:
+   $$\sum_{i=1}^3 \ln(x_i) = \ln(x_1) + \ln(x_2) + \ln(x_3)$$
+   $$\sum_{j=1}^3 \beta^j = \beta + \beta^2 + \beta^3$$
+But the expression does not have to vary with the index:
+   $$\sum_{i=1}^3 2x = 2x + 2x + 2x = 6x$$
+   $$\sum_{i=1}^3 3 = 3 + 3 + 3 = 9$$
+We can use multiple summation operators in an expression:
+   $$\sum_{j=1}^2 \sum_{i=1}^2 x_iy_j = \sum_{j=1}^2 (x_1y_j + x_2y_j) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$$ 
+The summation operator looks fancy, but remember it is just a concise way
+of describing a sum. If you are ever struggling with understanding a
+summation, write it out.
+:::
+
+You learned the basic properties of addition and multiplication in Grade 3:
+
+- Associative property: 
+   $$(a + b) + c = a + (b+c)$$
+   $$(ab)c = a(bc)$$
+- Commutative property: 
+   $$a + b = b + a$$
+   $$ab = ba$$
+- Distributive property: 
+   $$a(b+c) = ab + ac$$
+
+An expressions using the sumamtion operator describes a sum, so
+it also obeys these properties:
+
+- The associative and commutative properties allow you to switch any two summation
+  operators:
+   $$\sum_{i \in A} \sum_{j \in B} x_iy_j = \sum_{j \in B} \sum_{i \in A}  x_iy_j$$
+  and to take the summation operator "into" or "out of" a sum.
+   $$\sum_{i \in A} (x_i + y_i) = \left(\sum_{i \in A} x_i\right) + \left(\sum_{i \in A} y_i \right)$$ 
+- The distributive property allows you to take any constant out of the summation 
+   operator
+  $$\sum_{i=1}^n ax_i = a \sum_{i=1}^n x_i $$
+
+We will use these three results later on.
+
