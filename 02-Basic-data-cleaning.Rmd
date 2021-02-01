@@ -491,7 +491,7 @@ other aspects of display formatting including:
 - alignment (left/right/center as well as top/bottom/middle) 
 :::
 
-### Functions
+### Built-in functions
 
 Excel has about 500 built-in functions that we can use in formulas. 
 
