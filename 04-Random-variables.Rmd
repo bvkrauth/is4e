@@ -182,7 +182,10 @@ abline(h=1/37,lty=2,col="gray")
 We can calculate any probability from the PDF by simple addition. That
 is:
   $$\Pr(x \in A) = \sum_{s \in S_x} f_x(s)I(s \in A)$$
-where $A \subset \mathbb{R}$ is any event defined for $x$.
+where[^2] $A \subset \mathbb{R}$ is any event defined for $x$.
+
+[^2]: If you are unfamiliar with the notation here, please refer to
+Section \@ref(summations) in the Math Review Appendix.
 
 ::: example
 **Some event probabilities in roulette**
