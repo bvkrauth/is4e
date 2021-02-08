@@ -988,3 +988,5 @@ Our final histogram will look like this:
 ![Histogram of UnempRate, final version](bin/HistogramFinal.png) 
 :::
 
+You can download the complete Excel file with all analysis from
+this chapter at https://bvkrauth.github.io/files/CanadaEmploymentHistoricalWithAnalysis.xlsx.
