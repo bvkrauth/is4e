@@ -9,6 +9,239 @@ chapter.
 
 In this chapter we will:
 
-- Insert goals here.
+- Calculate and interpret the covariance and correlation coefficient of 
+  two discrete random variables.
+- Calculate and interpret conditional distributions and conditional
+  expectations.
 :::
 
+## Multiple random variables
+
+We will often be interested in the relationship between two or more
+random variables. For example, we might want to know how tax rates
+are related to economic growth, or how education is related to 
+income.
+
+### Joint distributions
+
+Let $x = x(b)$ and $y = y(b)$ be two random variables
+defined in terms of the same underlying outcome $b$.
+Their joint probability distribution assigns a probability
+to every event that can be defined in terms of $x$ and $y$,
+for example $\Pr(x = 6 \cap y = 0)$ or $\Pr(x < y)$.
+
+This joint distribution can be fully described by the 
+***joint CDF***
+$$F_{x,y}(a,b) = \Pr(x \leq a \cap y \leq b)$$
+It can also be described by the ***joint PDF***
+$$f_{x,y}(a,b) = \begin{cases}
+      \Pr(x = a \cap y = b) & \textrm{if $x$ and $y$ are discrete} \\
+      \frac{\partial F_{x,y}(a,b)}{\partial a \partial b} & \textrm{if $x$ and $y$ are continuous} \\
+      \end{cases}$$
+
+The joint distribution tells you about the relationship between the
+two variables as well as the characteristics of the variables themselves.
+That is, we can always get the ***marginal*** distributions of the two 
+individual random variables from their joint distribution:
+$$F_x(a) = \Pr(x \leq a) = \Pr(x \leq a \cap y \leq \infty) = F_{x,y}(a,\infty)$$
+$$F_y(b) = \Pr(y \leq n) = \Pr(x \leq \infty \cap y \leq b) = F_{x,y}(\infty,b)$$
+However, it is not possible to get the joint distribution from the 
+marginal distributions.
+
+::: example
+**The joint PDF in roulette**
+
+In our roulette example, the joint PDF of $w_{red}$ and 
+$w_{14}$ can be derived from the original outcome.
+
+If $b=14$, then both red and 14 win:
+  \begin{align}
+    f_{red,14}(1,35) &= \Pr(w_{red}=1 \cap w_{14} = 35) \\
+      &= \Pr(b \in \{14\}) = 1/37
+  \end{align}
+If $b \in Red$ but $b \neq 14$, then red wins but 14 loses:
+  \begin{align}
+    f_{red,14}(1,-1) &= \Pr(w_{red} = 1 \cap w_{14} = -1) \\
+      &= \Pr\left(b \in \left\{
+        \begin{gathered}
+          1,3,5,7,9,12,16,18,19,21,\\
+          23,25,27,30,32,34,36
+        \end{gathered}\right\}\right)  \\
+      &= 17/37
+  \end{align}
+Otherwise both red and 14 lose:
+  \begin{align}
+    f_{red,14}(-1,-1) &= \Pr(w_{red} = -1 \cap w_{14} = -1) \\
+      &= \Pr\left(b \in \left\{
+        \begin{gathered}
+          0,2,4,6,7,10,11,13,15,17, \\
+          20,22,24,26,28,31,33,35
+        \end{gathered}\right\}\right)  \\
+      &= 19/37
+  \end{align}
+All other values have probability zero.
+:::
+
+### Conditional distributions
+
+Having defined joint distributions, we can now define conditional 
+distributions. By the definition of a conditional probability:
+$$\Pr(x \in A| y \in B) = \frac{\Pr(x \in A \cap y \in B)}{\Pr(y \in B)}$$
+So we can define the conditional CDF:
+  $$F_{y|x}(a,b) = \Pr(y \leq a|x=b)$$
+Conditional distributions can be derived from the joint distribution,
+but it isn't always easy.
+
+::: example
+**Conditional PDFs in roulette**
+
+Let's find the conditional PDF of the payout for a bet on 
+14 given the payout for a bet on red. 
+  \begin{align}
+    \Pr(w_{14}=-1|w_{red}=-1) &= \frac{\Pr(w_{14}=-1 \cap w_{red}=-1)}{\Pr(w_{red}=-1)} \\
+      &=\frac{19/37}{19/37} = 1 \\
+  \Pr(w_{14}=35|w_{red}=-1) &= \frac{\Pr(w_{14}=35 \cap w_{red}=-1)}{\Pr(w_{red}=-1)} \\
+    &=\frac{0}{19/37} = 0 \\
+  \Pr(w_{14}=-1|w_{red}=1) &= \frac{\Pr(w_{14}=-1 \cap w_{red}=1)}{\Pr(w_{red}=1)} \\
+    &= \frac{17/37}{18/37} \approx 0.944 \\
+  \Pr(w_{14}=35|w_{red}=1) &= \frac{\Pr(w_{14}=35 \cap w_{red}=1)}{\Pr(w_{red}=1)} \\
+    &= \frac{1/37}{18/37} \approx 0.056
+  \end{align}
+:::
+
+### Independence
+
+We say that $x$ and $y$ are ***independent*** if every event defined in 
+terms of $x$ is independent of every event defined in terms of $y$.
+  $$\Pr(x \in A \cap y \in B) = \Pr(x \in A)\Pr(y \in B)$$
+Independence allows us to write all joint and conditional probabilities
+in terms of marginal probabilities:
+  $$F_{x,y}(a,b) = F_x(a)F_y(b)$$
+  $$F_{y|x}(a,b) = F_y(a)$$
+As with independence of events, this will be very handy in simplifying the
+analysis.  But remember: independence is an *assumption* that
+we can only make when it's reasonable to do so.
+
+::: example
+**Independence in roulette**
+
+The winnings from a bet on red ($w_{red}$) and the winnings from 
+a bet on 14 ($w_{14}$) in the same game are *not* independent. However
+the winnings from a bet on red and a bet on 14 in two different 
+games *are* independent since the underlying outcomes are independent.
+:::
+
+### Covariance and correlation
+
+We earlier showed that if $x$ is a random variable, we can take the
+expected value of any function of $x$.  In addition, when $x$ and 
+$y$ are random variables with a well-defined joint distribution, 
+we can take the expected value of any function of $x$ and $y$.
+
+When $x$ and $y$ are both discrete:
+  $$E(g(x,y)) = \sum_{a \in S_x} \sum_{b \in S_y} g(a,b)\Pr( x=a \cap y = b)$$
+That is, we add up $g(x,y)$ across all possible values for the pair $(x,y)$
+with each value weighted by its probability.
+
+::: fyi
+When $x$ and $y$ are both continuous:
+  $$E(g(x,y)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(a,b)f_{x,y}(a,b)dadb$$
+Again, this looks similar to the formula for the discrete case,
+but uses an integral instead of a sum.
+:::
+
+As with a single random variable, you can take the expected value inside
+a linear function:
+  $$E(ax + by + c) = aE(x) + bE(y) + c$$
+but not inside most other functions.  For example:
+  $$E(xy) \neq E(x)E(y)$$
+  $$E(x/y) \neq E(x)/E(y)$$
+etc.
+
+::: example
+**Multiple bets in roulette**
+
+Suppose we bet \$100 on red and \$10 on 14. Our net payout will be:
+  $$w_{total} = 100*w_{red} + 10*w_{14}$$
+which has expected value:
+  \begin{align}
+    E(w_{total}) &= E(100 w_{red} + 10 w_{14}) \\
+      &= 100 \, \underbrace{E(w_{red})}_{\approx -0.027} + 10 \, \underbrace{E(w_{14})}_{\approx -0.027} \\
+      &\approx -3 
+  \end{align}
+That is we expect this betting strategy to lose an average of 
+about \$3 per game.
+:::
+
+The ***covariance*** of two random variables $x$ and $y$ 
+is defined as:
+  $$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
+and their ***correlation*** is defined as:
+  $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
+Both the covariance and correlation are measures of how $x$ and $y$ tend to 
+move together.  
+
+- When the covariance or correlation is *positive*, then that means that
+  $x$ and $y$ tend to move in the *same* direction. When $x$ is high, $y$ is
+  typically high, and when $x$ is low, $y$ is typically low.
+- When the covariance or correlation is *negative*, then that means that
+  $x$ and $y$ tend to move in *opposite* directions. When $x$ is high, $y$ is
+  typically low, and when $x$ is low, $y$ is typically high.
+- When the covariance or correlation is *zero* or close to zero, 
+  then that means that $x$ and $y$ tend *not* to move together.
+- Since the standard deviations $\sigma_x$ and $\sigma_y$ are always[^3]
+  positive, the covariance and correlation always have the same sign.
+- When $x$ and $y$ are independent, their covariance and correlation
+  are both exactly zero.  
+  - However, it does not go the other way around.  There are many
+    pairs of random variables that have a correlation of zero but
+    are not independent.
+- The covariance always lies somewhere between $-\sigma_x\sigma_y$ and
+  $\sigma_x\sigma_y$, and so the correlation always lies between 
+  $-1$ and $1$.
+  
+[^3]: More precisely, one or both of $\sigma_x$ and $\sigma_y$ could be zero.
+In that case the covariance will also be zero, and the correlation will be 
+undefined (since it is zero divided by zero).
+
+::: example
+**Covariance and correlation in roulettte**
+
+The covariance of $w_{red}$ and $w_{14}$ is:
+  \begin{align}
+    cov(w_{red},w_{14}) &= \begin{aligned}[t]
+        & (1-\underbrace{E(w_{red})}_{\approx -0.027})(35-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
+        &+ (1-\underbrace{E(w_{red})}_{\approx -0.027})(-1-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
+        &+ (-1-\underbrace{E(w_{red})}_{\approx -0.027})(-1-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
+        \end{aligned} \\
+      &\approx 0.999 
+    \end{align}
+and its correlation is:
+  \begin{align}
+    corr(w_{red},w_{14}) 
+    &= \frac{cov(w_{red},w_{14})}{\sqrt{var(w_{red})*var(w_{14})}} \\
+     &\approx \frac{0.999}{\sqrt{1.0*34.1}} \\
+     &\approx 0.17
+  \end{align}
+:::
+
+The covariance is the expected value of a product, and the expected
+value is a sum, which implies several convenient properties:
+
+- The covariance can be written:
+  $$cov(x,y) = E(xy) - E(x)E(y)$$
+- Covariances of sums can be written:
+  \begin{align}
+    cov(ax+by+c, dx+ey+f) &= 
+    \begin{aligned}[t]
+      & ad \, var(x) + be \, var(y) \\
+      &+ (bd + ae) \, cov(x,y) \\
+    \end{aligned}
+  \end{align}
+- The variance of a random variable is its covariance with itself:
+  $$cov(x,x) = var(x)$$
+  
+- The variance of a sum can be written:
+  $$var(ax+by+c) = a^2 \, var(x) + b^2 \, var(y) + 2ab \, cov(x,y)$$ 
+
+I will occasionally make use of these properties.
