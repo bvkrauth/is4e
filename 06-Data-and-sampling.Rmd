@@ -1,0 +1,14 @@
+# Data and sampling
+
+This is a new chapter that will contain the last part of the
+random variables chapter, and the first part of the statistics 
+chapter.
+
+::: goals
+***Chapter goals***
+
+In this chapter we will:
+
+- Insert goals here.
+:::
+
