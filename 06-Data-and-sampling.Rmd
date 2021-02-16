@@ -322,12 +322,24 @@ about it.
 ::: example
 **Data from 3 roulette games**
 
-Suppose we have a data set providing the result of 3 independent 
-games of roulette.  Let $b_i$ be the outcome in game $i$, and 
+Suppose we have a data set $D_3$ providing the result of $n=3$ independent games of roulette.  Let $b_i$ be the outcome in game $i$, and 
 let $x_i$ be the result of a bet on red:
   $$x_i = I(b_i \in RED) = \begin{cases} 1 & b_i \in RED \\ 0 & b_i \notin RED \\ \end{cases}$$
 Then $D_n = (x_1,x_2,x_3)$. For example, if red loses the first
 two games and wins the third game we have $D_n = (0,0,1)$.
+
+The joint distribution of $D_n$ can be derived. Let 
+  $$p = \Pr(b \in Red)$$
+Then the PDF of $x_i$ is
+  $$f_x(a) = \begin{cases}(1-p) & a = 0 \\ p & a = 1 \\ 0 & \textrm{otherwise} \\ \end{cases} $$
+Since the random variables in $D_n$ are independent, their
+joint PDF is:
+  $$\Pr(D_n) = f_x(x_1)f_x(x_2)f_x(x_3) = p^{x_1+x_2+x_3}(1-p)^{3-x_1-x_2-x_3}$$
+Note that even with a small data set of a simple random variable,
+the joint PDF is not easy to calculate.  Once we get into larger
+data sets and more complex random variables, it can get very 
+difficult.  That's OK, we don't usually need to calculate it - we
+just need to know that it *could* be calculated.
 :::
 
 ### Simple random sampling
@@ -370,6 +382,16 @@ generating an IID sample is to:
 
 It will turn out that a moderately-sized random sample provides 
 surprisingly accurate information on the underlying population.
+
+::: example
+**Data from roulette**
+
+Our data from 3 roulette games satisfies the criteria
+for a simple random sample.
+
+Each observation $x_i$ is an independent random draw from
+the $Bernouilli(p)$ distribution where $p = \Pr(b \in Red)$.
+:::
 
 ### Time series data
 
