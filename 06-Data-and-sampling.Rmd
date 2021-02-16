@@ -327,10 +327,18 @@ let $x_i$ be the result of a bet on red:
   $$x_i = I(b_i \in RED) = \begin{cases} 1 & b_i \in RED \\ 0 & b_i \notin RED \\ \end{cases}$$
 Then $D_n = (x_1,x_2,x_3)$. For example, if red loses the first
 two games and wins the third game we have $D_n = (0,0,1)$.
+:::
+
+::: example
+**The DGP for the roulette data**
 
 The joint distribution of $D_n$ can be derived. Let 
   $$p = \Pr(b \in Red)$$
-Then the PDF of $x_i$ is
+We showed in a previous chapter that $p \approx 0.486$ if the roulette
+wheel is fair.  But rather than assuming it is fair, let's treat $p$
+as an unknown parameter.
+
+The PDF of $x_i$ is
   $$f_x(a) = \begin{cases}(1-p) & a = 0 \\ p & a = 1 \\ 0 & \textrm{otherwise} \\ \end{cases} $$
 Since the random variables in $D_n$ are independent, their
 joint PDF is:
