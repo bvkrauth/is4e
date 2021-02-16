@@ -19,6 +19,74 @@ In this chapter we will:
 :::
 
 
+We have some ***statistic*** $s =s(D_n)$, i.e., a number that is 
+calculated from the data.
+
+  - Since the data is observed/known, the value of the statistic
+    is observed/known.
+  - Since the elements of $D_n$ are random variables, $s$ is also 
+    a random variable with a well-defined (but unknown) probability
+    distribution that depends on the unknown DGP.
+
+::: example
+In our roulette example, the total number of wins is:
+  $$s = x_1 + x_2 + x_3$$
+Since this is a number calculated from our data, it is a statistic.
+:::
+
+Often we are interested in some ***parameter*** $\theta = \theta(P_D)$ that 
+describes some aspect of the DGP.  
+  
+  - Since the exact DGP is unknown, the exact value of $\theta$ is also
+    unknown. 
+
+::: example
+In previous chapters, I asked you to assume that the roulette wheel
+was *fair*, meaning that all outcomes were equally likely.  This 
+allowed us to calculate the exact probability of red winning. But 
+that is not possible in every application of probability:
+
+- Maybe the roulette wheel isn't actually fair.
+- Maybe the probability of a given event is actually quite 
+  difficult to calculate exactly.
+
+In either of these cases, it makes more sense to treat the
+probability of winning as an unknown parameter:
+  $$\theta = \Pr(x_i = 1)$$
+Once we know this parameter, we can calculate the exact 
+probability distribution of our data.
+
+This calculation is time-consuming and not particularly informative,
+but here is what it looks like.  The probability of observing 
+a particular value of $D_n$ is:
+  $$\Pr(D_n) = \theta^{s(D_n)}(1-\theta)^{3-s(D_n)}$$
+where $s(D_n)=x_1+x_2+x_3$.
+:::
+
+We may use our statistic $s$ to tell us something about the value
+of $\theta$:
+
+  - Estimation: we may use $s$ as a best guess or ***estimate*** of 
+    the true value of $\theta$.
+  - Inference: we may use $s$ to infer whether a particular value
+    of $\theta$ is plausible.
+
+::: example
+In our roulette example, a natural guess of the probability of red 
+winning is the number of times we observe it winning.  That is,
+if red wins about half of the time, we guess that it has about
+a 50\% probability of winning. 
+
+Alternatively, suppose we play 100 games of roulette and observe that red 
+never wins (or always wins).  We might suspect that the casino is not 
+running a fair table!
+:::
+
+In this chapter we will focus on estimation.  We will cover statistical
+inference in a later chapter.
+
+
+
 ## Statistics and their properties
 
 We will use $s = s(D_n)$ as a general notation for some
