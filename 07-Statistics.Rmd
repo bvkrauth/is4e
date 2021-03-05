@@ -1,8 +1,7 @@
 # Statistics
 
-So far, we have learned how to model random events and random numbers, 
-and we have learned how to calculate some commonly-used statistics from 
-data.  This chapter ties all of that work together.
+Having described our data and its DGP, we now move on to describing 
+statistics calculated using our data.
 
 ::: goals
 ***Chapter goals***
@@ -18,84 +17,43 @@ In this chapter we will:
   theorem.
 :::
 
+## Statistics and their properties
 
-We have some ***statistic*** $s =s(D_n)$, i.e., a number that is 
-calculated from the data.
+Suppose we have some ***statistic*** $s_n =s(D_n)$, i.e., a number 
+that is calculated from the data.
 
   - Since the data is observed/known, the value of the statistic
     is observed/known.
-  - Since the elements of $D_n$ are random variables, $s$ is also 
+  - Since the elements of $D_n$ are random variables, $s_n$ is also 
     a random variable with a well-defined (but unknown) probability
     distribution that depends on the unknown DGP.
 
+
 ::: example
+**Roulette wins**
+
 In our roulette example, the total number of wins is:
-  $$s = x_1 + x_2 + x_3$$
+  $$R = x_1 + x_2 + x_3$$
 Since this is a number calculated from our data, it is a statistic.
+
+Since $x_i \sim Bernoulli(p)$, we can show that $R \sim Binomial(3,p)$. 
 :::
 
-Often we are interested in some ***parameter*** $\theta = \theta(P_D)$ that 
-describes some aspect of the DGP.  
-  
-  - Since the exact DGP is unknown, the exact value of $\theta$ is also
-    unknown. 
+### Some important statistics
 
-::: example
-In previous chapters, I asked you to assume that the roulette wheel
-was *fair*, meaning that all outcomes were equally likely.  This 
-allowed us to calculate the exact probability of red winning. But 
-that is not possible in every application of probability:
+I will use $s_n$ to represent an abstract statistic, but we will often
+use other notation to talk about specific statistics.
 
-- Maybe the roulette wheel isn't actually fair.
-- Maybe the probability of a given event is actually quite 
-  difficult to calculate exactly.
+The most important statistic is the ***sample average*** which is 
+defined as: 
+  $$\bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$$
+We will also consider several other commonly-used univariate 
+statistics:
 
-In either of these cases, it makes more sense to treat the
-probability of winning as an unknown parameter:
-  $$\theta = \Pr(x_i = 1)$$
-Once we know this parameter, we can calculate the exact 
-probability distribution of our data.
-
-This calculation is time-consuming and not particularly informative,
-but here is what it looks like.  The probability of observing 
-a particular value of $D_n$ is:
-  $$\Pr(D_n) = \theta^{s(D_n)}(1-\theta)^{3-s(D_n)}$$
-where $s(D_n)=x_1+x_2+x_3$.
-:::
-
-We may use our statistic $s$ to tell us something about the value
-of $\theta$:
-
-  - Estimation: we may use $s$ as a best guess or ***estimate*** of 
-    the true value of $\theta$.
-  - Inference: we may use $s$ to infer whether a particular value
-    of $\theta$ is plausible.
-
-::: example
-In our roulette example, a natural guess of the probability of red 
-winning is the number of times we observe it winning.  That is,
-if red wins about half of the time, we guess that it has about
-a 50\% probability of winning. 
-
-Alternatively, suppose we play 100 games of roulette and observe that red 
-never wins (or always wins).  We might suspect that the casino is not 
-running a fair table!
-:::
-
-In this chapter we will focus on estimation.  We will cover statistical
-inference in a later chapter.
-
-
-
-## Statistics and their properties
-
-We will use $s = s(D_n)$ as a general notation for some
-statistic calculated from the data set $D_n$. We will now
-define some of its properties.
-
-::: example
-We will also consider four specific examples:
-
+- The ***sample variance*** of $x_i$ is defined as: 
+  $$s_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
+  A closely-related statistic is the ***sample standard deviation***
+  $s_x = \sqrt{s_x^2}$ which is the square root of the sample variance.
 - The ***sample frequency*** or ***relative sample frequency***
   of the event $x_i \in A$ is defined as the proportion of cases
   in which the event occurs:
@@ -103,15 +61,8 @@ We will also consider four specific examples:
   A closely-related statistic is the ***absolute sample frequency***
   $n\hat{f}_A$ which is the *number* of cases in which the event 
   occurs.
-- The ***sample average*** of $x_i$ is defined as: 
-  $$\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$$
-- The ***sample variance*** of $x_i$ is defined as: 
-  $$s_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
-  A closely-related statistic is the ***sample standard deviation***
-  $s_x = \sqrt{s_x^2}$ which is the square root of the sample variance.
 - The ***sample median*** of $x_i$ is defined as:
   $$\hat{m}_x = m: \begin{cases} \hat{f}_{x < m} \leq 0.5 \\ \hat{f}_{x > m} \leq 0.5 \\ \end{cases}$$
-:::
 
 ### The sampling distribution
 
@@ -120,6 +71,8 @@ calculated from that data is also a random variable, with a probability
 distribution that can be derived from the DGP. 
 
 ::: example
+**The sampling distribution of the sample frequency**
+
 Calculating the exact probability distribution of most statistics is 
 quite difficult, but it is easy to do for the sample frequency. Let 
 $p =\Pr(x_i \in A)$.
@@ -129,36 +82,68 @@ In other words, we can calculate the exact probability distribution of
 the sample frequency using the formula for the binomial distribution.
 :::
 
+Unfortunately, most statistics typically have sampling distributions that
+are quite difficult to calculate.  
+
+::: fyi
+To see why the sampling distribution of a statistic is so difficult
+to calculate, suppose we have a discrete random variable $x_i$ whose 
+support $S_x$ has five elements. Then we need to calculate the sampling
+distribution of our statstic by adding its probability up across
+the support of $D_n$.  The support has $5^n$ elements, a number that 
+can quickly get very large.  
+
+For example, a typical data set in 
+microeconomics has at least a few hundred or a few thousand observations.
+With 100 observations, $D_n$ can take on $5^{100} \approx 7.9 \times 10^{69}$
+(that's 79 followed by 68 zeros!) distinct values.  With 
+1,000 observations , $D_n$ can take on $5^{1000}$ distinct values,
+a number too big for Excel to even calculate.
+:::
+
 ### The mean and variance
 
 If our statistic has a probability distribution, it (usually) has a mean
-and variance as well. 
+and variance as well. Under some circumstances, we can calculate them.
 
 ::: example
 **The mean of the sample average**
 
 Let $\mu_x = E(x_i)$ be the mean of $x_i$  Then the mean of $\bar{x}$ is:
-$$E(\bar{x}) = E\left( \frac{1}{n} \sum_{i=1}^n x_i\right) = \frac{1}{n} \sum_{i=1}^n E\left( x_i\right) = \frac{1}{n} \sum_{i=1}^n \mu_x = \mu_x$$
-This is an important and general result in statistics.
+$$E(\bar{x}_n) = E\left( \frac{1}{n} \sum_{i=1}^n x_i\right) = \frac{1}{n} \sum_{i=1}^n E\left( x_i\right) = \frac{1}{n} \sum_{i=1}^n \mu_x = \mu_x$$
 :::
 
-The mean of the sample average is thus identical to the mean of the 
-random variable being averaged.  The variance of the sample average
-is also closely related to the variance of the random variable being
-averaged.
+This is an important and general result in statistics. The mean of the 
+sample average in a random sample is identical to the mean of the random 
+variable being averaged.
+  $$E(\bar{x}_n) = E(x_i)$$
+We have shown this property specifically for a random sample, but it 
+holds under many other sampling processes.
 
+The variance of the sample average is not equal to the variance 
+of the random variable being averaged, but they are closely related.
 
 ::: example
 **The variance of the sample average**
 
-Let $\mu_x = E(x_i)$ be the mean of $x_i$ and let $\sigma_x^2 = var(x_i)$ be 
-its variance. Then the variance of $\bar{x}$ is:
-$$var(\bar{x}) = cov(\bar{x},\bar{x}) = E\left[\left( \frac{1}{n} \sum_{i=1}^n 
-x_i-\mu\right)\left(\frac{1}{n} \sum_{i=1}^n x_i - \mu\right)\right] = \frac{1}{n^2} \sum_{i=1}^n\sum_{j=1}^n E\left((x_i-\mu)(x_j-\mu)\right) = \frac{1}{n^2} \sum_{i=1}^n\sum_{j=1}^n cov(x_i,x_j)$$
-$$cov(x_i,x_j) = \begin{cases} \sigma_x^2 & i = j \\ 0 & i \neq j \\ \end{cases}$$ 
-so:
-$$var(\bar{x}) = \frac{1}{n^2} \sum_{i=1}^n \sigma_x^2 = \frac{n\sigma_x^2}{n^2} = \frac{\sigma_x^2}{n}$$
+To keep the math simple, suppose we only have $n = 2$ observations.  Then
+the sample average is:
+  $$\bar{x} = \frac{1}{2}(x_1 + x_2)$$
+By our earlier formula for the variance:
+  \begin{align}
+    var(\bar{x}) &= var\left(\frac{1}{2}(x_1 + x_2)\right) \\
+      &= \left(\frac{1}{2}\right)^2 var(x_1 + x_2) \\
+      &= \frac{1}{4} \left( \underbrace{var(x_1)}_{\sigma_x^2} + 
+          2 \underbrace{cov(x_1,x_2)}_{0 \textrm{(independence)}} + \underbrace{var(x_2)}_{\sigma_x^2} \right) \\
+      &= \frac{1}{4} \left( 2 \sigma_x^2 \right) \\
+      &= \frac{\sigma_x^2}{2} \\
+  \end{align}
 :::
+
+More generally, the variance of the sample average in a random sample
+of size $n$ is:
+  $$var(\bar{x}_n) = \frac{\sigma_x^2}{n}$$
+where $\sigma_x^2 = var(x_i)$.
 
 Other commonly-used statistics also have a mean and variance.
 
@@ -177,15 +162,22 @@ the relative sample frequency is:
   $$var(\hat{f}_A) = \frac{var(n\hat{f}_A)}{n^2} = \frac{np(1-p)}{n^2} = \frac{p(1-p)}{n} $$
 :::
 
+## Estimation
+
+One of the most important uses of statistics is to ***estimate*** or
+guess at the value at, some unknown parameter of the DGP.
+
 ### Parameters and estimators
 
 A ***parameter*** is an unknown number characterizing a DGP. 
 
 ::: example
+**Examples of parameters**
+
 Sometimes a single parameter completely describes the DGP:
 
-- If $x_i$ is a random sample from the $Bernoulli(p)$ distribution,
-  then $p$ is a parameter.
+- In our roulette data set, the joint distribution of the data
+  depends only on the single parameter $p = \Pr(b \in Red)$.
   
 Sometimes a group of parameters completely describe the DGP:
 
@@ -203,7 +195,7 @@ And sometimes a parameter only partially describes the DGP
 Typically there will be particular parameters whose value we wish
 to know.  Such a parameter is called a ***parameter of interest***.
 Our model may include other parameters, which are typically called
-auxiliary parameters or nuisance parameters. 
+*auxiliary parameters* or *nuisance parameters*. 
 
 An ***estimator*** is a statistic that is being used to ***estimate***
 (guess at the value of) an unknown parameter of interest.  The distinction
@@ -227,48 +219,51 @@ Our four example statistics are commonly used as estimators:
 
 :::
 
-Let $s$ be a statistic we are using as an estimator of some parameter 
+Let $s_n$ be a statistic we are using as an estimator of some parameter 
 of interest $\theta$.  We can define its ***error*** as:
-  $$err = s - \theta$$
-In principle, we want $s$ to be a good estimator of $\theta$, i.e.,
-we want $err$ to be as close to zero as possible.  There
-are several major complications to keep in mind:
+  $$err(s_n) = s_n - \theta$$
+In principle, we want $s_n$ to be a good estimator of $\theta$, i.e.,
+we want $err(s_n)$ to be as close to zero as possible.  
 
-1. Always remember that $err$ is not an inherent property of the
-  statistic - it is a property of the relationship between the statistic
-  and the parameter of interest. A given statistic may be a good
-  estimator of one parameter, and a bad estimator of another parameter.
-2. Since $s$ is a random variable with a probability distribution, 
-  so is $err$ is also a random variable with a proability distribution. 
-3. Since the value of $\theta$ is unknown, the value of $err$ is also 
-  unknown.
+There are several major complications to keep in mind:
 
-### Bias and mean squared error
+1. Since $s_n$ is a random variable with a probability distribution, 
+   $err(s_n)$ is also a random variable with a proability distribution. 
+2. Since the value of $\theta$ is unknown, the value of $err(s_n)$ is also 
+   unknown.
+
+Always remember that $err(s_n)$ is not an inherent property of the
+statistic - it depends on the relationship between the statistic
+and the parameter of interest. A given statistic may be a good
+estimator of one parameter, and a bad estimator of another parameter.
+
+### Bias and the MVUE criterion
 
 In choosing an estimator, we can consider several criteria.
 
 The first is the ***bias*** of the estimator, which is defined as:
-$$bias(s) = E(s - \theta) = E(s) - \theta$$
-The bias represents the average error we would expect over multiple
-trials. 
+$$bias(s_n) = E(err(s_n)) = E(s_n - \theta) = E(s_n) - \theta$$
+The bias represents the expected error. 
 
-Ideally we would want $bias(s)$ to be zero, in which case
-we would say that $s$ is an ***unbiased*** estimator of $\theta$.
+Ideally we would want $bias(s_n)$ to be zero, in which case
+we would say that $s_n$ is an ***unbiased*** estimator of $\theta$.
 Note that bias is always defined relative to the parameter we wish 
 to estimate, and is not an inherent property of the statistic.
 
 ::: example
-**Unbiased estimators of the mean**
+**Two unbiased estimators of the mean**
 
-Consider the sample average $\bar{x}$ in a random sample
+Consider the sample average $\bar{x}_n$ in a random sample
 as an estimator of the parameter $\mu_x = E(x_i)$. The bias is:
-  $$bias(\bar{x}) = E(\bar{x}) - \mu_x = \mu_x - \mu_x = 0$$
+  $$bias(\bar{x}_n) = E(\bar{x}_n) - \mu_x = \mu_x - \mu_x = 0$$
 That is, the sample average is an unbiased estimator of the population mean.
 
 However, it is not the only unbiased estimator.  For example, suppose we 
 simply take the value of $x_i$ in the first observation and throw
-away the rest of the data.  This is also an unbiased estimator of $\mu_x$:
-  $$bias(x_1) = E(x_1 - \mu_x) = \mu_x - \mu_x = 0$$
+away the rest of the data.  This "first observation estimator" is 
+easier to calculate than the sample average, and is also an unbiased 
+estimator of $\mu_x$:
+  $$bias(x_1) = E(x_1) - \mu_x = \mu_x - \mu_x = 0$$
 This example illustrates a general principle: there is rarely exactly
 one unbiased estimator.  There are either none, or many.
 :::
@@ -282,108 +277,130 @@ variance:
 This is not hard to prove, but I will skip it for now.
 :::
 
-If there are multiple unbiased estimators, we need to consider a 
-second criterion. One option is to consider the ***variance*** of the
-estimator:
-  $$var(s) = E[(s-(E(s))^2]$$
-Low variance is better than high variance. 
+If there are multiple unbiased estimators available for a given 
+parameter, we need to apply a second criterion to choose 
+one.  A natural second criterion is the ***variance*** of 
+the estimator:
+  $$var(s_n) = E[(s_n-(E(s_n))^2]$$
+If $s_n$ is unbiased, then a low variance means it is usually
+close to $\theta$, while a high variance means that it is
+often either much larger or much smaller than $\theta$. Clearly,
+low variance is better than high variance.
+
+The ***minimum variance unbiased estimator*** (MVUE) of a parameter is
+the unbiased estimator with the lowest variance. 
 
 ::: example
-**The variance of the sample mean and an alternative estimator **
+**The variance of the sample average and and first observation estimators**
 
 In our previous example, we found two unbiased estimators for the
-mean, the sample average $\bar{x}$ and the first observation $x_1$.
+mean, the sample average $\bar{x}_n$ and the first observation $x_1$.
 
 The variance of the sample average is:
-  $$var(\bar{x}) = \sigma^2/n$$
-and the variance of the "first observation estimator: is:
+  $$var(\bar{x}_n) = \sigma^2/n$$
+and the variance of the first observation estimator is:
   $$var(x_1) = \sigma^2$$
-Since $\sigma^2/n < \sigma^2$, the sample average $\bar{x}$ has
-lower variance than the first observation estimator $x_i$.
+For any $n > 1$, the sample average $\bar{x}_n$ has lower variance than 
+the first observation estimator $x_1$. Since they are both unbiased,
+it is the preferred estimator of the two.
 
-In fact, we can prove that $\bar{x}$ is the 
-***minimum variance unbiased estimator*** of $\mu_x$, i.e.,
-the unbiased estimator with the lowest variance.
+In fact, we can prove that $\bar{x}_n$ is the 
+minimum variance unbiased estimator of $\mu_x$.
 :::
+
+### Mean squared error
 
 Unfortunately, once we move beyond the simple case of estimating 
 the population mean, we run into several complications:
 
-- An unbiased estimator may not exist for a particular parameter, 
-  in which case there is no minimum variance unbiased 
-  estimator.
-- There may be a slightly biased estimator that has much lower variance
-  than any unbiased estimator. In fact, we can find examples
-  in which the biased estimator *always* has smaller error 
-  than any unbiased estimator.
+The first complication is that an unbiased estimator may not 
+exist for a particular parameter of interest. If there is
+no unbiased estimator, there is no minimum variance unbiased 
+estimator. So we need some other way of choosing an estimator.  
 
-This suggests that we need a criterion that allows for a trade-off
-between variance and bias.
+::: example
+**The sample median**
 
-The ***mean squared error*** of the estimator is defined as:
-$$MSE(s) = E[(s-\theta)^2]$$
+There is no unbiased estimator of the median of a random variable 
+with unknown distribution.  To see why, consider the simplest 
+possible data set: a random sample of size $n=1$ on the random 
+variable $x_i \sim Bernoulli(p)$, where $0 < p < 1$.  The median 
+of $x_i$ in this case is:
+  $$m_x = I(p > 0.5)$$
+
+First we show that the sample median is a biased estimator
+of $m_x$.  The sample median is:
+  $$\hat{m}_x = x_1$$ 
+and its expected value is:
+  $$E(\hat{m}_x) = E(x_1) = p \neq I(p > 0.5)$$
+So the sample median $\hat{m}_x$ is a biased estmator for 
+the population median $m_x$.
+
+More generally, any statistic calculated from this data set 
+must take the form $s = a_0 + a_1x_1$, where $s = a_0$ when
+$x_1 = 0$ and $s = a_0+a_1$ is its value when $x_1 = 1$. This
+statistic has expected value $E(a_0 + a_1x_1) = a_0 + a_1p$, so
+any unbiased estimator would need to solve the equation:
+  $$a_0 + a_1 p = I(p > 0.5)$$
+and there is no such solution.
+:::
+
+The second complication is that we often have access to an unbiased
+estimator and a biased estimator with lower variance.
+
+::: example
+**The relationship between age and earnings**
+
+One common question in labour economics is how earnings vary by 
+various characteristics such as age.
+
+Suppose we have a random sample of 800 Canadians, and we want to 
+estimate the earnings of the average 35-year old Canadian. Assuming
+for simplicity that ages are equally-spaced between 0 and 80, our
+data set will have only 10 Canadians at each age.  So we have several 
+options:
+
+  - Average earnings of the 10 35-year-olds in our data.
+
+This estimator will be unbiased, but 10 observations isn't
+very much and so its variance will be high. We can reduce the 
+variance by adding more observations from people who are *almost*
+35 years old:
+  
+  - Average earnings of the  30 34-36 year olds in our data.
+  - Average earnings of the 100 30-39 year olds in our data.
+  - Average earnings of the 800  0-80 year olds in our data. 
+
+By including more data, these estimators will have lower variance
+but will introduce bias. My guess is introducing 34 and 36 year
+olds is a good idea since they probably have similar earnings to 
+35 year olds, but including children and the elderly is not such
+a good idea.
+:::
+
+This suggests that we need a criterion that
+
+  - Can be used to choose between biased estimators
+  - Can choose slightly biased estimators with low variance
+    over unbiased estimators with high variance.
+
+The ***mean squared error*** of an estimator is defined as:
+  $$MSE(s_n) = E[err(s_n)^2] = E[(s_n-\theta)^2]$$
 We can do a little math and show that:
-$$MSE(s) = var(s) + [bias(s)]^2$$
+  $$MSE(s_n) = var(s_n) + [bias(s_n)]^2$$
 The MSE criterion allows us to choose a biased estimator with low variance
 over an unbiased estimator with high variance, and also allows us to choose
 between biased estimators when no unbiased estimator exists.
 
 ::: example
-**The MSE of the sample mean and an alternative estimator **
+**The MSE of the sample mean and first observation estimators**
 
 The mean squared error of the sample average is:
-  $$MSE(\bar{x}) = var(\bar{x}) + [bias(\bar{x})]^2 = \frac{\sigma_x^2}{n} + 0^2 = \frac{\sigma_x^2}{n}$$
+  $$MSE(\bar{x}_n) = var(\bar{x}_n) + [bias(\bar{x}_n)]^2 = \frac{\sigma_x^2}{n} + 0^2 = \frac{\sigma_x^2}{n}$$
 and the mean squared error of the first observation estimator is:
   $$MSE(x_1) = \sigma_x^2$$
 The sample average is the preferred estimator by the MSE criterion,
 so in this case we get the same result as applying the MVUE criterion.
-:::
-
-The sample median is an example of a biased estimator for the population
-median. 
-
-::: example
-**The sample median is a biased estimator**
-
-Consider a simple example in which $x_i \sim Bernoulli(0.6)$ and $n = 1$.
-Then the population median is the most likely value for $x_i$:
-  $$m_x = 1$$
-and the sample median is the observed value for $x_i$:
-  $$\hat{m}_x = x_1$$
-The mean of $\hat{m}_x$ is:
-  $$E(\hat{m}_x) = E(x_1) = p$$
-and so the bias is 
-  $$E(\hat{m}_x - m_x) = p - 1$$
-Now this is a very simple example, but the basic idea applies more generally:
-there is usually[^2] no unbiased estimator for the population median
-or any other population quantile. 
-:::
-
-[^2]: There are exceptions. For example, if the population median and 
-  the population mean are identical, then the sample average is an 
-  unbiased estimator of both.
-
-
-::: example
-**A biased estimator with lower MSE than the sample average**
-
-Here's an example of a biased estimator that has lower MSE than any unbiased
-estimator.  Suppose that we know that $x_i \sim N(\mu_x,\sigma_x^2)$ and
-that $\mu_x \geq 0$.  
-
-The sample average $\bar{x}$ is a good estimator for $\mu_x$, 
-but since we know $\mu_x \geq 0$ we can do better. 
-Let 
-  $$s = max(\bar{x},0)$$
-Intuitively, this will be a better estimator since it is identical 
-to $\bar{x}$ whenever $\bar{x} \geq 0$ and strictly closer to $\mu_x$ 
-whenever $\bar{x} < 0$. 
-
-With a little bit of math we can show that this alternative estimator 
-is biased:
-$$E(s) > E(\bar{x}) = \mu_x$$
-but has lower MSE than the (unbiased) sample average:
-$$MSE(s) < MSE(\bar{x})$$
 :::
 
 ### Standard errors
@@ -397,21 +414,21 @@ an estimate of its standard deviation.
 
 We have shown that the sample average provides a good estimate
 of the population mean, and that its variance is:
-  $$var(\bar{x}) = \frac{\sigma_x^2}{n} = \frac{var(x_i)}{n}$$
+  $$var(\bar{x}_n) = \frac{\sigma_x^2}{n} = \frac{var(x_i)}{n}$$
 Since $s_x^2$ is an unbiased estimator of $var(x_i)$ we can use
 it to construct an unbiased estimator of $var(\bar{x})$:
-  $$E\left(\frac{s_x^2}{n}\right) = \frac{E(s_x^2)}{n} = \frac{var(x_i)}{n} = var(\bar{x})$$
+  $$E\left(\frac{s_x^2}{n}\right) = \frac{E(s_x^2)}{n} = \frac{var(x_i)}{n} = var(\bar{x}_n)$$
 
 
 We might also want to estimate the standard deviation of $\bar{x}$. A natural
 approach would be to take the square root of the estimator above, yielding:
-  $$se(\bar{x}) = \frac{s_x}{\sqrt{n}}$$
+  $$se(\bar{x}_n) = \frac{s_x}{\sqrt{n}}$$
 This is the conventional formula for the standard error of the sample
 average, and is typically reported next to the sample average.
 :::
 
-In general, the standard error of a statistic is an estimator of the statistic's
-standard deviation. It is not exactly unbiased, but its bias is typically small and it has some other useful properties that we will use later.
+Standard errors are usually biased estimators of the statistic's true standard
+deviation, but the bias is typically small.
 
 ## Asymptotics
 
@@ -451,16 +468,16 @@ sample, the sample average is almost identical to the corresponding
 population mean.  
 
 In order to state the LLN, we need to introduce some concepts. Consider
-a data set $D_n$ of size $n$, and let $w_n$ be some statistic
-calculated from $D_n$. We say that $w_n$ ***converges in probability*** 
+a data set $D_n$ of size $n$, and let $s_n$ be some statistic
+calculated from $D_n$. We say that $s_n$ ***converges in probability*** 
 to some constant $c$ if:
-  $$\lim_{n \rightarrow \infty} \Pr( |w_n - c| < \epsilon) = 1$$
+  $$\lim_{n \rightarrow \infty} \Pr( |s_n - c| < \epsilon) = 1$$
 for any positive number $\epsilon > 0$.
 
 Intiutively, what this means is that for a sufficiently large $n$ 
-(the $\lim_{n \rightarrow \infty}$ part), $w_n$ is almost certainly
+(the $\lim_{n \rightarrow \infty}$ part), $s_n$ is almost certainly
 (the $\Pr(\cdot) = 1$ part) very close to $c$
-(the $|w_n-c| < \epsilon$ part).
+(the $|s_n-c| < \epsilon$ part).
 
 We have a compact way of writing convergence in probability:
   $$w_n \rightarrow^p c$$
@@ -508,25 +525,24 @@ that affects everyone.  Here the independence needed for the LLN
 does not apply.
 :::
 
-
 ### The central limit theorem
 
 The ***Central Limit Theorem (CLT)*** is an even more powerful result.
 It roughly says that for a sufficiently large sample size we can
 approximate the entire probability distribution of 
-$\bar{x}$ by a normal distribution.
+$\bar{x}_n$ by a normal distribution.
 
 As with the LLN, we need to invest in some terminology before we can
-state the CLT.  Let $w_n$ be a statistic calculated from $D_n$ and 
-let $F_n(\cdot)$ be its CDF. We say that $w_n$ 
-***converges in distribution*** to a random variable $w$ with CDF $F(\cdot)$, or 
-  $$w_n \rightarrow^D w$$
+state the CLT.  Let $s_n$ be a statistic calculated from $D_n$ and 
+let $F_n(\cdot)$ be its CDF. We say that $s_n$ 
+***converges in distribution*** to a random variable $s$ with CDF $F(\cdot)$, or 
+  $$s_n \rightarrow^D s$$
 if
   $$\lim_{n \rightarrow \infty} |F_n(a) - F(a)| = 0$$
 for every $a \in \mathbb{R}$.
 
 Convergence in distribution means we can approximate the actual CDF
-$F_n(\cdot)$ of $w_n$ with its limit $F(\cdot)$.  As with most approximations,
+$F_n(\cdot)$ of $s_n$ with its limit $F(\cdot)$.  As with most approximations,
 this is useful whenever $F_n(\cdot)$ is difficult to calculate and $F(\cdot)$
 is easy to calculate. 
 
@@ -557,9 +573,9 @@ What does the central limit theorem mean?
 The law of large numbers and central limit theorem apply to the sample
 mean, but we are interested in other estimators as well.
 
-In general, we say that the statistic $s$ is a ***consistent*** 
+In general, we say that the statistic $s_n$ is a ***consistent*** 
 estimator of a parameter $\theta$ if:
-$$s \rightarrow^P \theta$$
+$$s_n \rightarrow^P \theta$$
 It will turn out that most of the statistics we use are consistent 
 estimators of the thing we typically use them to estimate. 
 
@@ -570,9 +586,9 @@ applies to $g(s_n)$ for any continuous function $g(\cdot)$.
 
 ::: fyi
 **SLUTSKY THEOREM**: Let $g(\cdot)$ be a continuous function. Then:
-  $$w_n \rightarrow^p c \implies g(w_n) \rightarrow^p g(c)$$
+  $$s_n \rightarrow^p c \implies g(s_n) \rightarrow^p g(c)$$
 and:
-  $$w_n \rightarrow^D w \implies g(w_n) \rightarrow^D g(w)$$
+  $$s_n \rightarrow^D s \implies g(s_n) \rightarrow^D g(s)$$
 :::
 
 What is the importance of Slutsky's theorem?  Most commonly used statistics
@@ -588,3 +604,4 @@ sample averages). Slutsky's theorem
 The math needed to make full use of Slutsky's theorem is beyond the scope
 of this course, so all I am asking here is for you to know that it can be
 used for this purpose.
+

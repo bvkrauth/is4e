@@ -1,43 +1,24 @@
 # Data and sampling
 
-We have developed some basic theory of probability, random events, and random
-variables.  We have also learned some techniques for cleaning data and 
-calculating statistics in Excel.  The next step is to bring these two strands
-of concepts together.
+In chapters \@ref(basic-data-cleaning-with-excel) and
+\@ref(basic-data-analysis-with-excel) we learned some techniques 
+for cleaning data and calculating statistics in Excel.  In chapters 
+\@ref(probability-and-random-events) and \@ref(random-variables), 
+we developed the basic theory of probability, random events, 
+and random variables.  
 
-Over the next two chapters we will develop a framework for talking about data
+Our next step is to bring these two strands of concepts together.  Over 
+the next two chapters we will develop a framework for talking about data
 and the statistics calculated from that data as a random process that can be
 described using the theory of probability and random variables.
-
-Suppose we have a data set. We would like to use that data set to learn
-something about the mechanisms by which the data set was generated.
-This process of learning from data is statistical analysis.
-
-The basic idea of statistical analysis is that:
-
-- Each number in our data set can be thought of as a distinct random 
-  variable derived from some underlying (unobserved) random outcome.
-  - The random process that produced our data is called the 
-    *data generating process* or DGP.
-  - We have a probabilistic model of the DGP, but that model will typically 
-    include some unknown numbers called *parameters* of the model.
-- Each statistic we calculate from our data, since it is calculated from
-  these random variables, is also a random variable.  
-  - The probability distribution of each statistic could be derived from 
-    the DGP *if we knew the DGP*.
-- We will use some statistics as *estimates* of unknown parameters of
-  the DGP.
-  - We will want to use statistics that have a high probability of 
-    prividing provide accurate estimates. 
-
-Given this overall strategy, we will next talk about the details.
 
 ::: goals
 ***Chapter goals***
 
 In this chapter we will:
 
-- Calculate and interpret joint, marginal and conditional distributions.
+- Calculate and interpret joint, marginal and conditional distributions
+  of two random variables.
 - Calculate and interpret the covariance and correlation coefficient of 
   two discrete random variables.
 - Model the random process generating a data set.
@@ -73,20 +54,6 @@ $$f_{x,y}(a,b) = \begin{cases}
       \frac{\partial F_{x,y}(a,b)}{\partial a \partial b} & \textrm{if $x$ and $y$ are continuous} \\
       \end{cases}$$
 
-The joint distribution tells you two things about these variables
-
-1. The ***marginal*** distributions of the two individual random variables
-   - For example, we can derive each variable's CDF from the joint CDF:
-      $$F_x(a) = \Pr(x \leq a) = \Pr(x \leq a \cap y \leq \infty) = F_{x,y}(a,\infty)$$
-      $$F_y(b) = \Pr(y \leq n) = \Pr(x \leq \infty \cap y \leq b) = F_{x,y}(\infty,b)$$
-   - We can also derive each variable's PDF from the joint PDF
-2. The *relationship* between the two variables.  
-   - We will develop several ways of describing this relationship.
-
-Note that while you can always derive the marginal distributions from the joint 
-distribution, you cannot go the other way around unless you know everything
-about the relationship between the two variables.
-
 ::: example
 **The joint PDF in roulette**
 
@@ -121,13 +88,84 @@ Otherwise both red and 14 lose:
 All other values have probability zero.
 :::
 
+The joint distribution tells you two things about these variables
+
+1. The probability distribution of each individual random variable, 
+   sometimes called that variable's ***marginal*** distribution.
+   - For example, we can derive each variable's CDF from the joint CDF:
+      $$F_x(a) = \Pr(x \leq a) = \Pr(x \leq a \cap y \leq \infty) = F_{x,y}(a,\infty)$$
+      $$F_y(b) = \Pr(y \leq n) = \Pr(x \leq \infty \cap y \leq b) = F_{x,y}(\infty,b)$$
+   - We can also derive each variable's PDF from the joint PDF
+2. The *relationship* between the two variables.  
+   - We will develop several ways of describing this relationship: conditional
+     distribution, covariance, correlation, etc.
+
+Note that while you can always derive the marginal distributions from the joint 
+distribution, you cannot go the other way around unless you know everything
+about the relationship between the two variables.
+
+::: example
+**Three joint distributions with identical marginal distributions**
+
+The scatter plots in Figure \@ref(fig:JointIsNotMarginal) below 
+depict simulation results for a pair of random 
+variables $(x,y)$, with a different joint distribution in each
+graph. In all three graphs, $x$ and $y$ have the same
+marginal distribution (standard normal).
+
+The differences between the graphs are in the relationship 
+between $x$ and $y$.  
+
+- In the first graph, $x$ and $y$ are unrelated, so the 
+  data looks like as a "cloud" of random dots.  
+- In the second graph, $x$ and $y$ have something of a 
+  positive relationship. High values of $x$ tend to go
+  with high values of $y$.
+- In the third graph, $x$ and $y$ are closely related. In fact, 
+  they are equal.
+
+```{r JointIsNotMarginal, echo = FALSE, fig.margin = TRUE, fig.cap = "x and y have the same marginal distribution in all three graphs, but not the same joint distribution."}
+x <- rnorm(100)
+y <- rnorm(100)
+par(mfrow=c(1,3))
+plot(x=x,
+     y=y,
+     type="p",
+     pch=17,
+     col="blue",
+     xlab="x",
+     ylab="y",
+     bty="l")
+plot(x=x,
+     y=(x+0.5*y)/sqrt(1.25),
+     type="p",
+     pch=17,
+     col="blue",
+     xlab="x",
+     ylab="y",
+     bty="l")
+plot(x=x,
+     y=x,
+     type="p",
+     pch=17,
+     col="blue",
+     xlab="x",
+     ylab="y",
+     bty="l")
+```
+
+
+:::
+
+
 ### Conditional distributions
 
 The ***conditional distibution*** of a random variable $y$ given another random
 variable $x$ assigns values to all probabilities of the form:
   $$\Pr(y \in A| x \in B) = \frac{\Pr(y \in A \cap x \in B)}{\Pr(x \in B)}$$
-Since it is just the ratio of the joint probability to the marginal probability, the
-conditional distribution can always be derived from the joint distribution.
+Since a conditional probability is just the ratio of the joint probability 
+to the marginal probability, the conditional distribution can always be 
+derived from the joint distribution.
 
 We can describe a conditional distribution with either the ***conditional CDF***:
   $$F_{y|x}(a,b) = \Pr(y \leq a|x=b)$$
@@ -160,6 +198,9 @@ As before, independence of $x$ and $y$ implies that the conditional
 distribution is the same as the marginal distribution:
   $$\Pr(x \in A| y \in B) = \Pr(x \in A)$$
   $$\Pr(y \in A| x \in B) = \Pr(y \in A)$$
+The first graph in Figure \@ref(fig:JointIsNotMarginal) shows 
+what independent random variables look like in data: a cloud of 
+unrelated points.
   
 Independence also means that the joint and conditional PDF/CDF can be derived
 from the marginal PDF/CDF:
@@ -174,35 +215,43 @@ we can only make when it's reasonable to do so.
 ::: example
 **Independence in roulette**
 
-The winnings from a bet on red ($w_{red}$) and the winnings from 
-a bet on 14 ($w_{14}$) in the same game are *not* independent. However
-the winnings from a bet on red and a bet on 14 in two different 
+The winnings from a bet on red $(w_{red})$ and the winnings from 
+a bet on 14 $(w_{14})$ in the same game are *not* independent. 
+
+However the winnings from a bet on red and a bet on 14 in two different 
 games *are* independent since the underlying outcomes are independent.
 :::
 
 ### Expected values with multiple variables
 
 We earlier showed that if $x$ is a random variable, we can take the
-expected value of any function of $x$.  In addition, when $x$ and 
-$y$ are random variables with a well-defined joint distribution, 
-we can take the expected value of any function of $x$ and $y$.
+expected value of any function of $x$, and that you can take
+the expected value "inside" any linear function of $x$:
+  $$E(a + bx) = a + b E(x)$$
+but in general $E(g(x)) \neq g(E(x))$.
 
+Similarly, when $x$ and $y$ are random variables with a well-defined 
+joint distribution, we can take the expected value of any function of 
+$x$ and $y$. 
+
+::: fyi
 When $x$ and $y$ are both discrete:
   $$E(g(x,y)) = \sum_{a \in S_x} \sum_{b \in S_y} g(a,b)\Pr( x=a \cap y = b)$$
 That is, we add up $g(x,y)$ across all possible values for the pair $(x,y)$
 with each value weighted by its probability.
 
-::: fyi
 When $x$ and $y$ are both continuous:
   $$E(g(x,y)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(a,b)f_{x,y}(a,b)dadb$$
 Again, this looks similar to the formula for the discrete case,
 but uses an integral instead of a sum.
+
+You do not need to remember or use either of these formulas
 :::
 
 As with a single random variable, you can take the expected value inside
-a linear function:
+a *linear* function of multiple random variables:
   $$E(ax + by + c) = aE(x) + bE(y) + c$$
-but not inside most other functions.  For example:
+but in general $E(g(x,y)) \neq g(E(x),E(y))$. For example:
   $$E(xy) \neq E(x)E(y)$$
   $$E(x/y) \neq E(x)/E(y)$$
 etc.
@@ -232,29 +281,6 @@ and their ***correlation*** is defined as:
 Both the covariance and correlation are measures of how $x$ and $y$ tend to 
 move together.  
 
-- When the covariance or correlation is *positive*, then that means that
-  $x$ and $y$ tend to move in the *same* direction. When $x$ is high, $y$ is
-  typically high, and when $x$ is low, $y$ is typically low.
-- When the covariance or correlation is *negative*, then that means that
-  $x$ and $y$ tend to move in *opposite* directions. When $x$ is high, $y$ is
-  typically low, and when $x$ is low, $y$ is typically high.
-- When the covariance or correlation is *zero* or close to zero, 
-  then that means that $x$ and $y$ tend *not* to move together.
-- Since the standard deviations $\sigma_x$ and $\sigma_y$ are always[^3]
-  positive, the covariance and correlation always have the same sign.
-- When $x$ and $y$ are independent, their covariance and correlation
-  are both exactly zero.  
-  - However, it does not go the other way around.  There are many
-    pairs of random variables that have a correlation of zero but
-    are not independent.
-- The covariance always lies somewhere between $-\sigma_x\sigma_y$ and
-  $\sigma_x\sigma_y$, and so the correlation always lies between 
-  $-1$ and $1$.
-  
-[^3]: More precisely, one or both of $\sigma_x$ and $\sigma_y$ could be zero.
-In that case the covariance will also be zero, and the correlation will be 
-undefined (since it is zero divided by zero).
-
 ::: example
 **Covariance and correlation in roulettte**
 
@@ -276,48 +302,120 @@ and its correlation is:
   \end{align}
 :::
 
-The covariance is the expected value of a product, and the expected
-value is a sum, which implies several convenient properties:
+The *sign* of the covariance or correlation tells us the direction
+of the relationship between $x$ and $y$.
+- If *positive*: $x$ and $y$ tend to move in the *same* direction. 
+- If *negative*, $x$ and $y$ tend to move in *opposite* directions.
+- If *zero*: $x$ and $y$ tend *not* to move together at all.
+the covariance and correlation always have the same sign since 
+standard deviations are always[^3] positive, 
+
+[^3]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
+In that case the covariance will also be zero, and the correlation will be 
+undefined (zero divided by zero).
+
+When random variables are independent, their covariance and correlation are both
+exactly zero. However, it does not go the other way around.  
+
+::: example
+**Uncorrelated does not imply independent**
+
+Figure \@ref(fig:UncorrelatedButNotIndependent) below shows a scatter plot
+from a simulation of two random variables that are clearly related (and therefore
+not independent) but whose covariance and correlation are exactly zero.
+
+Intuitively, covariance and correlation are a measure of the *linear* 
+relationship between two variables.  When variables have a nonlinear 
+relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent), the
+covariance or correlation may miss it.
+
+```{r UncorrelatedButNotIndependent, echo = FALSE, fig.margin = TRUE, fig.cap = "x and y are uncorrelated, but clearly related."}
+x <- rnorm(100)
+plot(x=x,
+     y=x^2,
+     type="p",
+     pch=17,
+     col="blue",
+     xlab="x",
+     ylab="y",
+     bty="l")
+```
+:::
+
+The *magnitude* of the covariance or correlation tells us about
+the strength of the relationship between the two variables:
+
+- The correlation is a scale-free measure of the strength of the 
+  relationship:
+  - It always lies between -1 and 1.
+  - It is unchanged by any rescaling or change in units.  That is,
+    for any positive constants $a$ and $b$:
+    $$corr(ax,by) = corr(x,y)$$
+  - When $corr(x,y) \in \{-1,1\}$, then that means $y$ is an 
+    exact linear function of $x$.  That is, we can write it:
+    $$y = a + bx$$
+    and
+    $$corr(x,y) = \begin{cases} 1 & \textrm{if $b > 0$} \\ -1 & \textrm{if $b < 0$} \\ \end{cases}$$
+- In contrast, the covariance depends on the scale of the variables, and
+  always lies between $-\sigma_x\sigma_y$ and $\sigma_x\sigma_y$.
+
+Earlier I said that the variance was a square, and has some implied 
+properties similar to those of a square.  In particular:
+
+- The variance can be written
+  $$var(x) = E(x^2) - E(x)^2$$
+- We can take constants out of a variance:
+  $$var(ax) = a^2 var(x)$$
+since $(ax)^2 = a^2x^2$.
+
+Similarly, the covariance is the expected value of a product, and has some
+implied properties similar to those of a product.  
 
 - The covariance can be written:
   $$cov(x,y) = E(xy) - E(x)E(y)$$
 - The order in a covariance does not matter:
   $$cov(x,y)=cov(y,x)$$
-- Covariances go through sums just like products do:
+  since $xy = yx$.
+- Covariances go through sums:
   $$cov(x,y+z) = cov(x,y) + cov(x,z)$$
+  since $x*(y+z) = xy + xz$
 - Constant multiples can be taken out of covariances
-  $$cov(ax,y) = a cov(x,y)$$
+  $$cov(ax,by) = ab \, cov(x,y)$$
+  since $ax*by = ab*xy$.
 - The variance of a random variable is its covariance with itself:
   $$cov(x,x) = var(x)$$
+  since $x*x = x^2$
+- The variance of a sum is:
+  $$var(x + y) = var(x) + var(y) + 2 \, cov(x,y)$$
+  since $(x+y)^2 = x^2 + y^2 + 2xy$.
 
-
-I will occasionally make use of these properties.
-
-### Many random variables
-
-All of the terminology we have just developed to handle two random 
-variables can easily be extended to many more than two random variables.
+I do not expect you to remember all of these formulas, but be 
+prepared to see me use them
 
 ## Data and the data generating process
 
-Let $D_n$ be our data set. 
+Having invested in all of the probabilistic preliminaries, we can finally talk about
+data.  Suppose for the rest of this chapter that we have a data set 
+called $D_n$. 
 
-- In this chapter, we will assume that $D_n = (x_1,x_2,\ldots,x_n)$ 
-  is a data set with one variable and $n$ observations.  We use 
-  $x_i$ to refer to an arbitrary observation $i$.
+In this chapter, we will assume that $D_n = (x_1,x_2,\ldots,x_n)$ 
+is a data set with one variable and $n$ observations.  We use 
+$x_i$ to refer to the value of our variable for an arbitrary 
+observation $i$.
+
+In real-world analysis, data tends to be more complex:
+
 - In most applications, it will be a simple table of numbers with 
   $n$ observations (rows) and $K$ variables (columns). 
 - However, it is occasionally something more abstract.  For example,
-  the standard problem in the statistical field of machine learning 
-  is to develop a system for determining if a particular electronic
-  photograph shows a dog or a cat.  In that case, the data is a big 
+  the data set at https://www.kaggle.com/c/dogs-vs-cats is a big
   folder full of dog and cat photos.
+  - A great deal of research in the statistical field of machine 
+    learning has been focused on developing methods for determining 
+    if a particular photo in this data set shows a dog or a cat.  
 
-We think of $D_n$ as a set of random variables with unknown joint 
-distribution $P_D$.  This joint distribution is called the 
-***data generating process*** for $D_n$. The exact DGP
-is assumed to be unknown, but we usually have at least some information 
-about it.
+Although our examples will all be based on simple data sets, many
+of our concepts and results can be applied to more complex data.
 
 ::: example
 **Data from 3 roulette games**
@@ -328,6 +426,15 @@ let $x_i$ be the result of a bet on red:
 Then $D_n = (x_1,x_2,x_3)$. For example, if red loses the first
 two games and wins the third game we have $D_n = (0,0,1)$.
 :::
+
+Our data set $D_n$ is a set of $n$ *numbers*, but we can also think of 
+it as a set of $n$ *random variables* with unknown joint distribution 
+$P_D$. The distinction here is a hard one for students to make, so give 
+it some thought before proceeding.
+
+The joint distribution of $D_n$ is called its ***data generating process*** 
+or DGP. The exact DGP is assumed to be unknown, but we usually have at 
+least some information about it.
 
 ::: example
 **The DGP for the roulette data**
@@ -357,7 +464,7 @@ joint distribution of $D_n$.  As mentioned earlier, this means we must
 model both:
 
 - The marginal probability distribution of each $x_i$
-- The relationship between each of the $x_i$'s
+- The relationship between the $x_i$'s
 
 Fortunately, we often can simplify this joint distribution quite a bit 
 by assuming that $D_n$ 
@@ -370,66 +477,87 @@ A simple random sample has two features:
 2. **Identically distributed**: Each $x_i$ has the same (unknown)
    marginal distribution.
 
+This implies that its joint PDF can be written:
+  $$\Pr(D_n = (a_1,a_2,\ldots,a_n)) = f_x(a_1)f_x(a_2)\ldots f_x(a_n)$$
+where $f_x(a) = \Pr(x_i = a)$ is just the marginal PDF of a single 
+observation. Independence allows us to write the joint PDF as the 
+product of the marginal PDFs for each observation, and identical 
+distribution allows us to use the same marginal PDF for each 
+observation.
+
 The reason we call this "independent and identically distributed"
 is hopefully obvious, but what does it mean to say we have a 
 "random sample" from a "population"? Well, one simple way of 
 generating an IID sample is to:
 
 1. Define the population of interest, for example all Canadian residents.
-2. Use some purely random mechanism to choose a small subset of cases
+2. Use some purely random mechanism[^4] to choose a small subset of cases
   from this population.
    - The subset is called our ***sample***
-   - "Purely random" here means some mechanism like a coin flip
-     or a computer's random number generator.
-   - As a technical matter, the assumption of independence requires
-      that we sample *with replacement*. This means we allow
-      for the possibility that we sample the same case more than once.
-      In practice this doesn't matter as long as the sample is small 
-      relative to the population.
-3. Collect data from every case in our sample.
+   - "Purely random" here means some mechanism like a computer's 
+     random number generator, which can then be used to 
+     dial random telephone numbers or select cases from a list.
+3. Collect data from every case in our sample, usually by
+   contacting them and asking them questions (survey).
 
 It will turn out that a moderately-sized random sample provides 
 surprisingly accurate information on the underlying population.
 
+[^4]: As a technical matter, the assumption of independence requires
+  that we sample *with replacement*. This means we allow
+  for the possibility that we sample the same case more than once.
+  In practice this doesn't matter as long as the sample is small 
+  relative to the population.
+  
 ::: example
-**Data from roulette**
+**Our roulette data is a random sample**
 
-Our data from 3 roulette games satisfies the criteria
-for a simple random sample.
+Each observation $x_i$ in our roulette data is an independent
+random draw from the $Bernouilli(p)$ distribution where 
+$p = \Pr(b \in Red)$.
 
-Each observation $x_i$ is an independent random draw from
-the $Bernouilli(p)$ distribution where $p = \Pr(b \in Red)$.
+Therefore, this data set satisfies the criteria for a simple 
+random sample.
 :::
 
 ### Time series data
 
-Our employment data are an example of ***time series*** data; it is made of
-observations of a particular quantity at regularly-spaced points in time.
+Our employment data set is an example of ***time series*** data; it is made of
+observations of each variable at regularly-spaced points in time.
 Most macroeconomic data - GDP, population, inflation, interest rates - are
 time series.
 
 Time series have several features that are inconsistent with the random 
 sampling assumption:
 
-- They usually have clear *time trends*.  For example, Canada's real 
-  GDP has been steadily growing for as long as we have observed it.
-  This means that 2010 GDP is drawn from a distribution with a higher
-  expected value than the distribution for 1910 GDP.
-- They usually have clear recurring cyclical patterns or *seasonality*.  For
-  example, unemployment in Canada is usually lower from September 
-  through December.
-- They usually exhibit what is called *autocorrelation*. Shocks to
-  the economy that affect this year's GDP are likely to have 
-  a similar (if smaller) effect on next year's GDP.  So the time
-  periods close together are more closely related than time periods that 
-  are far apart, even after we have accounted for the time trend.
+- They usually have clear *time trends*.  
+  - For example, Canada's realGDP has been steadily growing for as 
+    long as we have data.
+  - This violates "identically distributed" since 2010 GDP is drawn 
+    from a distribution with a higher expected value than the
+    distribution for 1910 GDP.
+- They usually have clear recurring cyclical patterns or *seasonality*.  
+  - For example, unemployment in Canada is usually lower from September 
+    through December.
+  - This also violates "identically distributed" since February 
+    unemployment has a higher expected value than November 
+    unemployment.
+- They usually exhibit what is called *autocorrelation*. 
+  - For example, shocks to the economy that affect GDP in one month or
+    quarter (think of COVID or a financial crisis) are likely to have 
+    a similar (if smaller) effect on GDP in the next month or quarter.  
+  - This violates "independence" since nearby time periods are positively
+    correlated.
 
-Time series data sometimes require more advanced techniques than we will
-learn in this class.
+We can calculate statistics for time series, and we already did in Chapter
+\@ref(basic-data-analysis-with-excel).  However, time series data 
+often requires more advanced techniques than we will learn in this 
+class.  ECON 433 addresses time series data.
 
 ### Other sampling models
 
-Not all useful data sets come from a simple random sample. For example:
+Not all useful data sets come from a simple random sample or a time series. For 
+example:
 
 - A ***stratified sample*** is collected by dividing the population into
   *strata* (subgroups) based on some observable characteristics, and then randomly
@@ -518,50 +646,57 @@ There are two basic solutions to these problems:
   can be correctly interpreted as a random sample from that population.
   For example, instead of having a random sample of *Canadians*, we can
   interpret our data as a random sample of 
-  *Canadians who would answer these questions if asked*. 
+  *Canadians who would answer these questions if asked*.
+  
   
 This is not an issue that has a purely technical solution, but requires
 careful thought instead.  If we are imputing values, do we believe that
 our imputation method is reasonable?  If we are redefining the population,
-is that population one we care about?
+is the redefined population one we are interested in?  There is no right
+or wrong answers to these questions, and sometimes our data are simply
+not good enough to answer our questions.
 
 :::fyi
 **Nonresponse bias in recent US elections**
 
 Going into both the 2016 and 2020 US presidential elections, polls
 indicated that the Democratic candidate had a substantial lead over
-the Republican candidate: Hilary Clinton led Donald Trump by 4-6\% 
-nationally in 2016, and Joe Biden led Trump by 8\% nationally in
-2020.  The actual vote was much closer, with Clinton winning the
-popular vote (but losing the election) by 2\% and Biden winning
-the popular vote (and the election) by about 4.5\%.  This pattern
-appeared across a wide variety of polls by various organizations
-including Republican-affiliated polling companies.
+the Republican candidate: 
 
-The likely explanation for the disparity is systematic nonresponse: for
-one reason or another, Trump voters are less likely to respond to
+- Hillary Clinton led Donald Trump by 4-6\% nationally in 2016 
+- Joe Biden led Trump by 8\% nationally in 2020.  
+
+The actual vote was much closer:
+
+- Clinton won the popular vote (but lost the election) by 2\%
+- Biden won the popular vote (and won the election) by about 4.5\%.  
+
+The generally accepted explanation among pollsters for the clear 
+disparity between polls and voting is systematic nonresponse: for
+some reason, Trump voters are less likely to respond to
 polls. Since most people do not respond to standard telephone polls
 any more (response rates are typically around 9\%), it does not
 take much difference in repsonse rates to produce a large difference
-in responses.  For example, suppose that voters are equally
-split between Trump and Biden, and that 10\% of Biden voters
-and 8\% of Trump voters are willing to respond to polls. If you 
-call 1000 voters you will get (on average)
+in responses.  For example, suppose that:
 
-- $0.5*1000 = 500$ Trump voters, $0.08*500 =40$ of whom will respond
-- $0.5*1000 = 500$ Biden voters, $0.10*500 =50$ of whom will respond
+- We call 1,000 voters
+- These voters are equally split, with 500 supporting Biden and 500
+  supporting trump.
+- 10\% of Biden voters respond (50 voters)
+- 8\% of Trump voters respond (40 voters)
 
-So Biden will have the support of $50/90 = 56\%$ poll respondents
-and Trump will have the support of $40/90 = 44\%$.  The polls
-show a 12 percentage point gap in support, but actual support is 
-even.
+The overall response rate is 9\% (similar to what we usually see in surveys),
+Biden has the support of $50/90 = 56\%$ of the respondents
+while Trump has the support of $40/90 = 44\%$.  Actual support is
+even, but the polls show a 12 percentage point gap in support, entirely
+because of the small difference in response rates.
 
-
-Polling organizations are run by statisticians who are well aware
-of this problem, and they took various steps between 2016 and 2020
-to address it; for example, they now reweight their analysis by 
-characteristic like education and income. But the results indicate
-that this was not enough; some pollsters have argued that it makes
+Polling organizations employ statisticians who are well aware
+of this problem, and they made various adjustments after 2016 to address
+it. For example, most now weight their analysis by education, 
+since more educated people tend to have a higher response rate.
+Unfortunately, the 2020 results indicate that this adjustment was 
+not enough.  Some pollsters have argued that it makes
 more sense to just assume the nonresponse bias is 2-3\% and adjust 
 the numbers by that amount directly.
 :::
