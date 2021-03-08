@@ -1,54 +1,225 @@
-# Advanced data cleaning with Excel
+# Advanced data cleaning
+
+We have learned some of the basics of data cleaning, but there are many
+tasks and tools in Excel yet to learn.
+
+::: goals
+**Chapter goals**
 
 In this chapter we will learn how to:
 
-- Find economic data from key sources.
-- Move data files across multiple file formats and platforms.
-- Link and merge data across multiple files
-- Construct lookup tables using HLOOKUP and VLOOKUP
+- Move data files across multiple file formats.
+- Combine multiple data files into a single workbook.
+- Link observations using XLOOKUP.
+- Construct group-level aggregate variables
 - Work with Excel tables
+- Avoid, detect and handle errors
+- Protect data from unintentional modification
+:::
 
-## Advanced data cleaning in Excel
+We will do this while building a data set describing long-run economic
+growth in a wide cross-section of countries. 
 
-### Errors in formulas
 
-Go to any blank cell and enter the formula `=ln(B2)`. You will see
-that the cell displays the text `#VALUE!`.  This is an example of
-an error code - cell B2 contains the string "Male", so you are asking 
-Excel to calculate ln("Male"). Excel's most commonly-used error 
-codes are:
+::: economics
+**Data on long-run economic growth**
 
-- `#VALUE!` means you have given a function the wrong type of argument
-  (for example, giving the `ln()` function a string rather than the number.
-- `#NAME?` means you have referenced a function that does not
-  exist.
-- `DIV/0!` means you have divided by zero.  For example, this appears
-  when you take the average of a set of empty or non-numeric cells.
-- `#REF!` means you have referenced a cell that does not exist.  This
-  usually happens when you delete rows or columns.
-- `#NUM!` means that the result of your numeric calculation is not a 
-  number.  For example, if you take the square root of a negative number.
-- `#NA` means that a lookup function (vlookup or hlookup) was unable to
-  find a match.  I'll explain what that means later on when we talk 
-  about vlookup.
+Our main data source will be the ***Penn World Table*** (PWT), a cross-country
+data set covering real GDP, population, and other macroeconomic variables. The
+PWT is built from two distinct data sources:
 
-An error code is sometimes helpful in figuring out what has gone wrong.
+- National income data from each country's national statistical agency.
+- Systematic data comparing prices across countries, constructed by the
+  World Bank's International Comparison Program (ICP).
+
+The ICP data is needed to account for a simple economic reality: each 
+country's GDP is calculated using local prices, but prices of key goods and
+services vary dramatically across countries: housing is much more expensive
+in Vancouver than in Houston, and a haircut is much cheaper in Mumbai
+than in London.  The PWT research team use the results of the ICP to convert
+each country's GDP data to comparable (PPP) units.  The current version 
+of the PWT is available online at http://www.ggdc.net/pwt. 
+
+> Download the required file pwt100.xlsx from https://canvas.sfu.ca/files/15327606/.  
+
+We also have a secondary data source with cross-country data on top marginal
+tax rates.  Most countries have *progressive* tax systems - that means that
+residents with high income pay a higher tax rate than residents with low
+income - but these higher rates only apply to *marginal* income.  For
+example if the marginal tax rate is 30\% on taxable income below \$100,000 and 
+40\% on taxable income above \$100,000, a taxpayer with \$150,000 in taxable 
+income would pay 30\% on the first \$100,000 and 40\% on the remaining \$50,000
+for a total tax bill of \$50,000, or an average tax rate of 33\%.
+
+The data on the top marginal tax rate is obtained from the Tax Foundation[^5], 
+a US-based policy and research organization. Our data set comes from Table 1 in the report "Taxing High Incomes: A Comparison of 41 Countries", available online at  https://taxfoundation.org/taxing-high-income-2019/. 
+
+> Download the required file TaxRates.xlsx from https://canvas.sfu.ca/files/15327622/.
+
+Finally, we have a "crosswalk" data file I have constructed to help with
+linking the GDP and tax data (more about this below). 
+
+> Download the required file CountryCodes.txt from https://canvas.sfu.ca/files/15327623.
+
+The rest of the chapter will use these three data files.
+:::
+
+[^5]: I should mention that the Tax Foundation is not an entirely neutral 
+organization - it generally supports lower taxes - and so my use of their
+data here should not be taken as expressing an opinion on their policy 
+views. It is not unusual for useful data to come from politically-motivated 
+sources; for many years the best data on tobacco prices and taxes came from
+the Tobacco Institute, a tobacco industry lobbying group (https://en.wikipedia.org/wiki/Tobacco_Institute).    
+
+## Data file formats
+
+Nearly every software application we might use for data analysis has a 
+***native***  file format specifically designed for saving and reading data 
+in that application.  For example, Excel's native format is the `.xlsx` file 
+format.
+
+Applications work most seamlessly with their native format.  However, most 
+modern applications can also ***import*** (read) and ***export*** (save) files in
+other formats including native formats of other popular programs.
+
+There are also several standard or open file formats that are commonly
+used to share data across applications.  Most of these open file formats
+are built from ***text files***. 
+
+- A text file is just a sequence of lines of ***plain text*** characters
+  with no formatting, graphics, or complex structure.
+  - Most plain text characters are standard visible letters, numbers, 
+    spaces, and symbols.
+  - There may also be some non-display characters, including the end-of-line 
+    character(s), the end-of-file character, and tab characters.
+- You can view and edit text files using a simple application called a 
+  ***text editor***.
+  - Windows has a simple built-in text editor called *Notepad*
+  - MacOS has a built-in text editor called *TextEdit*. 
+  - There are more advanced text editors available for free online; 
+    I use one called *Notepad++*. 
+- Text files can be read by humans as well as computer programs.
+
+Files that are not text files are usually called ***binary*** files. Binary
+files are generally not human-readable.
+
+:::economics
+**The economics of file formats**
+
+What determines the file format used by a given program? Technical
+considerations play an important role, but so does economics.
+
+As a technical matter, binary files can be more efficient for
+storage and processing. To a computer, everything is a number,
+and so the number 123 can in principle be stored and handled more
+efficiently than the text string "123".  The primary technical
+advantage of text files is interoperability: sharing data across
+different users, applications, and devices.
+
+In a market economy, companies can increase profits by efficiently
+using *scarce* resources. Many well-known applications have moved
+from binary to text file formats as computers have become more 
+powerful (so reducing storage and processing requirements becomes less 
+valuable) and more networked (so increasing interoperability 
+becomes more valuable).
+
+Another economically important difference is that a company can
+control use of its binary file format through some combination
+of intellectual property rights (e.g. patents) and simply limiting
+access to information about the format (trade secrets). Controlling
+a *proprietary* file format in this manner can provide a 
+competitive advantage to a software company. However, this advantage
+has become less valuable over time as big companies demand the 
+interoperability and customization potential associated with open 
+file formats and standards.
+
+For example, Excel's original `.xls` files were binary files in a 
+proprietary format whose details were only known only by 
+Microsoft. Its current `.xlsx` files are (zipped) text files in an open
+format whose details are published
+[here](https://docs.microsoft.com/en-us/openspecs/office_file_formats/ms-offfflp/885c7947-17de-490b-840d-91231a031383). 
+
+If you are interested in learning more about the economics of 
+strategic interaction among firms, you should consider taking
+our third-year elective ECON 325.
+:::
+
+### Fixed-width files
+
+***Fixed-width*** text files represent a table of data by allocating
+the same number of characters to each cell in the same column.  They 
+can be formatted to be readable to humans like this:
+```
+Name                   Year of birth   Year of death
+Mary, Queen of Scots   1542            1547
+Mary I                 1516            1558
+Elizabeth I            1533            1603
+```
+or they may be in a less-readable format like this:
+```
+Mary, Queen of Scots15421547
+Mary I              15161558
+Elizabeth I         15331603
+```
+The key feature of a fixed-width file is that each column begins
+at the same point in each line.  For example, 
+
+- In the first file, the year of birth always starts 
+  on the 24th character of each line, and the year of death
+  always starts on the 40th character.
+- In the second file, the year of birth always starts 
+  on the 21st character of each line, and the year of death
+  always starts on the 25th character.
+
+You can open fixed-width text files in Excel using the 
+*Text Import Wizard*.
+
+::: example
+**Opening a fixed-width file**
+
+Download the file *CountryCodes.txt* if you have not already done 
+so. To see what it looks like, open it up in a text editor. In Windows,
+you can do this by double-clicking on the file. It will
+look like this:
+   ![Fixed format file in Notepad](bin/FFinNotepad.png) 
+This is a fixed format file in which the CountryName variable
+starts on the 1st character of each line and the CountryCode
+variable starts on the 36th character.
+
+To open this file in Excel, use the *Text Import Wizard*:
+
+1. Select `File > Open >` from the menu.
+2. Select `Browse` to get to the usual OpenFile dialog box.
+3. Find and select the file `CountryCodes.txt`.  You may need to move 
+   to the correct folder, and to change the file type to "All files (*.*)"
+4. The first dialog box of the *Text Import Wizard* allows you to specify
+   the overall structure of your data file:
+   ![Text Import Wizard- Step 1 of 3](bin/TIW1.png) 
+   Excel guesses about the structure of your data, but you may need to
+   correct its guesses. In this case, you should change the file
+   type from `Delimited` to `Fixed width`, and select `Next>`.
+   - Excel made a few other wrong guesses (it thinks that the file is 
+     written in Japanese!) but you can ignore them.
+5. The second dialog box of the Text Import Wizard allows you to 
+   specify where each column starts:
+   ![Text Import Wizard- Step 2 of 3](bin/TIW2.png) 
+   Excel seems to have guessed correctly in this case, so go ahead
+   and select `Next>`.
+6. The final dialog box of the Text Import Wizard provides some
+   options for changing the data format for each individual column:
+   ![Text Import Wizard- Step 3 of 3](bin/TIW3.png) 
+   We do not need to worry about any of these options, so go ahead and 
+   select `Finish`.
+   
+Our worksheet now contains the imported data, correctly arranged into
+cells. Keep this worksheet open.
+:::
 
 ### CSV files
 
-Normally, Excel works with files in its native format, `.xlsx` files.
-
-However, Excel is not the only program that works with data,
-and so we will often find data in other formats. We will also sometimes
-want to save our data in a format that can be read by other programs,
-for example R.
-
 The most common and useful general-purpose format for tabular data
-is called the "comma separated values" or ***CSV*** file format.
-
-#### What is a CSV file?
-
-A CSV file is just a text file with the following features:
+is called the ***comma separated values*** or ***CSV*** file format. A 
+CSV file is just a text file with the following features:
 
 - Each line in the file represents a row in the table
 - Within each row, cell values are separated or ***delimited*** by commas.
@@ -63,8 +234,55 @@ Elizabeth I,1533,1603
 ```
 will appear in Excel as the table:
 
-CSV files have several important limitations relative to Excel 
-files:
+| Name                 | Year of birth | Year of death
+|----------------------|---------------|---------------
+| Mary, Queen of Scots |    1542       |    1547
+| Mary I               |    1516       |    1558
+| Elizabeth I          |    1533       |    1603
+
+Notice that the quotes around "Mary, Queen of Scots" are needed
+in order for the comma to be interpreted as an actual comma
+rather than a delimiter between cells. 
+
+::: example
+**Exporting a CSV file from Excel**
+
+To save the Excel worksheet we created in the previous
+section as a CSV file:
+
+1. Select `File >  Save As`. You will see:
+   - a text box giving the file name (`CountryCodes.txt`) 
+   - a drop-down box giving the file format (`Text (Tab delimited) (*.txt)`
+3. Select `CSV (Comma delimited) (*.csv)` from the drop-down box and 
+4. Enter a filename (I suggest *CountryCodes.csv*) in the text box.
+5. Select `Save`.
+   - You may get the warning message: *The selected file type does
+     not support workbooks that contain multiple sheets. To save only
+     the active sheet click OK....* If so, select `OK`.
+6. Close Excel.
+   - You may get another warning message: *Want to save your changes
+     to CountryCodes.csv?*  If so, select `Don't save`.
+     
+You have created a CSV file.
+:::
+
+You can see the exact contents of a CSV file by opening it in a text 
+editor.  
+
+:::example
+**Opening a CSV file as text**
+
+Use your preferred text editor to open the file CountryCodes.csv. It
+will look something like this:
+![CountryCodes.csv viewed in a text editor](bin/CSVinNotepad.png) 
+:::
+
+If a CSV file has `.csv` at the end of its file name, you can open it
+in Excel by just double-clicking on it. Otherwise, you can use the
+*Text Import Wizard*.
+
+CSV files (and text files in general) have several important limitations
+relative to regular Excel (`.xlsx`) files:
 
 1. A CSV file can only contain one table, while an Excel file
    can contain multiple tables.
@@ -75,416 +293,690 @@ files:
    - Any other fancy Excel features
    
 These limitations are also the main advantage of the CSV file: they are simple
-ways of reporting tabular data and can be read by virtually any program.
+ways of reporting tabular data and can be read by virtually any program, or
+even by a human.
 
-#### Exporting CSV files from Excel
+### Other file formats
 
-Let's save our Excel worksheet as a CSV file.
+In addition to CSV files, we will run into files that use characters
+other than the comma to delimit cells. 
 
-1. Open [filename] in Excel, and go to [sheet]
-2. Click on `File >  Save As`. You will see:
-   - a text box giving the name of the file (currently [filename]) 
-   - a drop-down box giving the file format (currently 
-     `Excel Workbook (*.xlsx)`).
-3. Select `CSV (Comma delimited) (*.csv)` from the drop-down
-   box and enter a filename in the text box.
-4. Click on the `Save` button.
-   - You will get a warning message: "The selected file type does
-     not support workbooks that contain multiple sheets. To save only
-     the active sheet click OK...."
-5. Click on the `OK` button.
-6. Close Excel.
-   - You will get another warning message: "Want to save your changes
-     to [filename].csv?"  Click `Don't save`.
-     
-You have created a CSV file.
+ - ***Space-delimited*** text files are just like CSV files, but 
+   use spaces as the delimiter.  For example, a space-delimited
+   version of our table might look like this:
+   ```
+   Name "Year of birth" "Year of death"
+   "Mary, Queen of Scots" 1542 1547
+   "Mary I" 1516 1558
+   "Elizabeth I" 1533 1603
+    ```
+ - ***Tab-delimited*** text files are just like CSV files, but use a tab character
+   as the delimiter.
 
-#### Importing CSV files into Excel
-
-Let's take a look at our CSV file. You can open it in Excel by just 
-double-clicking on it. You may notice that it is somewhat different from the 
-Excel file:
-
-- The cells are unformatted, no boldface, no special number formats, etc.
-- The columns are all the same width; in some cases this might mean that a 
-  cell's value appears as "#####". You can fix this by changing the
-  width of the column.
-- All of the other worksheets and all of the graphics are gone.
-
-This is of course, what the CSV file is supposed to do.  You can now 
-add formatting, formulas, and any other Excel feature to the table.
-Just remember to save it as an Excel file and not a CSV file so that
-these features are saved too.
-
-#### Other file formats
-
-In addition to CSV files, we will run into other file formats.
-These include:
-
-- Text files in which cells are delimited by spaces or tab characters.
-  ```
-  Name "Year of birth" "Year of death"
-  "Mary, Queen of Scots" 1542 1547
-  "Mary I" 1516 1558
-  "Elizabeth I" 1533 1603
-  ```
-- Text files in which cells are of a fixed width:
-  ```
-  Name                   Year of birth   Year of death
-  Mary, Queen of Scots   1542            1547
-  Mary I                 1516            1558
-  Elizabeth I            1533            1603
-  ```
-
-You can open these files in Excel too.
+Like fixed-width and CSV files, space-delimited and tab-delimited files
+can be imported into Excel using the *Text Import Wizard*.
 
 Excel also has a wide variety of tools for obtaining data from various
-databases, online services, etc. We do not have time to explore all of these
-tools, but you can click `Data` on the menu bar and look around to see
-what is available.
+databases, online services, etc. We do not have time to explore all of
+these tools, but you can select `Data` from the menu bar and look 
+around to see what is available.
 
-#### Text to columns
+### Text to columns
 
 Sometimes you will run into an Excel sheet that looks like this:
-
-[Insert picture here]
-
-This will happen if a text file has been incorrectly imported,
+  ![Before Text-to-columns](bin/TTC1.png) 
+This can happen if a text file has been incorrectly imported,
 or if you have copied-and-pasted data from a PDF file or web 
-page.  Fortunately, Excel has a way of fixing that:
+page.  Fortunately, Excel has a way of fixing that: the 
+***text-to-columns*** tool.
 
-1. Select the column with the data.
-2. Select `Data` from the menu, then `Text to Columns`.
-3. The "Text to Columns Wizard" will appear; answer its questions
-   and you will be good to go.
+:::example
+**Using the text-to-columns tool**
 
-### Linking data and lookup tables
+Download and open the file *TaxRates.xlsx*.  As you can see, it looks
+like the picture above. To use the *text-to-columns* tool:
 
-Column J in our data set provides the student's state of residence
-using the state's two-letter postal abbreviation. Suppose we want 
-to create another variable giving the state's full name. We can
-do this by constructing a ***lookup table*** and using the 
-`vlookup()` function. 
+1. Select the column with the data (column A).
+   - Be sure to select the whole column, not just a single cell.
+2. Select `Data > Text to Columns` from the menu.
+3. The *Text to Columns Wizard* will appear.
+   - It is very similar to the Text Import Wizard
+   - Excel is usually smart enough to guess the structure
+     of your data and to offer the correct default options
+     here.
+   - Assuming the default options are correct (you can see what
+     happens if you change the options), select `Next>`, then
+     `Next>` again, then `Finish`.
 
-Our lookup table already exists, in the worksheet called `States`. It
-has several features:
+Your worksheet should now look like this:
+  ![After Text-to-columns](bin/TTC2.png) 
+Save this file and exit Excel.
+:::
 
-- The first column has the state identifier (postal abbreviation).
-  - The vlookup command requires that the identifier be in the first
-    column.
-- The remaining columns have information about the states.  
-  - The one we want is the `StateName` variable in column 2.
+## Combining data
 
-Let's add our state list:
+The data that we wish to analyze often comes in multiple tables
+from multiple sources.  In order to proceed with the analysis, we
+often need to combine information in various ways:
 
-1. Enter "StateName" in cell K1.
-2. Enter `=VLOOKUP(J2,States!$A$1:$B$3,2)` in cell K2.
-3. Copy/paste or fill this into the rest of column K.
+1. We will want to combine multiple data files into a single 
+   Excel file.
+2. We will want to link observations in one table with observations
+   in another table.
+3. We will want to construct new variables that are group-level aggregates
+   (counts, averages, or sums) of existing variables.
 
-The vlookup function takes three arguments:
+This section will go through the most important tools and techniques
+of combining data in these ways.
 
-1. The cell containing the identifier for the current observation. 
-  - In our example, this is cell   
-2. The full cell range of the the lookup table.
-  - In our example this is the full table of state data in cells
-    `States!A$1:B$3`. 
-  - Notice that I use absolute references here so the fill works.
-3. The column in the lookup table we want to retrieve values from.
-  - In our example, this is the StateName column in the lookup table,
-    which is located in column 2.
+### Combining Excel files
+
+Data tables often come in multiple files, especially if they are from
+different sources.  It is possible for one Excel file to use data from
+another Excel file (or even a non-Excel file or online data source),
+but doing so can lead to problems if not done very carefully. For example,
+if one file has a formula that references another file, that formula
+may stop working if either file is moved to another folder.
+
+An easier approach in most situations is to just combine everything into
+a single Excel workbook.
+
+:::example
+**Combining our cross-country data files**
+
+We currently have three data files: pwt100.xlsx, CountryCodes.csv,
+and TaxRates.xlsx. To combine them in a single file:
+
+1. Open all three files.
+2. Go to CountryCodes.csv, and right-click on the "CountryCodes" tab
+   at the bottom of the page.  A menu will appear; select `Move or Copy...`
+   and the *Move or Copy* dialog box will appear:
+   ![Move or Copy](bin/MoveOrCopy.png) 
+3. Select pwt100.xslx from the "To book:" drop-down box. Your worksheet 
+   will now move to that workbook.
+4. Repeat the same process with both worksheets in the TaxRates.xlsx
+   workbook.
+5. At this point all of our worksheets are in a single workbook. Save the 
+   workbook with name GrowthData.xlsx
+:::
+
+Before proceeding, it's a good idea to make sure our data is tidy.
+
+
+:::example
+**Making the our workbook tidy**
+
+1. Take a look at each of our three main worksheets and identify 
+   if they need to be adjusted in any way to meet our criteria for
+   tidy data:
+   - *CountryCodes* is tidy and does not need alteration.
+   - *TaxRates* is tidy and does not need alteration.
+   - *Data* has one issue: each observation (row) appears to describe a
+     particular country in a particular year.  There is an identifier 
+     for country and an identifier for year, but no combined identifier
+     that takes on a unique value for each individual observation. We will
+     need to create one.
+2. Add a unique ID variable to the *Data* worksheet:
+   a. Insert a new column to the left of the current column A.
+   b. Enter "CountryYear" in cell A1 to name the variable.
+   c. Use the `CONCAT()` function to create the identifier in cell A2. 
+      - The formula would be `=CONCAT(B2,E2)`
+      - For example, if row 2 depicts Aruba (ABW) in 1950, cell A2 
+        should display "ABW1950".
+   d. Copy/paste or fill this formula to the rest of column A.
+3. Make a copy of the *TaxRates* worksheet, and name it *GrowthData*. This
+   sheet will be the starting point for the linked data that we
+   will construct in the next two sections.
+
+Our data set is now tidy and ready to link.
+:::
+
+### Linking observations
+
+One of the most common tasks in cleaning data is to combine variables 
+from two or more data sets.  In order to do this, we need to ***match*** or
+***link*** observations in the two tables on the basis of one or more ID
+variables or ***keys***. 
+
+All statistics packages have tools to link observations.  In Excel, 
+the table you are obtaining data from is called a ***lookup table***
+and the key tool is the `XLOOKUP()` function:
+
+- The `XLOOKUP()` function takes three main/required arguments:
+  1. The `lookup_value` is the value in the current table to look up.
+  2. The `lookup_array` is the range containing the column of IDs.
+  3. The `return_array` is the range containing the column of values
+     to return.
+
+For example, the formula `=XLOOKUP("California",A1:A10,C1:C10)` looks
+for a row/observation with the value "California" in column A (cells A1:A10),
+and then returns the value in column C (cells C1:C10) for that row/observation.
+
+:::example
+**Adding country codes to the tax rate data**
+
+The *TaxRates* worksheet from the Tax Foundation and the *Data* worksheet from 
+the Penn World Table both provide information at the country level. But 
+they do not yet have a common key variable: 
+
+- *Data* provides two ways of identifying a country in each observation:
+   - The country name
+   - The three-letter [ISO country code](https://www.iso.org/iso-3166-country-codes.html).
+- *TaxRates* only provides the country name. 
  
-A few things to notice about this:
+We could try to match on country name, but the country names are not exactly 
+the same in the two tables. For example, the same country is called 
+"South Korea" in *TaxRates* and "Republic of Korea" in *Data*. This is a 
+common problem with names, so people who work with data usually prefer 
+standardized codes.
 
-- In order for vlookup to work, we need the first column in the 
-  lookup table to be the identifier.  This should be the case
-  if you are following good data practices.
-- If vlookup does not find a match, it returns `#N/A`.
-- vlookup is short for "vertical lookup" because it assumes that 
-  your data has variables in columns and observations in rows.  
-- There is also a function called hlookup that works with variables in rows and observations
-  in columns.
+One option is to simply change the country names in one of our tables, but
+that goes against our general principle that we avoid changing data. A 
+better solution is to use a ***crosswalk table*** that gives the country
+code for each country name, including name variations like "Republic of Korea"
+and "South Korea."  The *CountryCodes* worksheet is a crosswalk table 
+I have created for this purpose. If you take a look at it, you will notice
+that there are observations for both "Republic of Korea" and "South Korea."
+
+Let's use our crosswalk table and the `XLOOKUP()` function to add a country
+code to the *GrowthData* worksheet.
+
+1. Insert a new column to the left of the current column A.
+   - You can do that by selecting any cell in column A, and then selecting
+     `Home > Insert > Insert Sheet Columns`
+2. Enter "CountryCode" in cell A1 to name the variable.
+3. Construct the appropriate formula in cell A2.
+   - `lookup_value` should be the country name of the current observation (`B2`)
+   - `lookup_array` should be the full list of country names (`CountryCodes!A2:A185`)
+   - `return_array` should be the full list of country codes (`CountryCodes!B2:B185`)
+4. Change references in the formula from relative to absolute as appropriate. The
+   resulting formula will be 
+   `=XLOOKUP(B2,CountryCodes!A$2:A$185,CountryCodes!B$2:B$185)`
+5. Copy/paste or fill the formula to the remaining cells in column A.
+
+Column A should now display the ISO country code for each observation.
+:::
+
+`XLOOKUP()` can also be used to match on multiple criteria.
+
+:::example
+**Matching on multiple criteria**
+
+Now suppose we want to create a variable that is each country's
+population (**pop** in the *Data* worksheet) in 2019.  Since
+we need to match both country and year, we will need to use
+the `CONCAT()` function to put the country and year together
+in a single criterion.
+
+1. Enter "Pop2019" in cell K1 of *GrowthData* to name the variable.
+2. Enter the correct formula in cell K2:
+   - `lookup_value` should combine the country code (cell A2) with 
+     the year (2019), so it should be `CONCAT(A2,"2019")`.
+   - `lookup_array` should be the full range of the **CountryYear** 
+     variable in the *Data* worksheet (`Data!A2:A12811`).
+   - `return_array` should be the full range of the **pop**
+     variable in the *Data* worksheet (`Data!H2:H12811`).
+3. Make the cell references absolute where needed, which will result
+   in the formula 
+   `=XLOOKUP(CONCAT(A2,"2019"),Data!A$2:A$12811,Data!H$2:H$12811)`
+4. Copy/paste or fill the formula to the remaining cells in column
+   K.
+
+We can also create another variable whose variable is the country's
+population in 1990.
+
+1. Enter "Pop1990" in cell L1 of *GrowthData* to name the variable.
+2. Enter the correct formula in cell L2. It will be nearly identical 
+   to the formula in cell K2, but with "2019" replaced by "1990":
+   `=XLOOKUP(CONCAT(A2,"1990"),Data!A$2:A$12811,Data!H$2:H$12811)`
+4. Copy/paste or fill the formula to the remaining cells in column
+   K.
+   
+YOu may note that the PWT goes all the way back to 1950, and may wonder why
+I picked 1990 as my starting point.  The reason for this is many countries
+do not have data going back to 1950, especially those countries 
+that were part of or allied with the Soviet Union. By 1990, the PWT has 
+data for almost all countries.
+:::
+
+Normally, `XLOOKUP()` looks for an exact match and returns an error 
+if no match is found.  This is a good default, but the optional
+arguments `if_not_found` and `match_mode` can be used if you want 
+to do something other than that.
+
+::: fyi
+**Related functions**
+
+`XLOOKUP()` is a relatively new addition to Excel, so you may see files that
+use the older functions `VLOOKUP()` and `HLOOKUP()`.  The syntax of these 
+functions is somewhat different, but the underlying idea is the same.
+:::
 
 ### Aggregating by group
 
-Suppose you want to create a new variable that gives the average income
-among students in the same state.  This is an example of aggregation by 
-group.
+Sometimes we will want to create a new variable that is the sum or average
+of another variable within some group, or the count of the number
+of observations in that group.
 
-1. Enter "AvgStateInc" in cell L1.
-2. Enter "=AVERAGEIF(J$2:J$5,J2,C$2:C$5)" in cell L2.
-  - The first argument `J$2:J$5` gives the range of state values to look up.
-  - The second argument `J2` gives the state value of the current row.
-  - The third argument gives the range of income values to average over.
-3. Copy/paste or fill into the remaining cells in column L.
+We can construct group-level averages variables using the `AVERAGEIFS()` 
+function.  It takes three arguments:
 
-You can see that this formula takes on one value for the Michigan students,
-and another value for the Texas students.
+- `average_range` is the range of cells containing the variable that should be
+   averaged.
+- `criteria_range` is the range of cells containing the group identifier variable
+- `criteria` is the cell containing the group identifier of the 
+   current observation.
+  
+For example `=AVERAGEIFS(C1:C100,A1:A100,"California")` returns the average
+value in column C of all of the observations whose value in 
+column A is "California".
+
+:::example
+**Average investment share by country**
+
+Suppose we are interested in whether high-tax countries tend to have higher
+or lower investment rates than low-tax countries.  In order to do this,
+we might add a variable to our *GrowthData* worksheet that describes the 
+average investment share of GDP (the variable **csh_i**) in each country 
+over the full period of the data.
+
+We can do this using the `AVERAGEIFS()` function:
+
+1. Enter "AvgIShare" in cell M1 to name the variable.
+2. Construct the correct formula in cell M2 using the function `AVERAGEIFS()`:
+   - `average_range` should be the full range of investment shares (`Data!AO2:AO12811`)
+   - `criteria_range` should be the full range of country codes (`Data!A2:A12811`)
+   - `criteria` should be the cell containing the country code of the current
+      observation (`A2`)
+3. Adjust the formula to have the correct absolute references. The
+   resulting formula should be `=AVERAGEIFS(Data!AO$2:AO$12811,Data!A$2:A$12811,A2)`
+4. Copy/paste or fill this formula into the remaining cells in column M.
+
+The average investment share should range from a minimum of 
+0.13 for Bulgaria to a maximum of 0.44 for Cyprus.
+:::
+
+The `AVERAGEIFS()` function is part of a family of functions that 
+calculate a statistic for a subset of observations that satisfy a 
+set of criteria:
+
+- `COUNTIFS()` calculates the *number* of observations 
+  meeting the criteria.
+  - We used `COUNTIFS()` to construct a frequency table in 
+    Chapter \@ref(basic-data-analysis-with-excel).
+- `AVERAGEIFS()` calculate the *average* of a variable
+  for those observations that meet the criteria.
+- `SUMIFS()` calculate the *sum* of a variable
+  for those observations that meet the criteria.
+- `MINIFS()` calculate the *minimum* of a variable
+  for those observations that meet the criteria.
+- `MAXIFS()` calculate the *maximum* of a variable
+  for those observations that meet the criteria.
+
+These functions can all be used to construct summary statistics
+(as in Chapter \@ref(basic-data-analysis-with-excel))
+or to construct group aggregate variables within our data set
+(as in this chapter).
+
+:::fyi
+**Related functions**
+
+The `COUNTIFS()`, `AVERAGEIFS()`, `SUMIFS()`, `MINIFS()` and `MAXIFS()` 
+functions all allow for multiple criteria to be used.  Excel also includes
+a set of older functions `COUNTIF()`, `AVERAGEIF()`, `SUMIF()`, 
+`MINIF()` and `MAXIF()` that allow only a single criterion.  You may
+see these in older worksheets.
+:::
+
+## Advanced data management
 
 ### Excel Tables
 
-#### Creating a table
+We have already seen that tasks like sorting and filtering
+are much easier and quicker when our data is organized in
+a tidy and tabular format. Excel allows us to go further by
+converting our table's range of cells into an official 
+***Excel Table***. 
 
 To create an Excel table, go to any cell in your table, and
-select `Home` and then `Format as Table` from the menu. A set of
-visual styles will drop down.  Select whichever one looks nice to
-you.
+select `Home > Format as Table` from the menu. 
 
-A dialog box will come up that looks like this:
+::: example
+**Creating an Excel table**
 
-> Insert Format As Table dialog box here.
+To make *GrowthData* an Excel Table:
 
-Excel will try to guess the range of your table, and whether your
-table has headers (it should).  Correct Excel's guesses if necessary, and press OK. You have a table!
+1. Go to any cell in the *GrowthData* table. 
+2. Select `Home > Format as Table`. 
+   - A set of visual table styles will drop down.  
+   - Select whichever one looks best to you.
+3. The Format As Table dialog box will ask you to provide or confirm
+   some basic information about your table:
+   ![Format As Table dialog box](bin/FormatAsTable.png) 
+   - The default options are correct, so just select `OK`.
+:::
 
-#### Some things you can do with tables
+To see some of the things you can do with Excel Tables, select `Table Design`
+from the menu (note that `Table Design` is a context-dependent menu and
+will only appear if the currently-selected cell is part of an Excel 
+Table). 
 
-There are several things you can do with tables.  Most of them
-are on the ribbon associated with the `Design` menu option. Note
-that the `Design` menu is context-dependent - it only appears if
-the currently-selected cell is in a table.
+- Note that each table has a name
+  - Excel has assigned our table the default "Table1"
+  - We can change it to something more informative like "GrowthData".
+- We can easily change the table style in various ways.
+- We can remove duplicate observations
+- We can access tools such as PivotTable and Slicers (more on these later).
 
-Here are a few things you can do:
+Excel Tables also make it easier to add variables and observations, and can 
+make formulas easier to understand by expressing them in terms of variables
+rather than cells whenever possible.
 
-- Change the name of your table:
-  - By default your table will be named Table1 (or Table2, Table3,
-    etc.).  
-  - You can change its name in the upper right corner of the `Design`
-    ribbon. 
-  - You can refer to the table by name in formulas.
-- Convert it back to a normal range 
-  - Select  `Convert to Range` from the `Design` ribbon.
-- Sort and filter
-  - Click on the drop-down boxes in the header row.
+::: example
+**Adding a formula to an Excel table**
 
-Another nice feature of Excel tables is that it automatically uses
-variable names rather than cell addresses in formulas. To see
-how this works, click in cell H3 and look at the formula box.  The formula used to say `= D3 - C3` but now it says `=[@Income]-[@Spending]`. This
-feature makes it much easier to tell the content of a formula and to
-avoid making mistakes.
+Let's add a new variable for the growth rate of population between 1990 and
+2019.  
 
-#### Adding observations, variables and totals  
+In ECON 105, you probably learned this formula to calculate a growth rate 
+of a variable over a single year:
+  $$g = \frac{(\textrm{end value})-(\textrm{start value})}{\textrm{start value}}$$
+Unfortunately that formula doesn't work over many years because of compounding. For
+example, a population that grows at 5\% per year for 20 years will go up by 165\%,
+and not by 100\%.  To deal with compounding, we will use this formula to calculate 
+growth rates:
+  $$g = \frac{\ln(\textrm{end value}) - \ln(\textrm{start value})}{\textrm{number of years}}$$
+where $\ln(\cdot)$ is the natural logarithm. 
 
-You can add observations (rows) to the bottom of a table, and Excel will
-automatically fill in any formulas.
+To implement this in our Excel Table:
 
-1. Make sure that the `Total row` check box is unchecked.
-2. Enter "Fred" in cell A6.
+1. Enter "PopGrowth" in cell N1 to name the variable. 
+   - Note that Excel automatically adds this column to the Excel 
+     Table.
+2. Select cell N2 and follow these steps:
+   a. Type "=(ln(" (but don't hit `<enter>` yet!)
+   b. Click on cell K2.  Note that the formula box displays `=(ln([@Pop2019]`
+      instead of `=ln(K2`.
+   c. Type ") - ln(" so that the formula box displays `=(ln([@Pop2019]`) - ln(`
+   d. Click on cell L2. Note that the formula box displays `=(ln([@Pop2019]) - ln([@Pop1990]`
+   e. Type ")/(2019-1990)" so the formula box displays `=(ln([@Pop2019]) - ln([@Pop1990])/(2019-1990)`
+   f. Hit `<enter>`.
 
-As you can see, Excel has added row 6 to the table, and filled in
-all calculated cells automatically.
+You will notice several things happen here:
 
-You can also add variables (columns) to the end of the table.
+- The formula `=(LN([@Pop2019]) - LN([@Pop1990]))/(2019-1990)` is expressed 
+  in terms of *variables* rather than *cells*.
+  - This feature makes it much easier to understand the content of a formula
+    and to avoid making mistakes.
+- The formula is automatically copied to the other cells in the column
 
-1. Go to cell J1 and enter `LogSavings`. 
-  - As you can see, Excel automatically extends the table to include 
-    this variable.
-2. Go to cell J2 and enter `=ln(H2)` or `=LN([@Savings])`. 
-  - As you can see, Excel automatically fills in the formula 
-    for all other rows.
+This behavior also applies if you add an observation (row) to the bottom of 
+a table. Excel will automatically expand the table to include that row
+and will automatically fill in any missing formulas.
+:::
 
-Finally, you can add a summary row (Excel calls it a "total row"):
+You can also add a summary row (Excel calls it a "total row")
+to your table
 
-1. Click on the `Total Row` check box in the `Design` ribbon.
-  - By default, Excel will only show a total for the last column.
-2. Go to cell C6. You will notice a drop-down box appears in the
-  cell. Select "Average" from the drop-down box
-  - The average value for this variable now displays in the cell
-  - You can show the sum, count, standard deviation, etc. instead 
-    of the average.
-    
+:::example
+**Adding a total row**
+
+To add a total row to our table:
+
+1. Select `Table Design` and then check the check-box marked "Total Row".
+2. Go to the bottom of the table to see the total row.
+
+Right now the total row is almost empty, but each cell in the total
+row has a dropdown box that you can use to select a summary statistic. For
+example:
+
+1. Go to the dropdown box in cell B43 and select "Count" to get a count
+   of observations.
+2. Go to the dropdown box in cell M43 and select "Average" to get the average
+   value of the AvgIShare variable.
+
+You can display the summary statistic of your choice in each cell.
+:::
+
+Finally, you can always convert an Excel Table back to an ordinary range of 
+cells by selecting `Table Design > Convert to Range` from the menu. 
+
+:::fyi
+**Additional tools**    
+
+The full capabilities of Excel tables are described in more detail at
 https://support.office.com/en-us/article/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c. 
+:::
 
-#### Using Slicers
+### Error prevention and handling
 
-To be added.
+#### Error codes
 
-### Data validation
+Sometimes an Excel formula does not produce a valid result. When that
+happens, Excel will return an ***error code***
+to indicate what has gone wrong.  Excel's most commonly-used error 
+codes are:
 
-To be added.
+- `#VALUE!` means you have given a function the wrong type of argument
+  - Example: `=LN("THIS IS A STRING AND NOT A NUMBER")`
+- `#NAME?` means you have referenced a function that does not exist.
+  - Example: `=NOTAREALFUNCTION(1)`
+- `DIV/0!` means you have divided by zero.  
+  - Example: `=1/0`
+  - This error also appears when you take the `AVERAGE()` of a range of 
+    cells that does no include any numbers.
+- `#REF!` means you have referenced a cell that does not exist.  
+   - This usually happens when you delete a row or column that
+     the formula refers to.
+- `#NUM!` means that the result of your numeric calculation is not a 
+  real number.  
+  - Example: `=SQRT(-1)`
+- `#NA` means that a lookup function such as `XLOOKUP()` was unable to
+  find a match.  
 
-### Power Query
+If you aren't sure what an error code means, Google it.
 
-To be added.
+Although error codes are helpful in figuring out what has gone wrong with
+a calculation, they should not be part of your final work product. Instead,
+you should rewrite your formulas to catch and handle error conditions. 
 
+:::example
+**Catching and handling an error condition**
 
+Suppose you want the variable in column B to be the square root
+of the variable in column A, but the variable in column A is sometimes
+negative.  As a result the simple formula `=SQRT(A1)` displays the
+square root in some cases and the error code `#NUM!` in others.
 
+We can use the `IF()` function to catch this error, and handle
+it in whatever way we want.  For example, the formula:
+  `=IF(A1>=0,SQRT(A1),"")`
+will return the square root of A1 if A1 is positive or zero, and a 
+blank cell if A1 is negative.
+::::
 
+#### Data validation
 
+One potential source of errors is the entry of ***invalid*** data. Invalid
+data means that a particular cell in our data takes on a value that is
+not in the set of possible values for that variable. For example:
 
-## Data and project management
+- A numeric variable has a non-numeric value.
+- A logical variable has a value other than TRUE or FALSE.
+- A date variable is in the wrong format.
+- A text variable is the wrong length.
+- A numeric variable is outside of its expected range, for
+  example an unemployment rate of 200\% or a negative value of GDP.
 
-### Some basic principles
+Invalid data can result from typos or other human error, or it can 
+result from imperfect translation of data between different data sources.
 
-#### Reproducible analysis 
+Excel has a set of ***data validation*** tools to help prevent and fix
+invalid data. Data validation can be accessed by selecting `Data` from
+the menu and then clicking on the Data Validation button, which
+looks like this: ![Data Validation button](bin/DataValidationButton.png). 
 
-The goal of most data analysis is to get some interesting results that we can
-report to our audience.  Sometimes our audience is decision-makers in business
-or government, sometimes it is the public, and sometimes it is other
-researchers.  For our audience it is important for the results of our
-analysis to be:
+:::example
+**Adding data validation**
 
-- **Clear**: the audience can understand the information you are conveying.
-- **Informative**: the information is new and useful.
-- **Concise**: the relevant information is not obscured by irrelevant 
-   information.
-- **Professional**:  the presentation of our results is visually attractive
-   and follows the professional conventions of your field.
+The **Pop2019** variable (column K in the *GrowthData* table) is a 
+country's population in 2019.  Population cannot be negative, so
+let's add this as a data validation requirement:
 
-At the same time, the underlying analysis needs to be:
+1. Select column K in *GrowthData*.
+2. Select `Data > Data Validation`.  The Data Validation dialog box will 
+   appear.
+   ![Data Validation box](bin/DataValidation1.png). 
+   By default, it allows "Any value", which means no restriction
+   at all.
+3. To add a restriction that negative values are not allowed:
+   a. Select "Decimal" from the Allow drop-down box.
+   b. Select "greater than or equal to" from the Data drop-down box
+   c. Enter "0" in the Minimum drop-down box.
+4. Select `OK`.
 
-- **Accurate**: errors are minimized, and no "shortcuts" (e.g. fraudulent
-   data) are taken
-- **Transparent**: another analyst can determine how each result was obtained.
-   - this other analyst may be you in 6 months!
-- **Reproducible**: another analyst can derive, explore, and extend the results.
+Although nothing appears to have changed, column K is now subject to 
+data validation.
+:::
 
-The key to accuracy, transparency and reproducibility is to carefully 
-maintain a record of all data and analysis steps leading to every result 
-that is ever reported. This record can then be shared with others.      
+Once we have added data validation to a range of cells, several things
+will happen.  First, Excel will not allow you to enter invalid data into 
+a cell with validation turned on. This feature will help avoid problems
+in the first place.
 
-#### Workflow and version control
+:::example
+**Entering invalid data**
 
-Think about the last time you wrote a paper for school.  Did you just sit down
-and write from the beginning to the end, and then turn in the result?
-Probably not.  There was probably exploration, learning, and 
-trial-and-error. You probabaly threw away entire paragraphs, had little scraps 
-of writing, and went through several revisions. Data analysis follows a similar
-process.  Most of what you do will not end up in the final version, 
-and it would be a huge burden to have to maintain a record of everything
-you do. So what should we do?
+Go to cell K43, and (try to) enter "-1".  You will see this dialog
+box telling you that this is an invalid value:
+   ![Invalid Data Entered box](bin/InvalidDataEntered.png). 
+Select `Cancel`.
+:::
 
-The standard solution to this problem is to plan your ***workflow*** in advance.
-Your workflow is a system of rules and procedures you follow to organize your work,
-and needs to include some kind of ***version control*** system.  A 
-version control system maintains multiple versions of your files in a way that
-makes it easy to experiment without having to repeat steps.
+The Data Validation tool also allows you to identify previously-entered
+observations with invalid data.
 
-Serious programmers and data analysts often work in large teams 
-on massive projects that may take many years. The person who originally 
-wrote a particular piece of the code may have left the 
-company decades ago, and the system as a whole may be so complex that no one
-individual understands every detail.  These teams need to be constantly adding 
-new capabilities and fixing errors (bugs) without accidentally introducing new 
-errors or getting in one another's way. 
+:::example
+**Finding invalid data**
 
-To deal with these issues, serious programmers and data analysts use 
-specialized software to implement version control. The most commonly 
-used version control system combines two tools called Git and GitHub.
-We will not use these tools in this course, but I'd like to describe
-them so you have an idea what a robust version control system looks 
-like:
+All of our **Pop2019** data is valid, so in order to "find" invalid 
+data we will need to cheat a little.
 
-- Git is a computer program that maintains a distributed 
-  database of file versions for a single project.
-  - Every time you edit a file, the changes are logged in the database.
-  - Past changes can be viewed and can easily be undone.
-  - There is always a "master" version of each project file.  It is usually
-    under the exclusive control of a single user.
-  - Any user can create a local copy called a "branch", and can edit the 
-    files in their branch without affecting the master version.
-  - The user who controls the master version can "pull" 
-    changes in from any branch to the master. Usually this is done after the 
-    branch owner issues a "pull request."
-- GitHub is an online user interface to Git that provides various other features
-  like access control, task lists, and bug tracking.
+1. Select column K again.
+2. Select `Data > Data Validation` again.
+3. Change the Minimum value from "0" to "10". 
 
-Both Git and GitHub are free for most users, but we will not use them
-in this course. You are working alone, and your projects are simple.
+This will cause all values of **Pop2019** below 10 to be (incorrectly)
+considered invalid. 
 
-Instead we will follow some of the basic principles of version control
-without using any fancy software.
+To identify invalid observations, select 
+`Data > Data Validation > Circle Invalid Data`. You will now
+see red circles around all values that violate the validation
+criteria (there may be a slight delay):
+  ![Validation circles](bin/ValidationCircles.png)
 
-### Setting up your project
+To remove the circles, select `Data > Data Validation > Clear Validation Circles`. 
+:::
 
-Our simple verison control system will be a set of four rules.
+Finally, we can remove all data validation from a cell.
 
-1. Organize work into projects and keep all project-related files together.
-2. Keep all original ("raw") data separate and document its sources.
-3. Avoid changing data; use existing data to make new data instead.
-4. Maintain a master version, but keep selected intermediate versions as well.
+:::example
+**Removing data validation**
 
-We will now set up our first project according to these rules.
+To remove data validation from the **Pop2019** variable:
 
-#### Make a project folder
+1. Select column K in *GrowthData*.
+2. Select `Data > Data Validation`.  The Data Validation dialog box will 
+   appear.
+3. Select `Clear All` and then `OK`.
 
-**RULE #1: Organize work into projects, and keep all project-related files together.** 
+You can confirm that data validation has been removed by entering
+an invalid value (Excel will now let you do this) or by adding
+validation circles (there will not be any).
+:::
 
-For this class, it is natural to think of each chapter or assignment as a
-separate project.
+### Protecting data
 
-1. Decide where on your computer you want to keep your work for this course. 
-   - I will refer to that location as `[mywork]`.
-2. Create a folder called `[mywork]\Chapter3`
-3. Create the following subfolders:
-   -  `[mywork]\Chapter3\raw`
-   -  `[mywork]\Chapter3\doc`
+One of the most common Excel problems occurs when someone who
+is analyzing a data set unintentionally changes the data. 
 
-#### Get external data
+- This can happen because you accidentally touch your keyboard
+  and overwrite the contents of a cell.
+- It can also happens when an inexperienced analyst breaks the
+  rule about keeping the original data untouched, and makes
+  a mistake.
 
-**RULE #2: Keep all original ("raw") data separate and document its sources.** 
+This is to some extent an unavoidable consequence of Excel's
+fundamental design: there is no separation between data and 
+analysis.  This design feature has the positive implication
+that your data is always visible and accessible, but it comes
+at a cost.
 
-1. Download the file [LINK HERE] and put it in your `raw` folder.
-2. Create a text file in your ```raw``` folder called `README.txt`
-   and type the line:
-   `[filename] dowloaded [today's date] from [link]`
-   and save. 
+One way of avoiding this cost is to make a practice of making
+your original data "read only." Excel does this through the
+combined mechanisms of ***protecting*** sheets and ***locking***
+cells.
+
+- Each worksheet is either protected or unprotected.
+  - By default, all worksheets are unprotected.
+  - You can change the status of any worksheet.
+- Each cell is either locked or unlocked.
+  - By default, all cells are locked.
+  - You can change the status of a cell or cell range.
+- Any locked cell in any protected sheet cannot be edited.
+
+::: example
+**Protecting an entire worksheet**
+
+The PWT data table *Data* contains original raw that we do not want
+changed.  To prevent changes to that worksheet:
+
+1. Right-click on the *Data* tab at the bottom of the page.  A menu
+   will appear.
+2. Select `Protect Sheet`.  The Protect Sheet dialog box will provide several
+   options:
    
-Every time you add a file to the `raw` folder, you should add the
-corresponding line of information to `README.txt`.
+  ![Protect Sheet dialog box](bin/ProtectSheet.png). 
 
-#### Make working copies
+3. Select `OK`.
+   
+Now that you have protected the *Data* worksheet, try to edit any cell. You
+will get an error message.
+:::
 
-**RULE #3: Avoid changing data; use existing data to make new data instead.** 
+In many cases, you will only want to protect certain cells in a given
+sheet.  To do this, remember the rules: all cells are initially locked
+and all worksheets are unprotected.  So we will need to unlock all
+cells except the ones we want locked, and then protect the sheet.
 
-The `raw` directory is intended to contain the unaltered, original data
-files as you received them.  Aside from the `README.txt` file, you should
-*never* alter the data files in the `raw` directory. Why not?
+::: example
+**Protecting part of a worksheet**
 
-- Editing the raw data kills reproducibility, because the changes you have
-  made are not documented.
-- It is very easy to make a mistake when editing data directly, and these
-  mistakes are undetectible if you don't have the original data.
+To protect and lock columns A through N in *GrowthData* but
+keep the other columns unlocked:
 
-But the whole point of analysis is that we want to do something to the data,
-so what do we do? This is an easy problem to solve in R, because R keeps the
-data and analysis in separate files. In Excel the problem is more difficult
-because Excel keeps the data and analysis in the same file. We will solve the
-problem by making a  ***working copy*** of the original data, and editing the
-working copy.
+1. Select all of the cells in the worksheet by clicking on the 
+   ![Select all cells](Excel select all cells.jpg) button.
+2. Unlock all of the cells by selecting `Home > Format > Lock Cell`.
+3. Lock columns A through N by selecting them, and then
+   selecting `Home > Format > Lock Cell`.
+4. Protect the worksheet by selecting `Home > Format > Protect Sheet`
+5. The Protect Sheet dialog box will appear; select `OK`.
 
-1. Copy [filename] from the `raw` subfolder to your main project folder.
-   - This is your working copy.
-2. Rename the working copy.
-   - You should choose a brief but clear name. Avoid names like "my file.xlsx."
-   - I usually put the current date in YYMMDD format at the end of my filenames, 
-      for example "NLSY wage data 200614.xlsx" This makes it easier to keep earlier 
-      versions of a file while still knowing how they are related and which 
-      version is the current one.
-3. Open the working copy. 
+Note that you have to do it in this order - Excel will not let you 
+unlock locked cells after you have protected the sheet.
 
-#### Maintain a master version
+You will now get an error message if you try to edit any of the
+locked cells, but you can edit the unlocked cells in any way you 
+like.
+:::
 
-**RULE #4: Maintain a master version, but keep selected intermediate versions too.** 
+Finally, you can remove protection from any worksheet by simply
+selecting `Home > Format > Unprotect Sheet`.
 
-Think about the last time you wrote a paper for school. Did you just start at the
-beginning, write until you reached the end, and turn in the result?  Probably not.
-You may have written an outline, then filled in different sections in a random order.
-You may have decided you didn't like a paragraph, deleted it, and then decided to 
-put it back.  After several rounds of this, you eventually settled on the version
-you turned in.
+> You can download the complete Excel file with all data cleaning 
+> from this chapter at 
+> https://canvas.sfu.ca/files/15328441/. 
 
-Here's what I recommend:
 
-1. Number versions of files sequentially (e.g. "Wage analysis 1", Wage analysis 2", etc.)
-   or by date (e.g. "Wage analysis 200614"m "Wage analysis 200706", etc.)
-2. The file you are currently working on is your working copy. Feel free
-   to do whatever you want with the working copy.  All other copies should be read-only.
-3. At regular intervals you should:
-   a. Make your working copy the master copy.
-   b. Make a copy of this new master copy and call that your new working copy.
-
-When should you make the working copy the master copy? It depends on the nature of the work.
-Most people would do this upon completion of a significant step in the project.
-Others might do it at the end of each working day. Ideally, these two will often
-coincide. It all depends on what works best for you.
 
