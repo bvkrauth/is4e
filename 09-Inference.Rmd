@@ -1,16 +1,16 @@
 # Statistical inference
 
-Chapter 6 covered estimation, which is the use of data and statistics
-to construct the best possible guess at the value of some parameter
+In Chapter \@ref(statistics), we learned about estimation: the use of data and 
+statistics to construct the best possible guess at the value of some parameter
 $\theta$.
 
-In this chapter, we will pursue a different goal.  Instead of guessing
-the value of $\theta$ we will use the data to ask what values of 
-$\theta$ can be confidently ruled out.
+In this chapter, we will pursue a different goal.  Instead of estimating
+the value of $\theta$ we will what values of $\theta$ can be confidently 
+ruled out given the evidence available in our data:
 
-- A hypothesis test determines whether a particular value can be ruled 
-  out.
-- A confidence interval determines a range of values that cannot
+- A hypothesis test determines whether a *particular* value *can* be 
+  ruled out.
+- A confidence interval determines a *range* of values that *cannot*
   be ruled out.
 
 The set of procedures for constructing confidence intervals and 
@@ -28,36 +28,61 @@ In this chapter we will learn how to:
 
 ## Principles of inference
 
-We start by describing a very general framework, using our roulette
-example to make the abstract ideas more concrete.  
+### Evidence
 
-In the general framework, we have a data set $D$ with unknown 
-joint distribution $P_D$. We also have a parameter of interest 
-$\theta = \theta(P_D)$ whose value can in principle be determined
-from the DGP. 
+The purpose of statistical inference is to systematically account for the
+uncertainty associated with limited evidence.  That is, there are important
+aspects of the data generating process we do not know. The data provide
+some evidence about those unknown aspects, but the evidence they provide
+may not be strong.  Statistical inference asks us what statements about 
+the data generating process can be made with confidence based on the data.
 
 ::: example
-Suppose that we have data from a local casino on the results 
-from $n=100$ games of roulette. Specifically we have data 
-$D = (x_1,\ldots,x_{100})$ where $x_i = I(\textrm{red wins})$.
-Our parameter of interest is the probability that
-red wins:
-  $$p_{red} = \Pr(x_i = 1)$$
+**Roulette**
 
-We know that red wins in a fair game with probability
-$p_{red} = 18/37 \approx 0.486$. But maybe the casino is 
-cheating.  How can we determine whether we have a fair game?
-Intuitively:
+Suppose you work as a casino regulator for the BCLC (British Columbia
+Lottery Corporation, the crown corporation that regulates all commercial
+gambling in B.C.).  You have been given data with recent roulette 
+results from a particular casino and are tasked with determining whether
+the casino is running a fair game.
 
-  - If red wins about 48.6\% of the time, the game is probably fair.
-  - If red always wins or never wins, the game is probably not fair.
-  - There is some intermediate range of winning percentages 
-    where we can't be sure one way or the other.
-  
-We need a well-justified criterion for making these decisions.
+Before getting caught up in math, let's think about how we might assess 
+evidence:
+
+- If we have data from many games, and the win rate for gamblers is about
+  the same as the win probability in a fair game, then we would conclude there 
+  is strong evidence the game is *fair or close to fair*.
+- If we have data from many games, and the win rate for gamblers is much 
+  higher or lower than the win probability in a fair game, then we would
+  conclude there is strong evidence that the game is *not fair*.
+- If we have no data, or data from only a few games, we probably *can't tell*
+  whether the game is fair or unfair
+
+In this chapter we will formalize these basic ideas about evidence.
 :::
 
-### Hypothesis tests
+### A basic framework
+
+For the remainder of this chapter, suppose we have a data set 
+$D_n = (x_1,x_2,\ldots,x_n)$ of size $n$.  The data comes from an
+unknown data generating process that includes an unknown 
+parameter of interest $\theta$. 
+
+::: example
+**DGP and parameter of interest for roulette**
+
+Let $D_n = (x_1,\ldots,x_n)$ be a data set of results from 
+$n = 100$ games of roulette at a local casino. More specifically,
+let 
+  $$x_i = I(\textrm{Red wins})$$
+Our parameter of interest is the probability that
+red wins:
+  $$p_{red} = \Pr(x_i = 1) = E(x_i)$$
+We know that red wins in a fair game with probability
+$p_{red} = 18/37 \approx 0.486$. 
+:::
+
+## Hypothesis tests
 
 We will start with hypothesis tests. The idea of a hypothesis test
 is to determine whether the data rule out or ***reject*** a specific
@@ -66,14 +91,14 @@ value of the unknown parameter $\theta$.
 Intuitively, if we have no (useful) data we cannot rule anything
 out, but as we obtain more data, we can rule out more values.
 
-#### The null and alternative hypotheses
+### The null and alternative hypotheses
 
 The first step in a hypothesis test is to define the 
 ***null hypothesis***.  The null hypothesis is a statement
 about our parameter $\theta$ that takes the form:
   $$H_0: \theta = \theta_0$$
-where $\theta_0$ is a specific number. The null hypothesis
-is the value of $\theta$ we are interested in ruling out.
+where $\theta_0$ is a specific number. This is the value of 
+$\theta$ we are interested in ruling out.
 
 The next step is to define the ***alternative hypothesis***. The 
 alternative hypothesis defines every other value of $\theta$ 
@@ -82,99 +107,190 @@ we are allowing, and is usually written as:
 where $\theta_0$ is the same number as used in the null.
 
 ::: example
+**Null and alternative for $p_{red}$**
+
 In our roulette example, our null hypothesis is
-that the wheel is fair:
+that the game is fair:
   $$H_0: p_{red} = 18/37 \approx 0.486$$
 and the alternative hypothesis is that it is not fair:
-  $$H_1: p_{red} \neq 18/37 \approx 0.486$$
+  $$H_1: p_{red} \neq 18/37$$
 :::
 
-#### The test statistic
+Notice that there is something of an asymmetry between the null and 
+alternative hypothesis: the null is typically (though not necessarily)
+a single value and the alternative is every other possible value. 
 
-Our next step is to construct a usable ***test statistic***. A
-test statistic for a given null hypothesis is a statistic that
-has the following two properties:
+:::fyi
+**What null hypothesis to choose?**
 
-1. Its probability distribution under the null 
+Our framework here assumes that you already know what null hypothesis you
+wish to test, but we might briefly consider how we might choose a null
+hypothesis to test.
+
+In some applications there are null hypotheses that are of clear interest
+for that specific case:
+
+- In our roulette example, the natural null to test is whether the 
+  win probability matches that of a fair game ($p = p_{fair}$).
+- When measuring the effect $\beta$ of one variable on another, the natural
+  null to test is "no effect at all" ($\beta = 0$).
+- When comparing the mean of some characteristic or outcome across two
+  groups (for example, average wages of men and women), the natural null
+  to test is that they are the same ($\mu_m = \mu_W$)
+- In epidemiology, a contagious disease will tend to spread if its
+  reproduction rate $R$ is greater than one, and decline if it
+    is less than one, so $R = 1$ is a natural null to test.
+
+If there is no obvious null hypothesis, it may make sense to test many 
+null hypotheses and report all of the results.  There is nothing 
+wrong with doing that.
+:::
+
+### The test statistic
+
+Our next step is to construct a ***test statistic*** that can be 
+calculated from our data. A valid test statistic for a given null 
+hypothesis is a statistic $t_n$ that has the following two 
+properties:
+
+1. The probability distribution of $t_n$ ***under the null*** 
    (i.e., when $H_0$ is true) is *known*.
-2. Its probability distribution under the alternative 
-   (i.e., when $H_0$ is false) is *different* from its
+2. The probability distribution of $t_n$ ***under the alternative***
+   (i.e., when $H_1$ is true) is *different* from its
    probability distribution under the null.
 
-Most, but not all, test statistics are constructed so they are typically
-close to zero when the null is true, and far from zero when the null is false.
+The test statistic is usually based on an estimator of the parameter, 
+and is usually constructed so that it is typically close to zero 
+when the null is true, and far from zero when the null is false. But
+it does not need to be.
 
 ::: example
-In our roulette example, a natural test statistic would be the 
-absolute sample frequency:
-  $$n\hat{f}_{red} = \sum_{i=1}^n x_i$$
-Since $x_i \sim Bernoulli(p_{red})$ we have:
-  $$n\hat{f}_{red} \sim Binomial(n,p_{red})$$
-Under the null the distribution is known:
-  $$n\hat{f}_{red} \sim Binomial(100,18/37)$$
-and under the alternative the distribution is different:
-  $$n\hat{f}_{red} \sim Binomial(100,p_{red}) \textrm{ where $p_{red} \neq 18/37$ }$$
-Notice that the distribution under the alternative is not known,
-since $p_{red}$ is not known.  That's OK, it only needs to be *known* under
-the null and *different* under the alternative.
+***A test statistic for roulette***
+
+A natural test statistic for the win probability of a bet on red 
+would be the corresponding win frequency in our data.  We could
+use either the relative win frequency (which also happens to 
+be the sample average):
+  $$\hat{f}_{red} = \bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$$
+but it will be more convenient to use the absolute win frequency:
+  $$t_n = n\hat{f}_{red} = n\bar{x}_n =\sum_{i=1}^n x_i$$
+Next we need to find the probability distribution of $t_n$ 
+under the null, and under the alternative.
+
+In general, since $x_i \sim Bernoulli(p_{red})$ we have:
+  $$t_n \sim Binomial(n,p_{red})$$
+Remember that the $Binomial(n,p)$ distribution is the distribution corresponding
+to the number of times an event with probability $p$ happens in $n$ independent
+trials.
+
+Under the null (when $H_0$ is true), $p_{red} = 18/37$ and so:
+  $$t_n \sim Binomial(100,18/37)$$
+Since this distribution does not involve any unknown parameters,
+our test statistic satisfies the requirement of having a known
+distribution under the null.
+
+Under the alternative (when $H_1$ is true), $p_{red}$ can take on any value
+*other* than $18/37$.  The sample size is still $n=100$, so the
+distribution of the test statistic is:
+  $$t_n \sim Binomial(100,p_{red}) \textrm{ where $p_{red} \neq 18/37$ }$$
+Notice that the distribution of our test statistic under the alternative
+is not known, since $p_{red}$ is not known.  But the distribution is 
+*different* under the alternative, and that is what we require from
+our test statistic.
 :::
 
-#### Significance and critical values
+### Significance and critical values
 
-Once we have our test statistic $t$, the next thing is to choose 
+After choosing a test statistic $t_n$, the next step is to choose 
 ***critical values***.  The critical values are two numbers
-$c_L$ and $c_H$ such that:
+$c_L$ and $c_H$ (where $c_L < c_H$) such that 
 
-- We ***reject the null*** if $t < c_L$ or $t > c_H$.
-  - This means we conclude that $H_0$ is false.
-- We ***fail to reject the null*** if $c_L < t < c_H$.
-  - This does not mean we conclude that $H_0$ is true.
-  - It only means that we cannot conclude that it is false.
-    It may be true, or it may be false but we don't have 
-    enough evidence to tell that it is false.
+- $t_n$ has a *high* probability of being between $c_L$ and $c_H$ when
+  the null is true.
+- $t_n$ has a *lower* probability of being between $c_L$ and $c_H$ when
+  the alternative is true.
+  
+The range of values from $c_L$ to $c_H$ is called the ***critical range***
+of our test.
 
-How do we choose critical values? We need to balance two considerations:
+Given the test statistic and critical values:
 
-- We want our test to reject the null when it is false. The probability
-  of rejecting a false null is called the ***power*** of the test.
-    - Power is good.
-    - Widening the critical range (by reducing $c_L$ or increasing
-      $c_H$ will increase power, which is good.
-- We do not want our test to reject the null when it is true. The 
-  probability of rejecting a true null is called the ***size***
+- We ***reject the null*** if $t_n$ is outside of  the critical range.
+  - This means we have strong evidence that $H_0$ is false.
+  - The reason we reject here is that we know we would be unlikely to
+    observe such a value of $t_n$ if $H_0$ were true.
+- We ***fail to reject the null*** if $t_n$ is inside of the critical
+  range.
+  - This means we do not have strong evidence that $H_0$ is false.
+  - This does not mean we have strong evidence that $H_0$ is true. We 
+    may just not have enough evidence to reach a conclusion.
+
+Notice that there is an asymmetry here: in the absence of evidence,
+we will not reject *any* null hypotheses.
+
+![Critical values and rejecting the null hypothesis](bin/reject.png)
+
+How do we choose critical values? You can think of critical values as setting
+a standard of evidence, so we need to balance two considerations:
+
+- The probability of rejecting a false null is called the ***power***
+  of the test.
+  - We want our test to reject the null when it is false, so power is good.
+- The probability of rejecting a true null is called the ***size***
   or ***significance*** of a test.
-    - Size is bad.
-    - Widening the critical range (by reducing $c_L$ or increasing
-      $c_H$ will increase size, which is bad.
-      
-Ideally, we would want to choose critical values that optimize the 
-trade-off between power and size. But that isn't what we do. Instead,
-we typically:
+  - We do not want our test to reject the null when it is true, so size 
+    is bad.
+- There is always a trade off between power and size 
+  - A *narrower* critical range (higher $c_L$ or lower $c_H$) will increase 
+    the rejection rate, increasing both power (good) and size (bad).
+  - A *wider* critical range (lower $c_L$ or higher $c_H$) will reduce 
+    the rejection rate, reducing both power (bad) and size (good).
+  
+Given this trade off between power and size, we might construct some
+criterion that includes both (just like MSE includes both variance and
+bias) and choose critical values to maximize that criterion.  In practice, 
+we do not typically do that.  
+
+Instead, we follow a simple convention:
 
 1. Set the size to a fixed value $\alpha$.
+   - In general, the conventional size varies by field, and typically
+     varies with how much data is typical in that field.
    - In economics and most other social sciences, the usual convention 
-     is to use a size of 5\%. 
-     - That is, we tolerate a 5\% chance of mistakenly rejecting the null
-       when it is true.
-     - We use this convention because it provides a reasonable amount 
-      of power for the typical data set we have.
-     - This typically gives a reasonable We will sometimes use a size 
-      of 10\% when we don't have much data, or 1\% when we have a 
-      lot of data.
+     is to use a size of 5\% ($\alpha = 0.05$).
+   - We sometimes see 1\% ($\alpha = 0.01$) when working with larger data sets 
+     or 10\% ($\alpha = 0.10$) when working with small data sets.
    - In physics or genetics, where data sets are much larger, the 
      conventional size is much lower. 
-2. Calculate critical values that imply the desired size.  For
-   example, when with a size of 5\% $(\alpha = 0.05)$, we would:
-   - set $c_L$ to the 2.5 percentile of the null distribution
-   - set $c_H$ to the 97.5 percentile of the null distribution
+2. Calculate critical values that imply the desired size.  
+   - With a size of 5\% $(\alpha = 0.05)$, we would:
+     - set $c_L$ to the 2.5 percentile (0.025 quantile) of the null distribution
+     - set $c_H$ to the 97.5 percentile (0.975 quantile) of the null distribution
+   - With a size of 10\% $(\alpha = 0.10)$, we would:
+     - set $c_L$ to the 5 percentile (0.05 quantile) of the null distribution
+     - set $c_H$ to the 95 percentile (0.95 quantile) of the null distribution
+   - With a size of $\alpha$, we would:
+     - set $c_L$ to the $\alpha/2$ quantile of the null distribution
+     - set $c_H$ to the $1-\alpha/2$ quantile of the null distribution
+
+In other words, we set size equal to a conventional value, and let the 
+power be whatever is implied by that.
 
 ::: example
-In our example, under the null:
-  $$n\hat{f}_{red} \sim Binomial(100,18/37)$$
+**Critical values for roulette**
+
+We earlier showed that the distribution of $t_n$ under the null is:
+  $$t_n \sim Binomial(100,18/37)$$
 We can get a size of 5\% by choosing:
   $$c_L = 2.5 \textrm{ percentile of } Binomial(100,18/37)$$
   $$c_H = 97.5 \textrm{ percentile of } Binomial(100,18/37)$$
-We can then use Excel or R to calculate these critical values:
+We can then use Excel or R to calculate these critical values. In Excel,
+the function you would use is `BINOM.INV()`
+
+- The formula to calculate $c_L$ is `=BINOM.INV(100,18/37,0.025)`
+- The formula to calculate $c_H$ is `=BINOM.INV(100,18/37,0.975)`
+
+The calculations below were done in R:
 ```{r criticalvalues, echo = FALSE}
 cat("2.5 percentile of binomial(100,18/37) =",
     qbinom(0.025,100,18/37),
@@ -184,25 +300,31 @@ cat("97.5 percentile of binomial(100,18/37) =",
     "\n")
 ```
 In other words we reject the null (at 5\% significance) that 
-the roulette wheel is fair if red wins fewer than 39 spins 
-or more than 58 spins.
+the roulette wheel is fair if red wins fewer than 39 games 
+or more than 58 games.
 :::
 
-The table below summarizes where we stand:
-
-| Test component         | General case                         | Roulette example |
-|------------------------|--------------------------------------|---------------|
-| Parameter              | $p = \Pr(\textrm{some event})$       | $p = \Pr(RED)$ |
-| Null hypothesis        | $H_0:p = p_0$                        | $H_0:p = 18/37$ | 
-| Alternative hypothesis | $H_1: p \neq p_0$                    | $H_1: p \neq 18/37$ |
-| Test statistic         | $t = n\hat{f}_{\textrm{event}}$      | $t = n\hat{f}_{RED}$ | 
-| Null distribution      | $Binomial(n,p_0)$                    | $Binomial(100,18/37)$ |
-| Critical value $c_L$   | 2.5 percentile of $Binomial(n,p_0)$  | 39 |
-| Critical value $c_H$   | 97.5 percentile of $Binomial(n,p_0)$ | 58 |
-| Decision               | Reject if $t \notin [c_L,c_H]$       | Reject if $t \notin [39,58]$ |
 
 
-#### The power of a test
+::: fyi
+**A general test for a single probability**
+
+We can generalize the test we have constructed so far to the case
+of the probability of any event:
+
+| Test component         |  Roulette example                    |General case               |
+|------------------------|--------------------------------------|---------------------------|
+| Parameter              | $p_{red} = \Pr(\textrm{Red wins})$   | $p = \Pr(\textrm{event})$ |
+| Null hypothesis        | $H_0:p_{red} = 18/37$                | $H_0:p = p_0$             | 
+| Alternative hypothesis | $H_1: p_{red} \neq 18/37$            |$H_1: p \neq p_0$          | 
+| Test statistic         | $t = n\hat{f}_{RED}$           | $t = n\hat{f}_{\textrm{event}}$ | 
+| Null distribution      | $Binomial(100,18/37)$                |$Binomial(n,p_0)$          | 
+| Critical value $c_L$   | 39                        | 2.5 percentile of $Binomial(n,p_0)$  |
+| Critical value $c_H$   | 58                        | 97.5 percentile of $Binomial(n,p_0)$ |
+| Decision               | Reject if $t \notin [39,58]$    | Reject if $t \notin [c_L,c_H]$ |
+:::
+
+### The power of a test
 
 As mentioned above, the power of a test is defined as the probability 
 of rejecting the null when it is false, and the alternative is true.
@@ -216,49 +338,57 @@ of $\theta$ (and sometimes other unknown features of the DGP):
 In some cases we can actually calculate this function.
 
 ::: example
-I won't make you do that, but I'll show you the power curve for our example.  
-```{r power_curves, echo = FALSE}
-theta <- seq(0,1,length.out=100)
+**The power curve for roulette**
+
+Power curves can be tricky to calculate, and I will not ask you to calculate
+them for this course.  But they can be calculated, and it is useful to
+see what they look like.
+
+Figure \@ref(fig:PowerCurves) below depicts the power curve for the roulette test we have
+just constructed; that is, we are testing the null that $p_{red} = 18/37$
+at a 5\% size.  The blue line depicts the power curve for $n=100$ 
+as in our example, while the green line depicts the power curve for
+$n=20$.
+```{r PowerCurves, echo = FALSE, fig.margin = TRUE, fig.cap = "Power curves for the roulette example"}
+theta <- seq(0,1,length.out=380)
 power100 <- pbinom(qbinom(0.025,100,18/37),100,theta) +
   (1 - pbinom(qbinom(0.975,100,18/37),100,theta))
-power10 <- pbinom(qbinom(0.025,20,18/37),20,theta) +
+power20 <- pbinom(qbinom(0.025,20,18/37),20,theta) +
   (1 - pbinom(qbinom(0.975,20,18/37),20,theta))
 plot(theta,power100,
     type="l",
-    xlab="theta",
-    ylab = "power(theta)",
+    xlab="true probability of winning",
+    ylab = "power",
     main = "Power curve for fair roulette wheel",
     col = "blue")
-lines(theta,power10,col="green")
+lines(theta,power20,col="green")
 abline(v=18/37,lty=2,col="gray")
 abline(h=0.05,lty=2,col="gray")
 points(x=18/37,y=0.05,col="red")
+text("n=100",x=0.7,y=0.8,col="blue")
+text("n=20",x=0.9,y=0.8,col="green")
 ```
-A few things you should notice about it:
+There are a few features I would like you to notice, all of whcih
+are common to most regularly used tests:
 
-- The power curve reaches its lowest value 
-  at the red point which corresponds to the null value for
-  the parameter $\theta = 18/37$ and the size of the test
-  (0.05). That is:
-    - The power is always at least as big as the size,
-      and is usually bigger.
-    - We are more likely to reject the null when it is
-      false than when it is true. That's good!
-    - When a test has this desirable property, we call 
-      it an ***unbiased*** test. 
-- Power increases as $\theta$ gets further and further
-  from the null.  
-    - That is, we are more likely to detect unfairness
-      in a game that is *very* unfair than when in one that
-      is *a little* unfair.
+- The power curve reaches its lowest value at the red point 
+  $(18/37,0.05)$.  Note that $18/37$ is the parameter value
+  under the null, and $0.05$ is the size of the test. In other words:
+  - The power is always at least as big as the size, and is usually bigger.
+  - We are more likely to reject the null when it is false than when it 
+    is true. That's good!
+  - When a test has this desirable property, we call 
+    it an ***unbiased*** test. 
+- The power increases as $\theta$ gets further from the null.  
+  - That is, we are more likely to detect unfairness in a game 
+    that is *very* unfair than when in one that is *a little* unfair.
 - Power also increases with the sample size; the blue line
   ($n = 100$) is above the green line ($n = 20$).
-  - Power analysis is often used by researchers to determine 
-    how much data to collect.  Each additional observation 
-    costs money (so you don't want to get too much) but
-    gains power (so you don't want to get too little).
-
-These characteristics are shared by most commonly-used tests.
+  
+Power analysis is often used by researchers to determine how much data 
+to collect.  Each additional observation increases power but costs money,
+so it is important to spend enough to get clear results but not
+much more than that.
 :::
 
 ::: fyi
@@ -293,56 +423,278 @@ its distribution under the null.  I won't go through that calculation
 here.
 :::
 
-### Confidence intervals 
+
+## Application: the mean
+
+Having described the general framework and a single example, we now
+move on to the most common application: constructing hypothesis
+tests and confidence intervals on the mean in a random sample.
+
+Let $D = (x_1,\ldots,x_n)$ be a random sample of size $n$
+on some random variable $x_i$ with unknown mean $E(x_i) = \mu_x$
+and variance $var(x_i) = \sigma_x^2$.  
+
+Let the sample average be:
+  $$\bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$$
+and the sample variance:
+  $$s_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
+Both of these statistics are easily calculated from the data,
+and we have previosly discussed their properties in detail.
+
+### The null and alternative hypotheses
+
+Suppose that you want to test the null hypothesis:
+  $$H_0: \mu_x = 1$$
+against the alternative hypothesis 
+  $$H_1: \mu_x \neq 1$$
+Having stated our null and alternative hypotheses, we need to
+construct a test statistic.
+
+Remember that our test statistic needs to have a *known* distribution
+under the null, and a *different* distribution under the alternative.
+
+### The T statistic
+
+The typical test statistic we use in this setting is called the 
+***T statistic***, and takes the form:
+  $$t_n = \frac{\bar{x}_n - 1}{s_x/\sqrt{n}}$$
+The idea here is that we take our estimate of the parameter ($\bar{x}$),
+subtract its expected value under the null ($1$), and divide
+by an estimate of its standard deviation ($s_x/\sqrt{n}$). We can
+add and subtract the unknown true mean $\mu_x$ to get: 
+  \begin{align}
+    t_n &= \frac{\bar{x}_n - \mu_x + \mu_x - 1}{s_x/\sqrt{n}} \\
+      &= \frac{\bar{x}_n - \mu_x}{s_x/\sqrt{n}} + \frac{\mu_x - 1}{s_x/\sqrt{n}} 
+  \end{align}
+The first part of this expression is a random variable with a mean of zero
+and a variance of (about) one.  The second part of the expression is
+exactly zero when $H_0$ is true, and not exactly zero when it is false. 
+
+Recall that we need the probability distribution of $t_n$ to be known when
+$H_0$ is true, and different when it is false.  The second criterion is
+clearly met, and the first criterion is met if we can find the 
+probability distribution of $\frac{\bar{x}_n - \mu_x}{s_x/\sqrt{n}}$.
+
+Unfortunately, if we don't know the exact probability distribution
+of $x_i$ we don't know the exact probability distribution of statistics
+calculated from it.  Once we have a potential test statistic, there 
+are two standard solutions to this problem:
+  
+  1. Assume a specific probability distribution (usually a normal
+    distribution) for $x_i$.  We can (or at least a 
+    proefessional statistician can) then mathematically derive 
+    the distribution of any test statistic from this distribution.
+  2. Use the central limit theorem to get an approximate probability
+    distribution.
+
+We will explore both of those options.
+
+### Asymptotic critical values
+
+We will start with the asymptotic solution to the problem. As we learned in 
+Chapter \@ref(statistics), the Central Limit Theorem tells us that:
+  $$\frac{\bar{x}_n - \mu_x}{\sigma_x/\sqrt{n}} \rightarrow N(0,1)$$
+Under the null our test statistic looks just like this, but with the sample
+standard deviation $s_x$ in place of the population standard deviation 
+$\sigma_x$.  It turns out that Slutsky's theorem allows us to make
+this substitution, and it can be proved that:
+  $$\frac{\bar{x}_n - \mu_x}{s_x/\sqrt{n}} \rightarrow N(0,1)$$
+
+Therefore, under the null:
+  $$t_n \rightarrow N(0,1)$$
+In other words, while we do not know the exact (finite-sample) distribution
+of $t_n$ we know that $N(0,1)$ provides a useful asymptotic approximation 
+to that distribution.
+
+```{r NormalDistribution, echo=FALSE}
+x <- seq(-3,3,length.out = 100)
+tinf <- dnorm(x)
+plot(x,tinf, type="l",col="black",xlab = "value", ylab="PDF of t_n",
+    main="Asymptotic distribution of t_n under null")
+```
+
+Therefore, if we want a test that has the ***asymptotic size*** of 5\%, we
+can use Excel or R to calculate critical values. In Excel, the function
+would be `NORM.INV` or `NORM.S.INV`, and the formulas would be:
+
+- $c_L$: `=NORM.S.INV(0.025)` or `=NORM.INV(0.025,0,1)`.
+- $c_H$: `=NORM.S.INV(0.975)` or `=NORM.INV(0.975,0,1)`.
+
+The caclulations below were done in R:
+```{r echo=FALSE}
+  cat("cL = 2.5 percentile of N(0,1) = ",
+      round(qnorm(0.025),3),
+      "\n")
+  cat("cH = 97.5 percentile of N(0,1) = ",
+      round(qnorm(0.975),3),
+      "\n")
+```
+These particular critical values are so commonly used that I want you
+to remember them.
+
+### Exact critical values 
+
+Most economic data comes in sufficiently large samples that the asymptotic
+distribution of $t_n$ is a reasonable approximation and the asymptotic
+test works well. But occasionally we have samples that are small enough
+that it doesn't.  
+
+Another option is to assume that the $x_i$ variables are normally
+distributed:
+  $$x_i \sim N(\mu_x,\sigma_x^2)$$
+where $\mu_x$ and $\sigma_x^2$ are unknown parameters.
+
+Now at this point it is important to remind you: many interesting 
+variables are *not* normally distributed (for example, our roulette outcome
+is discrete uniform, and the result of a given bet is Bernouilli)
+and so this assumption may very well be incorrect.
+
+If this was a more advanced course I would derive the 
+distribution of $t_n$ under the null.  But for ECON 233, I will
+just ask you to understand that it *can* be derived once we 
+assume normality of the $x_i$.
+
+The null distribution of this particular test statistic under these particular assumptions was derived in the 1920's by William Sealy Gosset, a statistician 
+working at the Guiness brewery.  To avoid getting in trouble at work (Guiness 
+did not want to give away trade secrets) Gosset published under the pseudonym 
+"Student".  As a result, the family of distributions he derived is called
+"Student's T distribution".
+
+When the null is true, the test statistic $t_n$ as described above
+has Student's T distribution with $n-1$ degrees of freedom:
+  $$t_n \sim T_{n-1}$$
+As always, it has a different distribution (sometimes called the "noncentral
+T distribution") when the null is false.
+
+The $T_{n-1}$ distribution looks a lot like the $N(0,1)$
+distribution, but has slightly higher probability of extreme
+positive or negative values.  As $n$ increases the 
+$T_{n-1}$ distribution converges to the 
+$N(0,1)$ distribution, just as predicted by the central 
+limit theorem.
+
+```{r tdistribution, echo=FALSE}
+x <- seq(-3,3,length.out = 100)
+t5 <- dt(x,df=4)
+t10 <- dt(x,df=9)
+t30 <- dt(x,df=29)
+tinf <- dnorm(x)
+plot(x,tinf, type="l",col="black",main="Exact distribution of t_n under null",
+     sub="(x assumed to be normally distributed)",xlab="value",ylab="PDF")
+text("n = infinity",x=0.75,y=0.4,col="black")
+lines(x,t5,col="green")
+text("n = 5",x=2.5,y=0.1,col="green")
+lines(x,t10,col="blue")
+text("n = 10",x=1.7,y=0.2,col="blue")
+lines(x,t30,col="red")
+text("n = 30",x=1.2,y=0.3,col="red")
+```
+
+Having found our test statistic and its distribution under the null, 
+we can calculate our critical values:
+  $$c_L = 2.5 \textrm{ percentile of } T_{n-1}$$
+  $$c_H = 97.5 \textrm{ percentile of } T_{n-1}$$
+We can obtain these percentiles using Excel or R. In Excel, the
+relevant function is `T.INV`.  For example, if we have 5 observations, then:
+
+- We would cacluate $c_L$ by the formula `=T.INV(0.025,4)`.
+- We would cacluate $c_H$ by the formula `=T.INV(0.975,4)`.
+
+The results (calculated below using R) would be:
+```{r echo=FALSE}
+  cat("cL = 2.5 percentile of T_4 = ",
+      round(qt(0.025,df=4),3),
+      "\n")
+  cat("cH = 97.5 percentile of T_4 = ",
+      round(qt(0.975,df=4),3),
+      "\n")
+```
+In contrast, if we have 30 observations, then:
+
+- We would cacluate $c_L$ by the formula `=T.INV(0.025,29)`.
+- We would cacluate $c_H$ by the formula `=T.INV(0.975,29)`.
+
+The results (calculated below using R) would be:
+```{r echo=FALSE}
+  cat("cL = 2.5 percentile of T_29 = ",
+      round(qt(0.025,df=29),3),
+      "\n")
+  cat("cH = 97.5 percentile of T_29 = ",
+      round(qt(0.975,df=29),3),
+      "\n")
+```
+and if we have 1,000 observations:
+
+- We would cacluate $c_L$ by the formula `=T.INV(0.025,999)`.
+- We would cacluate $c_H$ by the formula `=T.INV(0.975,999)`.
+
+The results (calculated below using R) would be:
+```{r echo=FALSE}
+  cat("cL = 2.5 percentile of T_999 = ",
+      round(qt(0.025,df=999),3),
+      "\n")
+  cat("cH = 97.5 percentile of T_999 = ",
+      round(qt(0.975,df=999),3),
+      "\n")
+```
+
+Notice that the Student's T test is more ***conservative** (less likely 
+to reject) than the asymptotic test for smaller sample sizes. But
+at some point (around $n = 30$) the difference between the two tests
+becomes negligible.
+
+In practice, most data sets in economics have well over 30 observations so
+economists tend to use asymptotic tests unless they have a very small 
+sample.
+
+## Confidence intervals 
 
 Hypothesis tests have one very important limitation: although they 
 allow us to rule out $\theta = \theta_0$ for a single value of $\theta_0$, 
 they say nothing about other values very close to $\theta_0$.
 
-For example, if a medical researcher rejects the null hypothesis 
-that a particular treatment has no effect on patients, that finding 
-does not rule out the possibility that it has a tiny effect. 
-On a similar note, if the researcher fails to reject the null of no 
-effect, that does not rule out the possibility of a large effect.
+For example, suppose you are a medical reasearcher trying to measure the
+effect of a particular treatment, let $\theta$ be the treatment, and 
+suppose that you have tested the null hypothesis that the treatment
+has no effect ($\theta = 0$).
 
-The solution to this limitation is to report what are called 
-***confidence intervals***.  A confidence interval is a range 
-of values for $\theta$ that has been constructed from the data 
-in such a way that it is very likely to contain the true value.
+- If you reject this null, you have concluded that the effect has *some*
+  effect. However, that does not rule out the possibility that
+  the effect of the treatment is *very small*.
+- If you fail to reject this null, you cannot rule out the possibility
+  that the treatment has *no* effect.  However, this does not rule out
+  the possibility that the effect is *very large*.
 
-  - The interval $(-\infty,\infty)$ will always contain the true 
-    value, but is totally uninformative.
-  - A wider confidence interval is 
-    - more likely to contain the true value (good).
-    - less informative (bad) 
-  - A narrow confidence interval is 
-    - less likely to contain the true value (bad).
-    - less informative (good) 
+The solution to this would be to do a hypothesis test for every possible
+value of $\theta$, and classify them into values that were rejected 
+and not rejected.  This is the idea of a ***confidence interval***.
 
-As with hypothesis testing we address this trade-off by convention.
-In economics and most other social sciences the convention
-is to report the ***95 \% confidence interval*** which
-is defined as an interval $[s_L,s_H]$ calculated from the
-data that has the property:
-  $$\Pr(s_L < \theta < s_H) = 0.95$$
-Now an important thing to remember is that $\theta$ is a fixed
-parameter, and is not random.  The interval is the random part.
+A confidence interval for the parameter $\theta$ with coverage 
+rate $CP$ is an interval with lower bound $CI_L$ and 
+upper bound $CI_H$ constructed from the data in such a way that
+  $$\Pr(CI_L < \theta < CI_H) = CP$$
+In economics and most other social sciences, the convention is to report
+confidence intervals with a coverage rate of 95\%. 
+  $$\Pr(CI_L < \theta < CI_H) = 0.95$$
+Note that $\theta$ is a fixed (but unknown) parameter, while $CI_L$ 
+and $CI_H$ are statistics calculated from the data.  
 
 How do we calculate confidence intervals? It turns out to be 
 entirely straightforward: confidence intervals can be constructed
 by inverting hypothesis tests: 
 
-- the 95\% confidence interval for 
-  $\theta$ can be defined as the set of all $\theta_0$ values
-  that can be rejected at a 5\% level of significance.
-- The 90\% confidence interval is the set of all $\theta_0$ values
-  that can be rejected at a 10\% level of significance. It is 
-  narrower than the 95\% confidence interval.
-- The 99\% confidence interval is the set of all $\theta_0$ values
-  that can be rejected at a 1\% level of significance. It is 
-  wider than the 95\% confidence interval.
+- The 95\% confidence interval is all values that cannot be 
+  rejected at a 5\% level of significance.
+- The 90\% confidence interval all values that cannot be 
+  rejected at a 10\% level of significance. 
+  - It is *narrower* than the 95\% confidence interval.
+- The 99\% confidence interval is all values that cannot be 
+  rejected at a 1\% level of significance. 
+  - It is *wider* than the 95\% confidence interval.
 
 ::: example
+**A confidence interval for the win probability**
+
 Calculating a confidence interval for $p_{red}$ is somewhat 
 tricky to do by hand, but easy to do on a computer:
 
@@ -365,203 +717,8 @@ cat(thetaCI[1]," to ",thetaCI[2],"\n")
 Notice that the confidence interval includes the fair value of $0.486$
 but it also includes some very unfair values.  In other words, while
 we are unable to rule out the possibility that we have a fair game,
-the evidence that we do is not actually very strong.
+the evidence that we have a fair game is not very strong.
 :::
-
-## Application: the mean
-
-Having described the general framework and a single example, we now
-move on to the most common application: constructing hypothesis
-tests and confidence intervals on the mean in a random sample.
-
-Let $D = (x_1,\ldots,x_n)$ be a random sample of size $n$
-on some random variable $x_i$ with unknown mean $E(x_i) = \mu_x$
-and variance $var(x_i) = \sigma_x^2$.  
-
-Let the sample average be:
-  $$\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$$
-and the sample variance:
-  $$s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
-Both of these statistics are easily calculated from the data,
-and we have previosly discussed their properties in detail.
-
-Suppose that you want to test the null hypothesis:
-  $$H_0: \mu_x = 0$$
-against the alternative hypothesis 
-  $$H_1: \mu_x \neq 0$$
-Having stated our null and alternative hypotheses, we need to
-construct a test statistic.
-
-Remember that our test statistic needs to have a known distribution
-under the null, and a different distribution under the alternative.
-
-Unfortunately, if we don't know the exact probability distribution
-of $x_i$ we don't know the exact probability distribution of statistics
-calculated from it.  Once we have a potential test statistic, there 
-are two standard solutions to this problem:
-  
-  1. Assume a specific probability distribution (usually a normal
-    distribution) for $x_i$.  We can (or at least a 
-    proefessional statistician can) then mathematically derive 
-    the distribution of any test statistic from this distribution.
-  2. Use the central limit theorem to get an approximate probability
-    distribution.
-
-### An asymptotic test
-
-We will start with solution \#2. 
-
-We do not know the exact probability distribution of $\bar{x}$, but 
-we know from the central limit theorem that the distribution of:
-  $$z_n = \sqrt{n}\frac{\bar{x}-\mu_x}{\sigma_x}$$
-is approximately $N(0,1)$ if $n$ is large enough. It would be natural
-to base our test statistic on $z_n$, since its (approximate)
-distribution is known.
-
-Unfotunately, $z_n$ is not a statistic because it includes the 
-unknown parameters $\mu_x$ and $\sigma_x$, but maybe we can find
-a test statistic that is similar to $z_n$.  
-
-We proceed in two steps:
-
-  1. Replace $\sigma_x$ with its consistent estimator $s_x$, 
-     the sample standard deviation.
-  2. Replace $\mu_x$ with its value under the null $\mu_0$.
-    
-This gives us the test statistic:
-  $$t_n = \sqrt{n}\frac{\bar{x}_n-\mu_0}{s_x}$$
-This really is a statistic, since we can calculate it from our
-data.
-
-We can divide $t_n$ into two components:
-  $$t_n = \sqrt{n}\frac{\bar{x}_n - \mu_x}{s_x} + \sqrt{n}\frac{\mu_x-\mu_0}{s_x}$$
-The first component is very similar to our $z_n$.  In fact,
-I can prove using the CLT and Slutsky's theorem that 
-  $$\sqrt{n}\frac{\bar{x}_n-\mu_x}{s_x} \rightarrow^D N(0,1)$$
-The proof is well beyond the scope of this class, so I will
-ask you to take it for granted.
-
-When the null is true, the second component is zero, so the
-asymptotic distribution is known under the null:
-  $$t_n \rightarrow^D N(0,1)$$
-When the null is false, the second component "explodes"
-as $n$ increases since it is $\sqrt{n}$ times a roughly
-constant number times. That is, the approximate distribution
-is different under the alternative.
-
-Having chosen our test statistic, we now choose critical 
-values.  Under the null, $t_n$ has the approximate $N(0,1)$
-distribution, so we can get critical values for a 5\% test:
-  $$c_L = 2.5 \textrm{ percentile of } N(0,1) \approx -1.96$$
-  $$c_H = 97.5 \textrm{ percentile of } N(0,1) \approx 1.96$$
-This kind of test is so common that I want you to remember these
-numbers.
-
-### A finite-sample test
-
-Most economic data comes in sufficiently large samples that the asymptotic
-distribution of $t_n$ is a reasonable approximation and the asymptotic
-test works well. But occasionally we have samples that are small enough
-that it doesn't.  
-
-Specifically, we are going to add the assumption that our data
-comes from a normal distribution:
-  $$x_i \sim N(\mu_x,\sigma_x^2)$$
-We are also going to use the same test statistic as in our asymptotic
-test:
-  $$t_n = \sqrt{n}\frac{\bar{x}_n - \mu_0}{s_x}$$
-Now at this point we should stop and note that normality of the 
-data is an *assumption* that may very well be false.
-
-If this was a more advanced course I would derive the 
-distribution of $t_n$ under the null.  But for ECON 233 I will
-just ask you to understand that it *can* be derived once we 
-assume normality of the $x_i$.
-
-The null distribution of this particular test statistic 
-under these particular assumptions was derived
-in the 1920's by William Sealy Gosset, a statistician working 
-at the Guiness brewery.  To avoid getting in trouble at work
-(Guiness did not want to give away trade secrets) Gosset published
-under the pseudonym "Student".  As a result, the family of 
-distributions he derived is called "Student's T distribution".
-
-More precisely, the test statistic $t_n$ as described above
-has Student's T distribution with $n-1$ degrees of freedom:
-  $$t_n \sim T_{n-1}$$
-when the null is true.
-
-The $T_{n-1}$ distribution looks a lot like the $N(0,1)$
-distribution, but has slightly higher probability of extreme
-positive or negative values.  As $n$ increases the 
-$T_{n-1}$ distribution converges to the 
-$N(0,1)$ distribution, just as predicted by the central 
-limit theorem.
-
-```{r tdistribution, echo=FALSE}
-x <- seq(-3,3,length.out = 100)
-t5 <- dt(x,df=4)
-t10 <- dt(x,df=9)
-t30 <- dt(x,df=29)
-tinf <- dnorm(x)
-plot(x,tinf, type="l",col="black")
-lines(x,t5,col="green")
-lines(x,t10,col="blue")
-lines(x,t30,col="red")
-```
-
-Having found our test statistic and its distribution under the null, 
-we can calculate our critical values:
-  $$c_L = 2.5 \textrm{ percentile of } T_{n-1}$$
-  $$c_H = 97.5 \textrm{ percentile of } T_{n-1}$$
-We can obtain these percentiles using Excel or R.
-
-For example, if we have 5 observations, then:
-```{r}
-  cat("cL = 2.5 percentile of T_4 = ",
-      qt(0.025,df=4),
-      "\n")
-  cat("cH = 97.5 percentile of T_4 = ",
-      qt(0.975,df=4),
-      "\n")
-```
-In contrast, if we have 30 observations, then:
-```{r}
-  cat("cL = 2.5 percentile of T_29 = ",
-      qt(0.025,df=29),
-      "\n")
-  cat("cH = 97.5 percentile of T_29 = ",
-      qt(0.975,df=29),
-      "\n")
-```
-and if we have 1,000 observations:
-```{r}
-  cat("cL = 2.5 percentile of T_999 = ",
-      qt(0.025,df=999),
-      "\n")
-  cat("cH = 97.5 percentile of T_999 = ",
-      qt(0.975,df=999),
-      "\n")
-  cat("cL = 2.5 percentile of N(0,1) = ",
-      qnorm(0.025),
-      "\n")
-  cat("cH = 97.5 percentile of N(0,1) = ",
-      qnorm(0.975),
-      "\n")
-```
-
-Notice that:
-
-  - The test is more ***conservative** (less likely to reject)
-    for smaller sample sizes.
-  - For any finite sample size this test is at least slightly more
-    conservative than the asymptotic test. However,
-    - At some point (around $n = 30$) the difference between 
-      the two tests becomes negligible.
-
-In practice, most data sets in economics have well over 30
-observations so economists tend to use asymptotic tests
-unless they have a very small sample.
 
 ### Confidence intervals for the mean
 
@@ -579,7 +736,7 @@ where $c_L$ and $c_H$ are our critical values.
 Plugging $t_n$ to this expression we fail to reject the null whenever:
   $$c_L < \sqrt{n}\frac{\bar{x}-\mu_0}{s_x} < c_H$$
 Solving for $\mu_0$ we fail to reject whenever:
-  $$\bar{x} - c_H s_x/\sqrt{n} < \theta_0 < \bar{x} - c_L s_x/\sqrt{n}$$
+  $$\bar{x} - c_H s_x/\sqrt{n} < \mu_0 < \bar{x} - c_L s_x/\sqrt{n}$$
 All that remains is to choose a confidence/size level, and 
 decide whether to use an asymptotic or finite sample test.
 
@@ -599,110 +756,7 @@ For example, if $n=5$, then $c_L \approx -2.78$,
 $c_H \approx 2.78$ and the 95\% confidence interval is:
   $$CI = \bar{x} \pm 2.78 s_x/\sqrt{n}$$
 As with hypothesis tests, finite sample confidence intervals
-are typically more conservative than their asymptotic
+are typically more conservative (wider) than their asymptotic
 cousins, but the difference becomes negligible as 
 the sample size increases.
-
-## Extensions
-
-### One-tailed tests and confidence intervals
-
-Our simple testing setup assumed we wanted to test a single
-point null:
-  $$H_0: \theta = \theta_0$$
-against all alternatives:
-  $$H_1: \theta \neq \theta_0$$
-The resulting test procedure features both a lower critical value
-$c_L$ and an upper critical value $c_H$.
-
-But there are many applications in which we are only interested
-in some alternatives. For example,
-
-  - In medical applications we usually want to know if a proposed
-    treatment has a *beneficial* effect.  Knowing that the treatment
-    has a nonzero effect is not particularly helpful, because that
-    could mean it *harms* the patients.
-  - In economic applications, we can often rule out some values for
-    parameters of interest. For example, we know that demand curves
-    slope down: this means that their slope (or elasticity) is always
-    zero or negative, and never positive.
-
-The solution to this is to perform what is called a ***one-tailed***
-test.  A one-tailed test differs from a standard two-tailed test
-in two ways:
-
-1. The alternative hypothesis is either:
-    $$H_1: \theta > \theta_0$$
-    or 
-    $$H_1: \theta < \theta_0$$
-    That is, we are ruling out some values of $\theta$ as either
-    impossible (as in example \#2 above) or simply uninteresting
-    (as in example \#1 above).
-2. We eliminate one of the critical values, and adjust the other 
-    critical value so that the size is at the desired level.
-    For example the critical values for a one tailed test at 
-    5\% significance are either:
-    $$c_L = -\infty$$
-    $$c_H = 95th \textrm{ percentile of the null distribution}$$
-    or
-    $$c_L = 5th \textrm{ percentile of the null distribution}$$
-    $$c_H = \infty$$
-
-Exactly which critical value should be dropped is usually clear 
-from the context.
-
-::: example
-Suppose that we are interested in testing:
-  $$H_0: \mu_x = 0$$
-  $$H_1: \mu_x > 0$$
-according to the usual asymptotic test at 5\% significance.
-
-Then our critical values are
-  $$c_L = -\infty$$
-  $$c_H = \textrm{95th percentile of the } N(0,1) \textrm{ distribution} = \Phi^{-1}(0.95) \approx 1.645 $$
-That is, we reject the null in favor of the alternative if 
-$t_n > 1.645$, and fail to reject the null otherwise.
-:::
-
-Why would you use a one-tailed test?
-
-  - By restricting the scope of the alternative, we gain
-    power for every value of $\theta$ in this restricted 
-    alternative.
-  - The cost of this gain in power is that the test is biased
-    if our restrictions are invalid (i.e., if the true $\theta$
-    is actually less than $\theta_0$)
-
-We can also invert one-tailed hypothesis tests to generate one-tailed
-confidence intervals. 
-
-
-::: example
-Continuing on with our mean example, the 
-one-tailed 95\% asymptotic confidence interval for $\mu_x$ 
-is either:
-  $$(-\infty,\bar{x}+1.645 s_x/\sqrt{n})$$
-or
-  $$(\bar{x} - 1.645 s_x/\sqrt{n}, \infty)$$
-depending on which tail we want.
-:::
-
-### Additional applications
-
-I have focused on the principles of inference and one important 
-application for testing the value of a single parameter:
-
-- We can test a linear restriction on a set of parameters, for example
-  a null hypothesis of the form:
-  $$H_0: \mu_x = \mu_y$$
-  where $\mu_x=E(x_i)$ and $\mu_y=E(y_i)$ are the mean of two
-  different random variables
-- We can test multiple hypotheses, for example a null hypothesis
-  of the form:
-  $$H_0: \mu_x = a \textrm{ and } \mu_y=b$$
-- We can test nonlinear hypotheses, for example:
-  $$H_0: \mu_x\mu_y = 1$$
-All of these are beyond the scope of this course, but it is useful
-to know that they are possible.
-
 
