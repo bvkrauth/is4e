@@ -1,0 +1,196 @@
+# Using R and ggplot
+
+```{r setup11, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("tidyverse")
+simdat <- tibble(xval=sort(rnorm(100)),
+                 yval=sign(xval)+0.3*rnorm(100),
+                 zval=as.integer(round(runif(100))))
+simdat$tmpval <- simdat$xval
+simdat$tmpval[simdat$xval < 0] <- NA
+```
+
+In this chapter we will learn how to:
+
+ - Produce simple graphs in R.
+
+
+## Graphing with ggplot
+
+### Making a simple graph
+
+#### Making a histogram
+
+We can make a histogram
+```{r}
+ggplot(data=simdat,mapping=aes(x=xval)) + 
+  geom_histogram()
+```
+This is already a pretty nice graph, though it could use some customization.
+
+The `ggplot()` function has a non-standard syntax, so I'd like to go over 
+it. 
+
+- The first part `ggplot(data=simdat,mapping=aes(x=xval))` sets up
+  the basic characteristics of the graph:
+    - The `data` argument tells R which data set (tibble) will be
+      used
+    - the `mapping` argument describes the basic ***aesthetics***
+      of the graph, i.e., the relationship in the data we will
+      be graphing.
+- The rest of the command is one or more statements separated by 
+  a `+` sign.  These are called ***geometries*** and are geometric
+  elements to be included in the plot.
+    - The geom_hist() geometry produces a histogram
+
+
+Explain this...
+```{r}
+# The default is to plot the number of cases
+# But often we want to plot the proportion of cases
+ggplot(data=simdat,mapping=aes(x=xval)) + 
+  geom_histogram(aes(y=..density..))
+```
+
+
+#### Making a line graph
+
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_line()
+```
+
+
+#### Making a scatter plot
+
+We can also make a scatter plot
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point()
+```
+This is different from our histogram in two ways:
+  - The geometry is geom_point rather than geom_hist.
+  - The aesthetic also includes a `y` value, as require to plot $(x,y)$
+
+
+### Customizing your graph
+
+#### Titles and labels
+
+Titles: You can add a title and subtitle, and you can change the axis titles: 
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point() + 
+  labs(title="Main title here",
+      subtitle="subtitle here",
+      caption="caption here",
+      tag="tag here") +
+  xlab("x label here") +
+  ylab("y label here")
+```
+
+#### Color and shapes
+
+Using color: you can change the color of any geometric element
+using the `col=` argument:
+```{r}
+# You can fix the color of a geographic element at a preferred value
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point(col="red") 
+```
+
+You can also color-code a geographic element based on some other variable by including it as part of the aesthetic
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point(aes(col=as.factor(zval)))
+```
+
+Using shapes: you want to make sure your graph can be read by a reader
+who is color blind or is printing in black and white. So we can use 
+shapes in addition to color:
+```{r}
+# You can also color-code a geographic element based on some other variable
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point(aes(col=as.factor(zval),shape=as.factor(zval)))
+```
+
+### Adding plot elements 
+
+We can include multiple geometries in the same graph.
+
+For example, suppose we want to add a smooth fit to our scatter 
+plot. We can do that with the `geom_smooth()` geometry:
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point() +
+  geom_smooth()
+```
+Notice that by default, the graph includes both the fitted line
+(in blue) and a 95\% confidence interval (the shaded area around
+the line).  
+
+Alternatively, we could add a linear fit:
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+  geom_point() +
+  geom_smooth(method="lm") 
+```
+
+Finally, there is no built-in option to generate a binned 
+scatterplot, but we can do it with a little work:
+```{r}
+ggplot(data=simdat,aes(x=xval,y=yval)) + 
+ geom_point(size=0.5) +
+  stat_summary_bin(fun='mean', bins=20,
+                   col="blue", size=3, geom='point') +
+  stat_summary_bin(fun='mean', bins=20,
+                   col="blue", size=0.5, geom='line')
+```
+It took me a little while to figure this one out - I wouldn't 
+expect you to do anything so complicated.
+
+### A few other graphs
+
+The histogram, time series (line) graph and scatter plot 
+are the core graphs I want you to be able to produce. But ggplot2
+has many other pretty and useful graphs, so I would like to show
+you a few of them.
+
+Some alternatives to the histogram include:
+```{r}
+# A smooth density (PDF) function too
+ggplot(data=simdat,mapping=aes(x=xval)) +
+  geom_density()
+# Histograms don't work well for discrete variables
+ggplot(data=simdat,mapping=aes(x=zval)) +
+  geom_histogram()
+# geom_freqpoly is recommended instead
+ggplot(data=simdat,mapping=aes(x=zval)) +
+  geom_freqpoly()
+# This is called a box plot. It shows the mean
+ggplot(data=simdat,mapping=aes(x=xval,y=as.factor(zval))) + 
+  geom_boxplot()
+```
+We can put two densities in the same graph for comparison: 
+```{r}
+# The fill option changes the color under the density
+# The alpha option makes the fill partially transparent
+ggplot(data=simdat) + 
+  geom_density(aes(x=xval),fill="red",alpha=0.5) +
+  geom_density(aes(x=yval),fill="blue",alpha=0.5)
+```
+
+## Data cleaning with R (if time allows)
+
+
+### Some basic data-cleaning functions
+
+#### filter
+
+
+#### select
+
+#### arrange
+
+#### mutate
+
