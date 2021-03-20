@@ -1,7 +1,7 @@
 # An introduction to R
 
 ```{r setup10, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,prompt=TRUE,tidy=TRUE,collapse=TRUE)
 library("tidyverse")
 simdat <- tibble(xval=sort(rnorm(100)),
                  yval=sign(xval)+0.3*rnorm(100),
@@ -185,7 +185,7 @@ other things.
 
 In addition to ordinary text and Markdown information, R Markdown
 documents can include pieces of executable R code.  R code needs to be 
-included within a ***code fence*** that identifies the text inside 
+surrounded by a ***code fence*** that identifies the text inside 
 the fence as R code, and in some cases provides additional information
 about how it should be executed.  This sounds complicated, but is
 easy to see in a real R Markdown file.
@@ -339,7 +339,9 @@ change a file, or change something in R's memory.
 # It causes R to plot a histogram of 100 N(0,1) random numbers
 hist(rnorm(100))
 ```
-The "side effect" is often the main purpose of the expression.
+
+Although we call it a "side effect", the side effect is often the 
+main purpose of the expression.
 
 ### Assignment
 
