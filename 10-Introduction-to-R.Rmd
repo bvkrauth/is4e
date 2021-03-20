@@ -9,180 +9,386 @@ simdat <- tibble(xval=sort(rnorm(100)),
 simdat$tmpval <- simdat$xval
 simdat$tmpval[simdat$xval < 0] <- NA
 ```
+R is an application that has many of the same features as Excel, 
+but is specially designed for statistical analysis. It is a 
+little more complex, but more powerful in many important ways. 
+
+In this course, we will only have time to learn a little bit about
+R, so my goal is not to give a comprehensive treatment. My goal here 
+is primarily to introduce you to the terminology and concepts of R, 
+and to show you a few applications where R outshines Excel.  You will
+learn much more about R in ECON 333 and (if you take it) ECON 334. 
+
+:::goals
+**Chapter goals**
 
 In this chapter we will learn how to:
 
- - Write and execute a simple script in R
- - Perform basic tasks for reading and processing data
-  in R.
- - Calculate summary statistics in R.
- - Manage R: install and load libraries, etc.
+- Write and execute some simple R commands in the console window
+  a script, and an R Markdown document.
+- Perform simple calculations in R.
+- Manage R by installing and loading libraries, and opening and closing
+  files.
+:::
 
-## R basics
-
-### A brief tour of RStudio
+## A brief tour of RStudio
 
 Start the program RStudio. You should see something that looks like
 this:
 
-> INSERT RSTUDIO SCREENSHOT HERE.
-  
+![RStudio screen shot](bin/Rstudio.png)
+
 You may wonder what the difference is between R and RStudio.
 
-- R is the program we use to do statistical analysis. 
-- RStudio is an *integrated development environment* for R. It combines 
-  R with a set of additional tools that are helpful for using it: 
+- R is a programming language designed for statistical analysis.
+- R is also the computer program that runs R commands.
+  - It can also run R  ***scripts***, which are just a series of
+    R commands written in a text file.
+- RStudio is an *integrated development environment* (IDE) for 
+  R. It combines R with a set of additional useful tools: 
   - an interactive session of R (running in the "Console" window).
-  - a text editor for writing R scripts.
-  - the ability to run R scripts in batch mode 
+  - a text editor for writing R scripts and R Markdown documents.
   - tools for managing files and packages used by R
   - tools for comparing and combining scripts and other files
   - help and documentation
   -  many other features
 
-You can also just use R directly, it just won't have all of these 
-extra features.
+You can run commands and scripts in R itself, but without RStudio
+you won't have all these handy extra features.  So most people 
+these days use RStudio or another IDE.
 
-RStudio normally displays four open windows, each with tabs you can 
-select. We will not use most of them, but some of them will be very handy 
-indeed.
+RStudio normally displays three or four open windows, each of which has tabs 
+you can select to access different features. We will not use most of them, 
+but some of them will be very handy indeed.
 
-### Using the command line
+### The console window
 
 Like most programming languages, R is designed to execute a series
-of commands provided by the user.
+of commands provided by the user.  The simplest way to have R execute
+a command is by entering it into the ***Console*** window in the 
+lower left corner.
 
-- You can type commands into the "Console" window (lower left corner), 
-  and they will be executed as you enter them.
-- Or you can type a series of commands into a text file (a ***script***)
-  and tell R to execute them all in sequence.
+::: example
+**Using the console window**
 
-Let's start with the command line.  Move your cursor into the console 
-window, type the command `print("Hello world!")` and press the `Enter` key to
-execute the command.  
+Move your cursor into the console window, type the command 
+`print("Hello world!")` and press the `Enter` key to execute the command.  
 ```{r}
 print("Hello world!")
 ```
-Congratulations, you have successfully executed an R command.
+As you type your command in, you may notice that RStudio showed various
+pop-ups with helpful information about the command.  It will also
+autocomplete your command for you.
+:::
 
-#### Accessing the command history
+R maintains a ***command history*** that remembers commands you
+have previously entered.  This is useful when you did something a while
+ago, but either don't remember exactly how you did it, or don't want to type
+it all in from the beginning.
 
-Suppose you decide you want to say "Hello [your name]!" instead. You
-*could* type the command in again, but there's an easier way:
-RStudio maintains a history of previously executed commands for your 
-convenience. You can access it in one of two ways:
+The simplest way of accessing recent commands is to press the up-arrow
+key while in the console window.
 
-1. Press the up arrow key in the console window to show the most recently 
+:::example
+**Accessing the command history**
+
+Suppose you decide you want to say "Hello [your name]!" instead of 
+"Hello world", and you don't want to type in the whole command. Then
+you can:
+
+1. Press the up-arrow key in the **Console** window to show the most recently 
   executed command. If you press it a second time it gives you the 
   command before that, and so on.
-2. Click on the "History" tab in the upper right corner of your screen to
-  see the full command history.  You can double-click on any command in this
-  history and have it copied to the console.
-  
-Use either of those methods to copy your previous command to the console
-and then edit it to look the way you want:
-```{r}
-print("Hello Brian")
-```
+2. Look at the to the **History** window in the upper right corner to see
+   a full list of recently exectued commands.  You can double-click on 
+   any command in the window to copy it to the Console window.
 
-### Using scripts
+Once you have copied the previous command, you can edit it before
+pressing `<enter>`.
+:::
 
-The command line is ideal for basic tasks and trying things out, and 
+### Scripts
+
+The Console window is ideal for simple tasks and experimentation, and 
 we will continue using it regularly.  But in order to create reproducible
 research and take full advantage of R's capabilities, we will need 
 to write and execute ***scripts***. 
 
 An script is just a text file containing a sequence of R commands.  By 
-convention an R script has the .R extension but any text file will 
-work. Let's open and run an existing R script:
+convention, an R script should have the `.R` extension but any text file will 
+work. 
 
-1. Open the script [filename] in RStudio.  
-  - If you are already running RStudio, you can do this by selecting 
-    `file` and then `open file` from the menu, and following 
-    the usual procedure for opening a file.
-  - You can also do this by double-clicking on the file.
-  Once you have opened the file it should look like this 
-  > INSERT FIGURE HERE
-2. Look for the button in the top of that sub-window marked `Source`, 
-  and click on it. 
-  - You will see a stream of results appearing in the Console 
-    window.  This is your script running.
+::: example
+**Creating an R script**
 
-Once the script has completed running (I have set it up to display "DONE" 
-once it is done), let's look around.
+To create an R script  
 
-  - If you look in the console window, you will see the output from
-    the script: all the statistical calculations we did in Excel earlier.
-  - If you click on the Plots tab in the lower-right window, you can 
-    see the graphs produced by the script.
+1. Select `File > New File > R Script` from the menu.
+2. Enter a valid command in the first line of the file, for example 
+  `print("Hello world!")`
+3. Enter another valid command in the second line of the file,
+   for example `print("Goodbye world?")`
+4. Select `File > Save` to save your file.
+   - Name it "Chapter10Example.R"
 
-Let's go back and take a look at the script itself.  There are a few 
-elements that I'd like to point out:
+To run your script:
 
-- The first line in the script is `remove(list=objects())
-  - Without going into unnecessary details, this command tells R
-    to clear its memory before proceeding.
-  - It should be the first line in every script. In order for your
-    analysis to be reproducible, you want this script to do the 
-    exact same thing every time you run it.
-- There are some lines that begin with "#".  
-  - These are comments. 
-  - R will ignore anything on a line that appears after the # character.
-- RStudio uses color to distinguish different language
-  elements like functions, strings and comments.
+1. Press the ![Source](bin/RSourceButton.png){width=10%} button.
 
-Now let's write our own script.  
+You will see the results of your commands in the Console window.
+:::
 
-1. Select `File`, then `New File` and then `R Script` from the menu 
-  to create a blank file.
-2. Enter a valid command in the file, for example `print("hello world")`
-  and then save the file by selecing `File` and then `Save` from the
-  menu.
-3. Execute the file again by clicking on the button marked `Source`.
+### R Markdown
 
-Having written our first script, let's return to the console window.
+RStudio can also run text files written in the ***R Markdown*** format. R
+Markdown files have the `.Rmd` extension. 
 
-### Basic language elements
+R Markdown is a language for producing documents - HTML files (web pages), 
+Microsoft Word documents, PDF files, etc. - that have R code and analysis
+embedded in them. In fact, this book is written in R Markdown.
 
-Like Excel, R can perform various mathematical calculations. For example, 
-enter the command "sqrt(2)" in the console window:
+R Mardown is an implementation of the Markdown markup language in R. 
+
+::: fyi
+**What is Markdown?**
+
+Markdown is a markup language just like HTML, which means that it is 
+a way of writing documents in text files whose content is
+readable directly but can also be formatted and displayed (rendered)
+in a visually appealing way. 
+
+The original idea of HTML was that content creators could write 
+their content in text files (pages), with a few HTML tags sprinkled
+around to give the browser information about structure, and then 
+the browser would display the page.  However, as web users demanded
+fancy graphics, custom colors, interactivity, and mobile-friendly
+display, HTML became much more complicated.
+
+Markdown was created as radically simplified markup language. The basic
+idea is to use common conventions for how to indicate structure in
+a text file.
+
+- Adjacent lines of text are interpreted as part of the same paragraph.
+- A line of text following a blank line starts a new paragraph.
+- A line of text that begins with "#" is a header, with "#" for level 
+  one headers, "##" for level two, etc.
+- A line of text that begins with "-" is a bullet point.
+- A line of text that begins with a number is part of a numbered list.
+- Text written like `*this*` is rendered like *this*. 
+- Text written like `**this**` is rendered like **this**. 
+- Text written like `***this***` is rendered like ***this***. 
+
+Markdown documents can also include links and pictures (by simply
+providing the URL or file name), tables, and all sorts of 
+other things.
+:::
+
+In addition to ordinary text and Markdown information, R Markdown
+documents can include pieces of executable R code.  R code needs to be 
+included within a ***code fence*** that identifies the text inside 
+the fence as R code, and in some cases provides additional information
+about how it should be executed.  This sounds complicated, but is
+easy to see in a real R Markdown file.
+
+:::example
+**Creating an R Markdown file**
+
+To create our first R Markdown file:
+
+1. Select `File > New File > R Markdown` from the menu.
+   - You will see a dialog box that looks like this:
+      ![New R Markdown file](bin/NewRMarkdown.png)
+2. The default options are fine, so select `OK`.
+3. Save the file.
+
+RStudio has taken the liberty of creating an example R Markdown file that
+you can use as a template.  
+:::
+
+You can run the R code in an R Markdown document in one of two ways:
+
+You can run and display results for individual ***chunks*** of code. A 
+chunk is a few lines of R code surrounded by a code fence.
+
+::: example
+**Running code chunks**
+
+To run a code chunk in our R Markdown file:
+
+1. Go to the code chunk that looks like this:
+   ![An example code chunk](bin/CodeChunk.png)
+2. Press the ![Run current chunk](bin/RunCurrentChunk.png) button.
+
+As you can see, the code in the chunk will run and the results
+will be displayed below.
+   ![Code chunk with output](bin/CodeChunkWithOutput.png)
+:::
+
+You can also ***knit*** the entire R Markdown file into an HTML/word/PDF
+document that includes both the text and the R results by pressing 
+the Knit button.
+
+::: example
+**Knitting an R Markdown document**
+
+To knit an entire document:
+
+1. Press the ![Knit](bin/KnitButton.png){width=15%} button.
+
+It will take a few moments to process the file, and then the HTML
+file will open in a browser.
+:::
+
+By default, R Markdown files usually knit to HTML, but we can knit
+to other file formats including Word and PDF.  We will stick to 
+HTML in this course.
+
+:::fyi
+**R Markdown resources**
+
+R Markdown is as simple or as complicated as you want to make it. A plain
+text file with a few lines of content is a valid R Markdown file, and
+like HTML, Markdown is designed so it still "works" if you do something
+unexpected.
+
+If you want to try something new in R Markdown, or have forgotten how to do 
+something, the most useful resource is the one-page *R Markdown Cheatsheet*.  It 
+is available directly in RStudio, or at 
+https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf.
+You can also just search for "r markdown cheatsheet".
+:::
+
+### Other RStudio features
+
+RStudio has many other features, most of which we will not use. But I
+would like to highlight a few that may seem useful.
+
+In the lower right window:
+
+- The **Files** tab gives you easy access to files in the current 
+  active folder.
+- The **Plots** tab will display plots, when you create them.
+- The **Packages** tab is useful for managing packages (more
+  on them later)
+- The **Help** tab allows you to access R's help system.
+  
+In the upper right window
+
+- The **Environment** tab allows you to view all currently-defined
+  variables and their values.
+- The **History** tab shows the command history.
+
+In the menu:
+
+- You can select `Session > Restart R` to clear the memory and 
+  restart the current R session.
+
+We are done for now, so close RStudio. You may get a warning message that 
+looks something like this:
+
+  ![Save workspace dialog box](bin/RSaveWorkspace.png)
+
+Never click on the `Save` button here, as it would cause R to
+save the current state of its memory and re-load it next time you start R.
+In the interest of reproducibility, you should start R "clean" every time.
+Click on the `Don't Save` button, and you will exit RStudio.
+
+## The R language
+
+Next, we will learn some basic features of the R language.  Open RStudio
+and go to the console window so we can enter commands and see what they
+do.
+
+### Expressions 
+
+An ***expression*** is any piece of R code that can be evaluated on its
+own. For example:
+
+- Any text, numerical or logical constant: `"Hello world"`, `105`, `1.34`, or `TRUE`. 
+- Any complete formula built from functions and arithmetic
+  operators: `log(10)` or `2+2`
+
+An expression needs to be complete, for example `ln(` is not an
+expression, nor is `2+`.  
+
+Every valid R expression ***returns*** a value, also called an 
+***object***.  
+
+  - An object can be a number, a text string, a date, or a logical value,
+    just like in Excel.
+  - Objects can also be much more complex
+
+You can execute any valid R expression as a command, and have it display
+the value it returns.  
 ```{r}
-sqrt(2)
+# This is a comment. R ignores everything in a line after the "#"
+4+5
 ```
-As you can see, R read in your command, executed it and displayed the 
-result.  There are hundreds of built-in mathematical and statistical 
-functions in R.
 
-#### Objects and assignment
+You can also use any valid R expression within a larger expression.
+```{r}
+sqrt(4+5)
+```
 
-In addition to performing calculations, we can assign the results of
-the calculation to named ***objects***.  An object is basically a piece
-of information that R keeps in its memory and can be referred to later.
+In addition, some expressions have a ***side effect***.  That is, they make
+something happen: they cause something to appear on your computer screen, or
+change a file, or change something in R's memory. 
 
-We use the assignment operator `<-` to create or redefine an object. Once
-an object is defined, we can use it in other commands. We can display
-the contents of an object using the `print()` function, or by simply
-entering its name:
+```{r}
+# This expression has a side effect
+# It causes R to plot a histogram of 100 N(0,1) random numbers
+hist(rnorm(100))
+```
+The "side effect" is often the main purpose of the expression.
+
+### Assignment
+
+We can use the `<-` or ***assignment*** operator to assign the results
+of an expression to a named variable.  We can then use that
+variable in later expressions.
+
+For example, the R command `x <- 2` assigns the value `2`
+(i.e., the number 4) to the variable `x`.  Any subsequent code
+can then refer to the variable `x` in its own calculations or 
+actions.
+
+:::example
+**Using the assignment operator**
+
+```{r}
+# This will cause the variable x to take on the value 2
+x <- 2
+# We can then use x in any expression
+y <- x + 1
+print(y)
+# We can change the value of x at any time
+x <- 0
+# But this will not change the result of any previous calculations
+print(y)
+```
+
+:::
+
+We can display the contents of an object using the `print()` 
+function, or by simply giving its name:
 ```{r}
 x <- 5
 print(x) 
-x <- sqrt(2) 
-print(x)
-print(x - 1)
-y <- x*x
-print(y)
-y
+x
 ```
 
-#### Vectors
+### Vectors
 
 The primary data structure in R is a ***vector***, which is just 
-an ordered list of elements.  The simplest type of vector is 
-called an ***atomic vector*** - its elements are normally: 
+an ordered list of elements.  
 
-  - strings OR
-  - numbers OR
-  - logical values (either TRUE  or FALSE)
+The simplest type of vector is called an ***atomic vector*** - its 
+elements are normally from one of R's basic or ***atomic*** data
+types: 
+
+- text strings 
+- numbers 
+- logical values (either TRUE  or FALSE)
   
 The elements of an atomic vector need to be all part of the same 
 atomic type; a single vector cannot contain both strings and numbers,
@@ -197,93 +403,115 @@ There are many other functions that can be used to construct vectors. Two
 particularly useful ones are `rep` which repeats something a particular
 number of times, and `seq` which creates a sequence:
 ```{r}
+# REP repeats something a particular number of times (like Excel's Fill tool)
 ones <- rep(1,times=10)
 print(ones)
+# SEQ creates a sequence (like Excel's Series tool)
 evens <- seq(from=2,to=20,by=2)
 print(evens)
+# You can also create a sequence with the : operator:
+print(1:10)
 ```
 
 Mathematical functions in R operate directly on vectors, and automatically
 expand scalars (single numbers) to vectors as needed:
 ```{r}
-# This adds one to every element of evens
-odds <- evens - 1
-print(odds)
-# This does the same
+# This command subtracts 1 from every element in evens
 odds <- evens - ones
+print(odds)
+# This command does the same
+odds <- evens - 1
 print(odds)
 ```
 
-To select part of a vector you use the subscript operator `[]`. You can
-enumerate the indexes of the elements you want:
+The ***subscript operator*** `[]` can be used to select part of a 
+vector. You can enumerate the indexes of the elements you want:
 ```{r}
-# You can specify a single index:
+# You can give a single index
+# evens[2] is the 2nd element in evens
 x <- evens[2]
 print(x)
 # You can give a vector of indices
+# evens[c(2,5)] is a vector containing the 2nd and 5th element in evens 
 x <- evens[c(2,5)]
 print(x)
-# You can provide a range of indices
+# You can give a range of indices
+# evens[2:5] is a vector containing the 2nd, 3rd, 4th and 5th element in evens 
 x <- evens[2:5]
 print(x)
 ```
 
-Instead of providing a list of atomic elements, you can provide a list of
-logical values. R will then operate on those elements whose corresponding
-list has the value TRUE:
+You can also provide logical values instead of numeric indices. R will then 
+operate on those elements whose corresponding item has the value TRUE:
 ```{r}
-forexample <- (evens < 10)
-print(forexample)
-x <- evens[forexample]
+print(evens)
+# This creates a vector of the same length as evens, that contains TRUE
+# for all values less than 10, and FALSE for all other values
+lessthan10 <- (evens < 10)
+print(lessthan10)
+# This creates a vector that includes only those elements of evens
+# for which forexample is TRUE
+x <- evens[lessthan10]
 print(x)
-x <- evens[evens > 5]
+# This is a quicker way of accomplishing the same result
+x <- evens[evens < 10]
 print(x)
 ```
 
-Vector subscripting works on both sides of the assignment vector:
+Vector subscripting can be used on either side of the assignment operator:
 ```{r}
 x <- evens
 print(x)
+# This assigns the number 1000 to the 2nd element in x
 x[2] <- 1000
 print(x)
 ```
 
-#### Lists and other object types 
+### Lists 
 
 The other type of vector is a ***list***.  A list is a vector whose
-elements are other objects. These objects can be any type, so we can
-use lists inside lists to build very complex objects.  Lists can
-be built using the `list()` function:
+elements are themselves other vectors. These vectors can be any 
+type, so we can use lists inside lists to build very complex 
+objects.  
+
+Lists can be built using the `list()` function:
 ```{r}
 everything <- list(fruits,evens,odds)
 print(everything)
 ```
-You can access part of a list by specifying its index inside of the 
+You can (and should) assign names to the elements of a list:
+```{r}
+everything <- list(fruits=fruits,evens=evens,odds=odds)
+print(everything)
+```
+You can access part of a list by specifying its numerical index inside of the 
 `[[]]` operator:
 ```{r}
 print(everything[[2]])
 ```
-You can also assign names to the elements of a list, and then reference 
-them by name using either `[[]]` or `$` notation:
+If the items in a list are named, you can also access 
+them by name using either `[[]]` or `$` notation
 ```{r}
-everything <- list(fruits=fruits,evens=evens,odds=odds)
-print(everything)
-x <- everything[["evens"]]
-print(x)
-x <- everything$fruits
-print(x)
+print(everything[["evens"]])
+print(everything$fruits)
 ```
-You can add elements to an existing list using the `$` notation:
+
+You can also use the `$` notation to add new items to an existing list:
 ```{r}
+# There is no element in everything called "allnumbers" 
 everything$allnumbers <- c(evens,odds)
+# But now there is...
 print(everything)
 ```
 
-#### Attributes of an object
+### Attributes
 
-Finally, any object can also have ***attributes***.  This is a list 
-associated with the object that provides additional information. Let's see
-if any of the objects we have created have attributes:
+Any object can also have ***attributes***.  This attributes of an
+object are a list associated with the object that provides additional 
+information.
+
+Let's see if any of the objects we have created have 
+attributes:
 ```{r}
 print(attributes(fruits))
 print(attributes(evens))
@@ -296,59 +524,59 @@ Note that:
 - our list stores the names of its three elements in 
   the `$names` attribute.  
 
-R has hundreds of other object types that are built from atomic vectors,
+R has hundreds of standard object types that are built from atomic vectors,
 lists, and attributes.  These object types include matrices, arrays,
-objects structured as the output of a particular statistical analysis,
+data sets, objects structured as the output of a particular statistical analysis,
 descriptions of graphs, and so on.  Users can also define their own object
 types, and there is an extensive system for generic functions and
-object-based programming (if you know what that is). We will not go 
-into any of that.  
+object-based programming (if you know what that is). 
 
-#### Functions and operators
+### Functions and operators
 
-Our last basic language element is the ***function***.  Let's get to know
-the main features of functions in R by considering the `seq()` function.
+There are hundreds of built-in mathematical and statistical ***functions*** 
+in R, and users can easily define their own functions. As you have seen, 
+their format and usage is quite similar to Excel though there are a few important 
+differences.
 
-Functions have the following features:
+Let's get to know the main features of functions in R by considering the
+`seq()` function.  We have already seen this function: it is used to
+create a vector with a sequence of numbers, much like Excel's *Series*
+tool.
 
-- Every function has a name. In our example, the functions name
-  is `seq`.
-- You can obtain help on any function by entering `?` and its name
-  in the console window, for example `? seq`.
-- Most functions accept one or more ***arguments***. For example,
-  the seq functions arguments include `from`, `to`, `by` and 
-  `length.out`
-  - Every argument has a *name* and a *position*.  For example,
-    the `from` argument is in position one, the `to` argument
-    is in position two, etc.
-  - Arguments can be passed to the function by *name* or by *position*.
-    - Passing by name looks like this:`seq(from=1,to=5)`
-    - Passing by position looks like this: `seq(1,5)
-    - You can mix both methods: `seq(1,5,length.out=10)`
-    - I recommend passing by position for simple functions, 
-      and passing by name for more complex functions, but it
-      is really just a matter of what works for you.
-  - Some arguments are required. They must be provided every time the
-    function is called, or else the function will return an error. 
-  - Some arguments are optional. They *can* be provided, but have
-    a default value if not provided. All arguments to `seq()` are
-    optional; execute the command `seq()` to see what happens.
-- Every function returns a value.  This is even true for functions 
-  like `print()`.  To see this: execute the command:
-  
-```{r}
-y <- print("Hello world")
-print(y)
-```
-  As you can see, `print("Hello world")` returns "Hello world" as its
-  value.
-- Some functions also produce ***side effects***.  For example, the
-  `print()` function causes its argument to be printed to the console
-  window, and the `save()` function causes a file to be saved on your
-  computer.  In some cases like these two examples, the "side effects"
-  are actually the main reason for calling the function.
-R has hundreds of built-in functions, and users can easily define their
-own functions.  We will not do that in this class.
+1. Every function has a name. 
+   - In our example, the function's name is `seq`.
+2. You can obtain help on any function by entering `?` and its name
+   in the console window
+   - Try `? seq`.
+3. Most functions accept one or more ***arguments***. 
+   - The `seq` function's arguments include `from`, 
+    `to`, `by` and `length.out`
+   - Every argument has a *name* and a *position*.  For example,
+     the `from` argument is in position one, the `to` argument
+     is in position two, etc.
+   - Arguments can be passed to the function by *name* or by *position*.
+     - Passing by name looks like this:`seq(from=1,to=5)`
+     - Passing by position looks like this: `seq(1,5)`
+     - You can mix both methods: `seq(1,5,length.out=10)`
+     - I recommend passing by position for simple functions, 
+       and passing by name for more complex functions, but it
+       is really just a matter of what works for you.
+   - Some arguments are required. They must be provided every time the
+     function is called, or else the function will return an error. 
+   - Some arguments are optional. They *can* be provided, but have
+     a default value if not provided. 
+     - All arguments to `seq()` are optional; execute the command `seq()` 
+       to see what happens.
+4. Every function returns a value.  This is even true for functions 
+   like `print()`.  To see this: 
+   ```{r}
+   y <- print("Hello world")
+   print(y)
+   ```
+   As you can see, `print("Hello world")` returns "Hello world" as its
+   value.
+5. Some functions also produce ***side effects***, as we have described
+   earlier.
 
 In addition to functions, R has the usual binary mathematical 
 ***operators*** such as `+`, `-`, `*` and `/`.  Operators are
@@ -357,7 +585,7 @@ the `+` operator is really just another way of calling
 the `sum()` function:
 ```{r}
 # These two statements are equivalent
-2+2
+2 + 2
 sum(2,2)
 ```
 There are several other commonly used operators:
@@ -373,8 +601,8 @@ There are several other commonly used operators:
 2 == 3
 2 > 3
 # Logical operators
-TRUE & FALSE # this is logical AND
-TRUE | FALSE # this is logical OR
+2 == 3 & 2 < 3 # this is logical AND
+2 == 3 | 2 < 3 # this is logical OR
 ```
 The assignment operator is also an operator. It is equivalent to the 
 `assign()` function:
@@ -390,261 +618,173 @@ print(x)
 print(y)
 ```
 
-### Packages and the tidyverse
+## Packages and the Tidyverse
 
-R has many useful built-in functions and features.  
-
-But one of its most useful features is how easy it can be extended 
-by users, and the fact that it has a large user community who have 
+R has many useful built-in functions and features.  But one of its 
+most useful features is how easy it can be extended by users, and the 
+fact that it has a large user community who have 
 provided ***packages*** of useful new functions and data.  
+There are thousands of packages available online.  We will use a particularly
+useful package called the ***Tidyverse***. 
 
-We will use one of these packages called the ***tidyverse***. The tidyverse
-was created by the data scientist Hadley Wickham (also one of the key
-people behind RStudio) as a way of solving some problems with R.
+:::fyi
+**What is the Tidyverse?**
+
+The Tidyverse was created by the data scientist Hadley Wickham (also one of 
+the key people behind RStudio) as a way of solving some long-standing problems
+with R.  The Tidyverse is both an R package containing a set of new functions 
+and data structures as well as a philosophy about *how* to analyze data.
+
 The basic structure of R dates back to 1976 (R itself was created in the early
 1990s but is closely based on an earlier program called S). Computer science
-has advanced a lot since 1976, so some aspects of R seemed like a good idea 
-at the time but would be designed differently today.  There are many
-different ways of doing the same thing, there are many rarely-used functions,
-and there are a few functions that don't do what they should. But if we
-change any of the functions in base R that will cause thousands of existing
-programs to stop working.
+has advanced a lot since 1976, so some design aspects of R seemed like a good
+idea at the time but would be designed differently today.  
 
-The tidyverse addresses this problem by replacing many Base R 
-functions with an alternative versions that are easier to use, 
+- Too many different ways of doing the same thing
+- Too many rarely-used functions,
+- Some functions that don't do what they should. 
+
+Unfortunately, we can't change any of the original functions without 
+causing thousands of existing programs to stop working.
+
+The Tidyverse addresses this problem by replacing many Base R 
+functions with alternative versions that are easier to use, 
 better-designed, and usually faster. It does this in part by 
-being "opinionated" - for example, functions for data analysis
-assume that you have put the data into tidy format.
+being "opinionated" - for example, most data analysis tools 
+in the Tidyverse expect data to be in a tidy format.  This
+reflects a philosophy that data cleaning should precede and be
+separate from data analysis.
+:::
 
-Before you can use a package, it needs to be ***installed*** on your 
-computer using the `install.packages()` function.
+Most commonly-used packages including the Tidyverse are open-source,
+and are available online from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/). 
 
-- Most commonly-used packages including the tidyverse are available 
-  online from the Comprehensive R Archive Network (CRAN). You can
-  get a list of all available CRAN packages by simply executing
-  the `install.packages()` function with no arguments:
-```{r}
-#install.packages()
+Before you can use any package, two steps must be followed:
+
+1. The package needs to be ***installed*** on your computer using 
+   the `install.packages()` function. 
+   - This only needs to be done *once* for each package.
+2. The package needs to be ***loaded*** into memory using the `library()` 
+   function.
+   - This needs to be done in *every* R session.
+
+Once the package is installed and loaded, you can use its functions
+and other features.
+
+:::example
+**Loading the Tidyverse**
+
+You can get a list of all available CRAN packages by simply executing
+the `install.packages()` function with no arguments:
+```{r eval = FALSE}
+install.packages()
 ```
-- If you know the name of the CRAN package you want to install, 
-  you can provide it as the argument:
-```{r}
-#install.packages("tidyverse")
+If you know the name of the CRAN package you want to install, 
+you can provide it as the argument:
+```{r eval = FALSE}
+install.packages("Tidyverse")
 ```
 You only need to install each package once.
 
 However, installing a package only puts the files on your computer. In order
 to actually use the features of a package you need to load it into 
 memory during your current R session using the `library()` function:
-```{r}
-library("tidyverse")
+```{r eval = FALSE}
+library("Tidyverse")
 ```
+You can then use the Tidyverse functions and other tools.
+:::
 
-### Let's do something useful
+## Some examples
 
-Let's finish this introductory material by doing something useful with R.
-Suppose we want to plot the $N(0,1)$ PDF.  How do we go about doing that?
-We start by describing step-by-step what we need to do:
+I have explained some of the basic structure of R, but the best 
+way to learn a tool is by using it.
+
+::: example
+**Plotting a PDF**
+
+Suppose we want to plot the $N(0,1)$ PDF. We can start by describing 
+step-by-step what we need to do:
 
 1. Construct a vector $x$ of values at which to plot the PDF.
 2. Calculate a vector $p = \phi(x)$, where $\phi(\cdot)$ is the
   $N(0,1)$ PDF.
 3. Plot $p$ against $x$.
 
-Then we need to figure out how to accomplish each step.
+Then we need to figure out how to accomplish each step using R:
 
-Step 1 can be acccomplished using the `seq()` function, which we have already
-used. If you know the name of the function you want to use, you can
-access its help page by executing the command `? [function name here]`:
-```{r}
-# ? seq
-```
-As you can see, the `seq()` function takes arguments `from=` (for the 
-starting point), `to=` (for the end point), and `length.out=` (for the
-total number of points).  Let's plot the function at 10 points betwen -4 
-and 4:
-```{r}
-x <- seq(from=-4,to=4,length.out=10)
-print(x)
-```
+1. Our first step can be acccomplished using the `seq()` function, 
+   which we have already used. If you know the name of the function 
+   you want to use, you can access its help page by executing the 
+   command `? [function name here]`:
+   ```{r}
+   # ? seq
+   ```
+   As you can see, the `seq()` function takes arguments `from=` (for the 
+   starting point), `to=` (for the end point), and `length.out=` (for the
+   total number of points).  Let's plot the function at 10 points betwen -4 
+   and 4:
+   ```{r}
+   x <- seq(from=-4,to=4,length.out=10)
+   print(x)
+   ```
+   Note that I've picked only 10 points here so that our code is easy to check.
+2. The next step is to calculate the standard normal PDF at each of these 
+   points. R is a program for statisticians, so it presumably has that PDF
+   available as a built-in function. But what if we don't know its name? 
+   We can just Google "normal pdf in r" and click on a page or two to find 
+   out that the function we need is called `dnorm()`. 
+   ```{r}
+   p <- dnorm(x)
+   print(p)
+   ```
+3. Our last step is to plot $p$ against $x$. We could Google, or we
+   could guess that the function for creating plots is called `plot()`
+   and try something out. Don't be scared to try things out, nothing
+   bad could possibly happen here.
+   ```{r}
+   plot(x,p)
+   ```
+   You will see this plot in the "plots" tab in the lower right corner of your 
+   screen.
 
-Next we need to calculate the standard normal PDF at each of these points. R
-is a program for statisticians, so it presumably has that PDF available as 
-a built-in function. But what if we don't know its name? We can just Google
-"normal pdf in r" and click on a page or two to find out that the function
-we need is called `dnorm()`. 
-```{r}
-p <- dnorm(x)
-print(p)
-```
-Now all we have to do is plot $p$ against $x$. We could Google, or we
-could guess that the function for creating plots is called `plot()`
-and try something out.
-```{r}
-plot(x,p)
-```
-You will see this plot in the "plots" tab in the lower right corner of your 
-screen.
+Well, that's not too bad, but we might want to make some improvements:
 
-Well, that's not too bad! At the same time, we might want to make some improvements in this plot:
-
-- plot it at more points (100 rather than 10, for example)
-- connect the points with a line
-- add a title
+1. Plot it at more points (1000 rather than 10, for example)
+2. Connect the points with a line
+3. Add a title
 
 So we can read through the documentation for the `plot()` function,
 try a few things out, and we can produce a much prettier graph
 by just adding a few options:
-
 ```{r}
-
-x <- seq(from=-4,to=4,length.out=100)
+x <- seq(from=-4,to=4,length.out=1000)
 p <- dnorm(x)
 plot(x,p,type="l",ylab=expression(phi(x)),main="PDF of N(0,1) distribution")
 ```
-We are done for now, so close RStudio. When you do that you
-will get a warning message that looks something like this:
+As you can see, we have a much nicer and clearer looking plot.
+:::
 
-> INSERT SCREENSHOT OF SAVE WORKSPACE IMAGE
+Although I will need to test you on specific knowledge, you should also 
+keep in mind the bigger picture: my real goal here is for you to develop
+some long-lasting skills that you will find useful in the future.  This
+should be your goal as well. 
 
-You should never click on the `Save` button here, as it would cause R to
-save the current state of its memory and re-load it next time you start R.
-In the interest of reproducibility, you should start R "clean" every time.
-Click on the `Dont Save` button, and you will exit RStudio.
+A year from now, or five years from now, you will probably not be able 
+to remember exactly what the format of the `seq` function is, nor will
+you need to. Instead I want you to focus on learning how to think about 
+a coding task, how to find information, and how to design and implement 
+your plans. 
 
-### For more information
+::: fyi
+**For more information on R**
 
-https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf
+There are many free sources of useful information about R. 
 
-
-## Data analysis with R
-
-### Reading data from a CSV file
-
-Our first step will be reading the data in from the CSV file. The tidyverse 
-function to do this is called `read_csv()`:
-```{r}
-book1 <- read_csv("book1.csv")
-print(book1)
-```
-
-
-### Tibbles
-
-The `read_csv()` function creates an object called a ***tibble***. A 
-tibble is an object type that corresponds to a table in tidy data. Each 
-row in the tibble is an observation, and each column is a variable with 
-a name. The base R equivalent of a tibble is called a data.frame. In most applications tibbles and data.frames are interchangeable, but tibbles
-have some additional features that make them work better.
-
-We can obtain the column names of a tibble using the `names()` function:
-```{r}
-names(book1)
-```
-and we can count the rows and columns with `nrow()` and `ncol()` respectively:
-```{r}
-nrow(book1)
-ncol(book1)
-```
-We can access any variable by name using the `$` notation:
-```{r}
-print(book1$Gender)
-```
-We can also access any row (or rows) in  our tibble by number or logical condition,
-and any column by number or name:
-```{r}
-print(book1[1,])
-print(book1[,"Gender"])
-print(book1[book1$Gender == "Male","Name"])
-```
-
-
-### Some basic statistical functions
-
-#### Summary statistics
-
-Summary statistics:
-```{r}
-summary(simdat)
-```
-
-
-#### Means
-
-Means
-```{r}
-# Mean of a single variable
-mean(simdat$xval)
-# if a variable has any NA values, its mean will be NA 
-mean(simdat$tmpval)
-# unless you tell R to remove them
-mean(simdat$tmpval,na.rm=TRUE)
-# Mean of each column
-colMeans(simdat,na.rm=TRUE)
-```
-
-#### Other univariate statistics
-
-Variance and standard deviation:
-```{r}
-var(simdat$xval,na.rm = TRUE)
-sd(simdat$xval,na.rm = TRUE)
-apply(simdat,2,var,na.rm=TRUE)
-apply(simdat,2,sd,na.rm=TRUE)
-
-```
-
-Counts
-```{r}
-count(simdat,zval)
-count(simdat,cut_width(xval,0.5))
-```
-
-#### Multivariate statistics
-
-Covariance and correlation:
-```{r}
-# For two specific 
-cov(simdat$xval,simdat$yval)
-cor(simdat$xval,simdat$yval)
-cov(simdat)
-cor(simdat)
-```
-Dealing with missing values is a little more complicated for covariances and correlations because there are two different ways to drop them:
-
-1. Pairwise deletion: when calculating the covariance
-  of two variables, drop observations with a missing
-  values for either of *those two* variables.
-2. Casewise or listwise deletion: when calculating the covariance
-  of two variables, drop observations with a missing
-  value for *any* variable.
-
-```{r}
-# Pairwise deletion 
-cov(simdat,use="pairwise.complete.obs")
-# Casewise deletion 
-cov(simdat,use="complete.obs")
-```
-
-#### Probability distributions
-
-R has a family built-in functions for each commonly-used probability
-distribution.  We have already seen `dnorm()` function, which 
-gives the normal PDF:
-```{r}
-# The N(0,1) PDF, evaluated at 1.96
-dnorm(1.96)
-# The N(1,4) PDF, evaluated at 1.96
-dnorm(1.96,mean=1,sd=4)
-# The N(0,1) CDF, evaluated at 1.96
-pnorm(1.97)
-# The 2.5 percentile of the N(0,1) CDF
-qnorm(0.025)
-# Four random numbers from the N(0,1) distribution
-rnorm(4)
-```
-There is a similar set of functions available for the 
-uniform distribution (dunif, punif, qunif,runif), the
-binomial distribution (dbinom,,pbinom,qbinom,rbinom),
-and Student's T distribution (dt,pt,qt,rt), along 
-with many others.
+- A good short introduction is available at 
+  https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf.
+- A good longer book that focuses on the Tidyverse is Wickham and Grolemund's
+  *R for Data Science*.  It can be purchased as an actual book from Amazon
+  or your local book shop, and is also available as a free e-book at 
+  https://r4ds.had.co.nz/index.html.
+:::

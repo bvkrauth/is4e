@@ -15,6 +15,139 @@ In this chapter we will learn how to:
  - Produce simple graphs in R.
 
 
+
+## Data analysis with R
+
+### Reading data from a CSV file
+
+Our first step will be reading the data in from the CSV file. The tidyverse 
+function to do this is called `read_csv()`:
+```{r}
+book1 <- read_csv("book1.csv")
+print(book1)
+```
+
+
+### Tibbles
+
+The `read_csv()` function creates an object called a ***tibble***. A 
+tibble is an object type that corresponds to a table in tidy data. Each 
+row in the tibble is an observation, and each column is a variable with 
+a name. The base R equivalent of a tibble is called a data.frame. In most applications tibbles and data.frames are interchangeable, but tibbles
+have some additional features that make them work better.
+
+We can obtain the column names of a tibble using the `names()` function:
+```{r}
+names(book1)
+```
+and we can count the rows and columns with `nrow()` and `ncol()` respectively:
+```{r}
+nrow(book1)
+ncol(book1)
+```
+We can access any variable by name using the `$` notation:
+```{r}
+print(book1$Gender)
+```
+We can also access any row (or rows) in  our tibble by number or logical condition,
+and any column by number or name:
+```{r}
+print(book1[1,])
+print(book1[,"Gender"])
+print(book1[book1$Gender == "Male","Name"])
+```
+
+
+### Some basic statistical functions
+
+#### Summary statistics
+
+Summary statistics:
+```{r}
+summary(simdat)
+```
+
+
+#### Means
+
+Means
+```{r}
+# Mean of a single variable
+mean(simdat$xval)
+# if a variable has any NA values, its mean will be NA 
+mean(simdat$tmpval)
+# unless you tell R to remove them
+mean(simdat$tmpval,na.rm=TRUE)
+# Mean of each column
+colMeans(simdat,na.rm=TRUE)
+```
+
+#### Other univariate statistics
+
+Variance and standard deviation:
+```{r}
+var(simdat$xval,na.rm = TRUE)
+sd(simdat$xval,na.rm = TRUE)
+apply(simdat,2,var,na.rm=TRUE)
+apply(simdat,2,sd,na.rm=TRUE)
+
+```
+
+Counts
+```{r}
+count(simdat,zval)
+count(simdat,cut_width(xval,0.5))
+```
+
+#### Multivariate statistics
+
+Covariance and correlation:
+```{r}
+# For two specific 
+cov(simdat$xval,simdat$yval)
+cor(simdat$xval,simdat$yval)
+cov(simdat)
+cor(simdat)
+```
+Dealing with missing values is a little more complicated for covariances and correlations because there are two different ways to drop them:
+
+1. Pairwise deletion: when calculating the covariance
+  of two variables, drop observations with a missing
+  values for either of *those two* variables.
+2. Casewise or listwise deletion: when calculating the covariance
+  of two variables, drop observations with a missing
+  value for *any* variable.
+
+```{r}
+# Pairwise deletion 
+cov(simdat,use="pairwise.complete.obs")
+# Casewise deletion 
+cov(simdat,use="complete.obs")
+```
+
+#### Probability distributions
+
+R has a family built-in functions for each commonly-used probability
+distribution.  We have already seen `dnorm()` function, which 
+gives the normal PDF:
+```{r}
+# The N(0,1) PDF, evaluated at 1.96
+dnorm(1.96)
+# The N(1,4) PDF, evaluated at 1.96
+dnorm(1.96,mean=1,sd=4)
+# The N(0,1) CDF, evaluated at 1.96
+pnorm(1.97)
+# The 2.5 percentile of the N(0,1) CDF
+qnorm(0.025)
+# Four random numbers from the N(0,1) distribution
+rnorm(4)
+```
+There is a similar set of functions available for the 
+uniform distribution (dunif, punif, qunif,runif), the
+binomial distribution (dbinom,,pbinom,qbinom,rbinom),
+and Student's T distribution (dt,pt,qt,rt), along 
+with many others.
+
 ## Graphing with ggplot
 
 ### Making a simple graph
