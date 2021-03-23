@@ -1,4 +1,4 @@
-# Using R and ggplot
+# Using R
 
 ```{r setup11, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
