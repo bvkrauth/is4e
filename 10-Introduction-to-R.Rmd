@@ -684,7 +684,7 @@ install.packages()
 If you know the name of the CRAN package you want to install, 
 you can provide it as the argument:
 ```{r eval = FALSE}
-install.packages("Tidyverse")
+install.packages("tidyverse")
 ```
 You only need to install each package once.
 
@@ -692,7 +692,7 @@ However, installing a package only puts the files on your computer. In order
 to actually use the features of a package you need to load it into 
 memory during your current R session using the `library()` function:
 ```{r eval = FALSE}
-library("Tidyverse")
+library("tidyverse")
 ```
 You can then use the Tidyverse functions and other tools.
 :::
