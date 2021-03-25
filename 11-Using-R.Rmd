@@ -10,65 +10,91 @@ simdat$tmpval <- simdat$xval
 simdat$tmpval[simdat$xval < 0] <- NA
 ```
 
-In this chapter we will learn how to:
+::: goals
+**Chapter goals**
 
- - Produce simple graphs in R.
+In this chapter we will learn how to use R to:
 
+- Read CSV files
+- View data tables ("tibbles")
+- Use filter, select, arrange, and mutate to transform data tables
+- Calculate univariate statistics
+- Produce simple histograms, line graphs and scatter plots
+:::
 
+## Reading and viewing data
 
-## Data analysis with R
+### Reading a CSV file
 
-### Reading data from a CSV file
-
-Our first step will be reading the data in from the CSV file. The tidyverse 
+Our first step will be reading the data in from the CSV file. The Tidyverse 
 function to do this is called `read_csv()`:
 ```{r}
-book1 <- read_csv("book1.csv")
-print(book1)
+EmpData <- read_csv("EmploymentData.csv")
+print(EmpData)
 ```
 
-
-### Tibbles
+### Viewing a data table
 
 The `read_csv()` function creates an object called a ***tibble***. A 
 tibble is an object type that corresponds to a table in tidy data. Each 
 row in the tibble is an observation, and each column is a variable with 
-a name. The base R equivalent of a tibble is called a data.frame. In most applications tibbles and data.frames are interchangeable, but tibbles
+a name. The base R equivalent of a tibble is called a ***data frame***. In 
+most applications, tibbles and data frames are interchangeable, but tibbles
 have some additional features that make them work better.
+
+Tibbles can be quite large, so the `print()` function will usually
+show an abbreviated version of the table:
+We can obtain the column names of a tibble using the `names()` function:
+```{r}
+print(EmpData)
+```
+We can also see the whole data set by using the `view()` function.
 
 We can obtain the column names of a tibble using the `names()` function:
 ```{r}
-names(book1)
+names(EmpData)
 ```
 and we can count the rows and columns with `nrow()` and `ncol()` respectively:
 ```{r}
-nrow(book1)
-ncol(book1)
+nrow(EmpData)
+ncol(EmpData)
 ```
 We can access any variable by name using the `$` notation:
 ```{r}
-print(book1$Gender)
+mean(EmpData$UnempRate)
 ```
 We can also access any row (or rows) in  our tibble by number or logical condition,
 and any column by number or name:
 ```{r}
-print(book1[1,])
-print(book1[,"Gender"])
-print(book1[book1$Gender == "Male","Name"])
+print(EmpData[1,])
+print(EmpData[1,"LFPRate"])
+print(EmpData[EmpData$LFPRate < 0.61,c("MonthYr","UnempRate")])
 ```
 
+### Modifying a data table
 
-### Some basic statistical functions
+#### view
 
-#### Summary statistics
+#### filter
+
+#### select
+
+#### arrange
+
+#### mutate
+
+
+
+## Data analysis in R
+
+### The summary function
 
 Summary statistics:
 ```{r}
 summary(simdat)
 ```
 
-
-#### Means
+### Univariate statistics in R
 
 Means
 ```{r}
@@ -82,30 +108,34 @@ mean(simdat$tmpval,na.rm=TRUE)
 colMeans(simdat,na.rm=TRUE)
 ```
 
-#### Other univariate statistics
-
 Variance and standard deviation:
 ```{r}
+# VAR calculates the sample variance
 var(simdat$xval,na.rm = TRUE)
+# SD calculates the standard deviation
 sd(simdat$xval,na.rm = TRUE)
+# We can use APPLY to calculate them for every column
 apply(simdat,2,var,na.rm=TRUE)
 apply(simdat,2,sd,na.rm=TRUE)
 
 ```
 
-Counts
+Frequency tables
 ```{r}
+# COUNT creates a frequency table for discrete variables
 count(simdat,zval)
+# COUNT and CUT_WIDTH create a binned frequency table
 count(simdat,cut_width(xval,0.5))
 ```
 
-#### Multivariate statistics
+### Multivariate statistics in R
 
 Covariance and correlation:
 ```{r}
-# For two specific 
+# For two specific columns of data
 cov(simdat$xval,simdat$yval)
 cor(simdat$xval,simdat$yval)
+# For the whole data set
 cov(simdat)
 cor(simdat)
 ```
@@ -125,7 +155,7 @@ cov(simdat,use="pairwise.complete.obs")
 cov(simdat,use="complete.obs")
 ```
 
-#### Probability distributions
+### Probability distributions in R
 
 R has a family built-in functions for each commonly-used probability
 distribution.  We have already seen `dnorm()` function, which 
@@ -148,11 +178,9 @@ binomial distribution (dbinom,,pbinom,qbinom,rbinom),
 and Student's T distribution (dt,pt,qt,rt), along 
 with many others.
 
-## Graphing with ggplot
+## Graphs with ggplot
 
-### Making a simple graph
-
-#### Making a histogram
+### Creating a graph
 
 We can make a histogram
 ```{r}
@@ -206,7 +234,7 @@ This is different from our histogram in two ways:
   - The aesthetic also includes a `y` value, as require to plot $(x,y)$
 
 
-### Customizing your graph
+### Modifying a graph
 
 #### Titles and labels
 
@@ -247,7 +275,7 @@ ggplot(data=simdat,aes(x=xval,y=yval)) +
   geom_point(aes(col=as.factor(zval),shape=as.factor(zval)))
 ```
 
-### Adding plot elements 
+### Adding graph elements 
 
 We can include multiple geometries in the same graph.
 
@@ -282,7 +310,7 @@ ggplot(data=simdat,aes(x=xval,y=yval)) +
 It took me a little while to figure this one out - I wouldn't 
 expect you to do anything so complicated.
 
-### A few other graphs
+#### A few other graphs
 
 The histogram, time series (line) graph and scatter plot 
 are the core graphs I want you to be able to produce. But ggplot2
@@ -312,18 +340,4 @@ ggplot(data=simdat) +
   geom_density(aes(x=xval),fill="red",alpha=0.5) +
   geom_density(aes(x=yval),fill="blue",alpha=0.5)
 ```
-
-## Data cleaning with R (if time allows)
-
-
-### Some basic data-cleaning functions
-
-#### filter
-
-
-#### select
-
-#### arrange
-
-#### mutate
 
