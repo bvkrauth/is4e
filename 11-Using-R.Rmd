@@ -3,12 +3,12 @@
 ```{r setup11, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library("tidyverse")
-simdat <- tibble(xval=sort(rnorm(100)),
-                 yval=sign(xval)+0.3*rnorm(100),
-                 zval=as.integer(round(runif(100))))
-simdat$tmpval <- simdat$xval
-simdat$tmpval[simdat$xval < 0] <- NA
 ```
+
+Now that we have learned some basic R terminology and how to run R, our 
+next step is to do something useful in R.  We will do this using the
+Canadian employment data we have already worked with.  This data set
+can be downloaded at [***INSERT LINK HERE***].
 
 ::: goals
 **Chapter goals**
@@ -22,33 +22,99 @@ In this chapter we will learn how to use R to:
 - Produce simple histograms, line graphs and scatter plots
 :::
 
-## Reading and viewing data
+## Reading, viewing and cleaning data
+
+Before doing any statistical or graphical analysis, we need to 
+get the data into R.  We will also want to look at our data 
+before diving into the analysis, and we may want to do some data
+cleaning as well.
 
 ### Reading a CSV file
 
 Our first step will be reading the data in from the CSV file. The Tidyverse 
-function to do this is called `read_csv()`:
+function to do this is called `read_csv()`.  To use this and
+other tidyverse functions we will need to load the Tidyverse package:
 ```{r}
-EmpData <- read_csv("EmploymentData.csv")
-print(EmpData)
+# Load the tidyverse
+library("tidyverse")
 ```
+The `read_csv()` function has one required argument: the name of the CSV
+file:
+```{r}
+# The code below assumes that the file "EmploymentData.csv" is in 
+# the working directory.  Change the argument below as needed to 
+# make the function work in your environment 
+EmpData <- read_csv("EmploymentData.csv")
+```
+As you can see, R guesses each variable's data type, and reports its 
+guess.  It is always a good idea to read this output and make sure
+that everything is the way that we want it:
+
+- The numeric variables are all stored as `col_double()`.  
+  - This means double-precision (64 bit) real number
+  - This is what we want.
+- The two text variables are both stored as `col_character()`.  
+  - This means character or text string
+  - This is what we want.
+- The MonthYr variable is also stored as `col_character()`.  
+  - This is *not* what we want.  
+  - We will want MonthYr to be stored explicitly as a date 
+    variable, so we make a note of that issue here and will 
+    fix it later.
+
+We have assigned the data in the CSV file to the variable `EmpData`.
+
+:::fyi
+**Additional options**
+
+Our data file happens to be a nice and tidy one, so `read_csv()` worked 
+just fine with its default options.  Not all data files are so
+tidy, so `read_csv()` has many optional arguments.  There are
+also functions `read_csv2()` (for files delimited by semicolons
+rather than commas), `read_tsv()` (for tab-delimited files),
+and `read_delim()` (for files delimited using any other character).
+
+Base R function has a similar function called `read.csv()`, 
+but `read_csv()` is preferable for various reasons.
+:::
 
 ### Viewing a data table
 
 The `read_csv()` function creates an object called a ***tibble***. A 
-tibble is an object type that corresponds to a table in tidy data. Each 
-row in the tibble is an observation, and each column is a variable with 
-a name. The base R equivalent of a tibble is called a ***data frame***. In 
-most applications, tibbles and data frames are interchangeable, but tibbles
-have some additional features that make them work better.
+tibble is a Tidyverse object type that describes a tidy data table. 
 
-Tibbles can be quite large, so the `print()` function will usually
-show an abbreviated version of the table:
-We can obtain the column names of a tibble using the `names()` function:
+- Each row in the tibble is an observation
+- Each column is a variable with a name. 
+
+The base R equivalent of a tibble is called a ***data frame***. In 
+most applications, tibbles and data frames are interchangeable, but 
+tibbles have some additional features that make them work better 
+with the Tidyverse.
+
+We have several ways of viewing the contents of a tibble. We can
+start with the ***print*** function, which we have already seen in
+other contexts:
 ```{r}
 print(EmpData)
 ```
-We can also see the whole data set by using the `view()` function.
+Tibbles can be quite large, so the `print()` function will usually
+show an abbreviated version of the table.
+
+We can also see the whole table by executing the command `View(EmpData)` or
+through RStudio:
+
+1. Go to the **Environment** tab in the upper right window.
+   - You will see a list of all variables currently in memory,
+     including `EmpData`.
+2. Double-click on `EmpData`.
+
+You will see a spreadsheet-like display of EmpData. As in Excel, you can sort
+and filter this table.  Unlike Excel, you cannot edit it here.
+
+### Data table properties
+
+There are several R functions available for exploring the properties 
+of a data table.
 
 We can obtain the column names of a tibble using the `names()` function:
 ```{r}
@@ -63,97 +129,266 @@ We can access any variable by name using the `$` notation:
 ```{r}
 mean(EmpData$UnempRate)
 ```
-We can also access any row (or rows) in  our tibble by number or logical condition,
-and any column by number or name:
-```{r}
-print(EmpData[1,])
-print(EmpData[1,"LFPRate"])
-print(EmpData[EmpData$LFPRate < 0.61,c("MonthYr","UnempRate")])
-```
 
 ### Modifying a data table
 
-#### view
+We will not spend a lot of time on data cleaning in R, as we can clean data
+in Excel and export it to R. However, we have a few Tidyverse tools that are
+useful to learn.
 
-#### filter
+The first tool is called the ***pipe*** operator.  The pipe operator is part
+of the Tidyverse and addresses a common problem: we often want to
+perform multiple transformations on a data set, but doing so in the usual
+functional language can lead to code that is quite difficult to read.
 
-#### select
+The pipe operator is written `%>%` and it is interpreted as follows.  Suppose
+we have a variable called `x` and a function called `FUN()`. Then the 
+expression `x %>% FUN()` will be interpreted by R as `FUN(x)`.  To see a few
+examples:
 
-#### arrange
+```{r}
+# This is equivalent to names(EmpData)
+EmpData %>% names()
+# This is equivalent to sqrt(2)
+2 %>% sqrt()
+# This is equivalent to cat(sqrt(2)," is the square root of 2")
+2 %>% sqrt() %>% cat(" is the square root of 2")
+```
+As you can see, R's rule for interpreting the pipe operator is that the
+object before the operator is taken as the first argument for the function
+after the operator.  You can string together multiple pipes, which
+allows you to represent a complex calculation in steps.  We will
+see the potential advantages of this shortly.
 
-#### mutate
+The Tidyverse includes four core functions for modifying data: 
 
+- `mutate()` allows us to add or change variables.
+- `filter()` allows us to select particular observations, much
+  like Excel's filter tool.
+- `arrange()` allows us to sort observations, much like Excel's
+  sort tool.
+- `select()` allows us to select particular variables.
 
+All four functions follow a common syntax that is designed for use with
+the pipe.  To see how they work, let's do some work with them.
+
+First, let's suppose that we want to convert the unemployment rate and LFP
+rate to percentage.  The function for this is ***mutate***:
+```{r}
+# Convert UnempRate and LFPRate to percentages
+EmpData %>% 
+  mutate(UnempRate = 100*UnempRate) %>% 
+  mutate(LFPRatePct = 100*LFPRate)
+```
+Note that mutate allows us to *change* the existing variable UnempRate and
+*add* a new variable LFPRatePct.
+
+Now let's suppose we want to know more about the months in our data set 
+with the *highest* unemployment rates. We can use `filter()` for
+this purpose:
+```{r}
+# This will give all of the observations with unemployment rates over 13%
+EmpData %>% 
+  mutate(UnempRate = 100*UnempRate, LFPRatePct = 100*LFPRate) %>% 
+  filter(UnempRate > 13)
+```
+
+Now let's suppose that we only want to see a few pieces of information about those
+months.  We can use `select()` to choose variables:
+```{r}
+# This will take out all variables except a few
+EmpData %>% 
+  mutate(UnempRate = 100*UnempRate) %>% 
+  mutate(LFPRatePct = 100*LFPRate) %>% 
+  filter(UnempRate > 13) %>%
+  select(MonthYr,UnempRate,LFPRatePct,PrimeMinister)
+```
+Now let's suppose that we want to show months in descending order by
+unemployment rate (i.e., the highest unemployment rate first).  We 
+can use `arrange()` to sort rows in this way:
+```{r}
+# This will give all of the observations with unemployment rates over 13%
+EmpData %>% 
+  mutate(UnempRate = 100*UnempRate) %>% 
+  mutate(LFPRatePct = 100*LFPRate) %>% 
+  filter(UnempRate > 13) %>%
+  select(MonthYr,UnempRate,LFPRatePct,PrimeMinister) %>%
+  arrange(UnempRate)
+```
+Hopefully you can see why the pipe operator is useful in making our code
+clear and readable: 
+```{r}
+# This is what the same code looks like without the pipe
+arrange(select(filter(mutate(EmpData,UnempRate = 100*UnempRate,LFPRatePct = 100*LFPRate),UnempRate > 13),MonthYr,UnempRate,LFPRatePct,PrimeMinister),UnempRate)
+```
+
+Finally, we can assign the result of any piped expression to a value
+
+```{r}
+EmpData <- EmpData %>% 
+  mutate(MonthYr=as.Date(MonthYr,"%m/%d/%Y"))
+```
 
 ## Data analysis in R
 
 ### The summary function
 
-Summary statistics:
+The `summary()` function will give a basic summary of any object.  Exactly what
+that summary looks like depends on the object.  For tibbles, `summary()` produces
+a set of summary statistics for each variable:
 ```{r}
-summary(simdat)
+summary(EmpData)
 ```
 
-### Univariate statistics in R
+### The mean() function
 
-Means
+The R function `mean()` calculates the sample average of any numeric 
+vector:
 ```{r}
 # Mean of a single variable
-mean(simdat$xval)
-# if a variable has any NA values, its mean will be NA 
-mean(simdat$tmpval)
-# unless you tell R to remove them
-mean(simdat$tmpval,na.rm=TRUE)
-# Mean of each column
-colMeans(simdat,na.rm=TRUE)
+mean(EmpData$UnempRate)
+```
+In real-world data, some variables have missing values for one or more observations. There
+are many reasons for this:
+
+- Item-level nonresponse in survey data
+- Calculated variable depends on information that is not available
+- The variable does not apply to the observation; for example spousal income of
+  someone who is not married, or hourly wage of a baby.
+
+In our *EmpData* data set, the **AnnPopGrowth** variable is missing for the first year of
+data (1976), since calculating the growth rate for 1976 would require data from 1975. In
+R, missing values are given the special value `NA`.
+```{r}
+# NA is treated like any other value
+x <- NA
+# The value of any calculation based on NA is NA
+5 + NA
+log(NA)
+NA - NA
+# NA is not the only non-numeric "number"
+# Inf means "infinity"
+1/0
+-1/0
+# NaN means "not a number"
+0/0
+# There are standard rules for math with these
+Inf + Inf
+Inf - Inf
+5*Inf
+0*Inf
 ```
 
-Variance and standard deviation:
+There are several options for dealing with this:
+
+- Exclude observations with missing values from the calculation.
+  - This is the default in Excel
+- Include observations with missing values in the calculation.
+  - This is the default in R
+  - Since any calculation involving NA produces NA, this will 
+    produce NA as a result
+- Issue an error message if there are missing values
+  
+R's practice of carrying NA values through the calculation is generally
+considered the best practice for careful data analysis.  If you automatically
+throw out missing values, you may not even know there are any, which may
+leave you unaware of potential problems with the data.
+
+However, once we know the mising values are not a data problem we may decide
+to ignore them.  We can do that by adding the `na.rm = TRUE` option to
+the `mean()` function:
+```{r}
+# if a variable has any NA values, its mean will be NA 
+mean(EmpData$AnnPopGrowth)
+# unless you tell R to remove them
+mean(EmpData$AnnPopGrowth,na.rm=TRUE)
+```
+
+Now suppose we want to calculate the sample average for each column in our
+tibble. We could just call `mean()` for each of them, but there should
+be a quicker way. Here is the code to do that:
+```{r}
+# Mean of each column
+EmpData %>%
+  select(where(is.numeric)) %>%
+  lapply(mean,na.rm=TRUE) 
+```
+I would not expect you to come up with this code, but maybe it
+kind of makes sense.  The `select(where(is.numeric))` step selects 
+only the columns in EmpData that are numeric rather than text. The
+`lapply(mean,na.rm=TRUE)` step calculates `mean(x,na.rm=TRUE)` 
+for each (numeric) column x in EmpData. 
+
+### Other summary statistics
+
+There are many other functions in R to calculate univariate summary
+statistics:
 ```{r}
 # VAR calculates the sample variance
-var(simdat$xval,na.rm = TRUE)
+var(EmpData$UnempRate,na.rm = TRUE)
 # SD calculates the standard deviation
-sd(simdat$xval,na.rm = TRUE)
-# We can use APPLY to calculate them for every column
-apply(simdat,2,var,na.rm=TRUE)
-apply(simdat,2,sd,na.rm=TRUE)
-
+sd(EmpData$UnempRate,na.rm = TRUE)
+# MEDIAN calculates the sample median
+median(EmpData$UnempRate,na.rm = TRUE)
+```
+As you can see, they work just like `mean()`.  We can also
+use `lapply()` to apply these functions to every (numeric)
+column in our data set:
+```{r}
+# Standard deviation of each column
+EmpData %>%
+  select(where(is.numeric)) %>%
+  lapply(sd,na.rm=TRUE) 
 ```
 
-Frequency tables
+We can also construct frequency tables for both discrete and continuous
+variables:
 ```{r}
 # COUNT creates a frequency table for discrete variables
-count(simdat,zval)
-# COUNT and CUT_WIDTH create a binned frequency table
-count(simdat,cut_width(xval,0.5))
+EmpData %>% 
+  count(PrimeMinister)
+# COUNT and CUT_INTERVAL create a binned frequency table
+EmpData %>% 
+  count(cut_interval(LFPRate,6))
 ```
 
 ### Multivariate statistics in R
 
-Covariance and correlation:
+Multivariate statistics like covariance and correlation
+can be cauclulated 
 ```{r}
 # For two specific columns of data
-cov(simdat$xval,simdat$yval)
-cor(simdat$xval,simdat$yval)
+cov(EmpData$UnempRate,EmpData$LFPRate)
+cor(EmpData$UnempRate,EmpData$LFPRate)
+```
+They can also be calculated for the whole data set
+```{r}
 # For the whole data set
-cov(simdat)
-cor(simdat)
+EmpData %>%
+  select(where(is.numeric)) %>%
+  cor()
 ```
 Dealing with missing values is a little more complicated for covariances and correlations because there are two different ways to drop them:
 
-1. Pairwise deletion: when calculating the covariance
-  of two variables, drop observations with a missing
-  values for either of *those two* variables.
-2. Casewise or listwise deletion: when calculating the covariance
-  of two variables, drop observations with a missing
-  value for *any* variable.
+1. Pairwise deletion: when calculating the covariance of two variables, 
+   drop observations with a missing values for either of *those two* variables.
+2. Casewise or listwise deletion: when calculating the covariance of two
+   variables, drop observations with a missing value for *any* variable.
 
+The `use` argument allows you to specify which approach you want to use:
 ```{r}
-# Pairwise deletion 
-cov(simdat,use="pairwise.complete.obs")
-# Casewise deletion 
-cov(simdat,use="complete.obs")
+# EmpData has missing data in 1976 for the variable AnnPopGrowth
+# Casewise deletion will exclude 1976 from all calculations
+EmpData %>%
+  select(where(is.numeric)) %>%
+  cor(use="complete.obs")
+# Pairwise deletion will exclude 1976 from calculations involving AnnPopGrowth
+EmpData %>%
+  select(where(is.numeric)) %>%
+  cor(use="pairwise.complete.obs")
+
 ```
+In most applications, pairwise deletion makes the most sense 
 
 ### Probability distributions in R
 
@@ -167,8 +402,8 @@ dnorm(1.96)
 dnorm(1.96,mean=1,sd=4)
 # The N(0,1) CDF, evaluated at 1.96
 pnorm(1.97)
-# The 2.5 percentile of the N(0,1) CDF
-qnorm(0.025)
+# The 97.5 percentile of the N(0,1) CDF
+qnorm(0.975)
 # Four random numbers from the N(0,1) distribution
 rnorm(4)
 ```
@@ -180,11 +415,16 @@ with many others.
 
 ## Graphs with ggplot
 
+The Tidyverse also contains a powerful graphics package called[^10] ***ggplot***.
+
+[^10]: The package is technically called `ggplot2` since it is the second
+       version of `ggplot`.  But everyone calls it "ggplot" anyway.
+
 ### Creating a graph
 
-We can make a histogram
+We can start by making a histogram of the unemployment rate:
 ```{r}
-ggplot(data=simdat,mapping=aes(x=xval)) + 
+ggplot(data=EmpData,mapping=aes(x=UnempRate)) + 
   geom_histogram()
 ```
 This is already a pretty nice graph, though it could use some customization.
@@ -192,7 +432,7 @@ This is already a pretty nice graph, though it could use some customization.
 The `ggplot()` function has a non-standard syntax, so I'd like to go over 
 it. 
 
-- The first part `ggplot(data=simdat,mapping=aes(x=xval))` sets up
+- The first part `ggplot(data=EmpData,mapping=aes(x=UnempRate))` sets up
   the basic characteristics of the graph:
     - The `data` argument tells R which data set (tibble) will be
       used
@@ -202,78 +442,83 @@ it.
 - The rest of the command is one or more statements separated by 
   a `+` sign.  These are called ***geometries*** and are geometric
   elements to be included in the plot.
-    - The geom_hist() geometry produces a histogram
+    - The `geom_histogram()` geometry produces a histogram
+    
 
+    
 
-Explain this...
+We can also make a scatter plot showing the relationship between the 
+unemployment rate and the labour force participation rate:
 ```{r}
-# The default is to plot the number of cases
-# But often we want to plot the proportion of cases
-ggplot(data=simdat,mapping=aes(x=xval)) + 
-  geom_histogram(aes(y=..density..))
-```
-
-
-#### Making a line graph
-
-```{r}
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
-  geom_line()
-```
-
-
-#### Making a scatter plot
-
-We can also make a scatter plot
-```{r}
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
+ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
   geom_point()
 ```
 This is different from our histogram in two ways:
-  - The geometry is geom_point rather than geom_hist.
-  - The aesthetic also includes a `y` value, as require to plot $(x,y)$
+  - The aesthetic also includes a `y` value
+  - The geometry is geom_point rather than geom_hist. It shows one point
+    for each observation.
+
+Next, let's make a line graph:
+```{r}
+ggplot(data=EmpData,aes(x=MonthYr,y=UnempRate)) + 
+  geom_line() 
+```
 
 
 ### Modifying a graph
 
+As when making graphs in Excel, the basic graph gives us some useful information
+but we can improve upon it in various ways.
+
 #### Titles and labels
 
-Titles: You can add a title and subtitle, and you can change the axis titles: 
+You can add a title and subtitle, and you can change the axis titles: 
 ```{r}
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
-  geom_point() + 
-  labs(title="Main title here",
-      subtitle="subtitle here",
-      caption="caption here",
-      tag="tag here") +
-  xlab("x label here") +
-  ylab("y label here")
+ggplot(data=EmpData,aes(x=UnempRate)) + 
+  geom_histogram() + 
+  labs(title="Unemployment rate",
+      subtitle="January 1976 - January 2021",
+      caption="Source: Statistics Canada, Labour Force Survey",
+      tag="Canada") +
+  xlab("Unemployment rate") +
+  ylab("Count")
 ```
 
 #### Color and shapes
 
 Using color: you can change the color of any geometric element
 using the `col=` argument:
+
+
 ```{r}
-# You can fix the color of a geographic element at a preferred value
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
-  geom_point(col="red") 
+ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
+  geom_point(col="red")
 ```
 
-You can also color-code a geographic element based on some other variable by including it as part of the aesthetic
+You can also color-code a geographic element based on some other variable by 
+including it as part of the aesthetic:
 ```{r}
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
-  geom_point(aes(col=as.factor(zval)))
+ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
+  geom_point(aes(col=Party))
 ```
 
-Using shapes: you want to make sure your graph can be read by a reader
+As we discussed earlier, you want to make sure your graph can be read by a reader
 who is color blind or is printing in black and white. So we can use 
 shapes in addition to color:
 ```{r}
-# You can also color-code a geographic element based on some other variable
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
-  geom_point(aes(col=as.factor(zval),shape=as.factor(zval)))
+ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
+  geom_point(aes(col=Party, shape=Party))
 ```
+
+Some geometric elements, such as the bars in a histogram, also have 
+a ***fill*** color:
+
+```{r}
+ggplot(data=EmpData,aes(x=UnempRate)) + 
+  geom_histogram(col="red",fill="blue") 
+```
+As you can see, the `col=` argument sets the color for the exterior
+of each bar, and the `fill=` argument sets the color for the interior.
 
 ### Adding graph elements 
 
@@ -282,7 +527,7 @@ We can include multiple geometries in the same graph.
 For example, suppose we want to add a smooth fit to our scatter 
 plot. We can do that with the `geom_smooth()` geometry:
 ```{r}
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
+ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
   geom_point() +
   geom_smooth()
 ```
@@ -292,23 +537,48 @@ the line).
 
 Alternatively, we could add a linear fit:
 ```{r}
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
+ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
   geom_point() +
   geom_smooth(method="lm") 
 ```
 
-Finally, there is no built-in option to generate a binned 
-scatterplot, but we can do it with a little work:
+
+#### Putting it all together
+
 ```{r}
-ggplot(data=simdat,aes(x=xval,y=yval)) + 
- geom_point(size=0.5) +
-  stat_summary_bin(fun='mean', bins=20,
-                   col="blue", size=3, geom='point') +
-  stat_summary_bin(fun='mean', bins=20,
-                   col="blue", size=0.5, geom='line')
+ggplot(data=EmpData,aes(x=UnempRate)) + 
+  geom_histogram(binwidth=0.005,fill="blue") +
+  geom_density() +
+  labs(title="Unemployment rate",
+      subtitle=paste("January 1976 - January 2021 (",
+                     nrow(EmpData),
+                     " months)",
+                     sep="",
+                     collapse=""),
+      caption="Source: Statistics Canada, Labour Force Survey",
+      tag="Canada") +
+  xlab("Unemployment rate") +
+  ylab("Count")
 ```
-It took me a little while to figure this one out - I wouldn't 
-expect you to do anything so complicated.
+
+Here is our scatter plot:
+```{r}
+ggplot(data=EmpData %>% filter(Party != "Transfer"),
+       aes(x=UnempRate,y=LFPRate)) + 
+  geom_point(aes(col=Party, shape=Party)) +
+  geom_smooth(aes(col=Party)) +
+  labs(title="Unemployment and LFP rates by party in government",
+      subtitle=paste("January 1976 - January 2021 (",
+                     nrow(EmpData),
+                     " months)",
+                     sep="",
+                     collapse=""),
+      caption="Source: Statistics Canada, Labour Force Survey",
+      tag="Canada") +
+  xlab("Unemployment rate") +
+  ylab("Labour force participation")
+```
+
 
 #### A few other graphs
 
@@ -320,24 +590,32 @@ you a few of them.
 Some alternatives to the histogram include:
 ```{r}
 # A smooth density (PDF) function too
-ggplot(data=simdat,mapping=aes(x=xval)) +
+ggplot(data=EmpData,aes(x=UnempRate)) + 
   geom_density()
-# Histograms don't work well for discrete variables
-ggplot(data=simdat,mapping=aes(x=zval)) +
-  geom_histogram()
-# geom_freqpoly is recommended instead
-ggplot(data=simdat,mapping=aes(x=zval)) +
-  geom_freqpoly()
 # This is called a box plot. It shows the mean
-ggplot(data=simdat,mapping=aes(x=xval,y=as.factor(zval))) + 
+ggplot(data=EmpData,aes(x=UnempRate,y=PrimeMinister)) + 
   geom_boxplot()
 ```
 We can put two densities in the same graph for comparison: 
 ```{r}
 # The fill option changes the color under the density
 # The alpha option makes the fill partially transparent
-ggplot(data=simdat) + 
-  geom_density(aes(x=xval),fill="red",alpha=0.5) +
-  geom_density(aes(x=yval),fill="blue",alpha=0.5)
+ggplot(data=EmpData) + 
+  geom_density(aes(x=Population),fill="red",alpha=0.5) +
+  geom_density(aes(x=Employed),fill="blue",alpha=0.5)
 ```
+
+
+Finally, there is no built-in option to generate a binned 
+scatterplot, but we can do it with a little work:
+```{r}
+ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
+ geom_point(size=0.5) +
+  stat_summary_bin(fun='mean', bins=20,
+                   col="blue", size=3, geom='point') +
+  stat_summary_bin(fun='mean', bins=20,
+                   col="blue", size=0.5, geom='line')
+```
+It took me a little while to figure this one out - I wouldn't 
+expect you to do anything so complicated.
 
