@@ -1,2 +1,38 @@
 # Applications of statistics
 
+## Description
+
+The simplest application of statistics is the one we have emphasized so
+far: using statistics calculated from a random sample as estimates
+of the corresponding value in the population from which it was drawn.
+
+For example, Statistics Canada's estimate of the unemployment rate uses the 
+unemployment rate among the approximately 100,000 respondents to the 
+Labour Force Survey to estimate the unemployment rate among the much 
+larger population of approximately 30 million working-age Canadians.
+  
+## Prediction
+
+Another important application of statistics is to form ***predictions***.
+For example, we might use data to learn the historical relationship 
+between the unemployment rate and the previous month's unemployment
+rate, and then might use that relationship to predict next month's 
+unemployment rate.
+
+In our framework, this amounts to estimating the conditional expectation
+function $E(y_i|x_i=a)$, and then constructing forecasts for $y_i$
+by plugging in a value for $x_i$.
+
+This is a reasonable thing to do, but there are some common issues:
+
+- In order to work, the relationship between $y_i$ and $x_i$ must be
+  ***stable***, that is, the sample used to estimate the CEF is reasonably
+  representative of the population in which we will be forecasting.
+- In order to estimate $E(y_i|x_i=a)$ for a particular value of $a$
+  that value must be in the support of our sample (we must have observed
+  cases in which $x_i=a$) or we must have a model (e.g. a linear model)
+  that allows extrapolation.
+
+## Causal inference (TO BE ADDED)
+
+
