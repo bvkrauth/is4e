@@ -11,89 +11,83 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 
+So far most of our emphasis has been on univariate analysis - understanding
+the behavior of one variable at a time.  However, we are often intestested
+in the relationship among multiple variables.  This will be the primary
+subject of your next course in statistics (most likely ECON 333), but we
+will touch on a few of the basics here.
+
+For the most part, we will focus on the case of a random sample of size $n$
+on two random variables $x_i$ and $y_I$.  The primary application will be
+the relationship between unemployment and labour force participation in
+our Canadian employment data.
+
 :::goals
 **Chapter goals**
 
-In this chapter we will learn how to:
+In this chapter, we will learn how to:
 
-- Construct and interpret a pivot table.
+- Construct and interpret a scatter plot
 - Calculate and interpret common multivariate statistics such as covariance 
   and correlation.
-- Calculate conditional frequencies, covariances and 
-  correlations from a table of data.
+- Construct and interpret a pivot table.
 - Describe the relationship between two random variables
-  using the conditional expectation function (CEF).
-- Use the CEF to construct predictions.
-- Distinguish between methods of estimating a CEF 
+  using the conditional mean.
+- Distinguish between methods of estimating a conditional mean 
   (conditional averages, linear regression, and smoothing)
-  and interpret an estimated CEF.
+  and interpret the results.
 :::
 
-## Multivariate statistical methods
+## Scatter plots 
 
-### Multivariate statistics in R
+A ***scatter plot*** is the simplest way to view the relationship between
+two variables in data.  The horizontal (x) axis represents
+one variable, the vertical (y) axis represents the other variable,
+and each point represents an observation.
 
-Multivariate statistics like covariance and correlation
-can be cauclulated 
+Scatter plots can be created in R using the `geom_point()` geometry:
 ```{r}
-# For two specific columns of data
-cov(EmpData$UnempRate,EmpData$LFPRate)
-cor(EmpData$UnempRate,EmpData$LFPRate)
+ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
+  geom_point()
 ```
-They can also be calculated for the whole data set
+Scatter plots can also be created in Excel, though it is more work and 
+produces less satisfactory results.
+
+As you can see, there is something of a negative relationship between
+unemployment and labour force participation, though it is not a 
+close relationship.
+
+We can use color to explore the relationship further.  We can 
+color-code points or any other geographic element based 
+on some other variable by including it as part of the aesthetic:
 ```{r}
-# For the whole data set
-EmpData %>%
-  select(where(is.numeric)) %>%
-  cor()
+ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
+  geom_point(aes(col=PrimeMinister))
 ```
-Dealing with missing values is a little more complicated for covariances and correlations because there are two different ways to drop them:
-
-1. Pairwise deletion: when calculating the covariance of two variables, 
-   drop observations with a missing values for either of *those two* variables.
-2. Casewise or listwise deletion: when calculating the covariance of two
-   variables, drop observations with a missing value for *any* variable.
-
-The `use` argument allows you to specify which approach you want to use:
+As we discussed earlier, you want to make sure your graph can be read by a
+reader who is color blind or is printing in black and white. So we can use 
+shapes in addition to color:
 ```{r}
-# EmpData has missing data in 1976 for the variable AnnPopGrowth
-# Casewise deletion will exclude 1976 from all calculations
-EmpData %>%
-  select(where(is.numeric)) %>%
-  cor(use="complete.obs")
-# Pairwise deletion will exclude 1976 from calculations involving AnnPopGrowth
-EmpData %>%
-  select(where(is.numeric)) %>%
-  cor(use="pairwise.complete.obs")
-
+ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
+  geom_point(aes(col=Party, shape=Party))
 ```
-In most applications, pairwise deletion makes the most sense 
 
 
-### Sample covariance and correlation
+## Sample covariance and correlation
 
-The sample covariance of $x_i$ and $y_i$ is:
+In chapter ???, we learned about the covariance and correlation as 
+two ways of describing the relationship among random variables. 
+
+We can estimate the covariance of two variables $x_i$ and $y_i$ 
+in a random sample of size $n$ by their ***sample covariance***:
   $$s_{x,y} = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})$$
-and their sample correlation is:
+where $\bar{x}$ and $\bar{y}$ are the sample averages.
+
+We can estimate the correlation of $x_i$ and $y_i$ by 
+their ***sample correlation***:
   $$\rho_{x,y} = \frac{s_{x,y}}{s_x s_y}$$
-where $s_{x,y}$ is the sample covariance, $s_{x}$ is the sample
-standard deviation of $x_i$ and $s_{y}$ is the sample 
-standard deviation of $y_i$.
-
-For example, suppose that we have the following data:
-
-> INSERT TABLE HERE: 2 columns (x and y), 3 rows of data
-
-Then we can calculate:
-  $$\bar{x} = \frac{1}{n-1}\sum_{i=1} x_i = ?$$
-  $$\bar{y} = \frac{1}{n-1}\sum_{i=1} y_i = ?$$
-  $$s_{x} = \frac{1}{n-1}\sum_{i=1} (x_i - \bar{x})^2 = ?$$
-  $$s_{y} = \frac{1}{n-1}\sum_{i=1} (y_i - \bar{y})^2 = ?$$
-  $$s_{xy} = \frac{1}{n-1}\sum_{i=1} (x_i - \bar{x})(y_i - \bar{y}) = ?$$
-  $$s_{xy} = \frac{s_{xy}}{s_{x}s_{y}} = \frac{?}{? + ?} = ?$$
-
-> The sample covariance and correlation can be calculated in Excel
-> using the `COVARIANCE.S()` and `CORREL()` functions.
+where $s_{x}$ is the sample standard deviation of $x_i$ and 
+$s_{y}$ is the sample standard deviation of $y_i$.
 
 The sample covariance and correlation have several properties:
 
@@ -104,177 +98,75 @@ The sample covariance and correlation have several properties:
 - As with the population correlation, the sample correlation ranges 
   from -1 to 1.
 
+### Covariance and correlation in Excel
+
+The sample covariance and correlation can be calculated in Excel
+using the `COVARIANCE.S()` and `CORREL()` functions.
+
+### Covariance and correlation in R
+
+Multivariate statistics like covariance and correlation
+can be cauclulated in R using the `cov()` and `cor()` 
+functions:
+```{r}
+# For two specific columns of data
+cov(EmpData$UnempPct,EmpData$LFPPct)
+cor(EmpData$UnempPct,EmpData$LFPPct)
+```
+As you can see, unemployment and labour force participation are 
+*negatively* correlated: when unemployment is high, LFP tends to be
+low. This makes sense given the economics: if it is hard to find
+a job, people will move into other activities that take one out
+of the labour force: education, childcare, retirement, etc.
+
+Both `cov()` and `cor()` can be applied to an entire data set:
+```{r}
+# For the whole data set (at least the numerical parts)
+EmpData %>%
+  select(where(is.numeric)) %>%
+  cor()
+```
+As you can see, every variable's correlation with *AnnPopGrowth* is `NA`. 
+
+We know why this is, and would like to exclude `NA` values from the
+calculation.  This gets more complicated for covariances and correlations because there are two different ways to drop them:
+
+1. ***Pairwise deletion***: when calculating the covariance of two variables, 
+   drop observations with a missing values for either of *those two*
+   variables.
+2. ***Casewise*** or ***listwise deletion***: when calculating the 
+   covariance of two variables, drop observations with a missing value 
+   for *any* variable in the data set.
+
+The `use` argument allows you to specify which approach you want to use:
+```{r}
+# EmpData has missing data in 1976 for the variable AnnPopGrowth
+# Casewise will exclude 1976 from all calculations
+EmpData %>%
+  select(where(is.numeric)) %>%
+  cor(use="complete.obs")
+# Pairwise will only exclude 1976 from calculations involving AnnPopGrowth
+EmpData %>%
+  select(where(is.numeric)) %>%
+  cor(use="pairwise.complete.obs")
+
+```
+In most applications, pairwise deletion makes the most sense because it
+avoids throwing out data.  
+
+##  Pivot tables
+
+Pivot tables are a powerful tool in Excel that enable the analysis of
+frequencies, conditional averages, and various other aspects of the 
+data.  They are somewhat tricky to use, and we will only scratch
+the surface here. But the more comfortable you can get with them,
+the better.
+
 ### Joint and conditional frequencies
 
 See conditional averages below.
 
-
-
-    
-
-We can also make a scatter plot showing the relationship between the 
-unemployment rate and the labour force participation rate:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point()
-```
-
-
-
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point(col="red")
-```
-
-You can also color-code a geographic element based on some other variable by 
-including it as part of the aesthetic:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point(aes(col=Party))
-```
-
-As we discussed earlier, you want to make sure your graph can be read by a reader
-who is color blind or is printing in black and white. So we can use 
-shapes in addition to color:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point(aes(col=Party, shape=Party))
-```
-For example, suppose we want to add a smooth fit to our scatter 
-plot. We can do that with the `geom_smooth()` geometry:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point() +
-  geom_smooth()
-```
-Notice that by default, the graph includes both the fitted line
-(in blue) and a 95\% confidence interval (the shaded area around
-the line).  
-
-Alternatively, we could add a linear fit:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point() +
-  geom_smooth(method="lm") 
-```
-
-
-Here is our scatter plot:
-```{r}
-ggplot(data=EmpData %>% filter(Party != "Transfer"),
-       aes(x=UnempRate,y=LFPRate)) + 
-  geom_point(aes(col=Party, shape=Party)) +
-  geom_smooth(aes(col=Party)) +
-  labs(title="Unemployment and LFP rates by party in government",
-      subtitle=paste("January 1976 - January 2021 (",
-                     nrow(EmpData),
-                     " months)",
-                     sep="",
-                     collapse=""),
-      caption="Source: Statistics Canada, Labour Force Survey",
-      tag="Canada") +
-  xlab("Unemployment rate") +
-  ylab("Labour force participation")
-```
-
-
-### Estimating conditional expectations
-
-#### Conditional averages
-
-When our conditioning variable $x_i$ only takes on a 
-few values, the CEF can be estimated by constructing ***conditional averages***:
-
-1. Dividing up the sample into $k$ subsamples, one for each possible value of $x_i$
-2. Averaging $y_i$ within each subsample.
-
-For example, suppose we want to estimate the CEF of earnings given (binary)
-gender using the following table of data from a random sample of Canadians:
-
-> INSERT TABLE OF DATA HERE
-
-We  can use the average earnings of women in our sample to estimate the mean
-earnings of women in the population, and the average earnings of men in 
-our sample to estimate the mean earnings of men in the population.
-
-> The conditional average can be calculated in Excel
-> using the `AVERAGEIF()` function.
-
-The conditional average is just an average, so all of the results we have
-learned for averages apply: 
-
-- It is an unbiased and consistent estimator of the corresponding 
-  conditional mean.
-- It is asymptotically normal, and we can use the same formulas for standard
-  errors, hypothesis tests, and confidence intervals as we use for regular
-  averages/means.
-
-When $x_i$ is continuous, or takes on many values, we run into some problems
-with the conditional average:
-
-- The subsamples become very small, and so the averages become very noisy.  
-- The results are often hard to intepret.
-
-So we will also need some other techniques.
-
-#### Linear regression
-
-One solution is to assume that the CEF is a straight line, or can be
-well-approximated by a straight line.  In that case we can estimate
-the CEF by a technique called ***linear regression***.  Linear
-regression calculates the straight line that fits the data best.
-
-> EXAMPLE PLOT HERE: scatter plot with (good) linear fit
-
-You will learn much more about linear regression in ECON 333.
-
-#### Binning and smoothing
-
-Figure ??? below shows an example in which $x_i$ takes on many values 
-(so conditional averages won't work) and the relationship betwee
-$x_i$ and $y_i$ is clearly not linear (so linear regression will be misleading).
-What do we do there?
-
-> EXAMPLE PLOT HERE: scatter plot with bad linear fit
-
-One solution is to divide the range for $x_i$ into a set of ***bins** and then
-take averages within each bin. We can then plot the average $y_i$ within each
-bin against the midpoint of the bin. Figure ??? below shows the result of 
-binning our data.
-
-> EXAMPLE PLOT HERE: scatter plot with binned fit
-
-Another solution is to ***smooth***.  There are many different techiques for 
-smoothing, but they are all based on taking a weighted average of $y_i$ near 
-each point, with high weights on observations with $x_i$ close to 
-that point and low (or zero) weights on observations with $x_i$ far 
-from that point.  Figure ??? below shows the result of smoothing our data.
-
-> EXAMPLE PLOT HERE: scatter plot with smoothed fit
-
-Both binning and smoothing require the analyst to choose how smooth she wants
-the estimated CEF to be:
-
-  - In binning, this is determined by the number of bins. 
-    - The first graph in Figure ??? shows fewer bins
-    - The second graph in Figure ??? shows more bins
-  - In smoothing, this is determined by some smoothing parameter.
-    - The first graph in Figure ??? shows a smoother relationship
-    - The second graph in Figure ??? shows a lsss smooth relationship
-
-Computer programs that do binning or smoothing usually have some default
-way of setting these parameters so the results look reasonable.
-
-> EXAMPLE PLOT HERE: binned fit, fewer bins and more bins
-> EXAMPLE PLOT HERE: scatter plot with smoothed fit, oversmoothed and undersmoothed
-
-
-
-###  Excel pivot tables
-
-Pivot tables are quite powerful but somewhat tricky to use. 
-
-#### A simple pivot table
+### A simple pivot table
 
 Let's start by creating a simple pivot table
 
@@ -319,7 +211,7 @@ on "Sum of Income", then on "Summarize Values By" and then "Average".
 We can keep adding variables, and ways to summarize them. But there
 are other things we can do.
 
-#### Improving our pivot table
+### Improving our pivot table
 
 - We can sort rows by any column in the table.
 - We can filter rows out of the table:
@@ -327,5 +219,121 @@ are other things we can do.
     and selecting the filter we want.
   - We can also filter on any other variable by dragging that variable name
     into the "Filters" box.
+
+
+## Conditional means
+
+### Conditional averages
+
+When our conditioning variable $x_i$ only takes on a 
+few values, the CEF can be estimated by constructing ***conditional averages***:
+
+1. Dividing up the sample into $k$ subsamples, one for each possible value of $x_i$
+2. Averaging $y_i$ within each subsample.
+
+For example, suppose we want to estimate the CEF of earnings given (binary)
+gender using the following table of data from a random sample of Canadians:
+
+> INSERT TABLE OF DATA HERE
+
+We  can use the average earnings of women in our sample to estimate the mean
+earnings of women in the population, and the average earnings of men in 
+our sample to estimate the mean earnings of men in the population.
+
+> The conditional average can be calculated in Excel
+> using the `AVERAGEIF()` function.
+
+The conditional average is just an average, so all of the results we have
+learned for averages apply: 
+
+- It is an unbiased and consistent estimator of the corresponding 
+  conditional mean.
+- It is asymptotically normal, and we can use the same formulas for standard
+  errors, hypothesis tests, and confidence intervals as we use for regular
+  averages/means.
+
+When $x_i$ is continuous, or takes on many values, we run into some problems
+with the conditional average:
+
+- The subsamples become very small, and so the averages become very noisy.  
+- The results are often hard to intepret.
+
+So we will also need some other techniques.
+
+### Linear regression
+
+One solution is to assume that the CEF is a straight line, or can be
+well-approximated by a straight line.  In that case we can estimate
+the CEF by a technique called ***linear regression***.  Linear
+regression calculates the straight line that fits the data best.
+
+```{r}
+ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
+  geom_point() +
+  geom_smooth(method="lm") 
+```
+
+You will learn much more about linear regression in ECON 333.
+
+### Binning and smoothing
+
+The relationship between two variables is not always linear.  What should 
+we do in that case?  One solution is to divide the range for $x_i$ into 
+a set of ***bins*** and then take averages within each bin. We can then 
+plot the average $y_i$ within each bin against the midpoint of the bin. This
+is not difficult to do in R, though the code is a little beyond what
+we I would usually ask you to do:
+```{r}
+ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
+ geom_point(size=0.5) +
+  stat_summary_bin(fun='mean', bins=20,
+                   col="blue", size=3, geom='point') +
+  stat_summary_bin(fun='mean', bins=20,
+                   col="blue", size=0.5, geom='line')
+```
+It took me a little while to figure this one out - I wouldn't 
+expect you to do anything so complicated.
+
+Another solution is to ***smooth***.  There are many different techiques for 
+smoothing, but they are all based on taking a weighted average of $y_i$ near 
+each point, with high weights on observations with $x_i$ close to 
+that point and low (or zero) weights on observations with $x_i$ far 
+from that point.  
+
+The details here are somewhat complex, but you can
+construct this kind of smooth conditional mean in R by using the 
+`geom_smooth()` geometry:
+```{r}
+ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
+  geom_point() +
+  geom_smooth()
+```
+Notice that by default, the graph includes both the fitted line
+(in blue) and a 95\% confidence interval (the shaded area around
+the line).  
+
+
+
+
+
+
+
+Here is our scatter plot:
+```{r}
+ggplot(data=EmpData %>% filter(Party != "Transfer"),
+       aes(x=UnempRate,y=LFPRate)) + 
+  geom_point(aes(col=Party, shape=Party)) +
+  geom_smooth(aes(col=Party)) +
+  labs(title="Unemployment and LFP rates by party in government",
+      subtitle=paste("January 1976 - January 2021 (",
+                     nrow(EmpData),
+                     " months)",
+                     sep="",
+                     collapse=""),
+      caption="Source: Statistics Canada, Labour Force Survey",
+      tag="Canada") +
+  xlab("Unemployment rate") +
+  ylab("Labour force participation")
+```
 
 
