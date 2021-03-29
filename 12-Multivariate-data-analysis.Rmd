@@ -1,4 +1,4 @@
-# Advanced topics in data analysis
+# Multivariate data analysis
 
 ```{r setup12, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
