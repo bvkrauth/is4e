@@ -7,8 +7,7 @@ library("tidyverse")
 
 Now that we have learned some basic R terminology and how to run R, our 
 next step is to do something useful in R.  We will do this using the
-Canadian employment data we have already worked with.  This data set
-can be downloaded at [***INSERT LINK HERE***].
+Canadian employment data we have already worked with.  
 
 ::: goals
 **Chapter goals**
@@ -19,7 +18,7 @@ In this chapter we will learn how to use R to:
 - View data tables ("tibbles")
 - Use filter, select, arrange, and mutate to transform data tables
 - Calculate univariate statistics
-- Produce simple histograms, line graphs and scatter plots
+- Produce simple but informative histograms and line graphs
 :::
 
 ## Reading, viewing and cleaning data
@@ -29,17 +28,20 @@ get the data into R.  We will also want to look at our data
 before diving into the analysis, and we may want to do some data
 cleaning as well.
 
-### Reading a CSV file
-
-Our first step will be reading the data in from the CSV file. The Tidyverse 
-function to do this is called `read_csv()`.  To use this and
-other tidyverse functions we will need to load the Tidyverse package:
+We will use numerous Tidyverse functions, so we need to load the 
+Tidyverse package:
 ```{r}
 # Load the tidyverse
 library("tidyverse")
 ```
-The `read_csv()` function has one required argument: the name of the CSV
-file:
+We will also need to download our employment data set
+from https://canvas.sfu.ca/files/15539454/.
+
+### Reading a CSV file
+
+Our first step will be reading the data in from the CSV file. The Tidyverse 
+function to do this is called `read_csv()`.  It has one required argument: 
+the name of the CSV file:
 ```{r}
 # The code below assumes that the file "EmploymentData.csv" is in 
 # the working directory.  Change the argument below as needed to 
@@ -56,9 +58,9 @@ that everything is the way that we want it:
 - The two text variables are both stored as `col_character()`.  
   - This means character or text string
   - This is what we want.
-- The MonthYr variable is also stored as `col_character()`.  
+- The *MonthYr* variable is also stored as `col_character()`.  
   - This is *not* what we want.  
-  - We will want MonthYr to be stored explicitly as a date 
+  - We will want *MonthYr* to be stored explicitly as a date 
     variable, so we make a note of that issue here and will 
     fix it later.
 
@@ -70,9 +72,11 @@ We have assigned the data in the CSV file to the variable `EmpData`.
 Our data file happens to be a nice and tidy one, so `read_csv()` worked 
 just fine with its default options.  Not all data files are so
 tidy, so `read_csv()` has many optional arguments.  There are
-also functions `read_csv2()` (for files delimited by semicolons
-rather than commas), `read_tsv()` (for tab-delimited files),
-and `read_delim()` (for files delimited using any other character).
+also functions for other delimited file types:
+
+- `read_csv2()` for files delimited by semicolons rather than commas
+- `read_tsv()` for tab-delimited files
+- `read_delim()` for files delimited using any other character
 
 Base R function has a similar function called `read.csv()`, 
 but `read_csv()` is preferable for various reasons.
@@ -83,11 +87,11 @@ but `read_csv()` is preferable for various reasons.
 The `read_csv()` function creates an object called a ***tibble***. A 
 tibble is a Tidyverse object type that describes a tidy data table. 
 
-- Each row in the tibble is an observation
-- Each column is a variable with a name. 
+- Each row in the tibble represents an observation
+- Each column representa a variable, and has a name. 
 
-The base R equivalent of a tibble is called a ***data frame***. In 
-most applications, tibbles and data frames are interchangeable, but 
+The base R equivalent of a tibble is called a ***data frame***. Tibbles  
+and data frames are interchangeable in most applications, but 
 tibbles have some additional features that make them work better 
 with the Tidyverse.
 
@@ -108,7 +112,7 @@ through RStudio:
      including `EmpData`.
 2. Double-click on `EmpData`.
 
-You will see a spreadsheet-like display of EmpData. As in Excel, you can sort
+You will see a spreadsheet-like display of `EmpData`. As in Excel, you can sort
 and filter this table.  Unlike Excel, you cannot edit it here.
 
 ### Data table properties
@@ -127,38 +131,15 @@ ncol(EmpData)
 ```
 We can access any variable by name using the `$` notation:
 ```{r}
-mean(EmpData$UnempRate)
+length(EmpData$UnempRate)
 ```
+As you can see, the `length()` function returns the length of a vector.
 
 ### Modifying a data table
 
-We will not spend a lot of time on data cleaning in R, as we can clean data
-in Excel and export it to R. However, we have a few Tidyverse tools that are
-useful to learn.
-
-The first tool is called the ***pipe*** operator.  The pipe operator is part
-of the Tidyverse and addresses a common problem: we often want to
-perform multiple transformations on a data set, but doing so in the usual
-functional language can lead to code that is quite difficult to read.
-
-The pipe operator is written `%>%` and it is interpreted as follows.  Suppose
-we have a variable called `x` and a function called `FUN()`. Then the 
-expression `x %>% FUN()` will be interpreted by R as `FUN(x)`.  To see a few
-examples:
-
-```{r}
-# This is equivalent to names(EmpData)
-EmpData %>% names()
-# This is equivalent to sqrt(2)
-2 %>% sqrt()
-# This is equivalent to cat(sqrt(2)," is the square root of 2")
-2 %>% sqrt() %>% cat(" is the square root of 2")
-```
-As you can see, R's rule for interpreting the pipe operator is that the
-object before the operator is taken as the first argument for the function
-after the operator.  You can string together multiple pipes, which
-allows you to represent a complex calculation in steps.  We will
-see the potential advantages of this shortly.
+We will not spend a lot of time on data cleaning in R, as we can always clean
+data in Excel and export it to R. However, we have a few Tidyverse tools
+that are useful to learn.
 
 The Tidyverse includes four core functions for modifying data: 
 
@@ -169,67 +150,132 @@ The Tidyverse includes four core functions for modifying data:
   sort tool.
 - `select()` allows us to select particular variables.
 
-All four functions follow a common syntax that is designed for use with
-the pipe.  To see how they work, let's do some work with them.
+All four functions follow a common syntax that is designed to work with 
+a convenient Tidyverse tool called the "pipe" operator.
 
-First, let's suppose that we want to convert the unemployment rate and LFP
-rate to percentage.  The function for this is ***mutate***:
+#### The pipe operator
+
+The ***pipe operator*** is part of the Tidyverse and is written `%>%`. Recall 
+that an operator is just a symbol like "+" or "*" that performs some function
+on whatever comes before it and whatever comes after it.
+
+To see how it works, I'll show you a few examples:
 ```{r}
-# Convert UnempRate and LFPRate to percentages
-EmpData %>% 
-  mutate(UnempRate = 100*UnempRate) %>% 
-  mutate(LFPRatePct = 100*LFPRate)
+# This is equivalent to names(EmpData)
+EmpData %>% names()
+# This is equivalent to sqrt(2)
+2 %>% sqrt()
+# This is equivalent to cat(sqrt(2)," is the square root of 2")
+2 %>% sqrt() %>% cat(" is the square root of 2")
 ```
-Note that mutate allows us to *change* the existing variable UnempRate and
-*add* a new variable LFPRatePct.
+As you can see, R's rule for interpreting the pipe operator is that the
+object *before* the `%>%` is taken as the first argument for the function
+*after* the `%>%`.  
+
+The pipe operator does not add any functionality to R; anything you can do
+with it can also be done without it.  But it addresses a common problem: we often 
+want to perform multiple transformations on a data set, but doing so in 
+the usual functional language can lead to code that is quite difficult to 
+read.  The pipe operator can be used to create much more readable code, 
+as we will see in the examples below.
+
+#### Mutate
+
+The most important data transformation function is ***mutate***, which 
+allows us to change or add variables.  We will start by changing 
+the *MonthYr* variable from character (text) to date, using the `as.Date()`
+function: 
+```{r}
+# Change MonthYr to date format
+EmpData %>% 
+  mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y"))
+```
+As you can see, the *MonthYr* column is now labeled as a date rather than text. Like
+Excel, R has an internal representation of dates that allows for correct ordering
+and calculations, but displays dates in a standard human-readable format.
+
+Mutate can be used to add variables as well as changing them.  For example,
+suppose we also want to create versions of *UnempRate* and *LFPRate* that
+are expressed in percentages rather than decimal units:
+```{r}
+# Add UnempPct and LFPPct
+EmpData %>% 
+  mutate(UnempPct = 100*UnempRate) %>% 
+  mutate(LFPPct = 100*LFPRate)
+```
+If you look closely, you can see that the *UnempPct* and *LFPPct* variables are
+now included in the data table.
+
+Before we go any further, note that we haven't yet changed the `EmpData` data 
+table:
+```{r}
+print(EmpData)
+```
+As you can see, the *MonthYr* variable is still listed as a character variable and
+the new *UnempPct* and *LFPPct* variables do not seem to exist.
+
+What has happened here?  Our original commands simply created a *new* object *based*
+on `EmpData` that was then displayed on the screen.  In order to change `EmpData`
+itself, we need to assign that new object *back* to `EmpData`:
+```{r}
+# Make permanent changes to EmpData
+EmpData <- EmpData %>%
+  mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y")) %>% 
+  mutate(UnempPct = 100*UnempRate) %>% 
+  mutate(LFPPct = 100*LFPRate)
+```
+We can confirm that now we have changed `EmpData`:
+```{r}
+print(EmpData)
+```
+
+#### Filter, arrange, and select
 
 Now let's suppose we want to know more about the months in our data set 
 with the *highest* unemployment rates. We can use `filter()` for
 this purpose:
 ```{r}
-# This will give all of the observations with unemployment rates over 13%
+# This will give all of the observations with unemployment rates over 12.5%
 EmpData %>% 
-  mutate(UnempRate = 100*UnempRate, LFPRatePct = 100*LFPRate) %>% 
-  filter(UnempRate > 13)
+  filter(UnempPct > 12.5)
 ```
+As you can see, only 8 of the 541 months in our data have unemployment rates
+over 12.5% - the worst months of the 1982-83 recession, and April and May
+of last year.
 
 Now let's suppose that we only want to see a few pieces of information about those
 months.  We can use `select()` to choose variables:
 ```{r}
 # This will take out all variables except a few
 EmpData %>% 
-  mutate(UnempRate = 100*UnempRate) %>% 
-  mutate(LFPRatePct = 100*LFPRate) %>% 
-  filter(UnempRate > 13) %>%
-  select(MonthYr,UnempRate,LFPRatePct,PrimeMinister)
+  filter(UnempPct > 12.5) %>%
+  select(MonthYr,UnempRate,LFPPct,PrimeMinister)
 ```
-Now let's suppose that we want to show months in descending order by
+Finally, suppose that we want to show months in descending order by
 unemployment rate (i.e., the highest unemployment rate first).  We 
 can use `arrange()` to sort rows in this way:
 ```{r}
-# This will give all of the observations with unemployment rates over 13%
+# This will sort the rows by unemployment rate
 EmpData %>% 
-  mutate(UnempRate = 100*UnempRate) %>% 
-  mutate(LFPRatePct = 100*LFPRate) %>% 
-  filter(UnempRate > 13) %>%
-  select(MonthYr,UnempRate,LFPRatePct,PrimeMinister) %>%
-  arrange(UnempRate)
+  filter(UnempPct > 12.5) %>%
+  select(MonthYr,UnempPct,LFPPct,PrimeMinister) %>%
+  arrange(UnempPct)
 ```
 Hopefully you can see why the pipe operator is useful in making our code
 clear and readable: 
 ```{r}
 # This is what the same code looks like without the pipe
-arrange(select(filter(mutate(EmpData,UnempRate = 100*UnempRate,LFPRatePct = 100*LFPRate),UnempRate > 13),MonthYr,UnempRate,LFPRatePct,PrimeMinister),UnempRate)
+arrange(select(filter(EmpData,UnempPct>12.5),MonthYr,UnempPct,LFPPct,PrimeMinister),UnempPct)
 ```
-
-Finally, we can assign the result of any piped expression to a value
-
-```{r}
-EmpData <- EmpData %>% 
-  mutate(MonthYr=as.Date(MonthYr,"%m/%d/%Y"))
-```
+Now I should probably say: these results imply nothing meaningful about
+the economic policy of either Pierre or Justin Trudeau.  The severe worldwide recessions in 1982-83 (caused by US monetary policy) and 2020-2021 (caused 
+by the COVID-19 pandemic) were caused by world events largely outside the 
+control of Canadian policy makers.
 
 ## Data analysis in R
+
+Having read and cleaned our data set, we can now move on to some summary 
+statistics.
 
 ### The summary function
 
@@ -240,71 +286,56 @@ a set of summary statistics for each variable:
 summary(EmpData)
 ```
 
-### The mean() function
+### Univariate statistics 
 
 The R function `mean()` calculates the sample average of any numeric 
 vector:
 ```{r}
 # Mean of a single variable
-mean(EmpData$UnempRate)
+mean(EmpData$UnempPct)
 ```
-In real-world data, some variables have missing values for one or more observations. There
-are many reasons for this:
-
-- Item-level nonresponse in survey data
-- Calculated variable depends on information that is not available
-- The variable does not apply to the observation; for example spousal income of
-  someone who is not married, or hourly wage of a baby.
-
-In our *EmpData* data set, the **AnnPopGrowth** variable is missing for the first year of
-data (1976), since calculating the growth rate for 1976 would require data from 1975. In
-R, missing values are given the special value `NA`.
+There are many other functions in R to calculate other univariate summary
+statistics:
 ```{r}
-# NA is treated like any other value
-x <- NA
-# The value of any calculation based on NA is NA
-5 + NA
-log(NA)
-NA - NA
-# NA is not the only non-numeric "number"
-# Inf means "infinity"
-1/0
--1/0
-# NaN means "not a number"
-0/0
-# There are standard rules for math with these
-Inf + Inf
-Inf - Inf
-5*Inf
-0*Inf
+# VAR calculates the sample variance
+var(EmpData$UnempPct)
+# SD calculates the standard deviation
+sd(EmpData$UnempPct)
+# MEDIAN calculates the sample median
+median(EmpData$UnempPct)
 ```
+As you can see, they work just like `mean()`.  
 
-There are several options for dealing with this:
-
-- Exclude observations with missing values from the calculation.
-  - This is the default in Excel
-- Include observations with missing values in the calculation.
-  - This is the default in R
-  - Since any calculation involving NA produces NA, this will 
-    produce NA as a result
-- Issue an error message if there are missing values
-  
-R's practice of carrying NA values through the calculation is generally
-considered the best practice for careful data analysis.  If you automatically
-throw out missing values, you may not even know there are any, which may
-leave you unaware of potential problems with the data.
-
-However, once we know the mising values are not a data problem we may decide
-to ignore them.  We can do that by adding the `na.rm = TRUE` option to
-the `mean()` function:
+In real-world data, some variables have ***missing values*** for one or more
+observations. For example, the *AnnPopGrowth* variable in our data set is
+missing for the first year of data (1976), since calculating the growth rate
+for 1976 would require data from 1975. In R, missing values are given the
+special value `NA` which stands for "not available":
 ```{r}
-# if a variable has any NA values, its mean will be NA 
+EmpData %>%
+  select(MonthYr,Population,AnnPopGrowth)
+```
+When we try to take the mean of this variable we also get `NA`:
+```{r}
 mean(EmpData$AnnPopGrowth)
-# unless you tell R to remove them
+```
+This is because math in R follows the
+[IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) 
+standard for numerical arithmetic, which says that any calculation
+involving `NA` should also result in `NA`.  Whenever you have missing 
+values, you should investigate before proceeding.  Sometimes (as in our case
+here), missing values are for a good reason, other times they are the result
+of a mistake or problem that needs to be fixed.
+
+Once we have investigated the missing values, we can tell R explicitly
+to exclude them from the calculation by adding the `na.rm = TRUE` option:
+```{r}
 mean(EmpData$AnnPopGrowth,na.rm=TRUE)
 ```
 
-Now suppose we want to calculate the sample average for each column in our
+### Tables of statistics 
+
+Suppose we want to calculate the sample average for each column in our
 tibble. We could just call `mean()` for each of them, but there should
 be a quicker way. Here is the code to do that:
 ```{r}
@@ -314,32 +345,23 @@ EmpData %>%
   lapply(mean,na.rm=TRUE) 
 ```
 I would not expect you to come up with this code, but maybe it
-kind of makes sense.  The `select(where(is.numeric))` step selects 
-only the columns in EmpData that are numeric rather than text. The
-`lapply(mean,na.rm=TRUE)` step calculates `mean(x,na.rm=TRUE)` 
-for each (numeric) column x in EmpData. 
+kind of makes sense.  
 
-### Other summary statistics
-
-There are many other functions in R to calculate univariate summary
-statistics:
-```{r}
-# VAR calculates the sample variance
-var(EmpData$UnempRate,na.rm = TRUE)
-# SD calculates the standard deviation
-sd(EmpData$UnempRate,na.rm = TRUE)
-# MEDIAN calculates the sample median
-median(EmpData$UnempRate,na.rm = TRUE)
-```
-As you can see, they work just like `mean()`.  We can also
-use `lapply()` to apply these functions to every (numeric)
-column in our data set:
+- The `select(where(is.numeric))` step selects only the columns in 
+  `EmpData` that are numeric rather than text. 
+- The `lapply(mean,na.rm=TRUE)` step calculates `mean(x,na.rm=TRUE)` 
+  for each (numeric) column `x` in `EmpData`. 
+  
+We can use this method with any function that calculates a summary statistic:
 ```{r}
 # Standard deviation of each column
 EmpData %>%
   select(where(is.numeric)) %>%
   lapply(sd,na.rm=TRUE) 
 ```
+  
+
+### Frequency tables 
 
 We can also construct frequency tables for both discrete and continuous
 variables:
@@ -351,66 +373,43 @@ EmpData %>%
 EmpData %>% 
   count(cut_interval(LFPRate,6))
 ```
-
-### Multivariate statistics in R
-
-Multivariate statistics like covariance and correlation
-can be cauclulated 
-```{r}
-# For two specific columns of data
-cov(EmpData$UnempRate,EmpData$LFPRate)
-cor(EmpData$UnempRate,EmpData$LFPRate)
-```
-They can also be calculated for the whole data set
-```{r}
-# For the whole data set
-EmpData %>%
-  select(where(is.numeric)) %>%
-  cor()
-```
-Dealing with missing values is a little more complicated for covariances and correlations because there are two different ways to drop them:
-
-1. Pairwise deletion: when calculating the covariance of two variables, 
-   drop observations with a missing values for either of *those two* variables.
-2. Casewise or listwise deletion: when calculating the covariance of two
-   variables, drop observations with a missing value for *any* variable.
-
-The `use` argument allows you to specify which approach you want to use:
-```{r}
-# EmpData has missing data in 1976 for the variable AnnPopGrowth
-# Casewise deletion will exclude 1976 from all calculations
-EmpData %>%
-  select(where(is.numeric)) %>%
-  cor(use="complete.obs")
-# Pairwise deletion will exclude 1976 from calculations involving AnnPopGrowth
-EmpData %>%
-  select(where(is.numeric)) %>%
-  cor(use="pairwise.complete.obs")
-
-```
-In most applications, pairwise deletion makes the most sense 
+As you might imagine, there are various ways of customizing the intervals
+just like in Excel.
 
 ### Probability distributions in R
 
 R has a family built-in functions for each commonly-used probability
-distribution.  We have already seen `dnorm()` function, which 
-gives the normal PDF:
-```{r}
-# The N(0,1) PDF, evaluated at 1.96
-dnorm(1.96)
-# The N(1,4) PDF, evaluated at 1.96
-dnorm(1.96,mean=1,sd=4)
-# The N(0,1) CDF, evaluated at 1.96
-pnorm(1.97)
-# The 97.5 percentile of the N(0,1) CDF
-qnorm(0.975)
-# Four random numbers from the N(0,1) distribution
-rnorm(4)
-```
+distribution.  
+
+For example:
+
+- The  `dnorm()` function gives the normal PDF:
+  ```{r}
+  # The N(0,1) PDF, evaluated at 1.96
+  dnorm(1.96)
+  # The N(1,4) PDF, evaluated at 1.96
+  dnorm(1.96,mean=1,sd=4)
+  ```
+- The `pnorm()` function gives the normal CDF:
+  ```{r}
+  # The N(0,1) CDF, evaluated at 1.96
+  pnorm(1.97)
+  ```
+- The `qnorm()` function gives the inverse normal CDF (or quantile function):
+  ```{r}
+  # The 97.5 percentile of the N(0,1) CDF
+  qnorm(0.975)
+  ```
+- The `rnorm()` function produces normal random numbers:
+  ```{r}
+  # Four random numbers from the N(0,1) distribution
+  rnorm(4)
+  ```
+
 There is a similar set of functions available for the 
-uniform distribution (dunif, punif, qunif,runif), the
-binomial distribution (dbinom,,pbinom,qbinom,rbinom),
-and Student's T distribution (dt,pt,qt,rt), along 
+uniform distribution (`dunif`, `punif`, `qunif`, `runif`), the
+binomial distribution (`dbinom`, `pbinom`, `qbinom`,`rbinom`),
+and Student's T distribution (`dt`, `pt`, `qt`, `rt`), along 
 with many others.
 
 ## Graphs with ggplot
@@ -424,46 +423,34 @@ The Tidyverse also contains a powerful graphics package called[^10] ***ggplot***
 
 We can start by making a histogram of the unemployment rate:
 ```{r}
-ggplot(data=EmpData,mapping=aes(x=UnempRate)) + 
+ggplot(data=EmpData,mapping=aes(x=UnempPct)) + 
   geom_histogram()
 ```
-This is already a pretty nice graph, though it could use some customization.
+We can also make a time series (line) graph:
+```{r}
+ggplot(data=EmpData,mapping=aes(x=MonthYr,y=UnempPct)) + 
+  geom_line() 
+```
 
 The `ggplot()` function has a non-standard syntax, so I'd like to go over 
 it. 
 
-- The first part `ggplot(data=EmpData,mapping=aes(x=UnempRate))` sets up
-  the basic characteristics of the graph:
+- The first line sets up the basic characteristics of the graph:
     - The `data` argument tells R which data set (tibble) will be
       used
     - the `mapping` argument describes the basic ***aesthetics***
       of the graph, i.e., the relationship in the data we will
       be graphing.
+      - For the histogram, our aesthetic includes only one variable
+      - For the line graph, our aesthetic includes two variables
 - The rest of the command is one or more statements separated by 
   a `+` sign.  These are called ***geometries*** and are geometric
   elements to be included in the plot.
     - The `geom_histogram()` geometry produces a histogram
-    
+    - The `geom_line()` geometry produces a line
 
-    
-
-We can also make a scatter plot showing the relationship between the 
-unemployment rate and the labour force participation rate:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point()
-```
-This is different from our histogram in two ways:
-  - The aesthetic also includes a `y` value
-  - The geometry is geom_point rather than geom_hist. It shows one point
-    for each observation.
-
-Next, let's make a line graph:
-```{r}
-ggplot(data=EmpData,aes(x=MonthYr,y=UnempRate)) + 
-  geom_line() 
-```
-
+A graph can include multiple geometries in a given graph, as we will see
+shortly.
 
 ### Modifying a graph
 
@@ -474,47 +461,31 @@ but we can improve upon it in various ways.
 
 You can add a title and subtitle, and you can change the axis titles: 
 ```{r}
-ggplot(data=EmpData,aes(x=UnempRate)) + 
-  geom_histogram() + 
+ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
+  geom_line() + 
   labs(title="Unemployment rate",
       subtitle="January 1976 - January 2021",
       caption="Source: Statistics Canada, Labour Force Survey",
       tag="Canada") +
-  xlab("Unemployment rate") +
-  ylab("Count")
+  xlab("") +
+  ylab("Unemployment rate, %")
 ```
 
-#### Color and shapes
+#### Color 
 
 Using color: you can change the color of any geometric element
 using the `col=` argument:
-
-
 ```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point(col="red")
+ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
+  geom_line(col="blue") 
 ```
-
-You can also color-code a geographic element based on some other variable by 
-including it as part of the aesthetic:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point(aes(col=Party))
-```
-
-As we discussed earlier, you want to make sure your graph can be read by a reader
-who is color blind or is printing in black and white. So we can use 
-shapes in addition to color:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point(aes(col=Party, shape=Party))
-```
+Colors can be given in ordinary English (or local language) words,
+or with detailed color codes in RGB or CMYK format. 
 
 Some geometric elements, such as the bars in a histogram, also have 
 a ***fill*** color:
-
 ```{r}
-ggplot(data=EmpData,aes(x=UnempRate)) + 
+ggplot(data=EmpData,aes(x=UnempPct)) + 
   geom_histogram(col="red",fill="blue") 
 ```
 As you can see, the `col=` argument sets the color for the exterior
@@ -522,32 +493,37 @@ of each bar, and the `fill=` argument sets the color for the interior.
 
 ### Adding graph elements 
 
-We can include multiple geometries in the same graph.
-
-For example, suppose we want to add a smooth fit to our scatter 
-plot. We can do that with the `geom_smooth()` geometry:
+We can include multiple geometries in the same graph.  For example, we can
+include lines for both unemployment and labour force participation:
 ```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point() +
-  geom_smooth()
+ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
+  geom_line(col="blue") +
+  geom_line(aes(y=LFPPct),col="red")
 ```
-Notice that by default, the graph includes both the fitted line
-(in blue) and a 95\% confidence interval (the shaded area around
-the line).  
+A few things to note here:
 
-Alternatively, we could add a linear fit:
+- The third line gives `geom_line()` an aesthetics argument `aes(y=LFPPct)`.  This
+  overrides the aesthetics in the first line.  
+- We have used color to differentiate the two lines, but there is no legend 
+  to tell the reader which line is which.  We will need to fix that.
+- The vertical axis is labeled "UnempPct". We will need to fix that.
+
+We could add a legend here, but it is better (and friendlier to the color-blind)
+to just label the lines. We can use the `geom_text` geometry to do this:
 ```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
-  geom_point() +
-  geom_smooth(method="lm") 
+ggplot(data=EmpData,aes(x=MonthYr)) + 
+  geom_line(aes(y=UnempPct),col="blue") +
+  geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=15,label="Unemployment",col="blue") +
+  geom_line(aes(y=LFPPct),col="red") +
+  geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=60,label="LFP",col="red")
 ```
 
-
-#### Putting it all together
+The graphs below combine all of the features described above to yield clean
+and clear graphs.
 
 ```{r}
-ggplot(data=EmpData,aes(x=UnempRate)) + 
-  geom_histogram(binwidth=0.005,fill="blue") +
+ggplot(data=EmpData,aes(x=UnempPct)) + 
+  geom_histogram(binwidth=0.5,fill="blue") +
   geom_density() +
   labs(title="Unemployment rate",
       subtitle=paste("January 1976 - January 2021 (",
@@ -557,17 +533,17 @@ ggplot(data=EmpData,aes(x=UnempRate)) +
                      collapse=""),
       caption="Source: Statistics Canada, Labour Force Survey",
       tag="Canada") +
-  xlab("Unemployment rate") +
+  xlab("Unemployment rate, %") +
   ylab("Count")
 ```
 
-Here is our scatter plot:
 ```{r}
-ggplot(data=EmpData %>% filter(Party != "Transfer"),
-       aes(x=UnempRate,y=LFPRate)) + 
-  geom_point(aes(col=Party, shape=Party)) +
-  geom_smooth(aes(col=Party)) +
-  labs(title="Unemployment and LFP rates by party in government",
+ggplot(data=EmpData,aes(x=MonthYr)) + 
+  geom_line(aes(y=UnempPct),col="blue") +
+  geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=15,label="Unemployment",col="blue") +
+  geom_line(aes(y=LFPPct),col="red") +
+  geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=60,label="LFP",col="red") +
+  labs(title="Unemployment and LFP rates",
       subtitle=paste("January 1976 - January 2021 (",
                      nrow(EmpData),
                      " months)",
@@ -575,47 +551,6 @@ ggplot(data=EmpData %>% filter(Party != "Transfer"),
                      collapse=""),
       caption="Source: Statistics Canada, Labour Force Survey",
       tag="Canada") +
-  xlab("Unemployment rate") +
-  ylab("Labour force participation")
+  xlab("") +
+  ylab("Percent")
 ```
-
-
-#### A few other graphs
-
-The histogram, time series (line) graph and scatter plot 
-are the core graphs I want you to be able to produce. But ggplot2
-has many other pretty and useful graphs, so I would like to show
-you a few of them.
-
-Some alternatives to the histogram include:
-```{r}
-# A smooth density (PDF) function too
-ggplot(data=EmpData,aes(x=UnempRate)) + 
-  geom_density()
-# This is called a box plot. It shows the mean
-ggplot(data=EmpData,aes(x=UnempRate,y=PrimeMinister)) + 
-  geom_boxplot()
-```
-We can put two densities in the same graph for comparison: 
-```{r}
-# The fill option changes the color under the density
-# The alpha option makes the fill partially transparent
-ggplot(data=EmpData) + 
-  geom_density(aes(x=Population),fill="red",alpha=0.5) +
-  geom_density(aes(x=Employed),fill="blue",alpha=0.5)
-```
-
-
-Finally, there is no built-in option to generate a binned 
-scatterplot, but we can do it with a little work:
-```{r}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
- geom_point(size=0.5) +
-  stat_summary_bin(fun='mean', bins=20,
-                   col="blue", size=3, geom='point') +
-  stat_summary_bin(fun='mean', bins=20,
-                   col="blue", size=0.5, geom='line')
-```
-It took me a little while to figure this one out - I wouldn't 
-expect you to do anything so complicated.
-
