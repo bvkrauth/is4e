@@ -371,7 +371,7 @@ EmpData %>%
   count(PrimeMinister)
 # COUNT and CUT_INTERVAL create a binned frequency table
 EmpData %>% 
-  count(cut_interval(LFPRate,6))
+  count(cut_interval(UnempPct,6))
 ```
 As you might imagine, there are various ways of customizing the intervals
 just like in Excel.
