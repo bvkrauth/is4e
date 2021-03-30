@@ -96,8 +96,7 @@ which are statistics that describe a single variable in isolation. In Section
 \@ref(charts-in-excel) we will construct some commonly-used univariate graphs.  
 
 Multivariate statistics describe the relationships among multiple variables,
-and will be covered in Chapters \@ref(advanced-topics-in-statistics) and
-\@ref(advanced-data-analysis).
+and will be coverd in Chapter \@ref(multivariate-data-analysis).
 
 ### Summary statistics
 
@@ -582,7 +581,7 @@ graph that looks like this:
 In Excel, time series graphs can be implemented using either the *Line*
 chart type or the *Scatter* chart type.  Line graphs are simpler, so we
 will start with that.  We will learn how to make scatter plots in
-Chapter \@ref(using-r-and-ggplot).
+Chapter \@ref(using-r).
 
 The first step in creating an Excel chart is to select the data 
 source and graph type.
