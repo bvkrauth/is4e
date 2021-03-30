@@ -11,7 +11,7 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 
-So far most of our emphasis has been on univariate analysis - understanding
+So far most of our emphasis has been on univariate analysis: understanding
 the behavior of one variable at a time.  However, we are often intestested
 in the relationship among multiple variables.  This will be the primary
 subject of your next course in statistics (most likely ECON 333), but we
@@ -41,8 +41,8 @@ In this chapter, we will learn how to:
 ## Scatter plots 
 
 A ***scatter plot*** is the simplest way to view the relationship between
-two variables in data.  The horizontal (x) axis represents
-one variable, the vertical (y) axis represents the other variable,
+two variables in data.  The horizontal ($x$) axis represents
+one variable, the vertical ($y$) axis represents the other variable,
 and each point represents an observation.
 
 Scatter plots can be created in R using the `geom_point()` geometry:
@@ -50,8 +50,6 @@ Scatter plots can be created in R using the `geom_point()` geometry:
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
   geom_point()
 ```
-Scatter plots can also be created in Excel, though it is more work and 
-produces less satisfactory results.
 
 As you can see, there is something of a negative relationship between
 unemployment and labour force participation, though it is not a 
@@ -62,7 +60,7 @@ color-code points or any other geographic element based
 on some other variable by including it as part of the aesthetic:
 ```{r}
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
-  geom_point(aes(col=PrimeMinister))
+  geom_point(aes(col=Party))
 ```
 As we discussed earlier, you want to make sure your graph can be read by a
 reader who is color blind or is printing in black and white. So we can use 
@@ -72,11 +70,18 @@ ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) +
   geom_point(aes(col=Party, shape=Party))
 ```
 
+::: fyi
+**Scatter plots in Excel**
+
+Scatter plots can also be created in Excel, though it is more work and 
+produces less satisfactory results.
+:::
 
 ## Sample covariance and correlation
 
-In chapter ???, we learned about the covariance and correlation as 
-two ways of describing the relationship among random variables. 
+In Chapter \@ref(data-and-sampling), we learned about the covariance and
+correlation as two ways of describing the relationship among random
+variables. 
 
 We can estimate the covariance of two variables $x_i$ and $y_i$ 
 in a random sample of size $n$ by their ***sample covariance***:
@@ -98,11 +103,6 @@ The sample covariance and correlation have several properties:
 - As with the population correlation, the sample correlation ranges 
   from -1 to 1.
 
-### Covariance and correlation in Excel
-
-The sample covariance and correlation can be calculated in Excel
-using the `COVARIANCE.S()` and `CORREL()` functions.
-
 ### Covariance and correlation in R
 
 Multivariate statistics like covariance and correlation
@@ -110,8 +110,8 @@ can be cauclulated in R using the `cov()` and `cor()`
 functions:
 ```{r}
 # For two specific columns of data
-cov(EmpData$UnempPct,EmpData$LFPPct)
-cor(EmpData$UnempPct,EmpData$LFPPct)
+cat("covariance: ",cov(EmpData$UnempPct,EmpData$LFPPct),"\n")
+cat("correlation: ",cor(EmpData$UnempPct,EmpData$LFPPct),"\n")
 ```
 As you can see, unemployment and labour force participation are 
 *negatively* correlated: when unemployment is high, LFP tends to be
@@ -119,7 +119,8 @@ low. This makes sense given the economics: if it is hard to find
 a job, people will move into other activities that take one out
 of the labour force: education, childcare, retirement, etc.
 
-Both `cov()` and `cor()` can be applied to an entire data set:
+Both `cov()` and `cor()` can be applied to (the numeric variables in)
+an entire data set:
 ```{r}
 # For the whole data set (at least the numerical parts)
 EmpData %>%
@@ -153,6 +154,13 @@ EmpData %>%
 ```
 In most applications, pairwise deletion makes the most sense because it
 avoids throwing out data.  
+
+::: fyi
+**Covariance and correlation in Excel**
+
+The sample covariance and correlation can be calculated in Excel
+using the `COVARIANCE.S()` and `CORREL()` functions.
+:::
 
 ##  Pivot tables
 
