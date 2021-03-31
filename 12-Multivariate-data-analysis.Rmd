@@ -38,6 +38,105 @@ In this chapter, we will learn how to:
   and interpret the results.
 :::
 
+##  Pivot tables
+
+Pivot tables are a powerful tool in Excel that enable the analysis of
+frequencies, conditional averages, and various other aspects of the 
+data.  They are somewhat tricky to use, and we will only scratch
+the surface here. But the more comfortable you can get with them,
+the better.
+
+Open the data file EmploymentData.xlsx
+
+### A simple pivot table
+
+Let's start by creating a simple pivot table
+
+1. Open the *Data for Analysis* worksheet
+2. Click anywhere in your data table.
+3. Select `Insert > PivotTable` from the menu.
+4. Excel will display a dialog box allowing you to specify the range of
+  your data along with a few other options.  
+  ![Create Pivot Table dialog box](bin/CreatePivotTable.png)
+  The default here is fine, so select `OK`.
+  
+Excel will take you to a new worksheet that looks like this:
+
+  ![A worksheet with a new Pivot Table](bin/PivotTableSheet.png)
+  
+Let's start with a simple one-variable table. Check the box next to
+"PrimeMinister" and you will see something like this:
+
+![A list of prime ministers](bin/PrimeMinisterList.png)
+
+We now can report various statistics broken down by Prime Minister.  Let's
+start with  a simple count.  Drag "PrimeMinister" into the box marked
+"$\Sigma$ values". You will see something like this:
+
+![Number of months served by each prime minister](bin/PrimeMinisterCounts.png)
+
+As we can see, it shows the number of observations for each value of the
+PrimeMinister variable, which also happens to be the number of months in
+office for each prime minister. 
+
+Now let's addd a column reporting the average unemployment rate for each
+Prime Minister. Drag "Income" into the box marked "$\Sigma$ values".  You will now see a screen that looks like 
+this:
+
+![Sum of UnempRate](bin/UnempRateSum.png) 
+
+Unfortunately, we wanted to see the *average* unemployment rate for 
+each prime minister, but instead we see the *sum* of unemployment
+rates for each prime minister.  We can change that by right-clicking
+on "Sum of UnempRate", then on "Summarize Values By" and then "Average".
+
+![Average of unemployment rate](bin/UnempRateAvg.png) 
+
+We can keep adding variables, and ways to summarize them. But there
+are other things we can do.
+
+### Improving our pivot table
+
+We can format numbers:
+
+1. Right-click on "Average of UnempRate", and then select
+   `Value Field Settings...`
+![Value Field Settings dialog box](bin/ValueFieldSettings.png)   
+2. Select `Number Format`
+3. change the number format to Percentage with 1 decimal place.
+4. Select `OK` and then `OK` again.
+
+![Create Pivot Table dialog box](bin/UnempRateAvgPct.png)   
+
+We can sort rows by any column in the table
+
+1. Select any cell in the "Average of UnempRate column"
+2. Select `Home > Sort and Filter > Sort Largest to Smallest`
+   from the menu.
+   
+![Sorted by average unemployment rate](bin/UnempRateAvgSorted.png)   
+
+We can also filter rows out of the table.  For example, suppose we
+want to exclude the "Transfer" value from our list of prime ministers. There
+are two ways to do this:
+
+1. Click on the ![Row Labels button](bin/RowLabelsButton.png)   
+, and
+
+![Sort and filter menu](bin/SortAndFilter.png)   
+
+
+  Uncheck the box next to "Transfer", and select `OK`:
+  
+  The table no longer includes the Transfer value:
+  
+![Pivot table with transfer excluded](bin/TransferExcluded.png)
+
+Finally, we can change the headers to make the result more readable:
+
+![Final pivot table](bin/PivotTableFinal.png) 
+
+
 ## Scatter plots 
 
 A ***scatter plot*** is the simplest way to view the relationship between
@@ -161,100 +260,6 @@ avoids throwing out data.
 The sample covariance and correlation can be calculated in Excel
 using the `COVARIANCE.S()` and `CORREL()` functions.
 :::
-
-##  Pivot tables
-
-Pivot tables are a powerful tool in Excel that enable the analysis of
-frequencies, conditional averages, and various other aspects of the 
-data.  They are somewhat tricky to use, and we will only scratch
-the surface here. But the more comfortable you can get with them,
-the better.
-
-Open the data file EmploymentData.xlsx
-
-### A simple pivot table
-
-Let's start by creating a simple pivot table
-
-1. Open the *Data for Analysis* worksheet
-2. Click anywhere in your data table.
-3. Select `Insert > PivotTable` from the menu.
-4. Excel will display a dialog box allowing you to specify the range of
-  your data along with a few other options.  
-  ![Create Pivot Table dialog box](bin/CreatePivotTable.png)
-  The default here is fine, so select `OK`.
-  
-Excel will take you to a new worksheet that looks like this:
-
-  ![A worksheet with a new Pivot Table](bin/PivotTableSheet.png)
-  
-Let's start with a simple one-variable table. Check the box next to
-"PrimeMinister" and you will see something like this:
-
-![A list of prime ministers](bin/PrimeMinisterList.png)
-
-We now can report various statistics broken down by Prime Minister.  Let's
-start with  a simple count.  Drag "PrimeMinister" into the box marked
-"$\Sigma$ values". You will see something like this:
-
-![Number of months served by each prime minister](bin/PrimeMinisterCounts.png)
-
-As we can see, it shows the number of observations for each value of the
-PrimeMinister variable, which also happens to be the number of months in
-office for each prime minister. 
-
-Now let's addd a column reporting the average unemployment rate for each
-Prime Minister. Drag "Income" into the box marked "$\Sigma$ values".  You will now see a screen that looks like 
-this:
-
-![Sum of UnempRate](bin/UnempRateSum.png) 
-
-Unfortunately, we wanted to see the *average* unemployment rate for 
-each prime minister, but instead we see the *sum* of unemployment
-rates for each prime minister.  We can change that by right-clicking
-on "Sum of UnempRate", then on "Summarize Values By" and then "Average".
-
-![Average of unemployment rate](bin/UnempRateAvg.png) 
-
-We can keep adding variables, and ways to summarize them. But there
-are other things we can do.
-
-### Improving our pivot table
-
-We can format numbers:
-
-1. Right-click on "Average of UnempRate", and then select
-   `Value Field Settings...`
-![Value Field Settings dialog box](bin/ValueFieldSettings.png)   
-2. Select `Number Format`
-3. change the number format to Percentage with 1 decimal place.
-4. Select `OK` and then `OK` again.
-
-![Create Pivot Table dialog box](bin/UnempRateAvgPct.png)   
-
-We can sort rows by any column in the table
-
-1. Select any cell in the "Average of UnempRate column"
-2. Select `Home > Sort and Filter > Sort Largest to Smallest`
-   from the menu.
-   
-![Sorted by average unemployment rate](bin/UnempRateAvgSorted.png)   
-
-We can also filter rows out of the table.  For example, suppose we
-want to exclude the "Transfer" value from our list of prime ministers. There
-are two ways to do this:
-
-1. Click on the ![Row Labels button](bin/RowLabelsButton.png)   
-, and
-
-![Sort and filter menu](bin/SortAndFilter.png)   
-
-
-  Uncheck the box next to "Transfer", and select `OK`:
-  
-  The table no longer includes the Transfer value:
-  
-![Create Pivot Table dialog box](bin/TransferExcluded.png)
 
 ## Conditional means
 
