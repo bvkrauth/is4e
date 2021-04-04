@@ -166,8 +166,9 @@ To create a blank pivot table based on the employment data:
    and select any cell in the data table.
 2. Select `Insert > PivotTable` from the menu.
 3. Excel will display the `Create PivotTable` dialog box:.  
-  ![Create Pivot Table dialog box](bin/CreatePivotTable.png)
-  The default settings are fine, so select `OK`.
+
+   ![Create Pivot Table dialog box](bin/CreatePivotTable.png)
+   The default settings are fine, so select `OK`.
   
 Excel will open a new worksheet that looks like this:
 
@@ -201,12 +202,12 @@ office for each Canadian prime minister:
 1. Check the box next to `PrimeMinister`. The pivot table will look 
    like this:
 
-![A list of prime ministers](bin/PrimeMinisterList.png)
+   ![A list of prime ministers](bin/PrimeMinisterList.png)
 
 2. Drag "MonthYr" into the box marked "$\Sigma$ values". The pivot table will now 
    look like this:
 
-![Number of months served by each prime minister](bin/PrimeMinisterCounts.png)
+   ![Number of months served by each prime minister](bin/PrimeMinisterCounts.png)
 
 As we can see, the table shows the number of observations for each value of the
 *PrimeMinister* variable, which also happens to be the number of months in
@@ -225,11 +226,13 @@ To add a relative frequency column, we first need to add a second absolute
 frequency column:
 
 1. In the PivotTable Fields box, drag MonthYr to the "$\Sigma$ values" box.
+
    ![Two absolute frequencies](bin/PrimeMinisterCounts2.png)
 
 Then we convert it to a relative frequency column:
 
 2. Right-click on the "Count of MonthYr2" column, and select `Value Field Settings...`.
+
    ![Value Field Settings dialog box](bin/ValueFieldSettings.png)   
 3. Click on the `Show Values As` tab and select "% of Column Total" from
    the Show Values As drop-down box.
@@ -238,7 +241,7 @@ Then we convert it to a relative frequency column:
 The third column will now show the number of observations as a percentage of
 the total:
 
-  ![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png) 
+![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png) 
 :::
 
 ### Cross tabulations
@@ -259,7 +262,8 @@ Starting with a blank pivot table:
 3. Drag MonthYr into the $\Sigma$ values box.
 
 You will now have this table of absolute frequencies:
-  ![Joint absolute frequencies](bin/JointAbsFreq.png)
+
+![Joint absolute frequencies](bin/JointAbsFreq.png)
 
 For example, this crosstab tells us Brian Mulroney served 104 months as
 prime minister, with all of those months as a member of the (Progressive) 
@@ -282,7 +286,8 @@ To convert our absolute frequency crosstab into a joint frequency crosstab:
    from the Show Values As drop-down box.
 
 Your table will now look like this:
-  ![Joint frequency](bin/JointFreq.png)
+
+![Joint frequency](bin/JointFreq.png)
 
 For example, the table tells us that Brian Mulroney's 104 months as 
 prime minister represent 19.22% of all months in our data.
@@ -302,7 +307,9 @@ To convert our crosstab into a conditional frequency crosstab:
    from the Show Values As drop-down box.
 
 Your table will now look like this:
-  ![Conditional frequency](bin/CondFreq.png) 
+
+![Conditional frequency](bin/CondFreq.png) 
+
 For example, Brian Mulroney's 104 months as prime minister represent
 44.64% of all months served by a Conservative prime minister in our data.
 :::
@@ -325,12 +332,12 @@ men.
 Suppose we want to add the average unemployment rate during
 each prime minister's time in office to this pivot table:
 
-  ![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png) 
+![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png) 
 
-1.. Drag "UnempRate" into the box marked "$\Sigma$ values".  The table will 
+1. Drag "UnempRate" into the box marked "$\Sigma$ values".  The table will 
    now look like this:
 
-![Sum of UnempRate](bin/UnempRateSum.png) 
+   ![Sum of UnempRate](bin/UnempRateSum.png) 
 
 Unfortunately, we wanted to see the *average* unemployment rate for 
 each prime minister, but instead we see the *sum* of unemployment
@@ -369,6 +376,7 @@ changed.  To exclude those months from our main table:
 
 1. Click on the ![Row Labels button](bin/RowLabelsButton.png). The sort and filter
    menu will appear:
+
    ![Sort and filter menu](bin/SortAndFilter.png)   
 
 2. Uncheck the check box next to "Transfer", and select `OK`:
@@ -388,10 +396,11 @@ column.
 
 To sort our table by months in office:
 
-1. Click on the ![Row Labels button](bin/RowLabelsButton.png) and the 
+1. Click on ![Row Labels button](bin/RowLabelsButton.png) and the 
    sort and filter menu will appear.
 2. Select `More sort options`; the pivot table sort dialog box will appear:
-  ![Pivot table sort](bin/PTSort.png) 
+
+   ![Pivot table sort](bin/PTSort.png) 
 3. Select the `Descending (Z to A)` radio button and "Count of MonthYr" 
    from the drop-down box.
 
@@ -416,7 +425,7 @@ reporting the unemployment rate in percentage terms and fewer decimal places:
    with 1 decimal place.
 4. Select `OK` and then `OK` again. The table will now look like this:
 
-![Pivot Table with unemployment in percentages](bin/UnempRateAvgPct.png) 
+   ![Pivot Table with unemployment in percentages](bin/UnempRateAvgPct.png) 
 
 5. Change the other three headers.  You can do this through `Value Field Settings...`
    but you can also just edit the text directly.
@@ -439,12 +448,14 @@ cleaning up the pivot table so that it shows the data we want to
 represent:
 
 1. Select any cell in this table.
+
   ![Joint absolute frequencies](bin/JointAbsFreq.png)
 2. Use filtering to remove "Transfer" from the list
    of prime ministers.
 3. Use sorting to sort by (grand total) number of months in office.
 
    The table should now look like this:
+
    ![Joint absolute frequencies](bin/FinalJointAbsFreq.png)
 
 Then we can generate the graph:
@@ -457,7 +468,7 @@ Then we can generate the graph:
    
 Your graph will look like this:
 
-  ![A bar graph showing months in office for each prime minister](bin/PTChartExample.png) 
+![A bar graph showing months in office for each prime minister](bin/PTChartExample.png) 
 
 As always, there are various ways we could customize this graph to
 be more attractive and informative.
@@ -516,12 +527,14 @@ RoundedEmpData <- EmpData %>%
   mutate(UnempPct=round(UnempPct)) %>% 
   mutate(LFPPct=round(LFPPct))
 ```
+
 The scatter plot with the rounded data would look like this:
 ```{r}
 # Create graph using rounded data
 ggplot(data=RoundedEmpData, aes(x=UnempPct,y=LFPPct)) + 
   geom_point(col="red")
 ```
+
 As you can see from the graph, the scatter plot is misleading: there
 are 541 observations in the data set represented by only 40 points.
 
@@ -534,6 +547,7 @@ ggplot(data=RoundedEmpData,aes(x=UnempPct,y=LFPPct)) +
   geom_point(col="red") +
   geom_jitter(size=0.5, col="blue")
 ```
+
 As you can see the jittered rounded data (small blue dots) more accurately
 reflects the original unrounded data than the rounded data (large red dots).
 
@@ -548,6 +562,7 @@ ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=Party)) +
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=MonthYr)) + 
   geom_point()
 ```
+
 As these graphs show, R will use a discrete or continuous color scheme
 depending on whether the variable is discrete or continuous.
 
@@ -558,6 +573,7 @@ shapes in addition to color:
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=Party)) + 
   geom_point(aes(shape=Party))
 ```
+
 We would also choose a color scheme other than red and green, since that
 is the most common form of color blindness.
 
@@ -616,6 +632,7 @@ ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) +
   geom_text(x=13.8,y=62.5,label="20 bins",col="blue") +
   geom_text(x=13.8,y=60,label="100 bins",col="green")
 ```
+
 As you can see, the binned scatterplot tends to be smooth when there 
 are only a few bins, and jagged when there are many bins.  This reflects a
 trade-off between bias (too few bins may lead us to miss important 
@@ -638,6 +655,7 @@ ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) +
   geom_point(size = 0.5) +
   geom_smooth()
 ```
+
 Notice that by default, the graph includes both the fitted line
 (in blue) and a 95\% confidence interval (the shaded area around
 the line).  Also note that the confidence interval is narrow in the 
