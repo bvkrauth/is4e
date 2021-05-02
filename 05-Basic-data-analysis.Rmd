@@ -320,12 +320,13 @@ Frequency tables are at their simplest and most useful when the
 underlying variable is discrete, categorical, or even non-numeric.  The
 frequency table for this kind of variable looks like this:
 
-| (variablename)   | Count        | Percentage   |
+| variablename     | Count        | Percentage   |
 |------------------|--------------|--------------|
 | *(value1)*       | *(# value1)* | *(% value1)* |
 | *(value2)*       | *(# value2)* | *(% value2)* |
 | *(value3)*       | *(# value3)* | *(% value3)* |
 | *etc.*           |              |              |
+
 
 where:
 
