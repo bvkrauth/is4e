@@ -686,8 +686,7 @@ Next, let's modify the horizontal axis to be a little less busy.
    should appear to the right.
    - It may take you more than one try to double-click on the 
      correct object.
-2. Select the button (***INSERT PICTURE HERE***) marked 
-   "Axis Options".
+2. Select `Axis Options`.
    - You can see all of the choices Excel made here based
      on what it sees in the data. 
    - Feel free to play around with these options.  You can
