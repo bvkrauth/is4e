@@ -25,7 +25,7 @@ the math, please refer to the sections on [Sets](#sets) and on [Functions](#sets
 We will develop ideas by considering the casino game of **Roulette**.
 The picture below shows what a roulette wheel looks like.
 
-![roulette wheel image](bin/roulette.svg)
+![roulette wheel image](bin/roulette.png)
 Source: <a href="https://www.vecteezy.com/free-vector/roulette">Roulette Vectors by Vecteezy</a>
 
 Here are the rules:
