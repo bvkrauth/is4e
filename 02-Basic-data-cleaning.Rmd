@@ -16,7 +16,7 @@ In this chapter we will learn how to:
    - Cell contents and display format
    - Cell ranges
    - Relative and absolute cell addresses
-   - Numeric, text, date, and logical  data tpes
+   - Numeric, text, date, and logical  data types
  - Use Excel tools to view data, including:
    - Sorting
    - Filtering
@@ -77,7 +77,7 @@ ever knowing their names, so I will list them here:
    ![cell grid](bin/ExcelCellGrid.png)
   - Columns are identified by letter.
   - Rows are identified by number.
-  - Cells are identified by coumn and row.  For example, the cell 
+  - Cells are identified by column and row.  For example, the cell 
     in column A, row 2 is called cell A2.
 - Below the worksheet is a row of tabs:  
   ![tabs](bin/Excel tabs.jpg)
@@ -373,7 +373,7 @@ from 1 to 10.
 
 ### Formulas
 
-Most of the time our new variables will be calcuated from existing variables.
+Most of the time our new variables will be calculated from existing variables.
 To do this, we will use ***formulas***. A formula is just a rule for
 calculating a value from some other values.
 

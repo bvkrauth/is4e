@@ -254,7 +254,7 @@ section as a CSV file:
    - a text box giving the file name (`CountryCodes.txt`) 
    - a drop-down box giving the file format (`Text (Tab delimited) (*.txt)`
 3. Select `CSV (Comma delimited) (*.csv)` from the drop-down box and 
-4. Enter a filename (I suggest *CountryCodes.csv*) in the text box.
+4. Enter a file name (I suggest *CountryCodes.csv*) in the text box.
 5. Select `Save`.
    - You may get the warning message: *The selected file type does
      not support workbooks that contain multiple sheets. To save only

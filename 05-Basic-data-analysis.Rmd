@@ -83,7 +83,7 @@ hundreds of observations and hundreds of thousands of variables, and companies
 and governments often work with transactions-level data that includes millions
 of observations. 
 
-As humans, our brains are not large enough to fully understand a large dataset
+As humans, our brains are not large enough to fully understand a large data set
 without some kind of simplification or "dimension reduction": instead of looking 
 at millions of numbers and trying to identify patterns from that, we 
 calculate and view a relatively small number of ***statistics*** based on the 
@@ -96,7 +96,7 @@ which are statistics that describe a single variable in isolation. In Section
 \@ref(charts-in-excel) we will construct some commonly-used univariate graphs.  
 
 Multivariate statistics describe the relationships among multiple variables,
-and will be coverd in Chapter \@ref(multivariate-data-analysis).
+and will be covered in Chapter \@ref(multivariate-data-analysis).
 
 ### Summary statistics
 
@@ -192,7 +192,7 @@ references a cell in another worksheet. Note that the relative references
 are even copied over correctly. 
 :::
 
-Excel has many bulit-in functions to calculate summary statistics.
+Excel has many built-in functions to calculate summary statistics.
 
 ::: example
 **Summary statistics for UnempRate**
@@ -208,7 +208,7 @@ To fill in the statistics for column B:
    in cell B3
 3. Use the `STDEV.S()` function to report the standard deviation 
    of the unemployment rate in cell B4
-   - There is another builit-in Excel function called `STDEV.P()` that
+   - There is another built-in Excel function called `STDEV.P()` that
      uses a slightly different formula for the standard deviation:
      $$s_x^p = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2$$
      We will discuss the difference between these two statistics later.
@@ -377,7 +377,7 @@ Next we will fill in values for the **Count** column (B):
 
 1. Fill in cell B2 using the Excel function `COUNTIFS()`. 
    - The `criteria_range` will be the data in our main data set
-     (Data for Analysis workhseet) covering the Party variable 
+     (Data for Analysis worksheet) covering the Party variable 
      (cell range I2:I542), or `'Data for Analysis'!I2:I542`.
    - The `criteria` we want to match is the contents of the cell
      in the current row of column A, or `A2`.
@@ -428,7 +428,7 @@ table looks like this:
 | *(from2)* | *(to2)*  |       |            | 
 | etc.      |          |       |            |
 
-In constructing bins, we need to apply some good judgement, and 
+In constructing bins, we need to apply some good judgment, and 
 keep in mind a few requirements and considerations:
 
 - We need the bins to cover the full range of the data.  In particular:
@@ -525,14 +525,14 @@ We now have our binned frequency table.
 :::
 
 ::: fyi
-The `FREQUENCY()` function is another way to ctreate a frequency
+The `FREQUENCY()` function is another way to create a frequency
 table.  However, this function is a tricky one to learn, 
 and Microsoft recently changed how it works.  So we will skip it.
 :::
 
 ## Univariate graphs in Excel 
 
-Another way to explore our data is by ***visualizng*** it: 
+Another way to explore our data is by ***visualizing*** it: 
 constructing and viewing graphs. In this section, we will
 construct and view three graphs that are useful for
 understanding a single variable: the time series graph,
@@ -609,7 +609,7 @@ one variable, so let's get rid of the others:
 
 1. Select `Design > Select Data` which will open the `Select Data Source`
    dialog box.
-2. Unckeck the checkbox next to every series in the "Legend Entries (Series)"
+2. Uncheck the checkbox next to every series in the "Legend Entries (Series)"
    box except UnempRate.
 
 ![Time graph series of UnempRate](bin/TimeSeriesGraphInitial.png) 
@@ -637,7 +637,7 @@ but we can talk about and apply a few basic ideas:
    "chartjunk") should be removed.
 4. Related information should be visually "close" and required eye
    movement should be minimized.
-5. Color and formatting should be used to simplify intepretation 
+5. Color and formatting should be used to simplify interpretation 
    rather than to complicate it.
 5. Accessibility should be taken into account.  For example:
    - Color is not always available to readers: Some readers are color
@@ -666,7 +666,7 @@ but we can talk about and apply a few basic ideas:
 Let's start by removing unnecessary chart elements.
 
 1. Select the chart.  This will cause the `Chart Design` and `Format` 
-   menu items to apper in the menu.
+   menu items to appear in the menu.
 2. To remove the horizontal gridlines, select 
    `Chart Design > Add Chart Element > Gridlines > Primary Major Horizontal`
 3. To remove the legend, select
@@ -745,7 +745,7 @@ skills further, you might consider our course
 ECON 334: Data Visualization and Economic Analysis.
 
 You might also get a book on data visualization, either Kieran 
-Healy's *Data Vizualization* or Cole Nussbaumer Knaflic's 
+Healy's *Data Visualization* or Cole Nussbaumer Knaflic's 
 *Storytelling with Data*.  Healy's book is aimed at a primarily
 academic audience while Knaflic's is aimed at a business 
 audience. Both of them are practical and easy reads, with many 
@@ -913,7 +913,7 @@ To construct a histogram of the **UnempRate** variable:
      cell in this worksheet.  For some reason, this won't work
      with the histogram chart type.
 2. Select `Insert > Recommended Charts" from the menu bar.
-3. Slect the `All Charts` tab to see the full set of options.
+3. Select the `All Charts` tab to see the full set of options.
 3. Select `Histogram` and then `OK`.
 
 Our graph will appear:

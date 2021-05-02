@@ -98,7 +98,7 @@ you can:
   executed command. If you press it a second time it gives you the 
   command before that, and so on.
 2. Look at the to the **History** window in the upper right corner to see
-   a full list of recently exectued commands.  You can double-click on 
+   a full list of recently executed commands.  You can double-click on 
    any command in the window to copy it to the Console window.
 
 Once you have copied the previous command, you can edit it before
@@ -145,7 +145,7 @@ R Markdown is a language for producing documents - HTML files (web pages),
 Microsoft Word documents, PDF files, etc. - that have R code and analysis
 embedded in them. In fact, this book is written in R Markdown.
 
-R Mardown is an implementation of the Markdown markup language in R. 
+R Markdown is an implementation of the Markdown markup language in R. 
 
 ::: fyi
 **What is Markdown?**
@@ -607,7 +607,7 @@ There are several other commonly used operators:
 The assignment operator is also an operator. It is equivalent to the 
 `assign()` function:
 ```{r AssignmentIsAnOperator}
-# These two statments are equivalent:
+# These two statements are equivalent:
 x <- 2
 assign(y,2)
 print(x)
@@ -713,7 +713,7 @@ step-by-step what we need to do:
 
 Then we need to figure out how to accomplish each step using R:
 
-1. Our first step can be acccomplished using the `seq()` function, 
+1. Our first step can be accomplished using the `seq()` function, 
    which we have already used. If you know the name of the function 
    you want to use, you can access its help page by executing the 
    command `? [function name here]`:
@@ -722,7 +722,7 @@ Then we need to figure out how to accomplish each step using R:
    ```
    As you can see, the `seq()` function takes arguments `from=` (for the 
    starting point), `to=` (for the end point), and `length.out=` (for the
-   total number of points).  Let's plot the function at 10 points betwen -4 
+   total number of points).  Let's plot the function at 10 points between -4 
    and 4:
    ```{r}
    x <- seq(from=-4,to=4,length.out=10)

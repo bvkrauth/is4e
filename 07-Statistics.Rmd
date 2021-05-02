@@ -89,7 +89,7 @@ are quite difficult to calculate.
 To see why the sampling distribution of a statistic is so difficult
 to calculate, suppose we have a discrete random variable $x_i$ whose 
 support $S_x$ has five elements. Then we need to calculate the sampling
-distribution of our statstic by adding its probability up across
+distribution of our statistic by adding its probability up across
 the support of $D_n$.  The support has $5^n$ elements, a number that 
 can quickly get very large.  
 
@@ -228,7 +228,7 @@ we want $err(s_n)$ to be as close to zero as possible.
 There are several major complications to keep in mind:
 
 1. Since $s_n$ is a random variable with a probability distribution, 
-   $err(s_n)$ is also a random variable with a proability distribution. 
+   $err(s_n)$ is also a random variable with a probability distribution. 
 2. Since the value of $\theta$ is unknown, the value of $err(s_n)$ is also 
    unknown.
 
@@ -333,7 +333,7 @@ of $m_x$.  The sample median is:
   $$\hat{m}_x = x_1$$ 
 and its expected value is:
   $$E(\hat{m}_x) = E(x_1) = p \neq I(p > 0.5)$$
-So the sample median $\hat{m}_x$ is a biased estmator for 
+So the sample median $\hat{m}_x$ is a biased estimator for 
 the population median $m_x$.
 
 More generally, any statistic calculated from this data set 
@@ -474,7 +474,7 @@ to some constant $c$ if:
   $$\lim_{n \rightarrow \infty} \Pr( |s_n - c| < \epsilon) = 1$$
 for any positive number $\epsilon > 0$.
 
-Intiutively, what this means is that for a sufficiently large $n$ 
+Intuitively, what this means is that for a sufficiently large $n$ 
 (the $\lim_{n \rightarrow \infty}$ part), $s_n$ is almost certainly
 (the $\Pr(\cdot) = 1$ part) very close to $c$
 (the $|s_n-c| < \epsilon$ part).

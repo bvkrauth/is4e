@@ -757,7 +757,7 @@ Uniform distributions are commonly used by computers because:
 Every video game you have ever played is constantly generating
 $U(0,1)$ random numbers and using them to determine the behavior of 
 non-player characters, the location of resources, etc.  Without that
-element of randomess, these games would be way too predictable to be 
+element of randomness, these games would be way too predictable to be 
 much fun.
 :::
 

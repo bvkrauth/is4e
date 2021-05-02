@@ -376,7 +376,7 @@ points(x=18/37,y=0.05,col="red")
 text("n=100",x=0.7,y=0.8,col="blue")
 text("n=20",x=0.9,y=0.8,col="green")
 ```
-There are a few features I would like you to notice, all of whcih
+There are a few features I would like you to notice, all of which
 are common to most regularly used tests:
 
 - The power curve reaches its lowest value at the red point 
@@ -447,7 +447,7 @@ Let the sample average be:
 and the sample variance:
   $$s_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
 Both of these statistics are easily calculated from the data,
-and we have previosly discussed their properties in detail.
+and we have previously discussed their properties in detail.
 
 ### The null and alternative hypotheses
 
@@ -490,7 +490,7 @@ are two standard solutions to this problem:
   
   1. Assume a specific probability distribution (usually a normal
     distribution) for $x_i$.  We can (or at least a 
-    proefessional statistician can) then mathematically derive 
+    professional statistician can) then mathematically derive 
     the distribution of any test statistic from this distribution.
   2. Use the central limit theorem to get an approximate probability
     distribution.
@@ -528,7 +528,7 @@ would be `NORM.INV` or `NORM.S.INV`, and the formulas would be:
 - $c_L$: `=NORM.S.INV(0.025)` or `=NORM.INV(0.025,0,1)`.
 - $c_H$: `=NORM.S.INV(0.975)` or `=NORM.INV(0.975,0,1)`.
 
-The caclulations below were done in R:
+The calculations below were done in R:
 ```{r AsymptoticCriticalValues}
   cat("cL = 2.5 percentile of N(0,1) = ",
       round(qnorm(0.025),3),
@@ -554,7 +554,7 @@ where $\mu_x$ and $\sigma_x^2$ are unknown parameters.
 
 Now at this point it is important to remind you: many interesting 
 variables are *not* normally distributed (for example, our roulette outcome
-is discrete uniform, and the result of a given bet is Bernouilli)
+is discrete uniform, and the result of a given bet is Bernoulli)
 and so this assumption may very well be incorrect.
 
 If this was a more advanced course I would derive the 
@@ -563,7 +563,7 @@ just ask you to understand that it *can* be derived once we
 assume normality of the $x_i$.
 
 The null distribution of this particular test statistic under these particular assumptions was derived in the 1920's by William Sealy Gosset, a statistician 
-working at the Guiness brewery.  To avoid getting in trouble at work (Guiness 
+working at the Guiness brewery.  To avoid getting in trouble at work (Guinness 
 did not want to give away trade secrets) Gosset published under the pseudonym 
 "Student".  As a result, the family of distributions he derived is called
 "Student's T distribution".
@@ -605,8 +605,8 @@ we can calculate our critical values:
 We can obtain these percentiles using Excel or R. In Excel, the
 relevant function is `T.INV`.  For example, if we have 5 observations, then:
 
-- We would cacluate $c_L$ by the formula `=T.INV(0.025,4)`.
-- We would cacluate $c_H$ by the formula `=T.INV(0.975,4)`.
+- We would calculate $c_L$ by the formula `=T.INV(0.025,4)`.
+- We would calculate $c_H$ by the formula `=T.INV(0.975,4)`.
 
 The results (calculated below using R) would be:
 ```{r T4CriticalValues}
@@ -619,8 +619,8 @@ The results (calculated below using R) would be:
 ```
 In contrast, if we have 30 observations, then:
 
-- We would cacluate $c_L$ by the formula `=T.INV(0.025,29)`.
-- We would cacluate $c_H$ by the formula `=T.INV(0.975,29)`.
+- We would calculate $c_L$ by the formula `=T.INV(0.025,29)`.
+- We would calculate $c_H$ by the formula `=T.INV(0.975,29)`.
 
 The results (calculated below using R) would be:
 ```{r T29CriticalValues}
@@ -633,8 +633,8 @@ The results (calculated below using R) would be:
 ```
 and if we have 1,000 observations:
 
-- We would cacluate $c_L$ by the formula `=T.INV(0.025,999)`.
-- We would cacluate $c_H$ by the formula `=T.INV(0.975,999)`.
+- We would calculate $c_L$ by the formula `=T.INV(0.025,999)`.
+- We would calculate $c_H$ by the formula `=T.INV(0.975,999)`.
 
 The results (calculated below using R) would be:
 ```{r T999CriticalValues}
@@ -661,7 +661,7 @@ Hypothesis tests have one very important limitation: although they
 allow us to rule out $\theta = \theta_0$ for a single value of $\theta_0$, 
 they say nothing about other values very close to $\theta_0$.
 
-For example, suppose you are a medical reasearcher trying to measure the
+For example, suppose you are a medical researcher trying to measure the
 effect of a particular treatment, let $\theta$ be the treatment, and 
 suppose that you have tested the null hypothesis that the treatment
 has no effect ($\theta = 0$).
@@ -749,7 +749,7 @@ All that remains is to choose a confidence/size level, and
 decide whether to use an asymptotic or finite sample test.
 
 If we are using the asymptotic approximation to construct
-a 95\% confidence interval, then the 5\% asyptotic critical values
+a 95\% confidence interval, then the 5\% asymptotic critical values
 are $c_L = -1.96$ and $c_H \approx 1.96$ and the 
 confidence interval is:
   $$CI = \bar{x} \pm 1.96 s_x/\sqrt{n}$$
@@ -759,7 +759,7 @@ errors.
 
 If we have a small sample, and choose to assume normality rather
 than using the asymptotic approximation, then we need to use the
-slighly larger critical values from the $T_{n-1}$ distribution.
+slightly larger critical values from the $T_{n-1}$ distribution.
 For example, if $n=5$, then $c_L \approx -2.78$,
 $c_H \approx 2.78$ and the 95\% confidence interval is:
   $$CI = \bar{x} \pm 2.78 s_x/\sqrt{n}$$

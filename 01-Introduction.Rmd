@@ -25,7 +25,7 @@ You will develop computer skills:
 
 1. Clean and analyze data in Excel.
 2. Analyze and graph data in R.
-3. Follow recomended practices for data management and reproducible analysis.
+3. Follow recommended practices for data management and reproducible analysis.
 
 You will become familiar with basic statistical concepts:
 
@@ -41,7 +41,7 @@ real-world economic data:
 
 8. Construct and interpret common charts including histograms, scatter plots,
   and time-series plots.
-9. Construct and interpret freqency tables and cross-tabulations.
+9. Construct and interpret frequency tables and cross-tabulations.
 10. Construct and interpret common univariate and bivariate statistics,
     including	mean, variance, standard deviation, covariance and correlation.
 11. Construct and interpret hypothesis tests and confidence intervals.
@@ -62,7 +62,7 @@ Today's world is awash in data:
 - manufacturers track product quality and costs
 - marketers collect data on customers and potential customers
 - government records everyone's interactions with schools,
-    tax authorities, social welfare, healthcare and criminal justice, 
+    tax authorities, social welfare, health care and criminal justice, 
 - employers maintain detailed personnel records. 
  
 These databases can be linked and analyzed in various ways, and many 
@@ -122,7 +122,7 @@ recommended to take ECON 233.
 **Related courses**
 
 ECON 333 is the second course in the two-course econometrics
-sequence requirred for all economics majors.  In ECON 333, 
+sequence required for all economics majors.  In ECON 333, 
 you will learn more advanced techniques including 
 linear regression, you will use R more extensively, 
 and you will go deeper into the theory.

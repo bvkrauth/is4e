@@ -143,7 +143,7 @@ for this random process, which is a function that assigns
 a number to each possible event.  The number is called 
 the event's ***probability***. 
 
-Probabilties are normally between zero and one:
+Probabilities are normally between zero and one:
 
 - If an event has probability zero, it definitely *will
   not* happen
@@ -181,7 +181,7 @@ to confirm that a roulette wheel is fair.
 
 Call that probability $p$:
    $$p = \Pr(b = 0) = \Pr(b = 1) = \cdots = \Pr(b = 36)$$
-To find the value of $p$ we use the rules of probablity. 
+To find the value of $p$ we use the rules of probability. 
 By rule #2 of probability, one of the outcomes will happen:
    $$\Pr(\Omega) = 1$$
 Since the different outcomes are disjoint, rule #3 implies that:
@@ -237,7 +237,7 @@ are two standard interpretations for probabilities:
   that the event will occur.  That is, if you go to a casino and
   bet 1000 times on Red, you will win about 486 times. 
 - *Bayesian or subjectivist interpretation*: the random process
-  is a one-time occurence, but we have limited information about
+  is a one-time occurrence, but we have limited information about
   it and the probability of event represents the strength of 
   our belief that the event will happen.
 
@@ -325,7 +325,7 @@ words, your bet should be based on $\Pr(win|cards)$ rather than $\Pr(win)$. Good
 poker players have detailed knowledge of these conditional probabilities.
 
 ::: example
-**Conditional probabilties in roulette**
+**Conditional probabilities in roulette**
 
 In our roulette example:
    $$\Pr(Red|Even) = \frac{\Pr(Red \cap Even)}{\Pr(Even)} = \frac{8/37}{18/37} \approx 0.444$$
@@ -404,7 +404,7 @@ Suppose that I bring \$100 to a casino this afternoon for a few games
 of roulette. I bet all of my money on Red for the first game.
 
 - If I lose, I am broke and stop playing.
-- If I win, I keep all of my money (both my intial bet and my winnings)
+- If I win, I keep all of my money (both my initial bet and my winnings)
   on Red for the next spin.  
 - I keep playing until I run out of money.
 
@@ -490,7 +490,7 @@ This is a classic probability question, as it makes use
 of Bayes' law and the law of total probability, and it has
 obvious practical usage.  
 
-Since we want a condtional probability, we start by stating Bayes' law:
+Since we want a conditional probability, we start by stating Bayes' law:
    $$\Pr(D|T) = = \frac{\Pr(T|D)\Pr(D)}{\Pr(T)}$$
 Bayes' law will allow us to calculate $\Pr(D|T)$ if we can find 
 the components of the right side of this equation. 
@@ -533,5 +533,5 @@ and had substantial real world consequences.
 [article in Science](https://www.sciencemag.org/news/2020/04/antibody-surveys-suggesting-vast-undercount-coronavirus-infections-may-be-unreliable) 
 provides an overview of the controversy, and a 
 [blog post by statistician Andrew Gelman](https://statmodeling.stat.columbia.edu/2020/04/19/fatal-flaws-in-stanford-study-of-coronavirus-prevalence/) 
-provides a thourough discussion 
+provides a thorough discussion 
 of the statistical issues.

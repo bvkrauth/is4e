@@ -91,7 +91,7 @@ The `read_csv()` function creates an object called a ***tibble***. A
 tibble is a Tidyverse object type that describes a tidy data table. 
 
 - Each row in the tibble represents an observation
-- Each column representa a variable, and has a name. 
+- Each column represents a variable, and has a name. 
 
 The base R equivalent of a tibble is called a ***data frame***. Tibbles  
 and data frames are interchangeable in most applications, but 

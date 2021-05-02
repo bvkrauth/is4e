@@ -436,7 +436,7 @@ You learned the basic properties of addition and multiplication in Grade 3:
 - Distributive property: 
    $$a(b+c) = ab + ac$$
 
-An expressions using the sumamtion operator describes a sum, so
+An expressions using the summation operator describes a sum, so
 it also obeys these properties:
 
 - The associative and commutative properties allow you to switch any two summation

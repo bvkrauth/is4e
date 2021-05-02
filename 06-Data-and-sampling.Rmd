@@ -168,7 +168,7 @@ plot(x=x,
 
 ### Conditional distributions
 
-The ***conditional distibution*** of a random variable $y$ given another random
+The ***conditional distribution*** of a random variable $y$ given another random
 variable $x$ assigns values to all probabilities of the form:
   $$\Pr(y \in A| x \in B) = \frac{\Pr(y \in A \cap x \in B)}{\Pr(x \in B)}$$
 Since a conditional probability is just the ratio of the joint probability 
@@ -290,7 +290,7 @@ Both the covariance and correlation are measures of how $x$ and $y$ tend to
 move together.  
 
 ::: example
-**Covariance and correlation in roulettte**
+**Covariance and correlation in roulette**
 
 The covariance of $w_{red}$ and $w_{14}$ is:
   \begin{align}
@@ -539,7 +539,7 @@ Time series have several features that are inconsistent with the random
 sampling assumption:
 
 - They usually have clear *time trends*.  
-  - For example, Canada's realGDP has been steadily growing for as 
+  - For example, Canada's real GDP has been steadily growing for as 
     long as we have data.
   - This violates "identically distributed" since 2010 GDP is drawn 
     from a distribution with a higher expected value than the
@@ -684,7 +684,7 @@ disparity between polls and voting is systematic nonresponse: for
 some reason, Trump voters are less likely to respond to
 polls. Since most people do not respond to standard telephone polls
 any more (response rates are typically around 9\%), it does not
-take much difference in repsonse rates to produce a large difference
+take much difference in response rates to produce a large difference
 in responses.  For example, suppose that:
 
 - We call 1,000 voters

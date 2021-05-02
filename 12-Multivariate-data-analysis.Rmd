@@ -647,7 +647,7 @@ see patterns in the data that aren't really part of the DGP).
 
 An alternative to binned averaging is ***smoothing***, which calculates a 
 smooth curve that fits the data as well as possible.  There are many 
-different techiques for smoothing, but they are all based on taking a
+different techniques for smoothing, but they are all based on taking a
 weighted average of $y_i$ near each point, with high weights on observations 
 with $x_i$ close to that point and low (or zero) weights on observations 
 with $x_i$ far from that point.  The calculations required for smoothing 
