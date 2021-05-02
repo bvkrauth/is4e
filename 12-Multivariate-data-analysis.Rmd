@@ -1,8 +1,11 @@
 # Multivariate data analysis
 
 ```{r setup12, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,prompt=TRUE,tidy=TRUE,collapse=TRUE)
-library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE,
+                      prompt = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE)
+library("tidyverse")
 EmpData <- read_csv("bin/EmploymentData.csv")
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
@@ -47,7 +50,7 @@ The Excel worksheet can be downloaded at
 
 The R data set is the same as the one we used in Chapter 
 \@ref(using-r). Execute the following R code to get started:
-```{r , eval = FALSE}
+```{r SetupCodeForStudents, eval = FALSE}
 library(tidyverse)
 # If you do not have this data set, you can download it at
 # https://canvas.sfu.ca/files/15539454/
@@ -81,7 +84,7 @@ The sample covariance and correlation can be calculated in R using
 the `cov()` and `cor()` functions. 
 
 These functions can be applied to any two columns of data:
-```{r}
+```{r CovCor}
 # For two specific columns of data
 cov(EmpData$UnempPct,EmpData$LFPPct)
 cor(EmpData$UnempPct,EmpData$LFPPct)
@@ -95,7 +98,7 @@ of the labour force: education, childcare, retirement, etc.
 Both `cov()` and `cor()` can also be applied to (the numeric variables in)
 an entire data set.  The result is what is called a 
 ***covariance matrix*** or ***correlation matrix***:
-```{r}
+```{r CorMatrix}
 # Correlation matrix for the whole data set (at least the numerical parts)
 EmpData %>%
   select(where(is.numeric)) %>%
@@ -120,7 +123,7 @@ there are two different ways to exclude them:
    a missing value for *any* variable.
 
 The `use` argument allows you to specify which approach you want to use:
-```{r}
+```{r PairwiseOrListwise}
 # EmpData has missing data in 1976 for the variable AnnPopGrowth
 # Pairwise will only exclude 1976 from calculations involving AnnPopGrowth
 EmpData %>%
@@ -500,8 +503,9 @@ one variable, the vertical ($y$) axis represents the other variable,
 and each point represents an observation.
 
 Scatter plots can be created in R using the `geom_point()` geometry:
-```{r}
-ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
+```{r ScatterPlot}
+ggplot(data = EmpData,
+       aes(x = UnempPct,y = LFPPct)) +
   geom_point()
 ```
 
@@ -521,7 +525,7 @@ plot.
 
 For example, suppose we had rounded our unemployment and LFP data to 
 the nearest percent:
-```{r}
+```{r RoundEmpData}
 # Round UnempPct and LFPPct to nearest integer
 RoundedEmpData <- EmpData %>% 
   mutate(UnempPct=round(UnempPct)) %>% 
@@ -529,7 +533,7 @@ RoundedEmpData <- EmpData %>%
 ```
 
 The scatter plot with the rounded data would look like this:
-```{r}
+```{r ScatterPlotRounded}
 # Create graph using rounded data
 ggplot(data=RoundedEmpData, aes(x=UnempPct,y=LFPPct)) + 
   geom_point(col="red")
@@ -542,7 +546,7 @@ A common solution to this problem is to ***jitter*** the data by adding a
 small amount of random noise so that every observation is at least a little
 different and appears as a single point.  We can use the `geom_jitter()` 
 geometry to do a jittered scatter plot:
-```{r}
+```{r ScatterPlotJittered}
 ggplot(data=RoundedEmpData,aes(x=UnempPct,y=LFPPct)) + 
   geom_point(col="red") +
   geom_jitter(size=0.5, col="blue")
@@ -556,7 +560,7 @@ reflects the original unrounded data than the rounded data (large red dots).
 We can use color to add a third dimension to the data.  That is, we can 
 color-code points based on a third variable by including it as part of 
 the aesthetic:
-```{r}
+```{r ScatterPlotColorCoded}
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=Party)) + 
   geom_point()
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=MonthYr)) + 
@@ -569,7 +573,7 @@ depending on whether the variable is discrete or continuous.
 As we discussed earlier, you want to make sure your graph can be read by a
 reader who is color blind or is printing in black and white. So we can use 
 shapes in addition to color:
-```{r}
+```{r UsingShapes}
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=Party)) + 
   geom_point(aes(shape=Party))
 ```
@@ -602,7 +606,7 @@ Binned scatterplots are not difficult to do in R but the code is quite
 a bit more complex than you are used to.  As a result, I will not ask
 you to be able to produce binned scatter plots, I will only ask you
 to interpret them.  Here is my binned scatter plot with 20 bins:
-```{r, echo = FALSE}
+```{r BinnedScatterPlot, echo = FALSE}
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
  geom_point(size=0.5) +
   stat_summary_bin(fun='mean', bins=20,
@@ -613,7 +617,7 @@ ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) +
 
 The number of bins is an important choice.  The graph below adds a 
 red line based on 4 bins and a green line based on 100 bins.
-```{r}
+```{r HowManyBins}
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
  geom_point(size=0.5) +
   stat_summary_bin(fun='mean', bins=4,
@@ -650,7 +654,7 @@ with $x_i$ far from that point.  The calculations required for smoothing
 can be quite complex and well beyond the scope of this course.
 
 Fortunately, smoothing is easy to do in R using the `geom_smooth()` geometry:
-```{r}
+```{r SmoothedRegression}
 ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
   geom_point(size = 0.5) +
   geom_smooth()
@@ -671,14 +675,14 @@ line that fits the data best.
 
 You can include a linear regression line in your plot by adding the 
 `method=lm` argument to the `geom_smooth()` geometry:
-```{r}
+```{r LinearRegression}
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
   geom_point(size=0.5) +
   geom_smooth(method="lm") 
 ```
 
 We can compare the linear and smoothed fits to see where they differ:
-```{r}
+```{r LinearAndSmoothed}
 ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
   geom_point(size=0.5) +
   geom_smooth(col="red") + 

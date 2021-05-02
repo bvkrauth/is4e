@@ -1,5 +1,13 @@
 # Statistical inference
 
+```{r setup9, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      prompt = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE)
+library("tidyverse")
+```
+
 In Chapter \@ref(statistics), we learned about estimation: the use of data and 
 statistics to construct the best possible guess at the value of some parameter
 $\theta$.
@@ -291,7 +299,7 @@ the function you would use is `BINOM.INV()`
 - The formula to calculate $c_H$ is `=BINOM.INV(100,18/37,0.975)`
 
 The calculations below were done in R:
-```{r criticalvalues, echo = FALSE}
+```{r BinomialCriticalValues}
 cat("2.5 percentile of binomial(100,18/37) =",
     qbinom(0.025,100,18/37),
     "\n")
@@ -349,7 +357,7 @@ just constructed; that is, we are testing the null that $p_{red} = 18/37$
 at a 5\% size.  The blue line depicts the power curve for $n=100$ 
 as in our example, while the green line depicts the power curve for
 $n=20$.
-```{r PowerCurves, echo = FALSE, fig.margin = TRUE, fig.cap = "Power curves for the roulette example"}
+```{r PowerCurves, fig.cap = "Power curves for the roulette example"}
 theta <- seq(0,1,length.out=380)
 power100 <- pbinom(qbinom(0.025,100,18/37),100,theta) +
   (1 - pbinom(qbinom(0.975,100,18/37),100,theta))
@@ -506,7 +514,7 @@ In other words, while we do not know the exact (finite-sample) distribution
 of $t_n$ we know that $N(0,1)$ provides a useful asymptotic approximation 
 to that distribution.
 
-```{r NormalDistribution, echo=FALSE}
+```{r NormalDistribution}
 x <- seq(-3,3,length.out = 100)
 tinf <- dnorm(x)
 plot(x,tinf, type="l",col="black",xlab = "value", ylab="PDF of t_n",
@@ -521,7 +529,7 @@ would be `NORM.INV` or `NORM.S.INV`, and the formulas would be:
 - $c_H$: `=NORM.S.INV(0.975)` or `=NORM.INV(0.975,0,1)`.
 
 The caclulations below were done in R:
-```{r echo=FALSE}
+```{r AsymptoticCriticalValues}
   cat("cL = 2.5 percentile of N(0,1) = ",
       round(qnorm(0.025),3),
       "\n")
@@ -573,7 +581,7 @@ $T_{n-1}$ distribution converges to the
 $N(0,1)$ distribution, just as predicted by the central 
 limit theorem.
 
-```{r tdistribution, echo=FALSE}
+```{r TDistribution}
 x <- seq(-3,3,length.out = 100)
 t5 <- dt(x,df=4)
 t10 <- dt(x,df=9)
@@ -601,7 +609,7 @@ relevant function is `T.INV`.  For example, if we have 5 observations, then:
 - We would cacluate $c_H$ by the formula `=T.INV(0.975,4)`.
 
 The results (calculated below using R) would be:
-```{r echo=FALSE}
+```{r T4CriticalValues}
   cat("cL = 2.5 percentile of T_4 = ",
       round(qt(0.025,df=4),3),
       "\n")
@@ -615,7 +623,7 @@ In contrast, if we have 30 observations, then:
 - We would cacluate $c_H$ by the formula `=T.INV(0.975,29)`.
 
 The results (calculated below using R) would be:
-```{r echo=FALSE}
+```{r T29CriticalValues}
   cat("cL = 2.5 percentile of T_29 = ",
       round(qt(0.025,df=29),3),
       "\n")
@@ -629,7 +637,7 @@ and if we have 1,000 observations:
 - We would cacluate $c_H$ by the formula `=T.INV(0.975,999)`.
 
 The results (calculated below using R) would be:
-```{r echo=FALSE}
+```{r T999CriticalValues}
   cat("cL = 2.5 percentile of T_999 = ",
       round(qt(0.025,df=999),3),
       "\n")
@@ -707,7 +715,7 @@ tricky to do by hand, but easy to do on a computer:
 
 For example, suppose that red wins on 40 of the 100 games. Then 
 a 95\% confidence interval for $p_{red}$ is:
-```{r rouletteCI, echo = FALSE}
+```{r RouletteCI}
 theta <- seq(0,1,length.out=101)
 cL <- qbinom(0.025,100,theta)
 cH <- qbinom(0.975,100,theta)

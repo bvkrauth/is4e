@@ -1,5 +1,13 @@
 # Random variables
 
+```{r setup4, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      prompt = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE)
+library("tidyverse")
+```
+
 Chapter \@ref(probability-and-random-events) developed a general framework for
 modeling random outcomes and events. This framework can be applied to
 any set of random outcomes, no matter how complex.
@@ -152,8 +160,8 @@ PDF:
             1/37 & a = 35 \\
             0 & a \notin \{-1,35\} \\
           \end{cases}$$
-Figure \@ref(fig:PDFAll) below shows these three PDFs.
-```{r PDFAll, echo = FALSE, fig.margin = TRUE, fig.cap = "PDFs for the roulette example"}
+Figure \@ref(fig:RoulettePDF) below shows these three PDFs.
+```{r RoulettePDF, fig.cap = "PDFs for the roulette example"}
 plot(x=0:36,
      y=rep(1/37,times=37),
      type="p",
@@ -290,8 +298,8 @@ in the support.
                 1 & a \geq 35 \\
                 \end{cases}$$
 
-Figure \@ref(fig:CDFAll) below graphs these CDFs. 
-```{r CDFAll, echo = FALSE, fig.margin = TRUE, fig.cap = "CDFs for the roulette example"}
+Figure \@ref(fig:RouletteCDF) below graphs these CDFs. 
+```{r RouletteCDF, fig.cap = "CDFs for the roulette example"}
 plot(x=c(-5,-1,1,40),
      y=c(0,19/37,1,1)-0.001,
      type="s",
@@ -365,8 +373,8 @@ distribution. What that means is that:
 
 The CDF of the standard uniform distribution is:
   $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
-Figure \@ref(fig:CDFUniform) below shows the CDF of the standard uniform distribution. 
-```{r CDFUniform, echo = FALSE, fig.cap = "CDF for the standard uniform distribution"}
+Figure \@ref(fig:UniformCDF) below shows the CDF of the standard uniform distribution. 
+```{r UniformCDF, fig.cap = "CDF for the standard uniform distribution"}
 plot(x=seq(from=-2,to=2,length.out=100),y=punif(seq(from=-2,to=2,length.out=100)),type="l",xlab="a",ylab=expression(Pr(x <= a)),bty="l",xaxp=c(-2,2,10),yaxp=c(0,1,2),col="blue")
 text(x=1,y=0.6,col="blue",label="F_x(a)",cex=0.75)
 abline(h=0.5,lty=2,col="gray")
@@ -393,7 +401,7 @@ derivative of its CDF:
 The PDF of a standard uniform random variable is:
   $$f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}$$
 which looks like this:
-```{r PDFUniform, echo = FALSE, fig.cap = "PDF for the standard uniform distribution"}
+```{r UniformPDF, fig.cap = "PDF for the standard uniform distribution"}
 plot(x=seq(from=-2,to=2,length.out=1000),y=dunif(seq(from=-2,to=2,length.out=1000)),type="l",xlab="a",ylab="f(a)",bty="l",xaxp=c(-2,2,10),yaxp=c(0,1,2),col="blue")
 text(x=1.2,y=0.8,col="blue",label="f_x(a)",cex=0.75)
 ```

@@ -1,7 +1,10 @@
 # Using R
 
 ```{r setup11, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      prompt = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE)
 library("tidyverse")
 ```
 
@@ -30,7 +33,7 @@ cleaning as well.
 
 We will use numerous Tidyverse functions, so we need to load the 
 Tidyverse package:
-```{r}
+```{r LoadTidyverseAgain}
 # Load the tidyverse
 library("tidyverse")
 ```
@@ -42,7 +45,7 @@ from https://canvas.sfu.ca/files/15539454/.
 Our first step will be reading the data in from the CSV file. The Tidyverse 
 function to do this is called `read_csv()`.  It has one required argument: 
 the name of the CSV file:
-```{r}
+```{r ReadEmpDataFromCSV}
 # The code below assumes that the file "EmploymentData.csv" is in 
 # the working directory.  Change the argument below as needed to 
 # make the function work in your environment 
@@ -98,7 +101,7 @@ with the Tidyverse.
 We have several ways of viewing the contents of a tibble. We can
 start with the ***print*** function, which we have already seen in
 other contexts:
-```{r}
+```{r PrintEmpData}
 print(EmpData)
 ```
 Tibbles can be quite large, so the `print()` function will usually
@@ -121,16 +124,16 @@ There are several R functions available for exploring the properties
 of a data table.
 
 We can obtain the column names of a tibble using the `names()` function:
-```{r}
+```{r NamesEmpData}
 names(EmpData)
 ```
 and we can count the rows and columns with `nrow()` and `ncol()` respectively:
-```{r}
+```{r NrowNcolEmpData}
 nrow(EmpData)
 ncol(EmpData)
 ```
 We can access any variable by name using the `$` notation:
-```{r}
+```{r LengthExample}
 length(EmpData$UnempRate)
 ```
 As you can see, the `length()` function returns the length of a vector.
@@ -160,7 +163,7 @@ that an operator is just a symbol like "+" or "*" that performs some function
 on whatever comes before it and whatever comes after it.
 
 To see how it works, I'll show you a few examples:
-```{r}
+```{r PipeExamples}
 # This is equivalent to names(EmpData)
 EmpData %>% names()
 # This is equivalent to sqrt(2)
@@ -185,7 +188,7 @@ The most important data transformation function is ***mutate***, which
 allows us to change or add variables.  We will start by changing 
 the *MonthYr* variable from character (text) to date, using the `as.Date()`
 function: 
-```{r}
+```{r MutateChangeMonthYr}
 # Change MonthYr to date format
 EmpData %>% 
   mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y"))
@@ -197,7 +200,7 @@ and calculations, but displays dates in a standard human-readable format.
 Mutate can be used to add variables as well as changing them.  For example,
 suppose we also want to create versions of *UnempRate* and *LFPRate* that
 are expressed in percentages rather than decimal units:
-```{r}
+```{r MutateAddUnempPct}
 # Add UnempPct and LFPPct
 EmpData %>% 
   mutate(UnempPct = 100*UnempRate) %>% 
@@ -208,7 +211,7 @@ now included in the data table.
 
 Before we go any further, note that we haven't yet changed the `EmpData` data 
 table:
-```{r}
+```{r PrintEmpDataAgain}
 print(EmpData)
 ```
 As you can see, the *MonthYr* variable is still listed as a character variable and
@@ -217,7 +220,7 @@ the new *UnempPct* and *LFPPct* variables do not seem to exist.
 What has happened here?  Our original commands simply created a *new* object *based*
 on `EmpData` that was then displayed on the screen.  In order to change `EmpData`
 itself, we need to assign that new object *back* to `EmpData`:
-```{r}
+```{r MutatePermanently}
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
   mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y")) %>% 
@@ -225,7 +228,7 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 We can confirm that now we have changed `EmpData`:
-```{r}
+```{r ConfirmPermanence}
 print(EmpData)
 ```
 
@@ -234,7 +237,7 @@ print(EmpData)
 Now let's suppose we want to know more about the months in our data set 
 with the *highest* unemployment rates. We can use `filter()` for
 this purpose:
-```{r}
+```{r FilterEmpData}
 # This will give all of the observations with unemployment rates over 12.5%
 EmpData %>% 
   filter(UnempPct > 12.5)
@@ -245,7 +248,7 @@ of last year.
 
 Now let's suppose that we only want to see a few pieces of information about those
 months.  We can use `select()` to choose variables:
-```{r}
+```{r SelectEmpData}
 # This will take out all variables except a few
 EmpData %>% 
   filter(UnempPct > 12.5) %>%
@@ -254,7 +257,7 @@ EmpData %>%
 Finally, suppose that we want to show months in descending order by
 unemployment rate (i.e., the highest unemployment rate first).  We 
 can use `arrange()` to sort rows in this way:
-```{r}
+```{r ArrangeEmpData}
 # This will sort the rows by unemployment rate
 EmpData %>% 
   filter(UnempPct > 12.5) %>%
@@ -263,7 +266,7 @@ EmpData %>%
 ```
 Hopefully you can see why the pipe operator is useful in making our code
 clear and readable: 
-```{r}
+```{r WithoutPipe}
 # This is what the same code looks like without the pipe
 arrange(select(filter(EmpData,UnempPct>12.5),MonthYr,UnempPct,LFPPct,PrimeMinister),UnempPct)
 ```
@@ -282,7 +285,7 @@ statistics.
 The `summary()` function will give a basic summary of any object.  Exactly what
 that summary looks like depends on the object.  For tibbles, `summary()` produces
 a set of summary statistics for each variable:
-```{r}
+```{r SummaryEmpData}
 summary(EmpData)
 ```
 
@@ -290,13 +293,13 @@ summary(EmpData)
 
 The R function `mean()` calculates the sample average of any numeric 
 vector:
-```{r}
+```{r MeanUnempPct}
 # Mean of a single variable
 mean(EmpData$UnempPct)
 ```
 There are many other functions in R to calculate other univariate summary
 statistics:
-```{r}
+```{r VarUnempPct}
 # VAR calculates the sample variance
 var(EmpData$UnempPct)
 # SD calculates the standard deviation
@@ -311,12 +314,12 @@ observations. For example, the *AnnPopGrowth* variable in our data set is
 missing for the first year of data (1976), since calculating the growth rate
 for 1976 would require data from 1975. In R, missing values are given the
 special value `NA` which stands for "not available":
-```{r}
+```{r ShowMissingValues}
 EmpData %>%
   select(MonthYr,Population,AnnPopGrowth)
 ```
 When we try to take the mean of this variable we also get `NA`:
-```{r}
+```{r MeanAnnPopGrowth}
 mean(EmpData$AnnPopGrowth)
 ```
 This is because math in R follows the
@@ -329,7 +332,7 @@ of a mistake or problem that needs to be fixed.
 
 Once we have investigated the missing values, we can tell R explicitly
 to exclude them from the calculation by adding the `na.rm = TRUE` option:
-```{r}
+```{r MeanAnnPopGrowthWithoutNA}
 mean(EmpData$AnnPopGrowth,na.rm=TRUE)
 ```
 
@@ -338,7 +341,7 @@ mean(EmpData$AnnPopGrowth,na.rm=TRUE)
 Suppose we want to calculate the sample average for each column in our
 tibble. We could just call `mean()` for each of them, but there should
 be a quicker way. Here is the code to do that:
-```{r}
+```{r MeanTable}
 # Mean of each column
 EmpData %>%
   select(where(is.numeric)) %>%
@@ -353,7 +356,7 @@ kind of makes sense.
   for each (numeric) column `x` in `EmpData`. 
   
 We can use this method with any function that calculates a summary statistic:
-```{r}
+```{r SDTable}
 # Standard deviation of each column
 EmpData %>%
   select(where(is.numeric)) %>%
@@ -365,7 +368,7 @@ EmpData %>%
 
 We can also construct frequency tables for both discrete and continuous
 variables:
-```{r}
+```{r CountTables}
 # COUNT creates a frequency table for discrete variables
 EmpData %>% 
   count(PrimeMinister)
@@ -422,12 +425,12 @@ The Tidyverse also contains a powerful graphics package called[^10] ***ggplot***
 ### Creating a graph
 
 We can start by making a histogram of the unemployment rate:
-```{r}
+```{r ggplotHistogram}
 ggplot(data=EmpData,mapping=aes(x=UnempPct)) + 
   geom_histogram()
 ```
 We can also make a time series (line) graph:
-```{r}
+```{r ggplotTimeSeries}
 ggplot(data=EmpData,mapping=aes(x=MonthYr,y=UnempPct)) + 
   geom_line() 
 ```
@@ -460,7 +463,7 @@ but we can improve upon it in various ways.
 #### Titles and labels
 
 You can add a title and subtitle, and you can change the axis titles: 
-```{r}
+```{r ggplotTitles}
 ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
   geom_line() + 
   labs(title="Unemployment rate",
@@ -475,7 +478,7 @@ ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) +
 
 Using color: you can change the color of any geometric element
 using the `col=` argument:
-```{r}
+```{r ggplotColor}
 ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
   geom_line(col="blue") 
 ```
@@ -484,7 +487,7 @@ or with detailed color codes in RGB or CMYK format.
 
 Some geometric elements, such as the bars in a histogram, also have 
 a ***fill*** color:
-```{r}
+```{r ggplotFill}
 ggplot(data=EmpData,aes(x=UnempPct)) + 
   geom_histogram(col="red",fill="blue") 
 ```
@@ -495,7 +498,7 @@ of each bar, and the `fill=` argument sets the color for the interior.
 
 We can include multiple geometries in the same graph.  For example, we can
 include lines for both unemployment and labour force participation:
-```{r}
+```{r ggplotTwoLines}
 ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
   geom_line(col="blue") +
   geom_line(aes(y=LFPPct),col="red")
@@ -510,7 +513,7 @@ A few things to note here:
 
 We could add a legend here, but it is better (and friendlier to the color-blind)
 to just label the lines. We can use the `geom_text` geometry to do this:
-```{r}
+```{r ggplotAddText}
 ggplot(data=EmpData,aes(x=MonthYr)) + 
   geom_line(aes(y=UnempPct),col="blue") +
   geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=15,label="Unemployment",col="blue") +
@@ -521,7 +524,7 @@ ggplot(data=EmpData,aes(x=MonthYr)) +
 The graphs below combine all of the features described above to yield clean
 and clear graphs.
 
-```{r}
+```{r ggplotFancyHistogram}
 ggplot(data=EmpData,aes(x=UnempPct)) + 
   geom_histogram(binwidth=0.5,fill="blue") +
   geom_density() +
@@ -537,7 +540,7 @@ ggplot(data=EmpData,aes(x=UnempPct)) +
   ylab("Count")
 ```
 
-```{r}
+```{r ggplotFancyTimeSeries}
 ggplot(data=EmpData,aes(x=MonthYr)) + 
   geom_line(aes(y=UnempPct),col="blue") +
   geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=15,label="Unemployment",col="blue") +

@@ -1,5 +1,13 @@
 # Data and sampling
 
+```{r setup6, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      prompt = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE)
+library("tidyverse")
+```
+
 In chapters \@ref(basic-data-cleaning-with-excel) and
 \@ref(basic-data-analysis-with-excel) we learned some techniques 
 for cleaning data and calculating statistics in Excel.  In chapters 
@@ -124,7 +132,7 @@ between $x$ and $y$.
 - In the third graph, $x$ and $y$ are closely related. In fact, 
   they are equal.
 
-```{r JointIsNotMarginal, echo = FALSE, fig.margin = TRUE, fig.cap = "x and y have the same marginal distribution in all three graphs, but not the same joint distribution."}
+```{r JointIsNotMarginal, fig.cap = "x and y have the same marginal distribution in all three graphs, but not the same joint distribution."}
 x <- rnorm(100)
 y <- rnorm(100)
 par(mfrow=c(1,3))
@@ -329,7 +337,7 @@ relationship between two variables.  When variables have a nonlinear
 relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent), the
 covariance or correlation may miss it.
 
-```{r UncorrelatedButNotIndependent, echo = FALSE, fig.margin = TRUE, fig.cap = "x and y are uncorrelated, but clearly related."}
+```{r UncorrelatedButNotIndependent, fig.cap = "x and y are uncorrelated, but clearly related."}
 x <- rnorm(100)
 plot(x=x,
      y=x^2,

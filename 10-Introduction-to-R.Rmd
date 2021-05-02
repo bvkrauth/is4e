@@ -1,13 +1,11 @@
 # An introduction to R
 
 ```{r setup10, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,prompt=TRUE,tidy=TRUE,collapse=TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      prompt = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE)
 library("tidyverse")
-simdat <- tibble(xval=sort(rnorm(100)),
-                 yval=sign(xval)+0.3*rnorm(100),
-                 zval=as.integer(round(runif(100))))
-simdat$tmpval <- simdat$xval
-simdat$tmpval[simdat$xval < 0] <- NA
 ```
 R is an application that has many of the same features as Excel, 
 but is specially designed for statistical analysis. It is a 
@@ -73,7 +71,7 @@ lower left corner.
 
 Move your cursor into the console window, type the command 
 `print("Hello world!")` and press the `Enter` key to execute the command.  
-```{r}
+```{r HelloWorld}
 print("Hello world!")
 ```
 As you type your command in, you may notice that RStudio showed various
@@ -320,13 +318,13 @@ Every valid R expression ***returns*** a value, also called an
 
 You can execute any valid R expression as a command, and have it display
 the value it returns.  
-```{r}
+```{r ExpressionExample}
 # This is a comment. R ignores everything in a line after the "#"
 4+5
 ```
 
 You can also use any valid R expression within a larger expression.
-```{r}
+```{r ExpressionInExpression}
 sqrt(4+5)
 ```
 
@@ -334,7 +332,7 @@ In addition, some expressions have a ***side effect***.  That is, they make
 something happen: they cause something to appear on your computer screen, or
 change a file, or change something in R's memory. 
 
-```{r}
+```{r SideEffectExample}
 # This expression has a side effect
 # It causes R to plot a histogram of 100 N(0,1) random numbers
 hist(rnorm(100))
@@ -357,7 +355,7 @@ actions.
 :::example
 **Using the assignment operator**
 
-```{r}
+```{r AssignmentOperatorExample}
 # This will cause the variable x to take on the value 2
 x <- 2
 # We can then use x in any expression
@@ -373,7 +371,7 @@ print(y)
 
 We can display the contents of an object using the `print()` 
 function, or by simply giving its name:
-```{r}
+```{r PrintExample}
 x <- 5
 print(x) 
 x
@@ -397,14 +395,14 @@ atomic type; a single vector cannot contain both strings and numbers,
 for example. 
   
 We can construct a vector by enumeration using the `c()` function:
-```{r}
+```{r EnumerationExample}
 fruits <- c("Avocado","Banana","Cantaloupe")
 print(fruits)
 ```
 There are many other functions that can be used to construct vectors. Two
 particularly useful ones are `rep` which repeats something a particular
 number of times, and `seq` which creates a sequence:
-```{r}
+```{r RepExample}
 # REP repeats something a particular number of times (like Excel's Fill tool)
 ones <- rep(1,times=10)
 print(ones)
@@ -417,7 +415,7 @@ print(1:10)
 
 Mathematical functions in R operate directly on vectors, and automatically
 expand scalars (single numbers) to vectors as needed:
-```{r}
+```{r VectorExpansionExample}
 # This command subtracts 1 from every element in evens
 odds <- evens - ones
 print(odds)
@@ -428,7 +426,7 @@ print(odds)
 
 The ***subscript operator*** `[]` can be used to select part of a 
 vector. You can enumerate the indexes of the elements you want:
-```{r}
+```{r SubscriptOperatorExample}
 # You can give a single index
 # evens[2] is the 2nd element in evens
 x <- evens[2]
@@ -445,7 +443,7 @@ print(x)
 
 You can also provide logical values instead of numeric indices. R will then 
 operate on those elements whose corresponding item has the value TRUE:
-```{r}
+```{r LogicalSelectionExample}
 print(evens)
 # This creates a vector of the same length as evens, that contains TRUE
 # for all values less than 10, and FALSE for all other values
@@ -461,7 +459,7 @@ print(x)
 ```
 
 Vector subscripting can be used on either side of the assignment operator:
-```{r}
+```{r LeftSideSubscriptingExample}
 x <- evens
 print(x)
 # This assigns the number 1000 to the 2nd element in x
@@ -477,29 +475,29 @@ type, so we can use lists inside lists to build very complex
 objects.  
 
 Lists can be built using the `list()` function:
-```{r}
+```{r ListExample}
 everything <- list(fruits,evens,odds)
 print(everything)
 ```
 You can (and should) assign names to the elements of a list:
-```{r}
+```{r NamedListExample}
 everything <- list(fruits=fruits,evens=evens,odds=odds)
 print(everything)
 ```
 You can access part of a list by specifying its numerical index inside of the 
 `[[]]` operator:
-```{r}
+```{r ListSubscriptExample}
 print(everything[[2]])
 ```
 If the items in a list are named, you can also access 
 them by name using either `[[]]` or `$` notation
-```{r}
+```{r ListDollarsignExample}
 print(everything[["evens"]])
 print(everything$fruits)
 ```
 
 You can also use the `$` notation to add new items to an existing list:
-```{r}
+```{r AddToListExample}
 # There is no element in everything called "allnumbers" 
 everything$allnumbers <- c(evens,odds)
 # But now there is...
@@ -514,7 +512,7 @@ information.
 
 Let's see if any of the objects we have created have 
 attributes:
-```{r}
+```{r AttributesExample}
 print(attributes(fruits))
 print(attributes(evens))
 print(attributes(everything))
@@ -585,13 +583,13 @@ In addition to functions, R has the usual binary mathematical
 just another way of expressing functions.  For example
 the `+` operator is really just another way of calling 
 the `sum()` function:
-```{r}
+```{r OperatorExample}
 # These two statements are equivalent
 2 + 2
 sum(2,2)
 ```
 There are several other commonly used operators:
-```{r}
+```{r OtherOperators}
 # Basic arithmetic operators
 2 + 3
 2 - 3
@@ -608,7 +606,7 @@ There are several other commonly used operators:
 ```
 The assignment operator is also an operator. It is equivalent to the 
 `assign()` function:
-```{r}
+```{r AssignmentIsAnOperator}
 # These two statments are equivalent:
 x <- 2
 assign(y,2)
@@ -678,12 +676,12 @@ and other features.
 
 You can get a list of all available CRAN packages by simply executing
 the `install.packages()` function with no arguments:
-```{r eval = FALSE}
+```{r ListPackages, eval = FALSE}
 install.packages()
 ```
 If you know the name of the CRAN package you want to install, 
 you can provide it as the argument:
-```{r eval = FALSE}
+```{r InstallTidyverse, eval = FALSE}
 install.packages("tidyverse")
 ```
 You only need to install each package once.
@@ -691,7 +689,7 @@ You only need to install each package once.
 However, installing a package only puts the files on your computer. In order
 to actually use the features of a package you need to load it into 
 memory during your current R session using the `library()` function:
-```{r eval = FALSE}
+```{r LibraryTidyverse, eval = FALSE}
 library("tidyverse")
 ```
 You can then use the Tidyverse functions and other tools.
@@ -759,7 +757,7 @@ Well, that's not too bad, but we might want to make some improvements:
 So we can read through the documentation for the `plot()` function,
 try a few things out, and we can produce a much prettier graph
 by just adding a few options:
-```{r}
+```{r PlotExample}
 x <- seq(from=-4,to=4,length.out=1000)
 p <- dnorm(x)
 plot(x,p,type="l",ylab=expression(phi(x)),main="PDF of N(0,1) distribution")
