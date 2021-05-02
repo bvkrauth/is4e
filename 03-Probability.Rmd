@@ -360,7 +360,7 @@ can easily be incorrect.
 
 The definition of independence is not very intuitive, but we can clarify
 it by doing a little math.  Consider two independent events $A$
-and $B$ that have nonzero[^1] probability.  Then by the definition of
+and $B$ that have nonzero[^301] probability.  Then by the definition of
 independence:
   $$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A)$$
 By the same reasoning:
@@ -369,7 +369,7 @@ In other words, knowing that one of these events are true
 tells you nothing useful about whether the other the other event
 is true.
 
-[^1]: You may wonder: if it makes more sense to describe independence 
+[^301]: You may wonder: if it makes more sense to describe independence 
       in terms of conditional probabilities, why do we define it in 
       terms of joint probabilities?  The key is the requirement that
       the events have nonzero probability. When $B$ has zero
@@ -522,14 +522,14 @@ is rare a positive test result means a 9.1% chance of having the disease.
 
 This general issue (even a small false positive rate can have a big impact
 when prevalence is low) appeared repeatedly in March and April of 2020. Several 
-studies by well-known researchers[^2] dramatically overestimated the early
+studies by well-known researchers[^302] dramatically overestimated the early
 prevalence of the COVID-19 virus and thus dramatically underestimated its
 fatality rate. These studies were regularly cited as support by those who 
 wanted to substantially relax public health restrictions in April 2020,
 and had substantial real world consequences.
 :::
 
-[^2]: If you are interested in learning more about this, an 
+[^302]: If you are interested in learning more about this, an 
 [article in Science](https://www.sciencemag.org/news/2020/04/antibody-surveys-suggesting-vast-undercount-coronavirus-infections-may-be-unreliable) 
 provides an overview of the controversy, and a 
 [blog post by statistician Andrew Gelman](https://statmodeling.stat.columbia.edu/2020/04/19/fatal-flaws-in-stanford-study-of-coronavirus-prevalence/) 

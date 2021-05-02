@@ -316,9 +316,9 @@ of the relationship between $x$ and $y$.
 - If *negative*, $x$ and $y$ tend to move in *opposite* directions.
 - If *zero*: $x$ and $y$ tend *not* to move together at all.
 the covariance and correlation always have the same sign since 
-standard deviations are always[^3] positive, 
+standard deviations are always[^601] positive, 
 
-[^3]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
+[^601]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
 In that case the covariance will also be zero, and the correlation will be 
 undefined (zero divided by zero).
 
@@ -499,7 +499,7 @@ is hopefully obvious, but what does it mean to say we have a
 generating an IID sample is to:
 
 1. Define the population of interest, for example all Canadian residents.
-2. Use some purely random mechanism[^4] to choose a small subset of cases
+2. Use some purely random mechanism[^602] to choose a small subset of cases
   from this population.
    - The subset is called our ***sample***
    - "Purely random" here means some mechanism like a computer's 
@@ -511,7 +511,7 @@ generating an IID sample is to:
 It will turn out that a moderately-sized random sample provides 
 surprisingly accurate information on the underlying population.
 
-[^4]: As a technical matter, the assumption of independence requires
+[^602]: As a technical matter, the assumption of independence requires
   that we sample *with replacement*. This means we allow
   for the possibility that we sample the same case more than once.
   In practice this doesn't matter as long as the sample is small 

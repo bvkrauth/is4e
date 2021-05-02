@@ -101,9 +101,9 @@ and analyze those relationships.
 
 #### The support
 
-The ***support*** of a random variable $x$ is the smallest[^1] set $S_x \subset \mathbb{R}$ such that $\Pr(x \in S_x) = 1$.  
+The ***support*** of a random variable $x$ is the smallest[^401] set $S_x \subset \mathbb{R}$ such that $\Pr(x \in S_x) = 1$.  
 
-[^1]: Technically, it is the smallest *closed* set, but let's ignore that for now.
+[^401]: Technically, it is the smallest *closed* set, but let's ignore that for now.
 
 In plain language the support is the set of all values in the sample space 
 that have some chance of actually happening. 
@@ -186,9 +186,9 @@ abline(h=1/37,lty=2,col="gray")
 We can calculate any probability from the PDF by simple addition. That
 is:
   $$\Pr(x \in A) = \sum_{s \in S_x} f_x(s)I(s \in A)$$
-where[^2] $A \subset \mathbb{R}$ is any event defined for $x$.
+where[^402] $A \subset \mathbb{R}$ is any event defined for $x$.
 
-[^2]: If you are unfamiliar with the notation here, please refer to
+[^402]: If you are unfamiliar with the notation here, please refer to
 Section \@ref(summations) in the Math Review Appendix.
 
 ::: example

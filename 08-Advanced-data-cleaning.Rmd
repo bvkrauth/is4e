@@ -51,7 +51,7 @@ example if the marginal tax rate is 30\% on taxable income below \$100,000 and
 income would pay 30\% on the first \$100,000 and 40\% on the remaining \$50,000
 for a total tax bill of \$50,000, or an average tax rate of 33\%.
 
-The data on the top marginal tax rate is obtained from the Tax Foundation[^5], 
+The data on the top marginal tax rate is obtained from the Tax Foundation[^801], 
 a US-based policy and research organization. Our data set comes from Table 1 in the report "Taxing High Incomes: A Comparison of 41 Countries", available online at  https://taxfoundation.org/taxing-high-income-2019/. 
 
 > Download the required file TaxRates.xlsx from https://canvas.sfu.ca/files/15327622/.
@@ -64,7 +64,7 @@ linking the GDP and tax data (more about this below).
 The rest of the chapter will use these three data files.
 :::
 
-[^5]: I should mention that the Tax Foundation is not an entirely neutral 
+[^801]: I should mention that the Tax Foundation is not an entirely neutral 
 organization - it generally supports lower taxes - and so my use of their
 data here should not be taken as expressing an opinion on their policy 
 views. It is not unusual for useful data to come from politically-motivated 

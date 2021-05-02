@@ -417,9 +417,9 @@ with many others.
 
 ## Graphs with ggplot
 
-The Tidyverse also contains a powerful graphics package called[^10] ***ggplot***.
+The Tidyverse also contains a powerful graphics package called[^1101] ***ggplot***.
 
-[^10]: The package is technically called `ggplot2` since it is the second
+[^1101]: The package is technically called `ggplot2` since it is the second
        version of `ggplot`.  But everyone calls it "ggplot" anyway.
 
 ### Creating a graph
