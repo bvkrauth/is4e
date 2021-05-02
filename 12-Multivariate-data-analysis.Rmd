@@ -3,7 +3,7 @@
 ```{r setup12, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,prompt=TRUE,tidy=TRUE,collapse=TRUE)
 library(tidyverse)
-EmpData <- read_csv("EmploymentData.csv")
+EmpData <- read_csv("bin/EmploymentData.csv")
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
   mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y")) %>% 
@@ -51,7 +51,7 @@ The R data set is the same as the one we used in Chapter
 library(tidyverse)
 # If you do not have this data set, you can download it at
 # https://canvas.sfu.ca/files/15539454/
-EmpData <- read_csv("EmploymentData.csv")
+EmpData <- read_csv("bin/EmploymentData.csv")
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
   mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y")) %>% 
