@@ -956,7 +956,7 @@ To protect and lock columns A through N in *GrowthData* but
 keep the other columns unlocked:
 
 1. Select all of the cells in the worksheet by clicking on the 
-   ![Select all cells](Excel select all cells.jpg) button.
+   ![Select all cells](bin/Excel select all cells.jpg) button.
 2. Unlock all of the cells by selecting `Home > Format > Lock Cell`.
 3. Lock columns A through N by selecting them, and then
    selecting `Home > Format > Lock Cell`.

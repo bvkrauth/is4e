@@ -41,16 +41,16 @@ of its basic characteristics and terminology.
 ### Terminology and interface
 
 Start Excel. Your screen should look something like this:
-![Excel screenshot](ExcelBlankWorkbook.png)
+![Excel screenshot](bin/ExcelBlankWorkbook.png)
 
 When giving instructions, I will refer to various elements of Excel's user
 interface by name. You may have been using these elements for years without
 ever knowing their names, so I will list them here:
 
 - The ***menu bar*** is at the top of the screen. 
-   ![It shows a list of options: `File Home Insert Draw ...`.](Excel menu bar.jpg)
+   ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)
 - The ***ribbon*** is below the menu bar
-   ![It is a row of buttons.](Excel ribbon.jpg)
+   ![It is a row of buttons.](bin/Excel ribbon.jpg)
   - The ribbon has buttons for performing simple actions.
   - The buttons are grouped by function, for example there is a group called
     "Clipboard" and another called "Font".
@@ -66,21 +66,21 @@ ever knowing their names, so I will list them here:
     - I will assume that Home is the currently-active option; if it isn't
       you can just click on `Home` to make it the currently-active option.
 - The ***formula bar*** is just below the ribbon.
-   ![the long white box ](Excel formula bar.jpg) 
+   ![the long white box ](bin/Excel formula bar.jpg) 
    - It shows the contents of the current cell.
    - You can type in it to change the contents of the current cell.
 - The ***insert function*** button is to the left of the formula bar. 
-   ![fx](Excel insert function button.jpg){height=16pt} 
+   ![fx](bin/Excel insert function button.jpg){height=16pt} 
    - We will learn to use this later.
 - Most of the screen displays a grid of ***cells*** that is called 
    a ***spreadsheet*** or ***worksheet***:
-   ![cell grid](ExcelCellGrid.png)
+   ![cell grid](bin/ExcelCellGrid.png)
   - Columns are identified by letter.
   - Rows are identified by number.
   - Cells are identified by coumn and row.  For example, the cell 
     in column A, row 2 is called cell A2.
 - Below the worksheet is a row of tabs:  
-  ![tabs](Excel tabs.jpg)
+  ![tabs](bin/Excel tabs.jpg)
   - You can click on a tab to switch to that worksheet.
   - You can double-click on a tab to change its name.
   - You can click on the "+" button to add a new worksheet.
@@ -92,7 +92,7 @@ ever knowing their names, so I will list them here:
 ### Tidy data
 
 Download the data file at https://bvkrauth.github.io/files/CanadaEmploymentNov2020.xlsx and open it in Excel.
-   ![Excel screenshot](EmploymentData.png) 
+   ![Excel screenshot](bin/EmploymentData.png) 
 This data file provides the main employment statistics for Canadian provinces
 in November 2020.
 
@@ -162,7 +162,7 @@ call ***tidy*** data. Tidy data takes a simple and convenient format:
 To see what messy data looks like, click on the `Raw data` tab at the bottom 
 of the page.  This worksheet shows the original data set as I originally
 downloaded it from Statistics Canada.
-   ![Excel screenshot](RawEmploymentData.png)
+   ![Excel screenshot](bin/RawEmploymentData.png)
 This data set is messy in many ways - it does not have a simple tabular
 form starting in cell A1, the headings have multiple rows, and the table
 has variables in rows and observations in columns.
@@ -264,7 +264,7 @@ We have several options for doing this:
   `Home > Format > Cell Width...`.  A dialog box will appear that allows you
   to enter your preferred width. Try 10.
 - *With the mouse*: Move your cursor to the line between column headers B 
-  and C until the cursor looks like this: ![cursor](cell width change.png){height=16pt}. Click on the mouse and drag the cursor to
+  and C until the cursor looks like this: ![cursor](bin/cell width change.png){height=16pt}. Click on the mouse and drag the cursor to
   resize the column.
 - *Auto-fit* (this is what I usually do):  Move your cursor to the 
   line between column headers B and C, and double-click.  The column 
@@ -517,7 +517,7 @@ Suppose we want to add a new variable for the (natural) log of population.
    just type in our formula.  But suppose we don't know the name of the function,
    or even whether there is such a function.
    a. Click on the insert function button 
-      ![insert function button](Excel insert function button.jpg) 
+      ![insert function button](bin/Excel insert function button.jpg) 
       to the left of the formula bar.
    b. The "Insert Function" dialog box will appear. It will have a 
       very long list of functions. You will want to narrow this list down,

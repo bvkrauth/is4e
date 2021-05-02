@@ -198,7 +198,7 @@ https://www.sfu.ca/itservices/technical/software/office365.html.
 
 Once you have installed Excel, you should confirm that it is working by
 starting the program. You should see something that looks like this:
-![Excel blank workbook](ExcelBlankWorkbook.png) 
+![Excel blank workbook](bin/ExcelBlankWorkbook.png) 
 
 ### Installing R and RStudio
 
@@ -218,7 +218,7 @@ NOTE: install R first, then RStudio.
 
 After installing R and RStudio, you should confirm that they are working by
 opening RStudio.  You should see something like this:
-![RStudio open screenshot](RStudio open screenshot.jpg)
+![RStudio open screenshot](bin/RStudio open screenshot.jpg)
 
 ### Installing the Tidyverse package for R
 
