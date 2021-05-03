@@ -29,3 +29,6 @@ div.goals {
     border: solid 5px #dfedff;
 }
 
+div.fyi {
+ background-image: url("bin/FYI.png");
+}
