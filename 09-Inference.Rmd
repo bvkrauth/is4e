@@ -358,23 +358,41 @@ at a 5\% size.  The blue line depicts the power curve for $n=100$
 as in our example, while the green line depicts the power curve for
 $n=20$.
 ```{r PowerCurves, fig.cap = "Power curves for the roulette example"}
-theta <- seq(0,1,length.out=380)
-power100 <- pbinom(qbinom(0.025,100,18/37),100,theta) +
-  (1 - pbinom(qbinom(0.975,100,18/37),100,theta))
-power20 <- pbinom(qbinom(0.025,20,18/37),20,theta) +
-  (1 - pbinom(qbinom(0.975,20,18/37),20,theta))
-plot(theta,power100,
-    type="l",
-    xlab="true probability of winning",
-    ylab = "power",
-    main = "Power curve for fair roulette wheel",
-    col = "blue")
-lines(theta,power20,col="green")
-abline(v=18/37,lty=2,col="gray")
-abline(h=0.05,lty=2,col="gray")
-points(x=18/37,y=0.05,col="red")
-text("n=100",x=0.7,y=0.8,col="blue")
-text("n=20",x=0.9,y=0.8,col="green")
+PowerCurveData <- tibble(theta = seq(0,1,length.out=380),
+                         power20 = pbinom(qbinom(0.025,
+                                                 20,
+                                                 18/37),
+                                          20,
+                                          theta) +
+                             (1 - pbinom(qbinom(0.975,
+                                              20,
+                                              18/37),
+                                       20,
+                                       theta)),
+                         power100 = pbinom(qbinom(0.025,
+                                                  100,
+                                                  18/37),
+                                           100,
+                                           theta) +
+                           (1 - pbinom(qbinom(0.975,
+                                              100,
+                                              18/37),
+                                       100,
+                                       theta)))
+ggplot(data = PowerCurveData, 
+       mapping = aes(x = theta,y = power20)) +
+  geom_line(col="green") +
+  geom_line(aes(y = power100), col="blue") +
+  xlab("true probability of winning") +
+  ylab("power") +
+  geom_text(label="n=100",x=0.7,y=0.8,col="blue") +
+  geom_text(label="n=20",x=0.9,y=0.8,col="green") +
+  geom_hline(yintercept = 0.05,col="gray") +
+  geom_vline(xintercept = 18/37,col="gray") +
+  labs(title = "Power curve for fair roulette wheel", 
+       subtitle = "", 
+       caption = "H0: Pr(red wins) = 18/37, significance = 0.05", 
+       tag = "")
 ```
 There are a few features I would like you to notice, all of which
 are common to most regularly used tests:
@@ -515,10 +533,18 @@ of $t_n$ we know that $N(0,1)$ provides a useful asymptotic approximation
 to that distribution.
 
 ```{r NormalDistribution}
-x <- seq(-3,3,length.out = 100)
-tinf <- dnorm(x)
-plot(x,tinf, type="l",col="black",xlab = "value", ylab="PDF of t_n",
-    main="Asymptotic distribution of t_n under null")
+simdata <- tibble(x = seq(-3,3,length.out = 100),
+                  tinf = dnorm(x))
+ggplot(data=simdata,
+       mapping = aes(x= x,
+                     y= tinf)) +
+  geom_line() +
+  xlab("value") +
+  ylab("PDF of t_n") +
+  labs(title = "Asymptotic distribution of t_n under null", 
+       subtitle = "", 
+       caption = "", 
+       tag = "")
 ```
 
 Therefore, if we want a test that has the ***asymptotic size*** of 5\%, we
@@ -582,20 +608,27 @@ $N(0,1)$ distribution, just as predicted by the central
 limit theorem.
 
 ```{r TDistribution}
-x <- seq(-3,3,length.out = 100)
-t5 <- dt(x,df=4)
-t10 <- dt(x,df=9)
-t30 <- dt(x,df=29)
-tinf <- dnorm(x)
-plot(x,tinf, type="l",col="black",main="Exact distribution of t_n under null",
-     sub="(x assumed to be normally distributed)",xlab="value",ylab="PDF")
-text("n = infinity",x=0.75,y=0.4,col="black")
-lines(x,t5,col="green")
-text("n = 5",x=2.5,y=0.1,col="green")
-lines(x,t10,col="blue")
-text("n = 10",x=1.7,y=0.2,col="blue")
-lines(x,t30,col="red")
-text("n = 30",x=1.2,y=0.3,col="red")
+simdata <- tibble(x = seq(-3,3,length.out = 100),
+                  t5 = dt(x,df=4),
+                  t10 = dt(x,df=9),
+                  t30 = dt(x,df=29),
+                  tinf = dnorm(x))
+ggplot(data = simdata,
+       mapping = aes(x = x)) +
+  geom_line(aes(y = t5), col = "green") +
+  geom_line(aes(y = t10), col = "blue") +
+  geom_line(aes(y = t30), col = "red") +
+  geom_line(aes(y = tinf), col = "black") +
+  geom_text(label="n = infinity",x=0.75,y=0.4,col="black") +
+  geom_text(label="n = 5",x=2.5,y=0.1,col="green") +
+  geom_text(label="n = 10",x=1.7,y=0.2,col="blue") +
+  geom_text(label="n = 30",x=1.2,y=0.3,col="red") +
+  xlab("value") +
+  ylab("PDF") +
+  labs(title = "Exact distribution of t_n under null", 
+       subtitle = "", 
+       caption = "(x assumed to be normally distributed)", 
+       tag = "")
 ```
 
 Having found our test statistic and its distribution under the null, 

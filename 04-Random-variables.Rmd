@@ -162,24 +162,32 @@ PDF:
           \end{cases}$$
 Figure \@ref(fig:RoulettePDF) below shows these three PDFs.
 ```{r RoulettePDF, fig.cap = "PDFs for the roulette example"}
-plot(x=0:36,
-     y=rep(1/37,times=37),
-     type="p",
-     pch=17,
-     col="blue",
-     xlab="a",
-     ylab="f(a)",
-     bty="l",
-     xlim=c(-1,36),
-     ylim=c(0,1),
-     xaxp=c(-2,36,38),
-     yaxp=c(0,1,4))
-text(x=4,y=4/37,label="f_b(a)",col="blue",cex=0.75)
-points(x=c(-1,1),y=c(19/37,18/37),pch=16,col="red")
-text(x=4,y=18/37,label="f_red(a)",col="red",cex=0.75)
-points(x=c(-1,35),y=c(36/37,1/37),pch=18,col="green")
-text(x=2,y=36/37,label="f_14(a)",col="green",cex=0.75)
-abline(h=1/37,lty=2,col="gray")
+RoulettePDF <- tibble(a = seq(from = -2, to= 36),
+                      fb = c(0, 0, rep(1/37, times = 37)),
+                      fred = c(0, 19/37, 0, 18/37, rep(0, times=35)),
+                      f14 = c(0, 36/37,rep(0, times=35), 1/37, 0))
+ggplot(data = RoulettePDF, mapping = aes(x = a)) +
+  geom_point(aes(y=fb), col = "blue") +
+  geom_point(aes(y=fred), col = "red") +
+  geom_point(aes(y=f14), col = "green") +
+  xlab("a") +
+  ylab("f(a)") +
+  geom_text(x = 4, 
+            y = 4/37, 
+            label = "f_b(a)", 
+            col = "blue") +
+  geom_text(x = 4, 
+            y = 18/37, 
+            label = "f_red(a)", 
+            col = "red") +
+  geom_text(x = 2, 
+            y = 36/37, 
+            label = "f_14(a)", 
+            col = "green") +
+  labs(title = "Probability density function (PDF)", 
+       subtitle = "Roulette", 
+       caption = "", 
+       tag = "")
 ```
 :::
 
@@ -300,27 +308,32 @@ in the support.
 
 Figure \@ref(fig:RouletteCDF) below graphs these CDFs. 
 ```{r RouletteCDF, fig.cap = "CDFs for the roulette example"}
-plot(x=c(-5,-1,1,40),
-     y=c(0,19/37,1,1)-0.001,
-     type="s",
-     col="red",
-     xlab="a",
-     ylab="F(a)",
-     bty="l",
-     xaxp=c(-5,40,10),
-     yaxp=c(0,1,2))
-text(x=4,y=0.55,label="F_red(a)",col="red",cex=0.75)
-lines(x=c(-5,seq(from=0,to=36,by=1),40),
-      y=c(0,seq(from=0,to=1,length=37),1)-0.001,
-      type="s",
-      col="blue")
-text(x=24,y=0.55,label="F_b(a)",col="blue",cex=0.75)
-lines(x=0.1+ c(-5,-1,35,40),
-      y=0.01+c(0,36/37,1,1),
-      type="s",
-      col="green")
-text(x=-4,y=0.75,label="F_14(a)",col="green",cex=0.75)
-abline(h=0.5,lty=2,col="gray")
+RouletteCDF <- RoulettePDF %>%
+    mutate (Fb = cumsum(fb)) %>%
+    mutate (Fred = cumsum(fred))%>%
+    mutate (F14 = cumsum(f14)) 
+ggplot(data = RouletteCDF, mapping = aes(x = a)) +
+  geom_step(aes(y=Fb), col = "blue") +
+  geom_step(aes(y=Fred), col = "red") +
+  geom_step(aes(y=F14), col = "green") +
+  xlab("a") +
+  ylab("F(a)") +
+  geom_text(x = 7, 
+            y = 4/37, 
+            label = "f_b(a)", 
+            col = "blue") +
+  geom_text(x = 5, 
+            y = 18/37, 
+            label = "f_red(a)", 
+            col = "red") +
+  geom_text(x = 8, 
+            y = 32/37, 
+            label = "f_14(a)", 
+            col = "green") +
+  labs(title = "Cumulative distribution function (CDF)", 
+       subtitle = "Roulette", 
+       caption = "", 
+       tag = "")
 ```
 Notice that they show all of the general properties described above. In 
 addition, they all have a distinctive "stair-step" shape, jumping up at 
@@ -375,9 +388,18 @@ The CDF of the standard uniform distribution is:
   $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
 Figure \@ref(fig:UniformCDF) below shows the CDF of the standard uniform distribution. 
 ```{r UniformCDF, fig.cap = "CDF for the standard uniform distribution"}
-plot(x=seq(from=-2,to=2,length.out=100),y=punif(seq(from=-2,to=2,length.out=100)),type="l",xlab="a",ylab=expression(Pr(x <= a)),bty="l",xaxp=c(-2,2,10),yaxp=c(0,1,2),col="blue")
-text(x=1,y=0.6,col="blue",label="F_x(a)",cex=0.75)
-abline(h=0.5,lty=2,col="gray")
+UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
+                      Fa=punif(seq(from=-2,to=2,length.out=100)),
+                      fa=dunif(seq(from=-2,to=2,length.out=100)))
+ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
+  geom_line(col = "blue") +
+  geom_text(x=1,y=0.6,col="blue",label="F_x(a)") +
+  xlab("a") +
+  ylab("F(a)") +
+  labs(title = "Cumulative distribution function (CDF)", 
+       subtitle = "Standard uniform", 
+       caption = "", 
+       tag = "")
 ```
 As we have seen, the CDF of a discrete random variable rises in 
 a "stair-step" manner. In contrast, the standard uniform CDF rises 
@@ -402,8 +424,15 @@ The PDF of a standard uniform random variable is:
   $$f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}$$
 which looks like this:
 ```{r UniformPDF, fig.cap = "PDF for the standard uniform distribution"}
-plot(x=seq(from=-2,to=2,length.out=1000),y=dunif(seq(from=-2,to=2,length.out=1000)),type="l",xlab="a",ylab="f(a)",bty="l",xaxp=c(-2,2,10),yaxp=c(0,1,2),col="blue")
-text(x=1.2,y=0.8,col="blue",label="f_x(a)",cex=0.75)
+ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
+  geom_step(col = "blue") +
+  geom_text(x=1.25,y=0.8,col="blue",label="f_x(a)") +
+  xlab("a") +
+  ylab("f(a)") +
+  labs(title = "Probability density function (PDF)", 
+       subtitle = "Standard uniform", 
+       caption = "", 
+       tag = "")
 ```
 :::
 
