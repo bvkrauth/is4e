@@ -191,7 +191,7 @@ function:
 ```{r MutateChangeMonthYr}
 # Change MonthYr to date format
 EmpData %>% 
-  mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y"))
+  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y"))
 ```
 As you can see, the *MonthYr* column is now labeled as a date rather than text. Like
 Excel, R has an internal representation of dates that allows for correct ordering
@@ -223,7 +223,7 @@ itself, we need to assign that new object *back* to `EmpData`:
 ```{r MutatePermanently}
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
-  mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y")) %>% 
+  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
   mutate(UnempPct = 100*UnempRate) %>% 
   mutate(LFPPct = 100*LFPRate)
 ```
@@ -252,7 +252,7 @@ months.  We can use `select()` to choose variables:
 # This will take out all variables except a few
 EmpData %>% 
   filter(UnempPct > 12.5) %>%
-  select(MonthYr,UnempRate,LFPPct,PrimeMinister)
+  select(MonthYr, UnempRate, LFPPct, PrimeMinister)
 ```
 Finally, suppose that we want to show months in descending order by
 unemployment rate (i.e., the highest unemployment rate first).  We 
@@ -261,7 +261,7 @@ can use `arrange()` to sort rows in this way:
 # This will sort the rows by unemployment rate
 EmpData %>% 
   filter(UnempPct > 12.5) %>%
-  select(MonthYr,UnempPct,LFPPct,PrimeMinister) %>%
+  select(MonthYr, UnempPct, LFPPct, PrimeMinister) %>%
   arrange(UnempPct)
 ```
 Hopefully you can see why the pipe operator is useful in making our code
@@ -316,7 +316,7 @@ for 1976 would require data from 1975. In R, missing values are given the
 special value `NA` which stands for "not available":
 ```{r ShowMissingValues}
 EmpData %>%
-  select(MonthYr,Population,AnnPopGrowth)
+  select(MonthYr, Population, AnnPopGrowth)
 ```
 When we try to take the mean of this variable we also get `NA`:
 ```{r MeanAnnPopGrowth}
@@ -333,7 +333,7 @@ of a mistake or problem that needs to be fixed.
 Once we have investigated the missing values, we can tell R explicitly
 to exclude them from the calculation by adding the `na.rm = TRUE` option:
 ```{r MeanAnnPopGrowthWithoutNA}
-mean(EmpData$AnnPopGrowth,na.rm=TRUE)
+mean(EmpData$AnnPopGrowth, na.rm = TRUE)
 ```
 
 ### Tables of statistics 
@@ -345,7 +345,7 @@ be a quicker way. Here is the code to do that:
 # Mean of each column
 EmpData %>%
   select(where(is.numeric)) %>%
-  lapply(mean,na.rm=TRUE) 
+  lapply(mean, na.rm = TRUE) 
 ```
 I would not expect you to come up with this code, but maybe it
 kind of makes sense.  
@@ -360,7 +360,7 @@ We can use this method with any function that calculates a summary statistic:
 # Standard deviation of each column
 EmpData %>%
   select(where(is.numeric)) %>%
-  lapply(sd,na.rm=TRUE) 
+  lapply(sd, na.rm = TRUE) 
 ```
   
 
@@ -374,7 +374,7 @@ EmpData %>%
   count(PrimeMinister)
 # COUNT and CUT_INTERVAL create a binned frequency table
 EmpData %>% 
-  count(cut_interval(UnempPct,6))
+  count(cut_interval(UnempPct, 6))
 ```
 As you might imagine, there are various ways of customizing the intervals
 just like in Excel.
@@ -426,12 +426,15 @@ The Tidyverse also contains a powerful graphics package called[^1101] ***ggplot*
 
 We can start by making a histogram of the unemployment rate:
 ```{r ggplotHistogram}
-ggplot(data=EmpData,mapping=aes(x=UnempPct)) + 
+ggplot(data = EmpData,
+       mapping = aes(x = UnempPct)) + 
   geom_histogram()
 ```
 We can also make a time series (line) graph:
 ```{r ggplotTimeSeries}
-ggplot(data=EmpData,mapping=aes(x=MonthYr,y=UnempPct)) + 
+ggplot(data = EmpData,
+       mapping = aes(x = MonthYr, 
+                     y = UnempPct)) + 
   geom_line() 
 ```
 
@@ -464,12 +467,14 @@ but we can improve upon it in various ways.
 
 You can add a title and subtitle, and you can change the axis titles: 
 ```{r ggplotTitles}
-ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
+ggplot(data = EmpData,
+       aes(x = MonthYr, 
+           y =UnempPct)) + 
   geom_line() + 
-  labs(title="Unemployment rate",
-      subtitle="January 1976 - January 2021",
-      caption="Source: Statistics Canada, Labour Force Survey",
-      tag="Canada") +
+  labs(title = "Unemployment rate",
+      subtitle = "January 1976 - January 2021",
+      caption = "Source: Statistics Canada, Labour Force Survey",
+      tag = "Canada") +
   xlab("") +
   ylab("Unemployment rate, %")
 ```
@@ -479,8 +484,10 @@ ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) +
 Using color: you can change the color of any geometric element
 using the `col=` argument:
 ```{r ggplotColor}
-ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
-  geom_line(col="blue") 
+ggplot(data = EmpData,
+       aes(x = MonthYr, 
+           y = UnempPct)) + 
+  geom_line(col = "blue") 
 ```
 Colors can be given in ordinary English (or local language) words,
 or with detailed color codes in RGB or CMYK format. 
@@ -488,8 +495,10 @@ or with detailed color codes in RGB or CMYK format.
 Some geometric elements, such as the bars in a histogram, also have 
 a ***fill*** color:
 ```{r ggplotFill}
-ggplot(data=EmpData,aes(x=UnempPct)) + 
-  geom_histogram(col="red",fill="blue") 
+ggplot(data = EmpData,
+       aes(x = UnempPct)) + 
+  geom_histogram(col = "red",
+                 fill = "blue") 
 ```
 As you can see, the `col=` argument sets the color for the exterior
 of each bar, and the `fill=` argument sets the color for the interior.
@@ -499,9 +508,12 @@ of each bar, and the `fill=` argument sets the color for the interior.
 We can include multiple geometries in the same graph.  For example, we can
 include lines for both unemployment and labour force participation:
 ```{r ggplotTwoLines}
-ggplot(data=EmpData,aes(x=MonthYr,y=UnempPct)) + 
-  geom_line(col="blue") +
-  geom_line(aes(y=LFPPct),col="red")
+ggplot(data = EmpData,
+       aes(x = MonthYr, 
+           y = UnempPct)) + 
+  geom_line(col = "blue") +
+  geom_line(aes(y = LFPPct),
+            col = "red")
 ```
 A few things to note here:
 
@@ -514,46 +526,65 @@ A few things to note here:
 We could add a legend here, but it is better (and friendlier to the color-blind)
 to just label the lines. We can use the `geom_text` geometry to do this:
 ```{r ggplotAddText}
-ggplot(data=EmpData,aes(x=MonthYr)) + 
-  geom_line(aes(y=UnempPct),col="blue") +
-  geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=15,label="Unemployment",col="blue") +
-  geom_line(aes(y=LFPPct),col="red") +
-  geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=60,label="LFP",col="red")
+ggplot(data = EmpData,
+       aes(x = MonthYr)) + 
+  geom_line(aes(y = UnempPct),
+            col = "blue") +
+  geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
+            y = 15,
+            label = "Unemployment",
+            col = "blue") +
+  geom_line(aes(y = LFPPct),
+            col = "red") +
+  geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
+            y = 60,
+            label = "LFP",
+            col = "red")
 ```
 
 The graphs below combine all of the features described above to yield clean
 and clear graphs.
 
 ```{r ggplotFancyHistogram}
-ggplot(data=EmpData,aes(x=UnempPct)) + 
-  geom_histogram(binwidth=0.5,fill="blue") +
+ggplot(data = EmpData,
+       aes(x = UnempPct)) + 
+  geom_histogram(binwidth = 0.5,
+                 fill = "blue") +
   geom_density() +
-  labs(title="Unemployment rate",
-      subtitle=paste("January 1976 - January 2021 (",
+  labs(title = "Unemployment rate",
+      subtitle = paste("January 1976 - January 2021 (",
                      nrow(EmpData),
                      " months)",
-                     sep="",
-                     collapse=""),
-      caption="Source: Statistics Canada, Labour Force Survey",
-      tag="Canada") +
+                     sep = "",
+                     collapse = ""),
+      caption = "Source: Statistics Canada, Labour Force Survey",
+      tag = "Canada") +
   xlab("Unemployment rate, %") +
   ylab("Count")
 ```
 
 ```{r ggplotFancyTimeSeries}
-ggplot(data=EmpData,aes(x=MonthYr)) + 
-  geom_line(aes(y=UnempPct),col="blue") +
-  geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=15,label="Unemployment",col="blue") +
-  geom_line(aes(y=LFPPct),col="red") +
-  geom_text(x=as.Date("1/1/2000","%m/%d/%Y"),y=60,label="LFP",col="red") +
-  labs(title="Unemployment and LFP rates",
-      subtitle=paste("January 1976 - January 2021 (",
+ggplot(data = EmpData,
+       aes(x = MonthYr)) + 
+  geom_line(aes(y = UnempPct),
+            col = "blue") +
+  geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
+            y = 15,
+            label = "Unemployment",col="blue") +
+  geom_line(aes(y = LFPPct),
+            col = "red") +
+  geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
+            y = 60,
+            label = "LFP",
+            col = "red") +
+  labs(title = "Unemployment and LFP rates",
+      subtitle = paste("January 1976 - January 2021 (",
                      nrow(EmpData),
                      " months)",
-                     sep="",
-                     collapse=""),
-      caption="Source: Statistics Canada, Labour Force Survey",
-      tag="Canada") +
+                     sep = "",
+                     collapse = ""),
+      caption = "Source: Statistics Canada, Labour Force Survey",
+      tag = "Canada") +
   xlab("") +
   ylab("Percent")
 ```

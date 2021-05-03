@@ -9,7 +9,7 @@ library("tidyverse")
 EmpData <- read_csv("sampledata/EmploymentData.csv")
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
-  mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y")) %>% 
+  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
   mutate(UnempPct = 100*UnempRate) %>% 
   mutate(LFPPct = 100*LFPRate)
 ```
@@ -57,7 +57,7 @@ library(tidyverse)
 EmpData <- read_csv("sampledata/EmploymentData.csv")
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
-  mutate(MonthYr = as.Date(MonthYr,"%m/%d/%Y")) %>% 
+  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
   mutate(UnempPct = 100*UnempRate) %>% 
   mutate(LFPPct = 100*LFPRate)
 ```
@@ -86,8 +86,8 @@ the `cov()` and `cor()` functions.
 These functions can be applied to any two columns of data:
 ```{r CovCor}
 # For two specific columns of data
-cov(EmpData$UnempPct,EmpData$LFPPct)
-cor(EmpData$UnempPct,EmpData$LFPPct)
+cov(EmpData$UnempPct, EmpData$LFPPct)
+cor(EmpData$UnempPct, EmpData$LFPPct)
 ```
 As you can see, unemployment and labour force participation are 
 *negatively* correlated: when unemployment is high, LFP tends to be
@@ -128,11 +128,11 @@ The `use` argument allows you to specify which approach you want to use:
 # Pairwise will only exclude 1976 from calculations involving AnnPopGrowth
 EmpData %>%
   select(where(is.numeric)) %>%
-  cor(use="pairwise.complete.obs")
+  cor(use = "pairwise.complete.obs")
 # Casewise will exclude 1976 from all calculations
 EmpData %>%
   select(where(is.numeric)) %>%
-  cor(use="complete.obs")
+  cor(use = "complete.obs")
 ```
 In most applications, pairwise deletion makes the most sense because it
 avoids throwing out data. But it is occasionally important to use the
@@ -505,7 +505,8 @@ and each point represents an observation.
 Scatter plots can be created in R using the `geom_point()` geometry:
 ```{r ScatterPlot}
 ggplot(data = EmpData,
-       aes(x = UnempPct,y = LFPPct)) +
+       aes(x = UnempPct,
+           y = LFPPct)) +
   geom_point()
 ```
 
@@ -528,15 +529,17 @@ the nearest percent:
 ```{r RoundEmpData}
 # Round UnempPct and LFPPct to nearest integer
 RoundedEmpData <- EmpData %>% 
-  mutate(UnempPct=round(UnempPct)) %>% 
-  mutate(LFPPct=round(LFPPct))
+  mutate(UnempPct = round(UnempPct)) %>% 
+  mutate(LFPPct = round(LFPPct))
 ```
 
 The scatter plot with the rounded data would look like this:
-```{r ScatterPlotRounded}
+```{r ScatterPlotRounded} 
 # Create graph using rounded data
-ggplot(data=RoundedEmpData, aes(x=UnempPct,y=LFPPct)) + 
-  geom_point(col="red")
+ggplot(data = RoundedEmpData, 
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(col = "red")
 ```
 
 As you can see from the graph, the scatter plot is misleading: there
@@ -547,9 +550,12 @@ small amount of random noise so that every observation is at least a little
 different and appears as a single point.  We can use the `geom_jitter()` 
 geometry to do a jittered scatter plot:
 ```{r ScatterPlotJittered}
-ggplot(data=RoundedEmpData,aes(x=UnempPct,y=LFPPct)) + 
-  geom_point(col="red") +
-  geom_jitter(size=0.5, col="blue")
+ggplot(data = RoundedEmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(col = "red") +
+  geom_jitter(size = 0.5, 
+              col = "blue")
 ```
 
 As you can see the jittered rounded data (small blue dots) more accurately
@@ -561,9 +567,15 @@ We can use color to add a third dimension to the data.  That is, we can
 color-code points based on a third variable by including it as part of 
 the aesthetic:
 ```{r ScatterPlotColorCoded}
-ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=Party)) + 
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct,
+           col = Party)) + 
   geom_point()
-ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=MonthYr)) + 
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct,
+           col = MonthYr)) + 
   geom_point()
 ```
 
@@ -574,8 +586,11 @@ As we discussed earlier, you want to make sure your graph can be read by a
 reader who is color blind or is printing in black and white. So we can use 
 shapes in addition to color:
 ```{r UsingShapes}
-ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct,col=Party)) + 
-  geom_point(aes(shape=Party))
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct,
+           col = Party)) + 
+  geom_point(aes(shape = Party))
 ```
 
 We would also choose a color scheme other than red and green, since that
@@ -607,34 +622,71 @@ a bit more complex than you are used to.  As a result, I will not ask
 you to be able to produce binned scatter plots, I will only ask you
 to interpret them.  Here is my binned scatter plot with 20 bins:
 ```{r BinnedScatterPlot, echo = FALSE}
-ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
- geom_point(size=0.5) +
-  stat_summary_bin(fun='mean', bins=20,
-                   col="blue", size=3, geom='point') +
-  stat_summary_bin(fun='mean', bins=20,
-                   col="blue", size=0.5, geom='line')
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+ geom_point(size = 0.5) +
+  stat_summary_bin(fun = 'mean', 
+                   bins=20,
+                   col = "blue", 
+                   size = 3, 
+                   geom = 'point') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 20,
+                   col = "blue", 
+                   size = 0.5, 
+                   geom = 'line')
 ```
 
 The number of bins is an important choice.  The graph below adds a 
 red line based on 4 bins and a green line based on 100 bins.
 ```{r HowManyBins}
-ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
- geom_point(size=0.5) +
-  stat_summary_bin(fun='mean', bins=4,
-                   col="red", size=1, geom='point') +
-  stat_summary_bin(fun='mean', bins=4,
-                   col="red", size=0.5, geom='line') +
-  stat_summary_bin(fun='mean', bins=20,
-                   col="blue", size=1, geom='point') +
-  stat_summary_bin(fun='mean', bins=20,
-                   col="blue", size=0.5, geom='line') +
-  stat_summary_bin(fun='mean', bins=100,
-                   col="green", size=1, geom='point') +
-  stat_summary_bin(fun='mean', bins=100,
-                   col="green", size=0.5, geom='line') +
-  geom_text(x=13.8,y=64.1,label="4 bins",col="red") +
-  geom_text(x=13.8,y=62.5,label="20 bins",col="blue") +
-  geom_text(x=13.8,y=60,label="100 bins",col="green")
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+ geom_point(size = 0.5) +
+  stat_summary_bin(fun = 'mean',
+                   bins = 4,
+                   col = "red", 
+                   size = 1, 
+                   geom = 'point') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 4,
+                   col = "red", 
+                   size = 0.5, 
+                   geom = 'line') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 20,
+                   col = "blue", 
+                   size = 1, 
+                   geom = 'point') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 20,
+                   col = "blue", 
+                   size = 0.5, 
+                   geom = 'line') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 100,
+                   col = "green", 
+                   size = 1, 
+                   geom = 'point') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 100,
+                   col = "green", 
+                   size = 0.5, 
+                   geom = 'line') +
+  geom_text(x = 13.8,
+            y = 64.1,
+            label = "4 bins",
+            col = "red") +
+  geom_text(x = 13.8,
+            y = 62.5,
+            label = "20 bins",
+            col = "blue") +
+  geom_text(x = 13.8,
+            y = 60,
+            label = "100 bins",
+            col = "green")
 ```
 
 As you can see, the binned scatterplot tends to be smooth when there 
@@ -655,7 +707,9 @@ can be quite complex and well beyond the scope of this course.
 
 Fortunately, smoothing is easy to do in R using the `geom_smooth()` geometry:
 ```{r SmoothedRegression}
-ggplot(data=EmpData,aes(x=UnempRate,y=LFPRate)) + 
+ggplot(data = EmpData,
+       aes(x = UnempRate,
+           y = LFPRate)) + 
   geom_point(size = 0.5) +
   geom_smooth()
 ```
@@ -676,17 +730,22 @@ line that fits the data best.
 You can include a linear regression line in your plot by adding the 
 `method=lm` argument to the `geom_smooth()` geometry:
 ```{r LinearRegression}
-ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
-  geom_point(size=0.5) +
-  geom_smooth(method="lm") 
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(size = 0.5) +
+  geom_smooth(method = "lm") 
 ```
 
 We can compare the linear and smoothed fits to see where they differ:
 ```{r LinearAndSmoothed}
-ggplot(data=EmpData,aes(x=UnempPct,y=LFPPct)) + 
-  geom_point(size=0.5) +
-  geom_smooth(col="red") + 
-  geom_smooth(method="lm",col="blue") 
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(size = 0.5) +
+  geom_smooth(col = "red") + 
+  geom_smooth(method = "lm",
+              col = "blue") 
 ```
 
 As you can see, the two fits are quite similar for unemployment rates below

@@ -396,18 +396,18 @@ for example.
   
 We can construct a vector by enumeration using the `c()` function:
 ```{r EnumerationExample}
-fruits <- c("Avocado","Banana","Cantaloupe")
+fruits <- c("Avocado", "Banana", "Cantaloupe")
 print(fruits)
 ```
 There are many other functions that can be used to construct vectors. Two
 particularly useful ones are `rep` which repeats something a particular
 number of times, and `seq` which creates a sequence:
 ```{r RepExample}
-# REP repeats something a particular number of times (like Excel's Fill tool)
-ones <- rep(1,times=10)
+# REP repeats something (like Excel's Fill tool)
+ones <- rep(1, times = 10)
 print(ones)
 # SEQ creates a sequence (like Excel's Series tool)
-evens <- seq(from=2,to=20,by=2)
+evens <- seq(from = 2, to = 20, by = 2)
 print(evens)
 # You can also create a sequence with the : operator:
 print(1:10)
@@ -433,7 +433,7 @@ x <- evens[2]
 print(x)
 # You can give a vector of indices
 # evens[c(2,5)] is a vector containing the 2nd and 5th element in evens 
-x <- evens[c(2,5)]
+x <- evens[ c(2, 5) ]
 print(x)
 # You can give a range of indices
 # evens[2:5] is a vector containing the 2nd, 3rd, 4th and 5th element in evens 
@@ -476,30 +476,32 @@ objects.
 
 Lists can be built using the `list()` function:
 ```{r ListExample}
-everything <- list(fruits,evens,odds)
+everything <- list(fruits, evens, odds)
 print(everything)
 ```
 You can (and should) assign names to the elements of a list:
 ```{r NamedListExample}
-everything <- list(fruits=fruits,evens=evens,odds=odds)
+everything <- list(fruits=fruits,
+                   evens=evens,
+                   odds=odds)
 print(everything)
 ```
 You can access part of a list by specifying its numerical index inside of the 
 `[[]]` operator:
 ```{r ListSubscriptExample}
-print(everything[[2]])
+print( everything[[2]] )
 ```
 If the items in a list are named, you can also access 
 them by name using either `[[]]` or `$` notation
 ```{r ListDollarsignExample}
-print(everything[["evens"]])
-print(everything$fruits)
+print( everything[["evens"]] )
+print( everything$fruits )
 ```
 
 You can also use the `$` notation to add new items to an existing list:
 ```{r AddToListExample}
 # There is no element in everything called "allnumbers" 
-everything$allnumbers <- c(evens,odds)
+everything$allnumbers <- c(evens, odds)
 # But now there is...
 print(everything)
 ```
@@ -586,7 +588,7 @@ the `sum()` function:
 ```{r OperatorExample}
 # These two statements are equivalent
 2 + 2
-sum(2,2)
+sum(2, 2)
 ```
 There are several other commonly used operators:
 ```{r OtherOperators}
@@ -609,7 +611,7 @@ The assignment operator is also an operator. It is equivalent to the
 ```{r AssignmentIsAnOperator}
 # These two statements are equivalent:
 x <- 2
-assign(y,2)
+assign(y, 2)
 print(x)
 print(y)
 # The assign function returns its own value, so you can do this:
@@ -758,9 +760,12 @@ So we can read through the documentation for the `plot()` function,
 try a few things out, and we can produce a much prettier graph
 by just adding a few options:
 ```{r PlotExample}
-x <- seq(from=-4,to=4,length.out=1000)
+x <- seq(from = -4, to = 4, length.out = 1000)
 p <- dnorm(x)
-plot(x,p,type="l",ylab=expression(phi(x)),main="PDF of N(0,1) distribution")
+plot(x, p, 
+     type = "l", 
+     ylab = expression(phi(x)),
+     main = "PDF of N(0,1) distribution")
 ```
 As you can see, we have a much nicer and clearer looking plot.
 :::
