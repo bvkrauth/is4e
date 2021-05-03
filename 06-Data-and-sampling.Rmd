@@ -127,12 +127,12 @@ between $x$ and $y$.
 - In the first graph, $x$ and $y$ are unrelated, so the 
   data looks like as a "cloud" of random dots.  
 - In the second graph, $x$ and $y$ have something of a 
-  positive relationship. High values of $x$ tend to go
-  with high values of $y$.
-- In the third graph, $x$ and $y$ are closely related. In fact, 
-  they are equal.
+  negative relationship. High values of $x$ tend to go
+  with low values of $y$.
+- In the third graph, $x$ and $y$ are positively and closely 
+  related. In fact, they are equal.
 
-```{r JointIsNotMarginal, fig.cap = "x and y have the same marginal distribution in all three graphs, but not the same joint distribution."}
+```{r JointIsNotMarginal, fig.cap = "*x and y have the same marginal distribution in all three graphs, but not the same joint distribution.*"}
 simdata <- tibble(x = rnorm(100),
                   y1 = rnorm(100),
                   y2 = (-x+0.5*y1)/sqrt(1.25),
@@ -328,7 +328,7 @@ relationship between two variables.  When variables have a nonlinear
 relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent), the
 covariance or correlation may miss it.
 
-```{r UncorrelatedButNotIndependent, fig.cap = "x and y are uncorrelated, but clearly related."}
+```{r UncorrelatedButNotIndependent, fig.cap = "*x and y are uncorrelated, but clearly related.*"}
 simdata <- tibble(x = rnorm(100),
                   y = x^2)
 ggplot(data = simdata, mapping = aes(x = x, y =y)) +

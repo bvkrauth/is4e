@@ -186,13 +186,13 @@ This is a fixed format file in which the CountryName variable
 starts on the 1st character of each line and the CountryCode
 variable starts on the 36th character.
 
-To open this file in Excel, use the *Text Import Wizard*:
+To open this file in Excel, use the Text Import Wizard:
 
 1. Select `File > Open >` from the menu.
-2. Select `Browse` to get to the usual OpenFile dialog box.
+2. Select `Browse` to get to the usual `OpenFile` dialog box.
 3. Find and select the file `CountryCodes.txt`.  You may need to move 
    to the correct folder, and to change the file type to "All files (*.*)"
-4. The first dialog box of the *Text Import Wizard* allows you to specify
+4. The first dialog box of the Text Import Wizard allows you to specify
    the overall structure of your data file:
    ![Text Import Wizard- Step 1 of 3](bin/TIW1.png) 
    Excel guesses about the structure of your data, but you may need to
@@ -260,8 +260,9 @@ section as a CSV file:
      not support workbooks that contain multiple sheets. To save only
      the active sheet click OK....* If so, select `OK`.
 6. Close Excel.
-   - You may get another warning message: *Want to save your changes
-     to CountryCodes.csv?*  If so, select `Don't save`.
+   - You may get another warning message: 
+     `Want to save your changes to CountryCodes.csv?` If so, 
+     select `Don't save`.
      
 You have created a CSV file.
 :::
@@ -279,7 +280,7 @@ will look something like this:
 
 If a CSV file has `.csv` at the end of its file name, you can open it
 in Excel by just double-clicking on it. Otherwise, you can use the
-*Text Import Wizard*.
+Text Import Wizard.
 
 CSV files (and text files in general) have several important limitations
 relative to regular Excel (`.xlsx`) files:
@@ -314,7 +315,7 @@ other than the comma to delimit cells.
    as the delimiter.
 
 Like fixed-width and CSV files, space-delimited and tab-delimited files
-can be imported into Excel using the *Text Import Wizard*.
+can be imported into Excel using the Text Import Wizard.
 
 Excel also has a wide variety of tools for obtaining data from various
 databases, online services, etc. We do not have time to explore all of
@@ -328,18 +329,18 @@ Sometimes you will run into an Excel sheet that looks like this:
 This can happen if a text file has been incorrectly imported,
 or if you have copied-and-pasted data from a PDF file or web 
 page.  Fortunately, Excel has a way of fixing that: the 
-***text-to-columns*** tool.
+***Text to Columns*** tool.
 
 :::example
 **Using the text-to-columns tool**
 
 Download and open the file *TaxRates.xlsx*.  As you can see, it looks
-like the picture above. To use the *text-to-columns* tool:
+like the picture above. To use the Text to Columns tool:
 
 1. Select the column with the data (column A).
    - Be sure to select the whole column, not just a single cell.
 2. Select `Data > Text to Columns` from the menu.
-3. The *Text to Columns Wizard* will appear.
+3. The Text to Columns Wizard will appear.
    - It is very similar to the Text Import Wizard
    - Excel is usually smart enough to guess the structure
      of your data and to offer the correct default options
@@ -384,20 +385,20 @@ a single Excel workbook.
 :::example
 **Combining our cross-country data files**
 
-We currently have three data files: pwt100.xlsx, CountryCodes.csv,
-and TaxRates.xlsx. To combine them in a single file:
+We currently have three data files: *pwt100.xlsx*, *CountryCodes.csv*,
+and *TaxRates.xlsx*. To combine them in a single file:
 
 1. Open all three files.
-2. Go to CountryCodes.csv, and right-click on the "CountryCodes" tab
+2. Go to *CountryCodes.csv*, and right-click on the *CountryCodes* tab
    at the bottom of the page.  A menu will appear; select `Move or Copy...`
-   and the *Move or Copy* dialog box will appear:
+   and the `Move or Copy` dialog box will appear:
    ![Move or Copy](bin/MoveOrCopy.png) 
-3. Select pwt100.xslx from the "To book:" drop-down box. Your worksheet 
+3. Select *pwt100.xslx* from the `To book:` drop-down box. Your worksheet 
    will now move to that workbook.
-4. Repeat the same process with both worksheets in the TaxRates.xlsx
+4. Repeat the same process with both worksheets in the *TaxRates.xlsx*
    workbook.
 5. At this point all of our worksheets are in a single workbook. Save the 
-   workbook with name GrowthData.xlsx
+   workbook with name *GrowthData.xlsx*.
 :::
 
 Before proceeding, it's a good idea to make sure our data is tidy.
@@ -418,7 +419,7 @@ Before proceeding, it's a good idea to make sure our data is tidy.
      need to create one.
 2. Add a unique ID variable to the *Data* worksheet:
    a. Insert a new column to the left of the current column A.
-   b. Enter "CountryYear" in cell A1 to name the variable.
+   b. Enter **CountryYear** in cell A1 to name the variable.
    c. Use the `CONCAT()` function to create the identifier in cell A2. 
       - The formula would be `=CONCAT(B2,E2)`
       - For example, if row 2 depicts Aruba (ABW) in 1950, cell A2 
@@ -484,7 +485,7 @@ code to the *GrowthData* worksheet.
 1. Insert a new column to the left of the current column A.
    - You can do that by selecting any cell in column A, and then selecting
      `Home > Insert > Insert Sheet Columns`
-2. Enter "CountryCode" in cell A1 to name the variable.
+2. Enter **CountryCode** in cell A1 to name the variable.
 3. Construct the appropriate formula in cell A2.
    - `lookup_value` should be the country name of the current observation (`B2`)
    - `lookup_array` should be the full list of country names (`CountryCodes!A2:A185`)
@@ -508,7 +509,7 @@ we need to match both country and year, we will need to use
 the `CONCAT()` function to put the country and year together
 in a single criterion.
 
-1. Enter "Pop2019" in cell K1 of *GrowthData* to name the variable.
+1. Enter **Pop2019** in cell K1 of *GrowthData* to name the variable.
 2. Enter the correct formula in cell K2:
    - `lookup_value` should combine the country code (cell A2) with 
      the year (2019), so it should be `CONCAT(A2,"2019")`.
@@ -525,7 +526,7 @@ in a single criterion.
 We can also create another variable whose variable is the country's
 population in 1990.
 
-1. Enter "Pop1990" in cell L1 of *GrowthData* to name the variable.
+1. Enter **Pop1990** in cell L1 of *GrowthData* to name the variable.
 2. Enter the correct formula in cell L2. It will be nearly identical 
    to the formula in cell K2, but with "2019" replaced by "1990":
    `=XLOOKUP(CONCAT(A2,"1990"),Data!A$2:A$12811,Data!H$2:H$12811)`
@@ -582,7 +583,7 @@ over the full period of the data.
 
 We can do this using the `AVERAGEIFS()` function:
 
-1. Enter "AvgIShare" in cell M1 to name the variable.
+1. Enter **AvgIShare** in cell M1 to name the variable.
 2. Construct the correct formula in cell M2 using the function `AVERAGEIFS()`:
    - `average_range` should be the full range of investment shares (`Data!AO2:AO12811`)
    - `criteria_range` should be the full range of country codes (`Data!A2:A12811`)
@@ -650,7 +651,7 @@ To make *GrowthData* an Excel Table:
 2. Select `Home > Format as Table`. 
    - A set of visual table styles will drop down.  
    - Select whichever one looks best to you.
-3. The Format As Table dialog box will ask you to provide or confirm
+3. The `Format As Table` dialog box will ask you to provide or confirm
    some basic information about your table:
    ![Format As Table dialog box](bin/FormatAsTable.png) 
    - The default options are correct, so just select `OK`.
@@ -662,8 +663,8 @@ will only appear if the currently-selected cell is part of an Excel
 Table). 
 
 - Note that each table has a name
-  - Excel has assigned our table the default "Table1"
-  - We can change it to something more informative like "GrowthData".
+  - Excel has assigned our table the default name *Table1*
+  - We can change it to something more informative like *GrowthData*.
 - We can easily change the table style in various ways.
 - We can remove duplicate observations
 - We can access tools such as PivotTable and Slicers (more on these later).
@@ -690,11 +691,11 @@ where $\ln(\cdot)$ is the natural logarithm.
 
 To implement this in our Excel Table:
 
-1. Enter "PopGrowth" in cell N1 to name the variable. 
+1. Enter **PopGrowth** in cell N1 to name the variable. 
    - Note that Excel automatically adds this column to the Excel 
      Table.
 2. Select cell N2 and follow these steps:
-   a. Type "=(ln(" (but don't hit `<enter>` yet!)
+   a. Type `=(ln(` (but don't hit `<enter>` yet!)
    b. Click on cell K2.  Note that the formula box displays `=(ln([@Pop2019]`
       instead of `=ln(K2`.
    c. Type ") - ln(" so that the formula box displays `=(ln([@Pop2019]`) - ln(`
@@ -730,9 +731,9 @@ Right now the total row is almost empty, but each cell in the total
 row has a dropdown box that you can use to select a summary statistic. For
 example:
 
-1. Go to the dropdown box in cell B43 and select "Count" to get a count
+1. Go to the dropdown box in cell B43 and select `Count` to get a count
    of observations.
-2. Go to the dropdown box in cell M43 and select "Average" to get the average
+2. Go to the dropdown box in cell M43 and select `Average` to get the average
    value of the AvgIShare variable.
 
 You can display the summary statistic of your choice in each cell.
@@ -830,9 +831,9 @@ let's add this as a data validation requirement:
    By default, it allows "Any value", which means no restriction
    at all.
 3. To add a restriction that negative values are not allowed:
-   a. Select "Decimal" from the Allow drop-down box.
-   b. Select "greater than or equal to" from the Data drop-down box
-   c. Enter "0" in the Minimum drop-down box.
+   a. Select `Decimal` from the `Allow` drop-down box.
+   b. Select `greater than or equal to` from the `Data` drop-down box
+   c. Enter `0` in the `Minimum` drop-down box.
 4. Select `OK`.
 
 Although nothing appears to have changed, column K is now subject to 
@@ -847,7 +848,7 @@ in the first place.
 :::example
 **Entering invalid data**
 
-Go to cell K43, and (try to) enter "-1".  You will see this dialog
+Go to cell K43, and (try to) enter `-1`.  You will see this dialog
 box telling you that this is an invalid value:
    ![Invalid Data Entered box](bin/InvalidDataEntered.png). 
 Select `Cancel`.
@@ -961,7 +962,7 @@ keep the other columns unlocked:
 3. Lock columns A through N by selecting them, and then
    selecting `Home > Format > Lock Cell`.
 4. Protect the worksheet by selecting `Home > Format > Protect Sheet`
-5. The Protect Sheet dialog box will appear; select `OK`.
+5. The `Protect Sheet` dialog box will appear; select `OK`.
 
 Note that you have to do it in this order - Excel will not let you 
 unlock locked cells after you have protected the sheet.

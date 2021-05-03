@@ -52,19 +52,21 @@ ever knowing their names, so I will list them here:
 - The ***ribbon*** is below the menu bar
    ![It is a row of buttons.](bin/Excel ribbon.jpg)
   - The ribbon has buttons for performing simple actions.
-  - The buttons are grouped by function, for example there is a group called
-    "Clipboard" and another called "Font".
-    - Within each function group, there is usually a little icon in the
-      lower-right corner that you can click on to access additional options.
+  - The buttons are grouped by function, for example the ribbon above 
+    depicts groups called `Clipboard`, `Font`, etc.
+    - Within each function group, there is usually a little 
+      ![Additional options icon](bin/Excel additional options.jpg)
+      icon in the lower-right corner that you can click on to access 
+      additional options.
   - If your ribbon is not visible:
-    - You can make it visible by clicking "Home" (or anything else) on the
+    - You can make it visible by selecting `Home` (or anything else) on the
       menu bar. 
     - Once you have made the ribbon visible, you can keep it visible by
       clicking on the little thumbtack icon in its lower right corner.
   - The contents of the ribbon depend on the currently-active menu bar option
     (usually but not always `Home`). 
-    - I will assume that Home is the currently-active option; if it isn't
-      you can just click on `Home` to make it the currently-active option.
+    - I will assume that `Home` is the currently-active option; if it isn't
+      you can just select `Home` to make it the currently-active option.
 - The ***formula bar*** is just below the ribbon.
    ![the long white box ](bin/Excel formula bar.jpg) 
    - It shows the contents of the current cell.
@@ -181,13 +183,13 @@ The original data are in alphabetical order by province name. But suppose
 we wanted it to ordered by population (with the highest populations on top)
 instead. Here's all we need to do:
 
-1. Select any cell in the `Population` column.
+1. Select any cell in the **Population** column.
 2. Select `Home > Sort and Filter > Sort Largest to Smallest`.
 
 As you can see, the data set is now sorted by population. We can follow
 similar steps to put the data set back in alphabetical order:
 
-1. Select any cell in the `Province` column.
+1. Select any cell in the **Province** column.
 2. Select `Home > Sort and Filter > Sort A to Z`.
 
 Notice that Excel can tell whether a column contains numbers or text, and 
@@ -209,7 +211,7 @@ Suppose we only want to see data for larger provinces. Here's what we can do:
 
 1. Select `Home > Sort and Filter > Filter`. If you look at the column headers 
    in your sheet you will see that they have become drop-down boxes.
-3. Click on the drop-down box for `Population`, then select 
+3. Click on the drop-down box for **Population**, then select 
    `Number filters > Greater Than...`
 4. Enter one million (`1000000`) in the box and select `OK`.
 
@@ -292,7 +294,7 @@ directly.
 
 We will start by simply typing in some new data.
 
-The `Province` column gives the name of each person's province of residence.
+The **Province** column gives the name of each person's province of residence.
 It might be more convenient to use the two-letter postal abbreviation instead,
 so let's add that as a new variable. Here's the table of abbreviations
 for your reference:
@@ -315,7 +317,7 @@ for your reference:
 
 So let's add our variable:
 
-1. Enter "ProvAbb" in cell E1 to name the variable.
+1. Enter **ProvAbb** in cell E1 to name the variable.
 2. Fill in cells E2:E11 with the correct postal abbreviation.
 
 #### Using Fill {#using-fill}
@@ -323,7 +325,7 @@ So let's add our variable:
 Let's add a variable indicating which month and year these particular
 observations describe (November 2020).
 
-1. Enter "MonthYr" in cell F1 to name the variable.
+1. Enter **MonthYr** in cell F1 to name the variable.
 2. Enter "11/20" in cell F2.
    - You may notice that Excel displays the date differently from
      how you entered it - on my computer it displays as `Nov-20`. We
@@ -361,7 +363,7 @@ be convenient if it the ID variable were in column A.
 We can enter the ID numbers by hand, but there is an easier way using
 Excel's ***series*** feature:
 
-3. Enter "ID" in cell A1 to name the variable.
+3. Enter **ID** in cell A1 to name the variable.
 4. Enter 1 in cell A2.
 5. Select cells A2:A11.
 6. Select `Fill > Series...`.  The Series dialog box will appear.
@@ -394,7 +396,7 @@ We will start with a very simple formula.
 Returning to our application, everyone who is either employed or unemployed
 is in what economists call the "labour force." So let's add that variable.
 
-1. Enter "LabourForce" in cell H1 to name the variable.
+1. Enter **LabourForce** in cell H1 to name the variable.
    - Note that I avoid putting spaces in variable names. This is a habit of
      mine when working with data, because spaces can cause complications 
      when moving data across systems, e.g. from Excel to R.
@@ -443,15 +445,15 @@ Let's add a column for the labour force participation rate. To remind you,
 this is the proportion or percentage of the population (column C) that is in
 the labour force (column H).
 
-1. Enter "LFPRate" in cell I1 to name the variable.
-2. Enter "=H2/C2" in cell I2 to calculate the variable.
+1. Enter **LFPRate** in cell I1 to name the variable.
+2. Enter `=H2/C2` in cell I2 to calculate the variable.
 
 Let's also add a column for the unemployment rate.  To remind you, this is
 the proportion or percentage of the labour force (column H) that is
 unemployed (column E).
 
-3. Enter "UnempRate in cell J1 to name the variable.
-4. Enter "=E2/H2" in cell J2 to calculate the variable.
+3. Enter **UnempRate** in cell J1 to name the variable.
+4. Enter `=E2/H2` in cell J2 to calculate the variable.
 
 We can copy and paste the rest of the cells, but let's use Fill instead.
 
@@ -466,7 +468,7 @@ display format:
 
 5. Select cells I2:J11.
 6. Select `Home > Number Format` (it is a little drop down box that 
-   currently displays "General"), and then select "Percentage".
+   currently displays `General`), and then select `Percentage`.
 
 You will see that the cell now displays the rates in percentage, to
 two decimal places.  I think it would be more readable if we round to 
@@ -498,9 +500,10 @@ Excel has about 500 built-in functions that we can use in formulas.
 To use a function, you simply include its name and its arguments as 
 part of the formula.  For example, the `SQRT()` function takes a single
 numeric argument and returns the square root of the argument. So if
-you enter "=SQRT(2)" in a cell you will see 1.414, the square root of 2.
+you enter `=SQRT(2)` in a cell, the cell will display `1.414`, the 
+square root of 2.
 
-It also has extensive tools for 
+Excel also has extensive tools for 
 
 - finding the function you need for a particular calculation task
 - figuring out what arguments to use in the function.
@@ -511,7 +514,7 @@ We will now go through an example.
 
 Suppose we want to add a new variable for the (natural) log of population.
 
-1. Enter "LogPop" in cell K1 to give the variable a name.
+1. Enter **LogPop*8 in cell K1 to give the variable a name.
 2. Select cell K2.
 3. If we knew the name of the function for taking the natural log, we could
    just type in our formula.  But suppose we don't know the name of the function,
@@ -519,27 +522,27 @@ Suppose we want to add a new variable for the (natural) log of population.
    a. Click on the insert function button 
       ![insert function button](bin/Excel insert function button.jpg) 
       to the left of the formula bar.
-   b. The "Insert Function" dialog box will appear. It will have a 
+   b. The `Insert Function` dialog box will appear. It will have a 
       very long list of functions. You will want to narrow this list down,
       and you have several options for doing so:
-      - Search: Enter "logarithm in the `Search for a function` text box.
-      - Browse: Select "Math & Trig" from the `Or select a category`
+      - Search: Enter `logarithm` in the `Search for a function` text box.
+      - Browse: Select `Math & Trig` from the `Or select a category`
         drop-down box.
    c. Once you have narrowed the list down, it is easy to find the 
-      function you want (LN). Select `LN` from the `Select a function`
-      list box, and then select `OK`.You will now see the Function Arguments 
-      dialog box for the LN function.
-4. As you can see, the LN function takes one argument (the number you want 
-   the log of). You want to take the log of cell C2, so enter the text "C2" 
+      function you want (`LN`). Select `LN` from the `Select a function`
+      list box, and then select `OK`.You will now see the `Function Arguments`
+      dialog box for the `LN` function.
+4. As you can see, the `LN` function takes one argument (the number you want 
+   the log of). You want to take the log of cell C2, so enter the text `C2` 
    here or click on cell C2.
-   - the dialog box will display the value in cell C2 (3588700)
+   - the dialog box will display the value in cell C2 (`3588700`)
      as well as the calculated value for the log of cell
-     C2 (15.0933058).
+     C2 (`15.0933058`).
 6. Select `OK`.
 
-You will see that cell K2 now contains "=LN(C2)" which displays as 15.0933. 
+You will see that cell K2 now contains `=LN(C2)` which displays as `15.0933`. 
 Note that if you already knew the function and arguments you needed, you could 
-have just typed "=LN(C2)" into cell K2 instead.
+have just typed `=LN(C2)` into cell K2 instead.
 
 7. Copy/paste or fill the rest of the cells.
 
@@ -551,7 +554,7 @@ updated.
 
 #### Cell ranges {#cell-ranges}
 
-Some functions like SUM() and AVERAGE() operate on a ***range*** of cells
+Some functions like `SUM()` and `AVERAGE()` operate on a ***range*** of cells
 rather than a single cell or list of cells. A range is just a 
 rectangular set of cells, and is described by its upper-left and lower-right 
 cells, separated by a colon (":"). For example:
@@ -563,15 +566,15 @@ cells, separated by a colon (":"). For example:
 Suppose we want to create a new variable that reports the total population
 across all observations in the data. The function to do that is SUM(). 
 
-1. Enter "TotPop" in cell L1 to give the variable a name,
-2. Enter "=SUM(C2:C11)" in cell L2.  
+1. Enter **TotPop** in cell L1 to give the variable a name,
+2. Enter `=SUM(C2:C11)` in cell L2.  
 
 Cell L2 should display `31,275,600` which is indeed the sum of 
 cells C2 to C11.
 
 #### Absolute references {#absolute-references}
 
-Let's complete our TotPop variable by copy/pasting or filling cell L2 
+Let's complete our **TotPop** variable by copy/pasting or filling cell L2 
 to the remaining cells in column L.  You will notice something 
 strange: the other cells don't show the same number as cell L2.  
 Why is this?
@@ -585,10 +588,10 @@ of C2:C11 like we want.
 
 To fix this, we need to tell Excel that we want certain references 
 to be treated as absolute rather than relative.
-To do that, we add the character "$" before each such reference.
+To do that, we add the character `$` before each such reference.
 
 1. Go back to cell L2.
-2. Change "=SUM(C2:C11)" to "=SUM(C$2:C$11)".
+2. Change `=SUM(C2:C11)` to `=SUM(C$2:C$11)`.
    - Notice that the value in this cell does not change.
 3. Copy/paste or fill cell L2 into cells L3:L11.
    - Notice that all cells in this column display the same contents
@@ -609,18 +612,18 @@ to use for the ranking.  We want the first argument (the province's population)
 to vary across provinces, but we want the list of values (the populations of
 all of the provinces) to stay the same.
 
-1. Enter "PopRank" in cell M1 to give the variable a name.
+1. Enter **PopRank** in cell M1 to give the variable a name.
 2. Select cell M2.
-3. Use the Insert Function tool to access the arguments for RANK.EQ(). Enter
-   the appropriate arguments and press "OK":
-   - Number is the number we wish to rank: enter C2 for Alberta's population.
-   - Ref is the set of values we want to rank within: enter the range `C$2:C$11`
+3. Use the `Insert Function` tool to access the arguments for `RANK.EQ()`. Enter
+   the appropriate arguments and select `OK`:
+   - `Number` is the number we wish to rank: enter C2 for Alberta's population.
+   - `Ref` is the set of values we want to rank within: enter the range `C$2:C$11`
      for the list of all provinces' populations.
-   - Order is an optional argument: leave it blank.
+   - `Order` is an optional argument: leave it blank.
 4. Copy/paste or fill cell M2 into cells M3:M11.
 
 As you can see, Excel displays the correct ranks. We can check this by sorting
-on Population and seeing if PopRank is also sorted.
+on **Population** and seeing if **PopRank** is also sorted.
 
 ::: fyi
 **Advanced options**
@@ -646,8 +649,8 @@ Excel has tools for entering, storing and processing these data types.
 
 ### Text data {#text-data}
 
-The `Province` column contains text data, also called "character" data or
-"string" data. 
+The **Province** column contains ***text data***, also called
+***character data*** or ***string data***. 
 
 Text values can be entered directly in a cell, can be used in 
 a formula, and can be the result of a formula. 
@@ -656,7 +659,7 @@ For example, the `CONCAT()` function allows you to join (concatenate)
 two or more strings. Let's use that function to create a sentence
 that describes our data as if it we were writing a written report.
 
-1. Enter "Description" in cell N1 to name the variable
+1. Enter **Description** in cell N1 to name the variable
 2. Enter `=CONCAT(C2," people live in ",B2)` in cell N2. 
    - The cell should display `3588700 people live in Alberta`
 3. Copy/paste/fill in cells N3:N11.
@@ -689,7 +692,7 @@ There are many useful functions to manipulate text strings in Excel:
 ### Logical data {#logical-data}
 
 In addition to text and numbers, cells can also contain ***logical***
-values (TRUE or FALSE). Logical data is also called "Boolean" data.
+values (`TRUE` or `FALSE`). Logical data is also called "Boolean" data.
 
 Logical values can be entered directly in a cell, can be used in 
 a formula, and can be the result of a formula.
@@ -698,8 +701,8 @@ To see how the logical values work, let's create a variable that
 indicates whether a province has a labour force participation
 rate below 64%.
 
-1. Enter "LowLFP" in cell O1 to name the variable.
-2. Enter "=(I2 < 0.64) in cell O2.
+1. Enter **LowLFP** in cell O1 to name the variable.
+2. Enter `=(I2 < 0.64)` in cell O2.
    - Notice that `(I2 < 0.64)` is a *statement* that is either
      true or false, not a numeric expression.
    - Logical statements can use other comparison operators, 
@@ -719,8 +722,8 @@ variable.  An indicator variable is the numerical version of a logical
 variable: it takes on the value 1 if a particular statement
 is true, and 0 if the statement is false.
 
-1. Enter "LowLFPInd" in cell P1 to name the variable.
-2. Enter "=IF(I2 < 0.64,1,0)" in cell P2.
+1. Enter **LowLFPInd** in cell P1 to name the variable.
+2. Enter `=IF(I2 < 0.64,1,0)` in cell P2.
 3. Copy/paste or fill cell P2 into cells P3:P11.
 
 As you can see, the cells display `1` in the three provinces 
@@ -731,10 +734,10 @@ variables.
 ::: fyi
 **Advanced options**
 
-- `NOT()` returns TRUE if its argument is FALSE and 
-   FALSE if its argument is TRUE.
-- `AND()` returns TRUE if *all* of its arguments are TRUE.
-- `OR()` returns TRUE if *any* of its arguments are TRUE.
+- `NOT()` returns `TRUE` if its argument is `FALSE` and 
+   `FALSE` if its argument is `TRUE`.
+- `AND()` returns `TRUE` if *all* of its arguments are `TRUE`.
+- `OR()` returns `TRUE` if *any* of its arguments are `TRUE`.
 - `SWITCH()` and `IFS()` are extensions of `IF()` that take 
    multiple conditions.
 :::
@@ -784,14 +787,14 @@ Excel will store `11/1/2020  12:00:00 PM` as day number `44136.5`
 and `11/1/2020  1:00:00 PM` as day number `44136.5416666667`. 
 :::
 
-To see how this all works, let's go back to the `MonthYr` variable
+To see how this all works, let's go back to the **MonthYr** variable
 in column G.
 
 1. Select cell G2. Notice that (at least on my computer):
    - The cell displays `Nov-20`
    - The formula bar displays `11/1/2020`.
 2. To see how Excel sees this date, change the cell's number format 
-   from "Custom" (on your computer it might be "Date") to "General"
+   from `Custom` (on your computer it might be `Date`) to `General`
    - Now the cell displays `44136`.
 
 Now while a date of 44136 is quite clear to Excel, we want to display
@@ -801,22 +804,21 @@ November 20. So let's change the formatting:
 
 3. Select cells G2:G11.
 4. Select `Number Format > Short Date`.
-   - You can see even more options if you select "More number formats"
+   - You can see even more options if you select `More number formats`
 
 We can also do calculations with dates, and there are various functions
 using dates. For example, let's calculate how long ago November 2020 
 was:
 
-1. Enter "Today" in cell Q1 to name the variable
+1. Enter **Today** in cell Q1 to name the variable
 2. Enter `=TODAY()` in cell Q2 to put in today's date.
    - This will display today's date.
    - Tomorrow, the cell will display tomorrow's date.
-3. Enter "HowLongAgo" in cell R1.
+3. Enter **HowLongAgo** in cell R1.
 4. Enter `=Q2-G2` in cell R2.
    - This will display the number of days that have passed between
       November 1, 2020 and today.
 5. If you have not already done so, save your data file.
-
 
 ::: fyi
 Most of the time, Excel's handling of dates works seamlessly and is

@@ -161,7 +161,8 @@ PDF:
             0 & a \notin \{-1,35\} \\
           \end{cases}$$
 Figure \@ref(fig:RoulettePDF) below shows these three PDFs.
-```{r RoulettePDF, fig.cap = "PDFs for the roulette example"}
+
+```{r RoulettePDF, fig.cap = "*PDFs for the roulette example*"}
 RoulettePDF <- tibble(a = seq(from = -2, to= 36),
                       fb = c(0, 0, rep(1/37, times = 37)),
                       fred = c(0, 19/37, 0, 18/37, rep(0, times=35)),
@@ -307,7 +308,7 @@ in the support.
                 \end{cases}$$
 
 Figure \@ref(fig:RouletteCDF) below graphs these CDFs. 
-```{r RouletteCDF, fig.cap = "CDFs for the roulette example"}
+```{r RouletteCDF, fig.cap = "*CDFs for the roulette example*"}
 RouletteCDF <- RoulettePDF %>%
     mutate (Fb = cumsum(fb)) %>%
     mutate (Fred = cumsum(fred))%>%
@@ -387,7 +388,7 @@ distribution. What that means is that:
 The CDF of the standard uniform distribution is:
   $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
 Figure \@ref(fig:UniformCDF) below shows the CDF of the standard uniform distribution. 
-```{r UniformCDF, fig.cap = "CDF for the standard uniform distribution"}
+```{r UniformCDF, fig.cap = "*CDF for the standard uniform distribution*"}
 UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
                       Fa=punif(seq(from=-2,to=2,length.out=100)),
                       fa=dunif(seq(from=-2,to=2,length.out=100)))
@@ -423,7 +424,7 @@ derivative of its CDF:
 The PDF of a standard uniform random variable is:
   $$f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}$$
 which looks like this:
-```{r UniformPDF, fig.cap = "PDF for the standard uniform distribution"}
+```{r UniformPDF, fig.cap = "*PDF for the standard uniform distribution*"}
 ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
   geom_step(col = "blue") +
   geom_text(x=1.25,y=0.8,col="blue",label="f_x(a)") +

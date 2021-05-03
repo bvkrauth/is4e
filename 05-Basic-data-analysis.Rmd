@@ -162,7 +162,7 @@ To set up the table:
 1. Create a new blank worksheet
    - You can do this by clicking on the !["+"](bin/AddWorksheetButton.png) button at the 
      bottom of the screen.
-2. Rename the worksheet "Summary Statistics"
+2. Rename the worksheet *Summary Statistics*
    - You can do this by double-clicking on the tab for your new worksheet. A
      dialog box will open for you to enter the new name.
 3. Fill in the first column (cells A1:A9) as in the table above.
@@ -178,11 +178,11 @@ pull the variable names in from the original data set.
 To fill in the variable name for column B:
 
 1. Go to cell B1. 
-2. Type "=" but *don't* hit `<enter>` yet.
-3. Click on the tab for the "Data for Analysis" worksheet, and 
-   then click on cell G1 in the Data for Analysis worksheet.
+2. Type `=` but *don't* hit `<enter>` yet.
+3. Select the tab for the *Data for Analysis* worksheet, and 
+   then select cell G1 in the *Data for Analysis* worksheet.
    - The formula bar now says `='Data for Analysis'!G1`
-4. Hit `<enter>`. 
+4. Select `<enter>`. 
    - You should now be back in cell B1 in the Summary statistics worksheet.
    - Cell B1 should display "UnempRate" (the contents of cell G1 in Data 
      for Analysis).
@@ -471,14 +471,14 @@ Let's create the following table for the unemployment rate variable:
 | 10.0% |  15.0% |       |            |
 | 15.0% | 100.0% |       |            |
 
-where **Count** is the number of observations for UnempRate that 
+where **Count** is the number of observations for **UnempRate** that 
 are greater than that row's *From* value and less than or equal to
 the row's *To* value, and *Percentage* is the count as a percentage
 of the total.  We start by setting up the table:
 
-1. Create a new sheet titled "Unemployment frequency"
+1. Create a new sheet titled *Unemployment frequency*
 2. Copy the first row and first two columns from the table above.
-   - Enter the From and To values as decimals (0 to 1) and display 
+   - Enter the **From** and **To** values as decimals (0 to 1) and display 
      them as percentages (0% to 100%).
   
 Next, we fill in the first count in cell C2.  This will be a somewhat
@@ -542,7 +542,7 @@ graphs.
 
 ### Charts in Excel
 
-Excel calls graphs "charts."  Excel charts have three main
+Excel calls graphs ***charts***.  Excel charts have three main
 components:
 
 1. The ***data source***.  This is the table containing the data
@@ -579,8 +579,8 @@ graph that looks like this:
 
 ![Time series graph of UnempRate](bin/TimeSeriesGraphFinal.png)
 
-In Excel, time series graphs can be implemented using either the *Line*
-chart type or the *Scatter* chart type.  Line graphs are simpler, so we
+In Excel, time series graphs can be implemented using either the Line
+chart type or the Scatter chart type.  Line graphs are simpler, so we
 will start with that.  We will learn how to make scatter plots in
 Chapter \@ref(using-r).
 
@@ -592,7 +592,7 @@ source and graph type.
 
 We want to create a time series graph for our variable **UnempRate**.
 
-1. Select any cell in the "Data for analysis" table.
+1. Select any cell in the *Data for analysis* table.
 2. Select `Insert > Recommended Charts` from the menu.
 3. The dialog box will show a few recommended charts.  None of them are what
    we want, so select the `All Charts` tab at the top to see the full set
@@ -610,7 +610,7 @@ one variable, so let's get rid of the others:
 1. Select `Design > Select Data` which will open the `Select Data Source`
    dialog box.
 2. Uncheck the checkbox next to every series in the "Legend Entries (Series)"
-   box except UnempRate.
+   box except **UnempRate**.
 
 ![Time graph series of UnempRate](bin/TimeSeriesGraphInitial.png) 
 
@@ -678,7 +678,7 @@ this is.
 
 1. Select the title.
 2. Type in the new title, and hit the `<enter>` key.
-   - I went with the title "Canadian unemployment, 1976-present"
+   - I went with the title **Canadian unemployment, 1976-present**
    - I also made it **boldface**.
 
 Next, let's modify the horizontal axis to be a little less busy.
@@ -717,8 +717,7 @@ Finally, we want to add alt text for the visually impaired.
 2. Select `Format > Alt Text`. The Alt Text dialog box will open 
    to the right.
 3. Enter the alt text in the box.
-   - I used "Graph of Canadian unemployment rate from January 1976 to
-     present."
+   - I used *Graph of Canadian unemployment rate from January 1976 to present.*
 
 The graph will now look like the one above. The graph here is visually clean
 and simple, in part because I left out many elements that I could have included: 
@@ -742,7 +741,7 @@ not misleading.
 Data visualization skills are valuable in the academic world and in
 the professional world.  If you are interested in developing your
 skills further, you might consider our course
-ECON 334: Data Visualization and Economic Analysis.
+ECON 334: *Data Visualization and Economic Analysis*.
 
 You might also get a book on data visualization, either Kieran 
 Healy's *Data Visualization* or Cole Nussbaumer Knaflic's 
@@ -769,12 +768,12 @@ in the Column chart type.
 ::: example
 **A bar graph of the Party variable**
 
-To construct a bar graph of the Party variable:
+To construct a bar graph of the **Party** variable:
 
-1. Select any cell in the "Party control" worksheet.
+1. Select any cell in the *Party control* worksheet.
 2. Select `Insert > Recommended Charts` from the menu.
-3. Select the "All Charts" tab to see the full list of options.
-4. Select "Column" and then select `OK`.  
+3. Select the `All Charts` tab to see the full list of options.
+4. Select `Column` and then select `OK`.  
 
 The graph will look something like this:
 
@@ -815,16 +814,16 @@ graph:
 1. Change the title.
 2. Remove the gridlines.
 3. Remove the legend.
-4. Add the vertical axis title "Months in control" to clarify the units.
+4. Add the vertical axis title **Months in control** to clarify the units.
 
 Another thing we can do is use color and branding to convey
 information: each major Canadian political party has a distinctive
 color as part of its brand: red for the Liberals, blue for the 
 Conservatives, and orange for the NDP.
 
-1. Double-click on the "Liberal" bar.
+1. Double-click on the Liberal bar.
 2. Change its color to red.
-3. Double-click on the "Conservative" bar
+3. Double-click on the Conservative bar
 4. Change its color to blue.  The conservatives use two shades 
    of blue, so pick whichever one you like best.
 
@@ -840,8 +839,8 @@ eye do any extra work, let's put those labels on top.
    appear above the bars, and the `Format Data Labels` box will appear
    to the right.
 3. Select `Label options` from the dialog box.
-4. Uncheck "Value" and check "Category Name". The category names
-   "Liberal" and "Conservative" will now appear above the respective
+4. Uncheck `Value` and check `Category Name`. The category names
+   Liberal and Conservative will now appear above the respective
    bar.
 5. Select `Chart Design > Add Chart Element > Axes > Primary Horizontal`
    to eliminate the category names from the bottom of each bar.
@@ -864,7 +863,7 @@ to be misleading.
 ::: example
 **Why bar graphs should always start at zero**
 
-Suppose we start our Party bar graph at 200 rather than 
+Suppose we start our **Party** bar graph at 200 rather than 
 zero.  We will get this:
 
 ![Bar graph for Party, starting at 200](bin/BarGraphNonzeroOrigin.png)
@@ -908,7 +907,7 @@ The histogram is a built-in chart type in Excel.
 
 To construct a histogram of the **UnempRate** variable:
 
-1. Select column G in the "Data for Analysis" worksheet.
+1. Select column G in the *Data for Analysis* worksheet.
    - Notice that for the other charts we could just select any
      cell in this worksheet.  For some reason, this won't work
      with the histogram chart type.
@@ -955,8 +954,8 @@ lot of bins makes the horizontal axis very busy and difficult to read. One
 alternative that will help is to fix the bin *size* at some nice
 round number like 1% (0.01) or 0.5% (0.005).
 
-1. Select or double-click on the horizontal axis to open the "Format Axis"
-   box.
+1. Select or double-click on the horizontal axis to open the 
+   `Format Axis` box.
 2. Select `Axis Options`.
 3. Select `Bin width` and change the number to 0.01.
 
@@ -977,10 +976,10 @@ various elements to bring this histogram closer to presentation quality.
 
 To enhance the quality of this histogram:
 
-1. Add/modify the title to "Histogram of the Canadian unemployment rate, 
-   1976-present"
-2. Add the horizontal axis title "Unemployment rate"
-3. Add the vertical axis title "# of months"
+1. Add/modify the title to 
+   **Histogram of the Canadian unemployment rate, 1976-present**
+2. Add the horizontal axis title **Unemployment rate**
+3. Add the vertical axis title **# of months**
 
 Our final histogram will look like this:
 

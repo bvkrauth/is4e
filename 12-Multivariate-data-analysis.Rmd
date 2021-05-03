@@ -28,7 +28,7 @@ In this chapter, we will learn how to:
 - Calculate and interpret the sample covariance and correlation.
 - Interpret frequency tables, cross-tabulations and conditional 
   averages
-- Construct Excel pivot tables, including frequency tables,
+- Construct Excel Pivot Tables, including frequency tables,
   cross-tabulations, and conditional averages.
 - Interpret scatter plots, binned-mean plots, smoothed-mean
   plots, and linear regression plots.
@@ -110,7 +110,7 @@ since $cov(x,y) = cov(y,x)$.  In addition, the diagonal elements
 of the covariance matrix are $cov(x,x) = var(x)$ and the diagonal
 elements of the correlation matrix are $cor(x,x) = 1$.
 
-Every variable's correlation with *AnnPopGrowth* is `NA`, so we will
+Every variable's correlation with **AnnPopGrowth** is `NA`, so we will
 want to exclude `NA` values from the calculation.  Excluding missing
 values is more complicated for covariance and correlation matrices because
 there are two different ways to exclude them:
@@ -149,20 +149,20 @@ functions.
 
 ##  Pivot tables
 
-Excel's ***pivot tables*** are a powerful tool for the analysis of
+Excel's ***Pivot Tables*** are a powerful tool for the analysis of
 frequencies, conditional averages, and various other aspects of the 
 data.  They are somewhat tricky to use, and we will only scratch
 the surface here. But the more comfortable you can get with them,
 the better.
 
-The first step is to create a blank pivot table that is tied to a 
-particular data table.  We can create as many pivot tables as we
+The first step is to create a blank Pivot Table that is tied to a 
+particular data table.  We can create as many Pivot Tables as we
 want.
 
 ::: example
-**Creating a blank pivot table**
+**Creating a blank Pivot Table**
 
-To create a blank pivot table based on the employment data:
+To create a blank Pivot Table based on the employment data:
 
 1. Open the *Data for Analysis* worksheet in 
    [EmploymentData.xlsx](https://canvas.sfu.ca/files/15624202/)
@@ -176,25 +176,25 @@ To create a blank pivot table based on the employment data:
 Excel will open a new worksheet that looks like this:
 
   ![A worksheet with a new Pivot Table](bin/PivotTableSheet.png)
-The pivot table itself is on the left side of the new worksheet.
+The Pivot Table itself is on the left side of the new worksheet.
 :::
 
-The next step is to add elements to the table.  There are various tools available
-to do that: 
+The next step is to add elements to the table.  There are various tools 
+available to do that: 
 
 - the `Pivot Table Fields` box on the right side of the screen
 - the `PivotTable Analyze` menu
 - the `Design` menu.  
 
 These tools only appear in context, so they will disappear if you click a cell 
-outside of the pivot table. You can fix this by just clicking any cell in the 
-pivot table.
+outside of the Pivot Table. You can fix this by just clicking any cell in the 
+Pivot Table.
 
 ### Simple frequencies
 
-The simplest application of a pivot table is to construct a table of frequencies. By
-default, pivot tables report ***absolute frequencies*** - a count of the *number*
-of times we observe a particular value in the data.
+The simplest application of a Pivot Table is to construct a table of 
+frequencies. By default, Pivot Tables report ***absolute frequencies*** - 
+a count of the *number* of times we observe a particular value in the data.
 
 :::example
 **A simple frequency table**
@@ -202,18 +202,18 @@ of times we observe a particular value in the data.
 To create a simple frequency table showing the number of months in
 office for each Canadian prime minister:
 
-1. Check the box next to `PrimeMinister`. The pivot table will look 
+1. Check the box next to **PrimeMinister**. The Pivot Table will look 
    like this:
 
    ![A list of prime ministers](bin/PrimeMinisterList.png)
 
-2. Drag "MonthYr" into the box marked "$\Sigma$ values". The pivot table will now 
-   look like this:
+2. Drag **MonthYr** into the box marked "$\Sigma$ values". The Pivot Table 
+   will now look like this:
 
    ![Number of months served by each prime minister](bin/PrimeMinisterCounts.png)
 
 As we can see, the table shows the number of observations for each value of the
-*PrimeMinister* variable, which also happens to be the number of months in
+**PrimeMinister** variable, which also happens to be the number of months in
 office for each prime minister. It also shows a grand total.
 :::
 
@@ -228,17 +228,18 @@ of the corresponding relative probability.
 To add a relative frequency column, we first need to add a second absolute
 frequency column:
 
-1. In the PivotTable Fields box, drag MonthYr to the "$\Sigma$ values" box.
+1. In the PivotTable Fields box, drag **MonthYr** to the "$\Sigma$ values" box.
 
    ![Two absolute frequencies](bin/PrimeMinisterCounts2.png)
 
 Then we convert it to a relative frequency column:
 
-2. Right-click on the "Count of MonthYr2" column, and select `Value Field Settings...`.
+2. Right-click on the "Count of MonthYr2" column, and select 
+   `Value Field Settings...`.
 
    ![Value Field Settings dialog box](bin/ValueFieldSettings.png)   
 3. Click on the `Show Values As` tab and select "% of Column Total" from
-   the Show Values As drop-down box.
+   the `Show Values As` drop-down box.
 4. Select `OK`.
 
 The third column will now show the number of observations as a percentage of
@@ -258,11 +259,11 @@ can be expressed in terms of absolute frequency, relative frequency, or both.
 :::example
 **An absolute frequency table**
 
-Starting with a blank pivot table:
+Starting with a blank Pivot Table:
 
-1. Drag PrimeMinister into the Rows box.
-2. Drag Party into the Columns box.
-3. Drag MonthYr into the $\Sigma$ values box.
+1. Drag **PrimeMinister** into the Rows box.
+2. Drag **Party** into the Columns box.
+3. Drag **MonthYr** into the $\Sigma$ values box.
 
 You will now have this table of absolute frequencies:
 
@@ -319,7 +320,7 @@ For example, Brian Mulroney's 104 months as prime minister represent
 
 ### Conditional averages
 
-We can also use pivot tables to report ***conditional averages***. A
+We can also use Pivot Tables to report ***conditional averages***. A
 conditional average is just the average of one variable, taken within a
 sub-population defined by another variable.  For example, we might be interested
 in average earnings for men in Canada versus average earnings for women.  
@@ -333,11 +334,11 @@ men.
 **Adding a conditional average**
 
 Suppose we want to add the average unemployment rate during
-each prime minister's time in office to this pivot table:
+each prime minister's time in office to this Pivot Table:
 
 ![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png) 
 
-1. Drag "UnempRate" into the box marked "$\Sigma$ values".  The table will 
+1. Drag **UnempRate** into the box marked "$\Sigma$ values".  The table will 
    now look like this:
 
    ![Sum of UnempRate](bin/UnempRateSum.png) 
@@ -347,7 +348,7 @@ each prime minister, but instead we see the *sum* of unemployment
 rates for each prime minister.  To change this:
 
 3. Right-click "Sum of UnempRate", then select `Value Field Settings...`.
-4. Select "Average"
+4. Select `Average`
 
 The table now looks like this:
 
@@ -361,17 +362,17 @@ later.
 In addition to conditional averages, we can report other conditional statistics 
 including variances, standard deviations, minimum, and maximum.
 
-### Modifying a pivot table
+### Modifying a Pivot Table
 
-As you might expect, we can modify pivot tables in various ways to make them 
+As you might expect, we can modify Pivot Tables in various ways to make them 
 clearer, more informative, and more visually appealing.
 
 As with other tables in Excel, we can filter and sort them.  Filtering
-is particularly useful with pivot tables since there are often categories
+is particularly useful with Pivot Tables since there are often categories
 we want to exclude.
 
 :::example
-**Filtering a pivot table**
+**Filtering a Pivot Table**
 
 There is no Canadian prime minister named "Transfer." If you recall, we used
 that value to represent months in the data where the prime minister
@@ -395,13 +396,13 @@ By default, the table is sorted on the row labels, but we can sort on any
 column.
 
 :::example
-**Sorting a pivot table**
+**Sorting a Pivot Table**
 
 To sort our table by months in office:
 
 1. Click on ![Row Labels button](bin/RowLabelsButton.png) and the 
    sort and filter menu will appear.
-2. Select `More sort options`; the pivot table sort dialog box will appear:
+2. Select `More sort options`; the Pivot Table sort dialog box will appear:
 
    ![Pivot table sort](bin/PTSort.png) 
 3. Select the `Descending (Z to A)` radio button and "Count of MonthYr" 
@@ -438,16 +439,16 @@ reporting the unemployment rate in percentage terms and fewer decimal places:
 
 Our final table looks like this:
 
-![Final pivot table](bin/PivotTableFinal.png)  
+![Final Pivot Table](bin/PivotTableFinal.png)  
 :::
 
-Finally, we can use pivot tables to create graphs.
+Finally, we can use Pivot Tables to create graphs.
 
 ::: example
-**A pivot table graph**
+**A Pivot Table graph**
 
 To create a simple bar graph depicting months in office, we start by
-cleaning up the pivot table so that it shows the data we want to
+cleaning up the Pivot Table so that it shows the data we want to
 represent:
 
 1. Select any cell in this table.
@@ -477,7 +478,7 @@ As always, there are various ways we could customize this graph to
 be more attractive and informative.
 :::
 
-You can download the full set of pivot tables and associated charts 
+You can download the full set of Pivot Tables and associated charts 
 generated in this chapter at [EmploymentDataPT.xlsx](https://canvas.sfu.ca/files/15624691/).
 
 ## Graphical methods
@@ -606,8 +607,8 @@ produces less satisfactory results.
 ### Binned averages
 
 In section \@ref(conditional-averages) we calculated a conditional average
-of the (continuous) variable *UnempRate* for each observed value of the 
-discrete variable *PrimeMinister*.  When both variables are continuous,
+of the (continuous) variable **UnempRate** for each observed value of the 
+discrete variable **PrimeMinister**.  When both variables are continuous,
 this isn't such a good idea: there are as many values of each variable
 as there are observations, so the "conditional average" ends up just
 being the original data

@@ -61,9 +61,9 @@ that everything is the way that we want it:
 - The two text variables are both stored as `col_character()`.  
   - This means character or text string
   - This is what we want.
-- The *MonthYr* variable is also stored as `col_character()`.  
+- The **MonthYr** variable is also stored as `col_character()`.  
   - This is *not* what we want.  
-  - We will want *MonthYr* to be stored explicitly as a date 
+  - We will want **MonthYr** to be stored explicitly as a date 
     variable, so we make a note of that issue here and will 
     fix it later.
 
@@ -110,9 +110,9 @@ show an abbreviated version of the table.
 We can also see the whole table by executing the command `View(EmpData)` or
 through RStudio:
 
-1. Go to the **Environment** tab in the upper right window.
+1. Go to the *Environment* tab in the upper right window.
    - You will see a list of all variables currently in memory,
-     including `EmpData`.
+     including **EmpData**.
 2. Double-click on `EmpData`.
 
 You will see a spreadsheet-like display of `EmpData`. As in Excel, you can sort
@@ -159,7 +159,7 @@ a convenient Tidyverse tool called the "pipe" operator.
 #### The pipe operator
 
 The ***pipe operator*** is part of the Tidyverse and is written `%>%`. Recall 
-that an operator is just a symbol like "+" or "*" that performs some function
+that an operator is just a symbol like `+` or `*` that performs some function
 on whatever comes before it and whatever comes after it.
 
 To see how it works, I'll show you a few examples:
@@ -186,19 +186,19 @@ as we will see in the examples below.
 
 The most important data transformation function is ***mutate***, which 
 allows us to change or add variables.  We will start by changing 
-the *MonthYr* variable from character (text) to date, using the `as.Date()`
+the **MonthYr** variable from character (text) to date, using the `as.Date()`
 function: 
 ```{r MutateChangeMonthYr}
 # Change MonthYr to date format
 EmpData %>% 
   mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y"))
 ```
-As you can see, the *MonthYr* column is now labeled as a date rather than text. Like
+As you can see, the **MonthYr** column is now labeled as a date rather than text. Like
 Excel, R has an internal representation of dates that allows for correct ordering
 and calculations, but displays dates in a standard human-readable format.
 
 Mutate can be used to add variables as well as changing them.  For example,
-suppose we also want to create versions of *UnempRate* and *LFPRate* that
+suppose we also want to create versions of **UnempRate** and **LFPRate** that
 are expressed in percentages rather than decimal units:
 ```{r MutateAddUnempPct}
 # Add UnempPct and LFPPct
@@ -206,16 +206,17 @@ EmpData %>%
   mutate(UnempPct = 100*UnempRate) %>% 
   mutate(LFPPct = 100*LFPRate)
 ```
-If you look closely, you can see that the *UnempPct* and *LFPPct* variables are
-now included in the data table.
+If you look closely, you can see that the **UnempPct** and **LFPPct**
+variables are now included in the data table.
 
-Before we go any further, note that we haven't yet changed the `EmpData` data 
-table:
+Before we go any further, note that we haven't yet changed the 
+`EmpData` data table:
 ```{r PrintEmpDataAgain}
 print(EmpData)
 ```
-As you can see, the *MonthYr* variable is still listed as a character variable and
-the new *UnempPct* and *LFPPct* variables do not seem to exist.
+As you can see, the **MonthYr** variable is still listed as a character
+variable and the new **UnempPct* and **LFPPct* variables do not seem to
+exist.
 
 What has happened here?  Our original commands simply created a *new* object *based*
 on `EmpData` that was then displayed on the screen.  In order to change `EmpData`
@@ -481,7 +482,7 @@ ggplot(data = EmpData,
 
 #### Color 
 
-Using color: you can change the color of any geometric element
+You can change the color of any geometric element
 using the `col=` argument:
 ```{r ggplotColor}
 ggplot(data = EmpData,
@@ -521,7 +522,7 @@ A few things to note here:
   overrides the aesthetics in the first line.  
 - We have used color to differentiate the two lines, but there is no legend 
   to tell the reader which line is which.  We will need to fix that.
-- The vertical axis is labeled "UnempPct". We will need to fix that.
+- The vertical axis is labeled **UnempPct**. We will need to fix that.
 
 We could add a legend here, but it is better (and friendlier to the color-blind)
 to just label the lines. We can use the `geom_text` geometry to do this:

@@ -94,10 +94,10 @@ Suppose you decide you want to say "Hello [your name]!" instead of
 "Hello world", and you don't want to type in the whole command. Then
 you can:
 
-1. Press the up-arrow key in the **Console** window to show the most recently 
+1. Press the up-arrow key in the *Console* window to show the most recently 
   executed command. If you press it a second time it gives you the 
   command before that, and so on.
-2. Look at the to the **History** window in the upper right corner to see
+2. Look at the to the *History* window in the upper right corner to see
    a full list of recently executed commands.  You can double-click on 
    any command in the window to copy it to the Console window.
 
@@ -127,7 +127,7 @@ To create an R script
 3. Enter another valid command in the second line of the file,
    for example `print("Goodbye world?")`
 4. Select `File > Save` to save your file.
-   - Name it "Chapter10Example.R"
+   - Name it *Chapter10Example.R*
 
 To run your script:
 
@@ -263,18 +263,18 @@ would like to highlight a few that may seem useful.
 
 In the lower right window:
 
-- The **Files** tab gives you easy access to files in the current 
+- The *Files* tab gives you easy access to files in the current 
   active folder.
-- The **Plots** tab will display plots, when you create them.
-- The **Packages** tab is useful for managing packages (more
+- The *Plots* tab will display plots, when you create them.
+- The *Packages* tab is useful for managing packages (more
   on them later)
-- The **Help** tab allows you to access R's help system.
+- The *Help* tab allows you to access R's help system.
   
 In the upper right window
 
-- The **Environment** tab allows you to view all currently-defined
+- The *Environment* tab allows you to view all currently-defined
   variables and their values.
-- The **History** tab shows the command history.
+- The *History* tab shows the command history.
 
 In the menu:
 
@@ -388,7 +388,7 @@ types:
 
 - text strings 
 - numbers 
-- logical values (either TRUE  or FALSE)
+- logical values (either `TRUE`  or `FALSE`)
   
 The elements of an atomic vector need to be all part of the same 
 atomic type; a single vector cannot contain both strings and numbers,
@@ -442,7 +442,7 @@ print(x)
 ```
 
 You can also provide logical values instead of numeric indices. R will then 
-operate on those elements whose corresponding item has the value TRUE:
+operate on those elements whose corresponding item has the value `TRUE`:
 ```{r LogicalSelectionExample}
 print(evens)
 # This creates a vector of the same length as evens, that contains TRUE
@@ -545,7 +545,7 @@ Let's get to know the main features of functions in R by considering the
 create a vector with a sequence of numbers, much like Excel's *Series*
 tool.
 
-1. Every function has a name. 
+1. Every function has a name.
    - In our example, the function's name is `seq`.
 2. You can obtain help on any function by entering `?` and its name
    in the console window
@@ -730,13 +730,14 @@ Then we need to figure out how to accomplish each step using R:
    x <- seq(from=-4,to=4,length.out=10)
    print(x)
    ```
-   Note that I've picked only 10 points here so that our code is easy to check.
+   Note that I've picked only 10 points here so that our code is easy
+   to check.
 2. The next step is to calculate the standard normal PDF at each of these 
    points. R is a program for statisticians, so it presumably has that PDF
    available as a built-in function. But what if we don't know its name? 
    We can just Google "normal pdf in r" and click on a page or two to find 
    out that the function we need is called `dnorm()`. 
-   ```{r}
+   ```{r DnormExample}
    p <- dnorm(x)
    print(p)
    ```
@@ -744,11 +745,11 @@ Then we need to figure out how to accomplish each step using R:
    could guess that the function for creating plots is called `plot()`
    and try something out. Don't be scared to try things out, nothing
    bad could possibly happen here.
-   ```{r}
+   ```{r PlotExample}
    plot(x,p)
    ```
-   You will see this plot in the "plots" tab in the lower right corner of your 
-   screen.
+   You will see this plot in the *Plots* tab in the lower right corner
+   of your screen.
 
 Well, that's not too bad, but we might want to make some improvements:
 
@@ -759,7 +760,7 @@ Well, that's not too bad, but we might want to make some improvements:
 So we can read through the documentation for the `plot()` function,
 try a few things out, and we can produce a much prettier graph
 by just adding a few options:
-```{r PlotExample}
+```{r FancyPlotExample}
 x <- seq(from = -4, to = 4, length.out = 1000)
 p <- dnorm(x)
 plot(x, p, 
