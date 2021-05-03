@@ -1,4 +1,4 @@
-# Multivariate data analysis
+# Multivariate data analysis {#multivariate-data-analysis}
 
 ```{r setup12, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,

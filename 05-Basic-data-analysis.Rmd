@@ -1,4 +1,4 @@
-# Basic data analysis with Excel
+# Basic data analysis with Excel {#basic-data-analysis-with-excel}
 
 In chapter \@ref(basic-data-cleaning-with-excel), we learned how to obtain and clean a
 simple data set. The next step is to learn some tools for analyzing it. We

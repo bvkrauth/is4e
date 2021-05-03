@@ -1,4 +1,4 @@
-# Data and sampling
+# Data and sampling {#data-and-sampling}
 
 ```{r setup6, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,

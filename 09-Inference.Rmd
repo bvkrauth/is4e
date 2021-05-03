@@ -1,4 +1,4 @@
-# Statistical inference
+# Statistical inference {#statistical-inference}
 
 ```{r setup9, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,

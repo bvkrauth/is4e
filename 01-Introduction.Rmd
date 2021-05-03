@@ -1,4 +1,4 @@
-# Introduction
+# Introduction {#introduction}
 
 ::: goals
 **Chapter goals**
@@ -9,7 +9,7 @@ In this chapter we will:
  - Gather resources and tools, including all needed computer software.
 :::
 
-## Course goals and context
+## Course goals and context {#course-goals-and-context}
 
 ECON 233 is the first course in the two-course econometrics sequence 
 that is required for all economics majors.  If you've never seen the word
@@ -151,7 +151,7 @@ interdisciplinary [Social Data Analytics (SDA) minor](http://www.sfu.ca/students
 
 :::
 
-## Organization and expectations
+## Organization and expectations {#organization-and-expectations}
 
 The course Canvas page is available at https://canvas.sfu.ca/courses/59191. It includes information on lectures, tutorials, quizzes, and assignments.
 
@@ -170,7 +170,7 @@ This is not a class in introductory economics, high school math, or basic
 computer skills.  If you are a little behind in those skills
 you will need to ask for help, but I am happy to help anyone who asks.
 
-## Computer resources
+## Computer resources {#computer-resources}
 
 To do the computer work you will need a computer with internet access and
 the following software packages installed:
@@ -185,7 +185,7 @@ I will teach the course using Windows, and can provide technical support for
 Windows.  All of the necessary tools are also available for macOS, but my
 ability to provide technical support is more limited. I'll do the best I can.
 
-### Installing Microsoft Excel
+### Installing Microsoft Excel {#installing-microsoft-excel}
 
 Microsoft Excel is a well-known spreadsheet program that is available for both Windows 
 and macOS. Alternatives to Excel include Google Sheets and Apple Numbers.
@@ -200,7 +200,7 @@ Once you have installed Excel, you should confirm that it is working by
 starting the program. You should see something that looks like this:
 ![Excel blank workbook](bin/ExcelBlankWorkbook.png) 
 
-### Installing R and RStudio
+### Installing R and RStudio {#installing-r-and-rstudio}
 
 Later in the semester, we will also be using a more specialized statistical
 program called R, and a related program called RStudio. 
@@ -220,7 +220,7 @@ After installing R and RStudio, you should confirm that they are working by
 opening RStudio.  You should see something like this:
 ![RStudio open screenshot](bin/RStudio open screenshot.jpg)
 
-### Installing the Tidyverse package for R
+### Installing the Tidyverse {#installing-the-tidyverse}
 
 One of the most useful features of R is that it allows users to write and
 distribute ***packages*** that extend its capabilities.
@@ -249,7 +249,7 @@ to make sure the installation worked.
 If you run into trouble, don't worry. We will not need the Tidyverse for 
 a few weeks, so there is plenty of time to get help.
 
-## Conventions of this book
+## Conventions of this book {#conventions-of-this-book}
 
 
 This book uses consistent visual conventions to convey information.

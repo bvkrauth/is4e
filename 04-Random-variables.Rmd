@@ -1,4 +1,4 @@
-# Random variables
+# Random variables {#random-variables}
 
 ```{r setup4, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
@@ -34,7 +34,7 @@ In this chapter we will learn how to:
   binomial, uniform and normal.
 :::
 
-## Introduction to random variables
+## Introduction to random variables {#introduction-to-random-variables}
 
 A ***random variable*** is a number whose value depends
 on a random outcome. The idea here is that we are going to use a random
@@ -69,7 +69,7 @@ A random variable is always a function of the original outcome, but
 for convenience, we usually leave its dependence on the original
 outcome implicit, and write it as if it were an ordinary variable.
 
-### Probability distributions
+### Probability distributions {#probability-distributions}
 
 A random variable has its own sample space (normally $\mathbb{R}$) 
 and probability distribution.  This probability distribution can 
@@ -99,7 +99,7 @@ they all depend on the same underlying outcome. Section
 and analyze those relationships.
 :::
 
-#### The support
+#### The support {#the-support}
 
 The ***support*** of a random variable $x$ is the smallest[^401] set $S_x \subset \mathbb{R}$ such that $\Pr(x \in S_x) = 1$.  
 
@@ -124,12 +124,12 @@ is, the support is a set of isolated points each of which has a strictly
 positive probability. But not all random variables have a discrete support. 
 That will complicate the math quite a bit, as we will need to use calculus.
 
-### The PDF and CDF
+### The PDF and CDF {#the-pdf-and-cdf}
 
 The PDF and CDF are both functions that allow us to describe the
 probability distribution of a random variable.
 
-#### The PDF of a discrete random variable
+#### The PDF of a discrete random variable {#the-pdf-of-a-discrete-random-variable}
 
 We can describe the probability distribution of a random
 variable with a function called its ***probability density function (PDF)***.
@@ -229,7 +229,7 @@ The PDF of a discrete random variable has several general properties:
 
 We can prove these, but I will skip that.
 
-#### The CDF
+#### The CDF {#the-cdf}
 
 Another way to describe the probability distribution of a random
 variable is with a function called its 
@@ -340,7 +340,7 @@ random variable from its CDF would be written:
 but we can just think of it as the size of the jump.
 :::
 
-#### Continuous random variables
+#### Continuous random variables {#continuous-random-variables}
 
 So far we have considered random variables with a discrete support. However,
 many random variables of interest have a continuous support: they can
@@ -432,7 +432,7 @@ no idea what this is or how to solve it.  That's OK!  All you need
 to know for this course is that it *can* be solved.
 :::
 
-## The properties of a random variable
+## The properties of a random variable {#the-properties-of-a-random-variable}
 
 The probability distribution of a random variable is fully described
 by its PDF or CDF.  However, we will often be interested in 
@@ -444,7 +444,7 @@ or we might be interested in a simple measure of how much the
 random variable tends to vary.  All of these quantities
 can be defined and calculated from on the PDF or CDF.
 
-### The mode
+### The mode {#the-mode}
 
 Roughly speaking, the ***mode*** of a random variable is its most likely 
 value (i.e., the value with the highest PDF).
@@ -462,7 +462,7 @@ just "the most likely outcome." But this is an introductory course,
 so let's just leave it at that.
 :::
 
-### Range
+### Range {#range}
 
 The ***range*** of a random variable is the interval from the
 minimum value in its support to the maximum value in the support.
@@ -476,7 +476,7 @@ minimum value in its support to the maximum value in the support.
 
 :::
 
-### Medians, quantiles and percentiles
+### Medians, quantiles and percentiles {#medians-quantiles-and-percentiles}
 
 Roughly speaking, the ***median*** of a random variable is the value in the 
 "middle"of the distribution, i.e., we have the same probability of being 
@@ -520,13 +520,13 @@ The median of $w_{red}$ is just its 0.5 quantile or 50th percentile:
   $$median(w_{red}) = q_{0.5}(w_{red}) = -1$$
 :::
 
-### The expected value
+### The expected value {#the-expected-value}
 
 Both the median and mode are often interpreted as measures of a random variable's
 "central tendency", or as predictions of its "typical" value. The expected 
 value (also called the mean) is another measure of central tendency. 
 
-#### Definition of expected value
+#### Definition of expected value {#definition-of-expected-value}
 
 The ***expected value*** of a random variable $x$ is written
 $E(x)$. When $x$ is discrete, it is defined as:
@@ -568,7 +568,7 @@ either of these definitions, only to know that they exist.
 :::
 
 
-#### Properties of the expected value
+#### Properties of the expected value {#properties-of-the-expected-value}
 
 In addition to taking the expected value of $x$, we can also take the
 expected value of any function of $x$:
@@ -597,7 +597,7 @@ In other words, the average result of a \$100 bet on red is a loss
 of \$2.70.
 :::
 
-### Variance and standard deviation
+### Variance and standard deviation {#variance-and-standard-deviation}
 
 The mode, median and expected value all aim to describe a typical
 or central value of the random variable.  We are also interested in
@@ -649,13 +649,13 @@ several standard properties:
 
 We can easily derive these properties but we will skip that now.
 
-## Standard distributions
+## Standard distributions {#standard-distributions}
 
 Some probability distributions appear so often in applications that
 we have given them names. We will go through a few of the most 
 important ones below.
 
-### Discrete uniform
+### Discrete uniform {#discrete-uniform}
 
 The ***discrete uniform*** distribution is a distribution with 
 that puts equal probability on every value in a discrete set 
@@ -674,7 +674,7 @@ In our roulette example, the outcome $b$ has a discrete
 uniform distribution on $\Omega = \{0,1,\ldots,36\}$.
 :::
 
-### Bernoulli
+### Bernoulli {#bernoulli}
 
 The ***Bernoulli*** probability distribution is usually written:
 $$x \sim Bernoulli(p)$$
@@ -694,7 +694,7 @@ $$var(x) = E[(x-E(x))^2] = E[(x-p)^2] = (1-p)(0-p)^2 + p(1-p)^2 = p(1-p)$$
 The variable $r = I(Red)$ has the $Bernoulli(18/37)$ distribution.
 :::
 
-### Binomial
+### Binomial {#binomial}
 
 The ***binomial*** probability distribution is usually written:
 $$x \sim Binomial(n,p)$$
@@ -732,7 +732,7 @@ Since the outcome of a single bet on red is $r \sim Bernoulli(18/37)$,
 this means that $WIN50 \sim Binomial(50,18/37)$.
 :::
 
-### Uniform and standard uniform
+### Uniform and standard uniform {#uniform-and-standard-uniform}
 
 The ***uniform*** probability distribution is usually written
 $$x \sim U(L,H)$$
@@ -767,7 +767,7 @@ The mean and variance of the $U(L,H)$ distribution are:
 As with all continuous random variables, these calculations would
 require integration which is beyond the scope of this course.
 
-### Normal and standard normal
+### Normal and standard normal {#normal-and-standard-normal}
 
 The ***normal distribution*** is typically written as:
 $$ x \sim N(\mu,\sigma^2)$$ 

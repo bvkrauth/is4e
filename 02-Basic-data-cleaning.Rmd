@@ -1,4 +1,4 @@
-# Basic data cleaning with Excel
+# Basic data cleaning with Excel {#basic-data-cleaning-with-excel}
 
 Excel is the most commonly-used example of a ***spreadsheet***, a software 
 program designed for the tabulation, analysis, and display of data. Its main 
@@ -32,13 +32,13 @@ In this chapter we will learn how to:
    - Identify the characteristics of tidy data
 :::
 
-## A quick tour of Excel
+## A quick tour of Excel {#a-quick-tour-of-excel}
 
 Many of you have probably used Excel before, but there are many features
 you are probably not yet familiar with.  We will start by going over some
 of its basic characteristics and terminology.
 
-### Terminology and interface
+### Terminology and interface {#terminology-and-interface}
 
 Start Excel. Your screen should look something like this:
 ![Excel screenshot](bin/ExcelBlankWorkbook.png)
@@ -89,7 +89,7 @@ ever knowing their names, so I will list them here:
   - in Windows, Excel files normally have the `.xlsx` extension. 
   - Older files sometimes have the `.xls` extension.
 
-### Tidy data
+### Tidy data {#tidy-data}
 
 Download the data file at https://bvkrauth.github.io/files/CanadaEmploymentNov2020.xlsx and open it in Excel.
    ![Excel screenshot](bin/EmploymentData.png) 
@@ -172,7 +172,7 @@ and we will often need to "clean" our data (convert from a messy to a tidy
 format) before starting our analysis. In many projects, the data cleaning 
 is a bigger job than the data analysis.
 
-### Sorting
+### Sorting {#sorting-in-excel}
 
 We will start by learning a few tools for viewing our data, starting
 with ***sorting***.
@@ -200,7 +200,7 @@ will sort accordingly.
 - You can sort on multiple columns by selecting the "Custom sort" option.
 :::
 
-### Filtering
+### Filtering {#filtering-in-excel}
 
 We will often want to look at a particular subgroup of observations.
 This is called  ***filtering***.
@@ -227,7 +227,7 @@ We can undo the filter and remove the drop-down boxes by selecting
 :::
 
 
-### Freezing panes
+### Freezing panes {#freezing-panes}
 
 Go down to row 50 or so in your worksheet. Notice that you can't 
 see the variable names in row 1 any more. This is fine for our current
@@ -252,7 +252,7 @@ To undo this, select `View > Freeze Panes > Unfreeze Panes`.
 - You can freeze any number of rows and columns.
 :::
 
-### Changing cell size
+### Changing cell size {#changing-cell-size}
 
 You may notice that cell B8 (Ontario population) appears to contain "######" 
 rather than a number.  The cause of this problem is that the cell is not wide
@@ -272,7 +272,7 @@ We have several options for doing this:
   
 You can follow similar procedures to adjust the row height.
 
-## Cleaning data
+## Cleaning data {#cleaning-data}
 
 We are now ready to start cleaning our data. Before we do that, we should
 make a ***working copy*** of our data set.  Save your Excel workbook,
@@ -283,12 +283,12 @@ with its original contents and name.
 We will now add several variables to our working data set. Save the file
 after adding each variable so that you don't lose your work.
 
-### Entering new data
+### Entering new data {#entering-new-data}
 
 The simplest way to add variables to an Excel table is by entering data
 directly.  
 
-#### Manual data entry
+#### Manual data entry {#manual-data-entry}
 
 We will start by simply typing in some new data.
 
@@ -318,7 +318,7 @@ So let's add our variable:
 1. Enter "ProvAbb" in cell E1 to name the variable.
 2. Fill in cells E2:E11 with the correct postal abbreviation.
 
-#### Using Fill
+#### Using Fill {#using-fill}
 
 Let's add a variable indicating which month and year these particular
 observations describe (November 2020).
@@ -338,7 +338,7 @@ ourselves some time by using Excel's ***fill*** features.
 As you can see, Excel fills in all selected cells with the value in the 
 top cell.
 
-#### Using Series
+#### Using Series {#using-series}
 
 Ideally, one of the variables in our table serves as a ***unique identifier***
 for observations. A unique identifier (ID) is a text or numeric (integer)
@@ -371,7 +371,7 @@ Excel's ***series*** feature:
 As you can see, column A now contains a unique identifier that numbers provinces
 from 1 to 10.
 
-### Formulas
+### Formulas {#formulas}
 
 Most of the time our new variables will be calculated from existing variables.
 To do this, we will use ***formulas***. A formula is just a rule for
@@ -387,7 +387,7 @@ expression that can include any combination of:
 
 We will go through several examples below.
 
-#### A simple formula
+#### A simple formula {#a-simple-formula}
 
 We will start with a very simple formula. 
 
@@ -409,7 +409,7 @@ calculation (the value).
 Because the cell contains the formula and not its result, the value displayed
 in cell H2 will change if the data changes.
 
-#### Copying, pasting and relative references
+#### Copying, pasting and relative references {#copying-pasting-and-relative-references}
 
 We haven't yet filled in the remaining cells in column H. It would be 
 inconvenient to type a formula into each cell, and would quickly become
@@ -433,7 +433,7 @@ do.
 Sometimes we will want Excel to treat a cell reference as absolute and not
 relative. Fortunately there is a way to do this - we will do that soon.
 
-### Cell formatting
+### Cell formatting {#cell-formatting}
 
 A cell's contents are distinct from its ***display format***, which is how
 it appears on the screen. We can change the display format of a cell or 
@@ -491,7 +491,7 @@ other aspects of display formatting including:
 - alignment (left/right/center as well as top/bottom/middle) 
 :::
 
-### Built-in functions
+### Built-in functions {#built-in-functions}
 
 Excel has about 500 built-in functions that we can use in formulas. 
 
@@ -507,7 +507,7 @@ It also has extensive tools for
 
 We will now go through an example.
 
-#### A simple function
+#### A simple function {#a-simple-function}
 
 Suppose we want to add a new variable for the (natural) log of population.
 
@@ -547,9 +547,9 @@ As you can see, the contents of cell K2 have been filled in to the other
 cells, which is what we wanted. Again, the cell references have all been
 updated.
 
-### Cell references
+### Cell references {#cell-references}
 
-#### Cell ranges
+#### Cell ranges {#cell-ranges}
 
 Some functions like SUM() and AVERAGE() operate on a ***range*** of cells
 rather than a single cell or list of cells. A range is just a 
@@ -569,7 +569,7 @@ across all observations in the data. The function to do that is SUM().
 Cell L2 should display `31,275,600` which is indeed the sum of 
 cells C2 to C11.
 
-#### Absolute references 
+#### Absolute references {#absolute-references}
 
 Let's complete our TotPop variable by copy/pasting or filling cell L2 
 to the remaining cells in column L.  You will notice something 
@@ -596,7 +596,7 @@ To do that, we add the character "$" before each such reference.
 
 This is what we want.
 
-#### Combining absolute and relative references
+#### Combining absolute and relative references {#combining-relative-and-absolute-references}
 
 Sometimes we will want to combine absolute and relative references in the
 same formula.
@@ -633,7 +633,7 @@ The `RANK.EQ()` function has several relatives with similar syntax:
   functions return ranks in percentiles.
 :::
 
-## Using non-numeric data
+## Using non-numeric data {#using-non-numeric-data}
 
 Most of the data we work with is numerical. However, there are other types
 of information we regularly work with:
@@ -644,7 +644,7 @@ of information we regularly work with:
 
 Excel has tools for entering, storing and processing these data types.
 
-### Text data
+### Text data {#text-data}
 
 The `Province` column contains text data, also called "character" data or
 "string" data. 
@@ -686,7 +686,7 @@ There are many useful functions to manipulate text strings in Excel:
    - `=REPLACE("Hello world!",7,5,"mom")` returns "Hello mom!"
 :::
 
-### Logical data
+### Logical data {#logical-data}
 
 In addition to text and numbers, cells can also contain ***logical***
 values (TRUE or FALSE). Logical data is also called "Boolean" data.
@@ -739,7 +739,7 @@ variables.
    multiple conditions.
 :::
 
-### Dates and times
+### Dates and times {#dates-and-times}
 
 In additions to numbers, text, and logical values, Excel can handle dates
 and times.  Dates and times are a surprisingly complex subject
@@ -839,7 +839,7 @@ So the HGNC changed the names of 27 genes in 2020: MARCH2 is now
 called MARCHF2.
 :::
 
-## Data management
+## Data management {#data-management}
 
 When analyzing data it is important for our results to be clear and 
 ***reproducible***. What that means is that an interested reader 

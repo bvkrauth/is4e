@@ -1,4 +1,4 @@
-# Using R
+# Using R {#using-r}
 
 ```{r setup11, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,

@@ -1,4 +1,4 @@
-# Advanced data cleaning
+# Advanced data cleaning {#advanced-data-cleaning}
 
 We have learned some of the basics of data cleaning, but there are many
 tasks and tools in Excel yet to learn.

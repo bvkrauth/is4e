@@ -1,4 +1,4 @@
-# Statistics
+# Statistics {#statistics}
 
 Having described our data and its DGP, we now move on to describing 
 statistics calculated using our data.

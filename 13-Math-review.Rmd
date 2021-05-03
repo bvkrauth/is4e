@@ -1,6 +1,6 @@
 # (APPENDIX) Appendix {-}
 
-# Math review 
+# Math review {#math-review}
 
 I'll start by reviewing some math we will use. All of it is covered
 in high school or in introductory calculus. Since introductory calculus

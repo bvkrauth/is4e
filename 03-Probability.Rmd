@@ -53,7 +53,7 @@ Something will happen, it matters (to the players and the casino) what
 will happen, but we don't know in advance what will happen.
 :::
 
-## Outcomes and events
+## Outcomes and events {#outcomes-and-events}
 
 To build a probabilistic model of a random process, we start by defining
 the ***outcome*** we are interested in.  An outcome can be a simple yes/no
@@ -136,7 +136,7 @@ In our roulette example:
      since $\{14\} \cap \{25\} = \emptyset$.
 :::
 
-## Probabilities
+## Probabilities {#probabilities}
 
 Our final step is to define a ***probability distribution***
 for this random process, which is a function that assigns
@@ -152,7 +152,7 @@ Probabilities are normally between zero and one:
 - If an event has probability one, it definitely *will* 
   happen.
 
-### The axioms of probability
+### The axioms of probability {#the-axioms-of-probability}
 
 All valid probability distributions must obey the following three conditions:
 
@@ -248,7 +248,7 @@ like predicting election results.
 :::
 
 
-## Related events
+## Related events {#related-events}
 
 We are often interested in more than one event, and want to talk about how 
 they are related. For example:
@@ -264,7 +264,7 @@ they are related. For example:
 This section will develop some tools for dealing with the relationship
 between different random events.
 
-### Some rules for probabilities
+### Some rules for probabilities {#some-rules-for-probabilities}
 
 Let $A$ and $B$ be two events.  Then our three axioms
 of probability imply several additional rules:
@@ -288,7 +288,7 @@ of probability imply several additional rules:
 These results are not hard to prove, but I will not go through the proofs.
 However, I will use these results so you should be familiar with them.
 
-### Joint probabilities
+### Joint probabilities {#joint-probabilities}
 
 The ***joint probability*** of two events $A$ *and* $B$ is the probability that
 they *both* happen:
@@ -309,7 +309,7 @@ red and even.
 
 Joint probabilities are just probabilities, so they obey all of the rules of probability.  For example, all joint probabilities are between zero and one.
 
-### Conditional probabilities
+### Conditional probabilities {#conditional-probabilities}
 
 The ***conditional probability*** of an event $A$ ***given*** another
 event $B$ is defined as:
@@ -335,7 +335,7 @@ In our roulette example:
 Like joint probabilities, conditional probabilities are just probabilities,
 so they obey all of the rules of probability.
 
-### Independent events 
+### Independent events {#independent-events}
 
 One common "trick" in modeling joint and conditional probabilities is to assume
 that certain events are unrelated to each other. This can simplify the math
@@ -431,7 +431,7 @@ equation because we have assumed the events $Red_1$, $Red_2$, and $Red_3$
 are independent.
 :::
 
-### Two "laws" of probability
+### Two "laws" of probability {#two-laws-of-probability}
 
 In addition to the results we have already discussed, there are two
 important results using conditional probabilities:
