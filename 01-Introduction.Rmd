@@ -267,8 +267,7 @@ Boxes like this are for examples
 :::
 
 ::: goals
-Boxes that look like this are for showing course
-or chapter goals.
+Boxes like this are for showing course or chapter goals.
 :::
 
 ::: economics
