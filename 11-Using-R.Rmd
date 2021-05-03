@@ -49,7 +49,7 @@ the name of the CSV file:
 # The code below assumes that the file "EmploymentData.csv" is in 
 # the working directory.  Change the argument below as needed to 
 # make the function work in your environment 
-EmpData <- read_csv("bin/EmploymentData.csv")
+EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```
 As you can see, R guesses each variable's data type, and reports its 
 guess.  It is always a good idea to read this output and make sure
