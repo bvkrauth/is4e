@@ -826,8 +826,8 @@ let's add this as a data validation requirement:
 
 1. Select column K in *GrowthData*.
 2. Select `Data > Data Validation`.  The Data Validation dialog box will 
-   appear.
-   ![Data Validation box](bin/DataValidation1.png). 
+   appear:
+   ![Data Validation box](bin/DataValidation1.png) 
    By default, it allows "Any value", which means no restriction
    at all.
 3. To add a restriction that negative values are not allowed:

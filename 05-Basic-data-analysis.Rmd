@@ -44,11 +44,10 @@ the data.
 Our analysis in this chapter will use historical employment data for
 Canada from January 1976 through January 2021. Download the file
 at https://bvkrauth.github.io/files/CanadaEmploymentHistorical.xlsx, 
-make a working copy, and open it. 
+make a working copy, and open it:  
+![*Canadian employment data, 1976-2021*](bin/CanadaEmploymentHistorical.png)
 
-![Canadian employment data, 1976-2021](bin/CanadaEmploymentHistorical.png)
-
-Our main data set for analysis is the worksheet "Data for Analysis", 
+Our main data set for analysis is the worksheet *Data for Analysis*, 
 which includes the following variables:
 
 - **MonthYr**: the month and year of the observation.
@@ -72,7 +71,7 @@ which includes the following variables:
   calculated as a proportion and displayed as a percentage.  Note that this
   variable is blank for the first 12 months of the data set.
   
-In addition, there is a worksheet titled "Raw data" that contains the original
+In addition, there is a worksheet titled *Raw data* that contains the original
 data as obtained from Statistics Canada.  Source information is also in that 
 worksheet.
 :::
@@ -184,8 +183,8 @@ To fill in the variable name for column B:
    - The formula bar now says `='Data for Analysis'!G1`
 4. Select `<enter>`. 
    - You should now be back in cell B1 in the Summary statistics worksheet.
-   - Cell B1 should display "UnempRate" (the contents of cell G1 in Data 
-     for Analysis).
+   - Cell B1 should display **UnempRate** (the contents of cell G1 in 
+     *Data for Analysis*).
 
 What have we done here? We have constructed a formula that successfully 
 references a cell in another worksheet. Note that the relative references
@@ -303,9 +302,8 @@ To make the display formatting a little nicer.
 4. Feel free to play around with colors, fonts, etc. to get a
    table that you like.
 
-We now have a nice table of summary statistics 
-
-![Table of summary statistics](bin/SummaryStatisticsTable.png)
+We now have a nice table of summary statistics:  
+![*Table of summary statistics*](bin/SummaryStatisticsTable.png)
 
 that we could put into a Word or PowerPoint document, and share with an audience.
 :::
@@ -405,9 +403,8 @@ Next, we need to fill in the **Percentage** column (C).
 4. By default, the percentages are displayed as proportions. Change the
    display format to percentage, with one decimal place.
 
-We now have a simple frequency table for the Party variable.
-
-![Party control frequency table](bin/PartyControlFrequencyTable.png)
+We now have a simple frequency table for the Party variable:  
+![*Party control frequency table*](bin/PartyControlFrequencyTable.png)
 :::
 
 ### Binned frequency tables
@@ -519,9 +516,8 @@ table:
 3. Fill in the **Percentage** column (C) with the appropriate formula 
    and change its display format to Percent.
 
-We now have our binned frequency table.
-
-![Binned frequency table for UnempRate](bin/UnemploymentBinnedFrequencyTable.png)
+We now have our binned frequency table:  
+![*Binned frequency table for* **UnempRate**](bin/UnemploymentBinnedFrequencyTable.png)
 :::
 
 ::: fyi
@@ -575,9 +571,8 @@ then modify chart elements until the chart looks the way you want it.
 A ***time series graph*** plots one or more variables at multiple points in
 time.  Conventionally, time is on the horizontal axis and the variable's
 value is on the vertical axis. For example, we will generate a time series
-graph that looks like this:
-
-![Time series graph of UnempRate](bin/TimeSeriesGraphFinal.png)
+graph that looks like this:  
+![*Time series graph of* **UnempRate**](bin/TimeSeriesGraphFinal.png)
 
 In Excel, time series graphs can be implemented using either the Line
 chart type or the Scatter chart type.  Line graphs are simpler, so we
@@ -601,6 +596,7 @@ We want to create a time series graph for our variable **UnempRate**.
 5. The dialog box gives you several different types of line graph. Select
    the picture that looks like this:
    ![Recommended](bin/RecommendedLineGraph.png) 
+   
    and select `OK`.
 
 We have our time series graph (it looks like the picture above).  Unfortunately,
@@ -610,9 +606,8 @@ one variable, so let's get rid of the others:
 1. Select `Design > Select Data` which will open the `Select Data Source`
    dialog box.
 2. Uncheck the checkbox next to every series in the "Legend Entries (Series)"
-   box except **UnempRate**.
-
-![Time graph series of UnempRate](bin/TimeSeriesGraphInitial.png) 
+   box except **UnempRate**:  
+![*Time graph series of* **UnempRate**](bin/TimeSeriesGraphInitial.png) 
 
 This looks like the graph we want.
 :::
@@ -775,9 +770,8 @@ To construct a bar graph of the **Party** variable:
 3. Select the `All Charts` tab to see the full list of options.
 4. Select `Column` and then select `OK`.  
 
-The graph will look something like this:
-
-![Bar graph of Party variable, default options](bin/BarGraphInitial.png)
+The graph will look something like this:  
+![*Bar graph of* **Party** *variable, default options*](bin/BarGraphInitial.png)
 
 As you can see, basic bar graphs are quite simple.  There is a bar
 for each category (the first column of the table) and variable
@@ -792,9 +786,8 @@ really only need one of those.
 2. Select `Chart Design > Select Data`
 3. Uncheck the check boxes for Percentage, NDP and Transfer.
 
-We now have a bar graph that looks like this
-
-![Bar graph of Party variable, simplified](bin/BarGraph2.png)
+We now have a bar graph that looks like this:  
+![*Bar graph of* **Party** *variable, simplified*](bin/BarGraph2.png)
 
 and shows the number of months in which the two
 largest federal parties were in government over the time frame of
@@ -847,9 +840,8 @@ eye do any extra work, let's put those labels on top.
 6. You might also consider changing the color of the two labels to match
    the color of the corresponding bar.
 
-Our final graph looks like this:
-
-![Bar graph of Party variable, final version](bin/BarGraphFinal.png)
+Our final graph looks like this:  
+![*Bar graph of* **Party** *variable, final version*](bin/BarGraphFinal.png)
 :::
 
 One of the keys to effective bar graph design is to keep the graph
@@ -864,9 +856,8 @@ to be misleading.
 **Why bar graphs should always start at zero**
 
 Suppose we start our **Party** bar graph at 200 rather than 
-zero.  We will get this:
-
-![Bar graph for Party, starting at 200](bin/BarGraphNonzeroOrigin.png)
+zero.  We will get this:  
+![*Bar graph for* **Party**, *starting at 200*](bin/BarGraphNonzeroOrigin.png)
     
 The relative size of these bars is very misleading. The bar for 
 Liberal is three times as big as the bar for Conservative,
@@ -874,9 +865,8 @@ even though the number it represents is only 29% higher.
 :::
 
 Excel provides several popular alternatives to bar graphs.  Pie graphs
-are another way of depicting relative frequencies:
-
-![Pie chart of Party variable](bin/PieChart.png)
+are another way of depicting relative frequencies:  
+![*Pie chart of* **Party** *variable*](bin/PieChart.png)
 
 However, most data visualization experts recommend against their 
 use.  Research on how people process visual information usually 
@@ -915,9 +905,8 @@ To construct a histogram of the **UnempRate** variable:
 3. Select the `All Charts` tab to see the full set of options.
 3. Select `Histogram` and then `OK`.
 
-Our graph will appear:
-
-![Histogram of UnempRate, with default options](bin/HistogramInitial.png)
+Our graph will appear:  
+![*Histogram of* **UnempRate**, *with default options*](bin/HistogramInitial.png)
 
 :::
 
@@ -981,9 +970,8 @@ To enhance the quality of this histogram:
 2. Add the horizontal axis title **Unemployment rate**
 3. Add the vertical axis title **# of months**
 
-Our final histogram will look like this:
-
-![Histogram of UnempRate, final version](bin/HistogramFinal.png) 
+Our final histogram will look like this:  
+![*Histogram of* **UnempRate**, *final version*](bin/HistogramFinal.png) 
 :::
 
 You can download the complete Excel file with all analysis from

@@ -33,7 +33,6 @@ In this chapter we will learn how to:
 
 Start the program RStudio. You should see something that looks like
 this:
-
 ![RStudio screen shot](bin/Rstudio.png)
 
 You may wonder what the difference is between R and RStudio.
@@ -283,7 +282,6 @@ In the menu:
 
 We are done for now, so close RStudio. You may get a warning message that 
 looks something like this:
-
   ![Save workspace dialog box](bin/RSaveWorkspace.png)
 
 Never click on the `Save` button here, as it would cause R to
