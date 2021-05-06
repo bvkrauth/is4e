@@ -589,3 +589,7 @@ ggplot(data = EmpData,
   xlab("") +
   ylab("Percent")
 ```
+
+## Chapter review {#review-using-r}
+
+To be added

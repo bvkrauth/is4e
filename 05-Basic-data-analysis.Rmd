@@ -976,3 +976,7 @@ Our final histogram will look like this:
 
 You can download the complete Excel file with all analysis from
 this chapter at https://bvkrauth.github.io/files/CanadaEmploymentHistoricalWithAnalysis.xlsx.
+
+## Chapter review {#review-basic-data-analysis}
+
+To be added

@@ -535,3 +535,7 @@ provides an overview of the controversy, and a
 [blog post by statistician Andrew Gelman](https://statmodeling.stat.columbia.edu/2020/04/19/fatal-flaws-in-stanford-study-of-coronavirus-prevalence/) 
 provides a thorough discussion 
 of the statistical issues.
+
+## Chapter review {#review-probability}
+
+To be added

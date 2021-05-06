@@ -801,3 +801,6 @@ are typically more conservative (wider) than their asymptotic
 cousins, but the difference becomes negligible as 
 the sample size increases.
 
+## Chapter review {#review-inference}
+
+To be added

@@ -453,3 +453,6 @@ The math needed to make full use of Slutsky's theorem is beyond the scope
 of this course, so all I am asking here is for you to know that it can be
 used for this purpose.
 
+## Chapter review {#review-estimation}
+
+To be added

@@ -979,5 +979,6 @@ selecting `Home > Format > Unprotect Sheet`.
 > from this chapter at 
 > https://canvas.sfu.ca/files/15328441/. 
 
+## Chapter review {#review-advanced-data-cleaning}
 
-
+To be added

@@ -610,3 +610,6 @@ implied properties similar to those of a product.
 I do not expect you to remember all of these formulas, but be 
 prepared to see me use them
 
+## Chapter review {#review-more-on-random-variables}
+
+To be added

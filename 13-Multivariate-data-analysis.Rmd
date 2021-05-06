@@ -746,3 +746,7 @@ regression become overwhelming when you have more than two
 variables to work with. As a result, linear regression is the
 most important tool in applied econometrics, and you will spend much of
 your time in ECON 333 learning to use it.
+
+## Chapter review {#review-multivariate-data-analysis}
+
+To be added

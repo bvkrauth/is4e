@@ -792,3 +792,7 @@ There are many free sources of useful information about R.
   or your local book shop, and is also available as a free e-book at 
   https://r4ds.had.co.nz/index.html.
 :::
+
+## Chapter review {#review-introduction-to-r}
+
+To be added

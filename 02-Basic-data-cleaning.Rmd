@@ -865,3 +865,7 @@ and should be able to generate those results themselves.
 
 Note that the "interested reader" might be *you*, since you may
 not remember where you found the data or what you have done with it.
+
+## Chapter review {#review-basic-data-cleaning-with-excel}
+
+To be added.
