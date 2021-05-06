@@ -804,3 +804,7 @@ the sample size increases.
 ## Chapter review {#review-inference}
 
 To be added
+
+### Practice problems {#problems-inference}
+
+To be added.

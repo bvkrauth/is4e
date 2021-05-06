@@ -982,3 +982,7 @@ selecting `Home > Format > Unprotect Sheet`.
 ## Chapter review {#review-advanced-data-cleaning}
 
 To be added
+
+### Practice problems {#problems-advanced-data-cleaning}
+
+To be added.

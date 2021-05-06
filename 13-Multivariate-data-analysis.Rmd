@@ -750,3 +750,7 @@ your time in ECON 333 learning to use it.
 ## Chapter review {#review-multivariate-data-analysis}
 
 To be added
+
+### Practice problems {#problems-multivariate-data-anlysis}
+
+To be added.

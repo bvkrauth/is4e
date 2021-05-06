@@ -869,3 +869,7 @@ not remember where you found the data or what you have done with it.
 ## Chapter review {#review-basic-data-cleaning-with-excel}
 
 To be added.
+
+### Practice problems {#problems-basic-data-cleaning-with-excel}
+
+To be added.

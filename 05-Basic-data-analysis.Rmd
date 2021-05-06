@@ -980,3 +980,7 @@ this chapter at https://bvkrauth.github.io/files/CanadaEmploymentHistoricalWithA
 ## Chapter review {#review-basic-data-analysis}
 
 To be added
+
+### Practice problems {#problems-basic-data-analysis}
+
+To be added.

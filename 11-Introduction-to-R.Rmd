@@ -796,3 +796,7 @@ There are many free sources of useful information about R.
 ## Chapter review {#review-introduction-to-r}
 
 To be added
+
+### Practice problems {#problems-introduction-to-r}
+
+To be added.

@@ -456,3 +456,7 @@ used for this purpose.
 ## Chapter review {#review-estimation}
 
 To be added
+
+### Practice problems {#problems-estimation}
+
+To be added.

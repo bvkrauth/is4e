@@ -474,3 +474,7 @@ the relative sample frequency is:
 ## Chapter review {#review-statistics}
 
 To be added
+
+### Practice problems {#problems-statistics}
+
+To be added.

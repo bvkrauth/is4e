@@ -593,3 +593,7 @@ ggplot(data = EmpData,
 ## Chapter review {#review-using-r}
 
 To be added
+
+### Practice problems {#problems-using-r}
+
+To be added.

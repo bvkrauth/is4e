@@ -645,3 +645,7 @@ uniform distribution on $\Omega = \{0,1,\ldots,36\}$.
 ## Chapter review {#review-random-variables}
 
 To be added
+
+### Practice problems {#problems-random-variables}
+
+To be added.
