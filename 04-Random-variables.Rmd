@@ -99,7 +99,7 @@ they all depend on the same underlying outcome. Section
 and analyze those relationships.
 :::
 
-#### The support {#the-support}
+### The support {#the-support}
 
 The ***support*** of a random variable $x$ is the smallest[^401] set $S_x \subset \mathbb{R}$ such that $\Pr(x \in S_x) = 1$.  
 
@@ -119,10 +119,15 @@ The support is just the set of values with non-zero probability:
 
 :::
 
-The random variables we have considered so far have  ***discrete*** support. That 
-is, the support is a set of isolated points each of which has a strictly 
-positive probability. But not all random variables have a discrete support. 
-That will complicate the math quite a bit, as we will need to use calculus.
+The random variables we will consider in this chapter  have  ***discrete***
+support. That is, the support is a set of isolated points each of which has
+a strictly positive probability. In most examples the support will also have
+a ***finite*** number of elements.  All finite sets are also discrete, but
+it is also possible for a discrete set to have an infinite number of elements.
+For example, the set of integers is both discrete and infinite.
+
+Some random variables have a support that is continuous rather than 
+discrete.  Chapter ?? will cover continuous random variables. 
 
 ### The PDF and CDF {#the-pdf-and-cdf}
 
@@ -269,11 +274,8 @@ The CDF has several properties:
   3. For any $a_1 < a_2$,
       $$\Pr(a_1 < x \leq a_2) = F_x(a_2) - F_x(a_1)$$
 
-As I said earlier, the CDF is well-defined and has these properties
-whether $x$ is discrete or continuous. 
-
-If a random variable is discrete, we can construct its CDF
-by just adding up the PDF:
+We can construct the CDF of a discrete random variable by
+just adding up the PDF:
   \begin{align}
     F_x(a) &= \Pr(x \leq a) \\
       &= \sum_{s \in S_x} f_x(s)I(s \leq a)
@@ -354,113 +356,6 @@ random variable from its CDF would be written:
 but we can just think of it as the size of the jump.
 :::
 
-#### Continuous random variables {#continuous-random-variables}
-
-So far we have considered random variables with a discrete support. However,
-many random variables of interest have a continuous support: they can
-take on *any* real value within some range. 
-
-For example, Canada produced 31.251 million metric tons of wheat in 2019. If we
-think of that number as a random variable, it's clear that this number
-could have been 31.252 million metric tons if circumstances were different. It
-also could have been any number between those numbers, for example 31.2511
-million or 31.2517 million.
-
-A ***continuous random variable*** has the property that the the probability
-of any specific value is zero:
-  $$\Pr(x=a) = 0$$
-Now this creates something of a paradox: by the rules of probability
-the probability that $x$ takes on *some* value is $\Pr(x \in \mathbb{R}) = 1$
-but the probability that $x$ takes on any *specific* value is zero.
-How can this work?
-
-I'll explain how it works with an example.  
-
-::: example
-**The standard uniform distribution**
-
-Consider a random variable $x$ that has the ***standard uniform*** 
-distribution. What that means is that:
-
-1. The support of $x$ is the range $[0,1]$.
-2. All values in this range are equally likely.
-
-The CDF of the standard uniform distribution is:
-  $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
-Figure \@ref(fig:UniformCDF) below shows the CDF of the standard uniform distribution. 
-```{r UniformCDF, fig.cap = "*CDF for the standard uniform distribution*"}
-UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
-                      Fa=punif(seq(from=-2,to=2,length.out=100)),
-                      fa=dunif(seq(from=-2,to=2,length.out=100)))
-ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
-  geom_line(col = "blue") +
-  geom_text(x=1,y=0.6,col="blue",label="F_x(a)") +
-  xlab("a") +
-  ylab("F(a)") +
-  labs(title = "Cumulative distribution function (CDF)", 
-       subtitle = "Standard uniform", 
-       caption = "", 
-       tag = "")
-```
-As we have seen, the CDF of a discrete random variable rises in 
-a "stair-step" manner. In contrast, the standard uniform CDF rises 
-smoothly with no jumps.  All continuous random variables have a CDF with
-this property.
-
-Let $a_1$ and $a_2$ be any two numbers between 0 and 1, and let $a_1 < a_2$.
-Then the probability of $x$ being between $a_1$ and $a_2$ is:
-  $$\Pr(a_1 < x \leq a_2) = F_x(a_2) - F_x(a_1) = a_2 - a_1$$
-As $a_2$ gets closer and closer to $a_1$ this number gets closer and closer
-to zero, so the probability of $x$ being *exactly* $a_1$ is zero.
-:::
-
-The PDF of a continuous random variable is defined as just the
-derivative of its CDF:
-  $$f_x(a) = \frac{dF_x(a)}{da}$$
-
-::: example
-**The PDF of the standard uniform distribution**
-
-The PDF of a standard uniform random variable is:
-  $$f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}$$
-which looks like this:
-```{r UniformPDF, fig.cap = "*PDF for the standard uniform distribution*"}
-ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
-  geom_step(col = "blue") +
-  geom_text(x=1.25,y=0.8,col="blue",label="f_x(a)") +
-  xlab("a") +
-  ylab("f(a)") +
-  labs(title = "Probability density function (PDF)", 
-       subtitle = "Standard uniform", 
-       caption = "", 
-       tag = "")
-```
-:::
-
-Now, in order to work with continuous random variables we would need to
-use integral calculus. Integral calculus is taught in MATH 158, which 
-is not a prerequisite for the course, So:
-
-  - Most of my examples will be for discrete case.
-  - I will briefly show you the math for the continuous case, 
-    but I will not expect you to do it.
-  - Most of the results I give you will apply for both cases.
-
-::: fyi
-**Integral calculus for continuous random variables**
-
-I have defined the PDF for a continuous random variable based on its CDF,
-but we can also go the other way and calculate the CDF from the PDF.
-The formula for that calculation is:
-  $$F_x(a) = \int_{-\infty}^a f_x(v)dv$$
-More generally the probability of $x$ being between any two numbers is:
-
-  $$\Pr(a \leq x \leq b) = F_x(b) - F_x(a) = \int_a^b f_x(v)dv$$
-
-Unless you have taken MATH 152 or MATH 158, you may have 
-no idea what this is or how to solve it.  That's OK!  All you need
-to know for this course is that it *can* be solved.
-:::
 
 ## The properties of a random variable {#the-properties-of-a-random-variable}
 
@@ -582,21 +477,6 @@ That is, each dollar bet on red leads to an average loss of 2.7 cents for the be
 We can think of the expected value as a weighted average of its possible
 values, with each value weighted by the probability of observing that value.
 
-::: fyi
-**The expected value for a continuous random variable**
-
-When $x$ is continuous, its expected value is defined as:
-  $$E(x) = \int_{-\infty}^{\infty} af_x(a)da$$
-Notice that this looks just like the definition for the discrete case, but
-with the sum replaced by an integral sign. 
-
-There is even a general definition that covers both discrete
-and continuous variables, as well as any mix between them:
-  $$E(x) - \int_{-\infty}^{\infty} a dF_x(a)$$
-Again, I do not expect you to understand, remember, or use 
-either of these definitions, only to know that they exist.
-:::
-
 
 #### Properties of the expected value {#properties-of-the-expected-value}
 
@@ -685,25 +565,6 @@ Some probability distributions appear so often in applications that
 we have given them names. We will go through a few of the most 
 important ones below.
 
-### Discrete uniform {#discrete-uniform}
-
-The ***discrete uniform*** distribution is a distribution with 
-that puts equal probability on every value in a discrete set 
-$S_x$. Its PDF is:
-$$f_x(a) = \begin{cases}
-          1/|S_x| & a \in S_x \\
-          0 & a \notin S_x \\
-          \end{cases}$$
-Discrete uniform distributions appear in gambling and similar 
-applications.  
-
-::: example
-**The discrete uniform distribution in roulette**
-
-In our roulette example, the outcome $b$ has a discrete 
-uniform distribution on $\Omega = \{0,1,\ldots,36\}$.
-:::
-
 ### Bernoulli {#bernoulli}
 
 The ***Bernoulli*** probability distribution is usually written:
@@ -762,7 +623,156 @@ Since the outcome of a single bet on red is $r \sim Bernoulli(18/37)$,
 this means that $WIN50 \sim Binomial(50,18/37)$.
 :::
 
-### Uniform and standard uniform {#uniform-and-standard-uniform}
+### Discrete uniform {#discrete-uniform}
+
+The ***discrete uniform*** distribution is a distribution with 
+that puts equal probability on every value in a discrete set 
+$S_x$. Its PDF is:
+$$f_x(a) = \begin{cases}
+          1/|S_x| & a \in S_x \\
+          0 & a \notin S_x \\
+          \end{cases}$$
+Discrete uniform distributions appear in gambling and similar 
+applications.  
+
+::: example
+**The discrete uniform distribution in roulette**
+
+In our roulette example, the outcome $b$ has a discrete 
+uniform distribution on $\Omega = \{0,1,\ldots,36\}$.
+:::
+
+## Continuous random variables {#continuous-random-variables}
+
+So far we have considered random variables with a discrete support. However,
+many random variables of interest have a continuous support: they can
+take on *any* real value within some range. 
+
+For example, Canada produced 31.251 million metric tons of wheat in 2019. If we
+think of that number as a random variable, it's clear that this number
+could have been 31.252 million metric tons if circumstances were different. It
+also could have been any number between those numbers, for example 31.2511
+million or 31.2517 million.
+
+A ***continuous random variable*** has the property that the the probability
+of any specific value is zero:
+  $$\Pr(x=a) = 0$$
+Now this creates something of a paradox: by the rules of probability
+the probability that $x$ takes on *some* value is $\Pr(x \in \mathbb{R}) = 1$
+but the probability that $x$ takes on any *specific* value is zero.
+How can this work?
+
+### The PDF and CDF {#continuous-pdf-and-cdf}
+
+I'll explain how it works with an example.  
+
+::: example
+**The standard uniform distribution**
+
+Consider a random variable $x$ that has the ***standard uniform*** 
+distribution. What that means is that:
+
+1. The support of $x$ is the range $[0,1]$.
+2. All values in this range are equally likely.
+
+The CDF of the standard uniform distribution is:
+  $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
+Figure \@ref(fig:UniformCDF) below shows the CDF of the standard uniform distribution. 
+```{r UniformCDF, fig.cap = "*CDF for the standard uniform distribution*"}
+UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
+                      Fa=punif(seq(from=-2,to=2,length.out=100)),
+                      fa=dunif(seq(from=-2,to=2,length.out=100)))
+ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
+  geom_line(col = "blue") +
+  geom_text(x=1,y=0.6,col="blue",label="F_x(a)") +
+  xlab("a") +
+  ylab("F(a)") +
+  labs(title = "Cumulative distribution function (CDF)", 
+       subtitle = "Standard uniform", 
+       caption = "", 
+       tag = "")
+```
+As we have seen, the CDF of a discrete random variable rises in 
+a "stair-step" manner. In contrast, the standard uniform CDF rises 
+smoothly with no jumps.  All continuous random variables have a CDF with
+this property.
+
+Let $a_1$ and $a_2$ be any two numbers between 0 and 1, and let $a_1 < a_2$.
+Then the probability of $x$ being between $a_1$ and $a_2$ is:
+  $$\Pr(a_1 < x \leq a_2) = F_x(a_2) - F_x(a_1) = a_2 - a_1$$
+As $a_2$ gets closer and closer to $a_1$ this number gets closer and closer
+to zero, so the probability of $x$ being *exactly* $a_1$ is zero.
+:::
+
+The PDF of a continuous random variable is defined as just the
+derivative of its CDF:
+  $$f_x(a) = \frac{dF_x(a)}{da}$$
+
+::: example
+**The PDF of the standard uniform distribution**
+
+The PDF of a standard uniform random variable is:
+  $$f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}$$
+which looks like this:
+```{r UniformPDF, fig.cap = "*PDF for the standard uniform distribution*"}
+ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
+  geom_step(col = "blue") +
+  geom_text(x=1.25,y=0.8,col="blue",label="f_x(a)") +
+  xlab("a") +
+  ylab("f(a)") +
+  labs(title = "Probability density function (PDF)", 
+       subtitle = "Standard uniform", 
+       caption = "", 
+       tag = "")
+```
+:::
+
+Now, in order to work with continuous random variables we would need to
+use integral calculus. Integral calculus is taught in MATH 158, which 
+is not a prerequisite for the course, So:
+
+  - Most of my examples will be for discrete case.
+  - I will briefly show you the math for the continuous case, 
+    but I will not expect you to do it.
+  - Most of the results I give you will apply for both cases.
+
+::: fyi
+**Integral calculus for continuous random variables**
+
+I have defined the PDF for a continuous random variable based on its CDF,
+but we can also go the other way and calculate the CDF from the PDF.
+The formula for that calculation is:
+  $$F_x(a) = \int_{-\infty}^a f_x(v)dv$$
+More generally the probability of $x$ being between any two numbers is:
+
+  $$\Pr(a \leq x \leq b) = F_x(b) - F_x(a) = \int_a^b f_x(v)dv$$
+
+Unless you have taken MATH 152 or MATH 158, you may have 
+no idea what this is or how to solve it.  That's OK!  All you need
+to know for this course is that it *can* be solved.
+:::
+
+### Properties of continuous random variables
+
+::: fyi
+**The expected value for a continuous random variable**
+
+When $x$ is continuous, its expected value is defined as:
+  $$E(x) = \int_{-\infty}^{\infty} af_x(a)da$$
+Notice that this looks just like the definition for the discrete case, but
+with the sum replaced by an integral sign. 
+
+There is even a general definition that covers both discrete
+and continuous variables, as well as any mix between them:
+  $$E(x) - \int_{-\infty}^{\infty} a dF_x(a)$$
+Again, I do not expect you to understand, remember, or use 
+either of these definitions, only to know that they exist.
+:::
+
+
+
+
+### The uniform distribution {#uniform-and-standard-uniform}
 
 The ***uniform*** probability distribution is usually written
 $$x \sim U(L,H)$$
@@ -797,7 +807,7 @@ The mean and variance of the $U(L,H)$ distribution are:
 As with all continuous random variables, these calculations would
 require integration which is beyond the scope of this course.
 
-### Normal and standard normal {#normal-and-standard-normal}
+### The normal distribution {#normal-and-standard-normal}
 
 The ***normal distribution*** is typically written as:
 $$ x \sim N(\mu,\sigma^2)$$ 
@@ -853,4 +863,3 @@ This implies:
 Since the standard normal CDF is available as a built-in function in Excel
 or R, so we can use this result to calculate the CDF for any normally
 distributed random variable.
-
