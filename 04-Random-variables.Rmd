@@ -1,4 +1,4 @@
-# Random variables {#random-variables}
+# Introduction to random variables {#random-variables}
 
 ```{r setup4, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,

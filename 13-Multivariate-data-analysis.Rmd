@@ -76,7 +76,7 @@ univariate statistics are defined in Chapter \@ref(statistics).
 
 The sample covariance and sample correlation can be interpreted
 as estimates of the corresponding population covariance and
-correlation as defined in Chapter \@ref(data-and-sampling).
+correlation as defined in Chapter \@ref(more-on-random-variables).
 
 ### Covariance and correlation in R
 

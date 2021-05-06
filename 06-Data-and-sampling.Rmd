@@ -1,4 +1,4 @@
-# Data and sampling {#data-and-sampling}
+# More on random variables {#more-on-random-variables}
 
 ```{r setup6, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
