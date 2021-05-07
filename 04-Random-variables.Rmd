@@ -356,8 +356,63 @@ random variable from its CDF would be written:
 but we can just think of it as the size of the jump.
 :::
 
+## The expected value {#the-expected-value}
 
-## Properties of a random variable {#the-properties-of-a-random-variable}
+The ***expected value*** of a random variable $x$ is written
+$E(x)$. When $x$ is discrete, it is defined as:
+
+$$E(x) = \sum_{a \in S_x} a\Pr(x=a) = \sum_{a \in S_x} af_x(a)$$
+The expected value is also called the ***mean***, the ***population mean***
+or the ***expectation*** of the random variable.
+
+
+::: example
+**The expected value in roulette**
+
+The expected value of $b$ is:
+  $$E(b) = 0*\underbrace{f_b(0)}_{1/37} + 1*\underbrace{f_b(1)}_{1/37} + \cdots 36*\underbrace{f_b(36)}_{1/37} = 18$$
+  
+The expected value of $w_{red}$ is:
+    $$E(w_{red}) = -1*\underbrace{f_{red}(-1)}_{19/37} + 1*\underbrace{f_{red}(1)}_{18/37} \approx -0.027$$
+The expected value of $w_{14}$ is:
+    $$E(w_{14}) = -1*\underbrace{f_{14}(-1)}_{36/37} + 35*\underbrace{f_{14}(35)}_{1/37} \approx -0.027$$
+That is, each dollar bet on red leads to an average loss of 2.7 cents for the bettor, as does each dollar bet on 14.
+:::
+
+We can think of the expected value as a weighted average of its possible
+values, with each value weighted by the probability of observing that value.
+
+### Properties of the expected value {#properties-of-the-expected-value}
+
+In addition to taking the expected value of $x$, we can also take the
+expected value of any function of $x$:
+  $$E(g(x)) = \sum_{s \in S_x} g(s)\Pr(x = s) = \sum_{s \in S_x} g(s)f_x(s)$$
+Now, remember that the expected value is a sum, and so it has some 
+of the same properties as sums. In particular, the associative and
+distributive rules apply, which means:
+  $$E(a + bx) =  a + bE(x)$$
+That is, we can take the expected value "inside" any linear function.
+This will turn out to be a very handy property.
+
+Unfortunately, this handy property applies only to linear functions. If
+$g(\cdot)$ is not a linear function than $E(g(x)) \neq g(E(x))$. For 
+example:
+  $$E(x^2) \neq E(x)^2$$
+  $$E( 1/x ) \neq 1 / E(x)$$
+Students frequently make this mistake, so try to avoid it.
+
+::: example
+**Using the linearity of the expected value**
+
+Suppose we bet \$100 on red.  Our net payout will be $100w_{red}$
+so our expected payout will be:
+  $$E(100 w_{red}) = 100 \, E(w_{red}) = 100*(-0.027) = -2.7$$
+In other words, the average result of a \$100 bet on red is a loss
+of \$2.70.
+:::
+
+
+## Other properties of a random variable {#the-properties-of-a-random-variable}
 
 The probability distribution of a random variable is fully described
 by its PDF or CDF.  However, we will often be interested in 
@@ -421,67 +476,6 @@ The median of $w_{red}$ is just its 0.5 quantile or 50th percentile:
   $$median(w_{red}) = q_{0.5}(w_{red}) = -1$$
 :::
 
-### The expected value {#the-expected-value}
-
-The median is often interpreted as measures of a random variable's
-"central tendency", or as a prediction of its "typical" value. The expected 
-value (also called the mean) is another measure of central tendency. 
-
-#### Definition of expected value {#definition-of-expected-value}
-
-The ***expected value*** of a random variable $x$ is written
-$E(x)$. When $x$ is discrete, it is defined as:
-
-$$E(x) = \sum_{a \in S_x} a\Pr(x=a) = \sum_{a \in S_x} af_x(a)$$
-The expected value is also called the ***mean***, the ***population mean***
-or the ***expectation*** of the random variable.
-
-
-::: example
-**The expected value in roulette**
-
-The expected value of $b$ is:
-  $$E(b) = 0*\underbrace{f_b(0)}_{1/37} + 1*\underbrace{f_b(1)}_{1/37} + \cdots 36*\underbrace{f_b(36)}_{1/37} = 18$$
-  
-The expected value of $w_{red}$ is:
-    $$E(w_{red}) = -1*\underbrace{f_{red}(-1)}_{19/37} + 1*\underbrace{f_{red}(1)}_{18/37} \approx -0.027$$
-The expected value of $w_{14}$ is:
-    $$E(w_{14}) = -1*\underbrace{f_{14}(-1)}_{36/37} + 35*\underbrace{f_{14}(35)}_{1/37} \approx -0.027$$
-That is, each dollar bet on red leads to an average loss of 2.7 cents for the bettor, as does each dollar bet on 14.
-:::
-
-We can think of the expected value as a weighted average of its possible
-values, with each value weighted by the probability of observing that value.
-
-
-#### Properties of the expected value {#properties-of-the-expected-value}
-
-In addition to taking the expected value of $x$, we can also take the
-expected value of any function of $x$:
-  $$E(g(x)) = \sum_{s \in S_x} g(s)\Pr(x = s) = \sum_{s \in S_x} g(s)f_x(s)$$
-Now, remember that the expected value is a sum, and so it has some 
-of the same properties as sums. In particular, the associative and
-distributive rules apply, which means:
-  $$E(a + bx) =  a + bE(x)$$
-That is, we can take the expected value "inside" any linear function.
-This will turn out to be a very handy property.
-
-Unfortunately, this handy property applies only to linear functions. If
-$g(\cdot)$ is not a linear function than $E(g(x)) \neq g(E(x))$. For 
-example:
-  $$E(x^2) \neq E(x)^2$$
-  $$E( 1/x ) \neq 1 / E(x)$$
-Students frequently make this mistake, so try to avoid it.
-
-::: example
-**Using the linearity of the expected value**
-
-Suppose we bet \$100 on red.  Our net payout will be $100w_{red}$
-so our expected payout will be:
-  $$E(100 w_{red}) = 100 \, E(w_{red}) = 100*(-0.027) = -2.7$$
-In other words, the average result of a \$100 bet on red is a loss
-of \$2.70.
-:::
 
 ### Variance and standard deviation {#variance-and-standard-deviation}
 
@@ -535,11 +529,15 @@ several standard properties:
 
 We can easily derive these properties but we will skip that now.
 
-## Standard distributions {#standard-distributions}
+## Standard discrete distributions {#standard-distributions}
 
-Some probability distributions appear so often in applications that
-we have given them names. We will go through a few of the most 
-important ones below.
+In principle, there are an infinite number of possible probability
+distributions.  However, some probability distributions appear so 
+often in applications that we have given them names. This provides 
+a quick way to describe a particular distribution without 
+writing out its PDF.  It also allows us to establish the properties
+of a commonly-used distribution once, and use those results every
+time we use that distribution.
 
 ### Bernoulli {#bernoulli}
 
@@ -547,19 +545,35 @@ The ***Bernoulli*** probability distribution is usually written:
 $$x \sim Bernoulli(p)$$
 It has discrete support $S_x = \{0,1\}$ and PDF:
 $$f_x(a) = \begin{cases} (1-p) & a = 0 \\ p & a = 1 \\ 0 & a = \textrm{anything else}\\ \end{cases}$$
-We typically use Bernoulli random variables to model the probability of some
-event $A$. If we define $x$ as the indicator variable $x=I(A)$, 
-then $x \sim Bernoulli(p)$ where $p=\Pr(A)$.
+Note that the "Bernoulli distribution" isn't really a (single)
+probability distribution.  Instead it is what
+we call a ***parametric family*** of distributions.  That is,
+the $Bernoulli(p)$ is a different distribution with a different PDF
+for each value of the ***parameter*** $p$.
 
-The mean and variance of a $Bernoulli(p)$ random variable are:
-$$E(x) = (1-p)*0 + p*1 = p$$
-$$var(x) = E[(x-E(x))^2] = E[(x-p)^2] = (1-p)(0-p)^2 + p(1-p)^2 = p(1-p)$$
+We typically use Bernoulli random variables to model the probability of some
+random event $A$. If we define $x$ as the indicator variable $x=I(A)$, 
+then $x \sim Bernoulli(p)$ where $p=\Pr(A)$.
 
 ::: example
 **The Bernoulli distribution in roulette**
 
 The variable $r = I(Red)$ has the $Bernoulli(18/37)$ distribution.
 :::
+
+The mean of a $Bernoulli(p)$ random variable is:
+\begin{align}
+  E(x) &= (1-p)*0 + p*1 \\
+       &= p
+\end{align}
+and its variance is:
+\begin{align}
+var(x) &= E[(x-E(x))^2] \\
+  &= E[(x-p)^2] \\
+  &= (1-p)(0-p)^2 + p(1-p)^2 \\
+  &= p(1-p)
+\end{align}
+
 
 ### Binomial {#binomial}
 
@@ -571,23 +585,19 @@ $$f_x(a) =
     \frac{n!}{a!(n-a)!} p^a(1-p)^{n-a} & a \in S_x \\ 
     0 & \textrm{anything else} \\ 
   \end{cases}$$
-The binomial distribution is typically used to model frequencies or counts.
+You do not need to memorize or even understand this formula.  The 
+Excel function `BINOMDIST()` can be used to calculate the PDF or 
+CDF of the binomial distribution, and the function `BINOM.INV()`
+can be used to calculate its quantiles.
 
-Let $(b_1,b_2,\ldots,b_n)$ be a sequence of $n$ independent random 
-variables from the $Bernoulli(p)$ distribution and let:
-  $$x = \sum_{i=1}^n b_i$$
-count up the number of times that $b_i$ is equal to one (i.e., the event
-modeled by $b_i$ happened).  Then it is possible to derive the
-distribution for $y$, and it turns out to be $Binomial(n,p)$.
+The binomial distribution is typically used to model frequencies or counts. We
+can show that it is the distribution of how many of $n$ independent 
+probability-$p$ events happen.  
 
-I won't derive the formula for the binomial PDF, but the intuition
-is simple: $\frac{n!}{a!(n-a)!}$ is the number of outcomes in 
-which $x=a$ and the $p^a(1-p)^{n-a}$ is the probability 
-of each of those outcomes.
-
-The mean and variance of a binomial random variable are:
-  $$E(x) = np$$
-  $$var(x) = np(1-p)$$
+For example, the basketball player Stephen Curry makes about
+43\% of his 3-point shot attempts.  If each shot is independent of the others,
+then the number of shots he makes in 10 attempts will have the
+$Binomial(10,0.43)$ distribution.
 
 ::: example
 **The binomial distribution in roulette**
@@ -599,11 +609,38 @@ Since the outcome of a single bet on red is $r \sim Bernoulli(18/37)$,
 this means that $WIN50 \sim Binomial(50,18/37)$.
 :::
 
+The mean and variance of a binomial random variable are:
+  $$E(x) = np$$
+  $$var(x) = np(1-p)$$
+
+
+::: fyi
+The formula for the binomial PDF looks strange, but it can actually
+be derived from a fairly simple and common situation.  Let 
+$(b_1,b_2,\ldots,b_n)$ be a sequence of $n$ independent random 
+variables from the $Bernoulli(p)$ distribution and let:
+  $$x = \sum_{i=1}^n b_i$$
+count up the number of times that $b_i$ is equal to one (i.e., the event
+modeled by $b_i$ happened).  Then it is possible to derive the
+PDF for $y$, and that is the PDF we call $Binomial(n,p)$.  The derivation
+is not easy, but the intuition is simple: 
+
+- We can calculate the probability of the event $x=a$ by adding up 
+  probability of its component outcomes.
+- The number of outcomes in the event $x=a$ is $\frac{n!}{a!(n-a)!}$.
+- The probability of each individual outcome in the event $x=a$ is 
+  $p^a(1-p)^{n-a}$.
+
+Therefore the probability of the event $x=a$ is   $\frac{n!}{a!(n-a)!}p^a(1-p)^{n-a}$.
+:::  
+
+
 ### Discrete uniform {#discrete-uniform}
 
-The ***discrete uniform*** distribution is a distribution with 
-that puts equal probability on every value in a discrete set 
-$S_x$. Its PDF is:
+The ***discrete uniform*** distribution 
+  $$x \sim DiscreteUniform(S_x)$$
+is a distribution that puts equal probability on every value in 
+a discrete set $S_x$. Its support is $S_x$ and its PDF is:
 $$f_x(a) = \begin{cases}
           1/|S_x| & a \in S_x \\
           0 & a \notin S_x \\
