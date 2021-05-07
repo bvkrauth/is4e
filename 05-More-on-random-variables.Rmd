@@ -8,17 +8,9 @@ knitr::opts_chunk$set(echo = FALSE,
 library("tidyverse")
 ```
 
-In chapters \@ref(basic-data-cleaning-with-excel) and
-\@ref(basic-data-analysis-with-excel) we learned some techniques 
-for cleaning data and calculating statistics in Excel.  In chapters 
-\@ref(probability-and-random-events) and \@ref(random-variables), 
-we developed the basic theory of probability, random events, 
-and random variables.  
-
-Our next step is to bring these two strands of concepts together.  Over 
-the next two chapters we will develop a framework for talking about data
-and the statistics calculated from that data as a random process that can be
-described using the theory of probability and random variables.
+Chapter \@ref(random-variables) developed the basic analytical tools
+for a single discrete random variable.  This chapter will extend those
+tools to continuous random variables, and to multiple random variables.
 
 ::: goals
 ***Chapter goals***
