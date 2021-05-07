@@ -369,24 +369,6 @@ or we might be interested in a simple measure of how much the
 random variable tends to vary.  All of these quantities
 can be defined and calculated from on the PDF or CDF.
 
-### The mode {#the-mode}
-
-Roughly speaking, the ***mode*** of a random variable is its most likely 
-value (i.e., the value with the highest PDF).
-
-:::example
-**The mode in roulette**
-
-- The mode of $w_{red}$ is $-1$. That is, losing \$1 is the 
-  most likely outcome.
-- The mode of $w_{14}$ is also $-1$.
-
-What is the mode of $b$, since it takes on one of 37 equally-likely values?
-In order to answer that, we would need to define the mode more precisely than
-just "the most likely outcome." But this is an introductory course,
-so let's just leave it at that.
-:::
-
 ### Range {#range}
 
 The ***range*** of a random variable is the interval from the
@@ -407,7 +389,7 @@ Roughly speaking, the ***median*** of a random variable is the value in the
 "middle"of the distribution, i.e., we have the same probability of being 
 above the median as we do of being below the median.
  
-As with the mode, this simple definition works fine in some cases but not
+This simple definition works fine in some cases but not
 others. But in this case, let's fine-tune the definition so it always works.
 
 We will start by defining something more general called a ***quantile*** or
@@ -447,8 +429,8 @@ The median of $w_{red}$ is just its 0.5 quantile or 50th percentile:
 
 ### The expected value {#the-expected-value}
 
-Both the median and mode are often interpreted as measures of a random variable's
-"central tendency", or as predictions of its "typical" value. The expected 
+The median is often interpreted as measures of a random variable's
+"central tendency", or as a prediction of its "typical" value. The expected 
 value (also called the mean) is another measure of central tendency. 
 
 #### Definition of expected value {#definition-of-expected-value}
@@ -509,7 +491,7 @@ of \$2.70.
 
 ### Variance and standard deviation {#variance-and-standard-deviation}
 
-The mode, median and expected value all aim to describe a typical
+The median and expected value both aim to describe a typical
 or central value of the random variable.  We are also interested in
 measures of how much the random variable varies.  We have already
 seen one - the range - but there are others, including the
