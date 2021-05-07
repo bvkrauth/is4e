@@ -357,7 +357,7 @@ but we can just think of it as the size of the jump.
 :::
 
 
-## The properties of a random variable {#the-properties-of-a-random-variable}
+## Properties of a random variable {#the-properties-of-a-random-variable}
 
 The probability distribution of a random variable is fully described
 by its PDF or CDF.  However, we will often be interested in 
@@ -383,23 +383,15 @@ minimum value in its support to the maximum value in the support.
 
 :::
 
-### Medians, quantiles and percentiles {#medians-quantiles-and-percentiles}
+### Quantiles and percentiles {#quantiles-and-percentiles}
 
-Roughly speaking, the ***median*** of a random variable is the value in the 
-"middle"of the distribution, i.e., we have the same probability of being 
-above the median as we do of being below the median.
- 
-This simple definition works fine in some cases but not
-others. But in this case, let's fine-tune the definition so it always works.
-
-We will start by defining something more general called a ***quantile*** or
-***percentile***.  Let $x$ be a random variable with CDF $F_x$, and let
-$\alpha$ be any number between zero and one.  Then the $\alpha$ quantile
+Let $x$ be a random variable with CDF $F_x$, and let
+$\alpha$ be any number between zero and one.  Then the $\alpha$ ***quantile***
 of $x$ is defined as:
 
 $$q_a(x) = \min\{a: \Pr(x \leq a) \geq \alpha\} = \min\{a: F_x(a) \geq \alpha\}$$
 The $\alpha$ quantile of a distribution is also called the $100*\alpha$
-percentile; for example the 0.25 quantile of $x$ is also called the 25th
+***percentile***; for example the 0.25 quantile of $x$ is also called the 25th
 percentile of $x$.
 
 ::: example
@@ -416,9 +408,11 @@ and its 0.75 quantile (75th percentile) is:
   $$q_{0.75}(w_{red}) = \min\{a: \Pr(w_{red} \leq a) \geq 0.75\} = \min\{1\} = 1$$
 :::
 
-Having precisely defined quantiles and percentiles, we can now precisely
-define the median: the median is the 0.5 quantile or 50th percentile.
 
+### The median {#the-median}
+
+The ***median*** of a random variable is its 0.5 quantile or 50th percentile.  It can be interpreted roughly as the "middle" of the
+distribution.
 
 ::: example
 **The median in roulette**
