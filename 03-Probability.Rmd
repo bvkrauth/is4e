@@ -97,15 +97,28 @@ These roulette events are well-defined for our sample space:
 - Ball lands on 14:
   $$b \in \{14\}$$
 - Ball lands on red:
-   $$b \in Red = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
+  \begin{align}
+    b \in Red &= \left\{\begin{aligned}
+      & 1,3,5,7,9,12,14,16,18, \\
+      & 19,21,23,25,27,30,32,34,36 \\
+      \end{aligned}\right\}
+  \end{align}
 - Ball lands on black:
-   $$b \in Black = \{2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35\}$$
+  \begin{align}
+    b \in Black &= \left\{\begin{aligned}
+      & 2,4,6,8,10,11,13,15,17, \\
+      & 20,22,24,26,28,29,31,33,35 \\
+      \end{aligned}\right\}
+  \end{align}
 - Ball lands on one of the first 12 numbers:
    $$b \in First12 = \{1,2,3,4,5,6,7,8,9,10,11,12\}$$
 
 We could define many more events, depending on what bets
 we are interested in.
 :::
+
+An event that contains only one outcome is called an 
+***elementary event***.
 
 Since events are sets, we can use the terminology and mathematical
 tools for sets. 
@@ -115,23 +128,24 @@ tools for sets.
 
 In our roulette example:
 
-- Events are *identical* if they contain exactly the same outcomes:
+- Two events are *identical* $(A = B)$ if they contain exactly the same outcomes:
   - The event "ball lands on 14" and "a bet on 14 wins"
     are identical since $\{14\} = \{14\}$.
   - Intuitively, identical means they are just two different ways of describing
     the same event.
-- An event *implies* another event if all of its outcomes are also in 
+- An event *implies* another event $(A \subset B)$ if all of its outcomes are also in 
   the implied event 
   - The event "ball lands on 14"  implies the event "ball lands on red" 
     since $\{14\} \subset Red$.
   - When an event happens, any event it implies also happens.
-- Events are *disjoint* if they share no outcomes:
+- Two events are *disjoint* $(A \cap B) = \emptyset$
+  if they share no outcomes:
   - The events "ball lands on red" and "ball lands on black" are disjoint 
     since $Red \cap Black = \emptyset$.
   - If two events are disjoint, they cannot both happen.
   - But they can both fail to happen.  For example, if the ball lands in the
     green zero slot ($b = 0$), neither red nor black wins.
-- Any two outcomes are either identical or disjoint
+- Any two elementary events are either identical or disjoint
    - The events "ball lands on 14" and "ball lands on 25" are disjoint
      since $\{14\} \cap \{25\} = \emptyset$.
 :::
@@ -154,7 +168,7 @@ Probabilities are normally between zero and one:
 
 ### The axioms of probability {#the-axioms-of-probability}
 
-All valid probability distributions must obey the following three conditions:
+All valid probability distributions must obey the following three conditions, which are sometimes called the ***axioms*** of probability.
 
 1. Probabilities are never negative:
    $$\Pr(A) \geq 0$$
@@ -164,9 +178,8 @@ All valid probability distributions must obey the following three conditions:
    $A$ or $B$ happen is the sum of their individual probabilities:
    $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
 
-These conditions are sometimes called the ***axioms*** of probability.
 Probability distributions have many other properties, but they
-can all be derived from these three.
+can all be derived from these three axioms.
 
 ::: example
 **Outcome probabilities for a fair roulette game**
@@ -190,16 +203,16 @@ Summarizing this equation:
    $$1 = 37p$$
 Solving for $p$ we get:
    $$p = 1/37 \approx 0.027$$
-That is, each of the 37 outcomes have a probability of $1/37$.
+That is, each of the 37 elementary events have a probability of $1/37$.
 :::
 
 Since this is an introductory course, our sample space will usually 
 contain a finite number of outcomes, as in our roulette example.  In
 that case, probability calculations are pretty simple:
 
-- Find the probability of each outcome.
+- Find the probability of each elementary event.
 - To find the probability of a specific event, just add up the probabilities
-  of its outcomes.
+  of its elementary events.
   
 
 ::: example
@@ -247,24 +260,7 @@ while the Bayesian interpretation makes more sense for things
 like predicting election results.
 :::
 
-
-## Related events {#related-events}
-
-We are often interested in more than one event, and want to talk about how 
-they are related. For example:
-
- - In some casino games like poker or blackjack, players take an additional 
-   action after partial information about the outcome is revealed.
- - Politicians often use polls to predict the winner of an election.
- - Finance people often want to model multiple market scenarios and 
-   forecast a company's earnings under each of them.
- - Economists often have data on current economic conditions and want 
-   to predict future economic conditions.
-
-This section will develop some tools for dealing with the relationship
-between different random events.
-
-### Some rules for probabilities {#some-rules-for-probabilities}
+### Additional rules for probabilities {#some-rules-for-probabilities}
 
 Let $A$ and $B$ be two events.  Then our three axioms
 of probability imply several additional rules:
@@ -288,6 +284,22 @@ of probability imply several additional rules:
 These results are not hard to prove, but I will not go through the proofs.
 However, I will use these results so you should be familiar with them.
 
+## Joint and conditional probabilities {#related-events}
+
+We are often interested in more than one event, and want to talk about how 
+they are related. For example:
+
+ - In some casino games like poker or blackjack, players take an additional 
+   action after partial information about the outcome is revealed.
+ - Politicians often use polls to predict the winner of an election.
+ - Finance people often want to model multiple market scenarios and 
+   forecast a company's earnings under each of them.
+ - Economists often have data on current economic conditions and want 
+   to predict future economic conditions.
+
+This section will develop some tools for dealing with the relationship
+between different random events.
+
 ### Joint probabilities {#joint-probabilities}
 
 The ***joint probability*** of two events $A$ *and* $B$ is the probability that
@@ -300,14 +312,28 @@ outcomes that are in both $A$ and $B$.
 **Joint probabilities for roulette bets**
 
 Consider two events for a game of roulette:
-  $$Red = \{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36\}$$
-  $$Even = \{2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36\}$$
+  \begin{align}
+    Red &= \left\{\begin{aligned}
+      & 1,3,5,7,9,12,14,16,18, \\
+      & 19,21,23,25,27,30,32,34,36 \\
+      \end{aligned}\right\} \\
+    Even &= \left\{\begin{aligned}
+      & 2,4,6,8,10,12,14,16,18, \\
+      & 20,22,24,26,28,30,32,34,36 \\
+      \end{aligned}\right\}
+  \end{align}
 Suppose you are interested in the probability that the ball lands on a number that is both 
-red and even. 
-  $$\Pr(Red \cap Even) = \Pr(\{12,14,16,18,30,32,34,36\}) = 8/37 \approx 0.216$$
+red and even. This event is just the intersection of $Red$ and $Even$
+so this joint probability is:
+  \begin{align}
+    \Pr(Red \cap Even) &= \Pr(\{12,14,16,18,30,32,34,36\}) \\
+      &= 8/37 \\
+      &\approx 0.216
+  \end{align}
 :::
 
-Joint probabilities are just probabilities, so they obey all of the rules of probability.  For example, all joint probabilities are between zero and one.
+Joint probabilities are just probabilities, so they obey all of the axioms
+and rules of probability described in Section \@ref(probabilities).
 
 ### Conditional probabilities {#conditional-probabilities}
 
@@ -333,7 +359,8 @@ In our roulette example:
 :::
 
 Like joint probabilities, conditional probabilities are just probabilities,
-so they obey all of the rules of probability.
+so they obey all of the axioms and rules of probability described in 
+Section \@ref(probabilities).
 
 ### Independent events {#independent-events}
 
@@ -345,18 +372,6 @@ We say that two events $A$ and $B$ are ***independent*** if their joint
 probability is just the two individual probabilities multiplied together:
   $$\Pr(A \cap B) = \Pr(A)\Pr(B)$$
 We usually express independence with the notation $A \bot B$.
-
-::: fyi
-**Events are not always independent**
-
-A common mistake by students who are new to probability and
-statistics is to take results that *only* apply under independence
-and use them when there is no reason to believe that independence
-holds.
-
-Don't make this mistake: independence is an assumption, and one that
-can easily be incorrect.
-:::
 
 The definition of independence is not very intuitive, but we can clarify
 it by doing a little math.  Consider two independent events $A$
@@ -375,17 +390,6 @@ is true.
       the events have nonzero probability. When $B$ has zero
       probability the conditional probability $\Pr(A|B)$ is not
       well defined since its denominator is zero.
-
-::: example
-**Independence in a roulette game**
-
-Consider the roulette events "Red wins" and "Even wins".  We earlier
-showed that the unconditional probability that Red wins is:
-  $$\Pr(Red) = 18/37 \approx 0.486$$
-The conditional probability that Red wins given that Even wins is:
-   $$\Pr(Red|Even) = 8/18 \approx 0.444$$
-Since $0.44 \neq 0.486$, these two events are *not* independent.
-:::
 
 When would it be reasonable to assume events are independent? 
 The typical scenario would be where there is simply no 
@@ -431,7 +435,29 @@ equation because we have assumed the events $Red_1$, $Red_2$, and $Red_3$
 are independent.
 :::
 
-### Two "laws" of probability {#two-laws-of-probability}
+When is it *not* reasonable to assume that events are independent? In
+almost any other case.  Remember that events are defined in terms of
+the same underlying outcome, so they are typically related unless 
+you have some very specific reason to assume otherwise.
+
+::: example
+**Independence within a roulette game?**
+
+Consider the roulette events "Red wins" and "Even wins".  We earlier
+showed that the unconditional probability that Red wins is:
+  $$\Pr(Red) = 18/37 \approx 0.486$$
+The conditional probability that Red wins given that Even wins is:
+   $$\Pr(Red|Even) = 8/18 \approx 0.444$$
+Since $0.44 \neq 0.486$, these two events are *not* independent.
+:::
+
+A common mistake by students who are new to probability and
+statistics is to take results that *only* apply under independence
+and use them when there is no reason to believe that independence
+holds.  Don't make this mistake: independence is an assumption, 
+and one that can easily be incorrect.
+
+### Law of total probability
 
 In addition to the results we have already discussed, there are two
 important results using conditional probabilities:
@@ -447,6 +473,8 @@ calculate probabilities under each scenario, and then add them up. It
 is useful when we are modeling random outcomes that occur in multiple
 stages, for example a poker game or an energy company making a series of
 investments to develop an oil field.
+
+### Bayes' law
 
 The second is ***Bayes' law***, which is a rule for determining 
 conditional probabilities:
