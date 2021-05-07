@@ -1,5 +1,8 @@
 # Estimation and asymptotics {#estimation-and-asymptotics}
 
+One of the most important uses of statistics is to ***estimate*** or
+guess at the value at, some unknown parameter of the DGP.
+
 ::: goals
 ***Chapter goals***
 
@@ -10,12 +13,7 @@ In this chapter we will:
   theorem.
 :::
 
-## Estimation
-
-One of the most important uses of statistics is to ***estimate*** or
-guess at the value at, some unknown parameter of the DGP.
-
-### Parameters and estimators
+## Parameters and estimators
 
 A ***parameter*** is an unknown number characterizing a DGP. 
 
@@ -67,11 +65,22 @@ Our four example statistics are commonly used as estimators:
 
 :::
 
+## Estimator properties
+
+Estimators are statistics, so they have all the usual characteristics of a 
+statistic, including a sampling distribution, a mean, a variance, etc.
+
+In addition estimators have properties specific to their purpose as
+a statistic that is supposed to take on a value close to the unknown
+parameter of interest.
+
+### Sampling error
+
 Let $s_n$ be a statistic we are using as an estimator of some parameter 
-of interest $\theta$.  We can define its ***error*** as:
+of interest $\theta$.  We can define its ***sampling error*** as:
   $$err(s_n) = s_n - \theta$$
 In principle, we want $s_n$ to be a good estimator of $\theta$, i.e.,
-we want $err(s_n)$ to be as close to zero as possible.  
+we want the sampling error to be as close to zero as possible.  
 
 There are several major complications to keep in mind:
 
@@ -85,18 +94,22 @@ statistic - it depends on the relationship between the statistic
 and the parameter of interest. A given statistic may be a good
 estimator of one parameter, and a bad estimator of another parameter.
 
-### Bias and the MVUE criterion
+### Bias 
 
 In choosing an estimator, we can consider several criteria.
 
-The first is the ***bias*** of the estimator, which is defined as:
-$$bias(s_n) = E(err(s_n)) = E(s_n - \theta) = E(s_n) - \theta$$
-The bias represents the expected error. 
+The first is the ***bias*** of the estimator, which is defined as
+its expected sampling error:
+\begin{align}
+  bias(s_n) &= E(err(s_n)) \\
+    &= E(s_n - \theta) \\
+    &= E(s_n) - \theta
+\end{align}
+Note that bias is always defined relative to the parameter we wish 
+to estimate, and is not an inherent property of the statistic.
 
 Ideally we would want $bias(s_n)$ to be zero, in which case
 we would say that $s_n$ is an ***unbiased*** estimator of $\theta$.
-Note that bias is always defined relative to the parameter we wish 
-to estimate, and is not an inherent property of the statistic.
 
 ::: example
 **Two unbiased estimators of the mean**
@@ -232,10 +245,13 @@ This suggests that we need a criterion that
   - Can choose slightly biased estimators with low variance
     over unbiased estimators with high variance.
 
-The ***mean squared error*** of an estimator is defined as:
-  $$MSE(s_n) = E[err(s_n)^2] = E[(s_n-\theta)^2]$$
-We can do a little math and show that:
-  $$MSE(s_n) = var(s_n) + [bias(s_n)]^2$$
+The ***mean squared error*** of an estimator is defined as the
+expected value of the squared sampling error:
+\begin{align}
+  MSE(s_n) &= E[err(s_n)^2] \\
+    &= E[(s_n-\theta)^2] \\
+    &= var(s_n) + [bias(s_n)]^2
+\end{align}
 The MSE criterion allows us to choose a biased estimator with low variance
 over an unbiased estimator with high variance, and also allows us to choose
 between biased estimators when no unbiased estimator exists.
@@ -251,7 +267,7 @@ The sample average is the preferred estimator by the MSE criterion,
 so in this case we get the same result as applying the MVUE criterion.
 :::
 
-### Standard errors
+### Standard error
 
 Parameter estimates are typically reported along with their
 ***standard errors***.  The standard error of a statistic is
@@ -266,7 +282,6 @@ of the population mean, and that its variance is:
 Since $s_x^2$ is an unbiased estimator of $var(x_i)$ we can use
 it to construct an unbiased estimator of $var(\bar{x})$:
   $$E\left(\frac{s_x^2}{n}\right) = \frac{E(s_x^2)}{n} = \frac{var(x_i)}{n} = var(\bar{x}_n)$$
-
 
 We might also want to estimate the standard deviation of $\bar{x}$. A natural
 approach would be to take the square root of the estimator above, yielding:
