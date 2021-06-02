@@ -546,7 +546,25 @@ the file after adding each variable so that you don't lose your work.
 
 ### Inserting cells
 
-To be added.
+Most of the time we will add data to the end of the existing table, adding
+new variables after the last column or new observations after the last row. But
+occasionally we will want to insert a column or row into our table.
+
+::: example
+**Adding a column for the ID variable**
+
+We will want our first column to include a not-yet-constructed ID
+variable, so we need to insert a column to the left.
+
+1. Select any cell in column A.
+2. Select `Home > Insert > Insert Sheet Columns` from the menu.
+
+This will shift all columns to the right, and insert a new blank
+column A.
+:::
+
+We can also insert rows, delete rows or columns, and even insert or
+delete individual cells.
 
 ### Data entry, fill and series {#entering-new-data}
 
@@ -582,8 +600,8 @@ The postal abbreviation is useful for at least two reasons
 
 To add this variable:
 
-1. Enter **ProvAbb** in cell E1 to name the variable.
-2. Fill in cells E2:E11 with the correct postal abbreviation.
+1. Enter **ProvAbb** in cell F1 to name the variable.
+2. Fill in cells F2:F11 with the correct postal abbreviation.
 :::
 
 Excel has several tools available to speed the process of entering
@@ -600,16 +618,16 @@ to the left or right.
 Our data cleaning plan includes adding a variable indicating which month 
 and year these particular observations describe (November 2020).
 
-1. Enter **MonthYr** in cell F1 to name the variable.
-2. Enter "11/20" in cell F2.
+1. Enter **MonthYr** in cell G1 to name the variable.
+2. Enter "11/20" in cell G2.
    - You may notice that Excel displays the date differently from
      how you entered it - on my computer it displays as `Nov-20`. We
      will talk more later about how Excel handles dates.
 
-Now we could enter the exact same date in cells F3:F11, but we can save
+Now we could enter the exact same date in cells G3:G11, but we can save
 ourselves some time by using Excel's fill tool:
 
-3. Select cells F2:F11.
+3. Select cells G2:G11.
 4. Select `Home > Fill > Down`.
  
 As you can see, Excel fills in all selected cells with the value in the 
@@ -622,23 +640,15 @@ with an ascending or descending sequence of numbers or dates.
 ::: example
 **Using series**
 
-Let's create a unique ID variable for our data set. The ID doesn't need to
-mean anything, so we can just number them sequentially. It would also 
-be convenient if it the ID variable were in column A.
-
-1.. Select any cell in column A.
-2. Select `Home` then the little drop-down-arrow next to`Insert` 
-   and then `Insert Sheet Columns`.  This inserts an empty column 
-   to the left of (what used to be) column A.
-
-We can enter the ID numbers by hand, but there is an easier way using
+Let's create a unique sequential ID variable in column A. We can enter 
+these ID numbers by hand, but there is an easier way using
 Excel's series tool:
 
-3. Enter **ID** in cell A1 to name the variable.
-4. Enter 1 in cell A2.
-5. Select cells A2:A11.
-6. Select `Fill > Series...`.  The Series dialog box will appear.
-7. There are several options for constructing a series. Fortunately, the
+1. Enter **ID** in cell A1 to name the variable.
+2. Enter 1 in cell A2.
+3. Select cells A2:A11.
+4. Select `Fill > Series...`.  The Series dialog box will appear.
+5. There are several options for constructing a series. Fortunately, the
    default is exactly what we want, so select `OK`.
 
 As you can see, column A now contains a unique identifier that numbers provinces
