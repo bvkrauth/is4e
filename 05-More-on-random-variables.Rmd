@@ -489,18 +489,15 @@ That is we expect this betting strategy to lose an average of
 about \$3 per game.
 :::
 
-### Covariance and correlation
+### Covariance
 
 The ***covariance*** of two random variables $x$ and $y$ 
 is defined as:
   $$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
-and their ***correlation*** is defined as:
-  $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
-Both the covariance and correlation are measures of how $x$ and $y$ tend to 
-move together.  
+The covariance is a measure of how $x$ and $y$ tend to move together.  
 
 ::: example
-**Covariance and correlation in roulette**
+**Covariance in roulette**
 
 The covariance of $w_{red}$ and $w_{14}$ is:
   \begin{align}
@@ -511,41 +508,28 @@ The covariance of $w_{red}$ and $w_{14}$ is:
         \end{aligned} \\
       &\approx 0.999 
     \end{align}
-and its correlation is:
-  \begin{align}
-    corr(w_{red},w_{14}) 
-    &= \frac{cov(w_{red},w_{14})}{\sqrt{var(w_{red})*var(w_{14})}} \\
-     &\approx \frac{0.999}{\sqrt{1.0*34.1}} \\
-     &\approx 0.17
-  \end{align}
 :::
 
-The *sign* of the covariance or correlation tells us the direction
+The *sign* of the covariance tells us the direction
 of the relationship between $x$ and $y$.
 - If *positive*: $x$ and $y$ tend to move in the *same* direction. 
 - If *negative*, $x$ and $y$ tend to move in *opposite* directions.
 - If *zero*: $x$ and $y$ tend *not* to move together at all.
-the covariance and correlation always have the same sign since 
-standard deviations are always[^601] positive, 
 
-[^601]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
-In that case the covariance will also be zero, and the correlation will be 
-undefined (zero divided by zero).
-
-When random variables are independent, their covariance and correlation are both
+When random variables are independent, their covariance is
 exactly zero. However, it does not go the other way around.  
 
 ::: example
-**Uncorrelated does not imply independent**
+**Zero covariance does not imply independent**
 
 Figure \@ref(fig:UncorrelatedButNotIndependent) below shows a scatter plot
 from a simulation of two random variables that are clearly related (and therefore
-not independent) but whose covariance and correlation are exactly zero.
+not independent) but whose covariance is exactly zero.
 
-Intuitively, covariance and correlation are a measure of the *linear* 
+Intuitively, covariance is a measure of the *linear* 
 relationship between two variables.  When variables have a nonlinear 
 relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent), the
-covariance or correlation may miss it.
+covariance may miss it.
 
 ```{r UncorrelatedButNotIndependent, fig.cap = "*x and y are uncorrelated, but clearly related.*"}
 simdata <- tibble(x = rnorm(100),
@@ -560,17 +544,6 @@ ggplot(data = simdata, mapping = aes(x = x, y =y)) +
 The *magnitude* of the covariance or correlation tells us about
 the strength of the relationship between the two variables:
 
-- The correlation is a scale-free measure of the strength of the 
-  relationship:
-  - It always lies between -1 and 1.
-  - It is unchanged by any rescaling or change in units.  That is,
-    for any positive constants $a$ and $b$:
-    $$corr(ax,by) = corr(x,y)$$
-  - When $corr(x,y) \in \{-1,1\}$, then that means $y$ is an 
-    exact linear function of $x$.  That is, we can write it:
-    $$y = a + bx$$
-    and
-    $$corr(x,y) = \begin{cases} 1 & \textrm{if $b > 0$} \\ -1 & \textrm{if $b < 0$} \\ \end{cases}$$
 - In contrast, the covariance depends on the scale of the variables, and
   always lies between $-\sigma_x\sigma_y$ and $\sigma_x\sigma_y$.
 
@@ -581,7 +554,7 @@ properties similar to those of a square.  In particular:
   $$var(x) = E(x^2) - E(x)^2$$
 - We can take constants out of a variance:
   $$var(ax) = a^2 var(x)$$
-since $(ax)^2 = a^2x^2$.
+  since $(ax)^2 = a^2x^2$.
 
 Similarly, the covariance is the expected value of a product, and has some
 implied properties similar to those of a product.  
@@ -606,6 +579,47 @@ implied properties similar to those of a product.
 
 I do not expect you to remember all of these formulas, but be 
 prepared to see me use them
+
+### Correlation
+
+The ***correlation coefficient*** of two random variables $x$ and $y$ is 
+defined as:
+  $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
+Like the covariance, the correlation describes the strength of a (linear) 
+relationship between $x$ and $y$.  But it is resecaled in a way that makes
+it more convenient for some purposes.
+
+::: example
+**Correlation in roulette**
+
+The correlation of $w_{red}$ and $w_{14}$ is:
+  \begin{align}
+    corr(w_{red},w_{14}) 
+    &= \frac{cov(w_{red},w_{14})}{\sqrt{var(w_{red})*var(w_{14})}} \\
+     &\approx \frac{0.999}{\sqrt{1.0*34.1}} \\
+     &\approx 0.17
+  \end{align}
+:::
+
+
+The covariance and correlation always have the same sign since 
+standard deviations are always[^601] positive. The key
+difference between them is that correlation is scale-invariant. That
+is:
+
+- It always lies between -1 and 1.
+- It is unchanged by any rescaling or change in units.  That is,
+  for any positive constants $a$ and $b$:
+  $$corr(ax,by) = corr(x,y)$$
+- When $corr(x,y) \in \{-1,1\}$, then that means $y$ is an 
+  exact linear function of $x$.  That is, we can write it:
+  $$y = a + bx$$
+  and
+  $$corr(x,y) = \begin{cases} 1 & \textrm{if $b > 0$} \\ -1 & \textrm{if $b < 0$} \\ \end{cases}$$
+
+[^601]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
+In that case the covariance will also be zero, and the correlation will be 
+undefined (zero divided by zero).
 
 ## Chapter review {#review-more-on-random-variables}
 
