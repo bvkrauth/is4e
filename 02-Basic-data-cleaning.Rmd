@@ -41,52 +41,194 @@ In this chapter we will learn how to:
    - Identify the characteristics of tidy data
 :::
 
-## Principles of data cleaning
+## Application: Canadian employment data
+
+We will demonstrate the key principles and tools in this chapter 
+by cleaning the November 2020 employment data for Canadian provinces. You 
+can download this data file at 
+https://bvkrauth.github.io/files/CanadaEmploymentNov2020.xlsx. 
+
+::: economics
+**Economics review: Employment statistics**
+
+Employment statistics are typically covered in a Principles of
+Macroeconomics course (at SFU, this course is called ECON 105). To
+review the basics:
+
+- These statistics are reported monthly by Statistics Canada and
+  are based on the Labour Force Survey (LFS), a monthly survey of the
+  **civilian, non-institutionalized, working-age population of Canada**.
+  - "civilian" excludes those on active military duty
+  - "non-institutionalized" excludes people in prison, hospitals, 
+    nursing homes, etc.
+  - "working-age" excludes those under age 15
+  - People living on reserve are also not covered by the LFS
+- The LFS population is grouped into three categories:
+  - **Employed**: worked for pay or profit in the previous week, or had
+    a job and was absent (e.g. due to illness or vacation).
+  - **Unemployed**: not employed in the previous week, but either looking
+    for work, on temporary layoff, or had a job to start within the
+    next four weeks.
+  - **Not in the labour force**: everyone else.  This includes retirees,
+    full-time students who aren't working for pay, and anyone else
+    who is neither working nor looking for work.
+- These basic counts are then used to calculate several other statistics
+  - The **labour force** is the total count of those who are employed or
+    unemployed.
+  - The **labour force participation rate** is the proportion or percentage
+    of the population that is in the labour force. The Canadian
+    LFP rate is typically around 65%.
+  - The **unemployment rate** is the proportion of the labour force that
+    is unemployed. The Canadian unemployment rate is typically 5-10%.
+
+The unemployment rate and LFP rate are key indicators of labour market
+conditions. A higher-than-usual unemployment rate means that workers
+are having difficulty finding work, and a lower-than-usual LPF rate
+means that some workers have stopped looking for work.
+:::
+
+## Data cleaning principles
+
+Next, we describe some of the core principles we will follow 
+in cleaning and managing our data.
 
 ### Reproducibility {#data-management}
 
-When analyzing data it is important for our results to be clear and 
-***reproducible***. What that means is that an interested reader 
+When analyzing data it is important for the results of our analysis to
+be ***reproducible***. What that means is that an interested reader 
 should be able to figure out exactly how you got your results, 
-and should be able to generate those results themselves.
+and should be able to generate those results themselves.  Note that the
+"interested reader" might be *you*, as it is common to return to an
+analysis you did earlier.  Without reproducibility, you may not 
+remember where you found the data, what you have done with it, or 
+what it means.
 
-1. Document the source of all original data.
+Reproducibility requires that we treat our data with care.  In
+particular, we should:
+
+1. Document the original sources for all data.
+   - If a data file is downloaded from the internet, the
+     original URL should be documented.
 2. Keep an unmodified copy of all original data.
 3. Avoid directly editing data. Add new data instead.
+   - Sometimes this is not possible or practical, which is
+     why we keep an unmodified copy of the original data.
 4. Give all files and variables brief but informative names.
    - I usually avoid spaces or special characters in variable or file 
      names as they can cause problems when moving data across operating
      systems, file formats, or applications.
 
-Note that the "interested reader" might be *you*, since you may
-not remember where you found the data, what you have done with it,
-or what it means.
+We will discuss the implementation of these principles later in this
+chapter.
 
 ### Tidy data {#tidy-data}
 
 To keep analysis easy and minimize errors, data should be organized
-as what data scientists sometimes call ***tidy*** data. Tidy data 
-has the following properties:
+as what data scientists have come to call ***tidy*** data. Tidy data 
+has the following seven properties:
 
-- Data is arranged in one or more simple rectangular grids or ***tables***.
-- Each row in a table (after the top row) represents a distinct
-  ***observation*** or ***case***.
-- All observations in a table come from the same ***unit of observation***
-- Each column in a table represents a distinct ***variable*** or attribute.
-- The top row of a table should give an informative and unique name for 
-  each variable.
-- One variable (ideally the first column) in a table serves as a 
-  **unique identifier** or **ID** for the observation.
-  - A unique identifier takes on a different value for each observation.
-- The order in which observations are listed is irrelevant to the analysis. 
-  - That is, the interpretation of the data in a table would not change if 
+1. Data is arranged in one or more simple rectangular grids or ***tables***.
+2. Each column in a table represents a distinct ***variable*** or attribute.
+3. Each variable has an informative and unique ***variable name***.
+   - Variable names are typically displayed in the top row of the table.
+4. Each row in a table (after the top row) represents a distinct
+   ***observation***, ***data point*** or ***case***.
+5. All observations in a given table come from the same 
+   ***unit of observation***
+6. The order in which observations are listed is irrelevant to the analysis. 
+   - That is, the interpretation of the data in a table would not change if 
     its rows were listed in a different order.
+7. One variable (ideally the first column) in a table serves as a 
+   **unique identifier** or **ID** for the observation.
+   - A unique identifier takes on a different value for each observation.
 
 Data that is not tidy is sometimes called ***messy*** data. One 
 of the first steps in cleaning data is rearranging it from a messy
 format to a tidy format.
 
-## A quick tour of Excel {#a-quick-tour-of-excel}
+### Observations and identifiers
+
+Each tidy data set normally includes at least one unique identifier or ID 
+variable. By definition, an ID variable *must* take on a different value 
+for each observation.  With this property, we can use ID variables to 
+link and combine data from multiple sources.
+
+::: example
+**ID variables at SFU**
+
+SFU is one of British Columbia's largest organizations, and relies
+heavily on ID variables to organize its information:
+
+- Each SFU member (faculty, staff or student) has a unique 16-digit ID
+  number and a unique computing ID.
+- Each semester at SFU has a 4-digit semester code, for example the 
+  Fall 2021 is assigned the semester code 1217.
+- Each academic program at SFU has a 2-letter to 4-letter program code
+  such as IS, BUS, or ECON.
+- Each course at SFU is identified by its program code (e.g. ECON)
+  a numeric course code (e.g. 233), a section number (e.g., D100),
+  and a semester number (e.g., 1217).  
+  
+Library records, grades, financial records, and almost any other 
+information SFU has about you includes one or more of these IDs.
+:::
+
+The example above shows several common characteristics of ID variables:
+
+1. They can be numbers (like your student ID number) or text 
+   strings (like your computing ID). 
+2. They can be 
+   - Assigned sequentially or arbitrarily (like your student ID number), 
+   - Constructed by a formula (like semester codes).
+   - Standardized and listed in a table (like program codes)
+3. An observation can sometimes be identified by combining identifiers. For 
+   example, a specific course at SFU might be "ECON233-D100-1217".
+
+ID variables should ideally be portable across applications and systems. That
+is, our ID variable should still work if we move data from a Windows PC to 
+a Linux or Apple system, and should still work if we move from Excel
+to R or Python.  To maximize portability:
+
+- Some applications will round non-integer values (changing 1.23 to 1) 
+  or drop leading zeros (changing 00045 to 45), so numeric ID
+  variables should always be integers without leading zeros.
+- Some applications will reject or transform spaces or unusual characters,
+  so text ID variables should only use (Latin) letters and (Arabic) 
+  digits.
+- Some applications are case-sensitive (so that "hello" and "Hello" 
+  are different values) and some are not, so text ID variables should
+  typically use either all upper-case or all lower-case. 
+
+
+::: fyi
+**Names and IDs**
+
+Notice that proper names are typically *not* used as ID variables for the
+obvious reason that there are sometimes multiple people with the exact
+same name.  
+
+There is also a second reason proper names do not make
+good ID variables, which is that they are not always written 
+consistently.  For example, the same person might be called "Doug" in
+one data set and "Douglas" in another. 
+
+Occasionally a data set will not have a proper or standardized ID variable,
+and our only option is to match observations based on a proper name.  For
+example school data in BC uses a one ID number called a PEN while health
+data uses a different ID number called a PHN. There is no direct way
+to match PEN and PHN, so we have to match education and health records
+on a combination of proper names and other information such as year of 
+birth.  Matches made this way are "probabilistic", meaning that the records
+probably describe the same person but might not.
+:::
+
+## Introduction to Excel {#a-quick-tour-of-excel}
+
+Excel is the most commonly-used example of a ***spreadsheet***, a software 
+program designed for the tabulation, analysis, and display of data. Its main
+competitors include Google Sheets and Apple Numbers. It is widely used
+in business and government, so good Excel skills are valuable in the labour
+market.
 
 Many of you have probably used Excel before, but there are many features
 you are probably not yet familiar with.  We will start by going over some
@@ -146,49 +288,7 @@ ever knowing their names, so I will list them here:
   - Older files sometimes have the `.xls` extension.
 
 
-### Application: Canadian employment data
-
-The rest of this chapter will analyze November 2020 employment data 
-for Canadian provinces. You can download the data file at https://bvkrauth.github.io/files/CanadaEmploymentNov2020.xlsx. 
-
-::: economics
-**Economics review: Employment statistics**
-
-Employment statistics are typically covered in a Principles of
-Macroeconomics course (at SFU, this course is called ECON 105). To
-review the basics:
-
-- These statistics are reported monthly by Statistics Canada and
-  are based on the Labour Force Survey (LFS), a monthly survey of the
-  **civilian, non-institutionalized, working-age population of Canada**.
-  - "civilian" excludes those on active military duty
-  - "non-institutionalized" excludes people in prison, hospitals, 
-    nursing homes, etc.
-  - "working-age" excludes those under age 15
-  - People living on reserve are also not covered by the LFS
-- The LFS population is grouped into three categories:
-  - **Employed**: worked for pay or profit in the previous week, or had
-    a job and was absent (e.g. due to illness or vacation).
-  - **Unemployed**: not employed in the previous week, but either looking
-    for work, on temporary layoff, or had a job to start within the
-    next four weeks.
-  - **Not in the labour force**: everyone else.  This includes retirees,
-    full-time students who aren't working for pay, and anyone else
-    who is neither working nor looking for work.
-- These basic counts are then used to calculate several other statistics
-  - The **labour force** is the total count of those who are employed or
-    unemployed.
-  - The **labour force participation rate** is the proportion or percentage
-    of the population that is in the labour force. The Canadian
-    LFP rate is typically around 65%.
-  - The **unemployment rate** is the proportion of the labour force that
-    is unemployed. The Canadian unemployment rate is typically 5-10%.
-
-The unemployment rate and LFP rate are key indicators of labour market
-conditions. A higher-than-usual unemployment rate means that workers
-are having difficulty finding work, and a lower-than-usual LPF rate
-means that some workers have stopped looking for work.
-:::
+### Viewing data
 
 The first step in any data cleaning exercise is to look at the data
 and assess what needs to be done.
@@ -233,57 +333,15 @@ data sources.  Both of these practices will enhance the reproducibility
 and reliability of our analysis.
 :::
 
-When looking through the data, one should be thinking ahead
-about what needs to be done to clean it.
-
-::: example
-**A plan for cleaning the employment data**
-
-The first thing to consider is whether we have a unique ID variable and
-to create one if we don't. In our employment data, the province name
-*could* serve as a unique identifier, but names typically have some drawbacks:
-
-- Names are not always unique. This is obviously not an issue with Canadian 
-  provinces, but it is an issue in many other data sets. For example, there 
-  are 41 cities and towns in the United States named "Springfield." 
-- The same observation often appears with different names in different 
-  data sets.  For example, some older data sets call the province of 
-  Newfoundland and Labrador just "Newfoundland" as that was the province's 
-  name before December 6, 2001.
-
-As a result, it is typically not advisable to use names as ID 
-variables. Instead, we could:
-
-- Use a **standardized code** such as the two-letter postal abbreviation.
-- Assign an arbitrary number to each observation.
-
-We will do both.
-
-The second set of modifications to consider is whether there
-are any variables we would like to analyze that have not yet
-been constructed.  In our employment data, we will want to construct
-
-- Labour force
-- Labour force participation rate
-- Unemployment rate
-
-We will also want to include information on which specific month 
-these observations are describing (November 2020).  Although that 
-information is in the *Raw data* worksheet and in the title of 
-the main worksheet (*Employment Nov 2020*) it may be useful to 
-have it in the table as well.
-:::
-
-
+In the remainder of this section, we will learn a few tools for changing how 
+our data is *displayed* that do not change the *content* of the data. 
 
 ### Sorting, filtering, and freezing
 
-Before we start cleaning our data, we will first learn a few 
-tools for changing how our data is displayed. These tools
-do not change the data itself.
-
 ***Sorting*** allows us to re-order the rows of our data based on 
-the value in one or more of the columns.
+the value in one or more of the columns.  Since order does not matter
+with tidy data, we can sort in whatever way we like without changing
+the content of our data.
 
 ::: example
 **Sorting the employment data**
@@ -333,10 +391,10 @@ We can undo the filter and remove the drop-down boxes by selecting
 You can filter on more complex criteria, and you can combine
 sorting and filtering.
 
-***Freezing panes*** allows us to keep some rows and/or columns 
-visible regardless of which cell is currently selected.  For example,
-it will allow us to keep the top row of variable names visible no
-matter which row of data we are looking at.
+***Freezing panes*** keeps some rows and/or columns visible regardless 
+of which cell is currently selected.  This allows us to work with large
+tables while keeping the top row (variable names) and/or the first 
+column (observation IDs) visible.
 
 ::: example
 **Freezing panes**
@@ -359,7 +417,9 @@ you can freeze any number of rows and columns.
 
 ### Cell formatting {#cell-formatting}
 
-You can change many aspects of how a cell displays, including: 
+Another way we can change the appearance of our data without changing
+its content is to adjust the ***cell formatting*** for one or more
+cells.  Cell formatting characteristics include:
 
 - Column width
 - Row height
@@ -370,8 +430,8 @@ You can change many aspects of how a cell displays, including:
 - Cell borders
 - Alignment (left/right/center as well as top/bottom/middle) 
 
-The procedure for doing this is straightforward if you regularly use
-applications like Microsoft Word.
+The procedure for modifying the cell format is straightforward if you 
+regularly use productivity applications like Microsoft Word.
 
 ::: example
 **Changing cell size**
@@ -395,28 +455,108 @@ We have several options for doing this:
 You can follow similar procedures to adjust the row height.
 :::
 
+Another important cell formatting characteristic is the number format,
+which will be discussed in a later section.
+
 ## Cleaning data {#cleaning-data}
 
-We are now ready to start cleaning our data. Before we do that, we should
-make a ***working copy*** of our data set.  Save your Excel workbook,
-giving it a *different* name from the name of the original data file.
-This will allow us to make changes while preserving the original file
-with its original contents and name.
+We are now ready to start actively cleaning our data. 
 
-We will now add several variables to our working data set. Save the file
-after adding each variable so that you don't lose your work.
+### Preparation
+
+We start by making two copies of our data set:
+
+1. The original file, exactly as we received it.
+2. A ***working copy*** under a new name.
+
+Recall that one of our core principles of reproducibility is to 
+always keep an unmodified copy of the original data.  We will do any
+modifications or additions in the working copy.  
+
+::: example
+**Creating a working copy**
+
+Save your Excel workbook, giving it a *different* name from the name 
+of the original data file. 
+
+As we proceed through the example application, be sure to save your
+working copy each time you make a significant modification or addition.
+:::
+
+The next step is to look at the data and construct a cleaning plan. Your 
+cleaning plan should have several steps:
+
+1. Convert all data into tidy-format tables.
+2. Ensure that each table has a unique ID variable.
+3. Identify and address problems in existing variables.
+4. Create new variables that may be useful.
+5. Link data across tables.
+
+The data cleaning plan should be based around what we plan to do 
+with the data, but should preserve flexibility in case we want to
+use the data for other purposes.
+
+::: example
+**A plan for cleaning the employment data**
+
+The first step in cleaning the employment data is to ensure
+we have tidy data.  This step has already been completed, so
+we can move on.
+
+The second step is to ensure that each table has a unique
+ID variable. In our employment data, the province name
+*could* serve as a unique identifier, but names typically have some drawbacks:
+
+- Names are not always unique. This is obviously not an issue with Canadian 
+  provinces, but it is an issue in many other data sets. For example, there 
+  are 41 cities and towns in the United States named "Springfield." 
+- The same observation often appears with different names in different 
+  data sets.  For example, some older data sets call the province of 
+  Newfoundland and Labrador just "Newfoundland" as that was the province's 
+  name before December 6, 2001.
+
+As a result, it is typically not advisable to use names as ID 
+variables. Instead, we could:
+
+- Use a **standardized code** such as the two-letter postal abbreviation.
+- Assign an arbitrary number to each observation.
+
+We will do both.
+
+The third step is to identify and address problems in our existing
+variables. 
+
+The fourth step is to consider is whether there
+are any variables we would like to analyze that have not yet
+been constructed.  In our employment data, we will want to construct
+
+- Labour force
+- Labour force participation rate
+- Unemployment rate
+
+We will also want to include information on which specific month 
+these observations are describing (November 2020).  Although that 
+information is in the *Raw data* worksheet and in the title of 
+the main worksheet (*Employment Nov 2020*) it may be useful to 
+have it in the table as well.
+:::
+
+We will now add several variables to our working data set. Be sure to save 
+the file after adding each variable so that you don't lose your work.
+
+### Inserting cells
+
+To be added.
 
 ### Data entry, fill and series {#entering-new-data}
 
-The simplest way to add variables to an Excel table is by entering data
-directly.  
+The simplest way to add a variable to an Excel table is by typing data
+directly into the cells.  
 
 ::: example
-**Entering data manually**
+**Entering data**
 
-The **Province** column gives the name of each person's province of residence,
-but it might be more convenient to use the two-letter postal abbreviation
-instead:
+As we discussed earlier, we would like to add the two-letter postal abbreviation for each province:
 
 | Province or Territory| ProvAbb |
 |----------------------|:-------:|
@@ -434,8 +574,15 @@ instead:
 | Saskatchewan              | SK |
 | Yukon                     | YT |
 
+The postal abbreviation is useful for at least two reasons
+
+1. It is *standardized*, while the full province name may not be. 
+   - Quebec is sometimes written Québec.
+2. It is *short*, which can be useful in charts.
+
 To add this variable:
 
+1. Enter **ProvAbb** in cell E1 to name the variable.
 2. Fill in cells E2:E11 with the correct postal abbreviation.
 :::
 
@@ -450,8 +597,8 @@ to the left or right.
 ::: example
 **Using fill**
 
-Let's add a variable indicating which month and year these particular
-observations describe (November 2020).
+Our data cleaning plan includes adding a variable indicating which month 
+and year these particular observations describe (November 2020).
 
 1. Enter **MonthYr** in cell F1 to name the variable.
 2. Enter "11/20" in cell F2.
@@ -636,7 +783,7 @@ row and one column.
 **Total population**
 
 Suppose we want to create a new variable that reports the total population
-across all observations in the data. The function to do that is SUM(). 
+across all observations in the data. The function to do that is `SUM()`. 
 
 1. Enter **TotPop** in cell L1 to give the variable a name,
 2. Enter `=SUM(C2:C11)` in cell L2.  
