@@ -69,7 +69,7 @@ A random variable is always a function of the original outcome, but
 for convenience, we usually leave its dependence on the original
 outcome implicit, and write it as if it were an ordinary variable.
 
-### Probability distributions {#probability-distributions}
+### Implied distribution {#probability-distributions}
 
 A random variable has its own sample space (normally $\mathbb{R}$) 
 and probability distribution.  This probability distribution can 
@@ -377,7 +377,7 @@ That is, each dollar bet on red leads to an average loss of 2.7 cents for the be
 We can think of the expected value as a weighted average of its possible
 values, with each value weighted by the probability of observing that value.
 
-### Properties of the expected value {#properties-of-the-expected-value}
+### Calculating expected values {#properties-of-the-expected-value}
 
 In addition to taking the expected value of $x$, we can also take the
 expected value of any function of $x$:
