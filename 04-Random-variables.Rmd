@@ -34,7 +34,7 @@ In this chapter we will learn how to:
   Bernoulli, binomial, and discrete uniform.
 :::
 
-## Introduction to random variables {#introduction-to-random-variables}
+## Random variables {#introduction-to-random-variables}
 
 A ***random variable*** is a number whose value depends
 on a random outcome. The idea here is that we are going to use a random
@@ -238,7 +238,7 @@ The PDF of a discrete random variable has several general properties:
 
 We can prove these, but I will skip that.
 
-#### The CDF {#the-cdf}
+### The CDF {#the-cdf}
 
 Another way to describe the probability distribution of a random
 variable is with a function called its 
