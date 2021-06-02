@@ -129,12 +129,7 @@ For example, the set of integers is both discrete and infinite.
 Some random variables have a support that is continuous rather than 
 discrete.  Chapter \@ref(more-on-random-variables) will cover continuous random variables. 
 
-### The PDF and CDF {#the-pdf-and-cdf}
-
-The PDF and CDF are both functions that allow us to describe the
-probability distribution of a random variable.
-
-#### The PDF of a discrete random variable {#the-pdf-of-a-discrete-random-variable}
+### The PDF {#the-pdf-of-a-discrete-random-variable}
 
 We can describe the probability distribution of a random
 variable with a function called its ***probability density function (PDF)***.
