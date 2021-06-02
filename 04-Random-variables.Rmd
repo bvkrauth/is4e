@@ -127,7 +127,7 @@ it is also possible for a discrete set to have an infinite number of elements.
 For example, the set of integers is both discrete and infinite.
 
 Some random variables have a support that is continuous rather than 
-discrete.  Chapter ?? will cover continuous random variables. 
+discrete.  Chapter \@ref(more-on-random-variables) will cover continuous random variables. 
 
 ### The PDF and CDF {#the-pdf-and-cdf}
 
