@@ -1,24 +1,19 @@
 # Basic data cleaning with Excel {#basic-data-cleaning-with-excel}
 
-Excel is the most commonly-used example of a ***spreadsheet***, a software 
-program designed for the tabulation, analysis, and display of data. Its main 
-competitors include Google Sheets and Apple Numbers. It is widely used
-in business and government, so good Excel skills are valuable in the labour
-market.
+Before we can analyze data, we usually need to ***clean*** it. Cleaning data
+means putting it into a form that is ready to analyze, and can include:
 
-In later chapters, we will use Excel to perform a statistical analysis of
-several economic data sets.  But before we can analyze data, we usually need
-to ***clean*** it. Cleaning data means putting it into a form that is ready to
-analyze, and can include:
-
-- Converting data files from other formats into Excel format.
+- Converting data files from one file format to another
 - Reorganizing complex tables of data into simple tables
-- Combining data across multiple tables
-- Creating new variables, or modifying existing variables
+- Combining data from multiple tables into a single table
+- Modifying existing variables
+- Creating new variables
 
-In this chapter we will learn basic Excel tools and some principles of
-data cleaning.  We will also apply this knowledge by using Excel 
-to clean a real data set.
+In this course, we will do most of our data cleaning using Excel. 
+
+This chapter will develop both both some principles of data cleaning and the
+basic Excel tools needed to implement them .  We will also apply this
+knowledge by using Excel to clean a real data set.
 
 ::: goals
 **Chapter goals**
