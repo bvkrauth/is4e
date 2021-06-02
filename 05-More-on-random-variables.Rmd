@@ -46,7 +46,7 @@ the probability that $x$ takes on *some* value is $\Pr(x \in \mathbb{R}) = 1$
 but the probability that $x$ takes on any *specific* value is zero.
 How can this work?
 
-### The PDF and CDF {#continuous-pdf-and-cdf}
+### The CDF {#continuous-pdf-and-cdf}
 
 I'll explain how it works with an example.  
 
@@ -87,6 +87,8 @@ Then the probability of $x$ being between $a_1$ and $a_2$ is:
 As $a_2$ gets closer and closer to $a_1$ this number gets closer and closer
 to zero, so the probability of $x$ being *exactly* $a_1$ is zero.
 :::
+
+### The PDF {#continuous-pdf}
 
 The PDF of a continuous random variable is defined as just the
 derivative of its CDF:
@@ -136,7 +138,7 @@ no idea what this is or how to solve it.  That's OK!  All you need
 to know for this course is that it *can* be solved.
 :::
 
-### Properties of continuous random variables
+### Expected values {#continuous-expected-values}
 
 ::: fyi
 **The expected value for a continuous random variable**
@@ -153,8 +155,11 @@ Again, I do not expect you to understand, remember, or use
 either of these definitions, only to know that they exist.
 :::
 
+### Quantiles {#continuous-quantiles}
 
+To be added.
 
+## Standard continuous distributions
 
 ### The uniform distribution {#uniform-and-standard-uniform}
 
@@ -402,7 +407,7 @@ Let's find the conditional PDF of the payout for a bet on
   \end{align}
 :::
 
-### Independent random variables
+### Independence {#independent-random-variables}
 
 We say that $x$ and $y$ are ***independent*** if every event defined in 
 terms of $x$ is independent of every event defined in terms of $y$.
@@ -435,7 +440,7 @@ However the winnings from a bet on red and a bet on 14 in two different
 games *are* independent since the underlying outcomes are independent.
 :::
 
-### Expected values with multiple variables
+### Expected values {#multiple-expected-values}
 
 We earlier showed that if $x$ is a random variable, we can take the
 expected value of any function of $x$, and that you can take
