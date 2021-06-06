@@ -60,9 +60,7 @@ game:
       and loses \$1 if the ball lands anywhere else.
 
 All of these random variables are defined in terms of the underlying
-outcome, but we can also define random variables in terms of other
-random variables.  For example, we could have defined $w_{red}$
-as $w_{red} = 2r-1$.
+outcome.
 :::
 
 A random variable is always a function of the original outcome, but
@@ -105,18 +103,17 @@ The ***support*** of a random variable $x$ is the smallest[^401] set $S_x \subse
 
 [^401]: Technically, it is the smallest *closed* set, but let's ignore that for now.
 
-In plain language the support is the set of all values in the sample space 
+In plain language, the support is the set of all values in the sample space 
 that have some chance of actually happening. 
 
 ::: example
 **The support in roulette**
 
-The support is just the set of values with non-zero probability:
+The support of $b$ is $S_{b} = \{0,1,2,\ldots,36\}$.
 
-  - The support of $b$ is $S_{b} = \{0,1,2,\ldots,36\}$.
-  - The support of $w_{Red}$ is $S_{Red} = \{-1,1\}$.
-  - The support of $w_{14}$ is $S_{14} = \{-1,35\}$.
+The support of $w_{Red}$ is $S_{Red} = \{-1,1\}$.
 
+The support of $w_{14}$ is $S_{14} = \{-1,35\}$.
 :::
 
 The random variables we will consider in this chapter  have  ***discrete***
@@ -355,22 +352,26 @@ but we can just think of it as the size of the jump.
 
 Any function of a random variable is also a random variable.  So 
 for example, if $x$ is a random variable, so is $x^2$ or 
-$\ln (x)$ or $\sqrt{x}$.
-
-We can derive the PDF or CDF of a function of a random variable directly
-from the PDF of the original random variable.  For example, suppose
-that:
-  $$y = g(x)$$
-for some function $g(\cdot)$.  Then the PDF of y is:
-  $$f_y(a) = \Pr(y = a) = \Pr\left(x \in \{b: g(b)=a\}\right) = \sum_{b:g(b)=a} f_x(b)$$
-and the CDF of y is:
-  $$F_y(a) = \Pr(y \leq a) = \Pr\left(x \in \{b: g(b) \leq a\}\right) = \sum_{b:g(b) \leq a} f_x(b)$$
+$\ln (x)$ or $\sqrt{x}$.  We can derive the PDF or CDF of a function 
+of a random variable directly from the PDF or CDF of the original random 
+variable.
 
 We say that $y$ is a **linear** function of $x$ if:
   $$y = ax + b$$
 where $a$ and $b$ are constants. We will have many results that apply
 specifically for linear functions.
 
+::: example
+**A linear function in roulette**
+
+The net payout from a \$1 bet on red ($w_{red}$) was earlier
+defined directly from the underlying outcome $b$.  However,
+we could have also defined it as a linear function of the random 
+variable $r$:
+  $$w_{red} = 2r-1$$
+That is,  $w_{red} = -1$ when red loses ($r = 0$) and $w_{red} = 1$ when
+red wins ($r = 1$).
+:::
 
 ## The expected value {#the-expected-value}
 
@@ -381,17 +382,37 @@ $$E(x) = \sum_{a \in S_x} a\Pr(x=a) = \sum_{a \in S_x} af_x(a)$$
 The expected value is also called the ***mean***, the ***population mean***
 or the ***expectation*** of the random variable.
 
-::: example
-**The expected value in roulette**
+The formula might look difficult if you are not used to the notation, but
+it is actually quite simple to calculate:
 
-The expected value of $b$ is:
-  $$E(b) = 0*\underbrace{f_b(0)}_{1/37} + 1*\underbrace{f_b(1)}_{1/37} + \cdots 36*\underbrace{f_b(36)}_{1/37} = 18$$
+1. Figure out tne set of values in the support of $x$.
+2. Multiply each value in the support by the PDF at that value.
+3. Add these all up.
+
+::: example
+**Some expected values in roulette**
+
+The support of $b$ is $\{0,1,2\ldots,36\}$ so its expected value is:
+  \begin{align}
+    E(b) &= 0*\underbrace{f_b(0)}_{1/37} + 1*\underbrace{f_b(1)}_{1/37} + \cdots 36*\underbrace{f_b(36)}_{1/37} \\
+      &= 18
+  \end{align}
+
+The support of $r$ is $\{0,1\}$ so its expected value is:
+  \begin{align}
+    E(r) &= 0*\underbrace{f_r(0)}_{19/37} + 1*\underbrace{f_r(1)}_{18/37} \\
+      &= 18/37 \\
+      &\approx 0.486
+  \end{align}
   
-The expected value of $w_{red}$ is:
-    $$E(w_{red}) = -1*\underbrace{f_{red}(-1)}_{19/37} + 1*\underbrace{f_{red}(1)}_{18/37} \approx -0.027$$
-The expected value of $w_{14}$ is:
-    $$E(w_{14}) = -1*\underbrace{f_{14}(-1)}_{36/37} + 35*\underbrace{f_{14}(35)}_{1/37} \approx -0.027$$
-That is, each dollar bet on red leads to an average loss of 2.7 cents for the bettor, as does each dollar bet on 14.
+The support of  $w_{14}$ is $\{-1,35\}$ so its expected value is:
+    \begin{align}
+      E(w_{14}) &= -1*\underbrace{f_{14}(-1)}_{36/37} + 35*\underbrace{f_{14}(35)}_{1/37} \\
+      &= 1/37 \\
+      &\approx -0.027
+    \end{align}
+That is, each dollar bet on 14 leads to an average loss of 2.7 cents 
+for the bettor.
 :::
 
 We can think of the expected value as a weighted average of its possible
@@ -404,47 +425,66 @@ means that:
 That is, we can take the expected value "inside" any linear function.
 This will turn out to be a very handy property.
 
+::: example
+**The expected value of a linear function in roulette**
+
+Earlier, we showed that $w_{red}$ is a linear function of $r$:
+  $$w_{red} = 2r -1$$
+so its expected value is:
+  $$E(w_{red}) = E(2r - 1) = 2 \underbrace{E(r)}_{18/37} - 1 = -1/37 \approx -0.027$$
+We can verify this calculation is correct by deriving the expected 
+value directly from the PDF:
+    $$E(w_{red}) = -1*\underbrace{f_{red}(-1)}_{19/37} + 1*\underbrace{f_{red}(1)}_{18/37} \approx -0.027$$
+That is, each dollar bet on red leads to an average loss of 2.7 cents for 
+the bettor, as does each dollar bet on 14.
+:::
+
 Unfortunately, this handy property applies only to linear functions. If
-$g(\cdot)$ is not a linear function than $E(g(x)) \neq g(E(x))$. For 
+$g(\cdot)$ is a nonlinear function, than $E(g(x)) \neq g(E(x))$. For 
 example:
   $$E(x^2) \neq E(x)^2$$
   $$E( 1/x ) \neq 1 / E(x)$$
 Students frequently make this mistake, so try to avoid it.
 
 ::: example
-**Using the linearity of the expected value**
+**The expected value of a nonlinear function in roulette**
 
-Suppose we bet \$100 on red.  Our net payout will be $100w_{red}$
-so our expected payout will be:
-  $$E(100 w_{red}) = 100 \, E(w_{red}) = 100*(-0.027) = -2.7$$
-In other words, the average result of a \$100 bet on red is a loss
-of \$2.70.
+We can define $w_{14}$ as a function of the underlying 
+outcome $b$:
+  $$w_{14} = 36 I(b = 14) -1$$
+That is, $w_{14}=35$ if a bet on 14 wins ($b = 14$) and $w_{14}= -1$
+otherwise.  Although this is a linear function of the indicator variable
+$I(b=14)$, it is a *nonlinear* function of $b$ itself.
+
+If we could take the expected value inside of a nonlinear function we would 
+get:
+  \begin{align}
+    E(w_{14}) &= 2 I(\underbrace{E(b)}_{18}=14) - 1 \qquad \textrm{(can we do this?)} \\
+      &= 2 \underbrace{I(18=14)}_{0} - 1  \\
+      &= -1 
+  \end{align}
+which is clearly wrong since we already calculated that $E(w_{14}) = -0.027$.
 :::
 
 ## Other characteristics {#the-properties-of-a-random-variable}
 
-The probability distribution of a random variable is fully described
-by its PDF or CDF.  However, we will often be interested in 
-describing the random variable with a few simple summary numbers.
-
-For example, we might be interested in the most common value (also
-called the mode), or we might be interested in a "typical" value,
-or we might be interested in a simple measure of how much the 
-random variable tends to vary.  All of these quantities
-can be defined and calculated from on the PDF or CDF.
+The expected value is one way of describing something about a random 
+variable, but there are many others.  We will describe a few of the
+most important ones.
 
 ### Range {#range}
 
-The ***range*** of a random variable is the interval from the
-minimum value in its support to the maximum value in the support.
+The ***range*** of a random variable is the interval from its lowest
+possible value ($\min(S_x)$ its highest possible value $\max(S_x)$.
 
 :::example
 **The range in roulette**
 
-- The range of $w_{red}$ is $[-1,1]$.
-- The range of $w_{14}$ is $[-1,35]$.
-- The range of $b$ is $[0,36]$.
+The support of $w_{red}$ is $\{-1,1\}$ so its range is $[-1,1]$.
 
+The support of $w_{14}$ is $\{-1,35\}$ so its range is $[-1,35]$.
+
+The support of $b$ is $\{0,1,2,\ldots,36\}$ so its range is $[0,36]$.
 :::
 
 ### Quantiles and percentiles {#quantiles-and-percentiles}
