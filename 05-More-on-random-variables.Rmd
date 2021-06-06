@@ -29,26 +29,70 @@ In this chapter we will:
 ## Continuous random variables {#continuous-random-variables}
 
 So far we have considered random variables with a discrete support. However,
-many random variables of interest have a continuous support: they can
-take on *any* real value within some range. 
+many random variables of interest have a continuous support.
 
-For example, Canada produced 31.251 million metric tons of wheat in 2019. If we
-think of that number as a random variable, it's clear that this number
-could have been 31.252 million metric tons if circumstances were different. It
-also could have been any number between those numbers, for example 31.2511
-million or 31.2517 million.
+For example, consider the Canadian labour force participation rate.  It is 
+defined as:
+  $$(\textrm{LFP rate}) = \frac{(\textrm{labour force})}{(\textrm{population})} \times 100\%$$ 
+so it can be any (rational) number between 0\% and 100\%:
+  $$S_{LFP rate} = [0\%,100\%]$$
+This introduces a complication: there is an infinite number of values 
+in this support. There is even an infinite number of possible values
+between two much closer numbers like 63\% and 63.0001\%.
 
-A ***continuous random variable*** has the property that the the probability
-of any specific value is zero:
-  $$\Pr(x=a) = 0$$
-Now this creates something of a paradox: by the rules of probability
-the probability that $x$ takes on *some* value is $\Pr(x \in \mathbb{R}) = 1$
-but the probability that $x$ takes on any *specific* value is zero.
-How can this work?
+Because a continuous random variable has an infinite support, it has a seemingly
+inconsistent pair of properties:
 
-### The CDF {#continuous-pdf-and-cdf}
+- The probability that $x$ is *any specific value* in the support is:
+  $$\Pr(x = a) = 0$$
+  for all $a \in S_x$.
+- The probability that $x$ is *somewhere* in the support is:
+  $$\Pr(x \in S_x) = 1$$
 
-I'll explain how it works with an example.  
+This feature applies to ranges as well.  For example, the Canadian labour force 
+participation rate has a high probability of being between 60\% and 70\%, but 
+zero probability of being exactly 65\%.
+
+The math for working with continuous random variables is a little different
+from the math for working with discrete random variables, and is harder 
+because it requires calculus.  In many cases, it requires integral calculus
+(MATH 152 or MATH 158) which is not a prerequisite to this course, and which
+I do not expect you to know.
+
+But deep down, there are no really important differences 
+between continuous and discrete random variables. The intuition for why is 
+straightforward: you can make a continuous random variable into a discrete 
+random variable by just rounding it.  For example, suppose you round the 
+labour force participation rate to the nearest percentage
+point.  Then it becomes a discrete random variable, with support:
+  $$S_x = \{0\%, 1\%, \ldots 99\%, \100\%\}$$
+The same point applies if you round to the nearest 1/100th of a percentage point,
+or the nearest 1/1,000,000th of a percentage point. 
+
+Since discrete and random variables are more alike than first appears,
+ost of the results and intuition we have already developed for discrete 
+random variables can also be applied to continuous random variables. So:
+
+- Most of my examples will be for discrete case.
+- I will briefly show you the math for the continuous case, 
+  but I will not expect you to do it.
+- Most of the results I give you will apply for both cases.
+
+Any time you see an integral here, you can ignore it.
+
+### The continuous CDF {#continuous-pdf-and-cdf}
+
+The CDF of a continuous random variable $x$ is defined exactly the same
+way as for the discrete case:
+  $$F_x(a) = \Pr(x \leq a)$$
+The only difference is how it looks.
+
+If you recall, the CDF of a discrete random variable takes on a stair-step form: 
+increasing in discrete jumps at every point in the discrete support, and flat 
+everywhere else. 
+
+In contrast, the CDF of a continuous random variable increases 
+continuously.  It can have flat parts, but never jumps.
 
 ::: example
 **The standard uniform distribution**
@@ -76,23 +120,24 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
        caption = "", 
        tag = "")
 ```
-As we have seen, the CDF of a discrete random variable rises in 
-a "stair-step" manner. In contrast, the standard uniform CDF rises 
-smoothly with no jumps.  All continuous random variables have a CDF with
-this property.
-
-Let $a_1$ and $a_2$ be any two numbers between 0 and 1, and let $a_1 < a_2$.
-Then the probability of $x$ being between $a_1$ and $a_2$ is:
-  $$\Pr(a_1 < x \leq a_2) = F_x(a_2) - F_x(a_1) = a_2 - a_1$$
-As $a_2$ gets closer and closer to $a_1$ this number gets closer and closer
-to zero, so the probability of $x$ being *exactly* $a_1$ is zero.
+As you can see, the CDF is smoothly increasing betweeen zero and one, and
+flat everywhere else.
 :::
 
-### The PDF {#continuous-pdf}
+### The continuous PDF {#continuous-pdf}
 
-The PDF of a continuous random variable is defined as just the
-derivative of its CDF:
-  $$f_x(a) = \frac{dF_x(a)}{da}$$
+The PDF $f_x(a)$ for a discrete random variable is defined as the size of the
+"jump" in the CDF at $a$, or (equivalently) the probability $\Pr(x=a)$ of 
+observing that particular value.  But the CDF of a continuous random variable
+has no jumps, and the probability of observing any particular value is
+always zero. So this particular function is useless in describing the probability
+distribution of a continuous random variable.
+
+Instead, we define the PDF of a continuous random variable $x$ as the slope
+or derivative of the CDF:
+  $$f_x(a) = \frac{d F_x(a)}{da}$$
+In other words, instead of the *amount* the CDF increases (jumps) at $a$,
+it is the *rate* at which it increases.
 
 ::: example
 **The PDF of the standard uniform distribution**
@@ -111,28 +156,28 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
        caption = "", 
        tag = "")
 ```
+The PDF of a continuous random variable is a good way to visualize its
+probability distribution.  For example, the uniform PDF shows the key 
+feature of this distribution: in some loose sense all values in the
+support are "equally likely", much like in the 
+[discrete uniform distribution](#discrete-uniform)
+described earlier. In fact, if you round a uniform random variable, you get
+a discrete uniform random variable.
 :::
 
-Now, in order to work with continuous random variables we would need to
-use integral calculus. Integral calculus is taught in MATH 158, which 
-is not a prerequisite for the course, So:
-
-  - Most of my examples will be for discrete case.
-  - I will briefly show you the math for the continuous case, 
-    but I will not expect you to do it.
-  - Most of the results I give you will apply for both cases.
+I have defined the PDF in terms of the CDF, but it is also possible to
+derive the CDF from the PDF.  This requires integral calculus, so I will
+give the definition below but not expect you to use it.
 
 ::: fyi
-**Integral calculus for continuous random variables**
+**Deriving the CDF from the PDF of a continuous random variable**
 
-I have defined the PDF for a continuous random variable based on its CDF,
-but we can also go the other way and calculate the CDF from the PDF.
-The formula for that calculation is:
+The formula for deriving the CDF of a continuous random variable
+from its PDF is:
   $$F_x(a) = \int_{-\infty}^a f_x(v)dv$$
 More generally the probability of $x$ being between any two numbers is:
 
-  $$\Pr(a \leq x \leq b) = F_x(b) - F_x(a) = \int_a^b f_x(v)dv$$
-
+  $$\Pr(a < x \leq b) = F_x(b) - F_x(a) = \int_a^b f_x(v)dv$$
 Unless you have taken MATH 152 or MATH 158, you may have 
 no idea what this is or how to solve it.  That's OK!  All you need
 to know for this course is that it *can* be solved.
