@@ -256,15 +256,19 @@ with support:
   $$S_x = [L,H]$$
 and PDF:
   $$f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
-which looks like this:
-```{r UniformPDF, fig.cap = "*PDF for the uniform distribution*"}
+
+For example, if $x \sim Uniform(2,5)$ its support is the range of all values from 2 to 5, and its PDF looks like this:
+```{r UniformPDF, fig.cap = "*PDF for the Uniform(2,5) distribution*"}
+UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
+                      Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
+                      fa=dunif(seq(from=-6,to=6,length.out=100),min=2,max=5))
 ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
   geom_step(col = "blue") +
   geom_text(x=1.25,y=0.8,col="blue",label="f_x(a)") +
   xlab("a") +
   ylab("f(a)") +
   labs(title = "Probability density function (PDF)", 
-       subtitle = "Uniform(L,H)", 
+       subtitle = "Uniform(2,5)", 
        caption = "", 
        tag = "")
 ```
@@ -272,33 +276,39 @@ The uniform distribution puts equal probability on all values between $L$
 and $H$. We have already seen the ***standard uniform*** distribution,
 which is just the $U(0,1)$ distribution.
 
-The CDF of the uniform distribution looks like this: 
-```{r UniformCDF, fig.cap = "*CDF for the uniform distribution*"}
-UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
-                      Fa=punif(seq(from=-2,to=2,length.out=100)),
-                      fa=dunif(seq(from=-2,to=2,length.out=100)))
+The CDF of the uniform distribution is
+  $$f_x(a) = \begin{cases}
+    0 & a \leq L \\ 
+    \frac{a-L}{H-L} & L < a < H \\ 
+    1 & a \geq H \\ 
+    \end{cases}$$
+For example, if $x \sim Uniform(2,5)$ the CDF looks like this: 
+```{r UniformCDF, fig.cap = "*CDF for the Uniform(2,5) distribution*"}
+UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
+                      Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
+                      fa=dunif(seq(from=-6,to=6,length.out=100),min=2,max=5))
 ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
   geom_line(col = "blue") +
-  geom_text(x=1,y=0.6,col="blue",label="F_x(a)") +
+  geom_text(x=3,y=0.6,col="blue",label="F_x(a)") +
   xlab("a") +
   ylab("F(a)") +
   labs(title = "Cumulative distribution function (CDF)", 
-       subtitle = "Uniform(L,H)", 
+       subtitle = "Uniform(2,5)", 
        caption = "", 
        tag = "")
 ```
 
-The mean and median of a uniform random variable is 
-
-If $x \sim Uniform(L,H)$ then its median is just the midpoint of its 
-support:
-  $$Med(x) = E(x) = \frac{L+H}{2}$$
-Its mean and variance can be found using intgral calculus, and are:
+The median of a uniform random variable $x \sim Uniform(L,H)$ 
+is just the midpoint of its support:
+  $$Med(x) = F_x^{-1}(0.5) = \frac{L+H}{2}$$
+Its mean can be found using integral calculus, and is also the
+midpoint:
   $$E(x) = \frac{L+H}{2}$$
-and:
+Its variance also requires integral calculus:
   $$var(x) = \frac{(H-L)^2}{12}$$
-Again, I do not expect you to be able to derive the mean and variance
-here.
+and its standard deviation is just the square root of the variance:
+  $$sd(x) = \sqrt{\frac{(H-L)^2}{12}}$$
+as always.
 
 ::: fyi
 **Uniform distributions in video games**
