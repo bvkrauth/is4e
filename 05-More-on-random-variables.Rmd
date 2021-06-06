@@ -380,49 +380,78 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
        tag = "")
 ```
 
-The formula for the normal PDF looks strange, but it turns out to be a very 
-important one in statistics for two reasons:
+The CDF of the normal distribution can be derived by integrating the PDF. There
+is no simple closed-form expression for this CDF, but it is easy to calculate 
+with a computer.  
+```{r NormalCDF, fig.cap = "*PDF for several normal distributions*"}
+NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
+                      Fa=pnorm(seq(from=-6,to=6,length.out=100)),
+                      Fa1=pnorm(seq(from=-6,to=6,length.out=100),mean=1),
+                      Fa2=pnorm(seq(from=-6,to=6,length.out=100),sd=2),
+                      fa=dnorm(seq(from=-6,to=6,length.out=100)))
+ggplot(data=NormalDist,mapping=aes(x=a,y=Fa)) +
+  geom_line(col = "blue") +
+  geom_line(aes(y=Fa1),col = "red") +
+  geom_line(aes(y=Fa2),col = "purple") +
+  geom_text(x=0,y=0.8,col="blue",label="N(0,1)") +
+  geom_text(x=1,y=0.3,col="red",label="N(1,1)") +
+  geom_text(x=-3.2,y=0.13,col="purple",label="N(0,2)") +
+  xlab("a") +
+  ylab("f(a)") +
+  labs(title = "Cumulative distribution function (CDF)", 
+       subtitle = "", 
+       caption = "", 
+       tag = "")
+```
+The Excel function `NORM.DIST()` can be used to calculate the 
+PDF or CDF of the normal distribution, and the Excel function `NORM.INV()` can 
+be used to calculate its quantile (inverse CDF) function.
 
-  1. Any linear function of a normally distributed random variable 
-    is also normally distributed.  That is, suppose that 
-    $x \sim N(\mu,\sigma^2)$ and let $y = a + bx$ where $a$ and 
-    $b$ are any constants.  Then $y \sim N(a+b\mu,b^2\sigma^2)$.
-  2. A very important result called the Central Limit Theorem tells
-      us that many random variables have a distribution that is
-      well-approximated by the normal distribution. We will discuss 
-      this in much more detail later.
+### Mean, median and variance
 
-The mean and variance of a $N(\mu,\sigma^2)$ random variable are:
-$$E(x) = \mu$$
-$$var(x) = \sigma^2$$
+The mean and variance of a $N(\mu,\sigma^2)$ random variable can be found
+by integration:
+  $$E(x) = \mu$$
+  $$var(x) = \sigma^2$$
+and the standard deviation is just the square root of the variance:
+  $$sd(x) = \sigma$$
+The median of a $N(\mu,\sigma^2)$ random variable is also $\mu$.
 
-The $N(0,1)$ distribution is also called the ***standard normal distribution***
+### Linear functions of normals
+
+The formula for the normal PDF may look strange, but it implies a 
+very important characteristic: any linear function of a normal random
+variable is also normal.  That is, if 
+  $$x \sim N(\mu,\sigma^2)$$
+Then for any constants $a$ and $b$:
+  $$ax + b \sim N(a\mu + b, b^2\sigma^2)$$
+Just to be clear, we already showed that $E(ax +b) = aE(x) + b$ and 
+$var(ax+b) = a^2 var(x)$ for any random variable $x$.  What is new here 
+is that $ax +b$ is normally distributed if $x$ is.
+
+### The standard normal distribution
+
 The standard normal distribution is so useful that we have special
 symbol for its PDF:
   $$\phi(a) = \frac{1}{\sqrt{2\pi}} e^{-\frac{a^2}{2}}$$
 and its CDF:
   $$\Phi(a) = \int_{-\infty}^a \phi(b)db$$
-The standard normal CDF $\Phi(.)$ does not have a closed form
-solution, but is easy to calculate on a computer and is available
-as a built-in function in Excel, R or any other program used to
-analyze data.
+All statistical programs, including Excel and R, provide a function 
+that calculates the standard normal CDF.
 
-Why is this useful?  Well remember that linear functions of 
-normal random variables are also normal.  This will allow
-us to calculate the CDF of any $N(\mu,\sigma^2)$ random
-variable using the standard normal CDF.
-
-The Excel function `NORM.DIST()` can be used to calculate the 
-PDF or CDF of the normal distribution, and the Excel function
-`NORM.INV()` can be used to calculate its quantile (inverse CDF)
-function.
-
-Consider a random variable $x \sim N(\mu,\sigma^2)$. Define another
-random variable $z = \frac{x-\mu}{\sigma}$. Then:
-  $$z \sim N\left(\mu*\frac{1}{\sigma}- \frac{\mu}{\sigma},\sigma^2*\left(\frac{1}{\sigma}\right)^2\right)$$
-or equivalently $z \sim N(0,1)$.
-
-This implies:
+Our result in the previous section about linear functions of a normal
+can be used to restate the distribution of any normally distributed 
+random variable in terms of a standard normal.  That is,
+suppose that 
+  $$x \sim N(\mu, \sigma^2)$$
+Then if we define
+  $$z = \frac{x - \mu}{\sigma}$$
+our result implies that
+  $$z \sim N\left(\frac{\mu-\mu}{\sigma}, 
+                  \left(\frac{1}{\sigma}\right)^2 \sigma^2\right)$$
+or equivalently:
+  $$z \sim N(0,1)$$
+We can use this result to derive the CDF of $x$:
   \begin{align}
     F_x(a) &= \Pr\left(x \leq a\right) \\
       &= \Pr\left( \frac{x-\mu}{\sigma} \leq \frac{a-\mu}{\sigma}\right)\\
@@ -432,6 +461,15 @@ This implies:
 Since the standard normal CDF is available as a built-in function in Excel
 or R, so we can use this result to calculate the CDF for any normally
 distributed random variable.
+
+::: fyi
+A very important result called the Central Limit Theorem tells
+us that many "real world" random variables have a probability distribution 
+that is well-approximated by the normal distribution. 
+
+We will discuss the central limit theorem in much more detail 
+later.
+:::
 
 ## Multiple random variables
 
