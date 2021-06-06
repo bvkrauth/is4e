@@ -237,13 +237,7 @@ of a continuous random variable is also just the inverse CDF:
   $$$M(x) = F_x^{-1}(0.5)$$
 The range and percentiles can be derived similarly.
 
-## Standard continuous distributions
-
-There are several standard continuous distributions that are in regular 
-usage.  The two most important are the uniform distribution and 
-the normal distribution. 
-
-### The uniform distribution {#uniform-and-standard-uniform}
+## The uniform distribution {#uniform-and-standard-uniform}
 
 The ***uniform*** probability distribution is usually written
   $$x \sim Uniform(L,H)$$
