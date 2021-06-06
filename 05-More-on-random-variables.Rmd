@@ -352,11 +352,33 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
        caption = "", 
        tag = "")
 ```
-The $N(0,1)$ distribution is symmetric around $\mu=0$ and bell-shaped,
-meaning that it is usually close to zero but can occasionally be
-quite far.  For other values of $\mu$, the $N(\mu,\sigma^2)$ distribution
+As the figure shows, the $N(0,1)$ distribution is symmetric around 
+$\mu=0$ and bell-shaped, meaning that it is usually close to zero 
+but can occasionally be quite far.  
+
+For other values of $\mu$, the $N(\mu,\sigma^2)$ distribution
 is also symmetric around $\mu$ and bell-shaped, with the "spread"
 of the distribution depending on the value of $\sigma^2$.
+```{r NormalPDF, fig.cap = "*PDF for several normal distributions*"}
+NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
+                      Fa=pnorm(seq(from=-6,to=6,length.out=100)),
+                      fa1=dnorm(seq(from=-6,to=6,length.out=100),mean=1),
+                      fa2=dnorm(seq(from=-6,to=6,length.out=100),sd=2),
+                      fa=dnorm(seq(from=-6,to=6,length.out=100)))
+ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
+  geom_line(col = "blue") +
+  geom_line(aes(y=fa1),col = "red") +
+  geom_line(aes(y=fa2),col = "purple") +
+  geom_text(x=-2,y=0.3,col="blue",label="N(0,1)") +
+  geom_text(x=3,y=0.3,col="red",label="N(1,1)") +
+  geom_text(x=-4.5,y=0.05,col="purple",label="N(0,2)") +
+  xlab("a") +
+  ylab("f(a)") +
+  labs(title = "Probability density function (PDF)", 
+       subtitle = "", 
+       caption = "", 
+       tag = "")
+```
 
 The formula for the normal PDF looks strange, but it turns out to be a very 
 important one in statistics for two reasons:
