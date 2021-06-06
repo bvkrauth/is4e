@@ -325,17 +325,40 @@ etc.  Without that element of randomness, these games would be far
 too predictable to be much fun.
 :::
 
-
-### The normal distribution {#normal-and-standard-normal}
+## The normal distribution {#normal-and-standard-normal}
 
 The ***normal distribution*** is typically written as:
 $$ x \sim N(\mu,\sigma^2)$$ 
 It is a continuous distribution with support $S_x = \mathbb{R}$
 and PDF:
 $$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
-The normal distribution is also called the ***Gaussian*** distribution.
+The normal distribution is also called the ***Gaussian*** distribution,
+and the $N(0,1)$ distribution is called the ***standard normal*** 
+distribution.
 
-The normal distribution looks strange, but it turns out to be a very 
+For example, the PDF for the $N(0,1)$ distribution looks like
+this:
+```{r StNormalPDF, fig.cap = "*PDF for the N(0,1) distribution*"}
+NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
+                      Fa=pnorm(seq(from=-6,to=6,length.out=100)),
+                      fa=dnorm(seq(from=-6,to=6,length.out=100)))
+ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
+  geom_line(col = "blue") +
+  geom_text(x=1.25,y=0.8,col="blue",label="f_x(a)") +
+  xlab("a") +
+  ylab("f(a)") +
+  labs(title = "Probability density function (PDF)", 
+       subtitle = "N(0,1)", 
+       caption = "", 
+       tag = "")
+```
+The $N(0,1)$ distribution is symmetric around $\mu=0$ and bell-shaped,
+meaning that it is usually close to zero but can occasionally be
+quite far.  For other values of $\mu$, the $N(\mu,\sigma^2)$ distribution
+is also symmetric around $\mu$ and bell-shaped, with the "spread"
+of the distribution depending on the value of $\sigma^2$.
+
+The formula for the normal PDF looks strange, but it turns out to be a very 
 important one in statistics for two reasons:
 
   1. Any linear function of a normally distributed random variable 
@@ -366,6 +389,11 @@ Why is this useful?  Well remember that linear functions of
 normal random variables are also normal.  This will allow
 us to calculate the CDF of any $N(\mu,\sigma^2)$ random
 variable using the standard normal CDF.
+
+The Excel function `NORM.DIST()` can be used to calculate the 
+PDF or CDF of the normal distribution, and the Excel function
+`NORM.INV()` can be used to calculate its quantile (inverse CDF)
+function.
 
 Consider a random variable $x \sim N(\mu,\sigma^2)$. Define another
 random variable $z = \frac{x-\mu}{\sigma}$. Then:
