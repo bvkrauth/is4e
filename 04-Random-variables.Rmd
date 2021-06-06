@@ -351,6 +351,27 @@ random variable from its CDF would be written:
 but we can just think of it as the size of the jump.
 :::
 
+### Functions of a random variable
+
+Any function of a random variable is also a random variable.  So 
+for example, if $x$ is a random variable, so is $x^2$ or 
+$\ln (x)$ or $\sqrt{x}$.
+
+We can derive the PDF or CDF of a function of a random variable directly
+from the PDF of the original random variable.  For example, suppose
+that:
+  $$y = g(x)$$
+for some function $g(\cdot)$.  Then the PDF of y is:
+  $$f_y(a) = \Pr(y = a) = \Pr\left(x \in \{b: g(b)=a\}\right) = \sum_{b:g(b)=a} f_x(b)$$
+and the CDF of y is:
+  $$F_y(a) = \Pr(y \leq a) = \Pr\left(x \in \{b: g(b) \leq a\}\right) = \sum_{b:g(b) \leq a} f_x(b)$$
+
+We say that $y$ is a **linear** function of $x$ if:
+  $$y = ax + b$$
+where $a$ and $b$ are constants. We will have many results that apply
+specifically for linear functions.
+
+
 ## The expected value {#the-expected-value}
 
 The ***expected value*** of a random variable $x$ is written
