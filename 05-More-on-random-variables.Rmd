@@ -333,13 +333,16 @@ too predictable to be much fun.
 ## The normal distribution {#normal-and-standard-normal}
 
 The ***normal distribution*** is typically written as:
-$$ x \sim N(\mu,\sigma^2)$$ 
-It is a continuous distribution with support $S_x = \mathbb{R}$
-and PDF:
-$$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
+  $$ x \sim N(\mu,\sigma^2)$$ 
 The normal distribution is also called the ***Gaussian*** distribution,
 and the $N(0,1)$ distribution is called the ***standard normal*** 
 distribution.
+
+### The normal PDF
+
+The $N(\mu,\sigma^2)$ distribution is a continuous distribution with support 
+$S_x = \mathbb{R}$ and PDF:
+$$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
 
 For example, the PDF for the $N(0,1)$ distribution looks like
 this:
@@ -385,6 +388,9 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
        tag = "")
 ```
 
+
+### The normal CDF
+
 The CDF of the normal distribution can be derived by integrating the PDF. There
 is no simple closed-form expression for this CDF, but it is easy to calculate 
 with a computer.  
@@ -412,7 +418,7 @@ The Excel function `NORM.DIST()` can be used to calculate the
 PDF or CDF of the normal distribution, and the Excel function `NORM.INV()` can 
 be used to calculate its quantile (inverse CDF) function.
 
-### Mean, median and variance
+### Median, mean and variance
 
 The mean and variance of a $N(\mu,\sigma^2)$ random variable can be found
 by integration:
