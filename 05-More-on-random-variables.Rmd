@@ -245,6 +245,8 @@ or
   $$x \sim U(L,H)$$
 where $L < H$. 
 
+### The uniform PDF
+
 The uniform distribution is a continuous probability distribution 
 with support:
   $$S_x = [L,H]$$
@@ -270,6 +272,8 @@ The uniform distribution puts equal probability on all values between $L$
 and $H$. We have already seen the ***standard uniform*** distribution,
 which is just the $U(0,1)$ distribution.
 
+### The uniform CDF
+
 The CDF of the uniform distribution is
   $$f_x(a) = \begin{cases}
     0 & a \leq L \\ 
@@ -291,6 +295,7 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
        caption = "", 
        tag = "")
 ```
+### Median, mean and variance {#uniform-median-mean-and-variance}
 
 The median of a uniform random variable $x \sim Uniform(L,H)$ 
 is just the midpoint of its support:
