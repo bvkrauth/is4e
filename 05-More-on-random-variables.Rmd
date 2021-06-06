@@ -183,7 +183,19 @@ no idea what this is or how to solve it.  That's OK!  All you need
 to know for this course is that it *can* be solved.
 :::
 
-### Expected values {#continuous-expected-values}
+### Expected value {#continuous-expected-values}
+
+The definition for the expected value of a continuous random variable 
+also uses integral calculus and is given below for background. More 
+importantly, the expected value has the same [interpretation]({#the-expected-value}) 
+as described earlier for discrete random variables, and it has all of 
+the [properties]({#properties-of-the-expected-value}) described earlier 
+as well.
+
+Since the variance and standard deviation are both defined as
+expected values, they also have the same 
+[interpretation and properties]({#variance-and-standard-deviation})
+for a continuous random variable as they do for a discrete random variable.
 
 ::: fyi
 **The expected value for a continuous random variable**
@@ -191,18 +203,27 @@ to know for this course is that it *can* be solved.
 When $x$ is continuous, its expected value is defined as:
   $$E(x) = \int_{-\infty}^{\infty} af_x(a)da$$
 Notice that this looks just like the definition for the discrete case, but
-with the sum replaced by an integral sign. 
+with the sum replaced by an integral sign. If you know much about 
+integral calculus, you may require that an integral is a sum (or more precisely,
+the limit of a sum). This is why the same properties we earlier
+found for the expected value of a discrete random variable also 
+applies to continuous random variables.
 
 There is even a general definition that covers both discrete
 and continuous variables, as well as any mix between them:
   $$E(x) - \int_{-\infty}^{\infty} a dF_x(a)$$
-Again, I do not expect you to understand, remember, or use 
-either of these definitions, only to know that they exist.
+This expression uses notation that is not typically taught in a first
+course in integral calculus, so even if you have taken MATH 152 or MATH 158
+you may not know how to interpret it.  Again, I am only showing you so
+that you know the formula exists, I am not asking you to remember or
+use it.
 :::
 
 ### Quantiles {#continuous-quantiles}
 
 To be added.
+
+
 
 ## Standard continuous distributions
 
