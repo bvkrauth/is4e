@@ -221,46 +221,106 @@ use it.
 
 ### Quantiles {#continuous-quantiles}
 
-To be added.
+Quantiles and percentiles have the same 
+[definition and interpretation]({#quantiles-and-percentiles})
+whether the random variable is continuous or discrete.
 
-
+While most calculations are harder for continuous random variables, calculating
+a quantile is actually much easier.  Recall that the $a$ quantile of a random 
+variable $x$ is defined as:
+ $$q_{\alpha}(x) = \min\{a: \Pr(x \leq a) \geq \alpha\} = \min\{a: F_x(a) \geq \alpha\}$$
+When $x$ is continuous, the CDF is continuous and increasing, so the quantile
+function is just the inverse of the CDF:
+   $$q_{\alpha}(x) = F_x^{-1}(\alpha)$$
+Since the median of a random variable is just its 0.5 quantile, the median
+of a continuous random variable is also just the inverse CDF:
+  $$$M(x) = F_x^{-1}(0.5)$$
+The range and percentiles can be derived similarly.
 
 ## Standard continuous distributions
+
+There are several standard continuous distributions that are in regular 
+usage.  The two most important are the uniform distribution and 
+the normal distribution. 
 
 ### The uniform distribution {#uniform-and-standard-uniform}
 
 The ***uniform*** probability distribution is usually written
-$$x \sim U(L,H)$$
-where $L < H$. It is a continuous probability distribution with 
-support $S_x = [L,H]$ and PDF:
-$$f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
+  $$x \sim Uniform(L,H)$$
+or
+  $$x \sim U(L,H)$$
+where $L < H$. 
+
+The uniform distribution is a continuous probability distribution 
+with support:
+  $$S_x = [L,H]$$
+and PDF:
+  $$f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
+which looks like this:
+```{r UniformPDF, fig.cap = "*PDF for the uniform distribution*"}
+ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
+  geom_step(col = "blue") +
+  geom_text(x=1.25,y=0.8,col="blue",label="f_x(a)") +
+  xlab("a") +
+  ylab("f(a)") +
+  labs(title = "Probability density function (PDF)", 
+       subtitle = "Uniform(L,H)", 
+       caption = "", 
+       tag = "")
+```
 The uniform distribution puts equal probability on all values between $L$ 
 and $H$. We have already seen the ***standard uniform*** distribution,
 which is just the $U(0,1)$ distribution.
 
-::: fyi
-Uniform distributions are commonly used by computers because:
+The CDF of the uniform distribution looks like this: 
+```{r UniformCDF, fig.cap = "*CDF for the uniform distribution*"}
+UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
+                      Fa=punif(seq(from=-2,to=2,length.out=100)),
+                      fa=dunif(seq(from=-2,to=2,length.out=100)))
+ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
+  geom_line(col = "blue") +
+  geom_text(x=1,y=0.6,col="blue",label="F_x(a)") +
+  xlab("a") +
+  ylab("F(a)") +
+  labs(title = "Cumulative distribution function (CDF)", 
+       subtitle = "Uniform(L,H)", 
+       caption = "", 
+       tag = "")
+```
 
-- It is easy for a computer to generate a random number from the standard 
-  uniform distribution.
+The mean and median of a uniform random variable is 
+
+If $x \sim Uniform(L,H)$ then its median is just the midpoint of its 
+support:
+  $$Med(x) = E(x) = \frac{L+H}{2}$$
+Its mean and variance can be found using intgral calculus, and are:
+  $$E(x) = \frac{L+H}{2}$$
+and:
+  $$var(x) = \frac{(H-L)^2}{12}$$
+Again, I do not expect you to be able to derive the mean and variance
+here.
+
+::: fyi
+**Uniform distributions in video games**
+
+Uniform distributions are important in many computer applications
+including video games.  
+
+- It is easy for a computer to generate a random number from the 
+  $Uniform(0,1)$ distribution.
 - You can generate a random variable with any probability distribution 
   you like by following these steps:
-    1. Generate a random variable $q \sim U(0,1)$.
+    1. Generate a random variable $q \sim Uniform(0,1)$.
     2. Calculate $x = F^{-1}(q)$ where $F^{-1}$ is the inverse CDF of 
       the distribution you want.
 
 Every video game you have ever played is constantly generating
-$U(0,1)$ random numbers and using them to determine the behavior of 
-non-player characters, the location of resources, etc.  Without that
-element of randomness, these games would be way too predictable to be 
-much fun.
+$Uniform(0,1)$ random numbers and using them to determine the behavior of 
+non-player characters, the location of weapons and other resources, 
+etc.  Without that element of randomness, these games would be far 
+too predictable to be much fun.
 :::
 
-The mean and variance of the $U(L,H)$ distribution are:
-  $$E(x) = \frac{L+H}{2}$$
-  $$var(x) = \frac{(H-L)^2}{12}$$
-As with all continuous random variables, these calculations would
-require integration which is beyond the scope of this course.
 
 ### The normal distribution {#normal-and-standard-normal}
 
