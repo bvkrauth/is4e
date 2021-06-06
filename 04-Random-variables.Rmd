@@ -381,7 +381,6 @@ $$E(x) = \sum_{a \in S_x} a\Pr(x=a) = \sum_{a \in S_x} af_x(a)$$
 The expected value is also called the ***mean***, the ***population mean***
 or the ***expectation*** of the random variable.
 
-
 ::: example
 **The expected value in roulette**
 
@@ -398,14 +397,9 @@ That is, each dollar bet on red leads to an average loss of 2.7 cents for the be
 We can think of the expected value as a weighted average of its possible
 values, with each value weighted by the probability of observing that value.
 
-### Calculating expected values {#properties-of-the-expected-value}
-
-In addition to taking the expected value of $x$, we can also take the
-expected value of any function of $x$:
-  $$E(g(x)) = \sum_{s \in S_x} g(s)\Pr(x = s) = \sum_{s \in S_x} g(s)f_x(s)$$
-Now, remember that the expected value is a sum, and so it has some 
-of the same properties as sums. In particular, the associative and
-distributive rules apply, which means:
+Since the expected value is a sum, it has some of the same properties as 
+sums. In particular, the associative and distributive rules apply, which 
+means that:
   $$E(a + bx) =  a + bE(x)$$
 That is, we can take the expected value "inside" any linear function.
 This will turn out to be a very handy property.
@@ -427,8 +421,7 @@ In other words, the average result of a \$100 bet on red is a loss
 of \$2.70.
 :::
 
-
-## Other properties of a random variable {#the-properties-of-a-random-variable}
+## Other characteristics {#the-properties-of-a-random-variable}
 
 The probability distribution of a random variable is fully described
 by its PDF or CDF.  However, we will often be interested in 
