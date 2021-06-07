@@ -598,38 +598,112 @@ Variance can be thought of as a measure of how much $x$ tends to
 deviate from its central tendency $E(x)$. 
 
 ::: example
-**Variance in roulette**
+**Calculating variance from the definition**
 
 The variance of $r$ is:
-  $$var(r) = (0-\underbrace{E(r)}_{18/37})^2 *\frac{19}{37} + (1-\underbrace{E(r)}_{18/37})^2 * \frac{18}{37} \approx 0.25$$
-
+  \begin{align}
+    var(r) &= (0-\underbrace{E(r)}_{18/37})^2 *\frac{19}{37} + (1-\underbrace{E(r)}_{18/37})^2 * \frac{18}{37} \\
+      &\approx 0.25
+  \end{align}
 The variance of $w_{red}$ is:
-  $$var(w_{red}) = (-1-\underbrace{E(w_{red})}_{\approx 0.027})^2 * \frac{19}{37} + (1-\underbrace{E(w_{red})}_{\approx 0.027})^2 * \frac{18}{37} \approx 1.0$$
+  \begin{align}
+    var(w_{red}) &= (-1-\underbrace{E(w_{red})}_{\approx 0.027})^2 * \frac{19}{37} + (1-\underbrace{E(w_{red})}_{\approx 0.027})^2 * \frac{18}{37} \\
+    &\approx 1.0
+  \end{align}
 
 The variance of $w_{14}$ is 
-  $$var(w_{14}) = (-1-\underbrace{E(w_{14})}_{\approx 0.027})^2 * \frac{36}{37} + (35-\underbrace{E(w_{14})}_{\approx 0.027})^2 * \frac{1}{37} \approx 34.1$$
+  \begin{align}
+    var(w_{14}) &= (-1-\underbrace{E(w_{14})}_{\approx 0.027})^2 * \frac{36}{37} + (35-\underbrace{E(w_{14})}_{\approx 0.027})^2 * \frac{1}{37} \\
+      &\approx 34.1
+  \end{align}
 
 That is, a bet on 14 has the same expected payout as a bet on red, but
 its payout is much more variable.
 :::
 
-The variance is the expected value (sum) of a square, which implies 
-several standard properties:
-  
-1. It is always non-negative:
-   $$var(x) \geq 0$$
-2. For any constants $a$ and $b$:
-   $$var(a + bx) = b^2 var(x)$$
-3. The variance can be written as:
-   $$var(x) = E(x^2) - E(x)^2$$
+The key to understanding the variance is that it is the expected value of
+a square $(x-E(x))^2$, and the expected value is just a (weighted) sum.
 
-We can easily derive these properties but we will skip that now.
+The first implication of this is that the variance is always positive
+(or more precisely, non-negative):
+  $$var(x) \geq 0$$
+The intuition is straightforward.  All squares are positive, and the expected
+value is just a sum.  If you add up several positive numbers, you will get
+a positive number.
+
+The second implication is that:
+  $$var(x) = E(x^2) - E(x)^2$$
+The derivation of this is as follows:
+  \begin{align}
+    var(x) &= E((x-E(x))^2) \\
+      &= E( ( x-E(x) ) * (x - E(x) )) \\
+      &= E( x^2 - 2xE(x) + E(x)^2)  \\
+      &= E(x^2) - 2E(x)E(x) + E(x)^2 \\
+      &= E(x^2) - E(x)^2 
+  \end{align}
+This formula is often an easier way of calculating the variance.
+
+::: example
+**Another way of calculating the variance**
+
+We already found that $E(w_{14}) = -0.027$, so we can calculate
+$var(w_{14})$ by finding:
+  \begin{align}
+    E(w_{14}^2) &= (-1)^2 f_{14}(-1) + 35^2 f_{14}(35) \\
+      &= 1 * \frac{36}{37} + 1225 * \frac{1}{37} \\
+      &\approx 34.08
+  \end{align}
+Adding these together we get:
+  \begin{align}
+    var(w_{14}) &= E(w_{14}^2) - E(w_{14})^2 \\
+      &\approx 34.08 + (-0.027)^2 \\
+      &\approx 34.1
+  \end{align}
+That is, a bet on 14 has the same expected payout as a bet on red, but
+its payout is much more variable.
+:::
+
+We can also find the variance of any linear function of a random variable. For
+any constants $a$ and $b$:
+  $$var(a + bx) = b^2 var(x)$$
+This can be derived as follows:
+  \begin{align}
+    var(a+bx) &= E( ( (a+bx) - E(a+bx))^2) \\
+      &= E( ( a+bx - a-bE(x))^2) \\
+      &= E( (b(x - E(x)))^2) \\
+      &= E( b^2(x - E(x))^2) \\
+      &= b^2 E( (x - E(x))^2) \\
+      &= b^2 var(x)
+  \end{align}
+I do not expect you to remember how to derive these results,
+but I want you to know them and use them.
+
+::: example
+**Variance of a linear function**
+
+The variance of $w_{red}$ is:
+  \begin{align}
+    var(w_{red}) &= var( 2r - 1) \\
+      &= 2^2 var(r) \\
+      &\approx 4*0.25 \\
+      &\approx 1.0
+  \end{align}
+:::
 
 ### Standard deviation {#standard-deviation}
 
 The ***standard deviation*** of a random variable 
 is defined as the (positive) square root of its variance.
 $$\sigma_x = sd(x) = \sqrt{var(x)}$$
+The standard deviation is just another way of describing the variability
+of $x$.  
+
+In some sense, the variance and standard deviation are
+interchangeable since they are so closely related.  The standard
+deviation has the advantage that it is expressed in the same
+units as the underlying random variable, while the variance
+is expressed in the square of those units.  This makes the standard
+deviation somewhat easier to interpret.
 
 ::: example
 **Standard deviation in roulette**
