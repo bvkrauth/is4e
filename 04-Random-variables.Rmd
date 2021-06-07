@@ -735,7 +735,16 @@ In principle, there are an infinite number of possible probability
 distributions.  However, some probability distributions appear so 
 often in applications that we have given them names. This provides 
 a quick way to describe a particular distribution without 
-writing out its PDF.  It also allows us to establish the properties
+writing out its full PDF, using the notation
+  $$RrandomVariable \sim DistributionName(Parameters)$$
+where $RandomVariable$ is the name of the random variable whose
+distribution is being described, the "$\sim$" character can be read as
+"has the following probability distribution", $DistributionName$ is
+the name of the probability distribution, and $Parameters$ is a list
+of numbers called parameters that provide additional information
+about the probability distribution.
+
+Using a standard distribution also allows us to establish the properties
 of a commonly-used distribution once, and use those results every
 time we use that distribution.
 
@@ -773,7 +782,6 @@ var(x) &= E[(x-E(x))^2] \\
   &= (1-p)(0-p)^2 + p(1-p)^2 \\
   &= p(1-p)
 \end{align}
-
 
 ### Binomial {#binomial}
 
