@@ -539,15 +539,14 @@ later.
 ## Multiple random variables
 
 Almost all interesting data sets have multiple observations and multiple
-variables and observations. So before we start talking about data, we 
-need to develop some tools and terminology for thinking about multiple
-random variables.
+variables. So before we start talking about data, we need to develop 
+some tools and terminology for thinking about multiple random variables.
 
 To keep things simple, most of the definitions and examples will be stated in
 terms of *two* random variables.  The extension to more than two random 
 variables is conceptually straightforward but will be skipped.
 
-### Joint distributions
+### Joint distribution
 
 Let $x = x(b)$ and $y = y(b)$ be two random variables defined in 
 terms of the same underlying outcome $b$.
@@ -597,6 +596,8 @@ Otherwise both red and 14 lose:
   \end{align}
 All other values have probability zero.
 :::
+
+### Marginal distribution
 
 The joint distribution tells you two things about these variables
 
@@ -659,7 +660,7 @@ plot_grid(p1,p2,p3,ncol=3,nrow=1)
 :::
 
 
-### Conditional distributions
+### Conditional distribution
 
 The ***conditional distribution*** of a random variable $y$ given another random
 variable $x$ assigns values to all probabilities of the form:
@@ -723,39 +724,24 @@ However the winnings from a bet on red and a bet on 14 in two different
 games *are* independent since the underlying outcomes are independent.
 :::
 
-### Expected values {#multiple-expected-values}
+### Functions of multiple random variables {#multiple-functions}
 
-We earlier showed that if $x$ is a random variable, we can take the
-expected value of any function of $x$, and that you can take
-the expected value "inside" any linear function of $x$:
-  $$E(a + bx) = a + b E(x)$$
-but in general $E(g(x)) \neq g(E(x))$.
+As with a single random variable, we can take any function $g(x,y)$ 
+of two or more random variables, and we will have a new random variable
+that has a well-defined CDF, PDF, expected value, etc.
 
-Similarly, when $x$ and $y$ are random variables with a well-defined 
-joint distribution, we can take the expected value of any function of 
-$x$ and $y$. 
+As with a linear function of a single random variable, we can take the 
+expected value inside of a linear function of two or more random variables. That
+is:
+  $$E(a + bx + cy) = a + bE(x) + cE(y)$$
+where $x$ and $y$ are random variables and $a$, $b$ and $c$ are constants.
 
-::: fyi
-When $x$ and $y$ are both discrete:
-  $$E(g(x,y)) = \sum_{a \in S_x} \sum_{b \in S_y} g(a,b)\Pr( x=a \cap y = b)$$
-That is, we add up $g(x,y)$ across all possible values for the pair $(x,y)$
-with each value weighted by its probability.
-
-When $x$ and $y$ are both continuous:
-  $$E(g(x,y)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(a,b)f_{x,y}(a,b)dadb$$
-Again, this looks similar to the formula for the discrete case,
-but uses an integral instead of a sum.
-
-You do not need to remember or use either of these formulas
-:::
-
-As with a single random variable, you can take the expected value inside
-a *linear* function of multiple random variables:
-  $$E(ax + by + c) = aE(x) + bE(y) + c$$
-but in general $E(g(x,y)) \neq g(E(x),E(y))$. For example:
+However, we cannot take the expected value inside a nonlinear function. For
+example:
   $$E(xy) \neq E(x)E(y)$$
   $$E(x/y) \neq E(x)/E(y)$$
-etc.
+As with a single random variable, the reason for this is that the
+expected value is a sum.
 
 ::: example
 **Multiple bets in roulette**
@@ -777,10 +763,11 @@ about \$3 per game.
 The ***covariance*** of two random variables $x$ and $y$ 
 is defined as:
   $$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
-The covariance is a measure of how $x$ and $y$ tend to move together.  
+The covariance can be interpreted as a measure of how $x$ and 
+$y$ tend to move together.  
 
 ::: example
-**Covariance in roulette**
+**Calculating the covariance from the joint PDF**
 
 The covariance of $w_{red}$ and $w_{14}$ is:
   \begin{align}
@@ -793,11 +780,71 @@ The covariance of $w_{red}$ and $w_{14}$ is:
     \end{align}
 :::
 
-The *sign* of the covariance tells us the direction
-of the relationship between $x$ and $y$.
-- If *positive*: $x$ and $y$ tend to move in the *same* direction. 
-- If *negative*, $x$ and $y$ tend to move in *opposite* directions.
-- If *zero*: $x$ and $y$ tend *not* to move together at all.
+The key to understanding the covariance is that it is the expected
+value of a *product* $(x-E(x))(y-E(y))$, and the expected value itself
+is just a sum. 
+
+The first implication of this insight is that we can derive an alternative
+formula for the covariance:
+  $$cov(x,y) = E(xy) - E(x)E(y)$$
+The derivation of this result is as follows:
+  \begin{align}
+    cov(x,y) &= E((x-E(x))(y-E(y))) \\
+      &= E(xy - yE(x) - xE(y) + E(x)E(y)) \\
+      &= E(xy) - E(y)E(x) - E(x)E(y) + E(x)E(y)) \\
+      &= E(xy) - E(x)E(y)
+  \end{align}
+Again, this formula is often easier to calculate than using the original
+definition.
+
+::: example
+**Another way to calculate the covariance**
+
+TO BE ADDED
+:::
+
+The next two implications are that the order does not matter:
+  $$cov(x,y) = cov(y,x)$$
+and that the variance is just the covariance of a random variable 
+with itself:
+  $$cov(x,x) = var(x)$$
+These follow from the corresponding properties of the product, since
+$x*y = y*x$ and $x^2 = x*x$.
+
+The next implication is that the *sign* of the covariance tells us the 
+direction of the relationship between the two variables.
+
+- If the covariance is *positive*: 
+  - $(x-E(x))$ and $(y-E(y))$ tend to have the *same* sign.
+  - $x$ and $y$ tend to move in the *same* direction. 
+- If the covariance is *negative*:
+  - $(x-E(x))$ and $(y-E(y))$ tend to have *opposite* signs.
+  - $x$ and $y$ tend to move in *opposite* directions. 
+
+If the covariance is *zero*, there is no simple pattern of
+co-movement for $x$ and $y$.
+
+Next, we can use our previous results on the expected value of
+a linear function of one or more random variables to derive some
+results on the covariance:
+
+- Covariances go through sums:
+  $$cov(x,y+z) = cov(x,y) + cov(x,z)$$
+- Constant multiples can be taken out of covariances
+  $$cov(ax,by) = ab \, cov(x,y)$$
+
+These two results can be combined in various ways, for example:
+  \begin{align}
+    cov(ax + by + c,dx + ey + f) &= ad var(x) + be Var(y) + (ae + bd) cov(x,y) 
+  \end{align}
+Finally, we can combine these results with our knowledge that
+the variance is just the covariance of a variable with itself
+to get:
+  $$var(x + y) = var(x) + var(y) + 2 \, cov(x,y)$$
+
+I do not expect you to remember all of these formulas, but be 
+prepared to see me use them
+
 
 When random variables are independent, their covariance is
 exactly zero. However, it does not go the other way around.  
@@ -824,44 +871,6 @@ ggplot(data = simdata, mapping = aes(x = x, y =y)) +
 ```
 :::
 
-The *magnitude* of the covariance or correlation tells us about
-the strength of the relationship between the two variables:
-
-- In contrast, the covariance depends on the scale of the variables, and
-  always lies between $-\sigma_x\sigma_y$ and $\sigma_x\sigma_y$.
-
-Earlier I said that the variance was a square, and has some implied 
-properties similar to those of a square.  In particular:
-
-- The variance can be written
-  $$var(x) = E(x^2) - E(x)^2$$
-- We can take constants out of a variance:
-  $$var(ax) = a^2 var(x)$$
-  since $(ax)^2 = a^2x^2$.
-
-Similarly, the covariance is the expected value of a product, and has some
-implied properties similar to those of a product.  
-
-- The covariance can be written:
-  $$cov(x,y) = E(xy) - E(x)E(y)$$
-- The order in a covariance does not matter:
-  $$cov(x,y)=cov(y,x)$$
-  since $xy = yx$.
-- Covariances go through sums:
-  $$cov(x,y+z) = cov(x,y) + cov(x,z)$$
-  since $x*(y+z) = xy + xz$
-- Constant multiples can be taken out of covariances
-  $$cov(ax,by) = ab \, cov(x,y)$$
-  since $ax*by = ab*xy$.
-- The variance of a random variable is its covariance with itself:
-  $$cov(x,x) = var(x)$$
-  since $x*x = x^2$
-- The variance of a sum is:
-  $$var(x + y) = var(x) + var(y) + 2 \, cov(x,y)$$
-  since $(x+y)^2 = x^2 + y^2 + 2xy$.
-
-I do not expect you to remember all of these formulas, but be 
-prepared to see me use them
 
 ### Correlation
 
@@ -883,7 +892,6 @@ The correlation of $w_{red}$ and $w_{14}$ is:
      &\approx 0.17
   \end{align}
 :::
-
 
 The covariance and correlation always have the same sign since 
 standard deviations are always[^601] positive. The key
