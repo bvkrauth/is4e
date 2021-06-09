@@ -222,18 +222,17 @@ The probability of the event $b \in Even$ can be calculated:
 
 The PDF of a discrete random variable has several general properties:
 
-  1. It is always between zero and one:
+1. It is always between zero and one:
     $$0 \leq f_x(a) \leq 1$$
-    since it is a probability.
-  2. It sums up to one over the support:
+   since it is a probability.
+2. It sums up to one over the support:
     $$\sum_{a \in S_x} f_x(a) = \Pr(x \in S_x) = 1$$
-    since the support has probability one by definition.
-  3. It is strictly positive for all values in the support:
+   since the support has probability one by definition.
+3. It is strictly positive for all values in the support:
     $$a \in S_x \implies f_x(a) > 0$$
-    since the support is the *smallest* set that has probability
-    one.
+   since the support is the *smallest* set that has probability one.
 
-We can prove these, but I will skip that.
+You can confirm that examples above all satisfy these properties.
 
 ### The CDF {#the-cdf}
 
@@ -250,21 +249,6 @@ function $F_x:\mathbb{R} \rightarrow [0,1]$ defined by:
 where $a$ is any number.  By convention, we typically use an upper-case
 $F$ to indicate a CDF, and we use the subscript to indicate
 what random variable we are talking about.
-
-The CDF has several properties:
-
-  1. It always lies between zero and one:
-      $$0 \leq F_x(a) \leq 1$$
-     since it is a probability.
-  2. It starts at zero and ends at one:
-      $$F_x(-\infty) = \Pr(x \leq -\infty) = 0$$
-      $$F_x(\infty) = \Pr(x \leq \infty) = 1$$
-  2. It is non-decreasing.  That is, for any $a_1 \leq a_2$
-      $$F_x(a_1) \leq F_x(a_2)$$
-     This is because the event $x \leq a_2$ implies the event $x \leq a_1$,
-     so it must be at least as probable.
-  3. For any $a_1 < a_2$,
-      $$\Pr(a_1 < x \leq a_2) = F_x(a_2) - F_x(a_1)$$
 
 We can construct the CDF of a discrete random variable by
 just adding up the PDF:
@@ -300,8 +284,30 @@ in the support.
                 36/37 & -1 \leq a < 35 \\
                 1 & a \geq 35 \\
                 \end{cases}$$
+:::
 
-Figure \@ref(fig:RouletteCDF) below graphs these CDFs. 
+
+The CDF has several properties.  First, it is *non-decreasing*.  That is,
+choose any two numbers $a$ and $b$ so that $a \leq b$.  Then
+  $$F_x(a) \leq F_x(b)$$
+The reason for this is simple: the event $x \leq a$ implies the 
+event $x \leq b$, so its probability cannot be higher.
+
+Second, it is a *probability*, which implies:
+  $$0 \leq F_x(a) \leq 1$$
+just like for a discrete PDF.
+
+Third, it *runs from zero to one*:
+    $$\lim_{a \rightarrow -\infty} F_x(a) = \Pr(x \leq -\infty) = 0$$
+    $$\lim_{a \rightarrow \infty} F_x(a) = \Pr(x \leq \infty) = 1$$
+The intuition is simple: all values in the support are between
+$-\infty$ and $\infty$.
+
+::: example
+**CDF properties**
+
+Figure \@ref(fig:RouletteCDF) below graphs the CDFs from the previous
+example.
 ```{r RouletteCDF, fig.cap = "*CDFs for the roulette example*"}
 RouletteCDF <- RoulettePDF %>%
     mutate (Fb = cumsum(fb)) %>%
@@ -330,14 +336,19 @@ ggplot(data = RouletteCDF, mapping = aes(x = a)) +
        caption = "", 
        tag = "")
 ```
-Notice that they show all of the general properties described above. In 
-addition, they all have a distinctive "stair-step" shape, jumping up at 
-each point in $S_x$ and flat between those points,  This is a general 
-property of CDFs for discrete random variables.
+Notice that they show all of the general properties described above. 
+
+  - The CDF never goes down, only goes up or stays the same.
+  - The CDF runs from zero to one, and never leaves that range.
+
+In addition, all of these CDFs have a distinctive "stair-step" shape, 
+jumping up at each point in $S_x$ and flat between those points,  This 
+is a general property of CDFs for discrete random variables.
 :::
 
-We can also go the other way, and construct the PDF of a discrete random 
-variable from its CDF. Each little jump in the CDF is a point in the support,
+In addition to constructing the CDF from the PDF, we can also go the
+other way, and construct the PDF of a discrete random variable from 
+its CDF. Each little jump in the CDF is a point in the support,
 and the size of the jump is exactly equal to the PDF.
 
 ::: fyi
@@ -346,6 +357,32 @@ random variable from its CDF would be written:
 
   $$f_x(a) = \lim_{\epsilon \rightarrow 0} F_x(a) - F_x(a-|\epsilon|)$$
 but we can just think of it as the size of the jump.
+:::
+
+Finally, we can use the CDF to calculate the probability that $x$ lies 
+in any interval.  That is, let $a$ and $b$ be any two numbers such that
+$a < b$.  Then:
+  \begin{align}
+    F(b) - F(a) &= \Pr(x \leq b) - \Pr(x \leq a) \\
+      &= \Pr((x \leq a) \cup (a < x \leq b)) - \Pr(x \leq a) \\
+      &= \Pr(x \leq a) + \Pr(a < x \leq b) - \Pr(x \leq a) \\
+      &= \Pr(a < x \leq b) 
+  \end{align}
+Notice that we have to be a little careful here to distinguish between
+the strict inequality $<$ and the weak inequality $\leq$, because 
+it is always possible for $x$ to be exactly equal to $a$ or $b$.
+
+::: example
+**Calculating interval probabilities**
+
+Consider the CDF for $b$ derived above. Then:
+  \begin{align}
+    \Pr(b \leq 36) &= F_b(36)
+      &=1 \\
+    \Pr(1 < b \leq 36) = F_b(36) - F_b(1) \\
+      &= 1 - 2/37 \\
+      &= 35/37 
+  \end{align}
 :::
 
 ### Functions of a random variable
@@ -799,8 +836,8 @@ CDF of the binomial distribution, and the function `BINOM.INV()`
 can be used to calculate its quantiles.
 
 The binomial distribution is typically used to model frequencies or counts. We
-can show that it is the distribution of how many of $n$ independent 
-probability-$p$ events happen.  
+can show that it is the distribution of how many times a probability-$p$ event
+happens in $n$ independent attempts.
 
 For example, the basketball player Stephen Curry makes about
 43\% of his 3-point shot attempts.  If each shot is independent of the others,
