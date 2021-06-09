@@ -526,12 +526,12 @@ The support of $b$ is $\{0,1,2,\ldots,36\}$ so its range is $[0,36]$.
 
 ### Quantiles and percentiles {#quantiles-and-percentiles}
 
-Let $\alpha$ be any number between zero and one.  Then the $\alpha$ ***quantile***
+Let $q$ be any number between zero and one.  Then the $q$ ***quantile***
 of a random variable $x$ is defined as:
-  $$q_x(\alpha) = \min\{a: \Pr(x \leq a) \geq \alpha\} = \min\{a: F_x(a) \geq \alpha\}$$
-where $F_x(\cdot)$ is the CDF of $x$.
+  $$F_x^{-1}(q) = \min\{a: \Pr(x \leq a) \geq q\} = \min\{a: F_x(a) \geq q\}$$
+where $F_x(\cdot)$ is the CDF of $x$.  The quantile function $F_x^{-1}(\cdot)$ is also called the ***inverse CDF***.
 
-The $\alpha$ quantile of a distribution is also called the $100*\alpha$
+The $q$ quantile of a distribution is also called the $100q$
 ***percentile***; for example the 0.25 quantile of $x$ is also called the 25th
 percentile of $x$.
 
@@ -572,17 +572,16 @@ ggplot(data = RouletteCDF, mapping = aes(x = a)) +
 ```
 We can use this graph to find any quantile.  For example, the 0.25 quantile
 (25th percentile) is:
-  $$q_{red}(0.25) = \min\{a: \Pr(w_{red} \leq a) \geq 0.25\} = \min [-1,1] = -1$$
+  $$F_{red}^{-1}(0.25) = \min\{a: \Pr(w_{red} \leq a) \geq 0.25\} = \min [-1,1] = -1$$
 which is depicted by the lowest blue dashed line.
 
 By the same method, we can find that the 0.5 quantile (50th percentile) is:
-  $$q_{red}(0.5) = \min\{a: \Pr(w_{red} \leq a) \geq 0.5\} = \min [-1,1] = -1$$
+  $$F_{red}^{-1}(0.5) = \min\{a: \Pr(w_{red} \leq a) \geq 0.5\} = \min [-1,1] = -1$$
 and the 0.75 quantile (75th percentile) is:
-  $$q_{red}(0.75) = \min\{a: \Pr(w_{red} \leq a) \geq 0.75\} = \min\{1\} = 1$$
+  $$F_{red}^{-1}(0.75) = \min\{a: \Pr(w_{red} \leq a) \geq 0.75\} = \min\{1\} = 1$$
 :::
 
-The quantile function $q_x(\cdot)$ is also called the ***inverse CDF*** because
-it is obtained by "flipping" the axes of the CDF.
+The formula for the quantile function may look intimidating, but it can be constructed by just "flipping" the axes of the CDF.
 
 ::: example
 **The whole quantile function**
@@ -617,7 +616,7 @@ distribution.
 **The median in roulette**
 
 The median of $w_{red}$ is just its 0.5 quantile or 50th percentile:
-  $$median(w_{red}) = q_{red}(0.5) = -1$$
+  $$median(w_{red}) = F_{red}^{-1}(0.5) = -1$$
 :::
 
 
