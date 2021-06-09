@@ -731,7 +731,17 @@ The ***covariance*** of two random variables $x$ and $y$
 is defined as:
   $$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
 The covariance can be interpreted as a measure of how $x$ and 
-$y$ tend to move together.  
+$y$ tend to move together:
+
+- If the covariance is *positive*: 
+  - $(x-E(x))$ and $(y-E(y))$ tend to have the *same* sign.
+  - $x$ and $y$ tend to move in the *same* direction. 
+- If the covariance is *negative*:
+  - $(x-E(x))$ and $(y-E(y))$ tend to have *opposite* signs.
+  - $x$ and $y$ tend to move in *opposite* directions. 
+
+If the covariance is *zero*, there is no simple pattern of
+co-movement for $x$ and $y$.
 
 ::: example
 **Calculating the covariance from the joint PDF**
@@ -745,14 +755,11 @@ The covariance of $w_{red}$ and $w_{14}$ is:
         \end{aligned} \\
       &\approx 0.999 
     \end{align}
+That is, the returns from a bet on red and a bet on 14 are positively
+related.
 :::
 
-The key to understanding the covariance is that it is the expected
-value of a *product* $(x-E(x))(y-E(y))$, and the expected value itself
-is just a sum. 
-
-The first implication of this insight is that we can derive an alternative
-formula for the covariance:
+As with the variance, we can derive an alternative formula for the covariance:
   $$cov(x,y) = E(xy) - E(x)E(y)$$
 The derivation of this result is as follows:
   \begin{align}
@@ -770,45 +777,37 @@ definition.
 TO BE ADDED
 :::
 
-The next two implications are that the order does not matter:
+The key to understanding the covariance is that it is the expected
+value of a *product* $(x-E(x))(y-E(y))$, and the expected value itself
+is just a sum. 
+
+The first implication of this insight is that the order does not 
+matter:
   $$cov(x,y) = cov(y,x)$$
-and that the variance is just the covariance of a random variable 
-with itself:
+since $x*y = y*x$ 
+
+A second implication is that the variance is just the covariance 
+of a random variable with itself:
   $$cov(x,x) = var(x)$$
-These follow from the corresponding properties of the product, since
-$x*y = y*x$ and $x^2 = x*x$.
-
-The next implication is that the *sign* of the covariance tells us the 
-direction of the relationship between the two variables.
-
-- If the covariance is *positive*: 
-  - $(x-E(x))$ and $(y-E(y))$ tend to have the *same* sign.
-  - $x$ and $y$ tend to move in the *same* direction. 
-- If the covariance is *negative*:
-  - $(x-E(x))$ and $(y-E(y))$ tend to have *opposite* signs.
-  - $x$ and $y$ tend to move in *opposite* directions. 
-
-If the covariance is *zero*, there is no simple pattern of
-co-movement for $x$ and $y$.
+since $x*x = x^2$.
 
 Next, we can use our previous results on the expected value of
 a linear function of one or more random variables to derive some
 results on the covariance:
 
-- Covariances go through sums:
+- Covariances pass through sums:
   $$cov(x,y+z) = cov(x,y) + cov(x,z)$$
-- Constant multiples can be taken out of covariances
-  $$cov(ax,by) = ab \, cov(x,y)$$
+- Constants can be taken out of covariances:
+  $$cov(x,a+by) = b \, cov(x,y)$$
 
-These two results can be combined in various ways, for example:
+These results can be combined in various ways, for example:
   \begin{align}
-    cov(ax + by + c,dx + ey + f) &= ad var(x) + be Var(y) + (ae + bd) cov(x,y) 
+    var(x + y)
+      &= cov(x + y, x + y) \\
+      &= cov(x + y, x) + cov(x + y,y) \\
+      &= cov(x,x) + cov(y, x) + cov(x,y) + cov(y,y) \\
+      &= var(x) + 2 \, cov(x,y) + var(y) \\
   \end{align}
-Finally, we can combine these results with our knowledge that
-the variance is just the covariance of a variable with itself
-to get:
-  $$var(x + y) = var(x) + var(y) + 2 \, cov(x,y)$$
-
 I do not expect you to remember all of these formulas, but be 
 prepared to see me use them
 
@@ -818,7 +817,7 @@ The ***correlation coefficient*** of two random variables $x$ and $y$ is
 defined as:
   $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
 Like the covariance, the correlation describes the strength of a (linear) 
-relationship between $x$ and $y$.  But it is resecaled in a way that makes
+relationship between $x$ and $y$.  But it is rescaled in a way that makes
 it more convenient for some purposes.
 
 ::: example
@@ -842,11 +841,18 @@ is:
 - It is unchanged by any rescaling or change in units.  That is,
   for any positive constants $a$ and $b$:
   $$corr(ax,by) = corr(x,y)$$
-- When $corr(x,y) \in \{-1,1\}$, then that means $y$ is an 
-  exact linear function of $x$.  That is, we can write it:
-  $$y = a + bx$$
-  and
-  $$corr(x,y) = \begin{cases} 1 & \textrm{if $b > 0$} \\ -1 & \textrm{if $b < 0$} \\ \end{cases}$$
+  
+When $corr(x,y) \in \{-1,1\}$, then that means $y$ is an 
+exact linear function of $x$.  That is, we can write it:
+ $$y = a + bx$$
+where:
+  \begin{align}
+    corr(x,y) 
+      &= \begin{cases} 
+          1 & \textrm{if $b > 0$} \\ 
+          -1 & \textrm{if $b < 0$} \\ 
+        \end{cases}
+  \end{align}
 
 [^601]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
 In that case the covariance will also be zero, and the correlation will be 
@@ -885,8 +891,8 @@ However the winnings from a bet on red and a bet on 14 in two different
 games *are* independent since the underlying outcomes are independent.
 :::
 
-When random variables are independent, their covariance is
-exactly zero. However, it does not go the other way around.  
+When random variables are independent, their covariance and correlation
+are both exactly zero. However, it does not go the other way around.  
 
 ::: example
 **Zero covariance does not imply independent**
@@ -909,7 +915,6 @@ ggplot(data = simdata, mapping = aes(x = x, y =y)) +
   ylab("y")
 ```
 :::
-
 
 ## Chapter review {#review-more-on-random-variables}
 
