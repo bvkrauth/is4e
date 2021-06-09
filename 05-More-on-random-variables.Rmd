@@ -65,12 +65,12 @@ straightforward: you can make a continuous random variable into a discrete
 random variable by just rounding it.  For example, suppose you round the 
 labour force participation rate to the nearest percentage
 point.  Then it becomes a discrete random variable, with support:
-  $$S_x = \{0\%, 1\%, \ldots 99\%, \100\%\}$$
+  $$S_x = \{0\%, 1\%, \ldots 99\%, 100\% \}$$
 The same point applies if you round to the nearest 1/100th of a percentage point,
 or the nearest 1/1,000,000th of a percentage point. 
 
 Since discrete and random variables are more alike than first appears,
-ost of the results and intuition we have already developed for discrete 
+most of the results and intuition we have already developed for discrete 
 random variables can also be applied to continuous random variables. So:
 
 - Most of my examples will be for discrete case.
