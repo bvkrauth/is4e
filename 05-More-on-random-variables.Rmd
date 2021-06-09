@@ -305,7 +305,7 @@ which is just the $U(0,1)$ distribution.
 ### The uniform CDF
 
 The CDF of the $U(L,H)$ distribution is
-  $$f_x(a) = \begin{cases}
+  $$F_x(a) = \begin{cases}
     0 & a \leq L \\ 
     \frac{a-L}{H-L} & L < a < H \\ 
     1 & a \geq H \\ 
@@ -325,7 +325,8 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
        caption = "", 
        tag = "")
 ```
-### Median, mean and variance {#uniform-median-mean-and-variance}
+
+### Means and quantiles {#uniform-median-mean-and-variance}
 
 The median of a uniform random variable $x \sim U(L,H)$ 
 is just the midpoint of its support:
@@ -339,21 +340,36 @@ and its standard deviation is just the square root of the variance:
   $$sd(x) = \sqrt{\frac{(H-L)^2}{12}}$$
 as always.
 
+### Functions of a uniform {#uniform-functions}
+
+A linear function of a uniform random variable also has a uniform
+distribution. That is, if $x \sim U(L,H)$ and $y = a + bx$ where
+$b > 0$, then:
+  $$y \sim U(a + bL, a + bH)$$
+A nonlinear function of a uniform random variable is genearlly 
+not uniform, but it has a very useful characteristic described 
+below.
+
 ::: fyi
 **Uniform distributions in video games**
 
 Uniform distributions are important in many computer applications
 including video games.  
 
-- It is easy for a computer to generate a random number from the 
-  $U(0,1)$ distribution.
-- You can generate a random variable with any probability distribution 
-  you like by following these steps:
-    1. Generate a random variable $q \sim U(0,1)$.
-    2. Calculate $x = F^{-1}(q)$ where $F^{-1}$ is the inverse CDF of 
-      the distribution you want.
+It is easy for a computer to generate a random number from the 
+$U(0,1)$ distribution, and a $U(0,1)$ has the unusual feature
+that its $q$ quantile is equal to $q$.
 
-Every video game you have ever played is constantly generating
+As a result, you can generate a random variable with any probability 
+distribution you like by following these steps:
+
+1. Generate a random variable $q \sim U(0,1)$.
+2. Calculate $x = F^{-1}(q)$ where $F(\cdot)$ is the CDF of the 
+   distribution you want.
+   
+Then $x$ is a random variable with the CDF $F(\cdot)$
+
+If you have ever played a video game, that game is constantly generating
 $U(0,1)$ random numbers and using them to determine the behavior of 
 non-player characters, the location of weapons and other resources, 
 etc.  Without that element of randomness, these games would be far 
