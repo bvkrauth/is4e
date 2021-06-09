@@ -216,30 +216,25 @@ identical to the properties of the discrete PDF.
 Like the discrete PDF, the continuous PDF is non-negative for all values:
   $$f_x(a) \geq 0$$
 and is strictly positive for all values in the support:
-  $$a \in S_x \implies f_x(a) > 0
+  $$a \in S_x \implies f_x(a) > 0$$ 
 but it is *not* a probability, and can be greater than one.
 
 If you recall, we can calculate probabilities from the discrete PDF
 by adding, and the discrete PDF sums to one.  Similarly, we can
 calculate probabilities from the continuous PDF by integrating:
-  $$\Pr(a < x < b) = \int_a^b f_x(v)dv$$
+  $$\Pr(a < x < b) = \int_a^b f_x(v)dv$$ 
 and the continuous PDF integrates to one:
   $$\int_{-\infty}^{\infty} f_x(v)dv = 1$$
 :::
 
-### Expected value {#continuous-expected-values}
+### Means and quantiles {#continuous-expected-values}
+
+Quantiles and percentiles, including the range and median, have the same 
+[definition and interpretation](#quantiles-and-percentiles)
+whether the random variable is continuous or discrete.
 
 The definition for the expected value of a continuous random variable 
-also uses integral calculus and is given below for background. More 
-importantly, the expected value has the same [interpretation](#the-expected-value) 
-as described earlier for discrete random variables, and it has all of 
-the [properties](#properties-of-the-expected-value) described earlier 
-as well.
-
-Since the variance and standard deviation are both defined as
-expected values, they also have the same 
-[interpretation and properties](#variance-and-standard-deviation)
-for a continuous random variable as they do for a discrete random variable.
+is different and uses integral calculus. 
 
 ::: fyi
 **The expected value for a continuous random variable**
@@ -263,23 +258,16 @@ that you know the formula exists, I am not asking you to remember or
 use it.
 :::
 
-### Quantiles {#continuous-quantiles}
+More importantly, the expected value has the same
+[interpretation](#the-expected-value) 
+as it does for a discrete random variable, and it has all of 
+the [properties](#properties-of-the-expected-value) described earlier 
+as well.
 
-Quantiles and percentiles have the same 
-[definition and interpretation]({#quantiles-and-percentiles})
-whether the random variable is continuous or discrete.
-
-While most calculations are harder for continuous random variables, calculating
-a quantile is actually much easier.  Recall that the $a$ quantile of a random 
-variable $x$ is defined as:
- $$q_{\alpha}(x) = \min\{a: \Pr(x \leq a) \geq \alpha\} = \min\{a: F_x(a) \geq \alpha\}$$
-When $x$ is continuous, the CDF is continuous and increasing, so the quantile
-function is just the inverse of the CDF:
-   $$q_{\alpha}(x) = F_x^{-1}(\alpha)$$
-Since the median of a random variable is just its 0.5 quantile, the median
-of a continuous random variable is also just the inverse CDF:
-  $$$M(x) = F_x^{-1}(0.5)$$
-The range and percentiles can be derived similarly.
+The variance and standard deviation are both defined as
+expected values, so they also have the same 
+[interpretation and properties](#variance-and-standard-deviation)
+for a continuous random variable as they do for a discrete random variable.
 
 ## The uniform distribution {#uniform-and-standard-uniform}
 
