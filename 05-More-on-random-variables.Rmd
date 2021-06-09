@@ -284,8 +284,6 @@ The range and percentiles can be derived similarly.
 ## The uniform distribution {#uniform-and-standard-uniform}
 
 The ***uniform*** probability distribution is usually written
-  $$x \sim Uniform(L,H)$$
-or
   $$x \sim U(L,H)$$
 where $L < H$. 
 
@@ -297,8 +295,8 @@ with support:
 and PDF:
   $$f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
 
-For example, if $x \sim Uniform(2,5)$ its support is the range of all values from 2 to 5, and its PDF looks like this:
-```{r UniformPDF, fig.cap = "*PDF for the Uniform(2,5) distribution*"}
+For example, if $x \sim U(2,5)$ its support is the range of all values from 2 to 5, and its PDF looks like this:
+```{r UniformPDF, fig.cap = "*PDF for the U(2,5) distribution*"}
 UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
                       fa=dunif(seq(from=-6,to=6,length.out=100),min=2,max=5))
@@ -308,7 +306,7 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
   xlab("a") +
   ylab("f(a)") +
   labs(title = "Probability density function (PDF)", 
-       subtitle = "Uniform(2,5)", 
+       subtitle = "U(2,5)", 
        caption = "", 
        tag = "")
 ```
@@ -318,14 +316,14 @@ which is just the $U(0,1)$ distribution.
 
 ### The uniform CDF
 
-The CDF of the uniform distribution is
+The CDF of the $U(L,H)$ distribution is
   $$f_x(a) = \begin{cases}
     0 & a \leq L \\ 
     \frac{a-L}{H-L} & L < a < H \\ 
     1 & a \geq H \\ 
     \end{cases}$$
-For example, if $x \sim Uniform(2,5)$ the CDF looks like this: 
-```{r UniformCDF, fig.cap = "*CDF for the Uniform(2,5) distribution*"}
+For example, if $x \sim U(2,5)$ the CDF looks like this: 
+```{r UniformCDF, fig.cap = "*CDF for the U(2,5) distribution*"}
 UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
                       fa=dunif(seq(from=-6,to=6,length.out=100),min=2,max=5))
@@ -335,13 +333,13 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
   xlab("a") +
   ylab("F(a)") +
   labs(title = "Cumulative distribution function (CDF)", 
-       subtitle = "Uniform(2,5)", 
+       subtitle = "U(2,5)", 
        caption = "", 
        tag = "")
 ```
 ### Median, mean and variance {#uniform-median-mean-and-variance}
 
-The median of a uniform random variable $x \sim Uniform(L,H)$ 
+The median of a uniform random variable $x \sim U(L,H)$ 
 is just the midpoint of its support:
   $$Med(x) = F_x^{-1}(0.5) = \frac{L+H}{2}$$
 Its mean can be found using integral calculus, and is also the
@@ -360,15 +358,15 @@ Uniform distributions are important in many computer applications
 including video games.  
 
 - It is easy for a computer to generate a random number from the 
-  $Uniform(0,1)$ distribution.
+  $U(0,1)$ distribution.
 - You can generate a random variable with any probability distribution 
   you like by following these steps:
-    1. Generate a random variable $q \sim Uniform(0,1)$.
+    1. Generate a random variable $q \sim U(0,1)$.
     2. Calculate $x = F^{-1}(q)$ where $F^{-1}$ is the inverse CDF of 
       the distribution you want.
 
 Every video game you have ever played is constantly generating
-$Uniform(0,1)$ random numbers and using them to determine the behavior of 
+$U(0,1)$ random numbers and using them to determine the behavior of 
 non-player characters, the location of weapons and other resources, 
 etc.  Without that element of randomness, these games would be far 
 too predictable to be much fun.
