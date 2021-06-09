@@ -227,19 +227,18 @@ and the continuous PDF integrates to one:
   $$\int_{-\infty}^{\infty} f_x(v)dv = 1$$
 :::
 
-
 ### Expected value {#continuous-expected-values}
 
 The definition for the expected value of a continuous random variable 
 also uses integral calculus and is given below for background. More 
-importantly, the expected value has the same [interpretation]({#the-expected-value}) 
+importantly, the expected value has the same [interpretation](#the-expected-value) 
 as described earlier for discrete random variables, and it has all of 
-the [properties]({#properties-of-the-expected-value}) described earlier 
+the [properties](#properties-of-the-expected-value) described earlier 
 as well.
 
 Since the variance and standard deviation are both defined as
 expected values, they also have the same 
-[interpretation and properties]({#variance-and-standard-deviation})
+[interpretation and properties](#variance-and-standard-deviation)
 for a continuous random variable as they do for a discrete random variable.
 
 ::: fyi
