@@ -691,39 +691,6 @@ Let's find the conditional PDF of the payout for a bet on
   \end{align}
 :::
 
-### Independence {#independent-random-variables}
-
-We say that $x$ and $y$ are ***independent*** if every event defined in 
-terms of $x$ is independent of every event defined in terms of $y$.
-  $$\Pr(x \in A \cap y \in B) = \Pr(x \in A)\Pr(y \in B)$$
-As before, independence of $x$ and $y$ implies that the conditional
-distribution is the same as the marginal distribution:
-  $$\Pr(x \in A| y \in B) = \Pr(x \in A)$$
-  $$\Pr(y \in A| x \in B) = \Pr(y \in A)$$
-The first graph in Figure \@ref(fig:JointIsNotMarginal) shows 
-what independent random variables look like in data: a cloud of 
-unrelated points.
-  
-Independence also means that the joint and conditional PDF/CDF can be derived
-from the marginal PDF/CDF:
-  $$f_{x,y}(a,b) = f_x(a)f_y(b)$$
-  $$f_{y|x}(a,b) = f_y(a)$$
-  $$F_{x,y}(a,b) = F_x(a)F_y(b)$$
-  $$F_{y|x}(a,b) = F_y(a)$$
-As with independence of events, this will be very handy in simplifying the
-analysis.  But remember: independence is an *assumption* that
-we can only make when it's reasonable to do so.
-
-::: example
-**Independence in roulette**
-
-The winnings from a bet on red $(w_{red})$ and the winnings from 
-a bet on 14 $(w_{14})$ in the same game are *not* independent. 
-
-However the winnings from a bet on red and a bet on 14 in two different 
-games *are* independent since the underlying outcomes are independent.
-:::
-
 ### Functions of multiple random variables {#multiple-functions}
 
 As with a single random variable, we can take any function $g(x,y)$ 
@@ -845,33 +812,6 @@ to get:
 I do not expect you to remember all of these formulas, but be 
 prepared to see me use them
 
-
-When random variables are independent, their covariance is
-exactly zero. However, it does not go the other way around.  
-
-::: example
-**Zero covariance does not imply independent**
-
-Figure \@ref(fig:UncorrelatedButNotIndependent) below shows a scatter plot
-from a simulation of two random variables that are clearly related (and therefore
-not independent) but whose covariance is exactly zero.
-
-Intuitively, covariance is a measure of the *linear* 
-relationship between two variables.  When variables have a nonlinear 
-relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent), the
-covariance may miss it.
-
-```{r UncorrelatedButNotIndependent, fig.cap = "*x and y are uncorrelated, but clearly related.*"}
-simdata <- tibble(x = rnorm(100),
-                  y = x^2)
-ggplot(data = simdata, mapping = aes(x = x, y =y)) +
-  geom_point(col="blue") +
-  xlab("x") + 
-  ylab("y")
-```
-:::
-
-
 ### Correlation
 
 The ***correlation coefficient*** of two random variables $x$ and $y$ is 
@@ -911,6 +851,65 @@ is:
 [^601]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
 In that case the covariance will also be zero, and the correlation will be 
 undefined (zero divided by zero).
+
+### Independence {#independent-random-variables}
+
+We say that $x$ and $y$ are ***independent*** if every event defined in 
+terms of $x$ is independent of every event defined in terms of $y$.
+  $$\Pr(x \in A \cap y \in B) = \Pr(x \in A)\Pr(y \in B)$$
+As before, independence of $x$ and $y$ implies that the conditional
+distribution is the same as the marginal distribution:
+  $$\Pr(x \in A| y \in B) = \Pr(x \in A)$$
+  $$\Pr(y \in A| x \in B) = \Pr(y \in A)$$
+The first graph in Figure \@ref(fig:JointIsNotMarginal) shows 
+what independent random variables look like in data: a cloud of 
+unrelated points.
+  
+Independence also means that the joint and conditional PDF/CDF can be derived
+from the marginal PDF/CDF:
+  $$f_{x,y}(a,b) = f_x(a)f_y(b)$$
+  $$f_{y|x}(a,b) = f_y(a)$$
+  $$F_{x,y}(a,b) = F_x(a)F_y(b)$$
+  $$F_{y|x}(a,b) = F_y(a)$$
+As with independence of events, this will be very handy in simplifying the
+analysis.  But remember: independence is an *assumption* that
+we can only make when it's reasonable to do so.
+
+::: example
+**Independence in roulette**
+
+The winnings from a bet on red $(w_{red})$ and the winnings from 
+a bet on 14 $(w_{14})$ in the same game are *not* independent. 
+
+However the winnings from a bet on red and a bet on 14 in two different 
+games *are* independent since the underlying outcomes are independent.
+:::
+
+When random variables are independent, their covariance is
+exactly zero. However, it does not go the other way around.  
+
+::: example
+**Zero covariance does not imply independent**
+
+Figure \@ref(fig:UncorrelatedButNotIndependent) below shows a scatter plot
+from a simulation of two random variables that are clearly related (and therefore
+not independent) but whose covariance is exactly zero.
+
+Intuitively, covariance is a measure of the *linear* 
+relationship between two variables.  When variables have a nonlinear 
+relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent), the
+covariance may miss it.
+
+```{r UncorrelatedButNotIndependent, fig.cap = "*x and y are uncorrelated, but clearly related.*"}
+simdata <- tibble(x = rnorm(100),
+                  y = x^2)
+ggplot(data = simdata, mapping = aes(x = x, y =y)) +
+  geom_point(col="blue") +
+  xlab("x") + 
+  ylab("y")
+```
+:::
+
 
 ## Chapter review {#review-more-on-random-variables}
 
