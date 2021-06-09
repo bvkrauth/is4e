@@ -154,11 +154,11 @@ has no jumps, and the probability of observing any particular value is
 always zero. So this particular function is useless in describing the probability
 distribution of a continuous random variable.
 
-Instead, we define the PDF of a continuous random variable $x$ as the slope
+Instead, we define the ***PDF of a continuous random variable*** $x$ as the slope
 or derivative of the CDF:
   $$f_x(a) = \frac{d F_x(a)}{da}$$
-In other words, instead of the *amount* the CDF increases (jumps) at $a$,
-it is the *rate* at which it increases.
+In other words, instead of the *amount* the CDF increases (jumps) at 
+$a$, it is the *rate* at which it increases.
 
 ::: example
 **The PDF of the standard uniform distribution**
@@ -177,10 +177,18 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
        caption = "", 
        tag = "")
 ```
+:::
+
 The PDF of a continuous random variable is a good way to visualize its
-probability distribution.  For example, the uniform PDF shows the key 
-feature of this distribution: in some loose sense all values in the
-support are "equally likely", much like in the 
+probability distribution, and this is about the only way we will use
+the continuous PDF in this class (since everything else requires integration).
+
+
+::: example
+**Interpreting the uniform PDF**
+
+The uniform PDF shows the key feature of this distribution: in some loose 
+sense, all values in the support are "equally likely", much like in the 
 [discrete uniform distribution](#discrete-uniform)
 described earlier. In fact, if you round a uniform random variable, you get
 a discrete uniform random variable.
@@ -196,13 +204,29 @@ give the definition below but not expect you to use it.
 The formula for deriving the CDF of a continuous random variable
 from its PDF is:
   $$F_x(a) = \int_{-\infty}^a f_x(v)dv$$
-More generally the probability of $x$ being between any two numbers is:
-
-  $$\Pr(a < x \leq b) = F_x(b) - F_x(a) = \int_a^b f_x(v)dv$$
 Unless you have taken MATH 152 or MATH 158, you may have 
 no idea what this is or how to solve it.  That's OK!  All you need
 to know for this course is that it *can* be solved.
 :::
+
+The continuous PDF has many properties that are similar but not
+identical to the properties of the discrete PDF.  
+
+::: fyi
+Like the discrete PDF, the continuous PDF is non-negative for all values:
+  $$f_x(a) \geq 0$$
+and is strictly positive for all values in the support:
+  $$a \in S_x \implies f_x(a) > 0
+but it is *not* a probability, and can be greater than one.
+
+If you recall, we can calculate probabilities from the discrete PDF
+by adding, and the discrete PDF sums to one.  Similarly, we can
+calculate probabilities from the continuous PDF by integrating:
+  $$\Pr(a < x < b) = \int_a^b f_x(v)dv$$
+and the continuous PDF integrates to one:
+  $$\int_{-\infty}^{\infty} f_x(v)dv = 1$$
+:::
+
 
 ### Expected value {#continuous-expected-values}
 
