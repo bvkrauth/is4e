@@ -124,6 +124,27 @@ As you can see, the CDF is smoothly increasing betweeen zero and one, and
 flat everywhere else.
 :::
 
+The CDF of a continuous random variable obeys all of the properties
+described in section \@ref(the-cdf):
+
+  $$F_x(a) \leq F_x(b) \qquad \textrm{ if $a \leq b$} $$
+  $$0 \leq F_x(a) \leq 1$$
+  $$\lim_{a \rightarrow -\infty} F_x(a) = \Pr(x \leq -\infty) = 0$$
+  $$\lim_{a \rightarrow \infty} F_x(a) = \Pr(x \leq \infty) = 1$$
+  \begin{align}
+    F(b) - F(a) &= \Pr(a < x \leq b) 
+  \end{align}
+In addition, the result on intervals applies to both strict 
+and weak inequalities:
+  \begin{align}
+    F(b) - F(a) &= \Pr(a < x \leq b) \\
+      &= \Pr(a < x < b) \\
+      &= \Pr(a \leq x \leq b) \\
+      &= \Pr(a \leq x < b) 
+  \end{align}
+since a continuous random variable has probability zero 
+of taking on any specific value.
+
 ### The continuous PDF {#continuous-pdf}
 
 The PDF $f_x(a)$ for a discrete random variable is defined as the size of the
