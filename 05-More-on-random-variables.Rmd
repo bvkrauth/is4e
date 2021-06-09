@@ -461,10 +461,15 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=Fa)) +
        tag = "")
 ```
 The Excel function `NORM.DIST()` can be used to calculate the 
-PDF or CDF of the normal distribution, and the Excel function `NORM.INV()` can 
-be used to calculate its quantile (inverse CDF) function.
+PDF or CDF of any normal distribution.
 
-### Median, mean and variance
+### Means and quantiles {#normal-means-and-quantiles}
+
+The Excel function `NORM.INV()` can be used to calculate the quantile 
+(inverse CDF) function of any normal distribution.  
+
+Since the $N(\mu,\sigma^2)$ distribution is symmetric around $\mu$, its
+median is also $\mu$.
 
 The mean and variance of a $N(\mu,\sigma^2)$ random variable can be found
 by integration:
@@ -472,19 +477,22 @@ by integration:
   $$var(x) = \sigma^2$$
 and the standard deviation is just the square root of the variance:
   $$sd(x) = \sigma$$
-The median of a $N(\mu,\sigma^2)$ random variable is also $\mu$.
 
-### Linear functions of normals
+### Functions of a normal
 
-The formula for the normal PDF may look strange, but it implies a 
-very important characteristic: any linear function of a normal random
-variable is also normal.  That is, if 
+Any linear function of a normal random variable is also normal.  That is, if 
   $$x \sim N(\mu,\sigma^2)$$
 Then for any constants $a$ and $b$:
   $$ax + b \sim N(a\mu + b, b^2\sigma^2)$$
 Just to be clear, we already showed that $E(ax +b) = aE(x) + b$ and 
 $var(ax+b) = a^2 var(x)$ for any random variable $x$.  What is new here 
 is that $ax +b$ is normally distributed if $x$ is.
+
+There are many other standard distributions that describe functions
+of one or more normal random variables and are derived from the
+normal distribution.  These distributions include the $\chi^2$ 
+distribution, the $F$ distribution and the $T$ distribution, and 
+have various applications in statistical analysis.
 
 ### The standard normal distribution
 
