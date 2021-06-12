@@ -8,13 +8,15 @@ knitr::opts_chunk$set(echo = FALSE,
 library("tidyverse")
 ```
 
-In Chapter \@ref(statistics), we learned about estimation: the use of data and 
-statistics to construct the best possible guess at the value of some parameter
-$\theta$.
+In a previous chapter, we learned about
+[estimation](#estimation-and-asymptotics): the use of data and statistics
+to construct the best possible guess at the value of some parameter.  
 
 In this chapter, we will pursue a different goal.  Instead of estimating
-the value of $\theta$ we will what values of $\theta$ can be confidently 
-ruled out given the evidence available in our data:
+the single "most likely" value of the parameter, we will construct
+statistics that can be used to classify particular parameter values as
+plausible (could be the true value) or implausible (unlikely to be the 
+true value).
 
 - A hypothesis test determines whether a *particular* value *can* be 
   ruled out.

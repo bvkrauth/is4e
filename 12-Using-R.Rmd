@@ -8,9 +8,11 @@ knitr::opts_chunk$set(echo = TRUE,
 library("tidyverse")
 ```
 
-Now that we have learned some basic R terminology and how to run R, our 
-next step is to do something useful in R.  We will do this using the
-Canadian employment data we have already worked with.  
+In the previous chapter we learned some 
+[basic R terminology and how to run R](#an-introduction-to-r). In 
+this chapter, we will use this knowledge to do some useful analysis
+of the Canadian employment data we have already worked with.  We will
+also use ggplot, R's powerful graphing system.
 
 ::: goals
 **Chapter goals**

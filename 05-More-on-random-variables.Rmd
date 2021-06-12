@@ -8,9 +8,10 @@ knitr::opts_chunk$set(echo = FALSE,
 library("tidyverse")
 ```
 
-Chapter \@ref(random-variables) developed the basic analytical tools
-for a single discrete random variable.  This chapter will extend those
-tools to continuous random variables, and to multiple random variables.
+The previous chapter developed the basic terminology and analytical 
+tools for a [single discrete random variable](#random-variables). This
+chapter will extend those tools to work wit continuous random variables, 
+and with multiple random variables.
 
 ::: goals
 ***Chapter goals***

@@ -1,7 +1,9 @@
 # Advanced data cleaning {#advanced-data-cleaning}
 
-We have learned some of the basics of data cleaning, but there are many
-tasks and tools in Excel yet to learn.
+In an earlier chapter, we learned some 
+[basic data cleaning](#basic-data-cleaning-with-excel) 
+skills.  This chapter will build on these skills by teaching some more
+advanced tools and concepts.
 
 ::: goals
 **Chapter goals**

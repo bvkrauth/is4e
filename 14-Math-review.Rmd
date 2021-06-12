@@ -2,16 +2,16 @@
 
 # Math review {#math-review}
 
-I'll start by reviewing some math we will use. All of it is covered
-in high school or in introductory calculus. Since introductory calculus
-is a co-requisite for this course, most of you have already seen it
-in that course, and the rest of you have seen it soon.  But you may 
-have forgotten it, or never understood it in the first place.
+The math used in this textbook is all covered in high school or in 
+introductory calculus. However, you may have forgotten it, or never 
+understood it very well in the first place.  This appendix provides
+a review of the most important mathematical terms, concepts and 
+methods.  It can be used to review ideas before starting the main
+text, or as a reference while going through the main text.
 
 If you have trouble with a few of these ideas, don't panic.  This is
 not a math class. For example, if you forget what it means for two sets
-to be "disjoint", you can always ask - during the lecture, or even during
-the exam.
+to be "disjoint", you can always ask.
 
 ## Sets
 

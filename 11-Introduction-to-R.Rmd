@@ -1,5 +1,3 @@
-# An introduction to R {#an-introduction-to-r}
-
 ```{r setup10, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       prompt = FALSE,
@@ -7,15 +5,19 @@ knitr::opts_chunk$set(echo = TRUE,
                       collapse = TRUE)
 library("tidyverse")
 ```
-R is an application that has many of the same features as Excel, 
-but is specially designed for statistical analysis. It is a 
-little more complex, but more powerful in many important ways. 
 
-In this course, we will only have time to learn a little bit about
-R, so my goal is not to give a comprehensive treatment. My goal here 
-is primarily to introduce you to the terminology and concepts of R, 
-and to show you a few applications where R outshines Excel.  You will
-learn much more about R in ECON 333 and (if you take it) ECON 334. 
+# An introduction to R {#an-introduction-to-r}
+
+As we have seen, Excel is a useful tool for both
+[cleaning](#advanced-data-cleaning) and 
+[analyzing](#basic-data-analysis-with-excel) data. R is an application
+that has many of the same features as Excel, but is specially 
+designed for statistical analysis. It is a little more complex, 
+but more powerful in many important ways. This chapter will introduce
+you to some of the basic concepts of R and associated tools such as R
+Markdown, RStudio, and the Tidyverse.  In the next chapter, we will 
+[use these tools](#using-r) to analyze data and create publication-quality 
+graphs. 
 
 :::goals
 **Chapter goals**
@@ -28,6 +30,12 @@ In this chapter we will learn how to:
 - Manage R by installing and loading libraries, and opening and closing
   files.
 :::
+
+In this course, we will only have time to learn a little bit about
+R, so my goal is not to give a comprehensive treatment. My goal here 
+is primarily to introduce you to the terminology and concepts of R, 
+and to show you a few applications where R outshines Excel.  You will
+learn much more about R in ECON 333 and (if you take it) ECON 334. 
 
 ## A brief tour of RStudio
 

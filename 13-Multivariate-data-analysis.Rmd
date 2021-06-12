@@ -14,11 +14,12 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 
-So far most of our emphasis has been on univariate analysis: understanding
-the behavior of one variable at a time.  However, we are often interested
+So far, most of our emphasis has been on univariate analysis: understanding
+the behavior of a single variable at a time.  However, we are often interested
 in the relationship among multiple variables.  This will be the primary
 subject of your next course in statistics (most likely ECON 333), but we
-will touch on a few of the basics here.
+will touch on a few of the basics in this chapter, using a combination of 
+theoretical concepts, Excel, and R.
 
 :::goals
 **Chapter goals**

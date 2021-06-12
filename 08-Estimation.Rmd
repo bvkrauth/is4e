@@ -1,7 +1,10 @@
 # Estimation and asymptotics {#estimation-and-asymptotics}
 
-One of the most important uses of statistics is to ***estimate*** or
-guess at the value at, some unknown parameter of the DGP.
+The previous chapter developed the 
+[basic properties of a statistic](#statistics)
+calculated from data, given a model of its data generating process or
+DGP. This chapter will go deeper into one of the most important uses of 
+statistics: to ***estimate*** or guess at the value at, some unknown parameter of the DGP.
 
 ::: goals
 ***Chapter goals***

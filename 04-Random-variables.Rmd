@@ -8,16 +8,15 @@ knitr::opts_chunk$set(echo = FALSE,
 library("tidyverse")
 ```
 
-Chapter \@ref(probability-and-random-events) developed a general framework for
-modeling random outcomes and events. This framework can be applied to
-any set of random outcomes, no matter how complex.
+The previous chapter developed a general framework for modeling 
+[random outcomes and events](#probability-and-random-events). This
+framework can be applied to any set of random outcomes, no 
+matter how complex.
 
-However, many of the random outcomes we are interested in are quantitative,
+This chapter develops additional tools for the case when the 
+random outcomes we are interested in are quantitative,
 that is, they can be described by a number. Quantitative outcomes 
-are also called "random variables." In addition to the basic 
-tools of probability developed in Chapter \@ref(probability-and-random-events),
-we have some extremely useful specialized tools for random variables. This
-chapter will develop these tools.
+are also called "random variables." 
 
 ::: goals
 **Chapter goals**
