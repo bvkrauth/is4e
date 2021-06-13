@@ -904,4 +904,102 @@ To be added
 
 ### Practice problems {#problems-random-variables}
 
-To be added.
+**SKILL #1: Define a random variable in terms of its underlying outcome**
+
+1. Consider the craps example from the previous chapter.  Let 
+   the random variable $t$ be the total showing on the pair of
+   dice, and let the random variable $y = I(t=11)$ be an indicator
+   for whether a bet on "Yo" wins.
+   a. Define $t$ in terms of the underlying outcome $(r,w)$.
+   a. Define $y$ in terms of the underlying outcome $(r,w)$.
+
+**SKILL #2: Find the support of a random variable**
+
+2. Find the support of the following random variables:
+   a. Find the support $S_r$ of the random variable $r$.
+   b. Find the support $S_t$ of the random variable $t$.
+   c. Find the support $S_y$ of the random variable $y$.
+
+**SKILL #3: Find the range from the support**
+
+3. Find the range of each of the following random variables
+   a. Find the range of $r$.
+   b. Find the range of $t$.
+   c. Find the range of $y$.
+
+**SKILL #4: Find the (discrete) PDF for a simple example**
+
+4. Find the following PDFs:
+   a. Find the PDF $f_r$ for the random variable $r$.
+   b. Find the PDF $f_t$ for the random variable $t$.
+   c. Find the PDF $f_y$ for the random variable $y$.
+
+**SKILL #5: Find the CDF from the (discrete) PDF**
+
+5. Using the PDFs you found earlier:
+   a. Find the CDF $F_r$ for the random variable $r$.
+   b. Find the CDF $F_t$ for the random variable $t$.
+   c. Find the CDF $F_y$ for the random variable $y$.
+
+**SKILL #6: Find the expected value from the (discrete) PDF**
+
+6. Using the PDFs you found earlier:
+   a. Find the expected value $E(r)$.
+   b. Find the expected value $E(t)$.
+
+**SKILL #7: Find quantiles from the CDF**
+
+7. Using the CDFs you found earlier:
+   a. Find the median $Med(r)$.
+   b. Find the 0.25 quantile $F_r^{-1}(0.25)$.
+   c. Find the 75th percentile of the random variable $t$.
+
+**SKILL #8: Calculate variance and standard deviation from the (discrete) PDF**
+
+8. Using the PDFs you found earlier:
+   a. Find the variance $var(r)$.
+   b. Find the standard deviation $var(r)$.
+9. Using results you found earlier:
+   a. Find $E(t^2)$.
+   b. Find $var(t)$.
+   
+**SKILL #9: Identify and use random variables from standard discrete distributions**
+  
+10. The random variable $y$ can be described using a standard distribution. 
+    a. What standard distribution is it?
+    b. Using prior results for that distribution, find $E(y)$
+    c. Using prior results for that distribution, find $var(y)$
+11. Let $Y_{10}$ be the number of times in 10 dice rolls that a 
+    bet on "Yo" wins.
+    a. What standard distribution describes the random variable $Y_{10}$?
+    b. Use existing results for this distribution to find $E(Y_{10})$.
+    c. Use existing results for this distribution to find $var(Y_{100})$.
+    d. Use Excel to calculate $\Pr(Y_{10} = 0)$.
+    e. Use Excel to calculate $\Pr(Y_{10} \leq 10/16)$.
+   
+**SKILL #10: Calculate mean and variance for a linear function of a random variable**
+
+12. The "Yo" bet pays out at 15:1, meaning you win \$15 for each dollar bet. Suppose
+    you bet \$10 on Yo.  Your net winnings in that case will be $W = 160*y - 10$.
+    a. Using earlier results, find $E(W)$.
+    b. Using earlier results, find $var(W)$.
+    c. The event $W > 0$ (your net winnings are positive) is identical to the
+       event $y = 1$.  Using earlier results, find $\Pr(W > 0)$.
+13. Suppose you bet \$1 on Yo in ten independent rolls.  Your net winnings in 
+    that case will be $W_{10} = 16*Y_{10} - 10$.
+    a. Using earlier results, find $E(W_{10})$.
+    b. Using earlier results, find $var(W_{10})$.
+    c. The event $W_{10} > 0$ (your net winnings are positive) is identical to the
+       event $Y_{10} > 10/16$.  Using earlier results, find $\Pr(W_{10} > 0)$.
+
+**SKILL #11: Interpret means and variances**
+
+14. Based on your answers above:
+    a. If you care mostly about expected net winnings, would you prefer to bet 
+       Yo \$10 on a single roll, \$1 on each of 10 rolls, or to just keep 
+       your \$10 and not bet at all?
+    b. Which of the two betting strategies (\$10 on one roll or \$1 on ten 
+       rolls) produces the highest probability of walking away from the
+       table with more money than you started with?
+    c. Which of the two betting strategies has more variable net winnings?
+
