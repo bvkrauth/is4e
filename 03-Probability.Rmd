@@ -570,4 +570,134 @@ To be added
 
 ### Practice problems {#problems-probability}
 
-To be added.
+Most of these practice problems will be based on the casino game of *craps*. Craps
+is played with a pair of 6-sided dice. 
+
+Players take turns rolling the dice, and the player currently rolling the dice
+is called the "shooter".  There are various bets - pass, don't
+pass, come, don't come, field, place, buy - that can be placed on the
+results of multiple rolls of the dice.  These bets and their probability 
+calculations can be quite complex, so we will focus on "single roll" bets.
+
+- A bet on "Snake Eyes" wins if the total showing on the dice is 2.
+- A bet on "Yo" wins if the total showing on the dice is 11.
+- A bet on "Boxcars" wins if the total showing on the dice is 12.
+- A bet on "Field" wins if the total showing on the dice is 2, 3, 4, 9, 10, 
+  11, or 12.
+
+For this example, assume that 
+
+ - One die is red and the other is white. 
+ - Both dice are fair, that is each side has equal probability
+ - The dice are independent of one another
+ 
+An outcome for a single roll of the dice is a pair of numbers $(r,w)$ 
+where $r$ is the amount showing on the red die, and $w$ is the amount
+showing on the white die. For example an outcome $(2,4)$ means that the
+red die is showing 2 and the white die is showing 4.
+
+**SKILL #1: Define outcomes and sample space for a simple example**
+
+1. Given the definition above for the outcome of a single roll in craps: 
+   a. Define its sample space by enumeration.
+   b. Find the cardinality of this sample space.
+2. Using enumeration, define the following events:
+   a. Yo wins.
+   b. Snake eyes wins
+   c. Boxcars wins
+   d. Field wins
+   
+**SKILL #2: Use set theory to work with events**
+
+3. Which of the following statements are true?
+   a. The events "Yo wins" and "Boxcars wins" are identical.
+   b. The events "Yo wins" and $(r,w) = (5,6)$ are identical.
+   c. The events "Boxcars wins" and $(r,w) = (6,6)$ are identical.
+4. Which of the following statements are true?
+   a. The events "Yo wins" and "Boxcars wins" are disjoint.
+   b. The events "Yo wins" and "Field wins" are disjoint.
+   c. The events "Yo wins" and "Boxcars loses" are disjoint.
+   d. The events "Yo wins" and "Field loses" are disjoint.
+5. Which of the following statements are true?
+   a. The event "Yo wins" implies the event "Boxcars wins".
+   b. The event "Yo wins" implies the event "Boxcars loses".
+   c. The event "Yo wins" implies the event "Field wins".
+   d. The event "Yo wins" implies the event "Field loses".
+6. Which of the following are elementary events?
+   a. Yo wins.
+   b. Yo loses.
+   c. Boxcars wins.
+   d. Boxcars loses.
+   e. Field wins.
+   f. Field loses.
+
+**SKILL #3: Calculate event probabilities from elementary event probabilities**
+
+7. Calculate each of the following elementary event probabilities:
+   a. $(r,w) = (1,1)$
+   b. $(r,w) = (3,4)$
+   c. $(r,w) = (6,6)$
+8. Calculate the probability of each of the following events:
+   a. A bet on Yo wins.
+   b. A bet on Snake eyes wins.
+   c. A bet on Boxcars wins.
+   d. A bet on Field wins.
+
+**SKILL #4: Calculate joint and conditional probabilities**
+
+9. Calculate each of the following joint probabilities:
+   a. $Pr(\textrm{Yo wins} \cap \textrm{Field wins})$
+   a. $Pr(\textrm{Yo wins} \cap \textrm{Boxcars wins})$
+   a. $Pr(\textrm{Yo wins} \cap \textrm{Boxcars loses})$
+10. Calculate each of the following conditional probabilities:
+    a. $Pr(\textrm{Yo wins} | \textrm{Field wins})$
+    a. $Pr(\textrm{Yo wins} | \textrm{Boxcars wins})$
+    a. $Pr(\textrm{Yo wins} \cap \textrm{Boxcars loses})$
+    a. $Pr(\textrm{Field wins} | \textrm{Yo wins})$
+    a. $Pr(\textrm{Boxcars wins} | \textrm{Yo wins})$
+11. Which of the following pairs of events are independent?
+    a. Yo wins and Boxcars wins.
+    b. Yo wins and Field wins.
+    c. Yo wins and Yo wins.
+    d. $r = 3$ and $r = 5$.
+    e. $r = 3$ and $w =5$.
+
+**SKILL #5: Apply the axioms of probability**
+
+12. Let $A$ be an event.  Which of the following statements are true?
+    a. $Pr(A) \geq 0$.
+    b. $Pr(A) > 0$.
+    c. $Pr(A) \leq 1$.
+    d. $Pr(A) < 1$.
+    e. $Pr(A^c) \geq 0$.
+    f. $Pr(A^c) > 0$.
+    g. $Pr(A^c) \leq 1$.
+    h. $Pr(A^c) < 1$.
+    i. $Pr(A^c) = 1 - \Pr(A)$.
+13. Let $A$ and $B$ be two events.  Which of the following statements 
+    are true?
+    a. $Pr(A \cup B) = \Pr(A) + \Pr(B)$.
+    b. $Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)$.
+    c. $Pr(A \cup B) \leq \Pr(A) + \Pr(B)$.
+    d. $Pr(A \cap B) = \Pr(A)\Pr(B)$.
+14. Let $A$ and $B$ be two disjoint events.  Which of the following
+    statements are true?
+    a. $Pr(A \cap B) = 0$.
+    b. $Pr(A \cap B) = \Pr(A) + \Pr(B)$.
+    c. $Pr(A \cup B) = 0$.
+    d. $Pr(A \cup B) = \Pr(A) + \Pr(B)$.
+    e. $Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)$.
+    f. $Pr(A \cup B) \leq \Pr(A) + \Pr(B)$.
+    g. $Pr(A \cap B) = \Pr(A)\Pr(B)$.
+    h. $\Pr(A | B) = 0$
+15. Let $A$ and $B$ be two events such that $A \subset B$.  Which of 
+    the following statements are true?
+    a. $\Pr(A) \leq \Pr(B)$
+    b. $\Pr(A \cap B) = \Pr(A)$
+    c. $\Pr(A | B) = 1$
+16. Let $A$ and $B$ be two independent events.  Which of the following
+    statements are true?
+    a. $Pr(A \cap B) = 0$.
+    b. $Pr(A \cap B) = \Pr(A)\Pr(B)$.
+    c. $Pr(A|B) = \Pr(A)$.
+
