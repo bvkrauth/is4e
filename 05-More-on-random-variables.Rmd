@@ -923,4 +923,113 @@ To be added
 
 ### Practice problems {#problems-more-on-random-variables}
 
-To be added.
+**SKILL #1: Use the properties of the uniform distribution**
+
+1. Suppose that $x \sim U(-1,1)$.
+   a. Find the PDF of $x$
+   b. Find the CDF of $x$
+   c. Find $\Pr(x = 0)$
+   d. Find $\Pr(0 < x < 0.5)$
+   e. Find $\Pr(0 \leq x \leq 0.5)$
+   f. Find the median of $x$.
+   g. Find the 75th percentile of $x$.
+   h. Find $E(x)$
+   i. Find $var(x)$
+
+**SKILL #2: Work with linear functions of uniform random variables**
+
+2. Suppose that $x \sim U(-1,1)$, and let $y = 3x + 5$.
+   a. What is the probability distribution of $y$?
+   b. Find $E(y)$.
+   
+**SKILL #3: Use the properties of the normal distribution**
+
+3. Suppose that $x \sim N(10,3)$.
+   a. Find $E(x)$.
+   b. Find $med(x)$.
+   c. Find $var(x)$.
+   d. Find $sd(x)$.
+   b. Use Excel to find $\Pr(x \leq 0)$.
+
+**SKILL #4: Work with linear functions of a normal random variable**
+
+4. Suppose that $x \sim N(10,3)$.
+   a. Find the distribution of $y = 3x + 5$.
+   b. Find $\Pr(x \leq 0)$ in terms of the standard normal CDF $\Phi(\cdot)$.
+ 
+**SKILL #5: Derive a joint distribution from the underlying outcome **
+
+5. Let $b = I(t=12)$ be an indicator of whether a bet on "Boxcars" wins.
+   a. Find the joint PDF $f_{y,t}(\cdot)$ of $y$ and $t$.
+   b. Find the joint PDF $f_{y,b}(\cdot)$ of $y$ and $b$.
+   
+**SKILL #6: Derive a marginal distribution from a joint distribution **
+
+6. Find the marginal PDF $f_b(\cdot)$ of $b$ from the joint PDF $f_{y,b}(\cdot)$
+   
+**SKILL #7: Derive a conditional distribution from a joint distribution**
+
+7. In the craps example:
+   a. Find the conditional PDF $f_{y|t}(\cdot)$ from the joint PDF
+      $f_{y,t}(\cdot)$.
+   b. Find the conditional PDF $f_{t|y}(\cdot)$ from the joint PDF
+      $f_{y,t}(\cdot)$.
+   c. Find the conditional PDF $f_{b|y}$ from the joint PDF $f_{y,b}(\cdot)$.
+   
+**SKILL #8: Identify whether two random variables are independent**
+
+8. Which of the following pairs of random variables are independent?
+   a. $y$ and $t$
+   b. $y$ and $b$
+   c. $r$ and $w$
+   d. $r$ and $y$
+
+**SKILL #9: Find covariance from a PDF**
+
+9. Find the following covariances:
+   a. Find $cov(y,b)$ using the joint PDF $f_{y,b}(\cdot)$.
+
+**SKILL #10: Find covariance using the alternate formula**
+
+10. Find the following covariances using the alternate formula:
+    a. Find $E(yt)$ using the joint PDF $f_{y,t}(\cdot)$.
+    b. Find $cov(y,t)$ using the alternative formula.
+
+**SKILL #11: Find correlation from covariance**
+
+11. Use earlier results to find the following correlations:
+    a. Find $corr(y,b)$
+    b. Find $corr(y,t)$
+12. We can show that $corr(b,t) = ??$ and that $var(b) = ??$. We earlier
+    showed that $var(t) = ??$
+    a. Find $cov(b,t)$.
+    b. Find $E(bt)$.
+
+**SKILL #11: Find correlation and covariance for independent random variables**
+
+13. We earlier found that $r$ and $w$ were independent. Using this information:
+    a. Find $cov(r,w)$.
+    a. Find $corr(r,w)$.
+
+**SKILL #12: Work with linear functions of random variables**
+
+13. Your net winnings if you bet \$1 on Yo and \$1 on Boxcars can
+    be written $16y + 16b - 2$. Find the following expected values
+    a. Find $E(y + b)$
+    b. Find $E(16y + 16b - 2)$
+
+14. Find the following variances/covariances
+    a. Find $cov(16y,16b)$
+    b. Find $var(y + b)$
+    b. Find $var(16y + 16b - 2)$
+
+**SKILL #13: Interpret covariances and correlations**
+
+15. Based on your results, which of the following statements is 
+    correct?
+    a. The result of a bet on Boxcars is positively related to the
+       result of a bet on Yo.
+    b. The result of a bet on Boxcars is negatively related to the
+       result of a bet on Yo.
+    c. The result of a bet on Boxcars is not related to the
+       result of a bet on Yo.
