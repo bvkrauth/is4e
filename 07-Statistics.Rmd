@@ -271,7 +271,35 @@ run into the following problems:
     - In supply/demand analysis, we only observe quantity supplied and
       quantity demanded at the current market price.
       
-There are two basic solutions to these problems:
+When observations are subject to nonresponse or censoring, we must intepret
+the data carefully.
+
+::: example
+**Airplanes in WW2**
+
+Abraham Wald was a famous statistician who was advising the US government during
+World War II.  He was provided with data on combat damage received by airplanes,
+with the hopes that the data could be used to help make the planes more robust
+to damage.  The data looked something like this (this isn't the real data,
+just a visualization constructed for the example):
+
+<a title="Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept), CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg"><img width="512" alt="Survivorship-bias" src="bin/WaldPlane.png"></a>
+
+Seeing this data, the military concluded that planes were mostly
+being shot in the wings and in the middle of the fuselage (body), and
+that they should be reinforced with additional steel in these locations.
+
+Wald quickly realized that this was wrong: the data were taken from
+planes *that returned*, which is not a random sample of planes
+that went out. Planes were probably shot in the nose, the engines,
+and the back of the fuselage just as often as anywhere else, but 
+they did not appear often in the data because they crashed. Wald's 
+insight led to a counter-intuitive policy recommendation: reinforce the 
+parts of the plane that are don't usually show damage after 
+returning.
+:::
+
+There are two basic solutions to nonresponse and censoring:
 
 - ***Imputation***: we assume or ***impute*** values for all missing 
   quantities. For example, we might assume that the wage of each 
@@ -282,8 +310,7 @@ There are two basic solutions to these problems:
   For example, instead of having a random sample of *Canadians*, we can
   interpret our data as a random sample of 
   *Canadians who would answer these questions if asked*.
-  
-  
+
 This is not an issue that has a purely technical solution, but requires
 careful thought instead.  If we are imputing values, do we believe that
 our imputation method is reasonable?  If we are redefining the population,
