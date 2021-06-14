@@ -514,4 +514,83 @@ To be added
 
 ### Practice problems {#problems-statistics}
 
-To be added.
+**SKILL #1: Identify whether a data set is a random sample**
+
+1. Suppose we have a data set $D_n = (x_1,x_2)$ of size $n = 2$.  For
+   each of the following conditions, identify whether it implies
+   that $D_n$ is (i) definitely a random sample; (ii) definitely
+   not a random sample; or (iii) possibly a random sample.
+   a. The two observations are independent and have the same mean 
+      $E(x_1) = E(x_2) = \mu_x$.
+   b. The two observations are independent and have the same mean 
+      $E(x_1) = E(x_2) = \mu_x$ and variance $var(x_1)=var(x_2)=\sigma_x^2$.
+   c. The two observations are independent and have different means 
+      $E(x_1) \neq E(x_2)$.
+   d. The two observations have the same PDFs, and are independent.
+   e. The two observations have the same PDFs, and have 
+      $corr(x_1,x_2) = 0$
+   f. The two observations have the same PDFs, and have $cov(x_1,x_2) > 0$
+
+**SKILL #2: Classify data sets by sampling types**
+
+2. Identify the sampling type (random sample, time series, stratified sample,
+   cluster sample, census, convenience sample) for each of the following data 
+   sets.
+   a. A data set from a survey of 100 SFU students who I found waiting in line
+      at Tim Horton's.
+   b. A data set from a survey of 1,000 randomly selected SFU students.
+   c. A data set from a survey of 100 randomly selected SFU students from each
+      faculty.
+   d. A data set that reports total SFU enrollment for each year from 2005-2020.
+   e. A data set from administrative sources that describes demogrphic information
+      and postal code of residence for all SFU students in 2020.
+
+**SKILL #3: Find the sampling distribution of a very simple statistic**
+
+3. Suppose we have a data set $D_n = (x_1,x_2)$ that is a random sample
+   of size $n = 2$ on the random variable $x_i$ which has discrete PDF:
+    \begin{align}
+      f_x(a) &= \begin{cases}
+                  0.4 & a = 1 \\
+                  0.6 & a = 2 \\
+              \end{cases}
+    \end{align}
+    Find the support $S_s$ and sampling distribution $f_s(\cdot)$ 
+    of the following statistics:
+    a. The sample frequency $\hat{f}_1 = \frac{I(x_1=1) + I(x_2=1)}{2}$.
+    b. The sample average $\bar{x} = (x_1 + x_2)/2$.
+    c. The sample variance $\hat{\sigma}_x^2 = (x_1-\bar{x})^2 + (x_2-\bar{x})^2$.
+    d. The sample standard deviation $\hat{\sigma}_x = \sqrt{\hat{\sigma}_x^2}$.
+    e. The sample minimum $xmin = \min(x_1, x_2)$.
+    f. The sample maximum $xmax = \max(x_1, x_2)$.
+
+**SKILL #4: Find the mean and variance of a statistic from the PDF**
+
+4. Suppose we have a data set $D_n = (x_1,x_2)$ that is a random sample
+   of size $n = 2$ on the random variable $x_i$ which has discrete PDF:
+    \begin{align}
+      f_x(a) = \begin{cases}
+                  0.4 & a = 1 \\
+                  0.6 & a = 2 \\
+              \end{cases}
+    \end{align}
+   Find the mean and variance of the following statistics:
+    a. The first observation $x_1$.
+    b. The second observation $x_2$.
+    c. The sample frequency $\hat{f}_1 = \frac{I(x_1=1) + I(x_2=1)}{2}$.
+    d. The sample average $\bar{x} = (x_1 + x_2)/2$.
+    e. The sample variance $\hat{\sigma}_x^2 = (x_1-\bar{x})^2 + (x_2-\bar{x})^2$.
+    f. The sample standard deviation $\hat{\sigma}_x = \sqrt{\hat{\sigma}_x^2}$.
+    g. The sample minimum $xmin = \min(x_1, x_2)$.
+    h. The sample maximum $xmax = \max(x_1, x_2)$.
+
+**SKILL #5: Find the mean and variance of a linear statistic**
+
+5. Suppose we have a data set $D_n = (x_1,x_2)$ that is a random sample
+   of size $n = 2$ on the random variable $x_i$ which has mean $E(x_i) = \mu$
+   and variance $var(x_i) = \sigma^2$. Find the mean and variance of the 
+   following statistics:
+    a. The first observation $x_1$.
+    b. The second observation $x_2$.
+    a. The sample average $\bar{x} = (x_1 + x_2)/2$.
+
