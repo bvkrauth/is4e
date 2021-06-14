@@ -478,3 +478,91 @@ To be added
 ### Practice problems {#problems-estimation}
 
 To be added.
+
+**SKILL #1: Identify parameters and estimators**
+
+1. Suppose $D_n$ is a random sample of size $n=100$ on a random variable
+   $x_i$ which has the $N(\mu,\sigma^2)$ distribution.  Which of the following 
+   are unknown parameters of the DGP? Which are statistics calculated from the 
+   data?
+   a. $D_n$
+   b. $n$
+   c. $x_i$
+   d. $i$
+   e. $N$
+   f. $\mu$
+   g. $\sigma^2$
+   h. $E(x_i)$
+   i. $E(x_i^3)$
+   j. $var(x_i)$
+   k. $sd(x_i)/\sqrt{n}$
+   l. $\bar{x}$
+
+**SKILL #2: Calculate sampling error**
+
+2. Suppose we have a data set $D_n = (x_1,x_2)$ that is a random sample
+   of size $n = 2$ on the random variable $x_i$ which has discrete PDF:
+    \begin{align}
+      f_x(a) = \begin{cases}
+                  p & a = 1 \\
+                  (1-p) & a = 2 \\
+              \end{cases}
+    \end{align}
+    where $p$ is an unknown parameter. Suppose we use the sample average
+      $$\bar{x} = (x_1 + x_2)/2$$
+    as an estimator of the population mean $\mu = E(x_i)$.
+    a. Find the true value of the parameter of interest $\mu$.
+    b. Find the support of the sampling error $err = \bar{x}-\mu$.
+    c. Find the sampling distribution of the sampling error $err$.
+
+**SKILL #3: Calculate bias and classify estimators as biased or unbiased**  
+**SKILL #4: Calculate mean squared error**  
+**SKILL #5: Apply MVUE and MSE criteria to select an estimator**  
+
+3. Suppose you have a random sample of size $n=2$ on the random variable 
+   $x$ with mean $E\left(x\right)=\mu$ and variance $var(x_i)=\sigma^2$. Two
+   potential estimators of $\mu$ are the sample average
+     $$\bar{x} = \frac{x_1 + x_2}{2}$$
+   and the last observation
+     $$x_2$$  
+   a. Are these estimators biased or unbiased?
+   b. Find $var(\bar{x})$
+   c. Find $var(x_2)$
+   d. Find $MSE(\bar{x})$
+   e. Find $MSE(x_2)$
+   f. Which estimator is preferred under the MVUE criterion?
+   g. Which estimator is preferred under the MSE criterion?
+4. Let $\mu_M$ be the average earnings of Canadian men, and let $\mu_W$ be 
+   the average earnings of Canadian women. Suppose we have a random sample 
+   of Canadians. Let $\bar{y}_{M}$ be the average earnings of men in our
+   sample, and let $\bar{y}_{W}$ be the average earnings of women in our
+   sample. We already know that $\bar{y}_{M}$ is an unbiased estimator of
+   $\mu_M$ and $\bar{y}_{W}$ is an unbiased estimator of $\mu_W$. 
+   a. Is the gap in sample average earnings $\bar{y}_M - \bar{y}_W$ a 
+      biased or  unbiased estimator of the gap in the population 
+      $\mu_M - \mu_W$? Explain.
+   b. Is the ratio of sample average earnings $\bar{y}_M/\bar{y}_W$ a
+      biased or unbiased estimator of the ratio in the population 
+      $\mu_M/\mu_W$? Explain.
+5. Let our data set $D_n = (x_1,x_2)$ be a random sample of size $n = 2$
+   on the random variable $x_i$ with discrete probability distribution:
+    \begin{align}
+      f_x(a) = \begin{cases}
+          p & a = L \\
+          (1-p) & a = H \\
+          0 & \textrm{otherwise} \\
+          \end{cases}
+    \end{align}
+    where $L$, $H$, and $p$ are unknown parameters such that $L < H$ and 
+    $0 < p < 1$. Let the sample minimum
+      $$q = \min(x_1,x_2)$$
+    be used as an estimator of the population minimum $L$. 
+    a. Find the support of $q$.
+    b. Find the sampling distribution of $q$.
+    c. Find $E(q)$ and $E(q-L)$.
+    d. Is this estimator biased or unbiased?
+    e. Find the variance $var(q)$
+    f. Find the mean squared error $MSE(q)$ 
+
+**SKILL #6: Something about standard errors?**  
+**SKILL #6: Something about asymptotics?**
