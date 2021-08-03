@@ -9,7 +9,7 @@ library("tidyverse")
 ```
 
 In a previous chapter, we learned about
-[estimation](#estimation-and-asymptotics): the use of data and statistics
+[estimation](#estimation): the use of data and statistics
 to construct the best possible guess at the value of some parameter.  
 
 In this chapter, we will pursue a different goal.  Instead of estimating
