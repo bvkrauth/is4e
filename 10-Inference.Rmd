@@ -810,3 +810,43 @@ To be added
 ### Practice problems {#problems-inference}
 
 To be added.
+
+One of the most common applications of statistical inference is 
+in measuring *treatment effects*; i.e., the effect of a particular
+action (treatment) on a particular outcome.  Statistical analysis
+of treatment effects originates in medicine, where we are looking
+literally at the effect of a treatment such as a pill or surgery. But
+we use the same basic concepts in economics to measure things like
+
+- The effect of the minimum wage on employment
+- The effect of additional schooling on earnings
+- Discrimination (the effect of race or gender on how a person
+  is treated)
+- The effect of taxes on economic growth
+
+Suppose for this set of problems that we are interested in the effect of the
+minimum wage on employment.  Let $u_i \in \{0,1\}$ be person $i$'s employment
+status without the minimum wage and let $t_i \in \{0,1\}$ be their employment
+status with the minimum wage. Let 
+  $$e_i = t_i - u_i$$  
+be the effect of the minimum wage on person $i$'s employment.
+
+**SKILL #1: Identify parameter, null and alternative**
+
+1. 
+
+**SKILL #2: Classify test statistics as valid or invalid**
+
+**SKILL #3: Find distribution of test statistic under the null**
+
+**SKILL #4: Describe distribution of test statistic under the alternative**
+
+**SKILL #5: Classify tests as finite-sample or asymptotic**
+
+**SKILL #6: Find the size of a test**
+
+**SKILL #7: Find critical values**
+
+**SKILL #8: Construct and interpret a confidence interval**
+
+**SKILL #9: Interpret test results and confidence intervals**
