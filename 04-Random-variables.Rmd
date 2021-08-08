@@ -904,102 +904,321 @@ To be added
 
 ### Practice problems {#problems-random-variables}
 
+Questions 1- 15 below continue our [craps example](#problems-probability). To 
+review that example, we have an outcome $(r,w)$ where $r$ and $w$ are the 
+numbers rolled on a pair of fair six-sided dice
+
+Let the random variable $t$ be the total showing on the pair of dice, and let
+the random variable $y = I(t=11)$ be an indicator for whether a bet on "Yo" 
+wins. 
+
 **SKILL #1: Define a random variable in terms of its underlying outcome**
 
-1. Consider the craps example from the previous chapter.  Let 
-   the random variable $t$ be the total showing on the pair of
-   dice, and let the random variable $y = I(t=11)$ be an indicator
-   for whether a bet on "Yo" wins.
-   a. Define $t$ in terms of the underlying outcome $(r,w)$.
-   a. Define $y$ in terms of the underlying outcome $(r,w)$.
+1. Define $t$ in terms of the underlying outcome $(r,w)$.
+2. Define $y$ in terms of the underlying outcome $(r,w)$.
 
 **SKILL #2: Find the support of a random variable**
 
-2. Find the support of the following random variables:
+3. Find the support of the following random variables:
    a. Find the support $S_r$ of the random variable $r$.
    b. Find the support $S_t$ of the random variable $t$.
    c. Find the support $S_y$ of the random variable $y$.
 
 **SKILL #3: Find the range from the support**
 
-3. Find the range of each of the following random variables
+4. Find the range of each of the following random variables
    a. Find the range of $r$.
    b. Find the range of $t$.
    c. Find the range of $y$.
 
 **SKILL #4: Find the (discrete) PDF for a simple example**
 
-4. Find the following PDFs:
+5. Find the following PDFs:
    a. Find the PDF $f_r$ for the random variable $r$.
    b. Find the PDF $f_t$ for the random variable $t$.
    c. Find the PDF $f_y$ for the random variable $y$.
 
 **SKILL #5: Find the CDF from the (discrete) PDF**
 
-5. Using the PDFs you found earlier:
+6. Using the PDFs you found earlier, find the following CDFs
    a. Find the CDF $F_r$ for the random variable $r$.
-   b. Find the CDF $F_t$ for the random variable $t$.
-   c. Find the CDF $F_y$ for the random variable $y$.
+   b. Find the CDF $F_y$ for the random variable $y$.
 
 **SKILL #6: Find the expected value from the (discrete) PDF**
 
-6. Using the PDFs you found earlier:
+7. Using the PDFs you found earlier, find the following expected values:
    a. Find the expected value $E(r)$.
-   b. Find the expected value $E(t)$.
+   b. Find the expected value $E(r^2)$.
 
 **SKILL #7: Find quantiles from the CDF**
 
-7. Using the CDFs you found earlier:
+8. Using the CDFs you found earlier, find the following quantiles:
    a. Find the median $Med(r)$.
    b. Find the 0.25 quantile $F_r^{-1}(0.25)$.
-   c. Find the 75th percentile of the random variable $t$.
+   c. Find the 75th percentile of $r$.
 
 **SKILL #8: Calculate variance and standard deviation from the (discrete) PDF**
 
-8. Using the PDFs you found earlier:
-   a. Find the variance $var(r)$.
-   b. Find the standard deviation $var(r)$.
-9. Using results you found earlier:
-   a. Find $E(t^2)$.
-   b. Find $var(t)$.
-   
-**SKILL #9: Identify and use random variables from standard discrete distributions**
+9. Let $d = (y - E(y))^2$ 
+   a. Find the PDF $f_d$ of $d$.
+   b. Use this PDF to find $E(d)$
+   c. Use the results above to find the variance $var(y)$.
+   d. Use the results above to find the standard deviation $sd(y)$.
+
+**SKILL #9: Calculate variance and standard deviation from expected values**
+
+10. In question (7) above, you calculated $E(r)$ and $E(r^2)$ from the PDF.  
+    a. Use these results to find $var(r)$
+    b. Use these results to find $sd(r)$
+
+**SKILL #10: Identify and use random variables from standard discrete distributions**
   
-10. The random variable $y$ can be described using a standard distribution. 
-    a. What standard distribution is it?
-    b. Using prior results for that distribution, find $E(y)$
-    c. Using prior results for that distribution, find $var(y)$
-11. Let $Y_{10}$ be the number of times in 10 dice rolls that a 
-    bet on "Yo" wins.
-    a. What standard distribution describes the random variable $Y_{10}$?
+11. The random variable $y$ can be described using a standard distribution. 
+    a. What standard distribution describes $y$?
+    b. Use standard results for this distribution to find $E(y)$
+    c. Use standard results for this distribution to find $var(y)$
+
+12. Let $Y_{10}$ be the number of times in 10 dice rolls that a bet on "Yo" 
+    wins.
+    a. What standard distribution describes $Y_{10}$?
     b. Use existing results for this distribution to find $E(Y_{10})$.
     c. Use existing results for this distribution to find $var(Y_{100})$.
     d. Use Excel to calculate $\Pr(Y_{10} = 0)$.
     e. Use Excel to calculate $\Pr(Y_{10} \leq 10/16)$.
-   
-**SKILL #10: Calculate mean and variance for a linear function of a random variable**
+    f. Use Excel to calculate $\Pr(Y_{10} > 10/16)$.
 
-12. The "Yo" bet pays out at 15:1, meaning you win \$15 for each dollar bet. Suppose
+**SKILL #11: Calculate mean and variance for a linear function of a random variable**
+
+13. The "Yo" bet pays out at 15:1, meaning you win \$15 for each dollar bet. Suppose
     you bet \$10 on Yo.  Your net winnings in that case will be $W = 160*y - 10$.
     a. Using earlier results, find $E(W)$.
     b. Using earlier results, find $var(W)$.
     c. The event $W > 0$ (your net winnings are positive) is identical to the
        event $y = 1$.  Using earlier results, find $\Pr(W > 0)$.
-13. Suppose you bet \$1 on Yo in ten independent rolls.  Your net winnings in 
+
+14. Suppose you bet \$1 on Yo in ten independent rolls.  Your net winnings in 
     that case will be $W_{10} = 16*Y_{10} - 10$.
     a. Using earlier results, find $E(W_{10})$.
     b. Using earlier results, find $var(W_{10})$.
     c. The event $W_{10} > 0$ (your net winnings are positive) is identical to the
        event $Y_{10} > 10/16$.  Using earlier results, find $\Pr(W_{10} > 0)$.
 
-**SKILL #11: Interpret means and variances**
+**SKILL #12: Interpret means and variances**
 
-14. Based on your answers above:
-    a. If you care mostly about expected net winnings, would you prefer to bet 
-       Yo \$10 on a single roll, \$1 on each of 10 rolls, or to just keep 
-       your \$10 and not bet at all?
-    b. Which of the two betting strategies (\$10 on one roll or \$1 on ten 
-       rolls) produces the highest probability of walking away from the
-       table with more money than you started with?
-    c. Which of the two betting strategies has more variable net winnings?
+15. If you have \$10 and care mostly about expected net winnings, which would 
+    be your preferred betting strategy?
+    - Bet Yo \$10 on a single roll. 
+    - Bet Yo \$1 on each of 10 rolls.
+    - Keep your \$10 and not bet at all.
+16. Which of the following two betting strategies produces the highest probability 
+    of walking away from the table with more money than you started with?
+    - Bet Yo \$10 on a single roll. 
+    - Bet Yo \$1 on each of 10 rolls.
+17. Which of the following two betting strategies has more variable net winnings?
+    - Bet Yo \$10 on a single roll. 
+    - Bet Yo \$1 on each of 10 rolls.
+
+### Practice problem answers {#answers-random-variables}
+
+1. We can define $t = r+w$.
+2. We can define $y = I(r+w = 11)$.
+3. The support of a random variable is the set of all values with positive probability.
+   a. The support of $r$ is $S_r = \{1,2,3,4,5,6\}$.
+   b. The support of $t$ is $S_t = \{2,3,4,5,6,7,8,9,10,11,12\}$.
+   c. The support of $y$ is $S_y = \{0,1\}$.
+4. The range of a random variable is just the interval defined by the support's minimum and maximum values.
+   a. The range of $r$ is $[1,6]$.
+   b. The range of $t$ is $[2,12]$.
+   c. The range of $y$ is $[0,1]$.
+5. The PDF can be derived from the probability distribution of the underlying outcome
+   $(r,w)$, which was calculated in the previous chapter.
+   a. The PDF of $r$ is:
+    \begin{align}
+      f_r(a) &= \begin{cases}
+        1/6 & a \in \{1,2,3,4,5,6\} \\
+        0 & \textrm{otherwise} \\
+        \end{cases}
+     \end{align}
+   b. The PDF of $t$ is:
+    \begin{align}
+      f_t(a) &= \begin{cases}
+        1/36 & a \in \{2,12\} \\
+        2/36 \textrm{ (or $1/18$)} & a \in \{3,11\} \\
+        3/36 \textrm{ (or $1/12$)} & a \in \{4,10\} \\
+        4/36 \textrm{ (or $1/9$)} & a \in \{5,9\} \\
+        5/36 & a \in \{6,8\} \\
+        6/36 \textrm{ (or $1/6$)} & a = 7 \\
+        0 & \textrm{otherwise} \\
+        \end{cases}
+     \end{align}
+   c. The PDF of $y$ is:
+    \begin{align}
+      f_y(a) &= \begin{cases}
+        17/18 & a = 0 \\
+        1/18 & a = 1 \\
+        0 & \textrm{otherwise} \\
+        \end{cases}
+     \end{align}
+6. We can construct the CDF by cumulatively summing up the PDF:
+   a. The CDF of $r$ is:
+    \begin{align}
+      F_r(a) &= \begin{cases}
+        0 & a < 1 \\
+        1/6 & 1 \leq a < 2 \\
+        1/3 & 2 \leq a < 3 \\
+        1/2 & 3 \leq a < 4 \\
+        2/3 & 4 \leq a < 5 \\
+        5/6 & 5 \leq a < 6 \\
+        1 & a \geq 6 \\
+        \end{cases}
+     \end{align}
+   b. The CDF of $y$ is:
+    \begin{align}
+      F_y(a) &= \begin{cases}
+        0 & a < 0 \\
+        17/18 & 0 \leq a < 1 \\
+        1 & a \geq 1 \\
+        \end{cases}
+     \end{align}
+7. We find the expected value by applying the definition:
+   a. The expected value is 
+      \begin{align}
+        E(r) &= \sum_{a \in S_r} a\Pr(r=a) \\
+          &= 1*\frac{1}{6} + 2*\frac{1}{6} + 3*\frac{1}{6} + 4*\frac{1}{6} + 5*\frac{1}{6} + 6*\frac{1}{6} \\
+          &= 21/6 \\
+          &= 3.5 
+      \end{align}
+   b. The expected value is 
+      \begin{align}
+        E(r) &= \sum_{a \in S_r} a^2\Pr(r=a) \\
+          &= 1^2*\frac{1}{6} + 2^2*\frac{1}{6} + 3^2*\frac{1}{6} + 4^2*\frac{1}{6} + 5^2*\frac{1}{6} + 6^2*\frac{1}{6} \\
+          &= 81/6 \\
+          &= 13.5 
+      \end{align}
+8. The key here is to write down the definition of the specific quantile you are 
+   looking for, then substitute the CDF you derived earlier.
+   a. The median of $r$ is:
+      \begin{align}
+        F_r^{-1}(0.5) &= \min \{a: \Pr(r \leq a) \geq 0.5\} \\
+          &= \min \{a: F_r(a) \geq 0.5\} \\
+          &= \min \{a: a \geq 3\} \\
+          &= 3
+      \end{align}
+   b. The 0.25 quantile of $r$ is 
+      \begin{align}
+        F_r^{-1}(0.25) &= \min \{a: \Pr(r \leq a) \geq 0.25\} \\
+          &= \min \{a: F_r(a) \geq 0.25\} \\
+          &= \min \{a: a \geq 2\} \\
+          &= 2
+      \end{align}
+   c. The 75th percentile of $r$ is just its 0.75 quantile: 
+      \begin{align}
+        F_r^{-1}(0.75) &= \min \{a: \Pr(r \leq a) \geq 0.75\} \\
+          &= \min \{a: F_r(a) \geq 0.75\} \\
+          &= \min \{a: a \geq 5\} \\
+          &= 5
+      \end{align}
+9. Let $d = (y - E(y))^2$ 
+   a. We can derive the PDF of $d$ from the PDF of $y$:
+    \begin{align}
+      f_{d}(a) &= \begin{cases}
+        17/18 & a = (0-1/18)^2 \\
+        1/18 & a = (1-1/18)^2 \\
+        0 & \textrm{otherwise} \\
+        \end{cases}
+     \end{align}
+   b. The expected value is:
+      \begin{align}
+        E(d) &= (0-1/18)^2 * \frac{17}{18} + (1-1/18)^2 *\frac{1}{18} \\
+          &\approx 0.0525 
+      \end{align}
+   b. The variance is:
+      \begin{align}
+        var(y) &= E(d) \\
+          &\approx 0.0525 
+      \end{align}
+   b. The standard deviation is 
+      $$sd(y) = \sqrt{var(y)} \approx \sqrt{0.0525} \approx 0.229$$
+10. Earlier, you found $E(r) = 3.5$ and $E(r^2) = 13.5$.  So we can apply
+    our result that $var(x) = E(x^2) - E(x)^2$ for a simpler way of calculating
+    the variance.  
+    a. The variance is:
+      \begin{align}
+        var(r) &= E(r^2) - E(r)^2 \\
+          &= 13.5 - 3.5^2 \\
+          &= 1.25
+      \end{align}
+    b. The standard deviation is:
+      \begin{align}
+        sd(r) &= \sqrt{var(r)} = \sqrt{1.25} \approx 1.18
+      \end{align}
+11. The Bernoulli distribution describes any random variable (like $y$) that
+    has a binary $\{0,1\}$ support.
+    a. $y$ has the $Bernouili(p)$ distribution with $p=1/18$, or
+      $$y \sim Bernoulli(1/18)$$
+    b. In the Bernoulli distribution $E(y)=p =1/18$.
+    c. In the Bernoulli distribution, $var(y) = p*(1-p) = 1/18 * 17/18 \approx 0.525$.
+12. The binomial distribution describes any random variable that describes the
+    number of times an event happens in a fixed number of independent trials.
+    a. $Y_{10}$ has the binomial distribution with $n=10$ and $p=1/18$.  We 
+      can also write that as 
+      $$Y_{10} \sim Binomial(10,1/18)$$
+    b. For the Binomial distribution we have 
+       $$E(Y_{10}) = np = 10*1/18 \approx 0.556$$
+    c. For the binomial distribution we have 
+       $$var(Y_{10}) = np(1-p) = 10*1/18*17/18 \approx 0.525$$
+    d. The Excel formula for $\Pr(Y_{10} = 0)$ would be 
+       `=BINOM.DIST(0,10,1/18,FALSE)` which produces the result 
+       $$\Pr(Y_{10} = 0) \approx 0.565$$
+    e. The Excel formula for $\Pr(Y_{10} \leq 10/16)$ would be 
+       `=BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result 
+        $$\Pr(Y_{10} \leq 10/16) \approx 0.565$$
+    f. The Exel formula for $\Pr(Y_{10} > 10/16)$ would be
+       `=1-BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result 
+       $$\Pr(Y_{10} > 10/16) \approx 0.435$$
+13. The key here is to apply the formulas for the expected value and variance 
+    of a linear function of a random variable.
+    a. The expected value is:
+       \begin{align}
+          E(W) &= E(160*y - 10) \\
+            &= 160*E(y) - 10 \\
+            &= 160*1/18 - 10 \\
+            &\approx -1.11
+        \end{align}
+    b. The variance is:
+       \begin{align}
+        var(W) &= var(160*y - 10) \\
+          &= 160^2*var(y) \\
+          &= 160^2*1/18*17/18 \\
+          &\approx 1343.2
+       \end{align}
+    c. The event probability is 
+       \begin{align}
+        \Pr(W > 0) &= \Pr(y=1) = 1/18 \approx 0.056
+       \end{align}
+14. Applying the formulas for a linear function:
+    a. The expected value is:
+       \begin{align}
+         E(W_{10}) &= E(16*Y_{10} - 10) \\
+          &= 16*E(Y_{10}) - 10 \\
+          &= 16*10*1/18 - 10 \\
+          &\approx -1.11
+        \end{align}
+    b. The variance is:
+       \begin{align}
+         var(W_{10}) &= var(16*Y_{10} - 10) \\ 
+          &= 16^2var(Y_10) \\
+          &= 16^2 * 10*1/18*17/18 \\
+          &\approx 134.32
+        \end{align}
+    c. The event probability is 
+       \begin{align}
+        \Pr(W_{10} > 0) &= \Pr(Y_{10} > 10/16) \approx 0.435
+       \end{align}
+15. If you care mostly about expected net winnings, you should just keep 
+    your \$10 and not bet at all. This strategy has an expected net winnings of
+    zero, while the others both have *negative* expected net winnings.
+16. Betting \$1 on ten rolls produces the highest probability of walking 
+       away from the table with more money than you started with.
+17. Betting \$10 on one roll produces more variable net winnings.
 
