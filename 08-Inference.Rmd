@@ -451,8 +451,68 @@ its distribution under the null.  I won't go through that calculation
 here.
 :::
 
+## The central limit theorem
 
-## Application: the mean
+In order for a test statistic to work, its exact probability distribution must be known
+under the null hypothesis.  The example test in the previous section worked because
+it was based on a sample frequency, a statistic whose probability distribution is 
+relatively easy to calculate.  Unfortunately, most statistics do not have a probability 
+distribution that is easy to calculate.
+
+Fortunately, we have a very powerful asymptotic result called the 
+***Central Limit Theorem (CLT)***.  The CLT roughly says that we can approximate 
+the entire probability distribution of the sample average $\bar{x}_n$ by a normal distribution
+if the sample size is sufficiently large.
+
+As with the LLN, we need to invest in some terminology before we can
+state the CLT.  Let $s_n$ be a statistic calculated from $D_n$ and 
+let $F_n(\cdot)$ be its CDF. We say that $s_n$ 
+***converges in distribution*** to a random variable $s$ with CDF $F(\cdot)$, or 
+  $$s_n \rightarrow^D s$$
+if
+  $$\lim_{n \rightarrow \infty} |F_n(a) - F(a)| = 0$$
+for every $a \in \mathbb{R}$.
+
+Convergence in distribution means we can approximate the actual CDF
+$F_n(\cdot)$ of $s_n$ with its limit $F(\cdot)$.  As with most approximations,
+this is useful whenever $F_n(\cdot)$ is difficult to calculate and $F(\cdot)$
+is easy to calculate. 
+
+::: fyi
+**CENTRAL LIMIT THEOREM**: Let $\bar{x}_n$ be the sample average 
+from a random sample of size $n$ on the random variable $x_i$ with
+mean $E(x_i) = \mu_x$ and variance $var(x_i) = \sigma_x^2$. Then
+  $$z_n \rightarrow^D z \sim N(0,1)$$
+:::
+
+What does the central limit theorem mean?
+
+  - Fundamentally, it means that if $n$ is big enough then the probability
+    distribution of $\bar{x}_n$ is approximately normal 
+    *no matter what the original distribution of $x_i$ looks like.*
+  - In order for the CLT to apply, we need to rescale $\bar{x}_n$
+    so that it has zero mean (by subtracting $E(\bar{x}_n) = \mu_x$) 
+    and constant variance as $n$ increases (by dividing by 
+    $sd(\bar{x}_n) = \sigma_x/\sqrt{n}$)).  That rescaled sample
+    average is $z_n$.  
+  - In practice, we don't usually know $\mu_x$ or $\sigma_x$ so 
+    we can't calculate $z_n$ from data. Fortunately, there are some
+    tricks for getting around this problem that we will talk
+    about later.
+
+What about statistics other than the sample average?  Well it turns out that 
+Slutsky's theorem also extends to convergence in distribution.
+
+::: fyi
+**SLUTSKY THEOREM**: Let $g(\cdot)$ be a continuous function. Then:
+  $$s_n \rightarrow^D s \implies g(s_n) \rightarrow^D g(s)$$
+:::
+
+The implication here is that *nearly all* statistics have a sampling
+distribution that can be approximated using the normal distribution if
+the sample size is large enough.
+
+## Inference on the mean
 
 Having described the general framework and a single example, we now
 move on to the most common application: constructing hypothesis
@@ -464,9 +524,11 @@ and variance $var(x_i) = \sigma_x^2$.
 
 Let the sample average be:
   $$\bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$$
-and the sample variance:
+let the sample variance be:
   $$s_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
-Both of these statistics are easily calculated from the data,
+and let the sample standard deviation be:
+  $$s_x = \sqrt{s_x^2}$$
+These statistics are easily calculated from the data,
 and we have previously discussed their properties in detail.
 
 ### The null and alternative hypotheses
@@ -638,10 +700,10 @@ we can calculate our critical values:
   $$c_L = 2.5 \textrm{ percentile of } T_{n-1}$$
   $$c_H = 97.5 \textrm{ percentile of } T_{n-1}$$
 We can obtain these percentiles using Excel or R. In Excel, the
-relevant function is `T.INV`.  For example, if we have 5 observations, then:
+relevant function is `T.INV`.  For example, if we have $n = 5$ observations, then:
 
-- We would calculate $c_L$ by the formula `=T.INV(0.025,4)`.
-- We would calculate $c_H$ by the formula `=T.INV(0.975,4)`.
+- We would calculate $c_L$ by the formula `=T.INV(0.025,5-1)`.
+- We would calculate $c_H$ by the formula `=T.INV(0.975,5-1)`.
 
 The results (calculated below using R) would be:
 ```{r T4CriticalValues}
@@ -654,8 +716,8 @@ The results (calculated below using R) would be:
 ```
 In contrast, if we have 30 observations, then:
 
-- We would calculate $c_L$ by the formula `=T.INV(0.025,29)`.
-- We would calculate $c_H$ by the formula `=T.INV(0.975,29)`.
+- We would calculate $c_L$ by the formula `=T.INV(0.025,30-1)`.
+- We would calculate $c_H$ by the formula `=T.INV(0.975,30-1)`.
 
 The results (calculated below using R) would be:
 ```{r T29CriticalValues}
@@ -668,8 +730,8 @@ The results (calculated below using R) would be:
 ```
 and if we have 1,000 observations:
 
-- We would calculate $c_L$ by the formula `=T.INV(0.025,999)`.
-- We would calculate $c_H$ by the formula `=T.INV(0.975,999)`.
+- We would calculate $c_L$ by the formula `=T.INV(0.025,1000-1)`.
+- We would calculate $c_H$ by the formula `=T.INV(0.975,1000-1)`.
 
 The results (calculated below using R) would be:
 ```{r T999CriticalValues}
@@ -681,14 +743,26 @@ The results (calculated below using R) would be:
       "\n")
 ```
 
-Notice that the Student's T test is more ***conservative** (less likely 
-to reject) than the asymptotic test for smaller sample sizes. But
-at some point (around $n = 30$) the difference between the two tests
-becomes negligible.
 
-In practice, most data sets in economics have well over 30 observations so
+### Which test to use? 
+
+Statisticians often call the finite-sample test the ***T test*** and the 
+asymptotic test the ***Z test***, as a result of the notation typically
+used to represent the test statistic.  The two tests have the same
+underlying test statistic, but different critical values.
+
+Which test should we use in practice?  The T test is a more ***conservative***
+test than the Z test, meaning it has larger critical values and is less
+likely to reject the null. As a result it has lower power and lower size. But 
+at some point (around $n = 30$) the difference 
+between the two tests becomes too small to make much of a difference.
+
+As a result, statisticians typically recommend using the T test for smaller samples
+(less than 30 or so), and then using whichever test is more convenient
+with larger samples.  Most data sets in economics have well over 30 observations so
 economists tend to use asymptotic tests unless they have a very small 
 sample.
+
 
 ## Confidence intervals 
 

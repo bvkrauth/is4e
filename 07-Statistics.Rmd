@@ -28,8 +28,8 @@ In this chapter we will:
 - Calculate and interpret the mean and variance of a statistic from
   its sampling distribution.
 - Calculate and interpret bias and mean squared error.
-- Explain the law of large numbers, central limit theorem, and Slutsky's 
-  theorem.
+- Explain the law of large numbers, Slutsky's theorem, and the idea of a consistent
+  estimator.
 :::
 
 ## Data and the data generating process
@@ -513,7 +513,12 @@ the relative sample frequency is:
   $$var(\hat{f}_A) = \frac{var(n\hat{f}_A)}{n^2} = \frac{np(1-p)}{n^2} = \frac{p(1-p)}{n} $$
 :::
 
-## Parameters and estimators {#estimation}
+## Estimation {#estimation}
+
+Statistics are often used to estimate, or guess the value of, some unknown 
+feature of the population or DGP.
+
+### Parameters and estimators 
 
 A ***parameter*** is an unknown number characterizing a DGP. 
 
@@ -564,8 +569,6 @@ Our four example statistics are commonly used as estimators:
   population median $m_x = q_{0.5}(x_i)$. 
 
 :::
-
-## Estimator properties
 
 Estimators are statistics, so they have all the usual characteristics of a 
 statistic, including a sampling distribution, a mean, a variance, etc.
@@ -793,7 +796,7 @@ average, and is typically reported next to the sample average.
 Standard errors are usually biased estimators of the statistic's true standard
 deviation, but the bias is typically small.
 
-## Asymptotics
+## The law of large numbers
 
 So far, we have described statistics and estimators in terms
 of their probability distribution and the mean, variance
@@ -818,13 +821,14 @@ are sometimes called ***exact*** or ***finite sample***
 properties. All of the results we have discussed
 so far are finite sample results.
 
-We will state three main asymptotic results, the law of large
-numbers, the central limit theorem, and Slutsky's theorem. All
-three rely on relatively sophisticated math, so I will not
-expect you to do much with them.  Please focus on the intuition
-and interpretation and don't worry too much about the math.
+We will state two main asymptotic results in this chapter: the law of large
+numbers and Slutsky's theorem.  A third asymptotic result called the central 
+limit theorem will be stated in the next chapter. All three results rely on 
+relatively sophisticated math, so I will not expect you to do much with 
+them.  Please focus on the intuition and interpretation and don't worry 
+too much about the math.
 
-### The law of large numbers
+### Defining the LLN
 
 The ***law of large numbers*** (LLN) says that for a large enough random
 sample, the sample average is almost identical to the corresponding
@@ -888,53 +892,10 @@ that affects everyone.  Here the independence needed for the LLN
 does not apply.
 :::
 
-### The central limit theorem
-
-The ***Central Limit Theorem (CLT)*** is an even more powerful result.
-It roughly says that for a sufficiently large sample size we can
-approximate the entire probability distribution of 
-$\bar{x}_n$ by a normal distribution.
-
-As with the LLN, we need to invest in some terminology before we can
-state the CLT.  Let $s_n$ be a statistic calculated from $D_n$ and 
-let $F_n(\cdot)$ be its CDF. We say that $s_n$ 
-***converges in distribution*** to a random variable $s$ with CDF $F(\cdot)$, or 
-  $$s_n \rightarrow^D s$$
-if
-  $$\lim_{n \rightarrow \infty} |F_n(a) - F(a)| = 0$$
-for every $a \in \mathbb{R}$.
-
-Convergence in distribution means we can approximate the actual CDF
-$F_n(\cdot)$ of $s_n$ with its limit $F(\cdot)$.  As with most approximations,
-this is useful whenever $F_n(\cdot)$ is difficult to calculate and $F(\cdot)$
-is easy to calculate. 
-
-::: fyi
-**CENTRAL LIMIT THEOREM**: Let $\bar{x}_n$ be the sample average 
-from a random sample of size $n$ on the random variable $x_i$ with
-mean $E(x_i) = \mu_x$ and variance $var(x_i) = \sigma_x^2$. Then
-  $$z_n \rightarrow^D z \sim N(0,1)$$
-:::
-
-What does the central limit theorem mean?
-
-  - Fundamentally, it means that if $n$ is big enough then the probability
-    distribution of $\bar{x}_n$ is approximately normal 
-    *no matter what the original distribution of $x_i$ looks like.*
-  - In order for the CLT to apply, we need to rescale $\bar{x}_n$
-    so that it has zero mean (by subtracting $E(\bar{x}_n) = \mu_x$) 
-    and constant variance as $n$ increases (by dividing by 
-    $sd(\bar{x}_n) = \sigma_x/\sqrt{n}$)).  That rescaled sample
-    average is $z_n$.  
-  - In practice, we don't usually know $\mu_x$ or $\sigma_x$ so 
-    we can't calculate $z_n$ from data. Fortunately, there are some
-    tricks for getting around this problem that we will talk
-    about later.
-
 ### Consistent estimation
 
-The law of large numbers and central limit theorem apply to the sample
-mean, but we are interested in other estimators as well.
+The law of large numbers applies to the sample mean, but we are interested 
+in other estimators as well.
 
 In general, we say that the statistic $s_n$ is a ***consistent*** 
 estimator of a parameter $\theta$ if:
@@ -944,29 +905,24 @@ estimators of the thing we typically use them to estimate.
 
 The key to this property is a result called ***Slutsky's theorem***.
 Slutsky's theorem roughly says that if the law of large numbers
-and central limit theorem applies to a statistic $s_n$, it also
-applies to $g(s_n)$ for any continuous function $g(\cdot)$.
+applies to a statistic $s_n$, it also applies to $g(s_n)$ for any continuous 
+function $g(\cdot)$.
 
 ::: fyi
 **SLUTSKY THEOREM**: Let $g(\cdot)$ be a continuous function. Then:
   $$s_n \rightarrow^p c \implies g(s_n) \rightarrow^p g(c)$$
-and:
-  $$s_n \rightarrow^D s \implies g(s_n) \rightarrow^D g(s)$$
 :::
 
 What is the importance of Slutsky's theorem?  Most commonly used statistics
 can be written as continuous functions of a sample average (or several 
-sample averages). Slutsky's theorem
-
-  - extends the LLN to these statistics 
-    - Most commonly used statistics are consistent estimators of 
-      the corresponding population parameter.
-  - extends the CLT to these statistics
-    - Most commonly used statistics are also asymptotically normal.
+sample averages). Slutsky's theorem extends the LLN to these statistics, and
+ensures that these commonly used statistics are consistent estimators of 
+the corresponding population parameter.
 
 The math needed to make full use of Slutsky's theorem is beyond the scope
 of this course, so all I am asking here is for you to know that it can be
 used for this purpose.
+
 
 ## Chapter review {#review-statistics}
 
