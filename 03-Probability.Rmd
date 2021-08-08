@@ -598,15 +598,15 @@ red die is showing 2 and the white die is showing 4.
 
 **SKILL #1: Define outcomes and sample space for a simple example**
 
-1. Given the definition above for the outcome of a single roll in craps: 
-   a. Define its sample space by enumeration.
-   b. Find the cardinality of this sample space.
+1. Let $\Omega$ be the sample space for the outcome of a single roll in craps.
+   a. Define $\Omega$ by enumeration.
+   b. Find the cardinality of $\Omega$.
 2. Using enumeration, define the following events:
-   a. Yo wins.
+   a. Yo wins
    b. Snake eyes wins
    c. Boxcars wins
    d. Field wins
-   
+
 **SKILL #2: Use set theory to work with events**
 
 3. Which of the following statements are true?
@@ -637,7 +637,7 @@ red die is showing 2 and the white die is showing 4.
    a. $(r,w) = (1,1)$
    b. $(r,w) = (3,4)$
    c. $(r,w) = (6,6)$
-8. Calculate the probability of each of the following events:
+8. Find the probability of each of the following events:
    a. A bet on Yo wins.
    b. A bet on Snake eyes wins.
    c. A bet on Boxcars wins.
@@ -646,15 +646,15 @@ red die is showing 2 and the white die is showing 4.
 **SKILL #4: Calculate joint and conditional probabilities**
 
 9. Calculate each of the following joint probabilities:
-   a. $Pr(\textrm{Yo wins} \cap \textrm{Field wins})$
-   a. $Pr(\textrm{Yo wins} \cap \textrm{Boxcars wins})$
-   a. $Pr(\textrm{Yo wins} \cap \textrm{Boxcars loses})$
+   a. $\Pr(\textrm{Yo wins} \cap \textrm{Boxcars wins})$
+   b. $\Pr(\textrm{Yo wins} \cap \textrm{Field wins})$
+   c. $\Pr(\textrm{Yo wins} \cap \textrm{Boxcars loses})$
 10. Calculate each of the following conditional probabilities:
-    a. $Pr(\textrm{Yo wins} | \textrm{Field wins})$
-    a. $Pr(\textrm{Yo wins} | \textrm{Boxcars wins})$
-    a. $Pr(\textrm{Yo wins} \cap \textrm{Boxcars loses})$
-    a. $Pr(\textrm{Field wins} | \textrm{Yo wins})$
-    a. $Pr(\textrm{Boxcars wins} | \textrm{Yo wins})$
+    a. $\Pr(\textrm{Yo wins} | \textrm{Boxcars wins})$
+    b. $\Pr(\textrm{Yo wins} | \textrm{Field wins})$
+    c. $\Pr(\textrm{Yo wins} \cap \textrm{Boxcars loses})$
+    d. $\Pr(\textrm{Field wins} | \textrm{Yo wins})$
+    e. $\Pr(\textrm{Boxcars wins} | \textrm{Yo wins})$
 11. Which of the following pairs of events are independent?
     a. Yo wins and Boxcars wins.
     b. Yo wins and Field wins.
@@ -665,39 +665,198 @@ red die is showing 2 and the white die is showing 4.
 **SKILL #5: Apply the axioms of probability**
 
 12. Let $A$ be an event.  Which of the following statements are true?
-    a. $Pr(A) \geq 0$.
-    b. $Pr(A) > 0$.
-    c. $Pr(A) \leq 1$.
-    d. $Pr(A) < 1$.
-    e. $Pr(A^c) \geq 0$.
-    f. $Pr(A^c) > 0$.
-    g. $Pr(A^c) \leq 1$.
-    h. $Pr(A^c) < 1$.
-    i. $Pr(A^c) = 1 - \Pr(A)$.
+    a. $\Pr(A) \geq 0$.
+    b. $\Pr(A) > 0$.
+    c. $\Pr(A) \leq 1$.
+    d. $\Pr(A) < 1$.
+    e. $\Pr(A^c) \geq 0$.
+    f. $\Pr(A^c) > 0$.
+    g. $\Pr(A^c) \leq 1$.
+    h. $\Pr(A^c) < 1$.
+    i. $\Pr(A^c) = 1 - \Pr(A)$.
 13. Let $A$ and $B$ be two events.  Which of the following statements 
     are true?
-    a. $Pr(A \cup B) = \Pr(A) + \Pr(B)$.
-    b. $Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)$.
-    c. $Pr(A \cup B) \leq \Pr(A) + \Pr(B)$.
-    d. $Pr(A \cap B) = \Pr(A)\Pr(B)$.
+    a. $\Pr(A \cup B) = \Pr(A) + \Pr(B)$.
+    b. $\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)$.
+    c. $\Pr(A \cup B) \leq \Pr(A) + \Pr(B)$.
+    d. $\Pr(A \cap B) = \Pr(A)\Pr(B)$.
 14. Let $A$ and $B$ be two disjoint events.  Which of the following
     statements are true?
-    a. $Pr(A \cap B) = 0$.
-    b. $Pr(A \cap B) = \Pr(A) + \Pr(B)$.
-    c. $Pr(A \cup B) = 0$.
-    d. $Pr(A \cup B) = \Pr(A) + \Pr(B)$.
-    e. $Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)$.
-    f. $Pr(A \cup B) \leq \Pr(A) + \Pr(B)$.
-    g. $Pr(A \cap B) = \Pr(A)\Pr(B)$.
+    a. $\Pr(A \cap B) = 0$.
+    b. $\Pr(A \cap B) = \Pr(A) + \Pr(B)$.
+    c. $\Pr(A \cup B) = 0$.
+    d. $\Pr(A \cup B) = \Pr(A) + \Pr(B)$.
+    e. $\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)$.
+    f. $\Pr(A \cup B) \leq \Pr(A) + \Pr(B)$.
+    g. $\Pr(A \cap B) = \Pr(A)\Pr(B)$.
     h. $\Pr(A | B) = 0$
 15. Let $A$ and $B$ be two events such that $A \subset B$.  Which of 
     the following statements are true?
     a. $\Pr(A) \leq \Pr(B)$
     b. $\Pr(A \cap B) = \Pr(A)$
     c. $\Pr(A | B) = 1$
+    Statements (a), (b) and (c) are true.
 16. Let $A$ and $B$ be two independent events.  Which of the following
     statements are true?
-    a. $Pr(A \cap B) = 0$.
-    b. $Pr(A \cap B) = \Pr(A)\Pr(B)$.
-    c. $Pr(A|B) = \Pr(A)$.
+    a. $\Pr(A \cap B) = 0$.
+    b. $\Pr(A \cap B) = \Pr(A)\Pr(B)$.
+    c. $\Pr(A|B) = \Pr(A)$.
+
+### Practice problem answers {#answers-probability}
+
+1. The sample space is the set of all posible outcomes for $(r,w)$, and its cardinality
+   is just the number of elements it has.
+   a. The sample space is:
+      \begin{align}
+        \Omega &= \left\{ \begin{aligned}
+          & (1,1),(1,2),(1,3),(1,4),(1,5),(1,6), \\
+          & (2,1),(2,2),(2,3),(2,4),(2,5),(2,6), \\
+          & (3,1),(3,2),(3,3),(3,4),(3,5),(3,6), \\
+          & (4,1),(4,2),(4,3),(4,4),(4,5),(4,6), \\
+          & (5,1),(5,2),(5,3),(5,4),(5,5),(5,6), \\
+          & (6,1),(6,2),(6,3),(6,4),(6,5),(6,6) \\
+          \end{aligned}
+          \right\}
+      \end{align}
+   b. Counting up the number of elements in the set, we get $|\Omega| = 36$.
+2. Each event is just a set listing the $(r,w)$ outcomes that satisfy the relevant
+   conditions.
+   a. Yo wins whenever $r+w = 11$.
+      \begin{align}
+        Yo &= \{(5,6),(6,5)\}
+      \end{align}
+   b. Snake eyes wins when $r+w = 2$:
+      \begin{align}
+        SnakeEyes = \{(1,1)\}
+      \end{align}
+   c. Boxcars wins when $r+w = 12$:
+      \begin{align}
+        Boxcars = \{(6,6)\}
+      \end{align}
+   d. Field wins when $r+w \in \{2,3,4,9,10,11,12\}$:
+      \begin{align}
+        Field &= \left\{\begin{aligned}
+           & (1,1),(1,2),(1,3), \\
+           & (2,1),(2,2), \\
+           & (3,1),(3,6), \\
+           & (4,5),(4,6), \\
+           & (5,4),(5,5),(5,6), \\
+           & (6,3),(6,4),(6,5),(6,6) \\
+           \end{aligned}\right\}
+       \end{align}
+3. Statements (b) and (c) are true.
+4. Statements (a) and (d) are true. 
+5. Statements (b) and (c) are true.
+6. Event (c) is an elementary event.
+7. All three elementary events have probability $1/36 \approx 0.028$
+8. The probability of each event can be calculated by adding up the probabilities
+   of its elementary events:
+   a. The probability a bet on Yo wins is:
+      \begin{align}
+        \Pr(Yo) &= \Pr(\{(5,6),(6,5)\}) \\
+          &= \Pr(\{(5,6)\}) + \Pr(\{(6,5)\}) \\
+          &= 2/36 \\
+          &\approx 0.056
+      \end{align}
+   b. The probability a bet on Snake eyes wins is:
+      \begin{align}
+        \Pr(SnakeEyes) &= \Pr(\{(1,1)\}) \\
+          &= 1/36 \\
+          &\approx 0.028
+      \end{align}
+   c. The probability a bet on Boxcars wins is:
+      \begin{align}
+        \Pr(Boxcars) &= \Pr(\{(6,6)\}) \\
+          &= 1/36 \\
+          &\approx 0.028
+      \end{align}
+   d. The probability a bet on Field wins is:
+      \begin{align}
+        \Pr(Field) &= \Pr\left(\left\{\begin{aligned}
+            & (1,1),(1,2),(1,3), \\
+            & (2,1),(2,2), \\
+            & (3,1),(3,6), \\
+            & (4,5),(4,6), \\
+            & (5,4),(5,5),(5,6), \\
+            & (6,3),(6,4),(6,5),(6,6) \\
+            \end{aligned}\right\}\right) \\
+          &= \Pr(\{(1,1)\}) + \Pr(\{(1,2)\}) + \cdots + \Pr(\{(6,6)\}) \\
+          &= 16/36 \\
+          &\approx 0.444
+      \end{align}
+9. To calculate the joint probability, start by calculating the intersection
+   of the two events:
+   a. The joint probability is:
+      \begin{align}
+        \Pr(Yo \cap Boxcars) 
+           &= \Pr(\{(5,6),(6,5)\} \cap \{(6,6)\}) \\
+           &= \Pr(\emptyset) \\
+           &= 0 
+      \end{align}
+   b. The joint probability is:
+      \begin{align}
+        \Pr(Yo \cap Field) 
+          &= \Pr\left(\{(5,6),(6,5)\} \cap \left\{\begin{aligned}
+            & (1,1),(1,2),(1,3), \\
+            & (2,1),(2,2), \\
+            & (3,1),(3,6), \\
+            & (4,5),(4,6), \\
+            & (5,4),(5,5),(5,6), \\
+            & (6,3),(6,4),(6,5),(6,6) \\
+            \end{aligned}\right\}\right) \\
+          &= \Pr(\{(5,6),(6,5)\}) \\
+          &= 2/36 \\
+          &\approx 0.056
+      \end{align}
+   c. The joint probability is:
+      \begin{align}
+       \Pr(Yo \cap Boxcars^C) 
+           &= \Pr(\{(5,6),(6,5)\} \cap \{(6,6)\}^C) \\
+           &= \Pr(\{(5,6),(6,5)\}) \\
+           &= 2/36 \\
+           &\approx 0.056 
+      \end{align}
+10. The conditional probabilty is just the ratio of the joint probability to 
+    the probability of the event we are conditioning on:
+    a. The conditional probability is:
+       \begin{align}
+         \Pr(Yo | Boxcars)
+            &= \frac{Pr(Yo \cap Boxcars)}{\Pr(Boxcars)} \\
+            &= \frac{0}{1/36} \\
+            &= 0
+        \end{align}
+    b. The conditional probability is:
+       \begin{align}
+         \Pr(Yo | Field)
+            &= \frac{Pr(Yo \cap Field)}{\Pr(Field)} \\
+            &= \frac{2/36}{16/36} \\
+            &= 0.125
+        \end{align}
+    c. The conditional probability is:
+       \begin{align}
+         \Pr(Yo | Boxcars^C)
+            &= \frac{Pr(Yo \cap Boxcars^C)}{\Pr(Boxcars^C)} \\
+            &= \frac{2/36}{1-1/36} \\
+            &\approx 0.057
+        \end{align}
+    d. The conditional probability is:
+       \begin{align}
+         \Pr(Field | Yo)
+            &= \frac{Pr(Field \cap Yo)}{\Pr(Yo)} \\
+            &= \frac{2/36}{2/36} \\
+            &= 1
+        \end{align}
+    e. The conditional probability is:
+       \begin{align}
+         \Pr(Boxcars | Yo)
+            &= \frac{Pr(Boxcars \cap Yo)}{\Pr(Yo)} \\
+            &= \frac{0}{2/36} \\
+            &= 0
+        \end{align}
+11. The events in (d) and (e) are independent.
+12. Statements (a), (c), (e), (g), and (i) are true.
+13. Statements (b) and (c) are true.
+14. Statements (a), (d), (e), (f), and (h) are true.
+15. Statements (a), (b) and (c) are true.
+16. Statements (b) and (c) are true.
 
