@@ -923,113 +923,417 @@ To be added
 
 ### Practice problems {#problems-more-on-random-variables}
 
-**SKILL #1: Use the properties of the uniform distribution**
+Questions 1- 7 below continue our [craps example](#problems-probability). To 
+review that example, we have:
 
-1. Suppose that $x \sim U(-1,1)$.
-   a. Find the PDF of $x$
-   b. Find the CDF of $x$
-   c. Find $\Pr(x = 0)$
-   d. Find $\Pr(0 < x < 0.5)$
-   e. Find $\Pr(0 \leq x \leq 0.5)$
-   f. Find the median of $x$.
-   g. Find the 75th percentile of $x$.
-   h. Find $E(x)$
-   i. Find $var(x)$
+- An outcome $(r,w)$ where $r$ and $w$ are the numbers rolled on a pair of 
+  fair six-sided dice
+- Several random variables defined in terms of that outcome:
+  - The total showing on the pair of dice: $t = r+w$
+  - An indicator for whether a bet on "Yo" wins: $y = I(t=11)$.
 
-**SKILL #2: Work with linear functions of uniform random variables**
+In addition, let $b = I(t=12)$ be an indicator of whether a bet on "Boxcars" wins. Since
+it is an indicator variable $b$ has the $Bernoulli(p)$ distribution with $p = 1/36$, so
+it has mean
+  $$E(b) = p = 1/36$$
+and variance:
+  $$var(b) = p(1-p) = 1/36*35/36 \approx 0.027 $$
 
-2. Suppose that $x \sim U(-1,1)$, and let $y = 3x + 5$.
-   a. What is the probability distribution of $y$?
-   b. Find $E(y)$.
-   
-**SKILL #3: Use the properties of the normal distribution**
+**SKILL #1: Derive a joint distribution from the underlying outcome **
 
-3. Suppose that $x \sim N(10,3)$.
-   a. Find $E(x)$.
-   b. Find $med(x)$.
-   c. Find $var(x)$.
-   d. Find $sd(x)$.
-   b. Use Excel to find $\Pr(x \leq 0)$.
+1. Let $f_{y,b}(\cdot)$ be the joint PDF of $y$ and $b$.
+   a. Find $f_{y,b}(1,1)$
+   b. Find $f_{y,b}(0,1)$
+   c. Find $f_{y,b}(1,0)$
+   d. Find $f_{y,b}(0,0)$
 
-**SKILL #4: Work with linear functions of a normal random variable**
+**SKILL #2: Derive a marginal distribution from a joint distribution **
 
-4. Suppose that $x \sim N(10,3)$.
-   a. Find the distribution of $y = 3x + 5$.
-   b. Find $\Pr(x \leq 0)$ in terms of the standard normal CDF $\Phi(\cdot)$.
- 
-**SKILL #5: Derive a joint distribution from the underlying outcome **
+2. Let $f_b(\cdot)$ be the marginal PDF of $b$ 
+    a. Find $f_b(0)$ based on the joint PDF $f_{y,b}(\cdot)$.
+    b. Find $f_b(1)$ based on the joint PDF $f_{y,b}(\cdot)$.
+    c. Find $E(b)$ based on this marginal PDF you found in parts (a) and (b).
 
-5. Let $b = I(t=12)$ be an indicator of whether a bet on "Boxcars" wins.
-   a. Find the joint PDF $f_{y,t}(\cdot)$ of $y$ and $t$.
-   b. Find the joint PDF $f_{y,b}(\cdot)$ of $y$ and $b$.
-   
-**SKILL #6: Derive a marginal distribution from a joint distribution **
+**SKILL #3: Derive a conditional distribution from a joint distribution**
 
-6. Find the marginal PDF $f_b(\cdot)$ of $b$ from the joint PDF $f_{y,b}(\cdot)$
-   
-**SKILL #7: Derive a conditional distribution from a joint distribution**
+3. Let $f_{y|b}(1,1)$ be the conditional PDF of $y$ given $b$.
+   a. Find $f_{y|b}(1,1)$.
+   b. Find $f_{y|b}(0,1)$.
+   c. Find $f_{y|b}(1,0)$.
+   d. Find $f_{y|b}(0,0)$.
 
-7. In the craps example:
-   a. Find the conditional PDF $f_{y|t}(\cdot)$ from the joint PDF
-      $f_{y,t}(\cdot)$.
-   b. Find the conditional PDF $f_{t|y}(\cdot)$ from the joint PDF
-      $f_{y,t}(\cdot)$.
-   c. Find the conditional PDF $f_{b|y}$ from the joint PDF $f_{y,b}(\cdot)$.
-   
-**SKILL #8: Identify whether two random variables are independent**
+**SKILL #4: Identify whether two random variables are independent**
 
-8. Which of the following pairs of random variables are independent?
-   a. $y$ and $t$
-   b. $y$ and $b$
-   c. $r$ and $w$
-   d. $r$ and $y$
+4. Which of the following pairs of random variables are independent?
+   - $y$ and $t$
+   - $y$ and $b$
+   - $r$ and $w$
+   - $r$ and $y$
 
-**SKILL #9: Find covariance from a PDF**
+**SKILL #5: Find covariance from a PDF**
 
-9. Find the following covariances:
-   a. Find $cov(y,b)$ using the joint PDF $f_{y,b}(\cdot)$.
+5. Find $cov(y,b)$ using the joint PDF $f_{y,b}(\cdot)$.
 
-**SKILL #10: Find covariance using the alternate formula**
+**SKILL #6: Find covariance using the alternate formula**
 
-10. Find the following covariances using the alternate formula:
-    a. Find $E(yt)$ using the joint PDF $f_{y,t}(\cdot)$.
-    b. Find $cov(y,t)$ using the alternative formula.
+6. Find the following covariances using the alternate formula:
+    a. Find $E(yb)$ using the joint PDF $f_{y,b}(\cdot)$.
+    b. Find $cov(y,b)$ using your result in (a).
+    c. Is your answer in (b) the same as your answer to question 5 above?
 
-**SKILL #11: Find correlation from covariance**
+**SKILL #7: Find correlation from covariance**
 
-11. Use earlier results to find the following correlations:
-    a. Find $corr(y,b)$
-    b. Find $corr(y,t)$
-12. We can show that $corr(b,t) = ??$ and that $var(b) = ??$. We earlier
-    showed that $var(t) = ??$
+7. Find $corr(y,b)$ using the results you found earlier.
+
+8. We can find the correlation from the covariance, but we can also find the 
+   covariance from the correlation.  For example, suppose we already know that
+    \begin{align}
+      E(t) &= 7 \\
+      var(t) &\approx 5.83  \\
+      corr(b,t) &\approx 0.35 \\
+    \end{align}
+    Using this information and the values of $E(b)$ and $var(b)$ provided above:
     a. Find $cov(b,t)$.
     b. Find $E(bt)$.
 
-**SKILL #11: Find correlation and covariance for independent random variables**
+**SKILL #8: Find correlation and covariance for independent random variables**
 
-13. We earlier found that $r$ and $w$ were independent. Using this information:
+9. We earlier found that $r$ and $w$ were independent. Using this information:
     a. Find $cov(r,w)$.
-    a. Find $corr(r,w)$.
+    b. Find $corr(r,w)$.
 
-**SKILL #12: Work with linear functions of random variables**
+**SKILL #9: Work with linear functions of random variables**
 
-13. Your net winnings if you bet \$1 on Yo and \$1 on Boxcars can
-    be written $16y + 16b - 2$. Find the following expected values
+10. Your net winnings if you bet \$1 on Yo and \$1 on Boxcars can
+    be written $16y + 16b - 2$. Find the following expected values:
     a. Find $E(y + b)$
     b. Find $E(16y + 16b - 2)$
 
-14. Find the following variances/covariances
+11. Find the following variances and covariances:
     a. Find $cov(16y,16b)$
     b. Find $var(y + b)$
     b. Find $var(16y + 16b - 2)$
 
-**SKILL #13: Interpret covariances and correlations**
+**SKILL #10: Interpret covariances and correlations**
 
-15. Based on your results, which of the following statements is 
+12. Based on your results, which of the following statements is 
     correct?
-    a. The result of a bet on Boxcars is positively related to the
-       result of a bet on Yo.
-    b. The result of a bet on Boxcars is negatively related to the
-       result of a bet on Yo.
-    c. The result of a bet on Boxcars is not related to the
-       result of a bet on Yo.
+    - The result of a bet on Boxcars is *positively* related to the
+      result of a bet on Yo.
+    - The result of a bet on Boxcars is *negatively* related to the
+      result of a bet on Yo.
+    - The result of a bet on Boxcars is *not* related to the
+      result of a bet on Yo.
+
+**SKILL #11: Use the properties of the uniform distribution**
+
+13. Suppose that $x \sim U(-1,1)$.
+    a. Find the PDF $f_x(\cdot)$ of $x$
+    b. Find the CDF $F_x(\cdot)$ of $x$
+    c. Find $\Pr(x = 0)$
+    d. Find $\Pr(0 < x < 0.5)$
+    e. Find $\Pr(0 \leq x \leq 0.5)$
+    f. Find the median of $x$.
+    g. Find the 75th percentile of $x$.
+    h. Find $E(x)$
+    i. Find $var(x)$
+
+**SKILL #12: Work with linear functions of uniform random variables**
+
+14. Suppose that $x \sim U(-1,1)$, and let $y = 3x + 5$.
+    a. What is the probability distribution of $y$?
+    b. Find $E(y)$.
+
+**SKILL #13: Use the properties of the normal distribution**
+
+15. Suppose that $x \sim N(10,4)$.
+    a. Find $E(x)$.
+    b. Find the median of $x$.
+    c. Find $var(x)$.
+    d. Find $sd(x)$.
+    b. Use Excel to find $\Pr(x \leq 11)$.
+
+**SKILL #14: Work with linear functions of a normal random variable**
+
+16. Suppose that $x \sim N(10,4)$.
+    a. Find the distribution of $y = 3x + 5$.
+    b. Find a random variable $z$ that is a linear function of $x$ and
+       has the standard normal distribution
+    c. Find an expression for $\Pr(x \leq 11)$ in terms of the standard 
+       normal CDF $\Phi(\cdot)$.
+    d. Use the Excel function `NORM.S.DIST` and the previous result to
+       find to find the value of $\Pr(x \leq 11)$.
+
+### Practice problem answers {#answers-more-on-random-variables}
+
+1. The key here is to redefine joint events for $y$ and $b$ as 
+   events for the single random variable $t$.
+   a. The joint PDF is:
+      \begin{align}
+        f_{y,b}(1,1) &= \Pr(y = 1 \cap b = 1) \\
+          &= \Pr(t = 11 \cap t = 12) \\
+          &= \Pr(\emptyset)  \\
+          &= 0
+       \end{align}
+   b. The joint PDF is:
+      \begin{align}
+        f_{y,b}(0,1) &= \Pr(y \neq 1 \cap b = 1) \\
+          &= \Pr(t \neq 11 \cap t = 12) \\
+          &= \Pr(t = 12) \\
+          &= f_t(12) \\
+          &= 1/36
+       \end{align}
+   c. The joint PDF is:
+      \begin{align}
+        f_{y,b}(1,0) &= \Pr(y = 1 \cap b = 0) \\
+          &= \Pr(t = 11 \cap t \neq 12) \\
+          &= \Pr(t = 11)  \\
+          &= f_t(11) \\
+          &= 1/18
+       \end{align}
+   d. The joint PDF is:
+      \begin{align}
+        f_{y,b}(0,0) &= \Pr(y = 0 \cap b = 0) \\
+          &= \Pr(t \neq 11 \cap t \neq 12) \\
+          &= \Pr(t \notin \{11,12\})  \\
+          &= 1 - \Pr(t \in \{11,12\}) \\
+          &= 1 - 1/36 - 1/18 \\
+          &= 11/12
+       \end{align}
+2. The marginal PDF is constructed by adding together the joint PDFs.
+    a. The marginal PDF is:
+       \begin{align}
+          f_b(0) &= f_{y,b}(0,0) + f_{y,b}(1,0) \\
+            &= 11/12 + 1/18 \\
+            &= 35/36
+        \end{align}
+    b. The marginal PDF is:
+       \begin{align}
+          f_b(1) &= f_{y,b}(0,1) + f_{y,b}(1,1) \\
+            &= 1/36 + 0 \\
+            &= 1/36
+        \end{align}
+    c. The expected value is:
+        \begin{align}
+          E(b) &= 0*f_b(0) + 1*f_b(1) \\
+            &= f_b(1) \\
+            &= 1/36
+        \end{align}
+3. The conditional PDF is the ratio of the joint PDF to the marginal PDF:
+   a. The conditional PDF is:
+      \begin{align}
+        f_{y|b}(1,1) &= \Pr(y=1|b=1) \\
+          &= \frac{f_{y,b}(1,1)}{f_b(1)} \\
+          &= \frac{0}{1/36} \\
+          &= 0
+      \end{align}
+   b. The conditional PDF is:
+      \begin{align}
+        f_{y|b}(0,1) &= \Pr(y=0|b=1) \\
+          &= \frac{f_{y,b}(0,1)}{f_b(1)} \\
+          &= \frac{1/36}{1/36} \\
+          &= 1
+      \end{align}
+   c. The conditional PDF is:
+      \begin{align}
+        f_{y|b}(1,0) &= \Pr(y=1|b=0) \\
+          &= \frac{f_{y,b}(1,0)}{f_b(0)} \\
+          &= \frac{1/18}{35/36} \\
+          &\approx 0.057
+      \end{align}
+   d. The conditional PDF is:
+      \begin{align}
+        f_{y|b}(0,0) &= \Pr(y=0|b=0) \\
+          &= \frac{f_{y,b}(0,0)}{f_b(0)} \\
+          &= \frac{11/12}{35/36} \\
+          &\approx 0.943
+      \end{align}
+4. $r$ and $w$ are independent.
+5. Since $E(y) = 1/18$ and $E(b) = 1/36$ we have
+   \begin{align}
+    cov(y,b) &= E((y-E(y))(b-E(b))) \\
+      &= \begin{aligned}[t]
+        & (0-E(y))*(0-E(b))*f_{y,b}(0,0) \\
+        &+ (1-E(y))*(0-E(b))*f_{y,b}(1,0) \\
+        &+ (0-E(y))*(1-E(b))*f_{y,b}(0,1) \\
+        &+ (1-E(y))*(1-E(b))*f_{y,b}(1,1) \\
+        \end{aligned} \\
+      &= \begin{aligned}[t]
+        & (0-1/18)*(0-1/36)*(11/12) \\
+        &+ (1-1/18)*(0-1/36)*(1/18) \\
+        &+ (0-1/18)*(1-1/36)*(1/36) \\
+        &+ (1-1/18)*(1-1/36)*(0) \\
+        \end{aligned} \\
+      &\approx -0.00154
+    \end{align}
+6. The alternate formula for the covariance is $cov(y,b) = E(yb) - E(y)E(b)$.
+    a. The expected value is:
+       \begin{align}
+        E(yb) &= \begin{aligned}
+            & 0*0*f_{y,b}(0,0) \\
+            &+ 1*0*f_{y,b}(1,0) \\
+            &+ 0*1*f_{y,b}(0,1) \\
+            &+ 1*1*f_{y,b}(1,1) \\
+            \end{aligned} \\
+          &= f_{y,b}(1,1) \\
+          &= 0
+        \end{align}
+    b. The covariance is:
+       \begin{align}
+        cov(y,b) &= E(yb) - E(y)E(b) \\
+          &= 0 - (1/18)*(1/36) \\
+          &\approx -0.00154
+        \end{align}
+    c. Yes, if you have done it right you should get the same answer.
+7. The correlation is:
+   \begin{align}
+      corr(y,b) &= \frac{cov(y,b)}{\sqrt{var(y)var(b)}} \\
+        &\approx \frac{-0.00154}{\sqrt{ 0.0525*0.027}} \\
+        &\approx -0.04
+    \end{align}
+8. In this question we know the correlation and several values of the formula
+   defining it, and we use this to solve for the missing value.
+    a. We know that $corr(b,t) = \frac{cov(b,t)}{\sqrt{var(b)var(t)}}$, so
+       we can substitute known values to get:
+       \begin{align}
+          0.35 &= \frac{cov(b,t)}{\sqrt{0.027*5.83}}
+       \end{align}
+       Solving for $cov(b,t)$ we get
+       \begin{align}
+          cov(b,t) &= 0.35*\sqrt{0.027*5.83} \\
+            &= 0.139
+       \end{align}
+    b. We know that $cov(b,t) = E(bt) - E(b)E(t)$, so we can substitute
+       known values to get:
+       \begin{align}
+          0.139 &= E(bt) - (1/36)*7
+       \end{align}
+       Solving for $E(bt)$ we get:
+       \begin{align}
+          E(bt) &= 0.139 + (1/36)*7 \\
+            &= 0.333
+       \end{align}
+9. Remember that independent events are also uncorrelated. So:
+    a. The covariance is $cov(r,w) = 0$.
+    b. The correlation is $corr(r,w) = 0$.
+10. This question uses the formulas for the mean of a linear function of 
+    two random variables. 
+    a. The expected value is:
+       \begin{align}
+          E(y+b) &= E(y) + E(b) \\
+            &= 1/18 + 1/36 \\
+            &= 3/36 \\
+            &= 1/12
+        \end{align}
+    b. The expected value is:
+       \begin{align}
+          E(16y + 16b - 2) &= 16E(y) + 16E(b) - 2 \\
+            &= 16/18 + 16/36 - 2 \\
+            &= -24/36
+       \end{align}
+11. This question uses the formulas for the variance and covariance of 
+    a linear function of two random variables. 
+    a. The covariance is:
+       \begin{align}
+          cov(16y,16b) &= 16^2 cov(y,b) \\
+            &\approx 16^2 * (-0.00154) \\
+            &\approx -0.39424
+       \end{align}
+    b. The variance is:
+       \begin{align}
+          var(y+b) &= var(y) + var(b) + 2 cov(y,b) \\
+            &\approx 0.0525 + 0.027 + 2*(-0.00154) \\
+            &\approx 0.07642
+        \end{align}
+    b. The variance is:
+       \begin{align}
+          var(16y + 16b - 2) &= 16^2 var(y+b) \\
+            &\approx 16^2 * 0.07642 \\
+            &\approx 19.56352
+        \end{align}
+12. The result of a bet on Boxcars is *negatively* related to the
+    result of a bet on Yo.
+13. This question uses various formulas for the uniform distribution.
+    a. The PDF is:
+      \begin{align}
+        f_x(a) &= \begin{cases}
+          0 & a < -1 \\
+          0.5 & -1 \leq a \leq 1 \\
+          1 & a > 1 \\
+          \end{cases}
+      \end{align}
+    b. The CDF is:
+      \begin{align}
+        f_x(a) &= \begin{cases}
+          0 & a < -1 \\
+          \frac{a+1}{2} & -1 \leq a \leq 1 \\
+          1 & a > 1 \\
+          \end{cases}
+      \end{align}
+    c. $x$ is a continuous random variable so $\Pr(x = 0) = 0$
+    d. $x$ is a continuous random variable so 
+       \begin{align}
+          \Pr(0 < x < 0.5) &= F_x(0.5) - F_x(0) \\
+            &= \frac{0.5+1}{2} - \frac{1}{2} \\
+            &= 0.25
+        \end{align}
+    e. $x$ is a continuous random variable so 
+       \begin{align}
+          \Pr(0 \leq x \leq 0.5) &= F_x(0.5) - F_x(0) \\
+            &= \frac{0.5+1}{2} - \frac{1}{2} \\
+            &= 0.25
+        \end{align}
+    f. The median is:
+       \begin{align}
+         F_x^{-1}(0.5) &= \min \{a: \Pr(x \leq a) \geq 0.5\} \\
+           &= \min \{a: F_x(a) \geq 0.5\} \\
+           &= \min \{a: \frac{a+1}{2} \geq 0.5\} \\
+           &= \textrm{the $a$ that solves the equation $\frac{a+1}{2} = 0.5$} \\
+           &= 0
+        \end{align}
+    g. The 75th percentile is
+       \begin{align}
+         F_x^{-1}(0.75) &= \min \{a: \Pr(x \leq a) \geq 0.75\} \\
+           &= \min \{a: F_x(a) \geq 0.75\} \\
+           &= \min \{a: \frac{a+1}{2} \geq 0.75\} \\
+           &= \textrm{the $a$ that solves the equation $\frac{a+1}{2} = 0.75$} \\
+           &= 0.5
+        \end{align}
+    h. The mean of a $Uniform(a,b)$ random variable is $(a+b)/2$, so
+       \begin{align} 
+          E(x) &= \frac{1 + (-1)}{2} \\
+            &= 0
+       \end{align}
+    i. The variance of a $Uniform(a,b)$ random variable is $(b-a)^2/12$, so
+       \begin{align}
+          var(x) &= (b-a)^2/12 \\
+            &= \frac{(1 - (-1))^2}{12} \\
+            &\approx 0.33
+        \end{align}
+14. A linear function of a uniform random variable is also uniform.
+    a. When $x = -1$, we have $y = 3*(-1)+5 = 2$. When $x = 1$, we have 
+       $y = 3*(1)+5 = 8$.  Therefore $y \sim U(2,8)$
+    b. The expected value is $E(y) = (2+8)/2 = 5$.
+15. This question applies various formulas for the normal distribution.
+    a. The expected value of a $N(\mu,\sigma^2)$ random variable is $\mu$, 
+       so $E(x) = 10$
+    b. The median of a $N(\mu,\sigma^2)$ random variable is $\mu$, 
+       so $Median(x) = 10$.
+    c. The variance of a $N(\mu,\sigma^2)$ random variable is $\sigma^2$, 
+       so $var(x) = 4$.
+    d. The standard deviation is $sd(x) = \sqrt{var(x)} = \sqrt{4} = 2$
+    b. The Excel formula would be `=NORM.DIST(11,10,2,TRUE)` which
+       yields the result $\Pr(x \leq 11) \approx 0.691$
+16. A linear function of a normal random variable is also normal.
+    a. The distribution of $y$ will be normal with mean $3E(x) + 5 = 35$ and variance
+       $3^2 var(x) = 36$, so $y \sim N(35,36)$
+    b. If $x \sim N(10,4)$ then $z = \frac{x - 10}{2} \sim N(0,1)$.
+    c. Solving for $x$ in terms of $z$ we get $x = 2z + 10$
+       \begin{align}
+          \Pr(x \leq 11) &= \Pr(2z + 10 \leq 11) \\
+            &= \Pr(z \leq (11-10)/2) \\
+            &= \Pr(z \leq 0.5) \\
+            &= \Phi(0.5)
+       \end{align}
+    d. The correct Excel formula would be `=NORM.S.DIST(0.5,TRUE)` which
+       yields the result $\Pr(x \leq 11) \approx 0.691$. 
