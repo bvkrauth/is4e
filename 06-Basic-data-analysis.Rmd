@@ -985,4 +985,116 @@ To be added
 
 ### Practice problems {#problems-basic-data-analysis}
 
-To be added.
+**SKILL #1: Calculate summary statistics by hand**
+
+1. Consider the following table of data
+
+   | Name  | Age |
+   |-------|-----|
+   | Al    |  25 |
+   | Betty |  32 |
+   | Carl  |  78 |
+   
+   Use a calculator or pencil and paper to calculate the following statistics:
+   
+   a. Sample size.
+   b. Sample average age.
+   c. Sample median of age.
+   d. Sample 25th percentile of age.
+   e. Sample variance of age.
+   f. Sample standard deviation of age.
+
+**SKILL #2: Calculate summary statistics in Excel**
+
+2. Consider the following table of data
+
+   | Name  | Age |
+   |-------|-----|
+   | Al    |  25 |
+   | Betty |  32 |
+   | Carl  |  78 |
+   
+   Enter this table in Excel, and use Excel functions to to calculate the following 
+   statistics:
+   
+   a. Sample size.
+   b. Sample average age.
+   c. Sample median of age.
+   d. Sample 25th percentile of age.
+   e. Sample variance of age.
+   f. Sample standard deviation of age.
+
+**SKILL #3: Construct (simple and binned) frequency tables in Excel**
+
+3. Consider the following table of data
+
+   | Name  | Age |
+   |-------|-----|
+   | Al    |  25 |
+   | Betty |  32 |
+   | Carl  |  78 |
+   
+   Use Excel to construct a binned frequency table of age, with bin widths of 10 years.
+
+**SKILL #4: Construct time series (line) graphs in Excel**
+
+4. Consider the following table of data
+
+   | Year  | Al's age |
+   |-------|----------|
+   | 2017  |  25      |
+   | 2018  |  26      |
+   | 2019  |  27      |
+   | 2020  |  28      |
+   | 2021  |  29      |
+
+   Use Excel to construct a time series graph of Al's age.
+
+**SKILL #5: Construct bar graphs and histograms in Excel**
+
+5. Consider the following table of data
+
+   | Name  | Age |
+   |-------|-----|
+   | Al    |  25 |
+   | Betty |  32 |
+   | Carl  |  78 |
+   
+   Use Excel to construct a histogram of age, with bin widths of 10 years.
+
+### Practice problem answers {#answers-basic-data-analysis}
+
+1. The answers are:
+   a. Sample size is 3
+   b. Sample average age is 45.
+   c. Sample median of age is 32.
+   d. Sample 25th percentile of age is 28.5.
+   e. Sample variance of age is 829.
+   f. Sample standard deviation of age is 28.8.
+2. The numerical answers are the same as in question 1.  Assuming the table starts
+   in cell A1, the Excel formulas are:
+   a. `=COUNT(B2:B4)`
+   b. `=AVERAGE(B2:B4)`
+   c. `=MEDIAN(B2:B4)`
+   d. `=PERCENTILE.INC(B2:B4,0.25)`
+   e. `=VAR.S(B2:B4)`
+   f. `=STDEV.S(B2:B4)`
+3. The binned frequency table should look something like this:
+
+   | Range | Frequency | % Freq |
+   |-------|-----------|--------|
+   | 0-10  |    0      |   0    |
+   | 11-20 |    0      |   0    |
+   | 21-30 |    1      |  33    |
+   | 31-40 |    1      |  33    |
+   | 41-50 |    0      |   0    |
+   | 51-60 |    0      |   0    |
+   | 61-70 |    0      |   0    |
+   | 71-80 |    1      |  33    |
+4. The time series graph should look something like this:
+   ![*Time series of Al's age*](bin/PP_6_4_TimeSeries.png) 
+5. The histogram should look something like this:
+   ![*Histogram of age*](bin/PP_6_5_Histogram.png) 
+
+
+
