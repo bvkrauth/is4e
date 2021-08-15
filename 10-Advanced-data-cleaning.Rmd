@@ -1,5 +1,13 @@
 # Advanced data cleaning {#advanced-data-cleaning}
 
+```{r setup10, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      prompt = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE)
+library("tidyverse")
+```
+
 In an earlier chapter, we learned some 
 [basic data cleaning](#basic-data-cleaning-with-excel) 
 skills.  This chapter will build on these skills by teaching some more
@@ -980,6 +988,123 @@ selecting `Home > Format > Unprotect Sheet`.
 > You can download the complete Excel file with all data cleaning 
 > from this chapter at 
 > https://canvas.sfu.ca/files/15328441/. 
+
+
+## Reading and viewing data in R
+
+Before doing any statistical or graphical analysis, we need to 
+get the data into R.  We will also want to look at our data 
+before diving into the analysis, and we may want to do some data
+cleaning as well.
+
+We will use numerous Tidyverse functions, so we need to load the 
+Tidyverse package:
+```{r LoadTidyverseAgain}
+# Load the tidyverse
+library("tidyverse")
+```
+We will also need to download our employment data set
+from https://canvas.sfu.ca/files/15539454/.
+
+### Reading a CSV file
+
+Our first step will be reading the data in from the CSV file. The Tidyverse 
+function to do this is called `read_csv()`.  It has one required argument: 
+the name of the CSV file:
+```{r ReadEmpDataFromCSV}
+# The code below assumes that the file "EmploymentData.csv" is in 
+# the working directory.  Change the argument below as needed to 
+# make the function work in your environment 
+EmpData <- read_csv("sampledata/EmploymentData.csv")
+```
+As you can see, R guesses each variable's data type, and reports its 
+guess.  It is always a good idea to read this output and make sure
+that everything is the way that we want it:
+
+- The numeric variables are all stored as `col_double()`.  
+  - This means double-precision (64 bit) real number
+  - This is what we want.
+- The two text variables are both stored as `col_character()`.  
+  - This means character or text string
+  - This is what we want.
+- The **MonthYr** variable is also stored as `col_character()`.  
+  - This is *not* what we want.  
+  - We will want **MonthYr** to be stored explicitly as a date 
+    variable, so we make a note of that issue here and will 
+    fix it later.
+
+We have assigned the data in the CSV file to the variable `EmpData`.
+
+:::fyi
+**Additional options**
+
+Our data file happens to be a nice and tidy one, so `read_csv()` worked 
+just fine with its default options.  Not all data files are so
+tidy, so `read_csv()` has many optional arguments.  There are
+also functions for other delimited file types:
+
+- `read_csv2()` for files delimited by semicolons rather than commas
+- `read_tsv()` for tab-delimited files
+- `read_delim()` for files delimited using any other character
+
+Base R function has a similar function called `read.csv()`, 
+but `read_csv()` is preferable for various reasons.
+:::
+
+### Viewing a data table
+
+The `read_csv()` function creates an object called a ***tibble***. A 
+tibble is a Tidyverse object type that describes a tidy data table. 
+
+- Each row in the tibble represents an observation
+- Each column represents a variable, and has a name. 
+
+The base R equivalent of a tibble is called a ***data frame***. Tibbles  
+and data frames are interchangeable in most applications, but 
+tibbles have some additional features that make them work better 
+with the Tidyverse.
+
+We have several ways of viewing the contents of a tibble. We can
+start with the ***print*** function, which we have already seen in
+other contexts:
+```{r PrintEmpData}
+print(EmpData)
+```
+Tibbles can be quite large, so the `print()` function will usually
+show an abbreviated version of the table.
+
+We can also see the whole table by executing the command `View(EmpData)` or
+through RStudio:
+
+1. Go to the *Environment* tab in the upper right window.
+   - You will see a list of all variables currently in memory,
+     including **EmpData**.
+2. Double-click on `EmpData`.
+
+You will see a spreadsheet-like display of `EmpData`. As in Excel, you can sort
+and filter this table.  Unlike Excel, you cannot edit it here.
+
+### Data table properties
+
+There are several R functions available for exploring the properties 
+of a data table.
+
+We can obtain the column names of a tibble using the `names()` function:
+```{r NamesEmpData}
+names(EmpData)
+```
+and we can count the rows and columns with `nrow()` and `ncol()` respectively:
+```{r NrowNcolEmpData}
+nrow(EmpData)
+ncol(EmpData)
+```
+We can access any variable by name using the `$` notation:
+```{r LengthExample}
+length(EmpData$UnempRate)
+```
+As you can see, the `length()` function returns the length of a vector.
+
+
 
 ## Chapter review {#review-advanced-data-cleaning}
 

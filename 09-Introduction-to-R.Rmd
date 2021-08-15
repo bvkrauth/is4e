@@ -1,4 +1,4 @@
-```{r setup10, include=FALSE}
+```{r setup09, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       prompt = FALSE,
                       tidy = TRUE,
@@ -15,7 +15,7 @@ that has many of the same features as Excel, but is specially
 designed for statistical analysis. It is a little more complex, 
 but more powerful in many important ways. This chapter will introduce
 you to some of the basic concepts of R and associated tools such as R
-Markdown, RStudio, and the Tidyverse.  In the next chapter, we will 
+Markdown, RStudio, and the Tidyverse.  We will later 
 [use these tools](#using-r) to analyze data and create publication-quality 
 graphs. 
 
