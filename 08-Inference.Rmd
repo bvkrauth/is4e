@@ -883,44 +883,293 @@ To be added
 
 ### Practice problems {#problems-inference}
 
-To be added.
-
-One of the most common applications of statistical inference is 
-in measuring *treatment effects*; i.e., the effect of a particular
-action (treatment) on a particular outcome.  Statistical analysis
-of treatment effects originates in medicine, where we are looking
-literally at the effect of a treatment such as a pill or surgery. But
-we use the same basic concepts in economics to measure things like
-
-- The effect of the minimum wage on employment
-- The effect of additional schooling on earnings
-- Discrimination (the effect of race or gender on how a person
-  is treated)
-- The effect of taxes on economic growth
-
-Suppose for this set of problems that we are interested in the effect of the
-minimum wage on employment.  Let $u_i \in \{0,1\}$ be person $i$'s employment
-status without the minimum wage and let $t_i \in \{0,1\}$ be their employment
-status with the minimum wage. Let 
-  $$e_i = t_i - u_i$$  
-be the effect of the minimum wage on person $i$'s employment.
-
 **SKILL #1: Identify parameter, null and alternative**
 
-1. 
+1. Suppose we have a research study of the effect of the minimum wage on employment.  Let $\beta$ 
+   be the parameter defining that effect. Formally state a null hypothesis corresponding to the
+   idea that the minimum wage has no effect on employment, and state the alternative hypothesis 
+   as well.
 
 **SKILL #2: Classify test statistics as valid or invalid**
 
+2. Which of the following characteristics do test statistics need to possess?
+   a. The distribution of the test statistic is known under the null.
+   b. The distribution of the test statistic is known under the alternative.
+   c. The test statistic has the same distribution whether the null is true or false.
+   d. The test statistic has a different distribution when the null is true versus when
+      the null is false.
+   e. The test statistic needs to be a number that can be calculated from the data.
+   f. The test statistic needs to have a normal distribution.
+   g. The test statstic's value depends on the true value of the parameter.
+
 **SKILL #3: Find distribution of test statistic under the null**
+
+3. Suppose we have a random sample of size $n$ on the random variable $x_i$ with unknown
+   mean $\mu$ and unknown variance $\sigma^2$. The conventional T-statistic for the mean 
+   is defined as
+    $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
+   where $\bar{x}$ is the sample average, $\mu_0$ is the value of $\mu$ under
+   the null, and $\hat{\sigma}_x$ is the sample standard deviation.
+   a. What needs to be true in order for $t$ to have the $T_{n-1}$ distribution under
+      the null?
+   b. What is the asymptotic distribution of $t$?
 
 **SKILL #4: Describe distribution of test statistic under the alternative**
 
-**SKILL #5: Classify tests as finite-sample or asymptotic**
+4. Consider the setting from problem 3 above, and suppose that the true value of 
+   $\mu$ is some number $\mu_1 \neq \mu_0$.  Write an expression describing $t$ 
+   as the sum of (a) a random variable that has the $T_{n-1}$ distribution and (b) a 
+   random variable that is proportional to $\mu_1-\mu_0$.
 
-**SKILL #6: Find the size of a test**
+**SKILL #5: Find the size of a test**
 
-**SKILL #7: Find critical values**
+5. Suppose that we have a random sample of size $n=14$ on the random variable
+   $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis 
+   $H_0: \mu = 0$.  Suppose we use the standard t-statistic:
+    $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
+   a. Suppose we use critical values $c_L = -1.96$ and $c_H = 1.96$.  Use Excel to calculate 
+      the exact size of this test.
+   b. Suppose we use critical values $c_L = -1.96$ and $c_H = 1.96$.  Use Excel to calculate 
+      the asymptotic size of this test.
+   c. Suppose we use critical values $c_L = -3$ and $c_H = 2$.  Use Excel to calculate 
+      the exact size of this test.
+   d. Suppose we use critical values $c_L = -3$ and $c_H = 2$.  Use Excel to calculate 
+      the asymptotic size of this test.
+   e. Suppose we use critical values $c_L = -\infty$ and $c_H = 1.96$.  Use Excel to calculate 
+      the exact size of this test.
+   f. Suppose we use critical values $c_L = -\infty$ and $c_H = 1.96$.  Use Excel to calculate 
+      the asymptotic size of this test.
 
-**SKILL #8: Construct and interpret a confidence interval**
+**SKILL #6: Find critical values**
 
-**SKILL #9: Interpret test results and confidence intervals**
+6. Suppose that we have a random sample of size $n=18$ on the random variable
+   $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis 
+   $H_0: \mu = 0$.  Suppose we use the standard t-statistic:
+    $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
+   a. Use Excel to calculate the (two-tailed) critical values that produce an exact size of 1\%.
+   b. Use Excel to calculate the (two-tailed) critical values that produce an exact size of 5\%.
+   c. Use Excel to calculate the (two-tailed) critical values that produce an exact size of 10\%.
+   d. Use Excel to calculate the (two-tailed) critical values that produce an asymptotic size of 1\%.
+   e. Use Excel to calculate the (two-tailed) critical values that produce an asymptotic size of 5\%.
+   f. Use Excel to calculate the (two-tailed) critical values that produce an asymptotic size of 10\%.
+
+**SKILL #7: Construct and interpret a confidence interval**
+
+7. Suppose we have a random sample of size $n = 16$ on the random variable 
+   $x_i \sim N(\mu,\sigma^2)$, and we calculate the sample average $\bar{x} = 4$
+   and the sample standard deviation $\hat{\sigma} = 0.3$.
+   a. Use Excel to calculate the 95\% (exact) confidence interval for $\mu$.
+   b. Use Excel to calculate the 90\% (exact) confidence interval for $\mu$.
+   c. Use Excel to calculate the 99\% (exact) confidence interval for $\mu$.
+   d. Use Excel to calculate the 95\% asymptotic confidence interval for $\mu$.
+   e. Use Excel to calculate the 90\% asymptotic confidence interval for $\mu$.
+   f. Use Excel to calculate the 99\% asymptotic confidence interval for $\mu$.
+
+**SKILL #8: Interpret test results and confidence intervals**
+
+8. Suppose you estimate the effect of a university degree on earnings at age 30, and 
+   you test the null hypothesis that this effect is zero.  You conduct a test at the
+   5\% level of significance, and reject the null.  Based on this information, classify 
+   each of these statements as "probably true", 'possibly true", or "probably false":
+   a. A university degree has no effect on earnings.
+   b. A university degree has some effect on earnings.
+   c. A university degree has a large effect on earnings.
+9. Suppose you estimate the effect of a university degree on earnings at age 30, and 
+   you test the null hypothesis that this effect is zero.  You conduct a test at the
+   5\% level of significance, and fail to reject the null.  Based on this information, 
+   classify each of these statements as "probably true", 'possibly true", or "probably false":
+   a. A university degree has no effect on earnings.
+   b. A university degree has some effect on earnings.
+   c. A university degree has a large effect on earnings.
+10. Suppose you estimate the effect of a university degree on earnings at age 30, and 
+    your 95\% confidence inteval for the effect is $(0.10,0.40)$, where an effect of 0.10 
+    means a degree increases earnings by 10\% and an effect of 0.40 means that a degree
+    increases earnings by 40\%. Based on this information, 
+    classify each of these statements as "probably true", 'possibly true", or "probably false":
+    a. A university degree has no effect on earnings.
+    b. A university degree has some effect on earnings.
+    c. A university degree has a large effect on earnings, where "large" means at least 10\%.
+    d. A university degree has a very large effect on earnings, where "very large" means 
+      at least 50\%.
+
+
+### Practice problem answers {#answers-inference}
+
+1. The null is:
+     $$H_0: \beta = 0$$
+   and the alternative is:
+     $$H_w: \beta \neq 0$$
+2. Test statistics need to possess characteristics (a), (d), and (e).
+3. In this setting:
+   a. $x_i$ must have a normal distribution.
+   b. The asymptotic distribution is $N(0,1)$
+4. The expression is:
+    $$t = \frac{\bar{x}-\mu_1}{\hat{\sigma}_x/\sqrt{n}} + \frac{\mu_1-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
+5. This question is about calculating the size given the critical values.
+   a. The size is:
+      \begin{align}
+        size &= F_{T_{13}}(-1.96) + 1 - F_{T_{13}}(1.96) \\
+          &= 0.035894296 + 1 - 0.964105704 \\
+          &\approx 0.07
+      \end{align}
+      and the formula for calculating this in Excel is `=T.DIST(-1.96,13,TRUE) +1 - T.DIST(1.96,13,TRUE)`.
+   b. The size is:
+      \begin{align}
+        size &= \Phi(-1.96) + 1 - \Phi(1.96) \\
+          &= 0.024997895 + 1 - 0.975002105 \\
+          &\approx 0.05
+      \end{align}
+      and the formula for calculating this in Excel is `=NORM.S.DIST(-1.96,TRUE) +1 - NORM.S.DIST(1.96,TRUE)`.
+   c. The size is:
+      \begin{align}
+        size &= F_{T_{13}}(-3) + 1 - F_{T_{13}}(2) \\
+          &\approx 0.005119449 + 1 - 0.966579821 \\
+          &\approx 0.04
+      \end{align}
+      and the formula for calculating this in Excel is `=T.DIST(-3,13,TRUE) +1 - T.DIST(1.96,13,TRUE)`.
+   d. The size is:
+      \begin{align}
+        size &= \Phi(-3) + 1 - \Phi(2) \\
+          &\approx 0.001349898 + 1 - 0.977249868 \\
+          &\approx 0.02
+      \end{align}
+      and the formula for calculating this in Excel is `=NORM.S.DIST(-3,TRUE) +1 - NORM.S.DIST(2,TRUE)`.
+   e. The size is:
+      \begin{align}
+        size &= F_{T_{13}}(-\infty) + 1 - F_{T_{13}}(2) \\
+          &\approx 0 + 1 - 0.966579821 \\
+          &\approx 0.03
+      \end{align}
+      and the formula for calculating this in Excel is `=1 - T.DIST(2,13,TRUE)`.
+   f. The size is:
+      \begin{align}
+        size &= \Phi(-\infty) + 1 - \Phi(2) \\
+          &\approx 0 + 1 - 0.977249868 \\
+          &\approx 0.02
+      \end{align}
+      and the formula for calculating this in Excel is `=1 - NORM.S.DIST(2,TRUE)`.
+6. This problem asks you to find the critical values that deliver a given size.
+   a. The critical values are:
+      \begin{align}
+        c_L &= F^{-1}_{T_{17}}(0.005) \\
+          &\approx -2.90 \\
+        c_H &= F^{-1}_{T_{17}}(0.995) \\
+          &\approx 2.90
+      \end{align}
+      and the formulas for calculating this in Excel are `=T.INV(0.005,17)` and
+      `=T.INV(0.995,17)`.
+   b. The critical values are:
+      \begin{align}
+        c_L &= F^{-1}_{T_{17}}(0.025) \\
+          &\approx -2.11 \\
+        c_H &= F^{-1}_{T_{17}}(0.975) \\
+          &\approx 2.11
+      \end{align}
+      and the formulas for calculating this in Excel are `=T.INV(0.025,17)` and
+      `=T.INV(0.975,17)`.
+   c. The critical values are:
+      \begin{align}
+        c_L &= F^{-1}_{T_{17}}(0.05) \\
+          &\approx -1.74 \\
+        c_H &= F^{-1}_{T_{17}}(0.95) \\
+          &\approx 1.74
+      \end{align}
+      and the formulas for calculating this in Excel are `=T.INV(0.05,17)` and
+      `=T.INV(0.95,17)`.
+   d. The critical values are:
+      \begin{align}
+        c_L &= \Phi^{-1}(0.005) \\
+          &\approx -2.58 \\
+        c_H &= \Phi^{-1}(0.995) \\
+          &\approx 2.58
+      \end{align}
+      and the formulas for calculating this in Excel are `=NORM.S.INV(0.005)` and
+      `=NORM.S.INV(0.995)`.
+   e. The critical values are:
+      \begin{align}
+        c_L &= \Phi^{-1}(0.025) \\
+          &\approx -1.96 \\
+        c_H &= \Phi^{-1}(0.995) \\
+          &\approx 1.96
+      \end{align}
+      and the formulas for calculating this in Excel are `=NORM.S.INV(0.025)` and
+      `=NORM.S.INV(0.975)`.
+   f. The critical values are:
+      \begin{align}
+        c_L &= \Phi^{-1}(0.05) \\
+          &\approx -1.65 \\
+        c_H &= \Phi^{-1}(0.95) \\
+          &\approx 1.65
+      \end{align}
+      and the formulas for calculating this in Excel are `=NORM.S.INV(0.05)` and
+      `=NORM.S.INV(0.95)`.
+7. The confidence interval for a mean always follows the same formula
+   a. The confidence interval is:
+      \begin{align}
+        CI^{95} &= \bar{x} \pm F_{T_{15}}^{-1}(0.975)*\sqrt{n}\hat{\sigma} \\
+          &\approx 4 \pm 2.13*\sqrt{16}*0.3 \\
+          &\approx (1.44, 6.56)
+      \end{align}
+      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.975,15)*SQRT(16)*0.3`
+      and `=4+T.INV(0.975,15)*SQRT(16)*0.3`
+   b. The confidence interval is:
+      \begin{align}
+        CI^{90} &= \bar{x} \pm F_{T_{15}}^{-1}(0.95)*\sqrt{n}\hat{\sigma} \\
+          &\approx 4 \pm 1.75*\sqrt{16}*0.3 \\
+          &\approx (1.90, 6.10)
+      \end{align}
+      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.95,15)*SQRT(16)*0.3`
+      and `=4+T.INV(0.95,15)*SQRT(16)*0.3`
+   c. The confidence interval is:
+      \begin{align}
+        CI^{99} &= \bar{x} \pm F_{T_{15}}^{-1}(0.995)*\sqrt{n}\hat{\sigma} \\
+          &\approx 4 \pm 2.95*\sqrt{16}*0.3 \\
+          &\approx (0.46, 7.54)
+      \end{align}
+      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.995,15)*SQRT(16)*0.3`
+      and `=4+T.INV(0.995,15)*SQRT(16)*0.3`
+   d. The confidence interval is:
+      \begin{align}
+        CI^{95} &= \bar{x} \pm \Phi^{-1}(0.975)*\sqrt{n}\hat{\sigma} \\
+          &\approx 4 \pm 1.96*\sqrt{16}*0.3 \\
+          &\approx (1.65, 6.35)
+      \end{align}
+      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.975)*SQRT(16)*0.3`
+      and `=4+NORM.S.INV(0.975,15)*SQRT(16)*0.3`
+   e. The confidence interval is:
+      \begin{align}
+        CI^{90} &= \bar{x} \pm \Phi^{-1}(0.95)*\sqrt{n}\hat{\sigma} \\
+          &\approx 4 \pm 1.64*\sqrt{16}*0.3 \\
+          &\approx (2.03, 5.97)
+      \end{align}
+      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.95)*SQRT(16)*0.3`
+      and `=4+NORM.S.INV(0.95,15)*SQRT(16)*0.3`
+   f. The confidence interval is:
+      \begin{align}
+        CI^{99} &= \bar{x} \pm \Phi^{-1}(0.995)*\sqrt{n}\hat{\sigma} \\
+          &\approx 4 \pm 2.58*\sqrt{16}*0.3 \\
+          &\approx (0.91, 7.09)
+      \end{align}
+      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.995)*SQRT(16)*0.3`
+      and `=4+NORM.S.INV(0.995,15)*SQRT(16)*0.3`
+8. The only thing we have tested here is whether there is no effect.  We rejected that null,
+   so we can rule out the possibility that there is no effect.  But that does not tell us whether the
+   effect is small or large - in order to say anything about that question we need to test 
+   other nulls, or construct a confidence interval.
+   a. Probably false.
+   b. Probably true.
+   c. Possibly true.
+9. The only thing we have tested here is whether there is no effect, and we haven't been
+   able to rule out that possibility.  So we can't really rule anything out.
+   a. Possibly true.
+   b. Possibly true.
+   c. Possibly true.
+10. In effect, the confidence interval simultaneously reports the results of every possible
+    null hypothesis.  So anything in the range $(0.10,0.40)$ cannot be ruled out but anything
+    outside of that range can be ruled out.
+    a. Probably false.
+    b. Probably true.
+    c. Probably true.
+    d. Probably false.
+
+
