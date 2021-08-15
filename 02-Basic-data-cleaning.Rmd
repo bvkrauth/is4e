@@ -1248,4 +1248,102 @@ Include link to completed data file.
 
 ### Practice problems {#problems-basic-data-cleaning-with-excel}
 
-To be added.
+**SKILL #1: Identify features of tidy data**
+
+1. Which of the following tables shows a tidy data set?
+   a. 
+      | PersonID   | 101  | 102    |
+      |------------|------|--------|
+      | Name       | Bob  | Joe    |
+      | Age        |  30  | 35     |
+      | Occupation | Chef | Waiter |
+   b. 
+      |  Name      | Age  | Occupation |
+      |------------|------|------------|
+      | Bob        | 30   | Chef       |
+      | Joe        | 35   | Waiter     |
+   c. 
+      | Variable   | Value  |
+      |------------|--------|
+      | Name       |  Bob   |
+      | Age        |   30   |
+      | Occupation |  Chef  |
+      | Name       |  Joe   |
+      | Age        |  35    |
+      | Occupation | Waiter |
+
+
+**SKILL #2: Identify features of ID variables**
+
+2. Which of the following characteristics is necessary for a vaiable to function
+   as an ID variable?
+   a. It takes on a different value for each observation.
+   b. Each value it can take on has an associated observztion.
+   c. It can take only one value.
+
+**SKILL #3: Use absolute and relative references in Excel**
+
+3. For each of the following formulas, suppose we copy that from cell C12 to cell 
+   E15. What formula appears in cell E15?
+   a. `=B2`
+   b. `=$B$2`
+   c. `=$B2`
+   d. `=B$2`
+   e. `=SUM(B2:B10)`
+   f. `=SUM($B$2:$B$10)`
+   g. `=SUM($B2,$B10)`
+   h. `=SUM(B$2,B$10)`
+
+**SKILL #4: Construct Excel formulas**
+
+4. Construct a formula to do each of the following.
+   a. Find the square root of the number in cell A2.
+   b. Find the lowest value in cells A2:A100.
+   c. Find the absolute value of the difference between cells A2 and B2.
+
+**SKILL #5: Use logical and text data in Excel**
+
+5. Construct an Excel formula to do each of the following.
+   a. Display "Reject" if cell A2 contains a number less than 0.05,
+      and display "Fail to reject" otherwise.
+   b. Display the text "A2 = " followed by the value in cell A2.
+   c. Display the first two letters of the text in cell A2.
+
+**SKILL #6: Use dates in Excel**
+
+6. Construct an Excel formula to do each of the following:
+   a. Display the current month. 
+   b. Display the date 100 days from today.
+   c. Display the number of days since your birth.
+
+### Practice problem answers {#answers-basic-data-cleaning-with-excel}
+
+1. Table (b) shows a tidy data set. 
+2. Characteristic (a) is necessary for a vaiable to function
+   as an ID variable.
+3. Cell E15 is 2 columns and 3 rows away from cell C12.  So we change all relative 
+   references from column B to column D, and all relative references from row 2 to 
+   row 5, and all relative references from row 10 to row 13.  Absolute references
+   are not changed.
+   a. `=D5`
+   b. `=$B$2`
+   c. `=$B5`
+   d. `=D$2`
+   e. `=SUM(D5:D13)`
+   f. `=SUM($B$2:$B$10)`
+   g. `=SUM($B5,$B13)`
+   h. `=SUM(D$2,D$10)`
+4. The formulas are:
+   a. `=SQRT(A2)`
+   b. `=MIN(A2:A100)`
+   c. `=ABS(A2-B2)`
+5. The formulas are:
+   a. `=IF(A2<0.05,"Reject","Fail to reject")`
+   b. `=CONCAT("A2 = ",A2)`
+   c. `=LEFT(A2,2)`
+6. The formulas are:
+   a. `=MONTH(TODAY())`
+   b. `=TODAY()+100`
+   c. `=TODAY()-DATE(1969,11,20)` - using my birthday; yours will obviously be
+      different.
+
