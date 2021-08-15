@@ -987,4 +987,26 @@ To be added
 
 ### Practice problems {#problems-advanced-data-cleaning}
 
-To be added.
+**SKILL #1: Identify common data file formats**
+
+1. Identify each of these text files as fixed-width, tab/space separated, or CSV
+   format.
+   a. ```
+      Name   Age
+      Al     25
+      Betty  32
+      ```
+   b. ```
+      Name     Age
+      Al    25
+      Betty    32
+      ```
+   c. ```
+      Name,Age
+      Al,25
+      Betty,32
+      ```
+
+
+
+   
