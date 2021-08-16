@@ -996,22 +996,75 @@ To be added
 
 1. Identify each of these text files as fixed-width, tab/space separated, or CSV
    format.
-   a. ```
+   a. 
+      ```
       Name   Age
       Al     25
       Betty  32
       ```
-   b. ```
+   b. 
+      ```
       Name     Age
       Al    25
       Betty    32
       ```
-   c. ```
+   c. 
+      ```
       Name,Age
       Al,25
       Betty,32
       ```
 
+**SKILL #2: Explain and implement common data cleaning tasks**
 
+2. What is the purpose of each of the following:
+   a. A crosswalk table
+   b. Matching observations by keys
+   c. Aggregating data by groups
 
-   
+**SKILL #3: Describe and use Excel data management tools**
+
+3. Under which of these scenarios can you edit cell A1?
+   a. You open a blank sheet.
+   b. You open a blank sheet, and protect the sheet.
+   c. You open a blank sheet, unlock cells A1:C9 and protect the sheet.
+   d. You open a blank sheet, lock cells A1:C9 and protect the sheet.
+4. What will happen if you:
+   a. Add data validation to a column that contains invalid data.
+   b. Add data validation to a column, and then try to enter invalid data
+
+**SKILL #4: Import and view data in R**
+
+5. Use R (with the Tidyverse loaded) to open the data file 
+   https://people.sc.fsu.edu/~jburkardt/data/csv/deniro.csv 
+   and count the number of observations and variables in it.
+
+### Practice problem answers {#answers-advanced-data-cleaning}
+
+1. The file formats are:
+   a. Fixed width 
+   b. Space or tab delimited
+   c. CSV 
+2. Here are my descriptions, yours may be somewhat different:
+   a. A crosswalk table is a data table we can use to translate variables that are 
+      expressed in one way into another way.  For example, we might use a crosswalk
+      table to translate country names into standardized country codes, or to 
+      translate postal codes into provinces.
+   b. When we have two data tables that contain information on related cross-sectional  
+      units, we can combine their information into a single table by matching observations
+      based on a variable that (a) exists in both tables and (b) connects the observations
+      in some way.
+   c. Aggregating data by groups allows us to group observations according to a common
+      characteristic, and describe those groups using data calculated from the 
+      individual observations.
+3. You can edit cell A1 under scenarios (a) and (c).
+4. If you do this:
+   a. Nothing will happen, but you can ask Excel to mark invalid data.
+   b. Excel will not allow you to enter invalid data.
+5. The R code will be something like this.
+```{r pp_10_05}
+library("tidyverse")
+deniro <- read_csv("https://people.sc.fsu.edu/~jburkardt/data/csv/deniro.csv")
+nrow(deniro)
+ncol(deniro)
+```
