@@ -107,7 +107,7 @@ are built from ***text files***.
   - Windows has a simple built-in text editor called *Notepad*
   - MacOS has a built-in text editor called *TextEdit*. 
   - There are more advanced text editors available for free online; 
-    I use one called *Notepad++*. 
+    I use one called [*Notepad++*](https://notepad-plus-plus.org/). 
 - Text files can be read by humans as well as computer programs.
 
 Files that are not text files are usually called ***binary*** files. Binary
@@ -641,127 +641,7 @@ see these in older worksheets.
 
 ## Advanced data management
 
-### Excel Tables
-
-We have already seen that tasks like sorting and filtering
-are much easier and quicker when our data is organized in
-a tidy and tabular format. Excel allows us to go further by
-converting our table's range of cells into an official 
-***Excel Table***. 
-
-To create an Excel table, go to any cell in your table, and
-select `Home > Format as Table` from the menu. 
-
-::: example
-**Creating an Excel table**
-
-To make *GrowthData* an Excel Table:
-
-1. Go to any cell in the *GrowthData* table. 
-2. Select `Home > Format as Table`. 
-   - A set of visual table styles will drop down.  
-   - Select whichever one looks best to you.
-3. The `Format As Table` dialog box will ask you to provide or confirm
-   some basic information about your table:
-   ![Format As Table dialog box](bin/FormatAsTable.png) 
-   - The default options are correct, so just select `OK`.
-:::
-
-To see some of the things you can do with Excel Tables, select `Table Design`
-from the menu (note that `Table Design` is a context-dependent menu and
-will only appear if the currently-selected cell is part of an Excel 
-Table). 
-
-- Note that each table has a name
-  - Excel has assigned our table the default name *Table1*
-  - We can change it to something more informative like *GrowthData*.
-- We can easily change the table style in various ways.
-- We can remove duplicate observations
-- We can access tools such as PivotTable and Slicers (more on these later).
-
-Excel Tables also make it easier to add variables and observations, and can 
-make formulas easier to understand by expressing them in terms of variables
-rather than cells whenever possible.
-
-::: example
-**Adding a formula to an Excel table**
-
-Let's add a new variable for the growth rate of population between 1990 and
-2019.  
-
-In ECON 105, you probably learned this formula to calculate a growth rate 
-of a variable over a single year:
-  $$g = \frac{(\textrm{end value})-(\textrm{start value})}{\textrm{start value}}$$
-Unfortunately that formula doesn't work over many years because of compounding. For
-example, a population that grows at 5\% per year for 20 years will go up by 165\%,
-and not by 100\%.  To deal with compounding, we will use this formula to calculate 
-growth rates:
-  $$g = \frac{\ln(\textrm{end value}) - \ln(\textrm{start value})}{\textrm{number of years}}$$
-where $\ln(\cdot)$ is the natural logarithm. 
-
-To implement this in our Excel Table:
-
-1. Enter **PopGrowth** in cell N1 to name the variable. 
-   - Note that Excel automatically adds this column to the Excel 
-     Table.
-2. Select cell N2 and follow these steps:
-   a. Type `=(ln(` (but don't hit `<enter>` yet!)
-   b. Click on cell K2.  Note that the formula box displays `=(ln([@Pop2019]`
-      instead of `=ln(K2`.
-   c. Type ") - ln(" so that the formula box displays `=(ln([@Pop2019]`) - ln(`
-   d. Click on cell L2. Note that the formula box displays `=(ln([@Pop2019]) - ln([@Pop1990]`
-   e. Type ")/(2019-1990)" so the formula box displays `=(ln([@Pop2019]) - ln([@Pop1990])/(2019-1990)`
-   f. Hit `<enter>`.
-
-You will notice several things happen here:
-
-- The formula `=(LN([@Pop2019]) - LN([@Pop1990]))/(2019-1990)` is expressed 
-  in terms of *variables* rather than *cells*.
-  - This feature makes it much easier to understand the content of a formula
-    and to avoid making mistakes.
-- The formula is automatically copied to the other cells in the column
-
-This behavior also applies if you add an observation (row) to the bottom of 
-a table. Excel will automatically expand the table to include that row
-and will automatically fill in any missing formulas.
-:::
-
-You can also add a summary row (Excel calls it a "total row")
-to your table
-
-:::example
-**Adding a total row**
-
-To add a total row to our table:
-
-1. Select `Table Design` and then check the check-box marked "Total Row".
-2. Go to the bottom of the table to see the total row.
-
-Right now the total row is almost empty, but each cell in the total
-row has a dropdown box that you can use to select a summary statistic. For
-example:
-
-1. Go to the dropdown box in cell B43 and select `Count` to get a count
-   of observations.
-2. Go to the dropdown box in cell M43 and select `Average` to get the average
-   value of the AvgIShare variable.
-
-You can display the summary statistic of your choice in each cell.
-:::
-
-Finally, you can always convert an Excel Table back to an ordinary range of 
-cells by selecting `Table Design > Convert to Range` from the menu. 
-
-:::fyi
-**Additional tools**    
-
-The full capabilities of Excel tables are described in more detail at
-https://support.office.com/en-us/article/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c. 
-:::
-
-### Error prevention and handling
-
-#### Error codes
+### Error codes
 
 Sometimes an Excel formula does not produce a valid result. When that
 happens, Excel will return an ***error code***
@@ -806,7 +686,7 @@ will return the square root of A1 if A1 is positive or zero, and a
 blank cell if A1 is negative.
 ::::
 
-#### Data validation
+### Data validation
 
 One potential source of errors is the entry of ***invalid*** data. Invalid
 data means that a particular cell in our data takes on a value that is
