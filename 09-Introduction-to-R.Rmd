@@ -774,6 +774,7 @@ plot(x, p,
      ylab = expression(phi(x)),
      main = "PDF of N(0,1) distribution")
 ```
+
 As you can see, we have a much nicer and clearer looking plot.
 :::
 
@@ -807,4 +808,55 @@ To be added
 
 ### Practice problems {#problems-introduction-to-r}
 
-To be added.
+**SKILL #1: Perform basic tasks in RStudio**
+
+1. Open RStudio and do the following:
+   a. Execute a command in the console window.
+   b. Write and execute (source) a brief script.
+   c. Write and knit a brief R Markdown document.
+   
+**SKILL #2: Use R expressions and vectors**
+
+2. Which of the following are valid R expressions?
+   a. `"Hello world"`
+   b. `Hello`
+   c. `Hello"`
+   d. `2+2`
+   e. `x <- 2 + 2`
+   f. `x <- 2 +`
+3. Write the R code to perform the following actions:
+   a. Create a vector named `cookies` that contains the elements "oatmeal", 
+      "chocolate chip", and "shortbread".
+   b. Create a vector named ``threes` that contains all of the integers between
+      1 and 100 that are divisible by 3.
+   c. Use the vector `threes` to find the 5th-lowest integer between 1 and 100
+      that is divisible by 3.
+   d. Create a list named `threecookies` that contains `cookies` and 
+      `threes`.
+
+**SKILL #3: Use R packages**
+
+4. Load the tidyverse package (you will need to install it if you have not already
+   done so), and execute the R code below:
+   ```
+   data("mtcars")  # load data
+   ggplot(mtcars, aes(wt, mpg)) + geom_point(aes(colour=factor(cyl), size = qsec))
+   ```
+
+
+### Practice problem answers {#answers-introduction-to-r}
+
+1. The chapter describes how to do each of these.
+2. Items (a), (b), (d), and (e) are valid R expressions.
+3. Write the R code to perform the following actions:
+   a. `cookies <- c("oatmeal", "chocolate chip", "shortbread")`
+   b. `threes <- seq(3,100,by=3)`
+   c. `threes[5]`
+   d. `threecookies <- list(cookies = cookies, threes = threes)`.
+4. This code will load a built-in data set of automobile gas mileage, and 
+   produce a graph that depicts the relationship between weight and miles per
+   gallon:
+``` {r pp_09_04}
+   data("mtcars")  # load data
+   ggplot(mtcars, aes(wt, mpg)) + geom_point(aes(colour=factor(cyl), size = qsec))
+```
