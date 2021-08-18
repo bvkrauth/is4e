@@ -8,8 +8,9 @@ knitr::opts_chunk$set(echo = TRUE,
 library("tidyverse")
 ```
 
-In the previous chapter we learned some 
-[basic R terminology and how to run R](#an-introduction-to-r). In 
+In a previous chapter we learned some 
+[basic R terminology and how to run R](#an-introduction-to-r), and how
+to use R to [read and view data](#reading-and-viewing-data-in-r). In 
 this chapter, we will use this knowledge to do some useful analysis
 of the Canadian employment data we have already worked with.  We will
 also use ggplot, R's powerful graphing system.
@@ -19,11 +20,9 @@ also use ggplot, R's powerful graphing system.
 
 In this chapter we will learn how to use R to:
 
-- Read CSV files
-- View data tables ("tibbles")
-- Use filter, select, arrange, and mutate to transform data tables
-- Calculate univariate statistics
-- Produce simple but informative histograms and line graphs
+- Use filter, select, arrange, and mutate to transform data tables.
+- Calculate univariate statistics in R.
+- Produce simple but informative histograms and line graphs using ggplot.
 :::
 
 ## Cleaning data in R

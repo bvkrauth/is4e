@@ -10,8 +10,8 @@ library("tidyverse")
 
 In an earlier chapter, we learned some 
 [basic data cleaning](#basic-data-cleaning-with-excel) 
-skills.  This chapter will build on these skills by teaching some more
-advanced tools and concepts.
+skills using Excel, and some [introductory R skills](#an-introduction-to-r).  This 
+chapter will build on these skills by teaching some more advanced tools and concepts.
 
 ::: goals
 **Chapter goals**
@@ -20,11 +20,12 @@ In this chapter we will learn how to:
 
 - Move data files across multiple file formats.
 - Combine multiple data files into a single workbook.
-- Link observations using XLOOKUP.
-- Construct group-level aggregate variables
-- Work with Excel tables
-- Avoid, detect and handle errors
-- Protect data from unintentional modification
+- Link observations in Excel using XLOOKUP.
+- Construct group-level aggregate variables in Excel.
+- Avoid, detect and handle errors in Excel.
+- Protect Excel data from unintentional modification.
+- Read CSV files in R.
+- View data tables ("tibbles") in R.
 :::
 
 We will do this while building a data set describing long-run economic
@@ -870,7 +871,7 @@ selecting `Home > Format > Unprotect Sheet`.
 > https://canvas.sfu.ca/files/15328441/. 
 
 
-## Reading and viewing data in R
+## Reading and viewing data in R {#reading-and-viewing-data-in-r}
 
 Before doing any statistical or graphical analysis, we need to 
 get the data into R.  We will also want to look at our data 
