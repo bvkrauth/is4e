@@ -754,4 +754,70 @@ To be added
 
 ### Practice problems {#problems-multivariate-data-anlysis}
 
-To be added.
+**SKILL #1: Calculate and interpret covariance and correlation**
+
+1. Using the `EmpData` data set, calculate the covariance and correlation of **UnempPct** and
+   **AnnPopGrowth**.  Based on these results, are periods of high population growth
+   typically periods of high unemployment?
+   
+**SKILL #2: Distinguish between pairwise and casewise deletion of missing values**
+
+2. In problem (1) above, did you use pairwise or casewise deletion of missing values?  Did it 
+   matter?  Explain why.
+   
+**SKILL #3: Construct and interpret a pivot table in Excel**
+
+3. The following tables are based on 2019 data for Canadians aged 25-34.  Classify each of these
+   tables as simple frequency tables, crosstabs, or conditional averages.
+   a. 
+      | Educational attainment     |  Percent   |
+      |----------------------------|------------|
+      | Below high school          |     6      |
+      | High school                |    31      |
+      | Tertiary (e.g. university) |    63      |
+   b.
+      | Gender | Years of schooling |
+      |--------|--------------------|
+      | Male   |   14.06            |
+      | Female |   14.74            |
+   c.
+      | Educational attainment | Male | Female |
+      |------------------------|------|--------|
+      | Below high school      |  7   |    5   |
+      | High school            | 38   |   24   |
+      | Tertiary               | 55   |   71   |
+
+**SKILL #4: Construct and interpret a scatter plot in R**
+
+4. Using the `EmpData` data set, construct a scatter plot with annual population growth on the
+   horizontal axis and unemployment rate on the vertical axis.
+
+**SKILL #5: Construct and interpret a linear or smoothed average plot in R**
+
+5. Using the `EmpData` data set, construct the same scatter plot as in problem (4) above, but add
+   a smooth fit and a linear fit.
+
+### Practice problem answers {#answers-multivariate-data-anlysis}
+
+1. The covariance and correlation is negative here, so periods of high population growth
+   tend to be periods of *low* unemployment.
+``` {r PP_12_01}
+cov(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
+cor(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
+```
+
+2. I used casewise deletion but it does not matter. It only matters when you add a third variable.
+3. The tables are
+   a. Simple frequency table
+   b. Conditional average
+   c. Crosstab
+4. The scatter plot should look something like this:
+``` {r PP_12_04}
+ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_point()
+```
+
+5. The plot should look something like this:
+```{r PP_12_05}
+ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_point() + 
+  geom_smooth(col = "green") + geom_smooth(method = "lm", col = "blue")
+```
