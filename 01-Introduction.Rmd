@@ -1,5 +1,8 @@
 # Introduction {#introduction}
 
+Before we dive into the day-to-day course material, it is important to understand
+the big picture of what we are trying to do here, and to get set up for our work.
+
 ::: goals
 **Chapter goals**
 
@@ -11,10 +14,9 @@ In this chapter we will:
 
 ## Course goals and context {#course-goals-and-context}
 
-ECON 233 is the first course in the two-course econometrics sequence 
-that is required for all economics majors.  If you've never seen the word
-before, "econometrics" just means statistics and data analysis for
-economics.  
+This is an introductory course in statistics for economics. It is similar to
+courses taught all over the world to first and second year university students
+in business, economics, and other social sciences.
 
 ::: goals
 **Course goals**
@@ -23,8 +25,8 @@ By the end of this course:
 
 You will develop computer skills:
 
-1. Clean and analyze data in Excel.
-2. Analyze and graph data in R.
+1. Clean, analyze, and graph data in Excel.
+2. Clean, analyze and graph data in R.
 3. Follow recommended practices for data management and reproducible analysis.
 
 You will become familiar with basic statistical concepts:
@@ -50,13 +52,12 @@ We will be switching back and forth between theory, data analysis and
 applications.  All three skill sets are valuable.
 :::
 
-Hopefully you are in this course because you are fascinated by the course
-material, and would take it even if it wasn't required for the economics 
-major. But that isn't the case for many of you, so I'd like to motivate
-everyone to take this course as an opportunity to learn some very useful
-skills.
+Hopefully you are in this course because you are fascinated by statistics 
+and can't wait to learn more about it.  But most of you are taking it because 
+it's a required course.  
 
-Today's world is awash in data: 
+So I'd like to motivate everyone to take this course as an opportunity to learn 
+some very useful skills.  Today's world is awash in data: 
 
 - retailers maintain databases of transactions
 - manufacturers track product quality and costs
@@ -84,15 +85,29 @@ much of it is done by economists: for example, Amazon is the
 second-largest employer of PhD economists in the US 
 (after the Federal Reserve System).
 
+This course will not qualify you for those jobs, but it is a first step
+in that direction. 
+
+
 ::: economics
+**Be the Mona Lisa**
+
 I always tell students thinking about the future to remember 
 supply and demand in the labour market.  In the labour market
 your skills and effort are the product, and you are the seller.
 Like all sellers, you want to be expensive.  This requires
-that you have skills that are:
+that you have skills that are both:
 
 - Useful (high demand)
 - Uncommon (low supply)
+
+In other words, you need to be like the Mona Lisa. If your skills are useful but common (like water), or
+rare but useless (like my one-of-a-kind drawing of the Mona Lisa) your labour will sell at a low price.
+
+|             |          High demand                       |                 Low demand                    |
+|-------------|:------------------------------------------:|:---------------------------------------------:|
+| Low supply  | <img src="bin/MonaLisa.png" width="100" /> | <img src="bin/BadMonaLisa.png" width="100" /> |
+| High supply | <img src="bin/Water.png" width="100" />    | <img src="bin/Garbage.png" width="200" />     |
 
 The ability to analyze data in a sophisticated way, and to explain
 the results in written or oral presentation, is an extremely 
@@ -103,6 +118,39 @@ of the underlying statistical principles, and the ability to
 recognize the economic considerations in a situation, you
 will do quite well.
 :::
+
+
+## Expectations {#organization-and-expectations}
+
+The course is constructed under the assumptions that:
+
+1. You have taken introductory microeconomics and introductory 
+   macroeconomics.
+   -  We will use ideas from those courses in applications and examples.
+2. You have seen some probability and statistics content in high school.
+   - It's OK if you do not remember much.
+3. You can do high-school level math including algebra and basic set theory
+   and have taken or are currently taking an introductory calculus course.
+   - I will not ask you to take derivatives or solve integrals; instead
+     I will refer to concepts like functions, sequences and limits.
+   - The math review appendix provides material and practice problems if you
+     need to review these concepts and tools.
+4. You have access to a desktop or laptop computer, and basic computer skills.
+
+This is not a class in introductory economics, high school math, or using 
+a computer.  If you are a little behind in those skills you will need to 
+ask for help, but I am happy to help anyone who asks.
+
+## SFU-specific information
+
+
+ECON 233 is the first course in the two-course econometrics sequence 
+that is required for all economics majors.  If you've never seen the word
+before, "econometrics" just means statistics and data analysis for
+economics.  The course Canvas page is available at https://canvas.sfu.ca/courses/59191. It includes information on lectures, tutorials, quizzes, and assignments.
+
+::: fyi
+**ECON 233 or BUS 232?**
 
 All economics majors have the option of taking ECON 233 or 
 BUS 232, so you may be wondering what the difference is. Either course 
@@ -117,15 +165,16 @@ is suitable preparation for ECON 333, but there are some key differences:
 ECON 233 is part of the Social Data and Analytics (SDA) minor; if you 
 are an economics student and are interested in that minor you are 
 recommended to take ECON 233.
-
-::: fyi
-**Related courses**
+:::
 
 ECON 333 is the second course in the two-course econometrics
 sequence required for all economics majors.  In ECON 333, 
 you will learn more advanced techniques including 
 linear regression, you will use R more extensively, 
 and you will go deeper into the theory.
+
+::: fyi
+**Related courses**
 
 If you find you enjoy and/or do well in this course, I would strongly
 encourage you to take further courses in econometrics:
@@ -148,27 +197,8 @@ encourage you to take further courses in econometrics:
 I would also encourage you to take courses outside of the economics
 department, and to consider a [Statistics minor](http://www.sfu.ca/students/calendar/2021/spring/programs/statistics/minor.html) or the new
 interdisciplinary [Social Data Analytics (SDA) minor](http://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html) . 
-
 :::
 
-## Organization and expectations {#organization-and-expectations}
-
-The course Canvas page is available at https://canvas.sfu.ca/courses/59191. It includes information on lectures, tutorials, quizzes, and assignments.
-
-The course is constructed under the assumptions that:
-
-- You have taken introductory microeconomics (ECON 103 at SFU) and
-  introductory macroeconomics (ECON 105 at SFU).
-	We will use ideas from those courses in applications and examples.
-- You have seen some probability and statistics content in high school, 
-  though you may not remember much.
-- You can do high-school level math including algebra and basic set theory
-  and have taken or are currently taken an introductory calculus course.
-- You have access to a desktop or laptop computer, and basic computer skills.
-
-This is not a class in introductory economics, high school math, or basic
-computer skills.  If you are a little behind in those skills
-you will need to ask for help, but I am happy to help anyone who asks.
 
 ## Computer resources {#computer-resources}
 
@@ -179,22 +209,27 @@ the following software packages installed:
 - R 
 - RStudio
 
-The required software packages are available free of charge for SFU students.  They are also installed on all campus lab computers, 
+Excel is a commercial application, while R and RStudio are both open-source (free). They 
+are available for both Windows and macOS.  The examples in the textbook use Windows.
 
-I will teach the course using Windows, and can provide technical support for
-Windows.  All of the necessary tools are also available for macOS, but my
-ability to provide technical support is more limited. I'll do the best I can.
+The required software packages are available free of charge for SFU students, and are 
+installed on all campus lab computers, 
 
 ### Installing Microsoft Excel {#installing-microsoft-excel}
 
 Microsoft Excel is a well-known spreadsheet program that is available for both Windows 
 and macOS. Alternatives to Excel include Google Sheets and Apple Numbers.
 
+::: fyi
+**Installing Excel at SFU**
+
 SFU has a licensing agreement with Microsoft that allows its students 
 free installation of the entire Microsoft Office suite, including Excel. 
 Installation instructions are available at
 
 https://www.sfu.ca/itservices/technical/software/office365.html.
+
+:::
 
 Once you have installed Excel, you should confirm that it is working by
 starting the program. You should see something that looks like this:
@@ -214,7 +249,7 @@ Both R and RStudio are open-source, and are available free of charge for both Wi
 
 https://rstudio.com/products/rstudio/download/#download.
 
-NOTE: install R first, then RStudio.
+Be sure to install R first, then RStudio.
 
 After installing R and RStudio, you should confirm that they are working by
 opening RStudio.  You should see something like this:
@@ -243,22 +278,25 @@ Once the installation is concluded and the `>` prompt reappears you can test
 to make sure the installation worked.
 
 4. Enter `library(tidyverse)` in the console window.  
-   - If you don't get an error message, the installation worked.
-   - If you get an error message, drop by office hours to get help.
+   - If you get an error message like
+     *Error in library(tidyverse) : there is no package called ‘tidyverse’*
+     drop by office hours for help.
+   - If you don't get an error message (you will get some message about "Conflicts"), 
+     the installation worked.
 
-If you run into trouble, don't worry. We will not need the Tidyverse for 
+If you run into trouble here, don't worry. We will not need the Tidyverse for 
 a few weeks, so there is plenty of time to get help.
 
 ## Conventions of this book {#conventions-of-this-book}
 
-
 This book uses consistent visual conventions to convey information.
 
 - Organization:
-  - Each chapter corresponds to one week of the course.
+  - Each chapter corresponds to one full week of the course.
 - Typography:
-  - Computer code or other inputs are shown `like this`.
-  - When new terminology is introduced, it is shown ***like this***.
+  - Computer code or other inputs are shown like `this`.
+  - Math is usually shown like $this$.
+  - When new terminology is introduced, it is shown like ***this***.
 - Boxes:
   - Pull-out information is shown in colored boxes.
   
