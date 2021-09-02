@@ -976,12 +976,20 @@ Our final histogram will look like this:
 ![*Histogram of* **UnempRate**, *final version*](bin/HistogramFinal.png) 
 :::
 
-You can download the complete Excel file with all analysis from
-this chapter at https://bvkrauth.github.io/files/CanadaEmploymentHistoricalWithAnalysis.xlsx.
 
 ## Chapter review {#review-basic-data-analysis}
 
-To be added
+You can download the complete Excel file with all analysis from
+this chapter at https://bvkrauth.github.io/files/CanadaEmploymentHistoricalWithAnalysis.xlsx.
+
+In this chapter, we learned how to calculate simple statistics in Excel. Calculating 
+the statistics is typically the easiest part of a statistical analysis - cleaning data 
+and interpreting the results is much more challenging.  So hopefully you have found
+this chapter an easy break from the last few.
+
+In the next chapter, we will bring this chapter together with the previously
+developed theory of random events and random variables to
+[interpret statistics as random variables](#statistics).
 
 ### Practice problems {#problems-basic-data-analysis}
 
