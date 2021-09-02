@@ -48,7 +48,7 @@ may not be strong.  Statistical inference asks us what statements about
 the data generating process can be made with confidence based on the data.
 
 ::: example
-**Roulette**
+**Fair and unfair roulette games**
 
 Suppose you work as a casino regulator for the BCLC (British Columbia
 Lottery Corporation, the crown corporation that regulates all commercial
@@ -57,16 +57,23 @@ results from a particular casino and are tasked with determining whether
 the casino is running a fair game.
 
 Before getting caught up in math, let's think about how we might assess 
-evidence:
+evidence: 
 
-- If we have data from many games, and the win rate for gamblers is about
-  the same as the win probability in a fair game, then we would conclude there 
-  is strong evidence the game is *fair or close to fair*.
-- If we have data from many games, and the win rate for gamblers is much 
-  higher or lower than the win probability in a fair game, then we would
-  conclude there is strong evidence that the game is *not fair*.
-- If we have no data, or data from only a few games, we probably *can't tell*
-  whether the game is fair or unfair
+- We might have results from many games, or only a few games.  
+- Our results may have a win rate close to the expected rate for a fair
+  game, or far from that rate.
+
+We can put those possibilities into a table:
+
+| Win rate                |  Many games     |    Few games            |
+|:------------------------|:---------------:|:-----------------------:|
+| Close to fair game rate | Probably fair   | Could be fair or unfair |
+| Far from fair game rate | Probably unfair | Could be fair or unfair |
+
+That is, we can make a fairly confident conclusion if we have a lot
+of evidence, and our conclusion depends on what the evidence shows. But
+if we do not have a lot of evidence, we cannot make a confident conclusion
+either way.
 
 In this chapter we will formalize these basic ideas about evidence.
 :::
