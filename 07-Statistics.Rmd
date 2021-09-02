@@ -937,7 +937,16 @@ used for this purpose.
 
 ## Chapter review {#review-statistics}
 
-To be added
+In this chapter we have learned to model a data generating process,
+describe the probability distribution of a statistic,
+interpret a statistic as an estimator of some unknown parameter of 
+the underlying data generating process.
+
+Almost by definition, estimators are rarely identical to the parameter
+of interest, so any conclusions based on estimators have a degree of
+uncertainty.  To describe this uncertainty in a rigorous and quantitative
+manner, we will next learn some principles of 
+[statistical inference](#statistical-inference). 
 
 ### Practice problems {#problems-statistics}
 
