@@ -474,6 +474,26 @@ is useful when we are modeling random outcomes that occur in multiple
 stages, for example a poker game or an energy company making a series of
 investments to develop an oil field.
 
+::: example
+**The law of total probability in poker**
+
+Suppose you are playing [Texas hold'em poker](https://en.wikipedia.org/wiki/Texas_hold_'em)
+with a few friends, and the hand has one card left to deal (the "river"). If
+the last card has a heart on it (25\% probability) you will have a flush and
+win the hand with a probability you estimate to be 90\%.  If not, you will 
+win with a probability you estimate to be 10\%. What are your overall chances 
+of winning?
+
+The answer can be calculated using the law of total probability:
+  \begin{align}
+    \Pr(Win) &= \Pr(\textrm{Win}|\textrm{Hearts})\Pr(\textrm{Hearts}) 
+              + \Pr(\textrm{Win}|\textrm{not Hearts})\Pr(\textrm{not Hearts}) \\
+      &= 0.9*0.25 + 0.1*0.75 \\
+      &= 0.3
+  \end{align}
+So you have a 30\% chance of winning. 
+:::
+
 ### Bayes' law
 
 The second is ***Bayes' law***, which is a rule for determining 
