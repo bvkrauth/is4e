@@ -886,7 +886,22 @@ the sample size increases.
 
 ## Chapter review {#review-inference}
 
-To be added
+In this chapter we have learned to formulate and test hypotheses, and to construct
+confidence intervals. The mechanics of doing so are complicated, but you should not
+let the various formulas distract you from the more basic idea of evidence: hypothesis
+testing is about how strong the evidence is in favor of (or against) a particular 
+true/false statment about the data generating process, and confidence intervals are
+about finding a range of values for a parameter that are consistent with the observed
+data.
+
+In practice, modern statistical packages automatically calculate and report confidence
+intervals for most estimates, and report the result of some basic hypothesis tests
+as well. When you need something more complicated, it is usually just a matter of 
+looking up the command. I will ask you to do these calculations yourself so you get used
+to them, but it is more important that you can correctly interpret the results.
+
+This is the last primarily theoretical chapter. The remaining chapters will be oriented towards
+data and applications.
 
 ### Practice problems {#problems-inference}
 
