@@ -586,7 +586,14 @@ of the statistical issues.
 
 ## Chapter review {#review-probability}
 
-To be added
+In this chapter we have learned the basic terminology and concepts of probability. You
+may have seen a number of these terms and ideas in high school, but we are approaching
+them at a higher level. Be sure to review these terms and concepts in detail, and
+do the practice problems to test your knowledge.
+
+Our next step is to take our general framework of outcomes and events, and apply
+them to [random variables](#random-variables) - outcomes that are specifically 
+numerical.  
 
 ### Practice problems {#problems-probability}
 
