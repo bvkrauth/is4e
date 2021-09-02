@@ -1314,12 +1314,31 @@ follow a few simple rules:
 At this level, you do not normally need to keep archived versions.  But you should
 at least distinguish between your master version and working copy.
 
-
 ## Chapter review {#review-basic-data-cleaning-with-excel}
 
-To be added.
+Data cleaning is among the most important practical skills one can develop in 
+applied statistical analysis. Simple statistical methods like averages
+and frequencies are all most people will ever use, but everyone who works
+with data regularly encounters complex and messy data.  
+
+In this chapter we have learned some important data cleaning concepts, including 
+reproducible research, tidy data, ID variables, and version control.  We have also 
+learned how to implement these concepts in Excel using tools such as fill/series, 
+sorting, formatting, formulas, and functions.  
+
+We will soon use Excel to do some 
+[basic statistical analysis and graphing](#basic-data-analysis-with-excel)
+using our cleaned data. Later on, we will learn more 
+[advanced data cleaning](#advanced-data-cleaning)
+concepts such as linking, aggregating, error validation/handling, 
+importing and exporting, as well has how to to implement them in both Excel 
+and R.
 
 ### Practice problems {#problems-basic-data-cleaning-with-excel}
+
+Each chapter will include a few simple practice problems to help you check
+your knowledge.  They are organized by the specific skill or area of knowledge
+you are practicing.
 
 **SKILL #1: Identify features of tidy data**
 
