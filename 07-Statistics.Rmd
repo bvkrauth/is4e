@@ -1157,25 +1157,25 @@ To be added
    PDFs.
    a. The support is just the set of all possible combinations: 
       $$S_{D_n} = \{(1,1),(1,2),(2,1),(2,2)\}$$
-   a. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
+   b. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
       \begin{align}
         f_{D_n}(1,1) &= f_x(1)f_x(1) \\
           &= 0.4*0.4 \\
           &= 0.16
       \end{align}
-   b. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
+   c. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
       \begin{align}
         f_{D_n}(2,1) &= f_x(2)f_x(1) \\
           &= 0.6*0.4 \\
           &= 0.24
       \end{align}
-   c. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
+   d. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
       \begin{align}
         f_{D_n}(1,2) &= f_x(1)f_x(2) \\
           &= 0.4*0.6 \\
           &= 0.24
       \end{align}
-   d. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
+   e. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
       \begin{align}
         f_{D_n}(2,2) &= f_x(2)f_x(2) \\
           &= 0.6*0.6 \\
@@ -1192,23 +1192,23 @@ To be added
    |  2    |   2   |    0.36      |    0        |   2      |       0            |       0          |   2    |   2    |
    
    This will make our lives much easier. 
-    a. The support is $S_{\hat{f}_1} = \{0,0.5,1\}$ and the sampling distribution
-       is:
-       \begin{align}
-          f_{\hat{f}_1}(0) &= \Pr(\hat{f}_1 = 0) \\
-            &= f_{D_n}(2,2) \\
-            &= 0.36 \\
-          f_{\hat{f}_1}(0.5) &= \Pr(\hat{f}_1 = 0.5) \\
-            &= f_{D_n}(2,1) + f_{D_n}(1,2) \\
-            &= 0.24 + 0.24 \\
-            &= 0.48 \\
-          f_{\hat{f}_1}(1) &= \Pr(\hat{f}_1 = 1) \\
-            &= f_{D_n}(1,1) \\
-            &= 0.16 
-        \end{align}
-    b. The support is $S_{\bar{x}} = \{1,1.5,2\}$ and the sampling distribution
-       is:
-       \begin{align}
+   a. The support is $S_{\hat{f}_1} = \{0,0.5,1\}$ and the sampling distribution
+      is:
+      \begin{align}
+         f_{\hat{f}_1}(0) &= \Pr(\hat{f}_1 = 0) \\
+           &= f_{D_n}(2,2) \\
+           &= 0.36 \\
+         f_{\hat{f}_1}(0.5) &= \Pr(\hat{f}_1 = 0.5) \\
+           &= f_{D_n}(2,1) + f_{D_n}(1,2) \\
+           &= 0.24 + 0.24 \\
+           &= 0.48 \\
+         f_{\hat{f}_1}(1) &= \Pr(\hat{f}_1 = 1) \\
+           &= f_{D_n}(1,1) \\
+           &= 0.16 
+       \end{align}
+   b. The support is $S_{\bar{x}} = \{1,1.5,2\}$ and the sampling distribution
+      is:
+      \begin{align}
           f_{\bar{x}}(1) &= \Pr(\bar{x} = 1) \\
             &= f_{D_n}(1,1) \\
             &= 0.16 \\
@@ -1219,10 +1219,10 @@ To be added
           f_{\bar{x}}(2) &= \Pr(\bar{x} = 2) \\
             &= f_{D_n}(2,2) \\
             &= 0.36 
-        \end{align}
-    c. The support is $S_{\hat{\sigma}_x^2} = \{0,0.5\}$ and the sampling distribution
-       is:
-       \begin{align}
+       \end{align}
+   c. The support is $S_{\hat{\sigma}_x^2} = \{0,0.5\}$ and the sampling distribution
+      is:
+      \begin{align}
           f_{\hat{\sigma}_x^2}(0) &= \Pr(\hat{\sigma}_x^2 = 0) \\
             &= f_{D_n}(1,1) + f_{D_n}(2,2)\\
             &= 0.16 + 0.36 \\
@@ -1231,10 +1231,10 @@ To be added
             &= f_{D_n}(2,1) + f_{D_n}(1,2) \\
             &= 0.24 + 0.24 \\
             &= 0.48 
-        \end{align}
-    d. The support is $S_{\hat{\sigma}_x} = \{0,0.71\}$ and the sampling distribution
-       is:
-       \begin{align}
+       \end{align}
+   d. The support is $S_{\hat{\sigma}_x} = \{0,0.71\}$ and the sampling distribution
+      is:
+      \begin{align}
           f_{\hat{\sigma}_x^2}(0) &= \Pr(\hat{\sigma}_x = 0) \\
             &= f_{D_n}(1,1) + f_{D_n}(2,2)\\
             &= 0.16 + 0.36 \\
@@ -1243,10 +1243,10 @@ To be added
             &= f_{D_n}(2,1) + f_{D_n}(1,2) \\
             &= 0.24 + 0.24 \\
             &= 0.48 
-        \end{align}
-    e. The support is $S_{xmin} = \{1,2\}$ and the sampling distribution
-       is:
-       \begin{align}
+       \end{align}
+   e. The support is $S_{xmin} = \{1,2\}$ and the sampling distribution
+      is:
+      \begin{align}
           f_{xmin}(1) &= \Pr(xmin = 1) \\
             &= f_{D_n}(1,1) + f_{D_n}(2,1) + f_{D_n}(1,2) \\
             &= 0.16 + 0.24 + 0.24 \\
@@ -1255,9 +1255,9 @@ To be added
             &= f_{D_n}(2,2) \\
             &= 0.36 
         \end{align}
-    f. The support is $S_{xmax} = \{1,2\}$ and the sampling distribution
-       is:
-       \begin{align}
+   f. The support is $S_{xmax} = \{1,2\}$ and the sampling distribution
+      is:
+      \begin{align}
           f_{xmax}(1) &= \Pr(xmax = 1) \\
             &= f_{D_n}(1,1) \\
             &= 0.16 \\
@@ -1267,89 +1267,89 @@ To be added
             &= 0.84 
         \end{align}
 5. The mean can be calculated from each statistic's PDF:
-    a. The mean is:
-        \begin{align}
+   a. The mean is:
+      \begin{align}
           E(\hat{f}_1) &= 0*f_{\hat{f}_1}(0) +  0.5*f_{\hat{f}_1}(0) +  1*f_{\hat{f}_1}(1) \\
             &= 0*0.36 +  0.5*0.48 +  1*0.16 \\
             &= 0.4 
-        \end{align}
-    b. The mean is:
-       \begin{align}
+      \end{align}
+   b. The mean is:
+      \begin{align}
          E(\bar{x}) &= 1*f_{\bar{x}}(1) +1.5*f_{\bar{x}}(1.5) + 2*f_{\bar{x}}(2) \\
              &= 1*0.16 +1.5*0.48 + 2*0.36 \\
              &= 1.6
-       \end{align}
-    c. The mean is:
-       \begin{align}
+      \end{align}
+   c. The mean is:
+      \begin{align}
         E(\hat{\sigma}_x^2) &= 0*f_{\hat{\sigma}_x^2}(0) + 0.5*f_{\hat{\sigma}_x^2}(0.5) \\
             &= 0*0.52 + 0.5*0.48  \\
             &= 0.24
       \end{align}
-    d. The mean is:
-       \begin{align}
+   d. The mean is:
+      \begin{align}
         E(\hat{\sigma}_x) &= 0*f_{\hat{\sigma}_x}(0) + 0.71*f_{\hat{\sigma}_x}(0.71) \\
             &= 0*0.52 + 0.71*0.48  \\
             &= 0.34
-      \end{align}
-    e. The mean is:
-       \begin{align}
+     \end{align}
+   e. The mean is:
+      \begin{align}
          E(xmin) &= 1*f_{xmin}(1) + 2*f_{xmin}(2) \\
              &= 1*0.64 + 2*0.36 \\
              &= 1.36  
-       \end{align}
-    f. The mean is:
-       \begin{align}
+      \end{align}
+   f. The mean is:
+      \begin{align}
          E(xmax) &= 1*f_{xmax}(1) + 2*f_{xmax}(2) \\
              &= 1*0.16 + 2*0.84 \\
              &= 1.84  
-       \end{align}
+      \end{align}
 6. We have already found the mean of each statistic, so we can calculate the variance using
    the alternative formula $var(x) = E(x^2) - E(x)^2$
-    a. To calculate the variance, we can use the alternative formula:
-        \begin{align}
+   a. To calculate the variance, we can use the alternative formula:
+      \begin{align}
           E(\hat{f}_1^2) &= 0^2*f_{\hat{f}_1}(0) +  0.5^2*f_{\hat{f}_1}(0) +  1^2*f_{\hat{f}_1}(1) \\
             &= 0*0.36 +  0.25*0.48 +  1*0.16 \\
             &= 0.28 \\
           var(\hat{f}_1) &= E(\hat{f}_1^2) - E(\hat{f}_1)^2 \\
             &= 0.28 - 0.4^2 \\
             &= 0.12
-        \end{align}
-    b. To calculate the variance, we can use the alternative formula:
-        \begin{align}
+      \end{align}
+   b. To calculate the variance, we can use the alternative formula:
+      \begin{align}
           E(\bar{x}^2) &= 1^2*f_{\bar{x}}(1) +1.5^2*f_{\bar{x}}(1.5) + 2^2*f_{\bar{x}}(2) \\
             &= 1*0.16 +2.25*0.48 + 4*0.36 \\
             &= 2.68 \\
           var(\bar{x}) &= E(\bar{x}^2) - E(\bar{x})^2 \\
             &= 2.68 - 1.6^2 \\
             &= 0.12
-        \end{align}
-    c. To calculate the variance, we can use the alternative formula:
-        \begin{align}
+      \end{align}
+   c. To calculate the variance, we can use the alternative formula:
+      \begin{align}
           E(xmin^2) &= 1^2*f_{xmin}(1) + 2^2*f_{xmin}(2) \\
              &= 1*0.64 + 4*0.36 \\
              &= 2.08 \\
           var(xmin) &= E(xmin^2) - E(xmin)^2 \\
             &= 2.08 - 1.36^2 \\
             &= 0.23
-        \end{align}
-    d. To calculate the variance, we can use the alternative formula:
-        \begin{align}
+      \end{align}
+   d. To calculate the variance, we can use the alternative formula:
+      \begin{align}
           E(xmax^2) &= 1^2*f_{xmax}(1) + 2^2*f_{xmax}(2) \\
              &= 1*0.16 + 4*0.84 \\
              &= 3.52 \\  
           var(xmax) &= E(xmax^2) - E(xmax)^2 \\
             &= 3.52 - 1.84^2 \\
             &= 0.134
-        \end{align}
+      \end{align}
 7. All three of these statistics are simple linear functions of the data, so their mean
    and variance can be calculated without using the PDF:
-    a. The mean and variance are already given to us:
+   a. The mean and variance are already given to us:
       \begin{align}
         E(x_1) &= 1.6 \\
         var(x_1) &= 0.24 
       \end{align}
-    b. The mean and variance can be found using the standard formulas for 
-       the sample average:
+   b. The mean and variance can be found using the standard formulas for 
+      the sample average:
       \begin{align}
         E(\bar{x}) &= E(x_i) \\
           &= 1.6 \\
@@ -1357,8 +1357,8 @@ To be added
           &= 0.24/2 \\
           &= 0.12 
       \end{align}
-    c. The mean and variance can be found using the standard formula for a linear
-       function of two random variables:
+   c. The mean and variance can be found using the standard formula for a linear
+      function of two random variables:
       \begin{align}
         E(w) &= E(0.2*x_1 + 0.8*x_2) \\ 
           &= 0.2*E(x_1) + 0.8*E(x_2) \\
@@ -1372,28 +1372,28 @@ To be added
 8. Unknown parameters: $\mu$,$\sigma^2$, $E(x_i)$, $E(x_i^3)$, $var(x_i)$, and $sd(x_i)/\sqrt{n}$.  
    Statistics: $D_n$, $\bar{x}$.
 9. We can find the true values directly from the PDF $f_x(\cdot)$:
-    a. The true probability is:
+   a. The true probability is:
       $\Pr(x_i = 1) = 0.4$
-    b. The population mean is:
+   b. The population mean is:
       $E(x_i) = 1*0.4 + 2*0.6 = 1.6$
-    c. The population variance is:
+   c. The population variance is:
       $var(x_i) = (1-1.6)^2*0.4 + (2-1.6)^2*0.6 = 0.24$
-    d. The population standard deviation is:
+   d. The population standard deviation is:
       $sd(x_i) = \sqrt{var(x_i)} = \sqrt{0.24} = 0.49$
-    e. The population minimum is:
+   e. The population minimum is:
       $min(S_x) = 1$
-    f. The population maximum is:
+   f. The population maximum is:
       $max(S_x) = 2$
 10. Since $\max(S_x) = 2$, the error is either $err = 1 -2 = -1$ or $err = 2 - 2 = 0$.
-     a. The sampling error has support $S_{err} = \{-1,0\}$
-     b. The sampling error has PDF:
-        \begin{align}
+    a. The sampling error has support $S_{err} = \{-1,0\}$
+    b. The sampling error has PDF:
+       \begin{align}
           f_{err}(-1) &= f_{D_n}(1,1) \\
             &= 0.16 \\
           f_{err}(0) &= f_{D_n}(2,1) + f_{D_n}(1,2) + f_{D_n}(2,2) \\
             &= 0.24 + 0.24 + 0.36 \\
             &= 0.84
-        \end{align}
+       \end{align}
 11. We have already calculated the mean of each statistic and the true value of each parameter,
     so we can calculate the bias and then use the result to classify each estimator:
     a. Unbiased
