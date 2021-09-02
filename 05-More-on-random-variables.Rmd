@@ -775,7 +775,23 @@ definition.
 ::: example
 **Another way to calculate the covariance**
 
-TO BE ADDED
+The expected value of $w_{red}w_{14}$ is:
+\begin{align}
+  E(w_{red}w_{14}) &= \begin{aligned}[t]
+        & 1*35*\underbrace{f_{red,14}(1,35)}_{1/37}\\
+        &+ 1*(-1)*\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
+        &+ (-1)*(-1)*\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
+        \end{aligned} \\
+      &= 35/37 - 17/37 + 19/37 \\
+      &= 1
+\end{align}
+So the covariance is:
+  \begin{align}
+    cov(w_{red},w_{14}) &= E(w_{red}w_{14}) - E(w_{red})E(w_{14}) \\
+      &= 1 - (-0.027)*(-0.027) \\
+      &\approx 0.999 
+    \end{align}
+which is the same result as we calculated earlier.
 :::
 
 The key to understanding the covariance is that it is the expected
