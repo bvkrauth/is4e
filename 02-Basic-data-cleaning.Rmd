@@ -114,8 +114,8 @@ particular, we should:
    - Sometimes this is not possible or practical, which is
      why we keep an unmodified copy of the original data.
 4. Give all files and variables brief but informative names.
-   - I usually avoid spaces or special characters in variable or file 
-     names as they can cause problems when moving data across operating
+   - Avoid spaces or special characters in variable or file 
+     names. They can cause problems when moving data between operating
      systems, file formats, or applications.
 
 We will discuss the implementation of these principles later in this
@@ -135,12 +135,16 @@ has the following seven properties:
    ***observation***, ***data point*** or ***case***.
 5. All observations in a given table come from the same 
    ***unit of observation***
-6. The order in which observations are listed is irrelevant to the analysis. 
-   - That is, the interpretation of the data in a table would not change if 
-    its rows were listed in a different order.
-7. One variable (ideally the first column) in a table serves as a 
-   **unique identifier** or **ID** for the observation.
+   - For example, data on Canadian cities and data on Canadian provinces
+     should probably be in two separate tables.
+6. One variable in a table serves as a **unique identifier** or **ID** for the 
+   observation.
    - A unique identifier takes on a different value for each observation.
+   - The ID variable is often in the first column of the table.
+7. The order in which observations or variables are listed is irrelevant to 
+   the analysis. 
+   - That is, the interpretation of the table would not change if its rows 
+     or columns were in a different order.
 
 Data that is not tidy is sometimes called ***messy*** data. One 
 of the first steps in cleaning data is rearranging it from a messy
@@ -159,17 +163,17 @@ link and combine data from multiple sources.
 SFU is one of British Columbia's largest organizations, and relies
 heavily on ID variables to organize its information:
 
-- Each SFU member (faculty, staff or student) has a unique 16-digit ID
+- Each person at SFU (faculty, staff or student) has a unique 16-digit ID
   number and a unique computing ID.
-- Each semester at SFU has a 4-digit semester code, for example the 
+- Each semester at SFU has a 4-digit semester code. For example,
   Fall 2021 is assigned the semester code 1217.
 - Each academic program at SFU has a 2-letter to 4-letter program code
   such as IS, BUS, or ECON.
-- Each course at SFU is identified by its program code (e.g. ECON)
-  a numeric course code (e.g. 233), a section number (e.g., D100),
-  and a semester number (e.g., 1217).  
+- Each course at SFU is uniquely identified by the combination of its 
+  program code (e.g. ECON) its numeric course code (e.g. 233), its section 
+  number (e.g., D100), and its semester number (e.g., 1217).  
   
-Library records, grades, financial records, and almost any other 
+Your library records, grades, financial records, and almost any other 
 information SFU has about you includes one or more of these IDs.
 :::
 
@@ -187,39 +191,38 @@ The example above shows several common characteristics of ID variables:
 ID variables should ideally be portable across applications and systems. That
 is, our ID variable should still work if we move data from a Windows PC to 
 a Linux or Apple system, and should still work if we move from Excel
-to R or Python.  To maximize portability:
+to R or Python.  To maximize portability, keep in mind the following
+potential issues:
 
-- Some applications will round non-integer values (changing 1.23 to 1) 
-  or drop leading zeros (changing 00045 to 45), so numeric ID
-  variables should always be integers without leading zeros.
-- Some applications will reject or transform spaces or unusual characters,
-  so text ID variables should only use (Latin) letters and (Arabic) 
-  digits.
-- Some applications are case-sensitive (so that "hello" and "Hello" 
-  are different values) and some are not, so text ID variables should
-  typically use either all upper-case or all lower-case. 
 
+| Issue                                       | Solution                            |
+|---------------------------------------------|-------------------------------------|
+| Some applications will round non-integer values (changing 1.23 to 1) or drop leading zeros (changing 00045 to 45). | Numeric ID variables should always be integers without leading zeros, or converted to text.  | 
+| Some applications will reject or transform spaces or unusual characters. | Text ID variables should only use (Latin) letters and (Arabic) digits. |
+| Some applications are case-sensitive (so that "hello" and "Hello" are different values) and others are not. | Text ID variables should typically use either all upper-case or all lower-case. |
+
+
+It's OK for an ID variable to be nearly-but-not-exactly identical to some other variable. For
+example a Canadian data set might have both a **Province** variable that takes on values like
+"Québec" and "Nova Scotia" and a **ProvinceID** variable that takes on values like "QUEBEC"
+and "NOVASCOTIA."
 
 ::: fyi
-**Names and IDs**
+**Names, IDs, and probabilistic matching**
 
-Notice that proper names are typically *not* used as ID variables for the
-obvious reason that there are sometimes multiple people with the exact
-same name.  
-
-There is also a second reason proper names do not make
-good ID variables, which is that they are not always written 
+Proper names are typically *not* used as ID variables since they are not necessarily 
+unique. In addition, they are not always written 
 consistently.  For example, the same person might be called "Doug" in
 one data set and "Douglas" in another. 
 
-Occasionally a data set will not have a proper or standardized ID variable,
-and our only option is to match observations based on a proper name.  For
-example school data in BC uses a one ID number called a PEN while health
-data uses a different ID number called a PHN. There is no direct way
-to match PEN and PHN, so we have to match education and health records
-on a combination of proper names and other information such as year of 
-birth.  Matches made this way are "probabilistic", meaning that the records
-probably describe the same person but might not.
+Occasionally a data set will not have a standardized ID variable, and our only 
+option is to match observations based on a proper name.  For
+example, in BC school data an ID number called a PEN while health data uses a 
+different ID number called a PHN. There is no direct way to match PEN and PHN, 
+so we have to match education and health records on a combination of proper names 
+and other information such as year of birth.  Matches made this way are 
+called "probabilistic" matches, meaning (roughly) that the records probably describe
+the same person but might not.
 :::
 
 ## Introduction to Excel {#a-quick-tour-of-excel}
@@ -957,10 +960,10 @@ The `RANK.EQ()` function has several relatives with similar syntax:
   functions return ranks in percentiles.
 :::
 
-## Excel data types {#excel-data-types}
+## Data types {#excel-data-types}
 
 Most of the data we work with is numeric. However, there are other types
-of information we regularly work with:
+of information we regularly encounter:
 
 - Text
 - Logical (true/false) values
@@ -971,11 +974,11 @@ these data types.
 
 ### Numeric data {#numeric-data}
 
-As with other computer applications, Excel does numeric calculations
-in double-precision (64-bit) binary floating point format, which is 
-typically accurate up to the 15th decimal place.
+Most modern computer applications, including Excel, do numeric calculations
+in double-precision (64-bit) binary floating point format.  Calculations in
+this format are typically accurate up to the 15th decimal place.
 
-The results of these calculations are typically displayed to 
+But the results of these calculations are typically displayed to 
 fewer decimal places than that.  A cell's contents are distinct 
 from its ***numeric display format***, which is how it appears 
 on the screen. We can change the display format of a cell or 
@@ -1009,11 +1012,13 @@ without rounding.
 ### Text data {#text-data}
 
 ***Text data*** is also called ***character data*** or 
-***string data***. Text values can be entered directly in a 
+***string data***. In Excel, text values can be entered directly in a 
 cell, can be used in a formula, and can be the result of a formula. 
 
-For example, the `CONCAT()` function allows you to join (concatenate) 
-two or more strings. This can be very useful in producing reports
+Excel has many functions for working with text data.  A particularly useful one is
+the `CONCAT()` function, which allows you to join or ***concatenate***
+two or more strings. This is useful in building reports, in constructing
+ID variables, and in many other applications.
 
 ::: example
 **Using CONCAT()**
@@ -1115,6 +1120,8 @@ variables.
 ::: fyi
 **Advanced options**
 
+Some additional functions that work with logical variables:
+
 - `NOT()` returns `TRUE` if its argument is `FALSE` and 
    `FALSE` if its argument is `TRUE`.
 - `AND()` returns `TRUE` if *all* of its arguments are `TRUE`.
@@ -1125,9 +1132,9 @@ variables.
 
 ### Dates and times {#dates-and-times}
 
-In additions to numbers, text, and logical values, Excel can handle dates
-and times.  Dates and times are a surprisingly complex subject
-that can create all sorts of problems on a computer:
+In additions to numbers, text, and logical values, Excel can handle ***dates***
+and ***times***.  Dates and times are a surprisingly complex subject
+that can create all sorts of problems on a computer, for several reasons:
 
 - There are many ways of writing the same date:
    - November 1, 2020
@@ -1149,28 +1156,28 @@ that can create all sorts of problems on a computer:
 - We want to do this in a way that is perfectly accurate, but 
   hides all of these complexities in normal usage.
 
-Excel handles these issues as follows:
+Each application has its own rules for handling dates and times, though there are some
+standards that have developed.  Excel handles these issues as follows:
 
-1. Dates are stored as the number of days elapsed since some base 
+1. Dates are *stored* as the number of days elapsed since some base 
    date. In Excel the base date is January 1, 1900, which means that
    - January 1, 1900 is day 1.
    - January 2, 1900 is day 2.
    - November 1, 2020 is day 44136.
-2. Each cell's display formatting determines how the date is displayed. 
+2. Dates are *displayed* according to the cell's display formatting. 
    - The default display formatting varies across regions, so 
      the same date in the same Excel file might appear different
      on your computer and my computer.
-3. When you enter something that looks like a date, Excel: 
-   - guesses the date format for what you have entered
-   - converts what you have entered to the internal form
-   - changes the display format to what Excel thinks it should be.
-   
-::: fyi
-Excel treats times as partial days. For example,
-Excel will store `11/1/2020  12:00:00 PM` as day number `44136.5`
-and `11/1/2020  1:00:00 PM` as day number `44136.5416666667`. 
-:::
+3. When you enter something that looks like a date, Excel does several things
+   behind the scenes:
+   - it guesses the date format for what you have entered
+   - it converts what you have entered to the internal storage form (days since base date).
+   - it changes the display format to what Excel thinks it should be (based on your location
+     settings).
 
+Most of the time, this system works seamlessly and you don't even notice it.  But
+it can cause problems, and understanding the underlying structure can help you
+to solve those problems.
 
 ::: example
 **How dates are stored and displayed**
@@ -1218,8 +1225,9 @@ Most of the time, Excel's handling of dates works seamlessly and is
 very clever. But sometimes Excel guesses wrong, and this can create
 all sorts of problems. 
 
-
 ::: fyi
+**Excel dates and genetics**
+
 Excel's handling of dates caused a significant unanticipated problem
 in the the field of human genetics, where it is a widely used
 tool.
@@ -1234,17 +1242,37 @@ March 2 in the current year. A 2016 research paper found that roughly
 20% of published research articles in the field used data that was 
 affected by this problem.
 
-Unfortunately, there is no way of "fixing" Excel to keep this from 
-happening since any change to its behavior would "break" Excel in some 
-other application. So the HGNC changed the names of these 27 genes in 
-2020. For example, the gene MARCH2 is now called MARCHF2.
+Unfortunately, it is too late to "fix" Excel to keep this from 
+happening. Any change to its behavior would "break" Excel in thousands
+of other applications that rely on its current behavior. 
+
+When you can't fix a problem in a computer application, you need to
+find a ***workaround***: a modification to how you
+use the application that avoids or minimizes the effects of the 
+problem. So the HGNC changed the names of these 27 genes in  2020. For 
+example, the gene MARCH2 is now called MARCHF2.
 :::
+
+In addition to dates, Excel can also handle date-time values such as 
+`11/1/2020  12:00:00 PM`.  
+
+::: fyi
+**How Excel handles times**
+
+Excel treats times as partial days. For example,
+Excel will store `11/1/2020  12:00:00 PM` as day number `44136.5`
+and `11/1/2020  1:00:00 PM` as day number `44136.5416666667`. 
+
+There are also functions that work with date-time values.  For
+example, we have already seen the function `TODAY(.)` which returns the 
+current date but there is also a function `NOW(.)` that returns the current
+date and time.
+:::
+
 
 ## Chapter review {#review-basic-data-cleaning-with-excel}
 
 To be added.
-
-Include link to completed data file.
 
 ### Practice problems {#problems-basic-data-cleaning-with-excel}
 
