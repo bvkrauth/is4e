@@ -280,17 +280,21 @@ When observations are subject to nonresponse or censoring, we must intepret
 the data carefully.
 
 ::: example
-**Airplanes in WW2**
+**Wald's airplanes**
 
-Abraham Wald was a famous statistician who was advising the US government during
-World War II.  He was provided with data on combat damage received by airplanes,
-with the hopes that the data could be used to help make the planes more robust
-to damage.  The data looked something like this (this isn't the real data,
-just a visualization constructed for the example):
+Abraham Wald was a Hungarian/American statistician and econometrician who made 
+important contributions to both the theory of statistical inference and the development
+of economic index numbers such as the Consumer Price Index. 
+
+Like many scientists of his time, he advised the US government during
+World War II. As part of his work, he was provided with data on combat damage 
+received by airplanes, with the hopes that the data could be used to help make
+the planes more robust to damage.  The data looked something like this (this 
+isn't the real data, just a visualization constructed for the example):
 
 <a title="Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept), CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg"><img width="512" alt="Survivorship-bias" src="bin/WaldPlane.png"></a>
 
-Seeing this data, the military concluded that planes were mostly
+Seeing this data, some military analysts concluded that planes were mostly
 being shot in the wings and in the middle of the fuselage (body), and
 that they should be reinforced with additional steel in these locations.
 
@@ -300,8 +304,7 @@ that went out. Planes were probably shot in the nose, the engines,
 and the back of the fuselage just as often as anywhere else, but 
 they did not appear often in the data because they crashed. Wald's 
 insight led to a counter-intuitive policy recommendation: reinforce the 
-parts of the plane that are don't usually show damage after 
-returning.
+parts of the plane that rarely show damage.
 :::
 
 There are two basic solutions to nonresponse and censoring:
