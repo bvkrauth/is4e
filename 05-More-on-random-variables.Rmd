@@ -935,7 +935,22 @@ ggplot(data = simdata, mapping = aes(x = x, y =y)) +
 
 ## Chapter review {#review-more-on-random-variables}
 
-To be added
+Over the course of this chapter and the previous one, we have learned the basic
+terminology and tools for working with random variables.  These are the two
+most difficult chapters in the course, but if you work hard and develop your 
+understanding of random variables you will find the rest of the course somewhat
+easier.  
+
+This is not a course on probability, so the next few chapters will be about
+data and statistics.  We will first learn to 
+[use Excel to calculate common statistics](#basic-data-analysis-with-excel)
+from a cleaned data set.  We will then use the tools of probability 
+and random variables to build a theoretical framework in which we can
+[interpret each statistic as a random variable](#statistics)
+and each data set as a collection of random variables. This 
+theory will allow us to use statistics not only as a way of
+describing data, but as a way of understanding the process that 
+produced that data.
 
 ### Practice problems {#problems-more-on-random-variables}
 
