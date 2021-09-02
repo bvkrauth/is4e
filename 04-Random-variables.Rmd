@@ -771,9 +771,9 @@ distributions.  However, some probability distributions appear so
 often in applications that we have given them names. This provides 
 a quick way to describe a particular distribution without 
 writing out its full PDF, using the notation
-  $$RrandomVariable \sim DistributionName(Parameters)$$
+  $$RandomVariable \sim DistributionName(Parameters)$$
 where $RandomVariable$ is the name of the random variable whose
-distribution is being described, the "$\sim$" character can be read as
+distribution is being described, the $\sim$ character can be read as
 "has the following probability distribution", $DistributionName$ is
 the name of the probability distribution, and $Parameters$ is a list
 of numbers called parameters that provide additional information
@@ -900,11 +900,21 @@ uniform distribution on $\Omega = \{0,1,\ldots,36\}$.
 
 ## Chapter review {#review-random-variables}
 
-To be added
+In this chapter we have learned various ways of describing the probability 
+distribution of a simple random variable - a single random variable that 
+takes on values in a finite set.  We have also learned two standard probability
+distributions for simple random variables.
+
+In the next chapter, we will deal with 
+[more complex random variables](#more-on-random-variables)
+including random variables that take on values in a continuous set,
+or random variables that are related to other random variables.  We will then
+use the concept of a random variable to understand both data and statistics
+calculated from data.
 
 ### Practice problems {#problems-random-variables}
 
-Questions 1- 15 below continue our [craps example](#problems-probability). To 
+The questions below continue our [craps example](#problems-probability). To 
 review that example, we have an outcome $(r,w)$ where $r$ and $w$ are the 
 numbers rolled on a pair of fair six-sided dice
 
