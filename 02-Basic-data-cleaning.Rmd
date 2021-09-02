@@ -1269,6 +1269,51 @@ current date but there is also a function `NOW(.)` that returns the current
 date and time.
 :::
 
+## Version control {#version-control}
+
+The last step in cleaning data is to save your work. In fact you should 
+be saving it regularly so that you don't lose work if something goes wrong. If 
+you have not already done so, save your file now.  You can compare it to my 
+version of the file at ***Include link to completed data file here.***
+
+In a simple setting, this is all you need to do. But as your projects get 
+more complex, you may find yourself keeping multiple versions of your data 
+file. There are many reasons to do this:
+
+ - Maybe you are trying something new, and are keeping an earlier version
+   in case something goes wrong.
+ - Maybe you did an analysis a few weeks ago that you are no longer using,
+   but you don't want to throw it away in case you change your mind.
+ - Maybe you and a classmate are working on a project together, and you
+   have each made changes to separate copies of the original file.
+
+You will want to use some form of ***version control*** here, with a goal
+of keeping everything you might need without making mistakes or spending
+a lot of time on it.  Version control is an important element in making 
+your analysis reproducible.
+
+Software developers and professional data analysts (like me) use a formal
+version control system like Git/GitHub.  For our purposes, we can just
+follow a few simple rules:
+
+1. The ***working copy*** is the file you are actively working on right now.
+2. The ***master version*** is the most recently saved file that is "complete."
+   - You should try to work in small and discrete projects so that you can
+     - Make a working copy of the master version.
+     - Complete a project in your working copy.
+     - Make this working copy the new master version.
+   - There should always be exactly one master version of a given document.
+3. ***Archived versions*** are earlier master versions (or occasionally 
+   working copies) that you wish to save.
+   - You may choose to save every previous master version.
+   - Or you may choose to save just a few important ones.
+   - Use some consistent naming convention to distinguish between archived 
+     versions. For example, I add a date code to the end like "210907" which
+     means that this file was the master version as of September 7, 2021.
+     
+At this level, you do not normally need to keep archived versions.  But you should
+at least distinguish between your master version and working copy.
+
 
 ## Chapter review {#review-basic-data-cleaning-with-excel}
 
