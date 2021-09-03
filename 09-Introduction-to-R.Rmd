@@ -781,7 +781,17 @@ plot(x, p,
 As you can see, we have a much nicer and clearer looking plot.
 :::
 
-Although I will need to test you on specific knowledge, you should also 
+## Chapter review {#review-introduction-to-r}
+
+In this chapter, we learned how to run R programs whether in the console, in
+a script, or in an R Markdown document.  We also learned some basics of
+the R language. We haven't learned how to do much of anything useful
+yet with data, but we will over the next few chapters.  In particular, 
+we will learn how to move data from Excel to R, how to view data in R,
+and how to clean and analyze data in R.  We will also learn a sophisticated
+R graphing package called ggplot.
+
+Although you will be tested on specific knowledge, you should also 
 keep in mind the bigger picture: my real goal here is for you to develop
 some long-lasting skills that you will find useful in the future.  This
 should be your goal as well. 
@@ -805,9 +815,6 @@ There are many free sources of useful information about R.
   https://r4ds.had.co.nz/index.html.
 :::
 
-## Chapter review {#review-introduction-to-r}
-
-To be added
 
 ### Practice problems {#problems-introduction-to-r}
 
