@@ -985,11 +985,17 @@ length(EmpData$UnempRate)
 ```
 As you can see, the `length()` function returns the length of a vector.
 
-
-
 ## Chapter review {#review-advanced-data-cleaning}
 
-To be added
+In this chapter, we learned about many loosely-related topics.  The underlying
+theme that connects them all is that real data can be complicated. We will 
+often need to get data from multiple sources and in varying formats, and we 
+cannot trust either ourselves or others not to make mistakes. So we need
+to be both disciplined in handling our data, and flexible in finding solutions
+to the problems that pop up.
+
+In the next two chapters, we will develop more advanced methods for data 
+analysis in both Excel and R.
 
 ### Practice problems {#problems-advanced-data-cleaning}
 
