@@ -26,6 +26,14 @@ In this chapter we will learn how to use R to:
 - Produce simple but informative histograms and line graphs using ggplot.
 :::
 
+To get started, open R, load the Tidyverse, and read in our employment data.
+
+```{r ReadEmpDataFromCSV_11, eval=FALSE}
+library(tidyverse)
+EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+```
+
+
 ## Cleaning data in R
 
 We will not spend a lot of time on data cleaning in R, as we can always clean
@@ -43,6 +51,7 @@ The Tidyverse includes four core functions for modifying data:
 
 All four functions follow a common syntax that is designed to work with 
 a convenient Tidyverse tool called the "pipe" operator.
+
 
 ### The pipe operator
 
@@ -163,6 +172,53 @@ Now I should probably say: these results imply nothing meaningful about
 the economic policy of either Pierre or Justin Trudeau.  The severe worldwide recessions in 1982-83 (caused by US monetary policy) and 2020-2021 (caused 
 by the COVID-19 pandemic) were caused by world events largely outside the 
 control of Canadian policy makers.
+
+### Saving code and data
+
+It is possible to save your data set in R's internal format just like you
+would save an EXcel file.  But I'm not going to tell you how to do that,
+because what you *really* need to do is save your code.
+
+Because it is command-based, R enables an entirely different and much
+more reproducible model for data cleaning and analysis.  In Excel, the
+original data, the data cleaning, the data analysis, and the results
+are all mixed in together in a simple file.  This is convenient and simple
+to use in many applications, but it can be a disaster in complex projects.
+
+In contrast, R allows you to have three separate files or groups of files
+
+1. The original data, which you do not change.
+2. The code to clean and analyze the data, which you maintain carefully
+   (including version control).
+   - Your code can be saved in an R script, or as part of an R Markdown document.
+   - This code can be split into multiple files.
+   - You can have one script to clean the data and another to analyze it.
+3. The results of your code, which you treat as temporary files that can be
+   deleted or replaced at any time.
+   - This can include the results of your analysis
+   - It can also include your cleaned data.
+   
+The key is to make sure that all of your cleaned data and results can be 
+regenerated from the original data at any time by running your code.
+
+::: example
+**BC education data**
+
+My colleagues and I have a long-term research project that uses student records
+from the British Columbia elementary school system. It requires linking a 
+student's records across multiple years, linking student records to school
+records, calculating school-level averages of some variables, and many other
+tasks.
+
+The code to clean this data is split into about 10 scripts which must be run in
+sequence and takes about 30-45 minutes to run.  I do not want to do that
+every time I do something with the data, so the last script saves the 
+cleaned data to a file, and my analysis scripts use that cleaned data file.
+
+But every time I make a major change, or every time I put results into a 
+research paper for others to read, I re-run everything from the beginning. 
+:::
+
 
 ## Data analysis in R
 

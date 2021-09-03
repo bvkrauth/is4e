@@ -46,16 +46,17 @@ on two random variables $x_i$ and $y_i$.
 The primary application in this chapter will use our Canadian employment
 data.  We will be using both Excel and R in our examples.
 
-The Excel worksheet can be downloaded at 
-[EmploymentData.xlsx](https://canvas.sfu.ca/files/15624202/).
+For the Excel examples we will start with the file
+[https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).  This file is similar to the employment data file we used in Chapter 
+\@ref(basic-data-analysis-with-excel).
 
-The R data set is the same as the one we used in Chapter 
-\@ref(using-r). Execute the following R code to get started:
-```{r SetupCodeForStudents, eval = FALSE}
+For the R examples we will start with the 
+[EmploymentData.csv](sampledata/EmploymentData.csv)
+file we used in Chapter \@ref(using-r).  Execute the following R code to get 
+started:
+```{r Setup12ForStudents, eval = FALSE}
 library(tidyverse)
-# If you do not have this data set, you can download it at
-# https://canvas.sfu.ca/files/15539454/
-EmpData <- read_csv("sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
   mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
@@ -166,7 +167,7 @@ want.
 To create a blank Pivot Table based on the employment data:
 
 1. Open the *Data for Analysis* worksheet in 
-   [EmploymentData.xlsx](https://canvas.sfu.ca/files/15624202/)
+   [EmploymentData.xlsx](sampledata/EmploymentData.xlsx)
    and select any cell in the data table.
 2. Select `Insert > PivotTable` from the menu.
 3. Excel will display the `Create PivotTable` dialog box:.  
@@ -460,7 +461,8 @@ be more attractive and informative.
 :::
 
 You can download the full set of Pivot Tables and associated charts 
-generated in this chapter at [EmploymentDataPT.xlsx](https://canvas.sfu.ca/files/15624691/).
+generated in this chapter at
+[https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
 
 ## Graphical methods
 

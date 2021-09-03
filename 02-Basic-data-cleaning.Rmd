@@ -44,9 +44,9 @@ In this chapter we will learn how to:
 ## Application: Canadian employment data
 
 We will demonstrate the key principles and tools in this chapter 
-by cleaning the November 2020 employment data for Canadian provinces. You 
-can download this data file at 
-https://bvkrauth.github.io/files/CanadaEmploymentNov2020.xlsx. 
+by cleaning the November 2020 employment data for Canadian provinces. The 
+data can be found in the file  
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx) 
 
 ::: economics
 **Economics review: Employment statistics**
@@ -1274,7 +1274,8 @@ date and time.
 The last step in cleaning data is to save your work. In fact you should 
 be saving it regularly so that you don't lose work if something goes wrong. If 
 you have not already done so, save your file now.  You can compare it to my 
-version of the file at ***Include link to completed data file here.***
+version of the file at 
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx) 
 
 In a simple setting, this is all you need to do. But as your projects get 
 more complex, you may find yourself keeping multiple versions of your data 

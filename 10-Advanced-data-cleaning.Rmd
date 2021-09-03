@@ -51,7 +51,8 @@ than in London.  The PWT research team use the results of the ICP to convert
 each country's GDP data to comparable (PPP) units.  The current version 
 of the PWT is available online at http://www.ggdc.net/pwt. 
 
-> Download the required file pwt100.xlsx from https://canvas.sfu.ca/files/15327606/.  
+> Download the required file pwt100.xlsx from   
+> [https://bookdown.org/bkrauth/BOOK/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)  
 
 We also have a secondary data source with cross-country data on top marginal
 tax rates.  Most countries have *progressive* tax systems - that means that
@@ -65,12 +66,17 @@ for a total tax bill of \$50,000, or an average tax rate of 33\%.
 The data on the top marginal tax rate is obtained from the Tax Foundation[^801], 
 a US-based policy and research organization. Our data set comes from Table 1 in the report "Taxing High Incomes: A Comparison of 41 Countries", available online at  https://taxfoundation.org/taxing-high-income-2019/. 
 
-> Download the required file TaxRates.xlsx from https://canvas.sfu.ca/files/15327622/.
+> Download the required file TaxRates.xlsx from 
+> [https://bookdown.org/bkrauth/BOOK/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)  
 
 Finally, we have a "crosswalk" data file I have constructed to help with
 linking the GDP and tax data (more about this below). 
 
-> Download the required file CountryCodes.txt from https://canvas.sfu.ca/files/15327623.
+> Download the required file CountryCodes.txt from 
+> [https://bookdown.org/bkrauth/BOOK/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
+> This file may display in your browser rather than downloading like the other 
+> files.  If that happens, you can right-click on the link above and select 
+> "Save link as" to save the file on your computer.
 
 The rest of the chapter will use these three data files.
 :::
@@ -188,10 +194,8 @@ You can open fixed-width text files in Excel using the
 ::: example
 **Opening a fixed-width file**
 
-Download the file *CountryCodes.txt* if you have not already done 
-so. To see what it looks like, open it up in a text editor. In Windows,
-you can do this by double-clicking on the file. It will
-look like this:
+Open the file [CountryCodes.txt](sampledata/CountryCodes.txt) in a text 
+editor. It will look like this:
    ![Fixed format file in Notepad](bin/FFinNotepad.png) 
 This is a fixed format file in which the CountryName variable
 starts on the 1st character of each line and the CountryCode
@@ -345,7 +349,7 @@ page.  Fortunately, Excel has a way of fixing that: the
 :::example
 **Using the text-to-columns tool**
 
-Download and open the file *TaxRates.xlsx*.  As you can see, it looks
+Open the file [TaxRates.xlsx](sampledata/TaxRates.xlsx).  As you can see, it looks
 like the picture above. To use the Text to Columns tool:
 
 1. Select the column with the data (column A).
@@ -361,7 +365,7 @@ like the picture above. To use the Text to Columns tool:
      `Next>` again, then `Finish`.
 
 Your worksheet should now look like this:
-  ![After Text-to-columns](bin/TTC2.png) 
+  ![After Text-to-columns](bin/TTC2.png)
 Save this file and exit Excel.
 :::
 
@@ -868,8 +872,7 @@ selecting `Home > Format > Unprotect Sheet`.
 
 > You can download the complete Excel file with all data cleaning 
 > from this chapter at 
-> https://canvas.sfu.ca/files/15328441/. 
-
+> [https://bookdown.org/bkrauth/BOOK/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
 
 ## Reading and viewing data in R {#reading-and-viewing-data-in-r}
 
@@ -884,19 +887,25 @@ Tidyverse package:
 # Load the tidyverse
 library("tidyverse")
 ```
-We will also need to download our employment data set
-from https://canvas.sfu.ca/files/15539454/.
+
+We will work with the employment data.
 
 ### Reading a CSV file
 
 Our first step will be reading the data in from the CSV file. The Tidyverse 
 function to do this is called `read_csv()`.  It has one required argument: 
-the name of the CSV file:
+the name of the CSV file.
+
+- Ye can access the online data set directly in R.
+- If you have a slow connection or want to work offline, you can download
+  the data set from 
+  [https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv](sampledata/EmploymentData.csv) and then access the local data set.
+
 ```{r ReadEmpDataFromCSV}
-# The code below assumes that the file "EmploymentData.csv" is in 
-# the working directory.  Change the argument below as needed to 
-# make the function work in your environment 
-EmpData <- read_csv("sampledata/EmploymentData.csv")
+# The code below accesses the online data.  You can also download the 
+# file "EmploymentData.csv" and change the argument to read_csv() 
+# to the local file location
+EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
 ```
 As you can see, R guesses each variable's data type, and reports its 
 guess.  It is always a good idea to read this output and make sure

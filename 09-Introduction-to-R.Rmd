@@ -9,7 +9,7 @@ library("tidyverse")
 # An introduction to R {#an-introduction-to-r}
 
 As we have seen, Excel is a useful tool for both
-[cleaning](#advanced-data-cleaning) and 
+[cleaning](#basic-data-cleaning-with-excel) and 
 [analyzing](#basic-data-analysis-with-excel) data. R is an application
 that has many of the same features as Excel, but is specially 
 designed for statistical analysis. It is a little more complex, 

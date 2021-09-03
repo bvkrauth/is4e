@@ -45,8 +45,8 @@ the data.
 
 Our analysis in this chapter will use historical employment data for
 Canada from January 1976 through January 2021. Download the file
-at https://bvkrauth.github.io/files/CanadaEmploymentHistorical.xlsx, 
-make a working copy, and open it:  
+at 
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx) make a working copy, and open it:  
 ![*Canadian employment data, 1976-2021*](bin/CanadaEmploymentHistorical.png)
 
 Our main data set for analysis is the worksheet *Data for Analysis*, 
@@ -980,7 +980,8 @@ Our final histogram will look like this:
 ## Chapter review {-#review-basic-data-analysis}
 
 You can download the complete Excel file with all analysis from
-this chapter at https://bvkrauth.github.io/files/CanadaEmploymentHistoricalWithAnalysis.xlsx.
+this chapter at 
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHistResults.xlsx](sampledata/CanEmpHistResults.xlsx) 
 
 In this chapter, we learned how to calculate simple statistics in Excel. Calculating 
 the statistics is typically the easiest part of a statistical analysis - cleaning data 

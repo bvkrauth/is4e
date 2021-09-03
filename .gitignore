@@ -6,10 +6,7 @@
 *.html
 *.pdf
 *.log
-*.csv
 *.tex
-*.xlsx
-*.txt
 
 *.docx
 *.doc
@@ -19,6 +16,7 @@
 *.gz
 
 BOOK.Rmd
+scraps.txt
 
 Old/
 _book/

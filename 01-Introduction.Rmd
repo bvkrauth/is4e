@@ -147,7 +147,7 @@ ask for help, but I am happy to help anyone who asks.
 ECON 233 is the first course in the two-course econometrics sequence 
 that is required for all economics majors.  If you've never seen the word
 before, "econometrics" just means statistics and data analysis for
-economics.  The course Canvas page is available at https://canvas.sfu.ca/courses/59191. It includes information on lectures, tutorials, quizzes, and assignments.
+economics.  The course Canvas page is available at https://canvas.sfu.ca/courses/62548. It includes information on lectures, tutorials, quizzes, and assignments.
 
 ::: fyi
 **ECON 233 or BUS 232?**

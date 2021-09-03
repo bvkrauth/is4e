@@ -1,0 +1,159 @@
+---
+title: "Example R Markdown document for Using R chapter"
+author: "Brian Krauth"
+date: "9/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+This R Markdown document contains all of the code in the chapter on 
+Using R.  You can run it by opening it in RStudio and pressing the "Knit"
+button.
+
+# Read in and clean data
+
+Load the tidyverse and read in the data
+```{r}
+library("tidyverse")
+EmpData <- read_csv("EmploymentData.csv")
+#EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+```
+
+Then clean it
+
+- Make permanent changes to EmpData
+- Change MonthYr to date format
+- Add UnempPct and LFPPct
+
+```{r}
+EmpData <- EmpData %>%
+  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
+  mutate(UnempPct = 100*UnempRate) %>% 
+  mutate(LFPPct = 100*LFPRate)
+```
+
+
+# View data
+
+Show selected variables for observations with unemployment rate 
+over 12.5%, sorted by unemployment rate:
+```{r}
+EmpData %>% 
+  filter(UnempPct > 12.5) %>%
+  select(MonthYr, UnempPct, LFPPct, PrimeMinister) %>%
+  arrange(UnempPct)
+```
+
+# Analyze data
+
+Summary statistics for EmpData
+```{r}
+summary(EmpData)
+```
+
+Mean of UnempPct
+```{r}
+mean(EmpData$UnempPct)
+```
+
+Variance of UnempPct
+```{r}
+var(EmpData$UnempPct)
+```
+
+SD of UnempPct
+```{r}
+sd(EmpData$UnempPct)
+```
+
+Median of UnempPct
+```{r}
+median(EmpData$UnempPct)
+```
+
+Mean of AnnPopGrowth
+```{r}
+mean(EmpData$AnnPopGrowth)
+```
+
+Mean of AnnPopGrowth (dropping NA values)
+```{r}
+mean(EmpData$AnnPopGrowth, na.rm = TRUE)
+```
+
+Mean of each column
+```{r}
+EmpData %>%
+  select(where(is.numeric)) %>%
+  lapply(mean, na.rm = TRUE)
+```
+
+Standard deviation of each column
+```{r}
+EmpData %>%
+  select(where(is.numeric)) %>%
+  lapply(sd, na.rm = TRUE) 
+```
+
+Simple Frequency table of PrimeMinister:
+```{r}
+EmpData %>% 
+  count(PrimeMinister)
+```
+
+Binned frequency table of UnempPct:
+```{r}
+EmpData %>% 
+  count(cut_interval(UnempPct, 6))
+```
+# Create graphs
+
+Histogram
+```{r}
+ggplot(data = EmpData,
+       aes(x = UnempPct)) + 
+  geom_histogram(binwidth = 0.5,
+                 fill = "blue") +
+  geom_density() +
+  labs(title = "Unemployment rate",
+      subtitle = paste("January 1976 - January 2021 (",
+                     nrow(EmpData),
+                     " months)",
+                     sep = "",
+                     collapse = ""),
+      caption = "Source: Statistics Canada, Labour Force Survey",
+      tag = "Canada") +
+  xlab("Unemployment rate, %") +
+  ylab("Count")
+```
+
+Time series (line) graph
+```{r}
+ggplot(data = EmpData,
+       aes(x = MonthYr)) + 
+  geom_line(aes(y = UnempPct),
+            col = "blue") +
+  geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
+            y = 15,
+            label = "Unemployment",col="blue") +
+  geom_line(aes(y = LFPPct),
+            col = "red") +
+  geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
+            y = 60,
+            label = "LFP",
+            col = "red") +
+  labs(title = "Unemployment and LFP rates",
+      subtitle = paste("January 1976 - January 2021 (",
+                     nrow(EmpData),
+                     " months)",
+                     sep = "",
+                     collapse = ""),
+      caption = "Source: Statistics Canada, Labour Force Survey",
+      tag = "Canada") +
+  xlab("") +
+  ylab("Percent")  
+```
