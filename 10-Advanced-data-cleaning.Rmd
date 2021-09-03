@@ -196,7 +196,8 @@ You can open fixed-width text files in Excel using the
 
 Open the file [CountryCodes.txt](sampledata/CountryCodes.txt) in a text 
 editor. It will look like this:
-   ![Fixed format file in Notepad](bin/FFinNotepad.png) 
+   ![Fixed format file in Notepad](bin/FFinNotepad.png){width=50%} 
+
 This is a fixed format file in which the CountryName variable
 starts on the 1st character of each line and the CountryCode
 variable starts on the 36th character.
@@ -208,21 +209,21 @@ To open this file in Excel, use the Text Import Wizard:
 3. Find and select the file `CountryCodes.txt`.  You may need to move 
    to the correct folder, and to change the file type to "All files (*.*)"
 4. The first dialog box of the Text Import Wizard allows you to specify
-   the overall structure of your data file:
-   ![Text Import Wizard- Step 1 of 3](bin/TIW1.png) 
+   the overall structure of your data file:  
+   ![Text Import Wizard- Step 1 of 3](bin/TIW1.png){width=50%} 
    Excel guesses about the structure of your data, but you may need to
    correct its guesses. In this case, you should change the file
    type from `Delimited` to `Fixed width`, and select `Next>`.
    - Excel made a few other wrong guesses (it thinks that the file is 
      written in Japanese!) but you can ignore them.
 5. The second dialog box of the Text Import Wizard allows you to 
-   specify where each column starts:
-   ![Text Import Wizard- Step 2 of 3](bin/TIW2.png) 
+   specify where each column starts:  
+   ![Text Import Wizard- Step 2 of 3](bin/TIW2.png){width=50%}  
    Excel seems to have guessed correctly in this case, so go ahead
    and select `Next>`.
 6. The final dialog box of the Text Import Wizard provides some
-   options for changing the data format for each individual column:
-   ![Text Import Wizard- Step 3 of 3](bin/TIW3.png) 
+   options for changing the data format for each individual column:  
+   ![Text Import Wizard- Step 3 of 3](bin/TIW3.png){width=50%}  
    We do not need to worry about any of these options, so go ahead and 
    select `Finish`.
    
@@ -290,7 +291,7 @@ editor.
 
 Use your preferred text editor to open the file CountryCodes.csv. It
 will look something like this:
-![CountryCodes.csv viewed in a text editor](bin/CSVinNotepad.png) 
+![CountryCodes.csv viewed in a text editor](bin/CSVinNotepad.png){width=50%} 
 :::
 
 If a CSV file has `.csv` at the end of its file name, you can open it
@@ -340,7 +341,8 @@ around to see what is available.
 ### Text to columns
 
 Sometimes you will run into an Excel sheet that looks like this:
-  ![Before Text-to-columns](bin/TTC1.png) 
+  ![Before Text-to-columns](bin/TTC1.png){width=50%} 
+
 This can happen if a text file has been incorrectly imported,
 or if you have copied-and-pasted data from a PDF file or web 
 page.  Fortunately, Excel has a way of fixing that: the 
@@ -364,8 +366,9 @@ like the picture above. To use the Text to Columns tool:
      happens if you change the options), select `Next>`, then
      `Next>` again, then `Finish`.
 
-Your worksheet should now look like this:
-  ![After Text-to-columns](bin/TTC2.png)
+Your worksheet should now look like this:  
+  ![After Text-to-columns](bin/TTC2.png){width=50%}
+
 Save this file and exit Excel.
 :::
 
@@ -406,8 +409,8 @@ and *TaxRates.xlsx*. To combine them in a single file:
 1. Open all three files.
 2. Go to *CountryCodes.csv*, and right-click on the *CountryCodes* tab
    at the bottom of the page.  A menu will appear; select `Move or Copy...`
-   and the `Move or Copy` dialog box will appear:
-   ![Move or Copy](bin/MoveOrCopy.png) 
+   and the `Move or Copy` dialog box will appear:  
+   ![Move or Copy](bin/MoveOrCopy.png){width=30%}  
 3. Select *pwt100.xslx* from the `To book:` drop-down box. Your worksheet 
    will now move to that workbook.
 4. Repeat the same process with both worksheets in the *TaxRates.xlsx*
@@ -710,7 +713,7 @@ result from imperfect translation of data between different data sources.
 Excel has a set of ***data validation*** tools to help prevent and fix
 invalid data. Data validation can be accessed by selecting `Data` from
 the menu and then clicking on the Data Validation button, which
-looks like this: ![Data Validation button](bin/DataValidationButton.png). 
+looks like this: ![Data Validation button](bin/DataValidationButton.png){height=16pt}. 
 
 :::example
 **Adding data validation**
@@ -722,7 +725,7 @@ let's add this as a data validation requirement:
 1. Select column K in *GrowthData*.
 2. Select `Data > Data Validation`.  The Data Validation dialog box will 
    appear:
-   ![Data Validation box](bin/DataValidation1.png) 
+   ![Data Validation box](bin/DataValidation1.png){width=50%}  
    By default, it allows "Any value", which means no restriction
    at all.
 3. To add a restriction that negative values are not allowed:
@@ -744,8 +747,9 @@ in the first place.
 **Entering invalid data**
 
 Go to cell K43, and (try to) enter `-1`.  You will see this dialog
-box telling you that this is an invalid value:
-   ![Invalid Data Entered box](bin/InvalidDataEntered.png). 
+box telling you that this is an invalid value:  
+   ![Invalid Data Entered box](bin/InvalidDataEntered.png){width=50%}
+
 Select `Cancel`.
 :::
 
@@ -768,8 +772,8 @@ considered invalid.
 To identify invalid observations, select 
 `Data > Data Validation > Circle Invalid Data`. You will now
 see red circles around all values that violate the validation
-criteria (there may be a slight delay):
-  ![Validation circles](bin/ValidationCircles.png)
+criteria (there may be a slight delay):  
+  ![Validation circles](bin/ValidationCircles.png){width=50%}
 
 To remove the circles, select `Data > Data Validation > Clear Validation Circles`. 
 :::
@@ -830,10 +834,8 @@ changed.  To prevent changes to that worksheet:
 1. Right-click on the *Data* tab at the bottom of the page.  A menu
    will appear.
 2. Select `Protect Sheet`.  The Protect Sheet dialog box will provide several
-   options:
-   
-  ![Protect Sheet dialog box](bin/ProtectSheet.png). 
-
+   options:  
+  ![Protect Sheet dialog box](bin/ProtectSheet.png){width=30%}  
 3. Select `OK`.
    
 Now that you have protected the *Data* worksheet, try to edit any cell. You
@@ -852,7 +854,7 @@ To protect and lock columns A through N in *GrowthData* but
 keep the other columns unlocked:
 
 1. Select all of the cells in the worksheet by clicking on the 
-   ![Select all cells](bin/Excel select all cells.jpg) button.
+   ![Select all cells](bin/Excel select all cells.jpg){height=16pt} button.
 2. Unlock all of the cells by selecting `Home > Format > Lock Cell`.
 3. Lock columns A through N by selecting them, and then
    selecting `Home > Format > Lock Cell`.

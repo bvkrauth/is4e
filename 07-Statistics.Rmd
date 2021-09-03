@@ -292,7 +292,7 @@ received by airplanes, with the hopes that the data could be used to help make
 the planes more robust to damage.  The data looked something like this (this 
 isn't the real data, just a visualization constructed for the example):
 
-<a title="Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept), CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg"><img width="512" alt="Survivorship-bias" src="bin/WaldPlane.png"></a>
+<a title="Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept), CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg"><img width="256" alt="Survivorship-bias" src="bin/WaldPlane.png"></a>
 
 Seeing this data, some military analysts concluded that planes were mostly
 being shot in the wings and in the middle of the fuselage (body), and

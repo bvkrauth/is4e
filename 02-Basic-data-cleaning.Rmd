@@ -580,7 +580,7 @@ directly into the cells.
 As we discussed earlier, we would like to add the two-letter postal abbreviation for each province:
 
 | Province or Territory| ProvAbb |
-|----------------------|:-------:|
+|:---------------------|:-------:|
 | Alberta                   | AB |
 | British Columbia          | BC |
 | Manitoba                  | MB |
@@ -753,7 +753,7 @@ Suppose we want to add a new variable for the (natural) log of population.
    log, we can just type in our formula.  But suppose we don't know 
    the name of the function, or even whether there is such a function.
    a. Click on the insert function button 
-      ![insert function button](bin/Excel insert function button.jpg) 
+      ![insert function button](bin/Excel insert function button.jpg){height=16pt} 
       to the left of the formula bar.
    b. The `Insert Function` dialog box will appear. It will have a 
       very long list of functions. You will want to narrow this list down,

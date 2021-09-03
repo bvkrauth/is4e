@@ -170,14 +170,12 @@ To create a blank Pivot Table based on the employment data:
    [EmploymentData.xlsx](sampledata/EmploymentData.xlsx)
    and select any cell in the data table.
 2. Select `Insert > PivotTable` from the menu.
-3. Excel will display the `Create PivotTable` dialog box:.  
-
-   ![Create Pivot Table dialog box](bin/CreatePivotTable.png)
+3. Excel will display the `Create PivotTable` dialog box:  
+   ![Create Pivot Table dialog box](bin/CreatePivotTable.png){width=50%}  
    The default settings are fine, so select `OK`.
   
-Excel will open a new worksheet that looks like this:
-
-  ![A worksheet with a new Pivot Table](bin/PivotTableSheet.png)
+Excel will open a new worksheet that looks like this:  
+  ![A worksheet with a new Pivot Table](bin/PivotTableSheet.png){width=90%}  
 The Pivot Table itself is on the left side of the new worksheet.
 :::
 
@@ -206,11 +204,10 @@ office for each Canadian prime minister:
 
 1. Check the box next to **PrimeMinister**. The Pivot Table will look 
    like this:  
-   ![A list of prime ministers](bin/PrimeMinisterList.png)
-
+   ![A list of prime ministers](bin/PrimeMinisterList.png){width=20%}  
 2. Drag **MonthYr** into the box marked "$\Sigma$ values". The Pivot Table 
    will now look like this:  
-   ![Number of months served by each prime minister](bin/PrimeMinisterCounts.png)
+   ![Number of months served by each prime minister](bin/PrimeMinisterCounts.png){width=30%}  
 
 As we can see, the table shows the number of observations for each value of the
 **PrimeMinister** variable, which also happens to be the number of months in
@@ -229,20 +226,20 @@ To add a relative frequency column, we first need to add a second absolute
 frequency column:
 
 1. In the PivotTable Fields box, drag **MonthYr** to the "$\Sigma$ values" box.  
-   ![Two absolute frequencies](bin/PrimeMinisterCounts2.png)
+   ![Two absolute frequencies](bin/PrimeMinisterCounts2.png){width=30%}  
 
 Then we convert it to a relative frequency column:
 
 2. Right-click on the "Count of MonthYr2" column, and select 
    `Value Field Settings...`  
-   ![Value Field Settings dialog box](bin/ValueFieldSettings.png)   
+   ![Value Field Settings dialog box](bin/ValueFieldSettings.png){width=30%}   
 3. Click on the `Show Values As` tab and select "% of Column Total" from
    the `Show Values As` drop-down box.
 4. Select `OK`.
 
 The third column will now show the number of observations as a percentage of
 the total:  
-![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png) 
+![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png){width=30%} 
 :::
 
 ### Cross tabulations
@@ -263,7 +260,7 @@ Starting with a blank Pivot Table:
 3. Drag **MonthYr** into the $\Sigma$ values box.
 
 You will now have this table of absolute frequencies:  
-![Joint absolute frequencies](bin/JointAbsFreq.png)
+![Joint absolute frequencies](bin/JointAbsFreq.png){width=40%}
 
 For example, this crosstab tells us Brian Mulroney served 104 months as
 prime minister, with all of those months as a member of the (Progressive) 
@@ -286,7 +283,7 @@ To convert our absolute frequency crosstab into a joint frequency crosstab:
    from the Show Values As drop-down box.
 
 Your table will now look like this:  
-![Joint frequency](bin/JointFreq.png)
+![Joint frequency](bin/JointFreq.png){width=50%}
 
 For example, the table tells us that Brian Mulroney's 104 months as 
 prime minister represent 19.22% of all months in our data.
@@ -306,7 +303,7 @@ To convert our crosstab into a conditional frequency crosstab:
    from the Show Values As drop-down box.
 
 Your table will now look like this:  
-![Conditional frequency](bin/CondFreq.png) 
+![Conditional frequency](bin/CondFreq.png){width=50%} 
 
 For example, Brian Mulroney's 104 months as prime minister represent
 44.64% of all months served by a Conservative prime minister in our data.
@@ -329,11 +326,11 @@ men.
 
 Suppose we want to add the average unemployment rate during
 each prime minister's time in office to this Pivot Table:  
-![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png) 
+![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png){width=30%}
 
 1. Drag **UnempRate** into the box marked "$\Sigma$ values".  The table will 
    now look like this:  
-   ![Sum of UnempRate](bin/UnempRateSum.png) 
+   ![Sum of UnempRate](bin/UnempRateSum.png){width=40%} 
 
 Unfortunately, we wanted to see the *average* unemployment rate for 
 each prime minister, but instead we see the *sum* of unemployment
@@ -343,7 +340,7 @@ rates for each prime minister.  To change this:
 4. Select `Average`
 
 The table now looks like this:  
-![Average of unemployment rate](bin/UnempRateAvg.png) 
+![Average of unemployment rate](bin/UnempRateAvg.png){width=40%} 
 
 We now have the average unemployment rate for each prime minister. It
 is not very easy to read, so we will want to change the formatting
@@ -369,14 +366,14 @@ There is no Canadian prime minister named "Transfer." If you recall, we used
 that value to represent months in the data where the prime minister
 changed.  To exclude those months from our main table:
 
-1. Click on the ![Row Labels button](bin/RowLabelsButton.png). The sort and filter
-   menu will appear:  
-   ![Sort and filter menu](bin/SortAndFilter.png)   
+1. Click on the ![Row Labels button](bin/RowLabelsButton.png){height=16pt}. The 
+   sort and filter menu will appear:  
+   ![Sort and filter menu](bin/SortAndFilter.png){width=30%}   
 
 2. Uncheck the check box next to "Transfer", and select `OK`:
   
 The table no longer includes the Transfer value:  
-![Pivot table with transfer excluded](bin/TransferExcluded.png)
+![Pivot table with transfer excluded](bin/TransferExcluded.png){width=50%}
 
 Note that the grand total has also gone down from 541 to 532.
 :::
@@ -389,15 +386,15 @@ column.
 
 To sort our table by months in office:
 
-1. Click on ![Row Labels button](bin/RowLabelsButton.png) and the 
+1. Click on ![Row Labels button](bin/RowLabelsButton.png){height=16pt} and the 
    sort and filter menu will appear.
 2. Select `More sort options`; the Pivot Table sort dialog box will appear:  
-   ![Pivot table sort](bin/PTSort.png) 
+   ![Pivot table sort](bin/PTSort.png){width=30%} 
 3. Select the `Descending (Z to A)` radio button and "Count of MonthYr" 
    from the drop-down box.
 
 The table is now sorted by number of months in office:  
-![Pivot table sorted](bin/PivotTableSorted.png)
+![Pivot table sorted](bin/PivotTableSorted.png){width=40%}
 :::
 
 We can change number formatting, column and row titles, and various
@@ -415,7 +412,7 @@ reporting the unemployment rate in percentage terms and fewer decimal places:
 3. Select `Number Format`, then change the number format to Percentage 
    with 1 decimal place.
 4. Select `OK` and then `OK` again. The table will now look like this:  
-   ![Pivot Table with unemployment in percentages](bin/UnempRateAvgPct.png) 
+   ![Pivot Table with unemployment in percentages](bin/UnempRateAvgPct.png){width=50%}
 
 5. Change the other three headers.  You can do this through `Value Field Settings...`
    but you can also just edit the text directly.
@@ -424,7 +421,7 @@ reporting the unemployment rate in percentage terms and fewer decimal places:
    - Change "Count of MonthYr2" to "% in office"
 
 Our final table looks like this:  
-![Final Pivot Table](bin/PivotTableFinal.png)  
+![Final Pivot Table](bin/PivotTableFinal.png){width=50%}  
 :::
 
 Finally, we can use Pivot Tables to create graphs.
@@ -437,13 +434,13 @@ cleaning up the Pivot Table so that it shows the data we want to
 represent:
 
 1. Select any cell in this table:  
-  ![Joint absolute frequencies](bin/JointAbsFreq.png)
+  ![Joint absolute frequencies](bin/JointAbsFreq.png){width=50%}
 2. Use filtering to remove "Transfer" from the list
    of prime ministers.
 3. Use sorting to sort by (grand total) number of months in office.
 
    The table should now look like this:  
-   ![Joint absolute frequencies](bin/FinalJointAbsFreq.png)
+   ![Joint absolute frequencies](bin/FinalJointAbsFreq.png){width=50%}
 
 Then we can generate the graph:
 
@@ -454,7 +451,7 @@ Then we can generate the graph:
    select `OK`.
    
 Your graph will look like this:  
-![A bar graph showing months in office for each prime minister](bin/PTChartExample.png) 
+![A bar graph showing months in office for each prime minister](bin/PTChartExample.png){width=50%}
 
 As always, there are various ways we could customize this graph to
 be more attractive and informative.

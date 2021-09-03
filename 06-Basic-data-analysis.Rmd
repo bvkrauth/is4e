@@ -161,8 +161,8 @@ for some of our variables.
 To set up the table:
 
 1. Create a new blank worksheet
-   - You can do this by clicking on the !["+"](bin/AddWorksheetButton.png) button at the 
-     bottom of the screen.
+   - You can do this by clicking on the !["+"](bin/AddWorksheetButton.png){height=16pt}
+     button at the bottom of the screen.
 2. Rename the worksheet *Summary Statistics*
    - You can do this by double-clicking on the tab for your new worksheet. A
      dialog box will open for you to enter the new name.
@@ -266,7 +266,8 @@ as "####". If it is too wide, it will take up too much room.
 There are many different ways to adjust row heights and column widths, 
 but here is the simplest:
 
-1. Select the whole sheet by clicking on the ![select sheet](bin/SelectSheetButton.png) 
+1. Select the whole sheet by clicking on the 
+   ![select sheet](bin/SelectSheetButton.png){height=16pt} 
    button in its upper left corner.
 2. Select `Home > Format > AutoFit Column Width` from the menu.
 
@@ -305,7 +306,7 @@ To make the display formatting a little nicer.
    table that you like.
 
 We now have a nice table of summary statistics:  
-![*Table of summary statistics*](bin/SummaryStatisticsTable.png)
+![*Table of summary statistics*](bin/SummaryStatisticsTable.png){width=50%}
 
 that we could put into a Word or PowerPoint document, and share with an audience.
 :::
@@ -406,7 +407,7 @@ Next, we need to fill in the **Percentage** column (C).
    display format to percentage, with one decimal place.
 
 We now have a simple frequency table for the Party variable:  
-![*Party control frequency table*](bin/PartyControlFrequencyTable.png)
+![*Party control frequency table*](bin/PartyControlFrequencyTable.png){width=50%}
 :::
 
 ### Binned frequency tables
@@ -519,7 +520,7 @@ table:
    and change its display format to Percent.
 
 We now have our binned frequency table:  
-![*Binned frequency table for* **UnempRate**](bin/UnemploymentBinnedFrequencyTable.png)
+![*Binned frequency table for* **UnempRate**](bin/UnemploymentBinnedFrequencyTable.png){width=50%}
 :::
 
 ::: fyi
@@ -574,7 +575,7 @@ A ***time series graph*** plots one or more variables at multiple points in
 time.  Conventionally, time is on the horizontal axis and the variable's
 value is on the vertical axis. For example, we will generate a time series
 graph that looks like this:  
-![*Time series graph of* **UnempRate**](bin/TimeSeriesGraphFinal.png)
+![*Time series graph of* **UnempRate**](bin/TimeSeriesGraphFinal.png){width=50%}
 
 In Excel, time series graphs can be implemented using either the Line
 chart type or the Scatter chart type.  Line graphs are simpler, so we
@@ -597,7 +598,7 @@ We want to create a time series graph for our variable **UnempRate**.
 4. Select `Line` to see the line graph options. 
 5. The dialog box gives you several different types of line graph. Select
    the picture that looks like this:
-   ![Recommended](bin/RecommendedLineGraph.png) 
+   ![Recommended](bin/RecommendedLineGraph.png){width=50%} 
    
    and select `OK`.
 
@@ -609,7 +610,7 @@ one variable, so let's get rid of the others:
    dialog box.
 2. Uncheck the checkbox next to every series in the "Legend Entries (Series)"
    box except **UnempRate**:  
-![*Time graph series of* **UnempRate**](bin/TimeSeriesGraphInitial.png) 
+![*Time graph series of* **UnempRate**](bin/TimeSeriesGraphInitial.png){width=50%}
 
 This looks like the graph we want.
 :::
@@ -773,7 +774,7 @@ To construct a bar graph of the **Party** variable:
 4. Select `Column` and then select `OK`.  
 
 The graph will look something like this:  
-![*Bar graph of* **Party** *variable, default options*](bin/BarGraphInitial.png)
+![*Bar graph of* **Party** *variable, default options*](bin/BarGraphInitial.png){width=50%}
 
 As you can see, basic bar graphs are quite simple.  There is a bar
 for each category (the first column of the table) and variable
@@ -789,7 +790,7 @@ really only need one of those.
 3. Uncheck the check boxes for Percentage, NDP and Transfer.
 
 We now have a bar graph that looks like this:  
-![*Bar graph of* **Party** *variable, simplified*](bin/BarGraph2.png)
+![*Bar graph of* **Party** *variable, simplified*](bin/BarGraph2.png){width=50%}
 
 and shows the number of months in which the two
 largest federal parties were in government over the time frame of
@@ -843,7 +844,7 @@ eye do any extra work, let's put those labels on top.
    the color of the corresponding bar.
 
 Our final graph looks like this:  
-![*Bar graph of* **Party** *variable, final version*](bin/BarGraphFinal.png)
+![*Bar graph of* **Party** *variable, final version*](bin/BarGraphFinal.png){width=50%}
 :::
 
 One of the keys to effective bar graph design is to keep the graph
@@ -859,30 +860,30 @@ to be misleading.
 
 Suppose we start our **Party** bar graph at 200 rather than 
 zero.  We will get this:  
-![*Bar graph for* **Party**, *starting at 200*](bin/BarGraphNonzeroOrigin.png)
+![*Bar graph for* **Party**, *starting at 200*](bin/BarGraphNonzeroOrigin.png){width=50%}
     
 The relative size of these bars is very misleading. The bar for 
 Liberal is three times as big as the bar for Conservative,
 even though the number it represents is only 29% higher.
 :::
 
-Excel provides several popular alternatives to bar graphs.  Pie graphs
-are another way of depicting relative frequencies:  
-![*Pie chart of* **Party** *variable*](bin/PieChart.png)
+Pie graphs are an alternative way of depicting relative frequencies,
+and are also available in Excel along with 3-dimensional variations
+on both pie and bar graphs:  
+
+| Graph type   | Example                                                             |
+|--------------|:-------------------------------------------------------------------:|
+| Pie graph    | ![*Pie chart of* **Party** *variable*](bin/PieChart.png){width=30%} |
+| 3D pie graph | ![3D pie chart of Party variable](bin/3DPieChart.png){width=30%}    |    
+| 3D bar graph | ![3D bar chart of Party variable](bin/3DBarChart.png){width=30%}    |
+
 
 However, most data visualization experts recommend against their 
 use.  Research on how people process visual information usually 
 find that they are *less* informative in practice. People are 
 much better at evaluating the relative size of two lines or 
 rectangles than they are at evaluating the relative size of two 
-pie slices. 
-
-Similar considerations apply to 3D pie charts 
-![3D pie chart of Party variable](bin/3DPieChart.png)
-and 3D bar charts. 
-![3D bar chart of Party variable](bin/3DBarChart.png)
-
-Again, research indicates people are much better at assessing relative
+pie slices. They are also much better at assessing relative
 distances in two dimensions than they are in three dimensions.
 
 ### Histograms
@@ -908,7 +909,7 @@ To construct a histogram of the **UnempRate** variable:
 3. Select `Histogram` and then `OK`.
 
 Our graph will appear:  
-![*Histogram of* **UnempRate**, *with default options*](bin/HistogramInitial.png)
+![*Histogram of* **UnempRate**, *with default options*](bin/HistogramInitial.png){width=50%}
 
 :::
 
@@ -973,7 +974,7 @@ To enhance the quality of this histogram:
 3. Add the vertical axis title **# of months**
 
 Our final histogram will look like this:  
-![*Histogram of* **UnempRate**, *final version*](bin/HistogramFinal.png) 
+![*Histogram of* **UnempRate**, *final version*](bin/HistogramFinal.png){width=50%}
 :::
 
 

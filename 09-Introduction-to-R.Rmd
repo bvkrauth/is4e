@@ -204,8 +204,8 @@ easy to see in a real R Markdown file.
 To create our first R Markdown file:
 
 1. Select `File > New File > R Markdown` from the menu.
-   - You will see a dialog box that looks like this:
-      ![New R Markdown file](bin/NewRMarkdown.png)
+   - You will see a dialog box that looks like this:  
+     ![New R Markdown file](bin/NewRMarkdown.png){width=50%}
 2. The default options are fine, so select `OK`.
 3. Save the file.
 
@@ -223,13 +223,13 @@ chunk is a few lines of R code surrounded by a code fence.
 
 To run a code chunk in our R Markdown file:
 
-1. Go to the code chunk that looks like this:
-   ![An example code chunk](bin/CodeChunk.png)
-2. Press the ![Run current chunk](bin/RunCurrentChunk.png) button.
+1. Go to the code chunk that looks like this:  
+   ![An example code chunk](bin/CodeChunk.png){width=50%}
+2. Press the ![Run current chunk](bin/RunCurrentChunk.png){height=16pt} button.
 
 As you can see, the code in the chunk will run and the results
-will be displayed below.
-   ![Code chunk with output](bin/CodeChunkWithOutput.png)
+will be displayed below.  
+   ![Code chunk with output](bin/CodeChunkWithOutput.png){width=50%}
 :::
 
 You can also ***knit*** the entire R Markdown file into an HTML/word/PDF
@@ -241,7 +241,7 @@ the Knit button.
 
 To knit an entire document:
 
-1. Press the ![Knit](bin/KnitButton.png){width=15%} button.
+1. Press the ![Knit](bin/KnitButton.png){height=16pt} button.
 
 It will take a few moments to process the file, and then the HTML
 file will open in a browser.
@@ -293,7 +293,7 @@ In the menu:
 
 We are done for now, so close RStudio. You may get a warning message that 
 looks something like this:
-  ![Save workspace dialog box](bin/RSaveWorkspace.png)
+  ![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
 
 Never click on the `Save` button here, as it would cause R to
 save the current state of its memory and re-load it next time you start R.
