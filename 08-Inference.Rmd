@@ -366,6 +366,7 @@ just constructed; that is, we are testing the null that $p_{red} = 18/37$
 at a 5\% size.  The blue line depicts the power curve for $n=100$ 
 as in our example, while the green line depicts the power curve for
 $n=20$.
+
 ```{r PowerCurves, fig.cap = "*Power curves for the roulette example*"}
 PowerCurveData <- tibble(theta = seq(0,1,length.out=380),
                          power20 = pbinom(qbinom(0.025,
@@ -403,6 +404,7 @@ ggplot(data = PowerCurveData,
        caption = "H0: Pr(red wins) = 18/37, significance = 0.05", 
        tag = "")
 ```
+
 There are a few features I would like you to notice, all of which
 are common to most regularly used tests:
 

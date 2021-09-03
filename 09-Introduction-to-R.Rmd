@@ -292,7 +292,7 @@ In the menu:
   restart the current R session.
 
 We are done for now, so close RStudio. You may get a warning message that 
-looks something like this:
+looks something like this:  
   ![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
 
 Never click on the `Save` button here, as it would cause R to

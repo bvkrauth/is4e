@@ -143,7 +143,6 @@ ask for help, but I am happy to help anyone who asks.
 
 ## SFU-specific information
 
-
 ECON 233 is the first course in the two-course econometrics sequence 
 that is required for all economics majors.  If you've never seen the word
 before, "econometrics" just means statistics and data analysis for
@@ -232,7 +231,7 @@ https://www.sfu.ca/itservices/technical/software/office365.html.
 :::
 
 Once you have installed Excel, you should confirm that it is working by
-starting the program. You should see something that looks like this:
+starting the program. You should see something that looks like this:  
 ![Excel blank workbook](bin/ExcelBlankWorkbook.png) 
 
 ### Installing R and RStudio {#installing-r-and-rstudio}
@@ -252,7 +251,7 @@ https://rstudio.com/products/rstudio/download/#download.
 Be sure to install R first, then RStudio.
 
 After installing R and RStudio, you should confirm that they are working by
-opening RStudio.  You should see something like this:
+opening RStudio.  You should see something like this:  
 ![RStudio open screenshot](bin/RStudio open screenshot.jpg)
 
 ### Installing the Tidyverse {#installing-the-tidyverse}

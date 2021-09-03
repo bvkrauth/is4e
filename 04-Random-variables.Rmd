@@ -156,6 +156,7 @@ PDF:
             1/37 & a = 35 \\
             0 & a \notin \{-1,35\} \\
           \end{cases}$$
+
 Figure \@ref(fig:RoulettePDF) below shows these three PDFs.
 
 ```{r RoulettePDF, fig.cap = "*PDFs for the roulette example*"}
@@ -306,7 +307,8 @@ $-\infty$ and $\infty$.
 **CDF properties**
 
 Figure \@ref(fig:RouletteCDF) below graphs the CDFs from the previous
-example.
+example:  
+
 ```{r RouletteCDF, fig.cap = "*CDFs for the roulette example*"}
 RouletteCDF <- RoulettePDF %>%
     mutate (Fb = cumsum(fb)) %>%
@@ -335,6 +337,7 @@ ggplot(data = RouletteCDF, mapping = aes(x = a)) +
        caption = "", 
        tag = "")
 ```
+
 Notice that they show all of the general properties described above. 
 
   - The CDF never goes down, only goes up or stays the same.
@@ -540,6 +543,7 @@ percentile of $x$.
 The CDF of $w_{red}$ is:
   $$F_{red}(a) = \begin{cases}0 & a < -1 \\ 0.514 & -1 \leq a < 1 \\ 1 & a \geq 1 \\ \end{cases}$$ 
 We can plot this CDF below.  
+
 ```{r RouletteQuantiles, fig.cap = "*CDFs for the roulette example*"}
 ggplot(data = RouletteCDF, mapping = aes(x = a)) +
   geom_step(aes(y=Fred), col = "red") +

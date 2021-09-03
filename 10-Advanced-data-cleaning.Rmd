@@ -290,7 +290,7 @@ editor.
 **Opening a CSV file as text**
 
 Use your preferred text editor to open the file CountryCodes.csv. It
-will look something like this:
+will look something like this:  
 ![CountryCodes.csv viewed in a text editor](bin/CSVinNotepad.png){width=50%} 
 :::
 
@@ -340,7 +340,7 @@ around to see what is available.
 
 ### Text to columns
 
-Sometimes you will run into an Excel sheet that looks like this:
+Sometimes you will run into an Excel sheet that looks like this:  
   ![Before Text-to-columns](bin/TTC1.png){width=50%} 
 
 This can happen if a text file has been incorrectly imported,
@@ -724,7 +724,7 @@ let's add this as a data validation requirement:
 
 1. Select column K in *GrowthData*.
 2. Select `Data > Data Validation`.  The Data Validation dialog box will 
-   appear:
+   appear:  
    ![Data Validation box](bin/DataValidation1.png){width=50%}  
    By default, it allows "Any value", which means no restriction
    at all.

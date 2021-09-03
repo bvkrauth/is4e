@@ -107,6 +107,7 @@ distribution. What that means is that:
 The CDF of the standard uniform distribution is:
   $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
 Figure \@ref(fig:StdUniformCDF) below shows the CDF of the standard uniform distribution. 
+
 ```{r StdUniformCDF, fig.cap = "*CDF for the standard uniform distribution*"}
 UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
                       Fa=punif(seq(from=-2,to=2,length.out=100)),
@@ -121,6 +122,7 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
        caption = "", 
        tag = "")
 ```
+
 As you can see, the CDF is smoothly increasing betweeen zero and one, and
 flat everywhere else.
 :::
@@ -166,7 +168,7 @@ $a$, it is the *rate* at which it increases.
 
 The PDF of a standard uniform random variable is:
   $$f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}$$
-which looks like this:
+which looks like this:  
 ```{r StdUniformPDF, fig.cap = "*PDF for the standard uniform distribution*"}
 ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
   geom_step(col = "blue") +
@@ -284,7 +286,7 @@ with support:
 and PDF:
   $$f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
 
-For example, if $x \sim U(2,5)$ its support is the range of all values from 2 to 5, and its PDF looks like this:
+For example, if $x \sim U(2,5)$ its support is the range of all values from 2 to 5, and its PDF looks like this:  
 ```{r UniformPDF, fig.cap = "*PDF for the U(2,5) distribution*"}
 UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
@@ -311,7 +313,7 @@ The CDF of the $U(L,H)$ distribution is
     \frac{a-L}{H-L} & L < a < H \\ 
     1 & a \geq H \\ 
     \end{cases}$$
-For example, if $x \sim U(2,5)$ the CDF looks like this: 
+For example, if $x \sim U(2,5)$ the CDF looks like this:  
 ```{r UniformCDF, fig.cap = "*CDF for the U(2,5) distribution*"}
 UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
@@ -392,7 +394,7 @@ $S_x = \mathbb{R}$ and PDF:
 $$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
 
 For example, the PDF for the $N(0,1)$ distribution looks like
-this:
+this:  
 ```{r StNormalPDF, fig.cap = "*PDF for the N(0,1) distribution*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=pnorm(seq(from=-6,to=6,length.out=100)),
@@ -407,13 +409,14 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
        caption = "", 
        tag = "")
 ```
+
 As the figure shows, the $N(0,1)$ distribution is symmetric around 
 $\mu=0$ and bell-shaped, meaning that it is usually close to zero 
 but can occasionally be quite far.  
 
 For other values of $\mu$, the $N(\mu,\sigma^2)$ distribution
 is also symmetric around $\mu$ and bell-shaped, with the "spread"
-of the distribution depending on the value of $\sigma^2$.
+of the distribution depending on the value of $\sigma^2$:  
 ```{r NormalPDF, fig.cap = "*PDF for several normal distributions*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=pnorm(seq(from=-6,to=6,length.out=100)),
@@ -461,6 +464,7 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=Fa)) +
        caption = "", 
        tag = "")
 ```
+
 The Excel function `NORM.DIST()` can be used to calculate the 
 PDF or CDF of any normal distribution.
 

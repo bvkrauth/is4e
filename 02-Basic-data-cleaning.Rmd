@@ -239,17 +239,17 @@ of its basic characteristics and terminology.
 
 ### Terminology and interface {#terminology-and-interface}
 
-Start Excel. Your screen should look something like this:
-![Excel screenshot](bin/ExcelBlankWorkbook.png)
+Start Excel. Your screen should look something like this:  
+![Excel screenshot](bin/ExcelBlankWorkbook.png)  
 
 When giving instructions, I will refer to various elements of Excel's user
 interface by name. You may have been using these elements for years without
 ever knowing their names, so I will list them here:
 
-- The ***menu bar*** is at the top of the screen. 
-   ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)
-- The ***ribbon*** is below the menu bar
-   ![It is a row of buttons.](bin/Excel ribbon.jpg)
+- The ***menu bar*** is at the top of the screen:   
+   ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)  
+- The ***ribbon*** is below the menu bar  
+   ![It is a row of buttons.](bin/Excel ribbon.jpg)  
   - The ribbon has buttons for performing simple actions.
   - The buttons are grouped by function, for example the ribbon above 
     depicts groups called `Clipboard`, `Font`, etc.
@@ -266,7 +266,7 @@ ever knowing their names, so I will list them here:
     (usually but not always `Home`). 
     - I will assume that `Home` is the currently-active option; if it isn't
       you can just select `Home` to make it the currently-active option.
-- The ***formula bar*** is just below the ribbon.
+- The ***formula bar*** is just below the ribbon.  
    ![the long white box ](bin/Excel formula bar.jpg) 
    - It shows the contents of the current cell.
    - You can type in it to change the contents of the current cell.
@@ -274,8 +274,8 @@ ever knowing their names, so I will list them here:
    ![fx](bin/Excel insert function button.jpg){height=16pt} 
    - We will learn to use this later.
 - Most of the screen displays a grid of ***cells*** that is called 
-   a ***spreadsheet*** or ***worksheet***:
-   ![cell grid](bin/ExcelCellGrid.png)
+   a ***spreadsheet*** or ***worksheet***:  
+   ![cell grid](bin/ExcelCellGrid.png)  
   - Columns are identified by letter.
   - Rows are identified by number.
   - Cells are identified by column and row.  For example, the cell 

@@ -720,9 +720,9 @@ EmpData <- EmpData %>%
    | 51-60 |    0      |   0    |
    | 61-70 |    0      |   0    |
    | 71-80 |    1      |  33    |
-4. The time series graph should look something like this:
+4. The time series graph should look something like this:  
    ![*Time series of Al's age*](bin/PP_6_4_TimeSeries.png) 
-5. The histogram should look something like this:
+5. The histogram should look something like this:  
    ![*Histogram of age*](bin/PP_6_5_Histogram.png) 
 
 ## **7** Statistics {-#answers-statistics}

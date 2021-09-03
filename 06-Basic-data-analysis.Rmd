@@ -597,7 +597,7 @@ We want to create a time series graph for our variable **UnempRate**.
    of options.
 4. Select `Line` to see the line graph options. 
 5. The dialog box gives you several different types of line graph. Select
-   the picture that looks like this:
+   the picture that looks like this:  
    ![Recommended](bin/RecommendedLineGraph.png){width=50%} 
    
    and select `OK`.
