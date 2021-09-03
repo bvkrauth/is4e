@@ -985,7 +985,7 @@ length(EmpData$UnempRate)
 ```
 As you can see, the `length()` function returns the length of a vector.
 
-## Chapter review {#review-advanced-data-cleaning}
+## Chapter review {-#review-advanced-data-cleaning}
 
 In this chapter, we learned about many loosely-related topics.  The underlying
 theme that connects them all is that real data can be complicated. We will 
@@ -997,7 +997,9 @@ to the problems that pop up.
 In the next two chapters, we will develop more advanced methods for data 
 analysis in both Excel and R.
 
-### Practice problems {#problems-advanced-data-cleaning}
+## Practice problems {-#problems-advanced-data-cleaning}
+
+Answers can be found in the [appendix](#answers-advanced-data-cleaning).
 
 **SKILL #1: Identify common data file formats**
 
@@ -1046,32 +1048,3 @@ analysis in both Excel and R.
    https://people.sc.fsu.edu/~jburkardt/data/csv/deniro.csv 
    and count the number of observations and variables in it.
 
-### Practice problem answers {#answers-advanced-data-cleaning}
-
-1. The file formats are:
-   a. Fixed width 
-   b. Space or tab delimited
-   c. CSV 
-2. Here are my descriptions, yours may be somewhat different:
-   a. A crosswalk table is a data table we can use to translate variables that are 
-      expressed in one way into another way.  For example, we might use a crosswalk
-      table to translate country names into standardized country codes, or to 
-      translate postal codes into provinces.
-   b. When we have two data tables that contain information on related cross-sectional  
-      units, we can combine their information into a single table by matching observations
-      based on a variable that (a) exists in both tables and (b) connects the observations
-      in some way.
-   c. Aggregating data by groups allows us to group observations according to a common
-      characteristic, and describe those groups using data calculated from the 
-      individual observations.
-3. You can edit cell A1 under scenarios (a) and (c).
-4. If you do this:
-   a. Nothing will happen, but you can ask Excel to mark invalid data.
-   b. Excel will not allow you to enter invalid data.
-5. The R code will be something like this.
-```{r pp_10_05}
-library("tidyverse")
-deniro <- read_csv("https://people.sc.fsu.edu/~jburkardt/data/csv/deniro.csv")
-nrow(deniro)
-ncol(deniro)
-```

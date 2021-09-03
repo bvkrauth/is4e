@@ -748,7 +748,7 @@ variables to work with. As a result, linear regression is the
 most important tool in applied econometrics, and you will spend much of
 your time in ECON 333 learning to use it.
 
-## Chapter review {#review-multivariate-data-analysis}
+## Chapter review {-#review-multivariate-data-analysis}
 
 Econometrics is mostly about the relationship between variables: price
 and quanity, consumption and savings, labour and capital, today and 
@@ -760,7 +760,9 @@ ECON 334, ECON 335, ECON 433, ECON 435) are all about multivariate analysis,
 and will develop both the theory behind these tools and the set of applications
 in much greater detail.
 
-### Practice problems {#problems-multivariate-data-anlysis}
+## Practice problems {-#problems-multivariate-data-analysis}
+
+Answers can be found in the [appendix](#answers-multivariate-data-analysis).
 
 **SKILL #1: Calculate and interpret covariance and correlation**
 
@@ -805,27 +807,3 @@ in much greater detail.
 5. Using the `EmpData` data set, construct the same scatter plot as in problem (4) above, but add
    a smooth fit and a linear fit.
 
-### Practice problem answers {#answers-multivariate-data-anlysis}
-
-1. The covariance and correlation is negative here, so periods of high population growth
-   tend to be periods of *low* unemployment.
-``` {r PP_12_01}
-cov(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
-cor(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
-```
-
-2. I used casewise deletion but it does not matter. It only matters when you add a third variable.
-3. The tables are
-   a. Simple frequency table
-   b. Conditional average
-   c. Crosstab
-4. The scatter plot should look something like this:
-``` {r PP_12_04}
-ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_point()
-```
-
-5. The plot should look something like this:
-```{r PP_12_05}
-ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_point() + 
-  geom_smooth(col = "green") + geom_smooth(method = "lm", col = "blue")
-```

@@ -884,7 +884,7 @@ are typically more conservative (wider) than their asymptotic
 cousins, but the difference becomes negligible as 
 the sample size increases.
 
-## Chapter review {#review-inference}
+## Chapter review {-#review-inference}
 
 In this chapter we have learned to formulate and test hypotheses, and to construct
 confidence intervals. The mechanics of doing so are complicated, but you should not
@@ -903,7 +903,9 @@ to them, but it is more important that you can correctly interpret the results.
 This is the last primarily theoretical chapter. The remaining chapters will be oriented towards
 data and applications.
 
-### Practice problems {#problems-inference}
+## Practice problems {-#problems-inference}
+
+Answers can be found in the [appendix](#answers-inference).
 
 **SKILL #1: Identify parameter, null and alternative**
 
@@ -1013,185 +1015,5 @@ data and applications.
     c. A university degree has a large effect on earnings, where "large" means at least 10\%.
     d. A university degree has a very large effect on earnings, where "very large" means 
       at least 50\%.
-
-
-### Practice problem answers {#answers-inference}
-
-1. The null is:
-     $$H_0: \beta = 0$$
-   and the alternative is:
-     $$H_w: \beta \neq 0$$
-2. Test statistics need to possess characteristics (a), (d), and (e).
-3. In this setting:
-   a. $x_i$ must have a normal distribution.
-   b. The asymptotic distribution is $N(0,1)$
-4. The expression is:
-    $$t = \frac{\bar{x}-\mu_1}{\hat{\sigma}_x/\sqrt{n}} + \frac{\mu_1-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
-5. This question is about calculating the size given the critical values.
-   a. The size is:
-      \begin{align}
-        size &= F_{T_{13}}(-1.96) + 1 - F_{T_{13}}(1.96) \\
-          &= 0.035894296 + 1 - 0.964105704 \\
-          &\approx 0.07
-      \end{align}
-      and the formula for calculating this in Excel is `=T.DIST(-1.96,13,TRUE) +1 - T.DIST(1.96,13,TRUE)`.
-   b. The size is:
-      \begin{align}
-        size &= \Phi(-1.96) + 1 - \Phi(1.96) \\
-          &= 0.024997895 + 1 - 0.975002105 \\
-          &\approx 0.05
-      \end{align}
-      and the formula for calculating this in Excel is `=NORM.S.DIST(-1.96,TRUE) +1 - NORM.S.DIST(1.96,TRUE)`.
-   c. The size is:
-      \begin{align}
-        size &= F_{T_{13}}(-3) + 1 - F_{T_{13}}(2) \\
-          &\approx 0.005119449 + 1 - 0.966579821 \\
-          &\approx 0.04
-      \end{align}
-      and the formula for calculating this in Excel is `=T.DIST(-3,13,TRUE) +1 - T.DIST(1.96,13,TRUE)`.
-   d. The size is:
-      \begin{align}
-        size &= \Phi(-3) + 1 - \Phi(2) \\
-          &\approx 0.001349898 + 1 - 0.977249868 \\
-          &\approx 0.02
-      \end{align}
-      and the formula for calculating this in Excel is `=NORM.S.DIST(-3,TRUE) +1 - NORM.S.DIST(2,TRUE)`.
-   e. The size is:
-      \begin{align}
-        size &= F_{T_{13}}(-\infty) + 1 - F_{T_{13}}(2) \\
-          &\approx 0 + 1 - 0.966579821 \\
-          &\approx 0.03
-      \end{align}
-      and the formula for calculating this in Excel is `=1 - T.DIST(2,13,TRUE)`.
-   f. The size is:
-      \begin{align}
-        size &= \Phi(-\infty) + 1 - \Phi(2) \\
-          &\approx 0 + 1 - 0.977249868 \\
-          &\approx 0.02
-      \end{align}
-      and the formula for calculating this in Excel is `=1 - NORM.S.DIST(2,TRUE)`.
-6. This problem asks you to find the critical values that deliver a given size.
-   a. The critical values are:
-      \begin{align}
-        c_L &= F^{-1}_{T_{17}}(0.005) \\
-          &\approx -2.90 \\
-        c_H &= F^{-1}_{T_{17}}(0.995) \\
-          &\approx 2.90
-      \end{align}
-      and the formulas for calculating this in Excel are `=T.INV(0.005,17)` and
-      `=T.INV(0.995,17)`.
-   b. The critical values are:
-      \begin{align}
-        c_L &= F^{-1}_{T_{17}}(0.025) \\
-          &\approx -2.11 \\
-        c_H &= F^{-1}_{T_{17}}(0.975) \\
-          &\approx 2.11
-      \end{align}
-      and the formulas for calculating this in Excel are `=T.INV(0.025,17)` and
-      `=T.INV(0.975,17)`.
-   c. The critical values are:
-      \begin{align}
-        c_L &= F^{-1}_{T_{17}}(0.05) \\
-          &\approx -1.74 \\
-        c_H &= F^{-1}_{T_{17}}(0.95) \\
-          &\approx 1.74
-      \end{align}
-      and the formulas for calculating this in Excel are `=T.INV(0.05,17)` and
-      `=T.INV(0.95,17)`.
-   d. The critical values are:
-      \begin{align}
-        c_L &= \Phi^{-1}(0.005) \\
-          &\approx -2.58 \\
-        c_H &= \Phi^{-1}(0.995) \\
-          &\approx 2.58
-      \end{align}
-      and the formulas for calculating this in Excel are `=NORM.S.INV(0.005)` and
-      `=NORM.S.INV(0.995)`.
-   e. The critical values are:
-      \begin{align}
-        c_L &= \Phi^{-1}(0.025) \\
-          &\approx -1.96 \\
-        c_H &= \Phi^{-1}(0.995) \\
-          &\approx 1.96
-      \end{align}
-      and the formulas for calculating this in Excel are `=NORM.S.INV(0.025)` and
-      `=NORM.S.INV(0.975)`.
-   f. The critical values are:
-      \begin{align}
-        c_L &= \Phi^{-1}(0.05) \\
-          &\approx -1.65 \\
-        c_H &= \Phi^{-1}(0.95) \\
-          &\approx 1.65
-      \end{align}
-      and the formulas for calculating this in Excel are `=NORM.S.INV(0.05)` and
-      `=NORM.S.INV(0.95)`.
-7. The confidence interval for a mean always follows the same formula
-   a. The confidence interval is:
-      \begin{align}
-        CI^{95} &= \bar{x} \pm F_{T_{15}}^{-1}(0.975)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 2.13*\sqrt{16}*0.3 \\
-          &\approx (1.44, 6.56)
-      \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.975,15)*SQRT(16)*0.3`
-      and `=4+T.INV(0.975,15)*SQRT(16)*0.3`
-   b. The confidence interval is:
-      \begin{align}
-        CI^{90} &= \bar{x} \pm F_{T_{15}}^{-1}(0.95)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 1.75*\sqrt{16}*0.3 \\
-          &\approx (1.90, 6.10)
-      \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.95,15)*SQRT(16)*0.3`
-      and `=4+T.INV(0.95,15)*SQRT(16)*0.3`
-   c. The confidence interval is:
-      \begin{align}
-        CI^{99} &= \bar{x} \pm F_{T_{15}}^{-1}(0.995)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 2.95*\sqrt{16}*0.3 \\
-          &\approx (0.46, 7.54)
-      \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.995,15)*SQRT(16)*0.3`
-      and `=4+T.INV(0.995,15)*SQRT(16)*0.3`
-   d. The confidence interval is:
-      \begin{align}
-        CI^{95} &= \bar{x} \pm \Phi^{-1}(0.975)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 1.96*\sqrt{16}*0.3 \\
-          &\approx (1.65, 6.35)
-      \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.975)*SQRT(16)*0.3`
-      and `=4+NORM.S.INV(0.975,15)*SQRT(16)*0.3`
-   e. The confidence interval is:
-      \begin{align}
-        CI^{90} &= \bar{x} \pm \Phi^{-1}(0.95)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 1.64*\sqrt{16}*0.3 \\
-          &\approx (2.03, 5.97)
-      \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.95)*SQRT(16)*0.3`
-      and `=4+NORM.S.INV(0.95,15)*SQRT(16)*0.3`
-   f. The confidence interval is:
-      \begin{align}
-        CI^{99} &= \bar{x} \pm \Phi^{-1}(0.995)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 2.58*\sqrt{16}*0.3 \\
-          &\approx (0.91, 7.09)
-      \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.995)*SQRT(16)*0.3`
-      and `=4+NORM.S.INV(0.995,15)*SQRT(16)*0.3`
-8. The only thing we have tested here is whether there is no effect.  We rejected that null,
-   so we can rule out the possibility that there is no effect.  But that does not tell us whether the
-   effect is small or large - in order to say anything about that question we need to test 
-   other nulls, or construct a confidence interval.
-   a. Probably false.
-   b. Probably true.
-   c. Possibly true.
-9. The only thing we have tested here is whether there is no effect, and we haven't been
-   able to rule out that possibility.  So we can't really rule anything out.
-   a. Possibly true.
-   b. Possibly true.
-   c. Possibly true.
-10. In effect, the confidence interval simultaneously reports the results of every possible
-    null hypothesis.  So anything in the range $(0.10,0.40)$ cannot be ruled out but anything
-    outside of that range can be ruled out.
-    a. Probably false.
-    b. Probably true.
-    c. Probably true.
-    d. Probably false.
 
 

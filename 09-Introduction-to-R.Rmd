@@ -781,7 +781,7 @@ plot(x, p,
 As you can see, we have a much nicer and clearer looking plot.
 :::
 
-## Chapter review {#review-introduction-to-r}
+## Chapter review {-#review-introduction-to-r}
 
 In this chapter, we learned how to run R programs whether in the console, in
 a script, or in an R Markdown document.  We also learned some basics of
@@ -816,7 +816,9 @@ There are many free sources of useful information about R.
 :::
 
 
-### Practice problems {#problems-introduction-to-r}
+## Practice problems {-#problems-introduction-to-r}
+
+Answers can be found in the [appendix](#answers-introduction-to-r).
 
 **SKILL #1: Perform basic tasks in RStudio**
 
@@ -854,19 +856,3 @@ There are many free sources of useful information about R.
    ```
 
 
-### Practice problem answers {#answers-introduction-to-r}
-
-1. The chapter describes how to do each of these.
-2. Items (a), (b), (d), and (e) are valid R expressions.
-3. Write the R code to perform the following actions:
-   a. `cookies <- c("oatmeal", "chocolate chip", "shortbread")`
-   b. `threes <- seq(3,100,by=3)`
-   c. `threes[5]`
-   d. `threecookies <- list(cookies = cookies, threes = threes)`.
-4. This code will load a built-in data set of automobile gas mileage, and 
-   produce a graph that depicts the relationship between weight and miles per
-   gallon:
-``` {r pp_09_04}
-   data("mtcars")  # load data
-   ggplot(mtcars, aes(wt, mpg)) + geom_point(aes(colour=factor(cyl), size = qsec))
-```

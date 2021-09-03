@@ -977,7 +977,7 @@ Our final histogram will look like this:
 :::
 
 
-## Chapter review {#review-basic-data-analysis}
+## Chapter review {-#review-basic-data-analysis}
 
 You can download the complete Excel file with all analysis from
 this chapter at https://bvkrauth.github.io/files/CanadaEmploymentHistoricalWithAnalysis.xlsx.
@@ -991,7 +991,9 @@ In the next chapter, we will bring this chapter together with the previously
 developed theory of random events and random variables to
 [interpret statistics as random variables](#statistics).
 
-### Practice problems {#problems-basic-data-analysis}
+## Practice problems {-#problems-basic-data-analysis}
+
+Answers can be found in the [appendix](#answers-basic-data-analysis).
 
 **SKILL #1: Calculate summary statistics by hand**
 
@@ -1069,40 +1071,4 @@ developed theory of random events and random variables to
    | Carl  |  78 |
    
    Use Excel to construct a histogram of age, with bin widths of 10 years.
-
-### Practice problem answers {#answers-basic-data-analysis}
-
-1. The answers are:
-   a. Sample size is 3
-   b. Sample average age is 45.
-   c. Sample median of age is 32.
-   d. Sample 25th percentile of age is 28.5.
-   e. Sample variance of age is 829.
-   f. Sample standard deviation of age is 28.8.
-2. The numerical answers are the same as in question 1.  Assuming the table starts
-   in cell A1, the Excel formulas are:
-   a. `=COUNT(B2:B4)`
-   b. `=AVERAGE(B2:B4)`
-   c. `=MEDIAN(B2:B4)`
-   d. `=PERCENTILE.INC(B2:B4,0.25)`
-   e. `=VAR.S(B2:B4)`
-   f. `=STDEV.S(B2:B4)`
-3. The binned frequency table should look something like this:
-
-   | Range | Frequency | % Freq |
-   |-------|-----------|--------|
-   | 0-10  |    0      |   0    |
-   | 11-20 |    0      |   0    |
-   | 21-30 |    1      |  33    |
-   | 31-40 |    1      |  33    |
-   | 41-50 |    0      |   0    |
-   | 51-60 |    0      |   0    |
-   | 61-70 |    0      |   0    |
-   | 71-80 |    1      |  33    |
-4. The time series graph should look something like this:
-   ![*Time series of Al's age*](bin/PP_6_4_TimeSeries.png) 
-5. The histogram should look something like this:
-   ![*Histogram of age*](bin/PP_6_5_Histogram.png) 
-
-
 

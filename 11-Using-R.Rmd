@@ -484,7 +484,7 @@ ggplot(data = EmpData,
   ylab("Percent")
 ```
 
-## Chapter review {#review-using-r}
+## Chapter review {-#review-using-r}
 
 As we have seen, we can do many of the same things in Excel and R.  R is typically
 more difficult to use for simple analysis tasks, and there is nothing 
@@ -493,7 +493,9 @@ with more complicated tasks, and there are many tasks where Excel doesn't do
 everything that R can do.  You should think of them as complementary tools, and
 be comfortable using both.
 
-### Practice problems {#problems-using-r}
+## Practice problems {-#problems-using-r}
+
+Answers can be found in the [appendix](#answers-using-r).
 
 **SKILL #1: Use mutate to add or change a variable**  
 **SKILL #2: Use filter, arrange and select to modify a data table**
@@ -541,60 +543,3 @@ be comfortable using both.
 
 6. Using the `PPData` data set, create a time series graph of the employment rate.
 
-### Practice problem answers {#answers-using-r}
-
-1. The R code to create this data table is as follows:
-
-```{r PP_11_01, collapse = FALSE}
-PPData <- EmpData %>%
-  mutate(Year = format(MonthYr, "%Y")) %>%
-  mutate(EmpRate = Employed/Population) %>%
-  filter(Year >= 2010) %>% 
-  select(MonthYr,Year,EmpRate,UnempRate,AnnPopGrowth) %>%
-  arrange(EmpRate)
-print(PPData)
-```
-
-2. The R code is as follows. None of the variables have missing data.
-
-```{r PP_11_02, collapse = FALSE}
-### A: Mean employment rate
-mean(PPData$EmpRate)
-### B: Table of medians
-PPData %>%
-    select(where(is.numeric)) %>%
-    lapply(median)
-```
-   
-3. The employment rate is a continuous variable, so the appropriate kind of 
-   frequency table here is a binned frequency table.
-   
-```{r PP_11_03, collapse = FALSE}
-PPData %>%
-    count(cut_interval(EmpRate, 6))
-```
-
-4. The R code for these calculations is as follows:
-   
-```{r PP_11_04, collapse = FALSE}
-qnorm(0.45,mean=4,sd=6)
-qt(0.975,df=8)
-pnorm(0.75)
-rbinom(5,size=10,prob=0.5)
-```
-
-5. The code below is the minimal code needed to create the histogram using the default
-   options.  You could improve on the graph quite easily by adjusting some of these 
-   options.
-
-```{r PP_11_05}
-ggplot(data = PPData, mapping = aes(x = EmpRate)) + geom_histogram()
-```
-
-6. The code below is the minimal code needed to create the graph using the default
-   options.  You could improve on the graph quite easily by adjusting some of these 
-   options.
-
-```{r PP_11_06}
-ggplot(data = PPData, mapping = aes(x = MonthYr, y = EmpRate)) + geom_line()
-```

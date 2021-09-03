@@ -1314,7 +1314,7 @@ follow a few simple rules:
 At this level, you do not normally need to keep archived versions.  But you should
 at least distinguish between your master version and working copy.
 
-## Chapter review {#review-basic-data-cleaning-with-excel}
+## Chapter review {-#review-basic-data-cleaning-with-excel}
 
 Data cleaning is among the most important practical skills one can develop in 
 applied statistical analysis. Simple statistical methods like averages
@@ -1334,11 +1334,13 @@ concepts such as linking, aggregating, error validation/handling,
 importing and exporting, as well has how to to implement them in both Excel 
 and R.
 
-### Practice problems {#problems-basic-data-cleaning-with-excel}
+## Practice problems {-#problems-basic-data-cleaning-with-excel}
 
 Each chapter will include a few simple practice problems to help you check
 your knowledge.  They are organized by the specific skill or area of knowledge
 you are practicing.
+
+Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
 
 **SKILL #1: Identify features of tidy data**
 
@@ -1407,35 +1409,4 @@ you are practicing.
    a. Display the current month. 
    b. Display the date 100 days from today.
    c. Display the number of days since your birth.
-
-### Practice problem answers {#answers-basic-data-cleaning-with-excel}
-
-1. Table (b) shows a tidy data set. 
-2. Characteristic (a) is necessary for a vaiable to function
-   as an ID variable.
-3. Cell E15 is 2 columns and 3 rows away from cell C12.  So we change all relative 
-   references from column B to column D, and all relative references from row 2 to 
-   row 5, and all relative references from row 10 to row 13.  Absolute references
-   are not changed.
-   a. `=D5`
-   b. `=$B$2`
-   c. `=$B5`
-   d. `=D$2`
-   e. `=SUM(D5:D13)`
-   f. `=SUM($B$2:$B$10)`
-   g. `=SUM($B5,$B13)`
-   h. `=SUM(D$2,D$10)`
-4. The formulas are:
-   a. `=SQRT(A2)`
-   b. `=MIN(A2:A100)`
-   c. `=ABS(A2-B2)`
-5. The formulas are:
-   a. `=IF(A2<0.05,"Reject","Fail to reject")`
-   b. `=CONCAT("A2 = ",A2)`
-   c. `=LEFT(A2,2)`
-6. The formulas are:
-   a. `=MONTH(TODAY())`
-   b. `=TODAY()+100`
-   c. `=TODAY()-DATE(1969,11,20)` - using my birthday; yours will obviously be
-      different.
 
