@@ -103,7 +103,7 @@ Before we go any further, note that we haven't yet changed the
 print(EmpData)
 ```
 As you can see, the **MonthYr** variable is still listed as a character
-variable and the new **UnempPct* and **LFPPct* variables do not seem to
+variable and the new **UnempPct** and **LFPPct** variables do not seem to
 exist.
 
 What has happened here?  Our original commands simply created a *new* object *based*
@@ -214,10 +214,12 @@ mean(EmpData$AnnPopGrowth)
 This is because math in R follows the
 [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) 
 standard for numerical arithmetic, which says that any calculation
-involving `NA` should also result in `NA`.  Whenever you have missing 
-values, you should investigate before proceeding.  Sometimes (as in our case
-here), missing values are for a good reason, other times they are the result
-of a mistake or problem that needs to be fixed.
+involving `NA` should also result in `NA`.  Some other applications
+drop missing data from the calculation.
+
+Whenever you have missing values, you should investigate before proceeding.  Sometimes 
+(as in our case here), missing values are for a good reason, other times they 
+are the result of a mistake or problem that needs to be fixed.
 
 Once we have investigated the missing values, we can tell R explicitly
 to exclude them from the calculation by adding the `na.rm = TRUE` option:
