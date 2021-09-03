@@ -452,7 +452,16 @@ We will use these three results later on.
 
 ## Chapter review {#review-math-review}
 
-To be added
+This appendix provides some of the basic mathematical background needed for this 
+course. There are many other useful sources if you need further information. 
+
+- Wikipedia's coverage of mathematics and introductory statistics content is 
+  usually quite reliable, and there is no shame in using it.
+- Your calculus textbook will typically provide much more detail on functions,
+  sequences, and limits, and almost any undergraduate math textbook will include
+  an appendix on set theory.
+
+Finally, you can just ask.
 
 ### Practice problems {#problems-math-review}
 

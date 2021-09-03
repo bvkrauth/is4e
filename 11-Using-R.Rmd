@@ -486,7 +486,12 @@ ggplot(data = EmpData,
 
 ## Chapter review {#review-using-r}
 
-To be added
+As we have seen, we can do many of the same things in Excel and R.  R is typically
+more difficult to use for simple analysis tasks, and there is nothing 
+wrong with using Excel when it is easier.  But the usability gap gets smaller
+with more complicated tasks, and there are many tasks where Excel doesn't do
+everything that R can do.  You should think of them as complementary tools, and
+be comfortable using both.
 
 ### Practice problems {#problems-using-r}
 
