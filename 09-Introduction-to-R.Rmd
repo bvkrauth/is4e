@@ -15,9 +15,12 @@ that has many of the same features as Excel, but is specially
 designed for statistical analysis. It is a little more complex, 
 but more powerful in many important ways. This chapter will introduce
 you to some of the basic concepts of R and associated tools such as R
-Markdown, RStudio, and the Tidyverse.  We will later 
-[use these tools](#using-r) to analyze data and create publication-quality 
-graphs. 
+Markdown, RStudio, and the Tidyverse.  We will later use these tools
+to [read](#reading-and-viewing-data-in-r) and 
+[analyze](#using-r) 
+data, and to create 
+[publication-quality graphs](#multivariate-data-analysis)
+that are well beyond what can be done in Excel.
 
 :::goals
 **Chapter goals**
