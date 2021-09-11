@@ -10,9 +10,6 @@
 
 *.docx
 *.doc
-*.jpg
-*.jfif
-*.svg
 *.gz
 
 BOOK.Rmd
