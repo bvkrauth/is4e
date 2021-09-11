@@ -16,7 +16,7 @@ this chapter, we will use this knowledge to do some useful analysis
 of the Canadian employment data we have already worked with.  We will
 also use ggplot, R's powerful graphing system.
 
-::: goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will learn how to use R to:

@@ -13,8 +13,8 @@ tools for a [single discrete random variable](#random-variables). This
 chapter will extend those tools to work wit continuous random variables, 
 and with multiple random variables.
 
-::: goals
-***Chapter goals***
+::: {.goals data-latex=""}
+**Chapter goals**
 
 In this chapter we will:
 
@@ -201,7 +201,7 @@ I have defined the PDF in terms of the CDF, but it is also possible to
 derive the CDF from the PDF.  This requires integral calculus, so I will
 give the definition below but not expect you to use it.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Deriving the CDF from the PDF of a continuous random variable**
 
 The formula for deriving the CDF of a continuous random variable
@@ -215,7 +215,7 @@ to know for this course is that it *can* be solved.
 The continuous PDF has many properties that are similar but not
 identical to the properties of the discrete PDF.  
 
-::: fyi
+::: {.fyi data-latex=""}
 Like the discrete PDF, the continuous PDF is non-negative for all values:
   $$f_x(a) \geq 0$$
 and is strictly positive for all values in the support:
@@ -239,7 +239,7 @@ whether the random variable is continuous or discrete.
 The definition for the expected value of a continuous random variable 
 is different and uses integral calculus. 
 
-::: fyi
+::: {.fyi data-latex=""}
 **The expected value for a continuous random variable**
 
 When $x$ is continuous, its expected value is defined as:
@@ -353,7 +353,7 @@ A nonlinear function of a uniform random variable is genearlly
 not uniform, but it has a very useful characteristic described 
 below.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Uniform distributions in video games**
 
 Uniform distributions are important in many computer applications
@@ -532,7 +532,7 @@ Since the standard normal CDF is available as a built-in function in Excel
 or R, so we can use this result to calculate the CDF for any normally
 distributed random variable.
 
-::: fyi
+::: {.fyi data-latex=""}
 A very important result called the Central Limit Theorem tells
 us that many "real world" random variables have a probability distribution 
 that is well-approximated by the normal distribution. 

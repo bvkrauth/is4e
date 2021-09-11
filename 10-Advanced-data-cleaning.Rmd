@@ -13,7 +13,7 @@ In an earlier chapter, we learned some
 skills using Excel, and some [introductory R skills](#an-introduction-to-r).  This 
 chapter will build on these skills by teaching some more advanced tools and concepts.
 
-::: goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will learn how to:
@@ -32,7 +32,7 @@ We will do this while building a data set describing long-run economic
 growth in a wide cross-section of countries. 
 
 
-::: economics
+::: {.economics data-latex=""}
 **Data on long-run economic growth**
 
 Our main data source will be the ***Penn World Table*** (PWT), a cross-country
@@ -120,7 +120,7 @@ are built from ***text files***.
 Files that are not text files are usually called ***binary*** files. Binary
 files are generally not human-readable.
 
-:::economics
+::: {.economics data-latex=""}
 **The economics of file formats**
 
 What determines the file format used by a given program? Technical
@@ -563,7 +563,7 @@ if no match is found.  This is a good default, but the optional
 arguments `if_not_found` and `match_mode` can be used if you want 
 to do something other than that.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Related functions**
 
 `XLOOKUP()` is a relatively new addition to Excel, so you may see files that
@@ -637,7 +637,7 @@ These functions can all be used to construct summary statistics
 or to construct group aggregate variables within our data set
 (as in this chapter).
 
-:::fyi
+::: {.fyi data-latex=""}
 **Related functions**
 
 The `COUNTIFS()`, `AVERAGEIFS()`, `SUMIFS()`, `MINIFS()` and `MAXIFS()` 
@@ -927,7 +927,7 @@ that everything is the way that we want it:
 
 We have assigned the data in the CSV file to the variable `EmpData`.
 
-:::fyi
+::: {.fyi data-latex=""}
 **Additional options**
 
 Our data file happens to be a nice and tidy one, so `read_csv()` worked 

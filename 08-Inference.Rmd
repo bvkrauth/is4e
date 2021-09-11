@@ -26,7 +26,7 @@ true value).
 The set of procedures for constructing confidence intervals and 
 hypothesis tests is called statistical ***inference***.
 
-::: goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will learn how to:
@@ -137,7 +137,7 @@ Notice that there is something of an asymmetry between the null and
 alternative hypothesis: the null is typically (though not necessarily)
 a single value and the alternative is every other possible value. 
 
-:::fyi
+::: {.fyi data-latex=""}
 **What null hypothesis to choose?**
 
 Our framework here assumes that you already know what null hypothesis you
@@ -323,7 +323,7 @@ or more than 58 games.
 
 
 
-::: fyi
+::: {.fyi data-latex=""}
 **A general test for a single probability**
 
 We can generalize the test we have constructed so far to the case
@@ -428,7 +428,7 @@ so it is important to spend enough to get clear results but not
 much more than that.
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 **P values**
 
 The convention of always using a 5\% significance level for 
@@ -487,7 +487,7 @@ $F_n(\cdot)$ of $s_n$ with its limit $F(\cdot)$.  As with most approximations,
 this is useful whenever $F_n(\cdot)$ is difficult to calculate and $F(\cdot)$
 is easy to calculate. 
 
-::: fyi
+::: {.fyi data-latex=""}
 **CENTRAL LIMIT THEOREM**: Let $\bar{x}_n$ be the sample average 
 from a random sample of size $n$ on the random variable $x_i$ with
 mean $E(x_i) = \mu_x$ and variance $var(x_i) = \sigma_x^2$. Then
@@ -512,7 +512,7 @@ What does the central limit theorem mean?
 What about statistics other than the sample average?  Well it turns out that 
 Slutsky's theorem also extends to convergence in distribution.
 
-::: fyi
+::: {.fyi data-latex=""}
 **SLUTSKY THEOREM**: Let $g(\cdot)$ be a continuous function. Then:
   $$s_n \rightarrow^D s \implies g(s_n) \rightarrow^D g(s)$$
 :::

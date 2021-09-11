@@ -5,7 +5,7 @@ so that we can understand it and/or make predictions about its future
 results. Probability is an essential tool for casinos, as well as for
 banks, insurance companies, and any other businesses that manage risks.
 
-::: goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will learn how to:
@@ -237,7 +237,7 @@ take on any of an infinite number of values.  This adds a few complications,
 and is the reason that the probability axioms refer to events (sets of
 outcomes) and not individual outcomes.
 
-::: fyi
+::: {.fyi data-latex=""}
 **What do probabilities really mean?**
 
 What does it really mean to say that the probability of the ball landing in 

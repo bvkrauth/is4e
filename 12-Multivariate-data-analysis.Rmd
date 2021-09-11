@@ -21,7 +21,7 @@ subject of your next course in statistics (most likely ECON 333), but we
 will touch on a few of the basics in this chapter, using a combination of 
 theoretical concepts, Excel, and R.
 
-:::goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter, we will learn how to:
@@ -141,7 +141,7 @@ avoids throwing out data. But it is occasionally important to use the
 same data for all calculations, in which case we would use 
 listwise deletion.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Covariance and correlation in Excel**
 
 The sample covariance and correlation between two variables (data ranges) 
@@ -577,7 +577,7 @@ ggplot(data = EmpData,
 We would also choose a color scheme other than red and green, since that
 is the most common form of color blindness.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Scatter plots in Excel**
 
 Scatter plots can also be created in Excel, though it is more work and 

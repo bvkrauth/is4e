@@ -8,7 +8,7 @@ that describe a single variable.  Later in the term, we will learn
 [multivariate methods](#multivariate-data-analysis) that describe the 
 relationship between two or more variables.
 
-::: goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will learn how to:
@@ -523,7 +523,7 @@ We now have our binned frequency table:
 ![*Binned frequency table for* **UnempRate**](bin/UnemploymentBinnedFrequencyTable.png){width=50%}
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 The `FREQUENCY()` function is another way to create a frequency
 table.  However, this function is a tricky one to learn, 
 and Microsoft recently changed how it works.  So we will skip it.
@@ -733,7 +733,7 @@ There is no strict rule for whether to include zero, but we can consider the
 general principle described earlier: our graph should be informative and
 not misleading. 
 
-:::fyi
+::: {.fyi data-latex=""}
 **For further reading**
 
 Data visualization skills are valuable in the academic world and in

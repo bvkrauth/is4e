@@ -15,7 +15,7 @@ described using the theory of probability and random variables. We will also
 explore one of the most important uses of statistics: to ***estimate*** or guess 
 at the value at, some unknown parameter of the DGP.
 
-::: goals
+::: {.goals data-latex=""}
 ***Chapter goals***
 
 In this chapter we will:
@@ -326,7 +326,7 @@ is the redefined population one we are interested in?  There is no right
 or wrong answers to these questions, and sometimes our data are simply
 not good enough to answer our questions.
 
-:::fyi
+::: {.fyi data-latex=""}
 **Nonresponse bias in recent US elections**
 
 Going into both the 2016 and 2020 US presidential elections, polls
@@ -439,7 +439,7 @@ the sample frequency using the formula for the binomial distribution.
 Unfortunately, most statistics typically have sampling distributions that
 are quite difficult to calculate.  
 
-::: fyi
+::: {.fyi data-latex=""}
 To see why the sampling distribution of a statistic is so difficult
 to calculate, suppose we have a discrete random variable $x_i$ whose 
 support $S_x$ has five elements. Then we need to calculate the sampling
@@ -855,7 +855,7 @@ means that $w_n$ converges in probability to $c$.
 
 Having defined our terms we can now state the law of large numbers.
 
-::: fyi
+::: {.fyi data-latex=""}
 **LAW OF LARGE NUMBERS**: Let $\bar{x}_n$ be the sample average 
 from a random sample of size $n$ on the random variable $x_i$ with
 mean $E(x_i) = \mu_x$. Then
@@ -911,7 +911,7 @@ Slutsky's theorem roughly says that if the law of large numbers
 applies to a statistic $s_n$, it also applies to $g(s_n)$ for any continuous 
 function $g(\cdot)$.
 
-::: fyi
+::: {.fyi data-latex=""}
 **SLUTSKY THEOREM**: Let $g(\cdot)$ be a continuous function. Then:
   $$s_n \rightarrow^p c \implies g(s_n) \rightarrow^p g(c)$$
 :::

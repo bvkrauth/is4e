@@ -15,7 +15,7 @@ This chapter will develop both both some principles of data cleaning and the
 basic Excel tools needed to implement them .  We will also apply this
 knowledge by using Excel to clean a real data set.
 
-::: goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will learn how to:
@@ -48,7 +48,7 @@ by cleaning the November 2020 employment data for Canadian provinces. The
 data can be found in the file  
 [https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx) 
 
-::: economics
+::: {.economics data-latex=""}
 **Economics review: Employment statistics**
 
 Employment statistics are typically covered in a Principles of
@@ -207,7 +207,7 @@ example a Canadian data set might have both a **Province** variable that takes o
 "Québec" and "Nova Scotia" and a **ProvinceID** variable that takes on values like "QUEBEC"
 and "NOVASCOTIA."
 
-::: fyi
+::: {.fyi data-latex=""}
 **Names, IDs, and probabilistic matching**
 
 Proper names are typically *not* used as ID variables since they are not necessarily 
@@ -949,7 +949,7 @@ As you can see, Excel displays the correct ranks. We can check this by sorting
 on **Population** and seeing if **PopRank** is also sorted.
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 **Advanced options**
 
 The `RANK.EQ()` function has several relatives with similar syntax:
@@ -1037,7 +1037,7 @@ statements. It is also useful for creating ID variables.
 
 
 
-::: fyi
+::: {.fyi data-latex=""}
 **Advanced options**
 
 There are many useful functions to manipulate text strings in Excel:
@@ -1117,7 +1117,7 @@ variables.
 
 
 
-::: fyi
+::: {.fyi data-latex=""}
 **Advanced options**
 
 Some additional functions that work with logical variables:
@@ -1225,7 +1225,7 @@ Most of the time, Excel's handling of dates works seamlessly and is
 very clever. But sometimes Excel guesses wrong, and this can create
 all sorts of problems. 
 
-::: fyi
+::: {.fyi data-latex=""}
 **Excel dates and genetics**
 
 Excel's handling of dates caused a significant unanticipated problem
@@ -1256,7 +1256,7 @@ example, the gene MARCH2 is now called MARCHF2.
 In addition to dates, Excel can also handle date-time values such as 
 `11/1/2020  12:00:00 PM`.  
 
-::: fyi
+::: {.fyi data-latex=""}
 **How Excel handles times**
 
 Excel treats times as partial days. For example,

@@ -18,7 +18,7 @@ random outcomes we are interested in are quantitative,
 that is, they can be described by a number. Quantitative outcomes 
 are also called "random variables." 
 
-::: goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will learn how to:

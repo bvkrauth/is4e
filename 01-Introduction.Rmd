@@ -3,7 +3,7 @@
 Before we dive into the day-to-day course material, it is important to understand
 the big picture of what we are trying to do here, and to get set up for our work.
 
-::: goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will:
@@ -303,15 +303,15 @@ This book uses consistent visual conventions to convey information.
 Boxes like this are for examples
 :::
 
-::: goals
+::: {.goals data-latex=""}
 Boxes like this are for showing course or chapter goals.
 :::
 
-::: economics
+::: {.economics data-latex=""}
 Boxes like this are for providing economic background
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 Boxes like this are for providing optional information that
 might be of interest to some students.
 :::

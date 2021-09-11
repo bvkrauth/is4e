@@ -22,7 +22,7 @@ data, and to create
 [publication-quality graphs](#multivariate-data-analysis)
 that are well beyond what can be done in Excel.
 
-:::goals
+::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter we will learn how to:
@@ -157,7 +157,7 @@ embedded in them. In fact, this book is written in R Markdown.
 
 R Markdown is an implementation of the Markdown markup language in R. 
 
-::: fyi
+::: {.fyi data-latex=""}
 **What is Markdown?**
 
 Markdown is a markup language just like HTML, which means that it is 
@@ -251,7 +251,7 @@ By default, R Markdown files usually knit to HTML, but we can knit
 to other file formats including Word and PDF.  We will stick to 
 HTML in this course.
 
-:::fyi
+::: {.fyi data-latex=""}
 **R Markdown resources**
 
 R Markdown is as simple or as complicated as you want to make it. A plain
@@ -638,7 +638,7 @@ provided ***packages*** of useful new functions and data.
 There are thousands of packages available online.  We will use a particularly
 useful package called the ***Tidyverse***. 
 
-:::fyi
+::: {.fyi data-latex=""}
 **What is the Tidyverse?**
 
 The Tidyverse was created by the data scientist Hadley Wickham (also one of 
@@ -802,7 +802,7 @@ you need to. Instead I want you to focus on learning how to think about
 a coding task, how to find information, and how to design and implement 
 your plans. 
 
-::: fyi
+::: {.fyi data-latex=""}
 **For more information on R**
 
 There are many free sources of useful information about R. 

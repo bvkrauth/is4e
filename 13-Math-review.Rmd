@@ -158,7 +158,7 @@ The combination of these basic definitions, relationships (identity,
 element, subset) and operations (union, intersection, complement) 
 are collectively called ***set algebra***.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Some standard results about sets**
 
 Given the basic components of set algebra, we can establish many useful rules. 
@@ -251,7 +251,7 @@ we can just refer to a function without defining exactly what it is,
 just like we can talk about a variable $x$ or a set $A$ without 
 assigning it a particular value.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Function or multiplication?**
 
 Students sometimes confuse functions and multiplication because of the way we 
@@ -376,7 +376,7 @@ You will learn or have learned the formal definition of a limit in your
 calculus course.  I won't make you re-learn it for this class, but the
 formal definition is provided below for your reference.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Definition of a limit**
 
 Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that 
