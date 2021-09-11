@@ -11,6 +11,7 @@
 *.doc
 *.gz
 
+BOOK.tex
 BOOK.Rmd
 scraps.txt
 
