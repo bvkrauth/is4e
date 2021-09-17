@@ -424,7 +424,7 @@ or the ***expectation*** of the random variable.
 The formula might look difficult if you are not used to the notation, but
 it is actually quite simple to calculate:
 
-1. Figure out tne set of values in the support of $x$.
+1. Figure out the set of values in the support of $x$.
 2. Multiply each value in the support by the PDF at that value.
 3. Add these all up.
 
@@ -498,8 +498,8 @@ $I(b=14)$, it is a *nonlinear* function of $b$ itself.
 If we could take the expected value inside of a nonlinear function we would 
 get:
   \begin{align}
-    E(w_{14}) &= 2 I(\underbrace{E(b)}_{18}=14) - 1 \qquad \textrm{(can we do this?)} \\
-      &= 2 \underbrace{I(18=14)}_{0} - 1  \\
+    E(w_{14}) &= 36 I(\underbrace{E(b)}_{18}=14) - 1 \qquad \textrm{(can we do this?)} \\
+      &= 36 \underbrace{I(18=14)}_{0} - 1  \\
       &= -1 
   \end{align}
 which is clearly wrong since we already calculated that $E(w_{14}) = -0.027$.
