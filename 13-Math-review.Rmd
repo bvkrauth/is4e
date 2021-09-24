@@ -286,7 +286,7 @@ We use indicator functions all the time in probability and statistics because th
 to convert a qualitative statement like "Bob is employed" 
 into a quantitative statement like $I(\textrm{Bob is employed}) = 1$.
 
-## Sequences, limits and summations
+## Sequences and summations
 
 ### Cartesian products
 
@@ -351,41 +351,6 @@ above. These are a few other ways of defining a sequence:
  - As functions of other sequences: $y_i = \ln(x_i)$.
  - As functions of the index itself $x_i = a^i$
 
-### Limits
-
-Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.
-We say that $x^*$ is the ***limit*** of this 
-sequence if $x_i$ gets closer and closer to $x^*$ as
-$i$ gets bigger and bigger.
-
-- The limit of a sequence can be a number.
-- The limit of a sequence can be $\infty$ or $-\infty$.
-- Not all sequences have limits.
-
-::: example
-**Limits**
-
-$$ \lim (1,1,1,\ldots) = 1$$
-$$\lim\left(1,\frac{1}{2},\frac{1}{3},\ldots\right) = 0$$
-$$\lim(1,2,3,\ldots) = \infty$$
-$$\lim(-1,-2,-3,\ldots) = -\infty$$
-$$\lim(0,1,0,1,0,1,\ldots) \textrm{ does not exist}$$
-:::
-
-You will learn or have learned the formal definition of a limit in your 
-calculus course.  I won't make you re-learn it for this class, but the
-formal definition is provided below for your reference.
-
-::: {.fyi data-latex=""}
-**Definition of a limit**
-
-Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that 
-the number $c$ is the limit of this sequence: 
-   $$\lim_{i\rightarrow \infty} x_i = c$$
-if for any $\delta > 0$ there exists an $N_{\delta}$ such that
-   $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
-:::
-
 ### Summations
 
 Many statistics we are calculating are constructed by adding 
@@ -449,6 +414,42 @@ it also obeys these properties:
   $$\sum_{i=1}^n ax_i = a \sum_{i=1}^n x_i $$
 
 We will use these three results later on.
+
+## Limits
+
+Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.
+We say that some number $c$ is the ***limit*** of this 
+sequence if $x_i$ gets closer and closer to $c$ as
+$i$ gets bigger and bigger.
+
+- The limit of a sequence can be a number.
+- The limit of a sequence can be $\infty$ or $-\infty$.
+- Not all sequences have limits.
+
+::: example
+**Limits**
+
+$$ \lim (1,1,1,\ldots) = 1$$
+$$\lim\left(1,\frac{1}{2},\frac{1}{3},\ldots\right) = 0$$
+$$\lim(1,2,3,\ldots) = \infty$$
+$$\lim(-1,-2,-3,\ldots) = -\infty$$
+$$\lim(0,1,0,1,0,1,\ldots) \textrm{ does not exist}$$
+:::
+
+You will learn or have learned the formal definition of a limit in your 
+calculus course.  I won't make you re-learn it for this class, but the
+formal definition is provided below for your reference.
+
+::: {.fyi data-latex=""}
+**Definition of a limit**
+
+Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that 
+the number $c$ is the limit of this sequence: 
+   $$\lim_{i\rightarrow \infty} x_i = c$$
+if for any $\delta > 0$ there exists an $N_{\delta}$ such that
+   $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
+:::
+
 
 ## Chapter review {-#review-math-review}
 
