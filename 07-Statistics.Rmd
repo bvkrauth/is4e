@@ -826,9 +826,14 @@ so far are finite sample results.
 
 We will state two main asymptotic results in this chapter: the law of large
 numbers and Slutsky's theorem.  A third asymptotic result called the central 
-limit theorem will be stated in the next chapter. All three results rely on 
-relatively sophisticated math, so I will not expect you to do much with 
-them.  Please focus on the intuition and interpretation and don't worry 
+limit theorem will be stated in the next chapter. 
+
+All three results rely on the concept of a limit, which you would
+have learned in your calculus course.  If you need to review that
+concept, please see the [section on limits](#limits)
+in the math appendix.  However, I will not expect you to do
+any significant amount of math with these results.  Please focus 
+on the intuition and interpretation and don't worry 
 too much about the math.
 
 ### Defining the LLN

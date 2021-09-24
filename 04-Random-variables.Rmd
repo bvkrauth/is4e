@@ -33,6 +33,12 @@ In this chapter we will learn how to:
   Bernoulli, binomial, and discrete uniform.
 :::
 
+The material in this chapter will use some mathematical notation 
+(the summation operator) that provides a convenient way to
+represent long sums.  Please review the section on
+[sequences and summations](#sequences-and-summations)
+in the math appendix.
+
 ## Random variables {#introduction-to-random-variables}
 
 A ***random variable*** is a number whose value depends

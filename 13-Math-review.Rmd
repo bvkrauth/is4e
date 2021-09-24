@@ -286,7 +286,7 @@ We use indicator functions all the time in probability and statistics because th
 to convert a qualitative statement like "Bob is employed" 
 into a quantitative statement like $I(\textrm{Bob is employed}) = 1$.
 
-## Sequences and summations
+## Sequences and summations {#sequences-and-summations}
 
 ### Cartesian products
 
@@ -415,7 +415,7 @@ it also obeys these properties:
 
 We will use these three results later on.
 
-## Limits
+## Limits {#limits}
 
 Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.
 We say that some number $c$ is the ***limit*** of this 
