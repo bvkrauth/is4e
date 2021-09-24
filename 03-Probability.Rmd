@@ -681,7 +681,7 @@ red die is showing 2 and the white die is showing 4.
 10. Calculate each of the following conditional probabilities:
     a. $\Pr(\textrm{Yo wins} | \textrm{Boxcars wins})$
     b. $\Pr(\textrm{Yo wins} | \textrm{Field wins})$
-    c. $\Pr(\textrm{Yo wins} \cap \textrm{Boxcars loses})$
+    c. $\Pr(\textrm{Yo wins} | \textrm{Boxcars loses})$
     d. $\Pr(\textrm{Field wins} | \textrm{Yo wins})$
     e. $\Pr(\textrm{Boxcars wins} | \textrm{Yo wins})$
 11. Which of the following pairs of events are independent?
@@ -724,7 +724,6 @@ red die is showing 2 and the white die is showing 4.
     a. $\Pr(A) \leq \Pr(B)$
     b. $\Pr(A \cap B) = \Pr(A)$
     c. $\Pr(A | B) = 1$
-    Statements (a), (b) and (c) are true.
 16. Let $A$ and $B$ be two independent events.  Which of the following
     statements are true?
     a. $\Pr(A \cap B) = 0$.
