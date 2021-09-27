@@ -200,7 +200,7 @@ EmpData <- EmpData %>%
             &= \frac{0}{2/36} \\
             &= 0
         \end{align}
-11. The events in (d) and (e) are independent.
+11. The events in (e) are independent.
 12. Statements (a), (c), (e), (g), and (i) are true.
 13. Statements (b) and (c) are true.
 14. Statements (a), (d), (e), (f), and (h) are true.
