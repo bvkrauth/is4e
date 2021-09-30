@@ -866,7 +866,7 @@ This is usually exactly what we want Excel to do.
 Select cell H3 and take a look at the formula bar. You'll notice that
 while the original cell H2 contains `=D2+E2`, cell H3 actually contains
 `=D3+E3`. This is exactly what we would want; each cell in column H
-caluclates the province's labour foce by adding togehter the unemployed
+calculates the province's labour force by adding together the unemployed
 and employed counts from the same province (i.e. same row).
 :::
 
@@ -882,7 +882,7 @@ is supposed to represent the total Canadian population, but each
 cell in this column shows a different number.
 
 Because Excel treats cell references as relative, copying the 
-cell L2 to the rest of column L produes:
+cell L2 to the rest of column L produces:
 - Cell L2 contains `=SUM(C2:C11)`
 - Cell L3 contains `=SUM(C3:C12)`
 - Cell L4 contains `=SUM(C4:C13)`
@@ -1370,10 +1370,10 @@ Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
 
 **SKILL #2: Identify features of ID variables**
 
-2. Which of the following characteristics is necessary for a vaiable to function
+2. Which of the following characteristics is necessary for a variable to function
    as an ID variable?
    a. It takes on a different value for each observation.
-   b. Each value it can take on has an associated observztion.
+   b. Each value it can take on has an associated observation.
    c. It can take only one value.
 
 **SKILL #3: Use absolute and relative references in Excel**
