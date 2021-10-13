@@ -281,10 +281,10 @@ EmpData <- EmpData %>%
       \end{align}
    b. The expected value is 
       \begin{align}
-        E(r) &= \sum_{a \in S_r} a^2\Pr(r=a) \\
+        E(r^2) &= \sum_{a \in S_r} a^2\Pr(r=a) \\
           &= 1^2*\frac{1}{6} + 2^2*\frac{1}{6} + 3^2*\frac{1}{6} + 4^2*\frac{1}{6} + 5^2*\frac{1}{6} + 6^2*\frac{1}{6} \\
-          &= 81/6 \\
-          &= 13.5 
+          &= 91/6 \\
+          &= 15.17 
       \end{align}
 8. The key here is to write down the definition of the specific quantile you are 
    looking for, then substitute the CDF you derived earlier.
@@ -330,18 +330,18 @@ EmpData <- EmpData %>%
       \end{align}
    b. The standard deviation is 
       $$sd(y) = \sqrt{var(y)} \approx \sqrt{0.0525} \approx 0.229$$
-10. Earlier, you found $E(r) = 3.5$ and $E(r^2) = 13.5$.  So we can apply
+10. Earlier, you found $E(r) = 3.5$ and $E(r^2) = 15.17$.  So we can apply
     our result that $var(x) = E(x^2) - E(x)^2$ for a simpler way of calculating
     the variance.  
     a. The variance is:
       \begin{align}
         var(r) &= E(r^2) - E(r)^2 \\
-          &= 13.5 - 3.5^2 \\
-          &= 1.25
+          &= 15.17 - 3.5^2 \\
+          &= 2.92
       \end{align}
     b. The standard deviation is:
-      \begin{align}
-        sd(r) &= \sqrt{var(r)} = \sqrt{1.25} \approx 1.18
+      \begin{align}2
+        sd(r) &= \sqrt{var(r)} = \sqrt{2.92} \approx 1.71
       \end{align}
 11. The Bernoulli distribution describes any random variable (like $y$) that
     has a binary $\{0,1\}$ support.

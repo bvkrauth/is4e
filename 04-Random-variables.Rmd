@@ -1004,7 +1004,7 @@ wins.
     wins.
     a. What standard distribution describes $Y_{10}$?
     b. Use existing results for this distribution to find $E(Y_{10})$.
-    c. Use existing results for this distribution to find $var(Y_{100})$.
+    c. Use existing results for this distribution to find $var(Y_{10})$.
     d. Use Excel to calculate $\Pr(Y_{10} = 0)$.
     e. Use Excel to calculate $\Pr(Y_{10} \leq 10/16)$.
     f. Use Excel to calculate $\Pr(Y_{10} > 10/16)$.
