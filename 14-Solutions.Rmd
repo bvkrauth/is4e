@@ -204,7 +204,7 @@ EmpData <- EmpData %>%
 12. Statements (a), (c), (e), (g), and (i) are true.
 13. Statements (b) and (c) are true.
 14. Statements (a), (d), (e), (f), and (h) are true.
-15. Statements (a), (b) and (c) are true.
+15. Statements (a) and (b) are true.
 16. Statements (b) and (c) are true.
 
 ## **4** Introduction to random variables {-#answers-random-variables}
