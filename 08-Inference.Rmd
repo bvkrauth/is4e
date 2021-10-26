@@ -499,10 +499,10 @@ What does the central limit theorem mean?
   - Fundamentally, it means that if $n$ is big enough then the probability
     distribution of $\bar{x}_n$ is approximately normal 
     *no matter what the original distribution of $x_i$ looks like.*
-  - In order for the CLT to apply, we need to rescale $\bar{x}_n$
+  - In order for the CLT to apply, we need to re-scale $\bar{x}_n$
     so that it has zero mean (by subtracting $E(\bar{x}_n) = \mu_x$) 
     and constant variance as $n$ increases (by dividing by 
-    $sd(\bar{x}_n) = \sigma_x/\sqrt{n}$)).  That rescaled sample
+    $sd(\bar{x}_n) = \sigma_x/\sqrt{n}$)).  That re-scaled sample
     average is $z_n$.  
   - In practice, we don't usually know $\mu_x$ or $\sigma_x$ so 
     we can't calculate $z_n$ from data. Fortunately, there are some
@@ -662,7 +662,7 @@ just ask you to understand that it *can* be derived once we
 assume normality of the $x_i$.
 
 The null distribution of this particular test statistic under these particular assumptions was derived in the 1920's by William Sealy Gosset, a statistician 
-working at the Guiness brewery.  To avoid getting in trouble at work (Guinness 
+working at the Guinness brewery.  To avoid getting in trouble at work (Guinness 
 did not want to give away trade secrets) Gosset published under the pseudonym 
 "Student".  As a result, the family of distributions he derived is called
 "Student's T distribution".
@@ -892,7 +892,7 @@ In this chapter we have learned to formulate and test hypotheses, and to constru
 confidence intervals. The mechanics of doing so are complicated, but you should not
 let the various formulas distract you from the more basic idea of evidence: hypothesis
 testing is about how strong the evidence is in favor of (or against) a particular 
-true/false statment about the data generating process, and confidence intervals are
+true/false statement about the data generating process, and confidence intervals are
 about finding a range of values for a parameter that are consistent with the observed
 data.
 
@@ -926,7 +926,7 @@ Answers can be found in the [appendix](#answers-inference).
       the null is false.
    e. The test statistic needs to be a number that can be calculated from the data.
    f. The test statistic needs to have a normal distribution.
-   g. The test statstic's value depends on the true value of the parameter.
+   g. The test statistic's value depends on the true value of the parameter.
 
 **SKILL #3: Find distribution of test statistic under the null**
 
@@ -1008,7 +1008,7 @@ Answers can be found in the [appendix](#answers-inference).
    b. A university degree has some effect on earnings.
    c. A university degree has a large effect on earnings.
 10. Suppose you estimate the effect of a university degree on earnings at age 30, and 
-    your 95\% confidence inteval for the effect is $(0.10,0.40)$, where an effect of 0.10 
+    your 95\% confidence interval for the effect is $(0.10,0.40)$, where an effect of 0.10 
     means a degree increases earnings by 10\% and an effect of 0.40 means that a degree
     increases earnings by 40\%. Based on this information, 
     classify each of these statements as "probably true", 'possibly true", or "probably false":

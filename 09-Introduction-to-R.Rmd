@@ -86,7 +86,7 @@ print("Hello world!")
 ```
 As you type your command in, you may notice that RStudio showed various
 pop-ups with helpful information about the command.  It will also
-autocomplete your command for you.
+auto-complete your command for you.
 :::
 
 R maintains a ***command history*** that remembers commands you
@@ -260,7 +260,7 @@ like HTML, Markdown is designed so it still "works" if you do something
 unexpected.
 
 If you want to try something new in R Markdown, or have forgotten how to do 
-something, the most useful resource is the one-page *R Markdown Cheatsheet*.  It 
+something, the most useful resource is the one-page *R Markdown Cheat sheet*.  It 
 is available directly in RStudio, or at 
 https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf.
 You can also just search for "r markdown cheatsheet".

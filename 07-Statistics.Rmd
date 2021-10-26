@@ -276,7 +276,7 @@ run into the following problems:
     - In supply/demand analysis, we only observe quantity supplied and
       quantity demanded at the current market price.
       
-When observations are subject to nonresponse or censoring, we must intepret
+When observations are subject to nonresponse or censoring, we must interpret
 the data carefully.
 
 ::: example
@@ -985,7 +985,7 @@ Answers can be found in the [appendix](#answers-statistics).
    c. A data set from a survey of 100 randomly selected SFU students from each
       faculty.
    d. A data set that reports total SFU enrollment for each year from 2005-2020.
-   e. A data set from administrative sources that describes demogrphic information
+   e. A data set from administrative sources that describes demographic information
       and postal code of residence for all SFU students in 2020.
 
 **SKILL #3: Describe the probability distribution of a very simple data set**
@@ -1085,7 +1085,7 @@ Answers can be found in the [appendix](#answers-statistics).
 11. Suppose we have the data set described in question 3 above. Classify each of the 
     following estimators as biased or unbiased, and calculate the bias.
     a. The sample frequency $\hat{f}_1$ as an estimator of the probability $\Pr(x_i=1)$.
-    b. The sample average $\bar{x}$ as an estiamtor of the population mean $E(x_i)$
+    b. The sample average $\bar{x}$ as an estimator of the population mean $E(x_i)$
     c. The sample variance $\hat{\sigma}_x^2$  as an estimator of the population variance $var(x_i)$
     d. The sample standard deviation $\hat{\sigma}_x$ as an estimator of the population standard deviation $sd(x_i)$
     e. The sample minimum $xmin$  as an estimator of the population minimum $\min(S_x)$.
@@ -1095,7 +1095,7 @@ Answers can be found in the [appendix](#answers-statistics).
     - The average earnings of Canadian men: $\mu_M$.
     - The average earnings of Canadian women: $\mu_W$.
     - The male-female earnings gap in Canada: $\mu_M - \mu_W$.
-    - The male-famale earnings ratio in Canada: $\mu_M/\mu_W$. 
+    - The male-female earnings ratio in Canada: $\mu_M/\mu_W$. 
       
     and we have calculated the following statistics from a random sample of Canadians:
     - The average earnings of men in our sample $\bar{y}_{M}$
@@ -1117,7 +1117,7 @@ Answers can be found in the [appendix](#answers-statistics).
 13. Suppose we have the data set described in question 3 above. Calculate the mean squared error 
     for each of the following estimators.
     a. The sample frequency $\hat{f}_1$ as an estimator of the probability $\Pr(x_i=1)$.
-    b. The sample average $\bar{x}$ as an estiamtor of the population mean $E(x_i)$
+    b. The sample average $\bar{x}$ as an estimator of the population mean $E(x_i)$
     c. The sample minimum $xmin$  as an estimator of the population minimum $\min(S_x)$.
     d. The sample maximum $xmax$  as an estimator of the population maximum $\max(S_x)$.
 

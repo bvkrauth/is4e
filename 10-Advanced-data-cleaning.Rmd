@@ -551,7 +551,7 @@ population in 1990.
 4. Copy/paste or fill the formula to the remaining cells in column
    K.
    
-YOu may note that the PWT goes all the way back to 1950, and may wonder why
+You may note that the PWT goes all the way back to 1950, and may wonder why
 I picked 1990 as my starting point.  The reason for this is many countries
 do not have data going back to 1950, especially those countries 
 that were part of or allied with the Soviet Union. By 1990, the PWT has 

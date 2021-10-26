@@ -608,7 +608,7 @@ one variable, so let's get rid of the others:
 
 1. Select `Design > Select Data` which will open the `Select Data Source`
    dialog box.
-2. Uncheck the checkbox next to every series in the "Legend Entries (Series)"
+2. Uncheck the check box next to every series in the "Legend Entries (Series)"
    box except **UnempRate**:  
 ![*Time graph series of* **UnempRate**](bin/TimeSeriesGraphInitial.png){width=50%}
 
@@ -654,7 +654,7 @@ but we can talk about and apply a few basic ideas:
          are available at http://colorbrewer2.org/. 
    - Readers in their 50's and above often have difficulty reading small text
      - Avoid squeezing important text into a tight space.
-     - Generate graphics that can be rescaled.
+     - Generate graphics that can be re-scaled.
    - Readers may have more general and severe visual impairments.
      - Provide alt text for all images.   
      
