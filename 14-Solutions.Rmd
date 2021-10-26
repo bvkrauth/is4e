@@ -578,29 +578,23 @@ EmpData <- EmpData %>%
         \end{align}
     b. The expected value is:
        \begin{align}
-          E(16y + 16b - 2) &= 16E(y) + 16E(b) - 2 \\
-            &= 16/18 + 16/36 - 2 \\
-            &= -24/36
+          E(16y + 31b - 2) &= 16 E(y) + 31 E(b) - 2 \\
+            &= 16/18 + 31/36 - 2 \\
+            &= -9/36
        \end{align}
 11. This question uses the formulas for the variance and covariance of 
     a linear function of two random variables. 
     a. The covariance is:
        \begin{align}
-          cov(16y,16b) &= 16^2 cov(y,b) \\
-            &\approx 16^2 * (-0.00154) \\
-            &\approx -0.39424
+          cov(16y,31b) &= 16 * 31 * cov(y,b) \\
+            &\approx 16 * 31 * (-0.00154) \\
+            &\approx -0.7638
        \end{align}
     b. The variance is:
        \begin{align}
           var(y+b) &= var(y) + var(b) + 2 cov(y,b) \\
             &\approx 0.0525 + 0.027 + 2*(-0.00154) \\
             &\approx 0.07642
-        \end{align}
-    b. The variance is:
-       \begin{align}
-          var(16y + 16b - 2) &= 16^2 var(y+b) \\
-            &\approx 16^2 * 0.07642 \\
-            &\approx 19.56352
         \end{align}
 12. The result of a bet on Boxcars is *negatively* related to the
     result of a bet on Yo.

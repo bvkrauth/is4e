@@ -1042,14 +1042,13 @@ and variance:
 **SKILL #9: Work with linear functions of random variables**
 
 10. Your net winnings if you bet \$1 on Yo and \$1 on Boxcars can
-    be written $16y + 16b - 2$. Find the following expected values:
+    be written $16y + 31b - 2$. Find the following expected values:
     a. Find $E(y + b)$
-    b. Find $E(16y + 16b - 2)$
+    b. Find $E(16y + 31b - 2)$
 
 11. Find the following variances and covariances:
-    a. Find $cov(16y,16b)$
+    a. Find $cov(16y,31b)$
     b. Find $var(y + b)$
-    b. Find $var(16y + 16b - 2)$
 
 **SKILL #10: Interpret covariances and correlations**
 
