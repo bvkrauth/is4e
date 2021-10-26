@@ -19,7 +19,7 @@ EmpData <- EmpData %>%
 [Click here to see the problems](#problems-basic-data-cleaning-with-excel)
 
 1. Table (b) shows a tidy data set. 
-2. Characteristic (a) is necessary for a vaiable to function
+2. Characteristic (a) is necessary for a variable to function
    as an ID variable.
 3. Cell E15 is 2 columns and 3 rows away from cell C12.  So we change all relative 
    references from column B to column D, and all relative references from row 2 to 
@@ -51,7 +51,7 @@ EmpData <- EmpData %>%
 
 [Click here to see the problems](#problems-probability)
 
-1. The sample space is the set of all posible outcomes for $(r,w)$, and its cardinality
+1. The sample space is the set of all possible outcomes for $(r,w)$, and its cardinality
    is just the number of elements it has.
    a. The sample space is:
       \begin{align}
@@ -163,7 +163,7 @@ EmpData <- EmpData %>%
            &= 2/36 \\
            &\approx 0.056 
       \end{align}
-10. The conditional probabilty is just the ratio of the joint probability to 
+10. The conditional probability is just the ratio of the joint probability to 
     the probability of the event we are conditioning on:
     a. The conditional probability is:
        \begin{align}
@@ -364,7 +364,7 @@ EmpData <- EmpData %>%
     e. The Excel formula for $\Pr(Y_{10} \leq 10/16)$ would be 
        `=BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result 
         $$\Pr(Y_{10} \leq 10/16) \approx 0.565$$
-    f. The Exel formula for $\Pr(Y_{10} > 10/16)$ would be
+    f. The Excel formula for $\Pr(Y_{10} > 10/16)$ would be
        `=1-BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result 
        $$\Pr(Y_{10} > 10/16) \approx 0.435$$
 13. The key here is to apply the formulas for the expected value and variance 
@@ -1068,7 +1068,7 @@ EmpData <- EmpData %>%
     the sample size increases.  In contrast the estimators based on the first observation,
     and on the first 100 observations are both unbiased, but they do not change as the 
     sample size increases.  So the LLN does not apply, and the estimators are not 
-    consistent. The LLN does apply to the sample median because of Slusky's theorem, 
+    consistent. The LLN does apply to the sample median because of Slutsky's theorem, 
     but that makes it a consistent estimator of the population *median*, which may or
     may not be equal to the population *mean*.
 
@@ -1413,7 +1413,7 @@ ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_po
    f. Enumeration is not an option here, so we use set-builder notation: 
       $B^C = \{x \in \mathbb{Z}: x \notin \{2,4\}\}$
 6. Remember that the indicator function $I(\cdot)$ returns one for true 
-   statements and zero for false satements.
+   statements and zero for false statements.
    a. $I(x < 5) = I(4 < 5) =1$
    b. $I(x \textrm{ is an odd number}) = I(4 \textrm{ is an odd number}) = 0$
    c. $I(x < 5) - I(\sqrt{x} \textrm{ is an integer}) = I(4 < 5) - I(\sqrt{4} \textrm{ is an integer}) = 1 - 1 = 0$

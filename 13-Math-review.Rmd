@@ -475,7 +475,7 @@ Answers can be found in the [appendix](#answers-math-review).
 
 **SKILL #2: Determine the cardinality of a set**
 
-3. Calculate the cardinatity of the sets you defined in problems (1) and (2) above.
+3. Calculate the cardinality of the sets you defined in problems (1) and (2) above.
 
 **SKILL #3: Identify whether sets are identical, disjoint, or subsets**
 

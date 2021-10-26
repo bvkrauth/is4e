@@ -750,7 +750,7 @@ your time in ECON 333 learning to use it.
 ## Chapter review {-#review-multivariate-data-analysis}
 
 Econometrics is mostly about the relationship between variables: price
-and quanity, consumption and savings, labour and capital, today and 
+and quantity, consumption and savings, labour and capital, today and 
 tomorrow.  So most of what we do is multivariate analysis.  
 
 This chapter has provided a brief view of some of the main techniques for 

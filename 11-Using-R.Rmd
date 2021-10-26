@@ -176,7 +176,7 @@ control of Canadian policy makers.
 ### Saving code and data
 
 It is possible to save your data set in R's internal format just like you
-would save an EXcel file.  But I'm not going to tell you how to do that,
+would save an Excel file.  But I'm not going to tell you how to do that,
 because what you *really* need to do is save your code.
 
 Because it is command-based, R enables an entirely different and much
@@ -581,7 +581,7 @@ Answers can be found in the [appendix](#answers-using-r).
 
 **SKILL #6: Construct a simple or binned frequency table**
 
-3. Using the `PPData`data set, construct a freqency table of the employment rate.
+3. Using the `PPData`data set, construct a frequency table of the employment rate.
 
 **SKILL #7: Perform simple probability calculations in R**
 
