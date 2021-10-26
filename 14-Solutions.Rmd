@@ -610,7 +610,7 @@ EmpData <- EmpData %>%
         f_x(a) &= \begin{cases}
           0 & a < -1 \\
           0.5 & -1 \leq a \leq 1 \\
-          1 & a > 1 \\
+          0 & a > 1 \\
           \end{cases}
       \end{align}
     b. The CDF is:
