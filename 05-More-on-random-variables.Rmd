@@ -123,7 +123,7 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
        tag = "")
 ```
 
-As you can see, the CDF is smoothly increasing betweeen zero and one, and
+As you can see, the CDF is smoothly increasing between zero and one, and
 flat everywhere else.
 :::
 
@@ -349,7 +349,7 @@ A linear function of a uniform random variable also has a uniform
 distribution. That is, if $x \sim U(L,H)$ and $y = a + bx$ where
 $b > 0$, then:
   $$y \sim U(a + bL, a + bH)$$
-A nonlinear function of a uniform random variable is genearlly 
+A nonlinear function of a uniform random variable is generally 
 not uniform, but it has a very useful characteristic described 
 below.
 
@@ -838,7 +838,7 @@ The ***correlation coefficient*** of two random variables $x$ and $y$ is
 defined as:
   $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
 Like the covariance, the correlation describes the strength of a (linear) 
-relationship between $x$ and $y$.  But it is rescaled in a way that makes
+relationship between $x$ and $y$.  But it is re-scaled in a way that makes
 it more convenient for some purposes.
 
 ::: example
@@ -859,7 +859,7 @@ difference between them is that correlation is scale-invariant. That
 is:
 
 - It always lies between -1 and 1.
-- It is unchanged by any rescaling or change in units.  That is,
+- It is unchanged by any re-scaling or change in units.  That is,
   for any positive constants $a$ and $b$:
   $$corr(ax,by) = corr(x,y)$$
   
