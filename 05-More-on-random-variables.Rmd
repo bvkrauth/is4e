@@ -488,7 +488,7 @@ and the standard deviation is just the square root of the variance:
 Any linear function of a normal random variable is also normal.  That is, if 
   $$x \sim N(\mu,\sigma^2)$$
 Then for any constants $a$ and $b$:
-  $$ax + b \sim N(a\mu + b, b^2\sigma^2)$$
+  $$ax + b \sim N(a\mu + b, a^2\sigma^2)$$
 Just to be clear, we already showed that $E(ax +b) = aE(x) + b$ and 
 $var(ax+b) = a^2 var(x)$ for any random variable $x$.  What is new here 
 is that $ax +b$ is normally distributed if $x$ is.
