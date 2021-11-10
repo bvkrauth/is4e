@@ -610,7 +610,7 @@ The joint distribution tells you two things about these variables
    sometimes called that variable's ***marginal*** distribution.
    - For example, we can derive each variable's CDF from the joint CDF:
       $$F_x(a) = \Pr(x \leq a) = \Pr(x \leq a \cap y \leq \infty) = F_{x,y}(a,\infty)$$
-      $$F_y(b) = \Pr(y \leq n) = \Pr(x \leq \infty \cap y \leq b) = F_{x,y}(\infty,b)$$
+      $$F_y(b) = \Pr(y \leq b) = \Pr(x \leq \infty \cap y \leq b) = F_{x,y}(\infty,b)$$
    - We can also derive each variable's PDF from the joint PDF
 2. The *relationship* between the two variables.  
    - We will develop several ways of describing this relationship: conditional
