@@ -1007,12 +1007,13 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
    | Betty |  32 |
    | Carl  |  78 |
    
-   Use a calculator or pencil and paper to calculate the following statistics:
+   Use a calculator or pencil and paper to calculate the following statistics
+   (*please skip parts c and d of this question*):
    
    a. Sample size.
    b. Sample average age.
-   c. Sample median of age.
-   d. Sample 25th percentile of age.
+   c. ~~Sample median of age.~~  
+   d. ~~Sample 25th percentile of age.~~
    e. Sample variance of age.
    f. Sample standard deviation of age.
 
