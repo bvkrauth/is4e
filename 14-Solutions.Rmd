@@ -1170,7 +1170,7 @@ EmpData <- EmpData %>%
       \begin{align}
         c_L &= \Phi^{-1}(0.025) \\
           &\approx -1.96 \\
-        c_H &= \Phi^{-1}(0.995) \\
+        c_H &= \Phi^{-1}(0.975) \\
           &\approx 1.96
       \end{align}
       and the formulas for calculating this in Excel are `=NORM.S.INV(0.025)` and
@@ -1187,52 +1187,53 @@ EmpData <- EmpData %>%
 7. The confidence interval for a mean always follows the same formula
    a. The confidence interval is:
       \begin{align}
-        CI^{95} &= \bar{x} \pm F_{T_{15}}^{-1}(0.975)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 2.13*\sqrt{16}*0.3 \\
-          &\approx (1.44, 6.56)
+        CI^{95} &= \bar{x} \pm F_{T_{15}}^{-1}(0.975)*\hat{\sigma}/\sqrt{n} \\
+          &\approx 4 \pm 2.13*0.3/\sqrt{16} \\
+          &\approx (3.84, 4.16)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.975,15)*SQRT(16)*0.3`
-      and `=4+T.INV(0.975,15)*SQRT(16)*0.3`
+      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.975,15)*0.3/SQRT(16)`
+      and `=4+T.INV(0.975,15)*0.3/SQRT(16)`
    b. The confidence interval is:
       \begin{align}
-        CI^{90} &= \bar{x} \pm F_{T_{15}}^{-1}(0.95)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 1.75*\sqrt{16}*0.3 \\
-          &\approx (1.90, 6.10)
+        CI^{90} &= \bar{x} \pm F_{T_{15}}^{-1}(0.95)*\hat{\sigma}/\sqrt{n} \\
+          &\approx 4 \pm 1.75*0.3/\sqrt{16} \\
+          &\approx (3.87, 4.13)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.95,15)*SQRT(16)*0.3`
-      and `=4+T.INV(0.95,15)*SQRT(16)*0.3`
+      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.95,15)*0.3/SQRT(16)`
+      and `=4+T.INV(0.95,15)*0.3/SQRT(16)`
    c. The confidence interval is:
       \begin{align}
-        CI^{99} &= \bar{x} \pm F_{T_{15}}^{-1}(0.995)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 2.95*\sqrt{16}*0.3 \\
-          &\approx (0.46, 7.54)
+        CI^{99} &= \bar{x} \pm F_{T_{15}}^{-1}(0.995)*\hat{\sigma}/\sqrt{n} \\
+          &\approx 4 \pm 2.95*0.3/\sqrt{16} \\
+          &\approx (3.77, 4.22)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.995,15)*SQRT(16)*0.3`
-      and `=4+T.INV(0.995,15)*SQRT(16)*0.3`
+      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.995,15)*0.3/SQRT(16)`
+      and `=4+T.INV(0.995,15)*0.3/SQRT(16)`
    d. The confidence interval is:
       \begin{align}
-        CI^{95} &= \bar{x} \pm \Phi^{-1}(0.975)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 1.96*\sqrt{16}*0.3 \\
-          &\approx (1.65, 6.35)
+        CI^{95} &= \bar{x} \pm \Phi^{-1}(0.975)*\hat{\sigma}/\sqrt{n} \\
+          &\approx 4 \pm 1.96*0.3/\sqrt{16} \\
+          &\approx (3.85, 4.15)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.975)*SQRT(16)*0.3`
-      and `=4+NORM.S.INV(0.975,15)*SQRT(16)*0.3`
+      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.975)*0.3/SQRT(16)`
+      and `=4+NORM.S.INV(0.975)*0.3/SQRT(16)`
    e. The confidence interval is:
       \begin{align}
-        CI^{90} &= \bar{x} \pm \Phi^{-1}(0.95)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 1.64*\sqrt{16}*0.3 \\
-          &\approx (2.03, 5.97)
+        CI^{90} &= \bar{x} \pm \Phi^{-1}(0.95)*\hat{\sigma}/\sqrt{n} \\
+          &\approx 4 \pm 1.64*0.3/\sqrt{16} \\
+          &\approx (3.88, 4.12)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.95)*SQRT(16)*0.3`
-      and `=4+NORM.S.INV(0.95,15)*SQRT(16)*0.3`
+      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.95)*0.3/SQRT(16)`
+      and `=4+NORM.S.INV(0.95)*0.3/SQRT(16)`
    f. The confidence interval is:
       \begin{align}
-        CI^{99} &= \bar{x} \pm \Phi^{-1}(0.995)*\sqrt{n}\hat{\sigma} \\
-          &\approx 4 \pm 2.58*\sqrt{16}*0.3 \\
-          &\approx (0.91, 7.09)
+        CI^{99} &= \bar{x} \pm \Phi^{-1}(0.995)*\hat{\sigma}/\sqrt{n} \\
+          &\approx 4 \pm 2.58*0.3/\sqrt{16} \\
+          &\approx (3.81, 4.19)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.995)*SQRT(16)*0.3`
-      and `=4+NORM.S.INV(0.995,15)*SQRT(16)*0.3`
+      and the formulas for calculating these numbers in Excel are
+      `=4-NORM.S.INV(0.995)*0.3/SQRT(16)`
+      and `=4+NORM.S.INV(0.995)*0.3/SQRT(16)`
 8. The only thing we have tested here is whether there is no effect.  We rejected that null,
    so we can rule out the possibility that there is no effect.  But that does not tell us whether the
    effect is small or large - in order to say anything about that question we need to test 
