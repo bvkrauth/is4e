@@ -2,6 +2,7 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
+      collapse: section
       before: |
         <li class="toc-logo"><a href="./"><img src="bin/emp_hist2.png"></a></li>
       after: |
