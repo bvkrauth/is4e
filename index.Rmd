@@ -13,7 +13,7 @@ description: A textbook for an introductory (first-year
   or second-year undergraduate) course in statistics
   for economics majors.
 favicon: bin/favicon.ico
-cover-image: bin/emp_hist2.png
+cover-image: bin/logo.png
 site: bookdown::bookdown_site
 ---
 
