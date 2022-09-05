@@ -1,3 +1,10 @@
+/* Base color scheme is:
+Navy blue #002D62
+Orange #EB6E1F
+Light orange #F4911E
+*/
+
+
 /* -----------div tips------------- */
 
   .goals, .fyi, .sfu, .economics, .note {
@@ -8,9 +15,9 @@
     background-repeat: no-repeat;
     background-position: 1em 1em;
     min-height: 120px;
-    color: #1f5386;
-    background-color: #bed3ec;
-    border: solid 5px #dfedff;
+    color: #002D62; /* navy blue text */
+    background-color: #ffffff; /* white background */
+    border: solid 3px #002D62; /* navy blue border */
   }
 
 div.economics {
@@ -19,7 +26,8 @@ div.economics {
 
 div.example {
     padding-left: 5px;
-    background-color: #d8d8d8;
+    color: #75330a; /* dark orange text */
+    background-color: #fafaff; /* very light blue background */
 }
 
 div.goals {
@@ -29,6 +37,7 @@ div.goals {
 div.fyi {
  background-image: url("bin/FYI.png");
 }
+
 div.sfu {
  background-image: url("bin/sfulogo-cropped.png");
 }
@@ -41,6 +50,28 @@ div.sfu {
 
 .sourceCode {
   margin-bottom: 0.85em; /* adds same amount of margin as a <p> would */
+}
+
+/*------------- Body and header text---------------- */
+
+.book.font-family-1 {
+  font-family: sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: serif;
+  color: #002D62; /* navy blue text */
+}
+
+.title {
+  font-family: 'DIN Pro', sans-serif;
+  font-size: 3em ;
+  color: #EB6E1F; /* orange text */
+ }
+
+.subtitle {
+  font-family: serif;
+  color: #F4911E; /* light orange text */
 }
 
 /*--- LOGO ---*/
@@ -64,7 +95,7 @@ div.sfu {
 
 li.appendix span, li.part span { /* for TOC part names */
   margin-top: 1em;
-  color: color: #1c3046 !important;
+  color: color: #1c3046 !important; /* very dark blue text */
   opacity: 1 !important;
   text-transform: uppercase;
 }
