@@ -15,6 +15,8 @@ description: A textbook for an introductory (first-year
 favicon: bin/favicon.ico
 cover-image: bin/logo.png
 site: bookdown::bookdown_site
+github-repo: https://github.com/bvkrauth/econ233
+url: https://bookdown.org/bkrauth/BOOK/
 ---
 
 # About this book {-}
