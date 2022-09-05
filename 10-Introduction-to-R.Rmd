@@ -975,4 +975,10 @@ Answers can be found in the [appendix](#answers-introduction-to-r).
    ggplot(mtcars, aes(wt, mpg)) + geom_point(aes(colour=factor(cyl), size = qsec))
    ```
 
+**SKILL #4: Import and view data in R**
+
+5. Use R (with the Tidyverse loaded) to open the data file
+   https://people.sc.fsu.edu/~jburkardt/data/csv/deniro.csv
+   and count the number of observations and variables in it.
+
 
