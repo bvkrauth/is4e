@@ -32,3 +32,14 @@ div.fyi {
 div.sfu {
  background-image: url("bin/sfulogo-cropped.png");
 }
+
+/*____Code Chunks____*/
+
+.sourceCode pre {
+  margin: 0 !important; /* makes space above and below symmetrical*/
+}
+
+.sourceCode {
+  margin-bottom: 0.85em; /* adds same amount of margin as a <p> would */
+}
+
