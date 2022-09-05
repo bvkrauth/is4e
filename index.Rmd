@@ -9,8 +9,9 @@ bibliography:
 - packages.bib
 biblio-style: apalike
 link-citations: yes
-description: This is a minimal example of using the bookdown package to write a book.
-  The output format for this example is bookdown::gitbook.
+description: A textbook for an introductory (first-year
+  or second-year undergraduate) course in statistics
+  for economics majors.
 favicon: bin/favicon.ico
 cover-image: bin/emp_hist2.png
 site: bookdown::bookdown_site
