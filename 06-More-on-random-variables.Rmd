@@ -1,3 +1,5 @@
+# (PART\*) Statistical Theory {-}
+
 # More on random variables {#more-on-random-variables}
 
 ```{r setup6, include=FALSE}

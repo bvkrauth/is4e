@@ -1,3 +1,5 @@
+# (PART\*) Fundamentals {-}
+
 # Introduction {#introduction}
 
 Before we dive into the day-to-day course material, it is important to understand
