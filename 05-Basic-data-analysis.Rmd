@@ -134,8 +134,8 @@ are the same, the concepts are *not* exactly the same.
    observations and below the other 90\% of observations.
 6. The sample ***median*** is a number that is above half of 
    observations and below the other half.
-7. The sample 90th percentile is a number that is above 10\% of
-   observations and below the other 90\% of observations.
+7. The sample 90th percentile is a number that is above 90\% of
+   observations and below the other 10\% of observations.
 8. The sample ***maximum*** is the highest value observed in the data.
 
 Notice the difference here: the sample average/median/percentiles/etc. 
