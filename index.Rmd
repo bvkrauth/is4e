@@ -33,6 +33,7 @@ available at https://github.com/bvkrauth/econ233.
 ## About the author {-}
 
 Brian Krauth is Associate Professor of Economics at Simon Fraser University.
+His research and CV are available at http://briankrauth.com.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
