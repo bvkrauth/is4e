@@ -637,6 +637,54 @@ To add this variable:
 2. Fill in cells F2:F11 with the correct postal abbreviation.
 :::
 
+
+::: fyi
+**Choosing variable names**
+
+It takes a little bit of thought to choose brief and informative variable names
+that work well, but you will be glad you did it.
+
+1. Variable names need to be *unique*.
+   - **Province** would have been a nice short and clear variable name,
+     but it was already taken.
+2. Variable names should be *informative*.
+   -  **X** or **my variable** would have been bad variable names.
+   - So would **Province2**.
+3. Variable names should be *short*. In some older programs, variable names
+   can be no longer than 8 characters long. Most modern programs allow
+   much longer variable names, but long variable names are harder
+   to remember, harder to type without errors, and less likely to
+   display cleanly.
+   - 8 characters is a good target, but it's OK to go a little over that.
+   - Abbreviation is a good way to shorten names, so we use
+     **ProvAbb** instead of **ProvinceAbbreviation**.
+4. Variable names should *avoid spaces and special characters*:
+   - Special characters are anything other than the Latin letters (a through z),
+     Arabic digits (0 through 9), and the underscore `_`.
+   - When constructing variable names from multiple words, there are several
+     standard methods of distinguishing between the words:
+     - Pascal case: **ProvAbb**
+     - Camel case:  **provAbb**
+     - Snake case: **prov_abb**
+5. Variable names should be treated as *potentially case independent*.
+   - Some programs like R treat variable names as ***case dependent***, and
+     will consider **ProvAbb**, **provabb**, **provAbb** and **PROVABB** four
+     different variables.
+   - Other programs like SAS treat variable names as **case independent**,
+     so these four names all refer to the same variable.
+   - So once we create a variable called **ProvAbb** we should never
+     create another variable called **provabb**, **provAbb**, or
+     **PROVABB**, just in case we want to use this data set in SAS.
+6. Variable naming conventions should be *consistent* within each data set.
+   - We could have used camel case or snake case for our new variable, but
+     the existing variables use Pascal case so we should use Pascal case
+     for all new variables too.
+
+To be honest, Excel allows nearly anything in a variable name since it does not
+normally use the variable names in its calculations.  But good naming practices
+are still important since you may need to move data between programs.
+:::
+
 Excel has several tools available to speed the process of entering
 data.  First, you can copy-and-paste or cut-and-paste the contents 
 of any cell into any other cell.
