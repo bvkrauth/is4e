@@ -288,38 +288,5 @@ to make sure the installation worked.
 If you run into trouble here, don't worry. We will not need the Tidyverse for 
 a few weeks, so there is plenty of time to get help.
 
-## Conventions of this book {#conventions-of-this-book}
-
-This book uses consistent visual conventions to convey information.
-
-- Organization:
-  - Each chapter corresponds to one full week of the course.
-- Typography:
-  - Computer code or other inputs are shown like `this`.
-  - Math is usually shown like $this$.
-  - When new terminology is introduced, it is shown like ***this***.
-- Boxes:
-  - Pull-out information is shown in colored boxes.
-  
-::: example
-Boxes like this are for examples
-:::
-
-::: {.goals data-latex=""}
-Boxes like this are for showing course or chapter goals.
-:::
-
-::: {.economics data-latex=""}
-Boxes like this are for providing economic background
-:::
-
-::: {.sfu data-latex=""}
-Boxes like this are for providing SFU-specific information.
-:::
-
-::: {.fyi data-latex=""}
-Boxes like this are for providing optional information that
-might be of interest to some students.
-:::
 
 
