@@ -339,6 +339,36 @@ and reliability of our analysis.
 In the remainder of this section, we will learn a few tools for changing how 
 our data is *displayed* that do not change the *content* of the data. 
 
+
+:::fyi
+**Link rot and the DOI**
+
+One common barrier to reproducibility is "link rot" - the tendency of a given
+URL to stop working over time as organizations make changes to their websites.
+Most links only work for a few months or a few years, depending on the data
+provider and how careful they are.
+
+One strategy for dealing with link rot is to always save a local copy of the
+data. Another is to use the digital object identifier or ***DOI*** if 
+one is available.  The DOI system allows organizations to provide persistent
+links to web pages or other files. The *Sources* worksheet above shows both
+regular and DOI addresses.
+
+- The regular URL (https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703
+) tells us where the file is located
+  - Go to the server www150.statcan.gc.ca 
+  - Look in the folder/directory t1/tbl1/en/tv.action/
+  - Search in the index of that folder for "pid=1410028703"
+- The DOI URL (https://doi.org/10.25318/1410028701-eng) also tells us where a
+  file is located, but the file at that location is not the actual data file.
+  Instead it is a link that redirects the user to the address
+  https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703. 
+
+When Statistics Canada moves the file at some point in the future, the original
+URL will stop working. But the DOI will continue working as long as they update
+the DOI entry with the new URL.
+:::
+
 ### Sorting, filtering, and freezing
 
 ***Sorting*** allows us to re-order the rows of our data based on 
