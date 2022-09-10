@@ -874,9 +874,10 @@ Suppose we want to add a new variable for the (natural) log of population.
    a. Click on the insert function button 
       ![insert function button](bin/Excel insert function button.jpg){height=16pt} 
       to the left of the formula bar.
-   b. The `Insert Function` dialog box will appear. It will have a 
-      very long list of functions. You will want to narrow this list down,
-      and you have several options for doing so:
+   b. The `Insert Function` dialog box will appear.
+      ![insert function dialog box](bin/InsertFunction.png)
+      It will show a long list of functions. You will want to narrow this list
+      down, and you have several options for doing so:
       - Search: Enter `logarithm` in the `Search for a function` text box.
       - Browse: Select `Math & Trig` from the `Or select a category`
         drop-down box.
@@ -884,6 +885,7 @@ Suppose we want to add a new variable for the (natural) log of population.
       function you want (`LN`). Select `LN` from the `Select a function`
       list box, and then select `OK`.You will now see the `Function Arguments`
       dialog box for the `LN` function.
+      ![function arguments dialog box](bin/FunctionArguments.png)
 4. As you can see, the `LN` function takes one argument (the number you want 
    the log of). You want to take the log of cell C2, so enter the text `C2` 
    here or click on cell C2.
