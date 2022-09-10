@@ -21,14 +21,32 @@ url: https://bookdown.org/bkrauth/BOOK/
 
 # About this book {-}
 
-This book has been written for use as a textbook for ECON 233, the
-introductory statistics course for economics majors at Simon Fraser
-University. 
+As its name suggests, *Introductory Statistics for Economics* is a textbook
+intended for use in an introductory (first or second year) statistics
+course for economics majors.  It was written for use as a textbook for
+ECON 233, the introductory statistics course for economics majors at Simon
+Fraser University.
 
-The current version of the book can be obtained at https://bookdown.org/bkrauth/BOOK/.
+The content is similar to most other introductory statistics courses for
+business and economics students, but with a few important differences. When
+I was assigned to teach ECON 233 I reviewed the available textbooks and
+found that most of them provide a somewhat dated perspective on statistical
+analysis at an extremely high price. I wanted a textbook that was
+fairly priced, combined both Excel and R, and reflected (or at least did
+not run counter to) contemporary thinking about issues like reproducibility,
+tidy data, and credible inference. The only way to get all of these
+features was to write my own book.
 
-The book itself is written using Bookdown, and its source code is 
-available at https://github.com/bvkrauth/econ233. 
+The book is available at no charge (MIT License) in HTML, PDF, and EPUB formats
+from https://bookdown.org/bkrauth/BOOK/. Instructors are welcome to assign
+it as a course textbook, but are strongly encouraged to contact me first
+as the book contents may change without warning.
+
+The book itself has been created using [Bookdown](https://bookdown.org/). Its
+source code is (or will be) available at https://github.com/bvkrauth/econ233,
+and errors or typos can be reported to me at <bkrauth@sfu.ca> or https://github.com/bvkrauth/econ233/issues.
+
+
 
 ## About the author {-}
 
