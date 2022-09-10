@@ -1,9 +1,10 @@
 # Probability and random events {#probability-and-random-events}
 
-***Probability*** is a method of mathematically modeling a random process
+***Probability*** is a mathematical system for modeling a random process
 so that we can understand it and/or make predictions about its future 
 results. Probability is an essential tool for casinos, as well as for
-banks, insurance companies, and any other businesses that manage risks.
+banks, insurance companies, and any other organization that manages risks.
+It also provides the mathematical framework for statistical analysis.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
@@ -15,9 +16,10 @@ In this chapter we will learn how to:
  - Interpret and use the assumptions of independence and equal outcome probability
 :::
 
-This chapter uses mathematical notation and terminology that you
-have seen before but may need to review.  If you have difficulty with
-the math, please refer to the sections on [Sets](#sets) and on [Functions](#sets) in the [Math Review](#math-review) appendix.
+Most high schools teach a little probability, but we will go deeper than you
+have before. To do this, we will use mathematical notation and
+terminology that you have seen before but may need to review.  If you have
+difficulty with the math, please refer to the sections on [Sets](#sets) and [Functions](#sets) in the [Math Review](#math-review) appendix.
 
 ::: example
 **Example application: Roulette**
@@ -33,7 +35,7 @@ Here are the rules:
 - It features 
   - a ball.
   - a spinning wheel with numbered/colored slots. 
-  - a table on which to place bets
+  - a table with a grid of numbers on which to place bets
 - The slots are numbered from 0 to 36
   - Slot number 0 is green
   - 18 slots are red
@@ -43,14 +45,14 @@ Here are the rules:
   - I will assume we have a European roulette table, which does not include
     the "00" slot.
 - Players can place various bets on the table including:
-  - Red (ball lands in a red slot) pays \$1 per \$1 bet
-  - Black (ball lands in a black slot) pays \$1 per \$1 bet
+  - Red (ball lands on any red number) pays \$1 per \$1 bet
+  - Black (ball lands on any black number) pays \$1 per \$1 bet
   - A straight bet on any specific number (ball lands on that number)
     pays \$35 per \$1 bet
 
-Like other casino games, a roulette game is an example of a random process.
-Something will happen, it matters (to the players and the casino) what
-will happen, but we don't know in advance what will happen.
+Like other casino games, a roulette game is an example of a random process:
+something will happen, someone (the players and the casino) cares what
+will happen, but no one knows in advance what will happen.
 :::
 
 ## Outcomes and events {#outcomes-and-events}
@@ -83,12 +85,17 @@ This sample space has $|\Omega| = 37$ elements.
 Next, we define a set of ***events*** that we are interested in.
 We can think of an event as either:
 
- - A statement that is either true or false OR
+ - A statement that is either true or false depending on the outcome OR
  - A subset of the sample space 
 
 These two concepts are equivalent, though the subset concept 
 makes the math clearer.
  
+An event that contains only one outcome is called an ***elementary event***.
+I will mostly treat "elementary event" and "outcome" interchangeably, but
+there is a minor technical distinction: the outcome $14$ is a number, while the
+elementary event $\{14\}$ is a set.
+
 ::: example
 **Events in roulette**
 
@@ -113,15 +120,13 @@ These roulette events are well-defined for our sample space:
 - Ball lands on one of the first 12 numbers:
    $$b \in First12 = \{1,2,3,4,5,6,7,8,9,10,11,12\}$$
 
-We could define many more events, depending on what bets
-we are interested in.
+You can see many other bets on the table such as "Even", "Odd",
+"1 to 18" and so on.  We can define an event for each of these bets, or for
+any other combination of values for $b$.
 :::
 
-An event that contains only one outcome is called an 
-***elementary event***.
-
-Since events are sets, we can use the terminology and mathematical
-tools for sets. 
+Since events are sets, we can work with events using the terminology and
+mathematical tools for sets.
 
 ::: example
 **Relationships among events**
@@ -142,9 +147,10 @@ In our roulette example:
   if they share no outcomes:
   - The events "ball lands on red" and "ball lands on black" are disjoint 
     since $Red \cap Black = \emptyset$.
-  - If two events are disjoint, they cannot both happen.
-  - But they can both fail to happen.  For example, if the ball lands in the
-    green zero slot ($b = 0$), neither red nor black wins.
+  - Two disjoint events cannot both happen because there is no possible outcome
+    that makes them both true.
+  - But two disjoint events can both fail to happen. For example, if the ball
+    lands in the green zero slot ($b = 0$), neither red nor black wins.
 - Any two elementary events are either identical or disjoint
    - The events "ball lands on 14" and "ball lands on 25" are disjoint
      since $\{14\} \cap \{25\} = \emptyset$.
@@ -161,10 +167,13 @@ Probabilities are normally between zero and one:
 
 - If an event has probability zero, it definitely *will
   not* happen
-- If an event has probability strictly between zero and
-  one, it *might* happen.
+- If an event has probability strictly between zero and one, it *might* happen.
+  An event with a higher probability is more likely to happen.
 - If an event has probability one, it definitely *will* 
   happen.
+
+Where does this probability distribution come from? That's a good question,
+but we will take it as given for the moment.
 
 ### The axioms of probability {#the-axioms-of-probability}
 
@@ -172,7 +181,7 @@ All valid probability distributions must obey the following three conditions, wh
 
 1. Probabilities are never negative:
    $$\Pr(A) \geq 0$$
-2. One of the outcomes will definitely happen:
+2. One of the outcomes in the sample space will definitely happen:
    $$\Pr(\Omega) = 1$$
 3. For any two *disjoint* events $A$ and $B$, the probability that
    $A$ or $B$ happen is the sum of their individual probabilities:
@@ -188,32 +197,34 @@ Let's assume that the roulette wheel is "fair" in the sense that each
 outcome has the same probability. Now, I should emphasize that this 
 doesn't have to be the case, it's just an assumption.  But it's a 
 reasonable one in this case because casinos are required
-by law to run fair roulette wheels and would be subject to heavy 
-penalties if they run unfair wheels. Later on, we will use statistics
-to confirm that a roulette wheel is fair.
+by law to operate fair roulette wheels and would be subject to heavy
+penalties if they operate unfair wheels. Later on, we will use data
+and statistics to evaluate whether a roulette wheel is *actually* fair.
 
-Call that probability $p$:
+Again each outcome in a fair roulette wheel has the same probability. Call
+that probability $p$:
    $$p = \Pr(b = 0) = \Pr(b = 1) = \cdots = \Pr(b = 36)$$
 To find the value of $p$ we use the rules of probability. 
 By rule #2 of probability, one of the outcomes will happen:
    $$\Pr(\Omega) = 1$$
 Since the different outcomes are disjoint, rule #3 implies that:
    $$\underbrace{\Pr(\Omega))}_{1} = \underbrace{\Pr(\{0\})}_{p} + \underbrace{\Pr(\{1\})}_{p} + \cdots + \underbrace{\Pr(\{36\})}_{p}$$
-Summarizing this equation:
+Since there are 37 possible outcomes, we can rewrite this equation as:
    $$1 = 37p$$
-Solving for $p$ we get:
+We can then solve for $p$ to get:
    $$p = 1/37 \approx 0.027$$
-That is, each of the 37 elementary events have a probability of $1/37$.
+That is, each of the 37 elementary events have a probability of $1/37$
+or about 2.7\%.
 :::
 
 Since this is an introductory course, our sample space will usually 
 contain a finite number of outcomes, as in our roulette example.  In
-that case, probability calculations are pretty simple:
+that case, probability calculations can be made in two simple steps:
 
-- Find the probability of each elementary event.
-- To find the probability of a specific event, just add up the probabilities
-  of its elementary events.
-  
+1. Find the probability of each elementary event.
+2. To find the probability of a specific event, just add up the probabilities
+   of its elementary events.
+
 
 ::: example
 **Event probabilities for a fair roulette game**
@@ -256,13 +267,13 @@ are two standard interpretations for probabilities:
 
 The frequentist interpretation of probability is well-suited
 for simple repeated settings like casino games or car insurance,
-while the Bayesian interpretation makes more sense for things
-like predicting election results.
+while the Bayesian interpretation makes more sense for predicting
+one-time events like the results of a particular election.
 :::
 
 ### Additional rules for probabilities {#some-rules-for-probabilities}
 
-Let $A$ and $B$ be two events.  Then our three axioms
+Let $A$ and $B$ be two (not necessarily disjoint) events.  Then our three axioms
 of probability imply several additional rules:
 
 - Probabilities cannot be higher than one.
@@ -343,13 +354,6 @@ event $B$ is defined as:
 The conditional probability answers the question: if we already know that 
 $B$ is true, what are the chances that $A$ is true?
 
-Conditional probabilities are very important when playing poker. At the beginning
-of the game, every player has equal chance of having a winning hand.
-But that is no longer true after you see your cards - having "good" cards increases
-your chance of winning, and having "bad" cards decreases that chance. In other
-words, your bet should be based on $\Pr(win|cards)$ rather than $\Pr(win)$. Good
-poker players have detailed knowledge of these conditional probabilities.
-
 ::: example
 **Conditional probabilities in roulette**
 
@@ -357,6 +361,16 @@ In our roulette example:
    $$\Pr(Red|Even) = \frac{\Pr(Red \cap Even)}{\Pr(Even)} = \frac{8/37}{18/37} \approx 0.444$$
    $$\Pr(b = 14|Even) = \frac{\Pr(b = 14 \cap Even)}{\Pr(Even)} = \frac{1/37}{18/37} \approx 0.056$$
 :::
+
+Conditional probabilities are not particularly useful in roulette, which is a
+simple "one shot" game.  But they are very important when playing multi-step
+games like poker or blackjack. At the beginning of a hand of poker, every player
+has equal chance of having a winning hand. But that is no longer true after you
+see your cards - having "good" cards increases your chance of winning, and
+having "bad" cards decreases that chance. You get to see your cards, so
+your bet should be based on $\Pr(win|YourCards)$ rather than $\Pr(win)$. Good
+poker players have detailed knowledge of these conditional probabilities.
+
 
 Like joint probabilities, conditional probabilities are just probabilities,
 so they obey all of the axioms and rules of probability described in 
@@ -371,7 +385,7 @@ significantly.
 We say that two events $A$ and $B$ are ***independent*** if their joint
 probability is just the two individual probabilities multiplied together:
   $$\Pr(A \cap B) = \Pr(A)\Pr(B)$$
-We usually express independence with the notation $A \bot B$.
+We sometimes express independence using the notation $A \bot B$.
 
 The definition of independence is not very intuitive, but we can clarify
 it by doing a little math.  Consider two independent events $A$
@@ -391,7 +405,7 @@ is true.
       probability the conditional probability $\Pr(A|B)$ is not
       well defined since its denominator is zero.
 
-When would it be reasonable to assume events are independent? 
+When would it be reasonable to assume two events are independent?
 The typical scenario would be where there is simply no 
 physical or logical relationship between them, usually due
 to a separation in time and space.
@@ -399,10 +413,11 @@ to a separation in time and space.
 ::: example
 **Independence across roulette games**
 
-We have already shown that events related to a *single* roulette game
+We will show below that events related to a *single* roulette game
 are not necessarily independent.  But the outcomes/events of 
 *two different* roulette games can be reasonably assumed to be independent
-of one another.
+of one another.  We can use that independence assumption in the following
+calculation.
 
 Suppose that I bring \$100 to a casino this afternoon for a few games 
 of roulette. I bet all of my money on Red for the first game.
@@ -443,8 +458,8 @@ you have some very specific reason to assume otherwise.
 ::: example
 **Independence within a roulette game?**
 
-Consider the roulette events "Red wins" and "Even wins".  We earlier
-showed that the unconditional probability that Red wins is:
+Consider the events "Red wins" and "Even wins" within a single roulette game.
+We earlier showed that the unconditional probability that Red wins is:
   $$\Pr(Red) = 18/37 \approx 0.486$$
 The conditional probability that Red wins given that Even wins is:
    $$\Pr(Red|Even) = 8/18 \approx 0.444$$
@@ -460,9 +475,8 @@ and one that can easily be incorrect.
 ### Law of total probability
 
 In addition to the results we have already discussed, there are two
-important results using conditional probabilities:
-
-The first is the ***law of total probability*** which
+important results using conditional probabilities.
+The first is the ***law of total probability***, which
 is a rule for determining unconditional probabilities 
 from conditional probabilities:
 
@@ -481,8 +495,8 @@ Suppose you are playing [Texas hold'em poker](https://en.wikipedia.org/wiki/Texa
 with a few friends, and the hand has one card left to deal (the "river"). If
 the last card has a heart on it (25\% probability) you will have a flush and
 win the hand with a probability you estimate to be 90\%.  If not, you will 
-win with a probability you estimate to be 10\%. What are your overall chances 
-of winning?
+not have a flush, but still have a win probability you estimate to be 10\%.
+Given this information, what are your overall chances of winning?
 
 The answer can be calculated using the law of total probability:
   \begin{align}
@@ -501,11 +515,10 @@ conditional probabilities:
   $$\Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$
 Bayes' law is particularly useful in evaluating evidence, because
 it allows us to restate one conditional probability in terms of
-another.  
-
-Both the law of total probability and Bayes' law follow from the definition of
-conditional probabilities.  They are easy to prove, but I won't prove them
-here.  Instead, I will use an example to show how they can be useful.
+another. That is, we are interested in whether a statement $A$ is true or
+false given our observation $B$, and Bayes' law allows us to state this
+conditional probability in terms of the probability of observing $B$ when
+$A$ is true.
 
 ::: example
 **False positives in medical testing**
@@ -521,7 +534,7 @@ Let the event $T$ mean a particular patient tests positive
 for a disease, and let the event $D$ mean that this patient 
 actually has the disease. 
 
-The *sensitivity* of the test is an infected patient's probability
+The *sensitivity* of the test is a sick patient's probability
 of testing positive:
    $$\Pr(T|D) = p$$
 the *specificity* of the test is a healthy patient's probability
@@ -536,13 +549,13 @@ $\Pr(D|T)$?
 
 This is a classic probability question, as it makes use
 of Bayes' law and the law of total probability, and it has
-obvious practical usage.  
+obvious practical importance.
 
 Since we want a conditional probability, we start by stating Bayes' law:
    $$\Pr(D|T) = = \frac{\Pr(T|D)\Pr(D)}{\Pr(T)}$$
 Bayes' law will allow us to calculate $\Pr(D|T)$ if we can find 
 the components of the right side of this equation. 
-We already know that $\Pr(T|D)=p$ and $\Pr(D)=r$, so all we need 
+We already know that $\Pr(T|D)=p$ and $\Pr(D)=d$, so all we need
 is to find $\Pr(T)$.
 
 Since $\Pr(T)$ is an unconditional probability, we can use
@@ -558,9 +571,11 @@ which is the result we need.
 Now, let's try out some numbers.  Suppose that false positives are rare 
 ($q = 0.99$), and false negatives never happen ($p=1$).
 
-- Suppose the disease itself is fairly common ($d = 0.10$).  Then:
+- Suppose the disease itself is fairly common ($d = 0.10$).  Then a patient
+  who tests positive is likely to have the disease:
    $$\Pr(D|T) = = \frac{1*0.1}{1*0.1 + (1-0.99)*(1-0.1)} \approx 0.917$$
-- Suppose the disease itself is quite rare ($d = 0.001$).  Then
+- Suppose the disease itself is quite rare ($d = 0.001$).  Then even a patient
+  who tests positive is unlikely to have the disease:
    $$\Pr(D|T) = = \frac{1*0.001}{1*0.001 + (1-0.99)*(1-0.001)} \approx 0.091$$
 
 In other words, the exact same test has a very different meaning depending
