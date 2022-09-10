@@ -328,6 +328,13 @@ contains three worksheets:
     it describes Nova Scotia).  As a result, the order of rows is very 
     important.
 - *Source* describes where the original data was obtained.
+   ![Excel screenshot](bin/Source.png)
+   - There is a text description of the data, provided by Statistics Canada.
+   - There are also two URLs linking to the original data source.  Click
+     on either one, or copy and paste it into your browser, to see what
+     the original data source looks like.
+   - There should also be some information on the date of access, but there
+     currently isn't.
 
 Note that we are following good data management practice by saving
 a copy of the original data and creating a new data set based on it, rather
