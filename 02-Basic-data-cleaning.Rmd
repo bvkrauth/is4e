@@ -31,14 +31,14 @@ In this chapter we will learn how to:
    - Filtering
    - Freezing panes
    - Changing cell size
- - Use Excel tools to enter new data and "clean" existing data, including
+ - Use Excel tools to enter new data and "clean" existing data, including:
    - Fill and series
    - Formulas
    - Functions
    - Number formats
- - Follow good data management practices 
-   - Practice data documentation and version control
-   - Identify the characteristics of tidy data
+ - Follow good data management practices, including:
+   - Data documentation and version control
+   - Identify and implement the principles of tidy data
 :::
 
 ## Application: Canadian employment data
@@ -106,17 +106,18 @@ what it means.
 Reproducibility requires that we treat our data with care.  In
 particular, we should:
 
-1. Document the original sources for all data.
-   - If a data file is downloaded from the internet, the
-     original URL should be documented.
+1. Document the ***provenance*** or original source for all data.
+   - When downloading data files, document the original URL and date of access.
 2. Keep an unmodified copy of all original data.
+   - This usually includes keeping the original file name.
 3. Avoid directly editing data. Add new data instead.
    - Sometimes this is not possible or practical, which is
      why we keep an unmodified copy of the original data.
-4. Give all files and variables brief but informative names.
+4. Give files and variables brief but informative names.
    - Avoid spaces or special characters in variable or file 
      names. They can cause problems when moving data between operating
      systems, file formats, or applications.
+   - Following a naming convention may help make your names more informative
 
 We will discuss the implementation of these principles later in this
 chapter.
@@ -227,10 +228,10 @@ the same person but might not.
 
 ## Introduction to Excel {#a-quick-tour-of-excel}
 
-Excel is the most commonly-used example of a ***spreadsheet***, a software 
-program designed for the tabulation, analysis, and display of data. Its main
-competitors include Google Sheets and Apple Numbers. It is widely used
-in business and government, so good Excel skills are valuable in the labour
+Microsoft Excel is the most commonly-used example of a ***spreadsheet***, which
+is a software program designed for the tabulation, analysis, and display of
+data. Its main competitors include Google Sheets and Apple Numbers. It is widely
+used in business and government, so good Excel skills are valuable in the labour
 market.
 
 Many of you have probably used Excel before, but there are many features
@@ -244,7 +245,7 @@ Start Excel. Your screen should look something like this:
 
 When giving instructions, I will refer to various elements of Excel's user
 interface by name. You may have been using these elements for years without
-ever knowing their names, so I will list them here:
+ever knowing their names, so I will list them here for your reference:
 
 - The ***menu bar*** is at the top of the screen:   
    ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)  
@@ -280,7 +281,7 @@ ever knowing their names, so I will list them here:
   - Rows are identified by number.
   - Cells are identified by column and row.  For example, the cell 
     in column A, row 2 is called cell A2.
-- Below the worksheet is a row of tabs:  
+- Below the worksheet is a row of ***tabs***:
   ![tabs](bin/Excel tabs.jpg)
   - You can click on a tab to switch to that worksheet.
   - You can double-click on a tab to change its name.
@@ -302,7 +303,7 @@ and assess what needs to be done.
 Open the data file in Excel.  As you can see, this Excel workbook 
 contains three worksheets:
 
-- *Employment Nov 2020* is our main data table:  
+- The worksheet *Employment Nov 2020* is our main data table:
    ![Excel screenshot](bin/EmploymentData.png) 
    It is in tidy format:
   - There is a single rectangular table starting in cell A1.
@@ -313,7 +314,7 @@ contains three worksheets:
   - The provinces are listed in alphabetical order, but the 
     interpretation of the table would not change if they were 
     listed in some other order
-- *Raw data* is the original data as downloaded from Statistics
+- The worksheet *Raw data* is the original data as downloaded from Statistics
   Canada.  
    ![Excel screenshot](bin/RawEmploymentData.png)
   It is ***messy*** (the opposite of tidy)
@@ -327,7 +328,7 @@ contains three worksheets:
     describes Nova Scotia because it comes after row 16 (which does say
     it describes Nova Scotia).  As a result, the order of rows is very 
     important.
-- *Source* describes where the original data was obtained.
+- The worksheet *Source* describes where the original data was obtained.
    ![Excel screenshot](bin/Source.png)
    - There is a text description of the data, provided by Statistics Canada.
    - There are also two URLs linking to the original data source.  Click
@@ -356,25 +357,26 @@ Most links only work for a few months or a few years, depending on the data
 provider and how careful they are.
 
 One strategy for dealing with link rot is to always save a local copy of the
-data. Another is to use the digital object identifier or ***DOI*** if 
+data. Another is to use the digital object identifier or ***DOI*** if
 one is available.  The DOI system allows organizations to provide persistent
 links to web pages or other files. The *Sources* worksheet above shows both
 regular and DOI addresses.
 
 - The regular URL (https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703
 ) tells us where the file is located
-  - Go to the server www150.statcan.gc.ca 
+  - Go to the server www150.statcan.gc.ca
   - Look in the folder/directory t1/tbl1/en/tv.action/
   - Search in the index of that folder for "pid=1410028703"
 - The DOI URL (https://doi.org/10.25318/1410028701-eng) also tells us where a
   file is located, but the file at that location is not the actual data file.
   Instead it is a link that redirects the user to the address
-  https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703. 
+  https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703.
 
 When Statistics Canada moves the file at some point in the future, the original
 URL will stop working. But the DOI will continue working as long as they update
 the DOI entry with the new URL.
 :::
+
 
 ### Sorting, filtering, and freezing
 
@@ -388,11 +390,12 @@ Before sorting data, always make sure that the order of rows does not
 convey important information.
 :::
 
+
 ::: example
 **Sorting the employment data**
 
 The original data are in alphabetical order by province name. But suppose 
-we wanted it to be ordered by population (with the highest populations on top)
+we wanted it to be ordered by population (with the largest provinces on top)
 instead. Here's all we need to do:
 
 1. Select any cell in the **Population** column.
@@ -413,7 +416,8 @@ multiple columns by selecting the "Custom sort" option.
 
 ***Filtering*** allows us to hide some observations so we can 
 look at a particular subset of observations that we are interested 
-in. The hidden observations are still there.
+in. The hidden observations are still there, so this is a much safer option
+than deleting observations.
 
 ::: example
 **Filtering the employment data**
@@ -497,7 +501,8 @@ We have several options for doing this:
   line between column headers B and C, and double-click.  The column 
   width will automatically adjust to fit the data.
   
-You can follow similar procedures to adjust the row height.
+You can follow similar procedures to adjust the row height, but we do not need
+to do that here.
 :::
 
 Another important cell formatting characteristic is the number format,
@@ -505,7 +510,9 @@ which will be discussed in a later section.
 
 ## Cleaning data {#cleaning-data}
 
-We are now ready to start actively cleaning our data. 
+We are now ready to start actively cleaning our data. Since our data set is
+already tidy, this will mostly involve defining new variables based on the
+existing variables.
 
 ### Preparation
 
@@ -566,10 +573,13 @@ variables. Instead, we could:
 - Use a **standardized code** such as the two-letter postal abbreviation.
 - Assign an arbitrary number to each observation.
 
-We will do both.
+We will do both. This is not necessary, but allows us to see the relative
+benefits of the two approaches
 
 The third step is to identify and address problems in our existing
-variables. 
+variables. Following the general principle to avoid editing data, we will
+do this by creating new-and-improved versions of these variables rather than
+editing the existing variables.
 
 The fourth step is to consider is whether there
 are any variables we would like to analyze that have not yet
@@ -639,8 +649,10 @@ As we discussed earlier, we would like to add the two-letter postal abbreviation
 
 The postal abbreviation is useful for at least two reasons
 
-1. It is *standardized*, while the full province name may not be. 
-   - Quebec is sometimes written Québec.
+1. It is *standardized*, while the full province name may not be.
+   - The postal abbreviations were originally created by Canada Post.
+   - They are also internationally recognized through the ISO standard
+     [ISO 3166-2](https://www.iso.org/standard/72483.html).
 2. It is *short*, which can be useful in charts.
 
 To add this variable:
@@ -697,9 +709,10 @@ normally use the variable names in its calculations.  But good naming practices
 are still important since you may need to move data between programs.
 :::
 
-Excel has several tools available to speed the process of entering
-data.  First, you can copy-and-paste or cut-and-paste the contents 
-of any cell into any other cell.
+Excel also has several tools available to speed the process of entering
+data.  First, you can ***copy-and-paste*** or ***cut-and-paste*** the contents
+of any cell into any other cell.  I'll assume you know how to do this, though
+there are a few special tricks we will cover later on.
 
 Excel's ***fill*** tool allows you to quickly copy the contents
 of a cell into a set of cells immediately, above, below or
@@ -714,8 +727,8 @@ and year these particular observations describe (November 2020).
 1. Enter **MonthYr** in cell G1 to name the variable.
 2. Enter "11/20" in cell G2.
    - You may notice that Excel displays the date differently from
-     how you entered it - on my computer it displays as `Nov-20`. We
-     will talk more later about how Excel handles dates.
+     how you entered it - on my computer it displays as `Nov-20` but yours
+     may look different. We will talk more later about how Excel handles dates.
 
 Now we could enter the exact same date in cells G3:G11, but we can save
 ourselves some time by using Excel's fill tool:
@@ -727,7 +740,7 @@ As you can see, Excel fills in all selected cells with the value in the
 top cell.
 :::
 
-The ***series*** tool allows you to fill in a group of cells
+Excel's ***series*** tool allows you to fill in a group of cells
 with an ascending or descending sequence of numbers or dates.
 
 ::: example
@@ -782,6 +795,7 @@ These are the ones I find most useful:
 Additional shortcuts and macOS information are available at
 https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f.
 :::
+
 
 
 ### Formulas {#formulas}
@@ -844,29 +858,30 @@ unemployed (column E).
 4. Enter `=E2/H2` in cell J2 to calculate the variable.
 
 Notice that both of these formulas use cell H2, which itself contains 
-a formula.
+a formula. It is often useful to break up a complex formula into steps
+like this, as it is easier to check your work and spot problems.
 :::
 
 
 ### Functions {#built-in-functions}
 
 Excel has about 500 built-in ***functions*** that we can use in formulas. Each
-function has a name and a set of ***arguments*** whose values you
+function has a ***function name*** and a set of ***arguments*** whose values you
 can set.
 
 To use a function, you simply include its name and its arguments as 
 part of the formula.  For example, the `SQRT()` function takes a single
 numeric argument and returns the square root of the argument. So if
 you enter `=SQRT(2)` in a cell, the cell will display `1.414`, the 
-square root of 2.
+square root of 2. You can use the contents of other cells as an argument,
+or you can also use the result of another function.
 
-Excel also has extensive tools for 
+Excel also has extensive tools for:
 
 - Finding the function you need for a particular calculation task.
 - Figuring out what arguments to use in the function.
 
-You can also use Google or any other search engine to find this 
-information.
+You can also use a search engine like Google to find this information.
 
 ::: example
 **A simple function**
@@ -969,9 +984,9 @@ cells in columns I through L:
 
 Excel is smart and normally treats cell addresses in formulas 
 as ***relative references*** when copying and pasting cells.  That
-is, when a formula is copied to another cell $a$ columns to the right
-and $b$ rows down, the column letters in the formula are increased
-by $a$ units, and the row numbers are increased by $b$ units.
+is, when a formula is copied to another cell $r$ columns to the right
+and $d$ rows down, the column letters in the formula are increased
+by $r$ units, and the row numbers are increased by $d$ units.
 
 For example, suppose cell B5 contains the formula `=A1`.  If
 we copy the contents of this cell to other cells, we get:
@@ -1042,8 +1057,8 @@ To fix the **TotPop** variable:
 2. Change `=SUM(C2:C11)` to `=SUM(C$2:C$11)`.
    - Notice that the value in this cell does not change.
 3. Copy/paste or fill cell L2 into cells L3:L11.
-   - Notice that all cells in this column display the same contents
-      (`=SUM(C$2:C$11)`) and value (`31,275,600`)
+   - Notice that all cells in this column contain the same formula
+      (`=SUM(C$2:C$11)`) and display the same value (`31,275,600`)
 
 This is what we want.
 :::
@@ -1141,7 +1156,7 @@ without rounding.
 
 ***Text data*** is also called ***character data*** or 
 ***string data***. In Excel, text values can be entered directly in a 
-cell, can be used in a formula, and can be the result of a formula. 
+cell, can be used in a formula, and can be the result of a formula.
 
 Excel has many functions for working with text data.  A particularly useful one is
 the `CONCAT()` function, which allows you to join or ***concatenate***
@@ -1160,7 +1175,7 @@ that describes our data as if it we were writing a written report.
 3. Copy/paste/fill in cells N3:N11.
 
 As you can see, `CONCAT()` is useful for converting data into human-readable 
-statements. It is also useful for creating ID variables.
+statements. It is also useful for constructing ID variables.
 :::
 
 
@@ -1177,13 +1192,13 @@ There are many useful functions to manipulate text strings in Excel:
    - `=MID("Hello world!",2,3)` returns a value of "ell".  
 - `UPPER()`, `LOWER()` and `PROPER()` allow you to change the case of a string.
    For example:
-   - `=UPPER("Hello world!")` returns "HELLO WORLD!", 
-   - `=LOWER("Hello world!")` returns "hello world!", and 
+   - `=UPPER("Hello world!")` returns "HELLO WORLD!".
+   - `=LOWER("Hello world!")` returns "hello world!".
    - `=PROPER("Hello world!")` returns "Hello World!".
-- `FIND()` allows you to find a particular substring within a larger string,
-   and
+- `FIND()` allows you to find a particular substring within a larger string.
+   For example:
    - `=FIND("world!","Hello world!")` returns 7
-- `REPLACE()` allows you to replace part of a string.
+- `REPLACE()` allows you to replace part of a string. For example:
    - `=REPLACE("Hello world!",7,5,"mom")` returns "Hello mom!"
 :::
 
@@ -1218,9 +1233,10 @@ with LFP rates below 64%, and `FALSE` in the other seven.
 :::
 
 Logical values are particularly powerful in combination with the
-`IF()` function.  This function takes three arguments: 
-- a statement,
-- a value to return if the statement is true
+`IF()` function.  This function takes three arguments:
+
+- a statement.
+- a value to return if the statement is true.
 - a value to return if the statement is false.
 
 ::: example
@@ -1264,7 +1280,7 @@ In additions to numbers, text, and logical values, Excel can handle ***dates***
 and ***times***.  Dates and times are a surprisingly complex subject
 that can create all sorts of problems on a computer, for several reasons:
 
-- There are many ways of writing the same date:
+- There are many conventional ways of writing the same date:
    - November 1, 2020
    - 2020 November 1
    - 14 Heshvan 5781 (Hebrew calendar)
@@ -1273,19 +1289,21 @@ that can create all sorts of problems on a computer, for several reasons:
    - 11-1-2020
    - 2020/11/1
    - etc.
-- Customs vary across cultures and organizations, 
+- Conventions vary across cultures and organizations
   - in some places 11/1 means November 1 and in others it means January 11.
-- We want to be able to sort and rank
-  - January 10, 2020 comes before December 10, 2020.
-- We want to be able to add and subtract
+- We want to be able to sort and rank in time order rather than alphabetical
+  order:
+  - January 10, 2020 should come before December 10, 2020.
+- We want to be able to add and subtract dates and times
   - January 4, 2021 comes 5 days after December 30, 2020.
 - We want to handle time zones, daylight savings time, leap years,
   and even leap seconds.
 - We want to do this in a way that is perfectly accurate, but 
   hides all of these complexities in normal usage.
 
-Each application has its own rules for handling dates and times, though there are some
-standards that have developed.  Excel handles these issues as follows:
+As you might imagine, this is not easy. Each application has its own rules for
+handling dates and times, but there are some standards that have developed.
+Excel handles dates and times as follows:
 
 1. Dates are *stored* as the number of days elapsed since some base 
    date. In Excel the base date is January 1, 1900, which means that
@@ -1296,28 +1314,30 @@ standards that have developed.  Excel handles these issues as follows:
    - The default display formatting varies across regions, so 
      the same date in the same Excel file might appear different
      on your computer and my computer.
-3. When you enter something that looks like a date, Excel does several things
-   behind the scenes:
+3. When you enter something into a cell that looks like a date, Excel does
+   several things behind the scenes:
    - it guesses the date format for what you have entered
    - it converts what you have entered to the internal storage form (days since base date).
    - it changes the display format to what Excel thinks it should be (based on your location
      settings).
 
-Most of the time, this system works seamlessly and you don't even notice it.  But
+Most of the time, this system works seamlessly and you don't even notice it. But
 it can cause problems, and understanding the underlying structure can help you
 to solve those problems.
 
 ::: example
 **How dates are stored and displayed**
 
-The **MonthYr** variable in column G is a date.
+The **MonthYr** variable in column G is a date.  Remember that we created it
+by typing in "11/20". Let's see what Excel did with that.
 
 1. Select cell G2. Notice that (at least on my computer):
    - The cell displays `Nov-20`
    - The formula bar displays `11/1/2020`.
 2. To see how Excel sees this date, change the cell's number format 
    from `Custom` (on your computer it might be `Date`) to `General`
-   - Now the cell displays `44136`.
+   - Now the cell displays `44136`, which is the date-time value that Excel
+     assigns to November 1, 2020.
 
 Now while a date of 44136 is quite clear to Excel, we want to display
 dates in a more human-readable way.  I don't like the `Nov-20` display
@@ -1399,11 +1419,19 @@ date and time.
 
 ## Version control {#version-control}
 
-The last step in cleaning data is to save your work. In fact you should 
-be saving it regularly so that you don't lose work if something goes wrong. If 
-you have not already done so, save your file now.  You can compare it to my 
-version of the file at 
+The last step in cleaning data is to save your work. In fact, you should
+be saving it regularly so that you don't lose work if something goes wrong.
+
+::: example
+**Saving your work**
+
+If you have not already done so, save your cleaned employment data file
+now. Remember to give it a brief but informative name; I chose
+`CanEmpNov20Clean.xlsx`.
+
+You can compare it to my version at
 [https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx) 
+:::
 
 In a simple setting, this is all you need to do. But as your projects get 
 more complex, you may find yourself keeping multiple versions of your data 
@@ -1417,40 +1445,54 @@ file. There are many reasons to do this:
    have each made changes to separate copies of the original file.
 
 You will want to use some form of ***version control*** here, with a goal
-of keeping everything you might need without making mistakes or spending
-a lot of time on it.  Version control is an important element in making 
-your analysis reproducible.
+of keeping everything you might need later, but without making mistakes
+or spending a lot of time on it.  Version control is an important element in
+making your analysis reproducible.
 
 Software developers and professional data analysts (like me) use a formal
-version control system like Git/GitHub.  For our purposes, we can just
-follow a few simple rules:
+version control system like [GitHub](https://github.com/). GitHub
+tracks every change made to a group of files, and can allow multiple
+users to work together on a project without getting in each other's
+way.
 
-1. The ***working copy*** is the file you are actively working on right now.
-2. The ***master version*** is the most recently saved file that is "complete."
-   - You should try to work in small and discrete projects so that you can
-     - Make a working copy of the master version.
-     - Complete a project in your working copy.
-     - Make this working copy the new master version.
+For our purposes, we can just follow a few simple rules:
+
+- Always have one ***working copy***, which is the file you are actively working
+  on right now.
+- Always have one ***master version***, which is the most recently saved file that
+  is "complete."
+   - You should try to work in small and distinct projects (like adding a single
+     variable or group of related variables) so that you can
+     1. Make a working copy of the master version.
+     2. Complete a project in your working copy.
+     3. Make this working copy the new master version.
    - There should always be exactly one master version of a given document.
-3. ***Archived versions*** are earlier master versions (or occasionally 
-   working copies) that you wish to save.
-   - You may choose to save every previous master version.
-   - Or you may choose to save just a few important ones.
+- As needed, you can keep any number of ***archived versions***, which are
+   earlier master versions (or occasionally earlier working copies) that
+   you wish to keep around for some reason.
+   - You may choose to save every previous master version.  GitHub does this
+     automatically.
+   - You may choose to save just a few important ones.  At minimum, this should
+     include any version you have sent to anyone else and any version
+     used to generate results you have sent to someone else.
    - Use some consistent naming convention to distinguish between archived 
      versions. For example, I add a date code to the end like "210907" which
      means that this file was the master version as of September 7, 2021.
      
-At this level, you do not normally need to keep archived versions.  But you should
-at least distinguish between your master version and working copy.
+At this level, you do not normally need to keep archived versions.  But you
+should at least distinguish between your master version and working copy, and to
+update your master version regularly. At some point you are guaranteed to make
+a catastrophic mistake in your working copy and you will be glad to have a
+master copy from before the mistake.
 
 ## Chapter review {-#review-basic-data-cleaning-with-excel}
 
 Data cleaning is among the most important practical skills one can develop in 
 applied statistical analysis. Simple statistical methods like averages
 and frequencies are all most people will ever use, but everyone who works
-with data regularly encounters complex and messy data.  
+with data regularly encounters complex and messy data in need of cleaning.
 
-In this chapter we have learned some important data cleaning concepts, including 
+In this chapter, we have learned some important data cleaning concepts, including
 reproducible research, tidy data, ID variables, and version control.  We have also 
 learned how to implement these concepts in Excel using tools such as fill/series, 
 sorting, formatting, formulas, and functions.  
