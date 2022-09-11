@@ -173,7 +173,7 @@ RoulettePDF <- tibble(a = seq(from = -2, to= 36),
 ggplot(data = RoulettePDF, mapping = aes(x = a)) +
   geom_point(aes(y=fb), col = "blue") +
   geom_point(aes(y=fred), col = "red") +
-  geom_point(aes(y=f14), col = "green") +
+  geom_point(aes(y=f14), col = "orange") +
   xlab("a") +
   ylab("f(a)") +
   geom_text(x = 4, 
@@ -187,7 +187,7 @@ ggplot(data = RoulettePDF, mapping = aes(x = a)) +
   geom_text(x = 2, 
             y = 36/37, 
             label = "f_14(a)", 
-            col = "green") +
+            col = "orange") +
   labs(title = "Probability density function (PDF)", 
        subtitle = "Roulette", 
        caption = "", 
@@ -323,7 +323,7 @@ RouletteCDF <- RoulettePDF %>%
 ggplot(data = RouletteCDF, mapping = aes(x = a)) +
   geom_step(aes(y=Fb), col = "blue") +
   geom_step(aes(y=Fred), col = "red") +
-  geom_step(aes(y=F14), col = "green") +
+  geom_step(aes(y=F14), col = "orange") +
   xlab("a") +
   ylab("F(a)") +
   geom_text(x = 7, 
@@ -337,7 +337,7 @@ ggplot(data = RouletteCDF, mapping = aes(x = a)) +
   geom_text(x = 8, 
             y = 32/37, 
             label = "f_14(a)", 
-            col = "green") +
+            col = "orange") +
   labs(title = "Cumulative distribution function (CDF)", 
        subtitle = "Roulette", 
        caption = "", 
