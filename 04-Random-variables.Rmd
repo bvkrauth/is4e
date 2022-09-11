@@ -1,4 +1,4 @@
-# Introduction to random variables {#random-variables}
+# Random variables {#random-variables}
 
 ```{r setup4, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
@@ -39,7 +39,7 @@ represent long sums.  Please review the section on
 [sequences and summations](#sequences-and-summations)
 in the math appendix.
 
-## Random variables {#introduction-to-random-variables}
+## Defining a random variable {#introduction-to-random-variables}
 
 A ***random variable*** is a number whose value depends
 on a random outcome. The idea here is that we are going to use a random
@@ -511,7 +511,7 @@ get:
 which is clearly wrong since we already calculated that $E(w_{14}) = -0.027$.
 :::
 
-## Other characteristics {#the-properties-of-a-random-variable}
+## Quantiles and their relatives {#the-properties-of-a-random-variable}
 
 The expected value is one way of describing something about a random 
 variable, but there are many others.  We will describe a few of the
@@ -629,13 +629,15 @@ The median of $w_{red}$ is just its 0.5 quantile or 50th percentile:
 :::
 
 
-### Variance {#variance-and-standard-deviation}
 
-The median and expected value both aim to describe a typical
-or central value of the random variable.  We are also interested in
-measures of how much the random variable varies.  We have already
-seen one - the range - but there are others, including the
+## Variance and standard deviation {#variance-and-standard-deviation}
+
+In addition to measures of central tendency such as the expected value
+and median, we are also interested in measures of "spread" or variability.
+We have already seen one - the range - but there are others, including the
 variance and standard deviation.
+
+### Variance {#variance}
 
 The ***variance*** of a random variable $x$ is defined as:
 $$\sigma_x^2 = var(x) = E((x-E(x))^2)$$

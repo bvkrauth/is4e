@@ -267,7 +267,7 @@ It is sometimes clear from the context which  of these interpretations is correc
 in a given problem. But please ask if you aren't sure.
 :::
 
-### The indicator function
+### The indicator function {#the-indicator-function}
 
 The ***indicator function*** is a special function whose argument
 is a *statement*. The indicator function is typically represented by $I(\cdot)$ or $\mathbb{1}(\cdot)$.  It returns a value of 1
