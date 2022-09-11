@@ -328,15 +328,15 @@ ggplot(data = RouletteCDF, mapping = aes(x = a)) +
   ylab("F(a)") +
   geom_text(x = 7, 
             y = 4/37, 
-            label = "f_b(a)", 
+            label = "F_b(a)",
             col = "blue") +
   geom_text(x = 5, 
             y = 18/37, 
-            label = "f_red(a)", 
+            label = "F_red(a)",
             col = "red") +
   geom_text(x = 8, 
             y = 32/37, 
-            label = "f_14(a)", 
+            label = "F_14(a)",
             col = "orange") +
   labs(title = "Cumulative distribution function (CDF)", 
        subtitle = "Roulette", 
