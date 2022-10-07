@@ -222,7 +222,7 @@ to get your system set up now.
 **Canvas**
 
 Course materials including the syllabus, lectures, and assignments are
-available at the course Canvas site (insert link here).
+available at the course Canvas site https://canvas.sfu.ca/courses/73884.
 :::
 
 
@@ -234,7 +234,7 @@ use Excel here, but the basic skills are transferable to any spreadsheet program
 including these alternatives.
 
 ::: sfu
-**Installing Excel at SFU**
+**Using Excel at SFU**
 
 SFU has a licensing agreement with Microsoft that allows its students 
 free installation of the entire Microsoft Office suite, including Excel. 
@@ -242,6 +242,7 @@ Installation instructions are available at
 
 https://www.sfu.ca/itservices/technical/software/office365.html.
 
+Excel is also available in all campus computer labs.
 :::
 
 Once you have installed Excel, you should confirm that it is working by
@@ -257,6 +258,19 @@ program called R, and a related program called RStudio.
 - RStudio is an "Integrated Development Environment" for R, that is
   it is an integrated set of tools for building and running R 
   programs.
+
+Alternatives to R include the (quite expensive) statistical packages
+SAS and Stata, as well as the (free) general-purpose programming
+language Python.
+
+::: sfu
+**Using R/RStudio at SFU**
+
+R and RStudio are available in all campus computer labs.
+
+You can also install them on your own computer by following the instructions
+below.
+:::
 
 Both R and RStudio are open-source, and are available free of charge for both Windows and macOS. Installation instructions are available at:
 
