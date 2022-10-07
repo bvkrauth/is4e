@@ -159,6 +159,9 @@ where $a$ is any number.  By convention, we typically use a
 lower-case $f$ to represent a PDF, and we use the subscript when needed
 to clarify which specific random variable we are talking about.
 
+In some cases we are just given the PDF, in others we may need to calculate it
+using the tools we have already learned.
+
 ::: example
 **The PDF in roulette**
 
@@ -193,6 +196,7 @@ ggplot(data = RoulettePDF, mapping = aes(x = a)) +
   geom_point(aes(y=f14), col = "orange") +
   xlab("a") +
   ylab("f(a)") +
+  ylim(0,1) +
   geom_text(x = 4, 
             y = 4/37, 
             label = "f_b(a)", 
@@ -482,28 +486,31 @@ or the ***expectation*** of the random variable.
 The formula might look difficult if you are not used to the notation, but
 it is actually quite simple to calculate:
 
-1. Figure out the support of $x$.
+1. Figure out the support and PDF of $x$.
 2. Multiply each value in the support by the PDF at that value.
 3. Add these numbers up.
 
 ::: example
 **Some expected values in roulette**
 
-The support of $b$ is $\{0,1,2\ldots,36\}$ so its expected value is:
+The support of $b$ is $\{0,1,2\ldots,36\}$ and its PDF is
+the $f_b(\cdot)$ function we calculated earlier. So its expected value is:
   \begin{align}
     E(b) &= 0*\underbrace{f_b(0)}_{1/37} + 1*\underbrace{f_b(1)}_{1/37} + \cdots 36*\underbrace{f_b(36)}_{1/37} \\
       &= \frac{1 + 2 + \cdots + 36}{37} \\
       &= 18
   \end{align}
 
-The support of $r$ is $\{0,1\}$ so its expected value is:
+The support of $r$ is $\{0,1\}$ and its PDF is the $f_r(\cdot)$ function we
+calculated earlier. So its expected value is:
   \begin{align}
     E(r) &= 0*\underbrace{f_r(0)}_{19/37} + 1*\underbrace{f_r(1)}_{18/37} \\
       &= 18/37 \\
       &\approx 0.486
   \end{align}
   
-The support of  $w_{14}$ is $\{-1,35\}$ so its expected value is:
+The support of  $w_{14}$ is $\{-1,35\}$ and its PDF is the $f_{14}(\cdot)$
+function we calculated earlier. So its expected value is:
     \begin{align}
       E(w_{14}) &= -1*\underbrace{f_{14}(-1)}_{36/37} + 35*\underbrace{f_{14}(35)}_{1/37} \\
       &= 1/37 \\

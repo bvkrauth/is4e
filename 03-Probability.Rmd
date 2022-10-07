@@ -71,7 +71,7 @@ The outcome of a single game of roulette can be defined as the number of
 the slot in which the ball lands.  Call that number $b$.
 :::
 
-The set of all possible outcomes is called the ***sample space***
+The set of all possible outcomes is called the ***sample space***.
 
 ::: example
 **The sample space in roulette**
@@ -165,12 +165,10 @@ the event's ***probability***.
 
 Probabilities are normally between zero and one:
 
-- If an event has probability zero, it definitely *will
-  not* happen
+- If an event has probability one, it definitely *will* happen.
+- If an event has probability zero, it definitely *will not* happen
 - If an event has probability strictly between zero and one, it *might* happen.
-  An event with a higher probability is more likely to happen.
-- If an event has probability one, it definitely *will* 
-  happen.
+- An event with a higher probability is more likely to happen.
 
 Where does this probability distribution come from? That's a good question,
 but we will take it as given for the moment.
@@ -187,37 +185,49 @@ All valid probability distributions must obey the following three conditions, wh
    $A$ or $B$ happen is the sum of their individual probabilities:
    $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
 
+The first two axioms are relatively straightforward, but the third may need
+some explanation. Remember that two events are disjoint if they have no
+outcomes in common, i.e., it is not possible for both events to happen. For
+example, the event "the unemployment rate is 5\%" and the event
+"the unemployment rate is 3\%" are disjoint.  Axiom three means that we can
+calculate the probability the unemployment rate is 3\% or 5\% by adding the
+probability of 3\% and the probability of 5\%.
+
+
+### Additional rules for probabilities {#some-rules-for-probabilities}
+
 Probability distributions have many other properties, but they
-can all be derived from these three axioms.
+can all be derived from the three axioms.
 
-::: example
-**Outcome probabilities for a fair roulette game**
+Let $A$ and $B$ be two (not necessarily disjoint) events.  Then our three axioms
+of probability imply several additional rules:
 
-Let's assume that the roulette wheel is "fair" in the sense that each 
-outcome has the same probability. Now, I should emphasize that this 
-doesn't have to be the case, it's just an assumption.  But it's a 
-reasonable one in this case because casinos are required
-by law to operate fair roulette wheels and would be subject to heavy
-penalties if they operate unfair wheels. Later on, we will use data
-and statistics to evaluate whether a roulette wheel is *actually* fair.
+- Probabilities cannot be higher than one.
+   $$\Pr(A) \leq 1$$
+- Probabilities of identical events are identical:
+   $$A = B \implies \Pr(A) = \Pr(B)$$
+- Probabilities of implied events are larger:
+   $$A \subset B \implies \Pr(A) \leq \Pr(B)$$
+- The probability of an event *not* happening is:
+   $$\Pr(A^C) = 1 - \Pr(A)$$
+- The probability of nothing happening is:
+   $$\Pr(\emptyset) = 0$$
+- The probability of either $A$ or $B$ happening is:
+  \begin{align}
+    \Pr(A \cup B) &= \Pr(A) + \Pr(B) - \Pr(A \cap B) \\
+      &\leq \Pr(A) +\Pr(B)
+  \end{align}
 
-Again each outcome in a fair roulette wheel has the same probability. Call
-that probability $p$:
-   $$p = \Pr(b = 0) = \Pr(b = 1) = \cdots = \Pr(b = 36)$$
-To find the value of $p$ we use the rules of probability. 
-By rule #2 of probability, one of the outcomes will happen:
-   $$\Pr(\Omega) = 1$$
-Since the different outcomes are disjoint, rule #3 implies that:
-   $$\underbrace{\Pr(\Omega))}_{1} = \underbrace{\Pr(\{0\})}_{p} + \underbrace{\Pr(\{1\})}_{p} + \cdots + \underbrace{\Pr(\{36\})}_{p}$$
-Since there are 37 possible outcomes, we can rewrite this equation as:
-   $$1 = 37p$$
-We can then solve for $p$ to get:
-   $$p = 1/37 \approx 0.027$$
-That is, each of the 37 elementary events have a probability of $1/37$
-or about 2.7\%.
-:::
+These results are not hard to prove, but I will not go through the proofs.
+However, I will use these results so you should be familiar with them.
 
-Since this is an introductory course, our sample space will usually 
+### Calculating probabilities
+
+To calculate probabilities we will need to use information or assumptions
+about the random process, and can then apply the axioms of probability and the
+associated rules.
+
+Since this is an introductory course, our sample space will usually
 contain a finite number of outcomes, as in our roulette example.  In
 that case, probability calculations can be made in two simple steps:
 
@@ -225,6 +235,39 @@ that case, probability calculations can be made in two simple steps:
 2. To find the probability of a specific event, just add up the probabilities
    of its elementary events.
 
+Finding the probability of each elementary event usually requires us to
+understand something about the random process itself.
+
+::: example
+**Outcome probabilities for a fair roulette game**
+
+Casinos are required by law to operate "fair" games, and are subject to heavy
+penalties if they operate unfair ones.  In the context of roulette, a fair game
+is one in which each number has the same probability.
+
+Let's assume that the roulette wheel is "fair" in the sense that each 
+outcome has the same probability. Note that this is just an assumption, and
+it may not actually be true. Later on, we will use data
+and statistics to evaluate whether a roulette wheel is *actually* fair.
+
+Asssuming each outcome has the same probability, let that probability be:
+   $$p = \Pr(b = 0) = \Pr(b = 1) = \cdots = \Pr(b = 36)$$
+To find the correct value of $p$ we use the axioms of probability:
+
+- By axiom #2, one of the outcomes will happen:
+   $$\Pr(\Omega) = 1$$
+- Since the different outcomes are disjoint, axiom #3 implies that:
+   $$\underbrace{\Pr(\Omega))}_{1} = \underbrace{\Pr(\{0\})}_{p} + \underbrace{\Pr(\{1\})}_{p} + \cdots + \underbrace{\Pr(\{36\})}_{p}$$
+- Since there are 37 possible outcomes, we can rewrite this equation as:
+   $$1 = 37p$$
+- We can then solve for $p$ to get:
+   $$p = 1/37 \approx 0.027$$
+That is, each of the 37 elementary events have a probability of $1/37$
+or about 2.7\%.
+:::
+
+Once we have the probabilities of each elementary event, calculating any
+other probability is just a matter of adding up.
 
 ::: example
 **Event probabilities for a fair roulette game**
@@ -271,30 +314,6 @@ while the Bayesian interpretation makes more sense for predicting
 one-time events like the results of a particular election.
 :::
 
-### Additional rules for probabilities {#some-rules-for-probabilities}
-
-Let $A$ and $B$ be two (not necessarily disjoint) events.  Then our three axioms
-of probability imply several additional rules:
-
-- Probabilities cannot be higher than one.
-   $$\Pr(A) \leq 1$$
-- Probabilities of identical events are identical:
-   $$A = B \implies \Pr(A) = \Pr(B)$$
-- Probabilities of implied events are larger:
-   $$A \subset B \implies \Pr(A) \leq \Pr(B)$$
-- The probability of an event *not* happening is:
-   $$\Pr(A^C) = 1 - \Pr(A)$$
-- The probability of nothing happening is:
-   $$\Pr(\emptyset) = 0$$
-- The probability of either $A$ or $B$ happening is:
-  \begin{align}
-    \Pr(A \cup B) &= \Pr(A) + \Pr(B) - \Pr(A \cap B) \\
-      &\leq \Pr(A) +\Pr(B)
-  \end{align}
-
-These results are not hard to prove, but I will not go through the proofs.
-However, I will use these results so you should be familiar with them.
-
 ## Joint and conditional probabilities {#related-events}
 
 We are often interested in more than one event, and want to talk about how 
@@ -302,11 +321,13 @@ they are related. For example:
 
  - In some casino games like poker or blackjack, players take an additional 
    action after partial information about the outcome is revealed.
- - Politicians often use polls to predict the winner of an election.
+ - Political scientists often use polls to predict the winner of an election.
  - Finance people often want to model multiple market scenarios and 
    forecast a company's earnings under each of them.
  - Economists often have data on current economic conditions and want 
    to predict future economic conditions.
+ - Doctors often want to know the probability that a particular treatment will
+   be effective based on test results and patient characteristics.
 
 This section will develop some tools for dealing with the relationship
 between different random events.
@@ -319,10 +340,17 @@ they *both* happen:
 Remember that the intersection ($\cap$) of $A$ and $B$ is the set of all 
 outcomes that are in both $A$ and $B$.
 
+We can calculate joint probabilities by constructing a new event from the
+intersection of the two original events, and then calculating the probability of
+that new event.
+
 ::: example
 **Joint probabilities for roulette bets**
 
-Consider two events for a game of roulette:
+Suppose that Al has bet on Red, and Betty has bet on Even. They agree to go out
+to a fancy dinner tonight if they both win.  How likely is this to happen?
+
+The events "Red wins" and "Even wins" can be defined:
   \begin{align}
     Red &= \left\{\begin{aligned}
       & 1,3,5,7,9,12,14,16,18, \\
@@ -333,14 +361,17 @@ Consider two events for a game of roulette:
       & 20,22,24,26,28,30,32,34,36 \\
       \end{aligned}\right\}
   \end{align}
-Suppose you are interested in the probability that the ball lands on a number that is both 
-red and even. This event is just the intersection of $Red$ and $Even$
+Note that zero doesn't count as an even number in roulette (if it did, the
+player would have an advantage over the house).
+
+This event "Red and Even both win" is just the intersection of $Red$ and $Even$
 so this joint probability is:
   \begin{align}
     \Pr(Red \cap Even) &= \Pr(\{12,14,16,18,30,32,34,36\}) \\
       &= 8/37 \\
       &\approx 0.216
   \end{align}
+So there is a 21.6\% chance of a fancy dinner.
 :::
 
 Joint probabilities are just probabilities, so they obey all of the axioms
@@ -354,23 +385,33 @@ event $B$ is defined as:
 The conditional probability answers the question: if we already know that 
 $B$ is true, what are the chances that $A$ is true?
 
+To calculate a conditional probability, just calculate the two components
+and apply the formula above.
+
 ::: example
 **Conditional probabilities in roulette**
 
-In our roulette example:
+Suppose that Betty has bet on even, and she excitedly yells out
+"I won! Woo hoo!"  Al bet on Red, and Carl bet on 14. Knowing that Betty
+has won, what are the chances Al and Carl also won?
+
+This question can be answered using the conditional probabilities:
    $$\Pr(Red|Even) = \frac{\Pr(Red \cap Even)}{\Pr(Even)} = \frac{8/37}{18/37} \approx 0.444$$
    $$\Pr(b = 14|Even) = \frac{\Pr(b = 14 \cap Even)}{\Pr(Even)} = \frac{1/37}{18/37} \approx 0.056$$
+That is, Betty winning is associated with a reduced probability of Al winning
+(since $0.444 < 0.486$) and an increased probability of Carl winning (since
+$0.056 > 0.027$).
 :::
 
 Conditional probabilities are not particularly useful in roulette, which is a
 simple "one shot" game.  But they are very important when playing multi-step
 games like poker or blackjack. At the beginning of a hand of poker, every player
-has equal chance of having a winning hand. But that is no longer true after you
-see your cards - having "good" cards increases your chance of winning, and
-having "bad" cards decreases that chance. You get to see your cards, so
-your bet should be based on $\Pr(win|YourCards)$ rather than $\Pr(win)$. Good
-poker players have detailed knowledge of these conditional probabilities.
-
+has equal chance of having a winning hand. But that is no longer true after the
+players see their cards - having "good" cards increases your chance of winning,
+and having "bad" cards decreases that chance. Players get to make bets after
+seeing their cards, so your bet should be based on $\Pr(win|YourCards)$ rather
+than $\Pr(win)$. Good poker players have detailed (but sometimes informal)
+knowledge of these conditional probabilities.
 
 Like joint probabilities, conditional probabilities are just probabilities,
 so they obey all of the axioms and rules of probability described in 
@@ -451,7 +492,7 @@ are independent.
 :::
 
 When is it *not* reasonable to assume that events are independent? In
-almost any other case.  Remember that events are defined in terms of
+almost any other case.  Remember that different events are defined in terms of
 the same underlying outcome, so they are typically related unless 
 you have some very specific reason to assume otherwise.
 
@@ -461,7 +502,7 @@ you have some very specific reason to assume otherwise.
 Consider the events "Red wins" and "Even wins" within a single roulette game.
 We earlier showed that the unconditional probability that Red wins is:
   $$\Pr(Red) = 18/37 \approx 0.486$$
-The conditional probability that Red wins given that Even wins is:
+and that the conditional probability that Red wins given that Even wins is:
    $$\Pr(Red|Even) = 8/18 \approx 0.444$$
 Since $0.44 \neq 0.486$, these two events are *not* independent.
 :::

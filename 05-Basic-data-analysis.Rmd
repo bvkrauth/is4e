@@ -4,9 +4,7 @@ In a previous chapter, we learned how to
 [clean a simple data set](#basic-data-cleaning-with-excel). The next step
 is to learn how to analyze it. In this chapter, we will use Excel to
 construct ***univariate*** statistics and charts, i.e., statistics and charts
-that describe a single variable.  Later in the term, we will learn 
-[multivariate methods](#multivariate-data-analysis) that describe the 
-relationship between two or more variables.
+that describe a single variable.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
@@ -14,11 +12,19 @@ relationship between two or more variables.
 In this chapter we will learn how to:
 
  - Calculate and interpret the main univariate summary statistics in Excel 
+   - Count or sample size
+   - Sample average
+   - Sample standard deviation or variance
+   - Sample minimum and maximum
+   - Sample percentiles and median
  - Construct and interpret frequency tables in Excel
  - Construct and interpret bar graphs, histograms and time series graphs in Excel
 :::
 
-In the next chapter, we will use the tools of probability and random
+Later in the term, we will learn
+[multivariate methods](#multivariate-data-analysis) that describe the
+relationship between two or more variables.
+We will also use the tools of probability and random
 variables to understand these statistics more deeply.
 
 ## Exploratory data analysis
@@ -94,7 +100,8 @@ data.  A statistic is just a number calculated from data.
 
 We will start by calculating some commonly-used ***univariate*** statistics, 
 which are statistics that describe a single variable in isolation. In Section
-\@ref(charts-in-excel) we will construct some commonly-used univariate graphs.  
+\@ref(univariate-graphs-in-excel) we will construct some commonly-used
+univariate graphs.
 
 Multivariate statistics describe the relationships among multiple variables,
 and will be covered in Chapter \@ref(multivariate-data-analysis).

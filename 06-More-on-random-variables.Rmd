@@ -12,7 +12,7 @@ library("tidyverse")
 
 The previous chapter developed the basic terminology and analytical 
 tools for a [single discrete random variable](#random-variables). This
-chapter will extend those tools to work wit continuous random variables, 
+chapter will extend those tools to work with continuous random variables,
 and with multiple random variables.
 
 ::: {.goals data-latex=""}

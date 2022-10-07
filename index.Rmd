@@ -51,21 +51,56 @@ and errors or typos can be reported to me at <bkrauth@sfu.ca> or https://github.
 
 This book uses consistent visual conventions to convey information.
 
-- Organization:
-  - Each chapter corresponds to one full week of the course.
-- Typography:
-  - Computer code or other inputs are shown like `this`.
-  - Math is usually shown like $this$.
-  - When new terminology is introduced, it is shown like ***this***.
-- Boxes:
-  - Pull-out information is shown in colored boxes.
+### Organization {-}
 
-::: example
-Boxes like this are for examples
-:::
+Each chapter is meant to be covered in one full week of a typical
+one-semester course. Chapters are introduced with learning goals
+and prerequisites to review before proceeding. Practice problems
+are provided at the end of each chapter, and are organized by
+learning goal.
+
+The chapters themselves are organized into three parts.
+
+- Chapters 1-5 (**FUNDAMENTALS**) introduce the basic theoretical concepts
+  of probability and random variables, as well as the basic computer
+  skills to work with data in Excel.  It is a prerequisite for the
+  later chapters.
+- Chapters 6-8 (**STATISTICAL THEORY**) develop the theory of statistics.
+  These chapters assume knowledge of the material from Chapters 1-5,
+  especially Chapters 3 and 4.
+- Chapters 9-12 (**WORKING WITH DATA**) teach more advanced data skills
+  in both Excel and R. These chapters assume knowledge of the material
+  from Chapters 1-5 (especially Chapters 2 and 5), but do not rely on
+  Chapters 6-8.
+
+There is also an appendix reviewing mathematical tools that are used
+throughout the book, but that should have been covered in a previous
+mathematics course.
+
+### Typography {-}
+
+`Computer instructions` including Excel formulas, R code,
+file names, etc. are shown in code format.
+
+$Mathematical$ expressions are shown in large italics.
+
+*Excel worksheet names* are shown in italics. Italics are
+also used to *emphasize* important points.
+
+***New terminology*** is shown in bold and italics when introduced.
+
+**Variable names** are shown in bold.
+
+### Boxes {-}
+
+Pull-out information is shown in colored boxes.
 
 ::: {.goals data-latex=""}
 Boxes like this are for showing course or chapter goals.
+:::
+
+::: example
+Boxes like this are for examples
 :::
 
 ::: {.economics data-latex=""}

@@ -36,9 +36,11 @@ In this chapter we will learn how to:
    - Formulas
    - Functions
    - Number formats
- - Follow good data management practices, including:
-   - Data documentation and version control
-   - Identify and implement the principles of tidy data
+ - Identify and implement good data management practices, including:
+   - Reproducibility
+   - Tidy data
+   - Data documentation
+   - Version control
 :::
 
 ## Application: Canadian employment data
@@ -95,28 +97,33 @@ in cleaning and managing our data.
 ### Reproducibility {#data-management}
 
 When analyzing data it is important for the results of our analysis to
-be ***reproducible***. What that means is that an interested reader 
+be ***reproducible***. Reproducibility means that an interested reader
 should be able to figure out exactly how you got your results, 
-and should be able to generate those results themselves.  Note that the
-"interested reader" might be *you*, as it is common to return to an
+and should be able to generate those results themselves.
+
+The "interested reader" might be *you*, as it is common to return to an
 analysis you did earlier.  Without reproducibility, you may not 
 remember where you found the data, what you have done with it, or 
-what it means.
+what it means.  The interested reader might also be your coworkers, your boss,
+or your clients.
 
 Reproducibility requires that we treat our data with care.  In
 particular, we should:
 
 1. Document the ***provenance*** or original source for all data.
    - When downloading data files, document the original URL and date of access.
-2. Keep an unmodified copy of all original data.
-   - This usually includes keeping the original file name.
+   - You can add a small text file (usually called `README.txt`) that
+     explains the provenance and provides other relevant information.
+2. Keep an unmodified copy of all original data files.
+   - Avoid changing the file name if possible.
+   - Use folders and your `README` file to clarify the contents of each file.
 3. Avoid directly editing data. Add new data instead.
    - Sometimes this is not possible or practical, which is
      why we keep an unmodified copy of the original data.
 4. Give files and variables brief but informative names.
-   - Avoid spaces or special characters in variable or file 
-     names. They can cause problems when moving data between operating
-     systems, file formats, or applications.
+   - Make your names ***portable***, i.e., easily moved across operating
+     systems, file formats, and applications.  For example, stick to letters
+     and numbers, and avoid using spaces or special characters.
    - Following a naming convention may help make your names more informative
 
 We will discuss the implementation of these principles later in this
@@ -131,17 +138,16 @@ has the following seven properties:
 1. Data is arranged in one or more simple rectangular grids or ***tables***.
 2. Each column in a table represents a distinct ***variable*** or attribute.
 3. Each variable has an informative and unique ***variable name***.
-   - Variable names are typically displayed in the top row of the table.
+   - Variable names are often displayed in the top row of the table.
 4. Each row in a table (after the top row) represents a distinct
    ***observation***, ***data point*** or ***case***.
+6. Each observation has a unique value for some **unique identifier** or **ID**
+   variable.
+   - The ID variable is often displayed in the first column of the table.
 5. All observations in a given table come from the same 
-   ***unit of observation***
-   - For example, data on Canadian cities and data on Canadian provinces
-     should probably be in two separate tables.
-6. One variable in a table serves as a **unique identifier** or **ID** for the 
-   observation.
-   - A unique identifier takes on a different value for each observation.
-   - The ID variable is often in the first column of the table.
+   ***unit of observation***.
+   - For example, we might have a table of Canadian cities, or a table of
+     Canadian provinces.
 7. The order in which observations or variables are listed is irrelevant to 
    the analysis. 
    - That is, the interpretation of the table would not change if its rows 
@@ -218,12 +224,13 @@ one data set and "Douglas" in another.
 
 Occasionally a data set will not have a standardized ID variable, and our only 
 option is to match observations based on a proper name.  For
-example, in BC school data an ID number called a PEN while health data uses a 
+example, each student in BC grades K to 12 is assigned an ID number called
+a PEN while each person in the healthcare system is assigned a
 different ID number called a PHN. There is no direct way to match PEN and PHN, 
-so we have to match education and health records on a combination of proper names 
-and other information such as year of birth.  Matches made this way are 
-called "probabilistic" matches, meaning (roughly) that the records probably describe
-the same person but might not.
+so we have to match education and health records on a combination of proper
+names and other information such as year of birth.  Matches made this way are
+called "probabilistic" matches, meaning (roughly) that the records probably
+describe the same person but might not.
 :::
 
 ## Introduction to Excel {#a-quick-tour-of-excel}
@@ -357,24 +364,24 @@ Most links only work for a few months or a few years, depending on the data
 provider and how careful they are.
 
 One strategy for dealing with link rot is to always save a local copy of the
-data. Another is to use the digital object identifier or ***DOI*** if
-one is available.  The DOI system allows organizations to provide persistent
-links to web pages or other files. The *Sources* worksheet above shows both
-regular and DOI addresses.
+data. Another is to use a [digital object identifier](https://www.doi.org/)
+or ***DOI*** if one is available. DOI is an international system that allows
+participating organizations to provide persistent links to web pages or other
+files. The *Sources* worksheet above provides both regular and DOI addresses.
 
 - The regular URL (https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703
 ) tells us where the file is located
   - Go to the server www150.statcan.gc.ca
-  - Look in the folder/directory t1/tbl1/en/tv.action/
-  - Search in the index of that folder for "pid=1410028703"
+  - Look in the folder/directory t1/tbl1/en/tv.action
+  - Pass the server the parameter "pid=1410028703"
 - The DOI URL (https://doi.org/10.25318/1410028701-eng) also tells us where a
   file is located, but the file at that location is not the actual data file.
-  Instead it is a link that redirects the user to the address
+  Instead it is a link that (currently) redirects the user to the address
   https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703.
 
 When Statistics Canada moves the file at some point in the future, the original
-URL will stop working. But the DOI will continue working as long as they update
-the DOI entry with the new URL.
+URL will stop working. But the DOI will continue working because Statistics
+Canada will (hopefully) update the DOI entry with the new URL.
 :::
 
 
@@ -1457,27 +1464,35 @@ way.
 
 For our purposes, we can just follow a few simple rules:
 
-- Always have one ***working copy***, which is the file you are actively working
-  on right now.
-- Always have one ***master version***, which is the most recently saved file that
-  is "complete."
-   - You should try to work in small and distinct projects (like adding a single
-     variable or group of related variables) so that you can
+1. Have a ***working copy***, which is the file you are actively working
+   on right now.
+   - There is only one working copy of a given document
+     (in a simple version control system).
+   - You can edit the working copy.
+2. Have a ***master version***, which is the most recently saved file that
+   is "complete."
+   - There is only one master version (in any version control system).
+   - Do not edit the master version.  Instead:
      1. Make a working copy of the master version.
      2. Complete a project in your working copy.
      3. Make this working copy the new master version.
-   - There should always be exactly one master version of a given document.
-- As needed, you can keep any number of ***archived versions***, which are
+   - You should try to work in small and distinct projects (like adding a single
+     variable or group of related variables).
+3. As needed, you can keep any number of ***archived versions***, which are
    earlier master versions (or occasionally earlier working copies) that
    you wish to keep around for some reason.
-   - You may choose to save every previous master version.  GitHub does this
-     automatically.
-   - You may choose to save just a few important ones.  At minimum, this should
-     include any version you have sent to anyone else and any version
-     used to generate results you have sent to someone else.
-   - Use some consistent naming convention to distinguish between archived 
-     versions. For example, I add a date code to the end like "210907" which
-     means that this file was the master version as of September 7, 2021.
+   - There can be many archived versions.
+   - Never edit an archived version.
+   - Archiving strategies vary depending on the importance/sensitivity
+     of the project.
+     - You may choose to save every previous master version.  GitHub does this
+       automatically.
+     - You may choose to save just a few important ones.  At minimum, this should
+       include any version you have sent to anyone else and any version
+       used to generate results you have sent to someone else.
+     - Use some consistent naming convention to distinguish between archived
+       versions. For example, I add a date code to the end like "210907" which
+       means that this file was the master version as of September 7, 2021.
      
 At this level, you do not normally need to keep archived versions.  But you
 should at least distinguish between your master version and working copy, and to
@@ -1540,16 +1555,16 @@ Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
 
 **SKILL #2: Identify features of ID variables**
 
-2. Which of the following characteristics is necessary for a variable to function
-   as an ID variable?
+2. Which of the following characteristics is necessary for a variable to
+   function as an ID variable?
    a. It takes on a different value for each observation.
    b. Each value it can take on has an associated observation.
    c. It can take only one value.
 
 **SKILL #3: Use absolute and relative references in Excel**
 
-3. For each of the following formulas, suppose we copy that from cell C12 to cell 
-   E15. What formula appears in cell E15?
+3. For each of the following Excel formulas, suppose we copy that from cell
+   C12 to cell E15. What formula appears in cell E15?
    a. `=B2`
    b. `=$B$2`
    c. `=$B2`
@@ -1559,9 +1574,11 @@ Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
    g. `=SUM($B2,$B10)`
    h. `=SUM(B$2,B$10)`
 
+If you aren't sure, try it out in Excel and see what happens.
+
 **SKILL #4: Construct Excel formulas**
 
-4. Construct a formula to do each of the following.
+4. Construct an Excel formula to do each of the following.
    a. Find the square root of the number in cell A2.
    b. Find the lowest value in cells A2:A100.
    c. Find the absolute value of the difference between cells A2 and B2.

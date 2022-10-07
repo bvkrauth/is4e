@@ -300,13 +300,11 @@ to make sure the installation worked.
 
 4. Enter `library(tidyverse)` in the console window.  
    - If you get an error message like
-     *Error in library(tidyverse) : there is no package called ‘tidyverse’*
-     drop by office hours for help.
-   - If you don't get an error message (you will get some message about "Conflicts"), 
-     the installation worked.
+     ```Error in library(tidyverse) : there is no package called ‘tidyverse’```
+     you may have forgotten to install the package; go back to step 2 above.
+   - If you don't get an error message (it's OK if you get some message
+     about "Conflicts"), the installation worked.
 
 If you run into trouble here, don't worry. We will not need the Tidyverse for 
 a few weeks, so there is plenty of time to get help.
-
-
 
