@@ -29,12 +29,21 @@ hypothesis tests is called statistical ***inference***.
 ::: {.goals data-latex=""}
 **Chapter goals**
 
-In this chapter we will learn how to:
+In this chapter, we will learn how to:
 
- - Construct and perform a simple hypothesis test
- - Construct a confidence interval
- - Correctly interpret both hypothesis tests and confidence intervals
+1. Identify the parameter of interest, null hypothesis, and alternative
+   hypothesis for a hypothesis test.
+2. Classify test statistics as valid or invalid.
+3. Find the distribution of a test statistic under the null.
+4. Describe the distribution of a test statistic under the alternative.
+5. Find the size of a simple test.
+6. Find critical values for a test.
+7. Construct and interpret a confidence interval.
+8. Correctly interpret test results and confidence intervals.
 :::
+
+To prepare for this chapter, please review the chapter on
+[statistics](#statistics).
 
 ## Principles of inference
 

@@ -10,36 +10,54 @@ knitr::opts_chunk$set(echo = TRUE,
 library("tidyverse")
 ```
 
-In an earlier chapter, we learned some 
-[basic data cleaning](#basic-data-cleaning-with-excel) 
-skills using Excel, and some [introductory R skills](#an-introduction-to-r).  This 
-chapter will build on these skills by teaching some more advanced tools and concepts.
+In an earlier chapter, we learned some basic data
+[cleaning](#basic-data-cleaning-with-excel) and
+[analysis](#basic-data-analysis-with-excel)
+skills using Excel.  This chapter will build on these skills by teaching some
+more advanced tools and concepts. We will do this while building a data set
+describing long-run economic growth in a wide cross-section of countries.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
 
-In this chapter we will learn how to:
+In this chapter, we will learn how to:
 
-- Move data files across multiple file formats.
-- Combine multiple data files into a single workbook.
-- Link observations in Excel using XLOOKUP.
-- Construct group-level aggregate variables in Excel.
-- Avoid, detect and handle errors in Excel.
-- Protect Excel data from unintentional modification.
-- Read CSV files in R.
-- View data tables ("tibbles") in R.
+1. Identify and work with common data file formats.
+   - Excel native (.xlsx) format
+   - Text format (CSV, tab/space delimited, fixed width)
+2. Describe and implement common data-cleaning tasks:
+   - Matching/merging using the XLOOKUP function.
+   - Crosswalk tables.
+   - Aggregation by groups using "IFS" functions.
+3. Describe and use Excel data-management tools:
+   - Data validation and error handling
+   - Data protection
 :::
 
-We will do this while building a data set describing long-run economic
-growth in a wide cross-section of countries. 
+To prepare for this chapter, please review the chapter on 
+[basic data cleaning with Excel](#basic-data-cleaning-with-excel).
+and download the following three data files:
+
+> [https://bookdown.org/bkrauth/BOOK/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)  
+> [https://bookdown.org/bkrauth/BOOK/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
+> [https://bookdown.org/bkrauth/BOOK/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
+
+The third file may display in your browser rather than downloading like the other 
+files.  If that happens, you can right-click on the link above and select 
+"Save link as" to save the file on your computer.
+
 
 
 ::: {.economics data-latex=""}
 **Data on long-run economic growth**
 
-Our main data source will be the ***Penn World Table*** (PWT), a cross-country
-data set covering real GDP, population, and other macroeconomic variables. The
-PWT is built from two distinct data sources:
+Our main data source `pwt100.xlsx` is the ***Penn World Table*** (PWT), a
+cross-country data set covering real GDP, population, and other macroeconomic
+variables. It has been used extensively by macroeconomists seeking to
+understand why some countries have more rapid economic growth than others.
+
+The current version of the PWT is available at 
+http://www.ggdc.net/pwt and is built from two distinct data sources:
 
 - National income data from each country's national statistical agency.
 - Systematic data comparing prices across countries, constructed by the
@@ -50,37 +68,23 @@ country's GDP is calculated using local prices, but prices of key goods and
 services vary dramatically across countries: housing is much more expensive
 in Vancouver than in Houston, and a haircut is much cheaper in Mumbai
 than in London.  The PWT research team use the results of the ICP to convert
-each country's GDP data to comparable (PPP) units.  The current version 
-of the PWT is available online at http://www.ggdc.net/pwt. 
+each country's GDP data to comparable (PPP) units.
 
-> Download the required file pwt100.xlsx from   
-> [https://bookdown.org/bkrauth/BOOK/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)  
-
-We also have a secondary data source with cross-country data on top marginal
-tax rates.  Most countries have *progressive* tax systems - that means that
-residents with high income pay a higher tax rate than residents with low
-income - but these higher rates only apply to *marginal* income.  For
+We also have a secondary data source `TaxRates.xlsx` with cross-country data on\
+top marginal tax rates.  Most countries have *progressive* tax systems - that
+means that residents with high income pay a higher tax rate than residents with
+low income - but these higher rates only apply to *marginal* income.  For
 example if the marginal tax rate is 30\% on taxable income below \$100,000 and 
 40\% on taxable income above \$100,000, a taxpayer with \$150,000 in taxable 
 income would pay 30\% on the first \$100,000 and 40\% on the remaining \$50,000
 for a total tax bill of \$50,000, or an average tax rate of 33\%.
 
-The data on the top marginal tax rate is obtained from the Tax Foundation[^801], 
+The data on the top marginal tax rate is obtained from the
+Tax Foundation[^801], 
 a US-based policy and research organization. Our data set comes from Table 1 in the report "Taxing High Incomes: A Comparison of 41 Countries", available online at  https://taxfoundation.org/taxing-high-income-2019/. 
 
-> Download the required file TaxRates.xlsx from 
-> [https://bookdown.org/bkrauth/BOOK/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)  
-
-Finally, we have a "crosswalk" data file I have constructed to help with
-linking the GDP and tax data (more about this below). 
-
-> Download the required file CountryCodes.txt from 
-> [https://bookdown.org/bkrauth/BOOK/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
-> This file may display in your browser rather than downloading like the other 
-> files.  If that happens, you can right-click on the link above and select 
-> "Save link as" to save the file on your computer.
-
-The rest of the chapter will use these three data files.
+Finally, we have a "crosswalk" data file `CountryCodes.txt`that I have constructed
+to help with linking the GDP and tax data (more about this below). 
 :::
 
 [^801]: I should mention that the Tax Foundation is not an entirely neutral 

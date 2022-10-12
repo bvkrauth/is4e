@@ -14,31 +14,36 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 
-So far, most of our emphasis has been on univariate analysis: understanding
-the behavior of a single variable at a time.  However, we are often interested
-in the relationship among multiple variables.  This will be the primary
-subject of your next course in statistics (most likely ECON 333), but we
-will touch on a few of the basics in this chapter, using a combination of 
-theoretical concepts, Excel, and R.
+In previous chapters, we have learned to perform *univariate* statistical
+analysis in both Excel and R. The statistics and graphs we have learned
+can be used to describe the behavior of a single variable.
+
+This chapter will develop some simple techniques for understanding the
+relationship *between* two or more variables. Most data analysis in economics
+is focused on understanding relationships between variables, so this is an
+important topic that will be central to the next statistics course you take.
+Here, we will only introduce a few basic ideas and methods.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter, we will learn how to:
 
-- Calculate and interpret the sample covariance and correlation.
-- Interpret frequency tables, cross-tabulations and conditional 
-  averages
-- Construct Excel Pivot Tables, including frequency tables,
-  cross-tabulations, and conditional averages.
-- Interpret scatter plots, binned-mean plots, smoothed-mean
-  plots, and linear regression plots.
-- Construct scatter plots, smoothed-mean plots and linear
-  regression plots in R.
+1. Calculate and interpret the sample covariance and correlation.
+2. Distinguish between pairwise and casewise deletion of missing
+   values.
+3. Construct and interpret pivot tables in Excel including
+   - Frequency tables
+   - Cross-tabulations
+   - Conditional averages
+4. Construct and interpret scatter plots in R.
+5. Construct and interpret smoothed-mean and linear regression plots in R.
 :::
 
-For the most part, we will focus on the case of a random sample of size $n$
-on two random variables $x_i$ and $y_i$.  
+To prepare for this chapter, please review the section on
+[multiple random variables](#multiple random variables) and previous chapters
+on using Excel and R.
+
 
 ::: example
 **Obtaining the data**

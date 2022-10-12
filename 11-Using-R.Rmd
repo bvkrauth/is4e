@@ -19,14 +19,21 @@ also use ggplot, R's powerful graphing system.
 ::: {.goals data-latex=""}
 **Chapter goals**
 
-In this chapter we will learn how to use R to:
+In this chapter, we will learn how to:
 
-- Use filter, select, arrange, and mutate to transform data tables.
-- Calculate univariate statistics in R.
-- Produce simple but informative histograms and line graphs using ggplot.
+1. Use the mutate function to add or modify variables in a data table.
+2. Use the select, arrange, and filter functions to modify a data table.
+3. Calculate univariate statistics for a single variable.
+4. Construct a table of summary statistics.
+5. Recognize and handle missing data problems.
+6. Construct a simple or binned frequency table.
+7. Perform simple probability calculations.
+8. Create a histogram with ggplot.
+9.  Create a line graph with ggplot.
 :::
 
-To get started, open R, load the Tidyverse, and read in our employment data.
+To prepare for this chapter, review the [introduction to R](#introduction-to-r).
+Then open R, load the Tidyverse, and read in our employment data:
 
 ```{r ReadEmpDataFromCSV_11, eval=FALSE}
 library(tidyverse)

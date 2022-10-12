@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = FALSE,
 library("tidyverse")
 ```
 
-The previous chapter developed a general framework for modeling 
+In a previous chapter, we developed a general framework for modeling
 [random outcomes and events](#probability-and-random-events). This
 framework can be applied to any set of random outcomes, no 
 matter how complex.
@@ -21,21 +21,28 @@ are also called "random variables."
 ::: {.goals data-latex=""}
 **Chapter goals**
 
-In this chapter we will learn how to:
+In this chapter, we will learn how to:
 
-- Calculate and interpret the CDF and PDF of a discrete random 
-  variable, or several random variables.
-- Calculate and interpret the expected value of a discrete random 
-  variable from its PDF.
-- Calculate and interpret the variance and standard deviation of a 
-  discrete random variable from its PDF.
-- Work with common discrete probability distributions including the 
-  Bernoulli, binomial, and discrete uniform.
+1.  Define a random variable in terms of a random outcome.
+2.  Determine the support and range of a random variable.
+3.  Calculate and interpret the PDF of a discrete random variable.
+4.  Calculate and interpret the CDF of a discrete random variable.
+5.  Identify standard properties of the PDF and CDF.
+6.  Calculate the expected value of a discrete random variable from its PDF.
+7.  Calculate quantiles of a random variable from its CDF.
+8.  Calculate the variance and standard deviation of a discrete random variable
+    from its PDF.
+9.  Calculate the variance and standard deviation using the expected
+    value formula.
+10. Calculate the expected value for a linear function of a random variable.
+11. Calculate the variance and standard deviation for a linear function
+    of a random variable.
+12. Work with standard discrete probability distributions including the 
+    Bernoulli, binomial, and discrete uniform.
 :::
 
-The material in this chapter will use some mathematical notation 
-(the summation operator) that provides a convenient way to
-represent long sums.  Please review the section on
+To prepare for this chapter, please review the chapter on
+[probability and random events](#probability) and the section on 
 [sequences and summations](#sequences-and-summations)
 in the math appendix.
 

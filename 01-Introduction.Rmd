@@ -10,8 +10,9 @@ the big picture of what we are trying to do here, and to get set up for our work
 
 In this chapter we will:
 
- - Review educational goals and establish course expectations
- - Gather resources and tools, including all needed computer software.
+1. Review course educational goals
+2. Establish course expectations
+3. Gather resources and tools, including all needed computer software.
 :::
 
 ## Course goals and context {#course-goals-and-context}
@@ -28,26 +29,27 @@ By the end of this course, you will:
 Develop computer skills:
 
 1. Clean, analyze, and graph data in Excel.
-2. Clean, analyze and graph data in R.
+2. Clean, analyze, and graph data in R.
 3. Follow recommended practices for data management and reproducible analysis.
 
 Become familiar with basic statistical concepts:
 
 4. Calculate and interpret probabilities and expected values.
 5. Explain the relationship between population and sample.
-6. Describe the properties of a statistic or estimator including its
-  probability distribution, expected value, variance, bias, and mean 
-  squared error.
-7. State and apply the law of large numbers and central limit theorem.
+6. Describe the properties of a statistic including its
+   probability distribution, expected value, and variance.
+7. Describe the properties of an estimator including its
+   bias and mean squared error.
+8. State and apply the law of large numbers and central limit theorem.
 
 Apply these skills in combination to analyze real-world economic data:
 
-8. Construct and interpret common charts including histograms, scatter plots,
-  and time-series plots.
-9. Construct and interpret frequency tables and cross-tabulations.
-10. Construct and interpret common univariate and bivariate statistics,
+9.  Construct and interpret common charts including histograms, scatter plots,
+    and time-series plots.
+10. Construct and interpret frequency tables and cross-tabulations.
+11. Construct and interpret common univariate and bivariate statistics,
     including	mean, variance, standard deviation, covariance and correlation.
-11. Construct and interpret hypothesis tests and confidence intervals.
+12. Construct and interpret hypothesis tests and confidence intervals.
 
 We will be switching back and forth between theory, data analysis and
 applications.  All three skill sets are valuable.
@@ -163,8 +165,9 @@ are an economics student and are interested in that minor you are
 recommended to take ECON 233.
 :::
 
-In later courses, you will learn more advanced techniques including
-linear regression, you will use statistical packages such as R more
+If you continue in an economics major, you will take at least one additional
+course  in econometrics. In those courses, you will learn more advanced techniques
+such as linear regression, you will use statistical packages such as R more
 extensively, and you will go deeper into the theory.
 
 ::: sfu

@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = FALSE,
 library("tidyverse")
 ```
 
-The previous chapter developed the basic terminology and analytical 
+In a previous chapter, we developed the basic terminology and analytical
 tools for a [single discrete random variable](#random-variables). This
 chapter will extend those tools to work with continuous random variables,
 and with multiple random variables.
@@ -18,16 +18,32 @@ and with multiple random variables.
 ::: {.goals data-latex=""}
 **Chapter goals**
 
-In this chapter we will:
+In this chapter, we will learn how to:
 
-- Interpret the CDF and PDF of a continuous random variable.
-- Work with common continuous probability distributions including the 
-  uniform and normal.
-- Calculate and interpret joint, marginal and conditional distributions
-  of two random variables.
-- Calculate and interpret the covariance and correlation coefficient of 
-  two discrete random variables.
+1.  Derive the joint distribution of two discrete random variables from the
+    underlying outcome.
+2.  Derive a marginal distribution from a joint distribution.
+3.  Derive a conditional distribution from a joint distribution.
+4.  Determine whether two random variables are independent.
+5.  Calculate the covariance of two discrete random variables from their joint
+    PDF.
+6.  Calculate the covariance of two random variables using the expected value
+    formula.
+7.  Calculate the correlation of two random variables from their covariance.
+8.  Calculate the covariance and correlation of two independent random
+    variables.
+9.  Calculate the expected value of a linear function of two or more random
+    variables.
+10. Interpret covariances and correlations.
+11. Interpret the CDF and PDF of a continuous random variable.
+12. Use the properties of the uniform distribution.
+13. Work with linear functions of a uniform random variable.
+14. Use the properties of the normal distribution.
+15. Work with linear functions of a normal random variable.
 :::
+
+To prepare for this chapter, please review the introductory chapter
+on [random variables](#random-variables).
 
 ## Continuous random variables {#continuous-random-variables}
 

@@ -18,19 +18,25 @@ at the value at, some unknown parameter of the DGP.
 ::: {.goals data-latex=""}
 ***Chapter goals***
 
-In this chapter we will:
+In this chapter, we will learn how to:
 
-- Model the random process generating a data set.
-- Apply and interpret the assumption of simple random sampling, and compare
-  it to other sampling schemes.
-- Use the theory of probability and random variables to model the statistics
-  we have calculated from a data set.
-- Calculate and interpret the mean and variance of a statistic from
-  its sampling distribution.
-- Calculate and interpret bias and mean squared error.
-- Explain the law of large numbers, Slutsky's theorem, and the idea of a consistent
-  estimator.
+1.  Identify whether a data set is a random sample.
+2.  Classify data sets by sampling types.
+3.  Describe the joint probability distribution of a very simple data set.
+4.  Find the sampling distribution of a very simple statistic.
+5.  Find the mean and variance of a statistic from its sampling distribution.
+6.  Find the mean and variance of a linear statistic.
+7.  Distinguish between parameters, statistics, and estimators.
+8.  Calculate the sampling error of an estimator.
+9.  Calculate bias and classify estimators as biased or unbiased.
+10. Calculate mean squared error of an estimator.
+11. Apply MVUE and MSE criteria to select an estimator.
+12. Calculate the standard error of a sample average.
+13. Explain and interpret the law of large numbers.
 :::
+
+To prepare for this chapter, please review both the [introductory](#random-variables)
+and [advanced](#more-on-random-variables) chapters on random variables.
 
 ## Data and the data generating process
 

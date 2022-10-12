@@ -18,30 +18,32 @@ knowledge by using Excel to clean a real data set.
 ::: {.goals data-latex=""}
 **Chapter goals**
 
-In this chapter we will learn how to:
+In this chapter, we will learn how to:
 
- - Use basic Excel terminology and concepts including:
+1. Identify and implement the principles of tidy data.
+2. Identify and implement the principles of reproducible research, including:
+   - Data documentation
+   - Version control
+2. Identify and work with ID variables.
+3. Use basic Excel terminology and concepts including:
    - Workbooks, worksheets, and cells
    - Cell contents and display format
    - Cell ranges
-   - Relative and absolute cell addresses
-   - Numeric, text, date, and logical  data types
- - Use Excel tools to view data, including:
+4. Use Excel tools to view data, including:
    - Sorting
    - Filtering
    - Freezing panes
    - Changing cell size
- - Use Excel tools to enter new data and "clean" existing data, including:
-   - Fill and series
-   - Formulas
-   - Functions
-   - Number formats
- - Identify and implement good data management practices, including:
-   - Reproducibility
-   - Tidy data
-   - Data documentation
-   - Version control
+5. Use fill and series to enter new data.
+6. Use Excel formulas to construct new variables.
+7. Use relative and absolute cell addresses in Excel formulas.
+8. Use logical and text data in Excel.
+9. Use dates in Excel.
 :::
+
+To prepare for this chapter, please ensure you have a computer with Excel
+installed. Refer to the [installation instructions](#installing-microsoft-excel) as
+needed.
 
 ## Application: Canadian employment data
 

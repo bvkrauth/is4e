@@ -9,17 +9,30 @@ It also provides the mathematical framework for statistical analysis.
 ::: {.goals data-latex=""}
 **Chapter goals**
 
-In this chapter we will learn how to:
+In this chapter, we will learn how to:
 
- - Model random events using the tools of probability
- - Calculate and interpret marginal, joint, and conditional probabilities
- - Interpret and use the assumptions of independence and equal outcome probability
+1.  Define the outcome and sample space for a given random process
+2.  Use set theory to define and manipulate events for a given random process.
+3.  Calculate event probabilities from elementary event probabilities.
+4.  Calculate and interpret joint and conditional probabilities
+5.  Apply the axioms and derived rules of probability.
+6.  Interpret and evaluate the claim that two events are independent.
+7.  Use the law of total probability and Bayes' law
 :::
 
-Most high schools teach a little probability, but we will go deeper than you
-have before. To do this, we will use mathematical notation and
-terminology that you have seen before but may need to review.  If you have
-difficulty with the math, please refer to the sections on [Sets](#sets) and [Functions](#sets) in the [Math Review](#math-review) appendix.
+To prepare for this chapter, please review the sections on [Sets](#sets) and
+[Functions](#sets) in the [Math Review](#math-review) appendix.
+
+## Randomness and uncertainty
+
+Economics studies choice behavior and its consequences, and nearly every choice
+we make is affected by ***randomness*** and ***uncertainty***. That is, we often
+cannot predict future conditions with certainty, and we do not even have full
+information on current conditions.
+
+As in other areas of economics, we can better understand random and uncertain
+events by building a model. The first step in building a model is to describe
+the situation of interest.
 
 ::: example
 **Example application: Roulette**

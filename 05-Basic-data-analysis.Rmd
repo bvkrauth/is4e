@@ -9,23 +9,21 @@ that describe a single variable.
 ::: {.goals data-latex=""}
 **Chapter goals**
 
-In this chapter we will learn how to:
+In this chapter, we will learn how to:
 
- - Calculate and interpret the main univariate summary statistics in Excel 
-   - Count or sample size
+1. Calculate and interpret the main univariate summary statistics by hand:
+   - Sample size (count)
    - Sample average
-   - Sample standard deviation or variance
-   - Sample minimum and maximum
    - Sample percentiles and median
- - Construct and interpret frequency tables in Excel
- - Construct and interpret bar graphs, histograms and time series graphs in Excel
+   - Sample variance and standard deviation
+2. Calculate the main univariate summary statistics in Excel.
+3. Construct and interpret simple and binned frequency tables in Excel
+4. Construct and interpret time series (line) graphs in Excel
+5. Construct and interpret bar graphs and histograms in Excel
 :::
 
-Later in the term, we will learn
-[multivariate methods](#multivariate-data-analysis) that describe the
-relationship between two or more variables.
-We will also use the tools of probability and random
-variables to understand these statistics more deeply.
+To prepare for this chapter, please review the chapter on
+[basic data cleaning with Excel](#basic-data-cleaning-with-excel).
 
 ## Exploratory data analysis
 
