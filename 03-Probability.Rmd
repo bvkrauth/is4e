@@ -70,11 +70,10 @@ will happen, but no one knows in advance what will happen.
 
 ## Outcomes and events {#outcomes-and-events}
 
-To build a probabilistic model of a random process, we start by defining
-the ***outcome*** we are interested in.  An outcome can be a simple yes/no
-result, it can be a number, or it can be a much more complex object. The
-outcome should be a complete description of the random process, in the
-sense that everything we are interested in can be defined in terms of
+Next, we define the ***outcome*** we are interested in.  An outcome can be a
+simple yes/no result, it can be a number, or it can be a much more complex
+object. The outcome should be a complete description of the random process, in
+the sense that everything we are interested in can be defined in terms of
 the outcome.
 
 ::: example
@@ -84,7 +83,8 @@ The outcome of a single game of roulette can be defined as the number of
 the slot in which the ball lands.  Call that number $b$.
 :::
 
-The set of all possible outcomes is called the ***sample space***.
+The set of all possible outcomes is called the ***sample space***. The sample
+space is usually represented by the Greek capital letter Omega ($\Omega$).
 
 ::: example
 **The sample space in roulette**
@@ -98,7 +98,7 @@ This sample space has $|\Omega| = 37$ elements.
 Next, we define a set of ***events*** that we are interested in.
 We can think of an event as either:
 
- - A statement that is either true or false depending on the outcome OR
+ - A factual statement about the outcome OR
  - A subset of the sample space 
 
 These two concepts are equivalent, though the subset concept 
@@ -172,9 +172,9 @@ In our roulette example:
 ## Probabilities {#probabilities}
 
 Our final step is to define a ***probability distribution***
-for this random process, which is a function that assigns
-a number to each possible event.  The number is called 
-the event's ***probability***. 
+for this random process, which is a function $Pr(\cdot)$ that assigns
+a number $\Pr(A)$ to each possible event $A$.  The number is called 
+the ***probability*** of event $A$.
 
 Probabilities are normally between zero and one:
 
@@ -188,24 +188,38 @@ but we will take it as given for the moment.
 
 ### The axioms of probability {#the-axioms-of-probability}
 
-All valid probability distributions must obey the following three conditions, which are sometimes called the ***axioms*** of probability.
+All valid probability distributions must obey the following three conditions,
+which are sometimes called the ***axioms*** of probability.
 
-1. Probabilities are never negative:
+1. ***Non-negativity***: Probabilities are never negative:
    $$\Pr(A) \geq 0$$
-2. One of the outcomes in the sample space will definitely happen:
+2. ***Unit measure***: One of the outcomes in the sample space will definitely
+   happen:
    $$\Pr(\Omega) = 1$$
-3. For any two *disjoint* events $A$ and $B$, the probability that
-   $A$ or $B$ happen is the sum of their individual probabilities:
+3. ***Additivity***: For any two *disjoint* events $A$ and $B$, the probability
+   that either $A$ or $B$ happens is the sum of their individual probabilities:
    $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
 
-The first two axioms are relatively straightforward, but the third may need
-some explanation. Remember that two events are disjoint if they have no
-outcomes in common, i.e., it is not possible for both events to happen. For
-example, the event "the unemployment rate is 5\%" and the event
-"the unemployment rate is 3\%" are disjoint.  Axiom three means that we can
-calculate the probability the unemployment rate is 3\% or 5\% by adding the
-probability of 3\% and the probability of 5\%.
+The first two axioms are straightforward.  Axiom 3 is a little trickier because
+we need to confirm that the events are disjoint before we apply it.  Remember
+that events are disjoint when they have no outcomes in common.
 
+::: example
+**Disjoint outcomes in roulette**
+
+The events "ball lands on zero" and "ball lands on 14"
+are disjoint:
+  $$\{0\} \cap \{14\} = \emptyset$$
+so Axiom 3 applies and the probability that the ball lands
+on zero or 14 is:
+  $$\Pr(\{0\} \cup \{14\}) = \Pr(\{0\}) + \Pr(\{14\})$$
+  
+The events "ball lands on red" and "ball lands on 14"
+are not disjoint:
+  $$Red \cap \{14\} = \{14\}$$
+so Axiom 3 does *not* apply.
+  $$\Pr(Red \cup \{14\}) \neq \Pr(Red) + \Pr(\{14\})$$
+:::
 
 ### Additional rules for probabilities {#some-rules-for-probabilities}
 
@@ -215,17 +229,15 @@ can all be derived from the three axioms.
 Let $A$ and $B$ be two (not necessarily disjoint) events.  Then our three axioms
 of probability imply several additional rules:
 
-- Probabilities cannot be higher than one.
+- ***Upper bound rule***: Probabilities cannot be higher than one.
    $$\Pr(A) \leq 1$$
-- Probabilities of identical events are identical:
-   $$A = B \implies \Pr(A) = \Pr(B)$$
-- Probabilities of implied events are larger:
-   $$A \subset B \implies \Pr(A) \leq \Pr(B)$$
-- The probability of an event *not* happening is:
+- ***Complement rule***: The probability of an event *not* happening is:
    $$\Pr(A^C) = 1 - \Pr(A)$$
-- The probability of nothing happening is:
+- ***Empty event rule***: The probability of nothing happening is:
    $$\Pr(\emptyset) = 0$$
-- The probability of either $A$ or $B$ happening is:
+- ***Implied event rule***: Probabilities of implied events are larger:
+   $$A \subset B \implies \Pr(A) \leq \Pr(B)$$
+- ***Subadditivity rule***: The probability of either $A$ or $B$ happening is:
   \begin{align}
     \Pr(A \cup B) &= \Pr(A) + \Pr(B) - \Pr(A \cap B) \\
       &\leq \Pr(A) +\Pr(B)
@@ -233,6 +245,27 @@ of probability imply several additional rules:
 
 These results are not hard to prove, but I will not go through the proofs.
 However, I will use these results so you should be familiar with them.
+
+::: example
+**Derived probability rules in roulette**
+
+We can use our derived probability rules in various ways:
+
+- If we can know the probability that Red wins, we can use the complement rule
+  to calculate the probability that Red loses:
+  $$\Pr(Red^c) = 1 - \Pr(Red)$$
+- We know that $\{14\} \subset Red$, so we can use the implied event rule
+  to determine that:
+  $$\Pr(\{14\}) \leq \Pr(Red)$$
+- We earlier determined that "ball lands on red" and "ball lands on 14"
+  are not disjoint, and so we could not apply Axiom 3 directly:
+  $$\Pr(Red \cup \{14\}) \neq \Pr(Red) + \Pr(\{14\})$$
+  However, we can use the subadditivity rule to find an upper bound:
+  $$\Pr(Red \cup \{14\}) \leq \Pr(Red) + \Pr(\{14\})$$
+  or calculate the exact probability:
+  $$\Pr(Red \cup \{14\}) = \Pr(Red) + \Pr(\{14\}) - \Pr(Red \cap \{14\})$$
+:::
+
 
 ### Calculating probabilities
 
@@ -258,20 +291,19 @@ Casinos are required by law to operate "fair" games, and are subject to heavy
 penalties if they operate unfair ones.  In the context of roulette, a fair game
 is one in which each number has the same probability.
 
-Let's assume that the roulette wheel is "fair" in the sense that each 
-outcome has the same probability. Note that this is just an assumption, and
-it may not actually be true. Later on, we will use data
+Let's assume that the roulette wheel is "fair" in this sense. Note that fairness
+is just an assumption, and may not actually be true. Later on, we will use data
 and statistics to evaluate whether a roulette wheel is *actually* fair.
 
-Asssuming each outcome has the same probability, let that probability be:
+Asssuming each elementary event has the same probability, let that probability be:
    $$p = \Pr(b = 0) = \Pr(b = 1) = \cdots = \Pr(b = 36)$$
 To find the correct value of $p$ we use the axioms of probability:
 
-- By axiom #2, one of the outcomes will happen:
+- By Axiom 2, one of the outcomes will happen:
    $$\Pr(\Omega) = 1$$
-- Since the different outcomes are disjoint, axiom #3 implies that:
+- Since the elementary events are disjoint, Axiom 3 implies that:
    $$\underbrace{\Pr(\Omega))}_{1} = \underbrace{\Pr(\{0\})}_{p} + \underbrace{\Pr(\{1\})}_{p} + \cdots + \underbrace{\Pr(\{36\})}_{p}$$
-- Since there are 37 possible outcomes, we can rewrite this equation as:
+- Since there are 37 elementary events, we can rewrite this equation as:
    $$1 = 37p$$
 - We can then solve for $p$ to get:
    $$p = 1/37 \approx 0.027$$
@@ -297,12 +329,13 @@ $$\Pr(Even) = |Even|*1/37 = 18/37 \approx 0.486$$
 $$\Pr(First12) = |First12|*1/37 = 12/37 \approx 0.324$$
 :::
 
-However, not all sample spaces contain a finite number of outcomes.  For
-example, suppose we are interested in using probability to model the
-unemployment rate, or a person's income.  Those are real numbers, and can 
-take on any of an infinite number of values.  This adds a few complications,
-and is the reason that the probability axioms refer to events (sets of
-outcomes) and not individual outcomes.
+This procedure works when our sample space contains a finite number of outcomes.
+We will usually stick with examples where that is the case, but there are some
+applications where it isn't.  For example, maybe we are interested in using
+probability to model the unemployment rate, or a person's income.  Those are
+real numbers, and can take on any of an infinite number of values. We will
+learn more about those cases in Chapter \@ref(random-variables).
+
 
 ::: {.fyi data-latex=""}
 **What do probabilities really mean?**
@@ -332,18 +365,19 @@ one-time events like the results of a particular election.
 We are often interested in more than one event, and want to talk about how 
 they are related. For example:
 
- - In some casino games like poker or blackjack, players take an additional 
-   action after partial information about the outcome is revealed.
- - Political scientists often use polls to predict the winner of an election.
- - Finance people often want to model multiple market scenarios and 
-   forecast a company's earnings under each of them.
- - Economists often have data on current economic conditions and want 
-   to predict future economic conditions.
- - Doctors often want to know the probability that a particular treatment will
-   be effective based on test results and patient characteristics.
+ - Poker or blackjack players can place bets after viewing their cards.
+ - Political analysts often want to predict the winner of an election 
+   based on partial results.
+ - Financial analysts often want to forecast a company's earnings under different
+   market scenarios.
+ - Economists often want to predict future economic conditions based on data
+   about current conditions.
+ - Doctors often want to predict the effectiveness of a particular treatment
+   based on test results and patient characteristics.
 
-This section will develop some tools for dealing with the relationship
-between different random events.
+In all of these cases, we know that a particular event has happened and want
+the probability of some other event. This section will develop
+some tools for dealing with this scenario.
 
 ### Joint probabilities {#joint-probabilities}
 
@@ -388,7 +422,7 @@ So there is a 21.6\% chance of a fancy dinner.
 :::
 
 Joint probabilities are just probabilities, so they obey all of the axioms
-and rules of probability described in Section \@ref(probabilities).
+and derived rules of probability described in Section \@ref(probabilities).
 
 ### Conditional probabilities {#conditional-probabilities}
 
@@ -446,7 +480,7 @@ it by doing a little math.  Consider two independent events $A$
 and $B$ that have nonzero[^301] probability.  Then by the definition of
 independence:
   $$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A)$$
-By the same reasoning:
+By the same reasoning, independence of $A$ and $B$ implies that:
   $$\Pr(B|A) = \Pr(B)$$
 In other words, knowing that one of these events are true 
 tells you nothing useful about whether the other the other event
@@ -594,12 +628,11 @@ of testing positive:
 the *specificity* of the test is a healthy patient's probability
 of testing negative:
    $$\Pr(T^c|D^c) = q$$
-and the *prevalence* of the infection is the probability that
-a given patient has the disease:
+and the *prevalence* of the disease is the probability that
+a given patient has it:
    $$\Pr(D) = d$$
-Suppose that a patient has tested positive.  What is the
-probability that he has the disease, i.e. what the value of
-$\Pr(D|T)$?
+Suppose that a patient has tested positive.  Given this information, what is the
+probability that he has the disease, i.e. what is the value of $\Pr(D|T)$?
 
 This is a classic probability question, as it makes use
 of Bayes' law and the law of total probability, and it has
