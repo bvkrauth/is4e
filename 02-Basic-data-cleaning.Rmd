@@ -29,16 +29,11 @@ In this chapter, we will learn how to:
    - Workbooks, worksheets, and cells
    - Cell contents and display format
    - Cell ranges
-4. Use Excel tools to view data, including:
-   - Sorting
-   - Filtering
-   - Freezing panes
-   - Changing cell size
-5. Use fill and series to enter new data.
-6. Use Excel formulas to construct new variables.
-7. Use relative and absolute cell addresses in Excel formulas.
-8. Use logical and text data in Excel.
-9. Use dates in Excel.
+4. Use fill and series to enter new data.
+5. Use Excel formulas to construct new variables.
+6. Use relative and absolute cell addresses in Excel formulas.
+7. Use logical and text data in Excel.
+8. Use dates in Excel.
 :::
 
 To prepare for this chapter, please ensure you have a computer with Excel
@@ -353,8 +348,6 @@ data sources.  Both of these practices will enhance the reproducibility
 and reliability of our analysis.
 :::
 
-In the remainder of this section, we will learn a few tools for changing how 
-our data is *displayed* that do not change the *content* of the data. 
 
 
 :::fyi
@@ -386,97 +379,11 @@ URL will stop working. But the DOI will continue working because Statistics
 Canada will (hopefully) update the DOI entry with the new URL.
 :::
 
-
-### Sorting, filtering, and freezing
-
-***Sorting*** allows us to re-order the rows of our data based on 
-the value in one or more of the columns.  Since order does not matter
-with tidy data, we can sort in whatever way we like without changing
-the content of our data.
-
-::: fyi
-Before sorting data, always make sure that the order of rows does not
-convey important information.
-:::
-
-
-::: example
-**Sorting the employment data**
-
-The original data are in alphabetical order by province name. But suppose 
-we wanted it to be ordered by population (with the largest provinces on top)
-instead. Here's all we need to do:
-
-1. Select any cell in the **Population** column.
-2. Select `Home > Sort and Filter > Sort Largest to Smallest`.
-
-As you can see, the data set is now sorted by population. We can follow
-similar steps to put the data set back in alphabetical order:
-
-1. Select any cell in the **Province** column.
-2. Select `Home > Sort and Filter > Sort A to Z`.
-
-Notice that Excel can tell whether a column contains numbers or text, and 
-will sort accordingly. 
-:::
-
-You can sort in ascending or descending order, and you can sort on 
-multiple columns by selecting the "Custom sort" option.
-
-***Filtering*** allows us to hide some observations so we can 
-look at a particular subset of observations that we are interested 
-in. The hidden observations are still there, so this is a much safer option
-than deleting observations.
-
-::: example
-**Filtering the employment data**
-
-Suppose we only want to see data for larger provinces. Here's what we can do:
-
-1. Select `Home > Sort and Filter > Filter`. If you look at the column headers 
-   in your sheet you will see that they have become drop-down boxes.
-3. Click on the drop-down box for **Population**, then select 
-   `Number filters > Greater Than...`
-4. Enter one million (`1000000`) in the box and select `OK`.
-
-At this point, only the provinces with at least one million residents
-appear in the table. Don't worry, the other ones haven't gone anywhere.
-
-We can undo the filter and remove the drop-down boxes by selecting
-`Home > Sort and Filter > Filter` again.
-:::
-
-You can filter on more complex criteria, and you can combine
-sorting and filtering.
-
-***Freezing panes*** keeps some rows and/or columns visible regardless 
-of which cell is currently selected.  This allows us to work with large
-tables while keeping the top row (variable names) and/or the first 
-column (observation IDs) visible.
-
-::: example
-**Freezing panes**
-
-Go down to row 50 or so in your worksheet. Notice that you can't 
-see the variable names in row 1 any more. This is fine for our current
-data set, but it would be a problem if we had more than a few rows.
-
-1. Go back to cell A1.
-2. Select `View > Freeze Panes > Freeze Top Row`.
-
-Now go back down to row 50 or so. You will see that the top row is still
-displayed and you can see the variable names.
-
-To undo this, select `View > Freeze Panes > Unfreeze Panes`.
-:::
-
-Instead of freezing the first row, you can freeze the first column, or
-you can freeze any number of rows and columns.
-
 ### Cell formatting {#cell-formatting}
 
-Another way we can change the appearance of our data without changing
-its content is to adjust the ***cell formatting*** for one or more
+In Excel, we distinguish between the contents of a cell and how it is displayed.
+We can change the appearance of our data without changing
+its content by adjusting the ***cell formatting*** for one or more
 cells.  Cell formatting characteristics include:
 
 - Column width

@@ -11,15 +11,19 @@ that describe a single variable.
 
 In this chapter, we will learn how to:
 
-1. Calculate and interpret the main univariate summary statistics by hand:
+1. Use Excel tools for viewing larger data tables, including:
+   - Sorting
+   - Filtering
+   - Freezing panes
+2. Calculate and interpret the main univariate summary statistics by hand:
    - Sample size (count)
    - Sample average
    - Sample percentiles and median
    - Sample variance and standard deviation
-2. Calculate the main univariate summary statistics in Excel.
-3. Construct and interpret simple and binned frequency tables in Excel
-4. Construct and interpret time series (line) graphs in Excel
-5. Construct and interpret bar graphs and histograms in Excel
+3. Calculate the main univariate summary statistics in Excel.
+4. Construct and interpret simple and binned frequency tables in Excel
+5. Construct and interpret time series (line) graphs in Excel
+6. Construct and interpret bar graphs and histograms in Excel
 :::
 
 To prepare for this chapter, please review the chapter on
@@ -82,17 +86,111 @@ data as obtained from Statistics Canada.  Source information is also in that
 worksheet.
 :::
 
-Our historical employment data set covers more than 500 months. Other data
+Our historical employment data set covers over 500 months. Other data
 sets are often much larger: large surveys from Statistics Canada can have
 hundreds of observations and hundreds of thousands of variables, and companies
 and governments often work with transactions-level data that includes millions
 of observations. 
 
-As humans, our brains are not large enough to fully understand a large data set
-without some kind of simplification or "dimension reduction": instead of looking 
-at millions of numbers and trying to identify patterns from that, we 
+Humans are smart, but not smart enough to fully understand a large data set
+without some kind of simplification or "dimension reduction." Instead of trying
+to directly interpret thousands or millions of numbers, we will need to
 calculate and view a relatively small number of ***statistics*** based on the 
 data.  A statistic is just a number calculated from data.
+
+But before we calculate statistics for our data set, we can use a few Excel
+tools - sorting, filtering and freezing - to view selected parts of our
+data set.
+
+### Sorting
+
+***Sorting*** allows us to re-order the rows of our data based on
+the value in one or more of the columns.  Since order does not matter
+with tidy data, we can sort in whatever way we like without changing
+the content of our data.
+
+::: fyi
+Before sorting data, always make sure that the order of rows does not
+convey important information.
+:::
+
+
+::: example
+**Sorting the employment data**
+
+The original data are ordered by date. But suppose
+we wanted it to be ordered by unemployment rate (with the highest rate on top)
+instead. Here's all we need to do:
+
+1. Select any cell in the **UnempRate** column.
+2. Select `Home > Sort and Filter > Sort Largest to Smallest`.
+
+As you can see, the data set is now sorted by unemployment rate. We can follow
+similar steps to put the data set back in date order:
+
+1. Select any cell in the **MonthYr** column.
+2. Select `Home > Sort and Filter > Sort Oldest to Newest`.
+
+Notice that Excel can tell whether a column contains numbers, texts or dates,
+and will sort accordingly.
+:::
+
+You can sort in ascending or descending order, and you can sort on
+multiple columns by selecting the "Custom sort" option.
+
+### Filtering
+
+***Filtering*** allows us to hide some observations so we can
+look at a particular subset of observations that we are interested
+in. The hidden observations are still there, so this is a much safer option
+than deleting observations.
+
+::: example
+**Filtering the employment data**
+
+Suppose we only want to see data from when Paul Martin was the Prime Minister.
+Here's what we can do:
+
+1. Select `Home > Sort and Filter > Filter`. If you look at the column headers
+   in your sheet you will see that they have become drop-down boxes.
+3. Click on the drop-down box for **PrimeMinister**, then uncheck every box
+   but the one marked `Paul Martin`.
+
+At this point, only the months when Paul Martin was the Prime Minister
+appear in the table. Don't worry, the other ones haven't gone anywhere.
+
+We can undo the filter and remove the drop-down boxes by selecting
+`Home > Sort and Filter > Filter` again.
+:::
+
+You can filter on more complex criteria, and you can combine
+sorting and filtering.
+
+### Freezing panes
+
+***Freezing panes*** keeps some rows and/or columns visible regardless
+of which cell is currently selected.  This allows us to work with large
+tables while keeping the top row (variable names) and/or the first
+column (observation IDs) visible.
+
+::: example
+**Freezing panes**
+
+Go down to row 50 or so in your worksheet. Notice that you cannot
+see the variable names in row 1 any more.  We can make sure
+the first row stays visible by doing the following:
+
+1. Go back to cell A1.
+2. Select `View > Freeze Panes > Freeze Top Row`.
+
+Now go back down to row 50 or so. You will see that the top row is still
+displayed and you can see the variable names.
+
+To undo this, select `View > Freeze Panes > Unfreeze Panes`.
+:::
+
+Instead of freezing the first row, you can freeze the first column, or
+you can freeze any number of rows and columns.
 
 ## Univariate statistics in Excel
 
