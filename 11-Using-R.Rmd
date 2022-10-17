@@ -3,7 +3,7 @@
 ```{r setup11, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       prompt = FALSE,
-                      tidy = TRUE,
+                      tidy = FALSE,
                       collapse = TRUE)
 library("tidyverse")
 EmpData <- read_csv("sampledata/EmploymentData.csv")
