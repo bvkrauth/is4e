@@ -52,9 +52,13 @@ the data.
 **Historical employment data for Canada**
 
 Our analysis in this chapter will use historical employment data for
-Canada from January 1976 through January 2021. Download the file
-at 
-[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx) make a working copy, and open it:  
+Canada from January 1976 through January 2021.
+
+1. Download the file at
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx).
+2. Make a working copy.
+   - I called mine  `CanEmpHist_WC.xlsx`.
+3. Open your working copy. It will look something like this:
 ![*Canadian employment data, 1976-2021*](bin/CanadaEmploymentHistorical.png)
 
 Our main data set for analysis is the worksheet *Data for Analysis*, 
@@ -407,6 +411,7 @@ To make the display formatting a little nicer.
      growth rate in percentages, rounded to one decimal place.
 4. Feel free to play around with colors, fonts, etc. to get a
    table that you like.
+5. Once you have the table you like, save your working copy.
 
 We now have a nice table of summary statistics:  
 ![*Table of summary statistics*](bin/SummaryStatisticsTable.png){width=50%}
@@ -479,35 +484,36 @@ observed in our data set.  We start by setting up the table:
 
 Next we will fill in values for the **Count** column (B):
 
-1. Fill in cell B2 using the Excel function `COUNTIFS()`. 
+3. Fill in cell B2 using the Excel function `COUNTIFS()`.
    - The `criteria_range` will be the data in our main data set
      (Data for Analysis worksheet) covering the Party variable 
      (cell range I2:I542), or `'Data for Analysis'!I2:I542`.
    - The `criteria` we want to match is the contents of the cell
      in the current row of column A, or `A2`.
-   - So the formula to enter in cell B2 is 
+   - So the formula to enter in cell B2 is
      `=COUNTIFS('Data for Analysis'!I2:I542,A2)`.
    - The result displayed should be 302, the number of observations in 
      our data that have the Party identified as Liberal.
-2. We will want to copy the formula in cell B2 to the other cells in 
+4. We will want to copy the formula in cell B2 to the other cells in
    column B.  But before we do that, we need to make some of the relative
    references into absolute references.  In this case, our table
    will keep the same `criteria_range` but will want to change the
    `criteria`, so:
    - Change the formula in cell B2 to 
      `=COUNTIFS('Data for Analysis'!I$2:I$542,A2)`
-3. Copy cell B2 to cells B3:B4.  
+5. Copy cell B2 to cells B3:B4.
    - Check the formulas in those cells to make sure they look right.
 
 Next, we need to fill in the **Percentage** column (C).  
 
-1. To do that we just need to divide each cell in the Count column 
+6. To do that we just need to divide each cell in the Count column
    by the sum of all the cells in that column. So the formula in cell C2 
    should be `=B2/SUM(B2:B5)`
-2. Change relative references to absolute references as needed,
-3. Copy the formula in cell C2 to cells C3:C5.
-4. By default, the percentages are displayed as proportions. Change the
+7. Change relative references to absolute references as needed,
+8. Copy the formula in cell C2 to cells C3:C5.
+9. By default, the percentages are displayed as proportions. Change the
    display format to percentage, with one decimal place.
+10. Make any other formatting changes you like, and save your working copy.
 
 We now have a simple frequency table for the Party variable:  
 ![*Party control frequency table*](bin/PartyControlFrequencyTable.png){width=50%}
@@ -616,11 +622,12 @@ Cell C2 should now display the number of months  (zero) in which the
 Canadian unemployment rate was between 0% and 5%. To finish up the 
 table: 
 
-1. Update the formula in cell C2 to use absolute references where
+4. Update the formula in cell C2 to use absolute references where
    appropriate.
-2. Copy the contents of cell C2 to cells C3:C6.
-3. Fill in the **Percentage** column (C) with the appropriate formula 
+5. Copy the contents of cell C2 to cells C3:C6.
+6. Fill in the **Percentage** column (C) with the appropriate formula
    and change its display format to Percent.
+7. Make any other formatting changes you like, and save your working copy.
 
 We now have our binned frequency table:  
 ![*Binned frequency table for* **UnempRate**](bin/UnemploymentBinnedFrequencyTable.png){width=50%}
@@ -819,6 +826,7 @@ Finally, we want to add alt text for the visually impaired.
    to the right.
 3. Enter the alt text in the box.
    - I used *Graph of Canadian unemployment rate from January 1976 to present.*
+4. Make any other formatting changes you like, and save your working copy.
 
 The graph will now look like the one above. The graph here is visually clean
 and simple, in part because I left out many elements that I could have included: 
@@ -945,6 +953,7 @@ eye do any extra work, let's put those labels on top.
    to eliminate the category names from the bottom of each bar.
 6. You might also consider changing the color of the two labels to match
    the color of the corresponding bar.
+7. Make any other formatting changes you like, and save your working copy.
 
 Our final graph looks like this:  
 ![*Bar graph of* **Party** *variable, final version*](bin/BarGraphFinal.png){width=50%}
@@ -1075,17 +1084,35 @@ To enhance the quality of this histogram:
    **Histogram of the Canadian unemployment rate, 1976-present**
 2. Add the horizontal axis title **Unemployment rate**
 3. Add the vertical axis title **# of months**
+4. Make any other formatting changes you like, and save your working copy.
 
 Our final histogram will look like this:  
 ![*Histogram of* **UnempRate**, *final version*](bin/HistogramFinal.png){width=50%}
 :::
 
+## Finishing up {#finishing-up-basic-data-analysis}
+
+As we do when cleaning data, the final steps of a data analysis are to:
+
+1. Check your work.
+2. Update your master version.
+
+::: example
+**Finishing up our employment data analysis**
+
+1. Select `Files > Save As` to save your file as the master version.  Choose a
+   new name for the file.
+   - I chose the file name `CanEmpHistResults.xlsx`.
+
+You can download
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHistResults.xlsx](sampledata/CanEmpHistResults.xlsx) if you want to check your work against mine. 
+:::
+
+
+
 
 ## Chapter review {-#review-basic-data-analysis}
 
-You can download the complete Excel file with all analysis from
-this chapter at 
-[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHistResults.xlsx](sampledata/CanEmpHistResults.xlsx) 
 
 In this chapter, we learned how to calculate simple statistics in Excel. Calculating 
 the statistics is typically the easiest part of a statistical analysis - cleaning data 

@@ -232,9 +232,11 @@ To open this file in Excel, use the Text Import Wizard:
    ![Text Import Wizard- Step 3 of 3](bin/TIW3.png){width=50%}  
    We do not need to worry about any of these options, so go ahead and 
    select `Finish`.
-   
+7. Save the file under a new name to create a working copy of this data set.
+   - I would use the file name `TaxRates_WC.xlsx`.
+
 Our worksheet now contains the imported data, correctly arranged into
-cells. Keep this worksheet open.
+cells.
 :::
 
 ### CSV files
@@ -275,8 +277,8 @@ section as a CSV file:
 1. Select `File >  Save As`. You will see:
    - a text box giving the file name (`CountryCodes.txt`) 
    - a drop-down box giving the file format (`Text (Tab delimited) (*.txt)`
-3. Select `CSV (Comma delimited) (*.csv)` from the drop-down box and 
-4. Enter a file name (I suggest *CountryCodes.csv*) in the text box.
+3. Select `CSV (Comma delimited) (*.csv)` from the drop-down box.
+4. Enter the file name `CountryCodes.csv` in the text box.
 5. Select `Save`.
    - You may get the warning message: *The selected file type does
      not support workbooks that contain multiple sheets. To save only
@@ -327,12 +329,14 @@ other than the comma to delimit cells.
  - ***Space-delimited*** text files are just like CSV files, but 
    use spaces as the delimiter.  For example, a space-delimited
    version of our table might look like this:
+
    ```
    Name "Year of birth" "Year of death"
    "Mary, Queen of Scots" 1542 1547
    "Mary I" 1516 1558
    "Elizabeth I" 1533 1603
     ```
+
  - ***Tab-delimited*** text files are just like CSV files, but use a tab character
    as the delimiter.
 
@@ -410,7 +414,7 @@ a single Excel workbook.
 **Combining our cross-country data files**
 
 We currently have three data files: *pwt100.xlsx*, *CountryCodes.csv*,
-and *TaxRates.xlsx*. To combine them in a single file:
+and *TaxRates_WC.xlsx*. To combine them in a single file:
 
 1. Open all three files.
 2. Go to *CountryCodes.csv*, and right-click on the *CountryCodes* tab
@@ -419,10 +423,10 @@ and *TaxRates.xlsx*. To combine them in a single file:
    ![Move or Copy](bin/MoveOrCopy.png){width=30%}  
 3. Select *pwt100.xslx* from the `To book:` drop-down box. Your worksheet 
    will now move to that workbook.
-4. Repeat the same process with both worksheets in the *TaxRates.xlsx*
+4. Repeat the same process with both worksheets in the *TaxRates_WC.xlsx*
    workbook.
 5. At this point all of our worksheets are in a single workbook. Save the 
-   workbook with name *GrowthData.xlsx*.
+   workbook with name *GrowthData_WC.xlsx*, and close all other files.
 :::
 
 Before proceeding, it's a good idea to make sure our data is tidy.
@@ -431,8 +435,8 @@ Before proceeding, it's a good idea to make sure our data is tidy.
 :::example
 **Making the our workbook tidy**
 
-1. Take a look at each of our three main worksheets and identify 
-   if they need to be adjusted in any way to meet our criteria for
+1. Take a look at each of our three main worksheets in `GrowthData_WC.xlsx` and
+   identify if they need to be adjusted in any way to meet our criteria for
    tidy data:
    - *CountryCodes* is tidy and does not need alteration.
    - *TaxRates* is tidy and does not need alteration.
@@ -452,6 +456,7 @@ Before proceeding, it's a good idea to make sure our data is tidy.
 3. Make a copy of the *TaxRates* worksheet, and name it *GrowthData*. This
    sheet will be the starting point for the linked data that we
    will construct in the next two sections.
+4. Save your file.
 
 Our data set is now tidy and ready to link.
 :::
@@ -518,8 +523,9 @@ code to the *GrowthData* worksheet.
    resulting formula will be 
    `=XLOOKUP(B2,CountryCodes!A$2:A$185,CountryCodes!B$2:B$185)`
 5. Copy/paste or fill the formula to the remaining cells in column A.
-
-Column A should now display the ISO country code for each observation.
+6. Check your work: Column A should now display the ISO country code for each
+   observation.
+7. Save your file.
 :::
 
 `XLOOKUP()` can also be used to match on multiple criteria.
@@ -544,18 +550,17 @@ in a single criterion.
 3. Make the cell references absolute where needed, which will result
    in the formula 
    `=XLOOKUP(CONCAT(A2,"2019"),Data!A$2:A$12811,Data!H$2:H$12811)`
-4. Copy/paste or fill the formula to the remaining cells in column
-   K.
+4. Copy/paste or fill the formula to the remaining cells in column K.
 
 We can also create another variable whose variable is the country's
 population in 1990.
 
-1. Enter **Pop1990** in cell L1 of *GrowthData* to name the variable.
-2. Enter the correct formula in cell L2. It will be nearly identical 
+5. Enter **Pop1990** in cell L1 of *GrowthData* to name the variable.
+6. Enter the correct formula in cell L2. It will be nearly identical
    to the formula in cell K2, but with "2019" replaced by "1990":
    `=XLOOKUP(CONCAT(A2,"1990"),Data!A$2:A$12811,Data!H$2:H$12811)`
-4. Copy/paste or fill the formula to the remaining cells in column
-   K.
+7. Copy/paste or fill the formula to the remaining cells in column K.
+8. Save your file.
    
 You may note that the PWT goes all the way back to 1950, and may wonder why
 I picked 1990 as my starting point.  The reason for this is many countries
@@ -616,6 +621,7 @@ We can do this using the `AVERAGEIFS()` function:
 3. Adjust the formula to have the correct absolute references. The
    resulting formula should be `=AVERAGEIFS(Data!AO$2:AO$12811,Data!A$2:A$12811,A2)`
 4. Copy/paste or fill this formula into the remaining cells in column M.
+5. Save your file.
 
 The average investment share should range from a minimum of 
 0.13 for Bulgaria to a maximum of 0.44 for Cyprus.
@@ -739,6 +745,7 @@ let's add this as a data validation requirement:
    b. Select `greater than or equal to` from the `Data` drop-down box
    c. Enter `0` in the `Minimum` drop-down box.
 4. Select `OK`.
+5. Save your file.
 
 Although nothing appears to have changed, column K is now subject to 
 data validation.
@@ -770,18 +777,16 @@ data we will need to cheat a little.
 
 1. Select column K again.
 2. Select `Data > Data Validation` again.
-3. Change the Minimum value from "0" to "10". 
+3. Change the Minimum value from "0" to "10".
+   - This will cause all values of **Pop2019** below 10 to be (incorrectly)
+     considered invalid.
+4. To identify invalid observations, select
+   `Data > Data Validation > Circle Invalid Data`. You will now see red circles
+    around all values that violate the validation criteria (there may be a
+    slight delay):
+   ![Validation circles](bin/ValidationCircles.png){width=50%}
 
-This will cause all values of **Pop2019** below 10 to be (incorrectly)
-considered invalid. 
-
-To identify invalid observations, select 
-`Data > Data Validation > Circle Invalid Data`. You will now
-see red circles around all values that violate the validation
-criteria (there may be a slight delay):  
-  ![Validation circles](bin/ValidationCircles.png){width=50%}
-
-To remove the circles, select `Data > Data Validation > Clear Validation Circles`. 
+5. To remove the circles, select `Data > Data Validation > Clear Validation Circles`.
 :::
 
 Finally, we can remove all data validation from a cell.
@@ -878,9 +883,21 @@ like.
 Finally, you can remove protection from any worksheet by simply
 selecting `Home > Format > Unprotect Sheet`.
 
-> You can download the complete Excel file with all data cleaning 
-> from this chapter at 
-> [https://bookdown.org/bkrauth/BOOK/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
+## Finishing up {#finishing-up-advanced-data-cleaning}
+
+As always, be sure to save your work and update/create the master version of
+your cleaned data file.
+
+:::example
+**Finishing up**
+
+1. Save your working copy, and save again as the master version.
+   - I chose the file name `GrowthData.xlsx`.
+
+You can compare your work to my Excel file at
+[https://bookdown.org/bkrauth/BOOK/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
+:::
+
 
 ## Chapter review {-#review-advanced-data-cleaning}
 
