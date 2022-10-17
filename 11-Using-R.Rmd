@@ -21,8 +21,8 @@ also use ggplot, R's powerful graphing system.
 
 In this chapter, we will learn how to:
 
-1. Use the mutate function to add or modify variables in a data table.
-2. Use the select, arrange, and filter functions to modify a data table.
+1. Use the `mutate` function to add or modify variables in a data table.
+2. Use the `select`, `arrange`, and `filter` functions to modify a data table.
 3. Calculate univariate statistics for a single variable.
 4. Construct a table of summary statistics.
 5. Recognize and handle missing data problems.
@@ -66,7 +66,13 @@ The ***pipe operator*** is part of the Tidyverse and is written `%>%`. Recall
 that an operator is just a symbol like `+` or `*` that performs some function
 on whatever comes before it and whatever comes after it.
 
-To see how it works, I'll show you a few examples:
+The pipe operator is unusual because it doesn't allow you to *do* anything
+new.  Instead, it makes your code easier to read. To see how it works, I will
+show you a few examples.
+
+:::example
+**The pipe operator**
+
 ```{r PipeExamples}
 # This is equivalent to names(EmpData)
 EmpData %>% names()
@@ -75,9 +81,11 @@ EmpData %>% names()
 # This is equivalent to cat(sqrt(2)," is the square root of 2")
 2 %>% sqrt() %>% cat(" is the square root of 2")
 ```
-As you can see, R's rule for interpreting the pipe operator is that the
-object *before* the `%>%` is taken as the first argument for the function
-*after* the `%>%`.  
+:::
+
+As you can see from the examples, R's rule for interpreting the pipe operator is
+that the object *before* the `%>%` is taken as the first argument for the
+function *after* the `%>%`.
 
 The pipe operator does not add any functionality to R; anything you can do
 with it can also be done without it.  But it addresses a common problem: we often 
@@ -89,9 +97,13 @@ as we will see in the examples below.
 ### Mutate
 
 The most important data transformation function is ***mutate***, which 
-allows us to change or add variables.  We will start by changing 
-the **MonthYr** variable from character (text) to date, using the `as.Date()`
-function: 
+allows us to change or add variables.
+
+:::example
+**Using `mutate()` to modify a variable**
+
+We will start by changing  the **MonthYr** variable from character (text) to
+date, using the `as.Date()` function:
 ```{r MutateChangeMonthYr}
 # Change MonthYr to date format
 EmpData %>% 
@@ -100,9 +112,14 @@ EmpData %>%
 As you can see, the **MonthYr** column is now labeled as a date rather than text. Like
 Excel, R has an internal representation of dates that allows for correct ordering
 and calculations, but displays dates in a standard human-readable format.
+:::
 
-Mutate can be used to add variables as well as changing them.  For example,
-suppose we also want to create versions of **UnempRate** and **LFPRate** that
+Mutate can be used to add variables as well as changing them.
+
+:::example
+**Using `mutate()` to add a variable**
+
+Suppose we want to create versions of **UnempRate** and **LFPRate** that
 are expressed in percentages rather than decimal units:
 ```{r MutateAddUnempPct}
 # Add UnempPct and LFPPct
@@ -112,9 +129,16 @@ EmpData %>%
 ```
 If you look closely, you can see that the **UnempPct** and **LFPPct**
 variables are now included in the data table.
+:::
 
-Before we go any further, note that we haven't yet changed the 
-`EmpData` data table:
+Before we go any further, note that `mutate()` is a function that *returns* a
+*new* data table.  In order to actually change the original data table, we
+will need to use the assignment (`<-`) operator.
+
+:::example
+**Modifying a data table**
+
+Take a look at `EmpData` data table.
 ```{r PrintEmpDataAgain}
 print(EmpData)
 ```
@@ -122,9 +146,8 @@ As you can see, the **MonthYr** variable is still listed as a character
 variable and the new **UnempPct** and **LFPPct** variables do not seem to
 exist.
 
-What has happened here?  Our original commands simply created a *new* object *based*
-on `EmpData` that was then displayed on the screen.  In order to change `EmpData`
-itself, we need to assign that new object *back* to `EmpData`:
+In order to change `EmpData` itself, we need to assign that new object *back*
+to `EmpData`.
 ```{r MutatePermanently}
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
@@ -132,14 +155,23 @@ EmpData <- EmpData %>%
   mutate(UnempPct = 100*UnempRate) %>% 
   mutate(LFPPct = 100*LFPRate)
 ```
-We can confirm that now we have changed `EmpData`:
+We can confirm that now we have changed `EmpData`: **MonthYr** is a date variable,
+and the variables **UnempPct** and **LFPPct** are part of the table.
 ```{r ConfirmPermanence}
 print(EmpData)
 ```
+:::
 
 ### Filter, arrange, and select
 
-Now let's suppose we want to know more about the months in our data set 
+Excel provides a tool called "filtering" that allows you to choose observations
+according to some criteria you specify.  R has a function called `filter()`
+that fills this purpose.
+
+:::example
+**Using `filter()` to choose observations**
+
+Suppose we want to know more about the months in our data set
 with the *highest* unemployment rates. We can use `filter()` for
 this purpose:
 ```{r FilterEmpData}
@@ -150,16 +182,31 @@ EmpData %>%
 As you can see, only 8 of the 541 months in our data have unemployment rates
 over 12.5% - the worst months of the 1982-83 recession, and April and May
 of last year.
+:::
 
-Now let's suppose that we only want to see a few pieces of information about those
-months.  We can use `select()` to choose variables:
+Similarly, R has a function called `select()` that allows you to choose
+specific variables.
+
+:::example
+**Using `select()` to choose variables**
+
+Suppose that we only want to see a few pieces of information about the months
+with the highest unemployment rates.
 ```{r SelectEmpData}
 # This will take out all variables except a few
 EmpData %>% 
   filter(UnempPct > 12.5) %>%
   select(MonthYr, UnempRate, LFPPct, PrimeMinister)
 ```
-Finally, suppose that we want to show months in descending order by
+:::
+
+Finally, R has a function called `arrange()` that sorts observations according
+to some criteria you specify.
+
+:::example
+**Using `arrange()` to sort observations**
+
+Suppose that we want to show months in descending order by
 unemployment rate (i.e., the highest unemployment rate first).  We 
 can use `arrange()` to sort rows in this way:
 ```{r ArrangeEmpData}
@@ -169,16 +216,30 @@ EmpData %>%
   select(MonthYr, UnempPct, LFPPct, PrimeMinister) %>%
   arrange(UnempPct)
 ```
-Hopefully you can see why the pipe operator is useful in making our code
-clear and readable: 
-```{r WithoutPipe}
-# This is what the same code looks like without the pipe
-arrange(select(filter(EmpData,UnempPct>12.5),MonthYr,UnempPct,LFPPct,PrimeMinister),UnempPct)
-```
+:::
+
 Now I should probably say: these results imply nothing meaningful about
 the economic policy of either Pierre or Justin Trudeau.  The severe worldwide recessions in 1982-83 (caused by US monetary policy) and 2020-2021 (caused 
 by the COVID-19 pandemic) were caused by world events largely outside the 
 control of Canadian policy makers.
+
+:::example
+**The usefulness of the pipe operator**
+
+I mentioned earlier that the pipe operator is never strictly necessary, and that
+it is always possible to write equivalent R code without it. But it does make
+our code substantially more clear and readable.
+
+```{r WithoutPipe, eval=FALSE}
+# Here is some code using the pipe
+EmpData %>%
+  filter(UnempPct > 12.5) %>%
+  select(MonthYr, UnempPct, LFPPct, PrimeMinister) %>%
+  arrange(UnempPct)
+# This is what the same code looks like without the pipe
+arrange(select(filter(EmpData,UnempPct>12.5),MonthYr,UnempPct,LFPPct,PrimeMinister),UnempPct)
+```
+:::
 
 ### Saving code and data
 
@@ -189,43 +250,44 @@ because what you *really* need to do is save your code.
 Because it is command-based, R enables an entirely different and much
 more reproducible model for data cleaning and analysis.  In Excel, the
 original data, the data cleaning, the data analysis, and the results
-are all mixed in together in a simple file.  This is convenient and simple
-to use in many applications, but it can be a disaster in complex projects.
+are all mixed in together in a single file or even a single worksheet.
+This is convenient and simple to use in many applications, but it can be a
+disaster in complex projects.
 
 In contrast, R allows you to have three separate files or groups of files
 
-1. The original data, which you do not change.
-2. The code to clean and analyze the data, which you maintain carefully
-   (including version control).
+1. Your **source data**
+   - Leave it exactly as you originally obtained it.
+2. Your **code** to clean and analyze the data
+   - Maintain it carefully using master versions, working copies and archives.
    - Your code can be saved in an R script, or as part of an R Markdown document.
    - This code can be split into multiple files.
    - You can have one script to clean the data and another to analyze it.
-3. The results of your code, which you treat as temporary files that can be
-   deleted or replaced at any time.
+3. Your **results**
+   - Treat them as temporary output files.
+   - You can regenerate ypur results at any time by running your code.
    - This can include the results of your analysis
    - It can also include your cleaned data.
-   
+
 The key is to make sure that all of your cleaned data and results can be 
 regenerated from the original data at any time by running your code.
 
-::: example
-**BC education data**
+:::example
+**Creating an R script to clean our data**
 
-My colleagues and I have a long-term research project that uses student records
-from the British Columbia elementary school system. It requires linking a 
-student's records across multiple years, linking student records to school
-records, calculating school-level averages of some variables, and many other
-tasks.
-
-The code to clean this data is split into about 10 scripts which must be run in
-sequence and takes about 30-45 minutes to run.  I do not want to do that
-every time I do something with the data, so the last script saves the 
-cleaned data to a file, and my analysis scripts use that cleaned data file.
-
-But every time I make a major change, or every time I put results into a 
-research paper for others to read, I re-run everything from the beginning. 
+Create an R script called `EmpData.R` with the following code:
+```{r fullScript, eval=FALSE}
+# Load the Tidyverse
+library(tidyverse)
+# Load the data
+EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+# Clean the data
+EmpData <- EmpData %>%
+  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>%
+  mutate(UnempPct = 100*UnempRate) %>%
+  mutate(LFPPct = 100*LFPRate)
+```
 :::
-
 
 ## Data analysis in R
 
@@ -235,23 +297,30 @@ statistics.
 ### The summary function
 
 The `summary()` function will give a basic summary of any object.  Exactly what
-that summary looks like depends on the object.  For tibbles, `summary()` produces
+that summary looks like depends on the object. For tibbles, `summary()` produces
 a set of summary statistics for each variable:
+
+::: example
+**Summarizing a data table**
+
 ```{r SummaryEmpData}
 summary(EmpData)
 ```
+:::
+
 
 ### Univariate statistics 
 
 The R function `mean()` calculates the sample average of any numeric 
-vector:
+vector.  There are also functions to calculate variance, standard deviation,
+and other summary statistics.
+
+::: example
+**Univariate statistics for a single variable**
+
 ```{r MeanUnempPct}
-# Mean of a single variable
+# MEAN calculates the mean of a single variable
 mean(EmpData$UnempPct)
-```
-There are many other functions in R to calculate other univariate summary
-statistics:
-```{r VarUnempPct}
 # VAR calculates the sample variance
 var(EmpData$UnempPct)
 # SD calculates the standard deviation
@@ -259,42 +328,79 @@ sd(EmpData$UnempPct)
 # MEDIAN calculates the sample median
 median(EmpData$UnempPct)
 ```
-As you can see, they work just like `mean()`.  
+:::
 
 In real-world data, some variables have ***missing values*** for one or more
-observations. For example, the *AnnPopGrowth* variable in our data set is
-missing for the first year of data (1976), since calculating the growth rate
-for 1976 would require data from 1975. In R, missing values are given the
-special value `NA` which stands for "not available":
+observations. Values can be missing for various reasons: information may be
+unavailable, or the variable may not be applicable to the case.  In R, missing
+values are given the special value `NA` which stands for "not available."
+
+::: example
+**Missing values in the employment data**
+
+The *AnnPopGrowth* variable in our data set is missing for the first year of
+data (1976), since calculating the growth rate for 1976 would require data from
+1975, and we don't have that data.
+
 ```{r ShowMissingValues}
 EmpData %>%
   select(MonthYr, Population, AnnPopGrowth)
 ```
-When we try to take the mean of this variable we also get `NA`:
-```{r MeanAnnPopGrowth}
-mean(EmpData$AnnPopGrowth)
-```
-This is because math in R follows the
-[IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) 
-standard for numerical arithmetic, which says that any calculation
-involving `NA` should also result in `NA`.  Some other applications
-drop missing data from the calculation.
+:::
 
-Whenever you have missing values, you should investigate before proceeding.  Sometimes 
-(as in our case here), missing values are for a good reason, other times they 
-are the result of a mistake or problem that needs to be fixed.
+
+By default, math in R follows the [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754)
+standard for numerical arithmetic, which says that any calculation
+involving `NA` should also result in `NA`.
+
+::: example
+**Calculations with `NA` produce `NA`**
+
+```{r MeanAnnPopGrowth}
+# Some values of AnnPopGrowth are NA, so its mean is also NA
+mean(EmpData$AnnPopGrowth)
+# The same goes for other statistics:
+sd(EmpData$AnnPopGrowth)
+var(EmpData$AnnPopGrowth)
+median(EmpData$AnnPopGrowth)
+```
+:::
+
+Some other applications simply drop missing data from the calculation. This is
+a simple solution, but R does what it does for a good reason. Missing values
+can be a sign of an error in the data or code, so we should always catch them
+and investigate their cause before dropping them.
 
 Once we have investigated the missing values, we can tell R explicitly
-to exclude them from the calculation by adding the `na.rm = TRUE` option:
+to exclude them from the calculation by adding the `na.rm = TRUE` option to
+many of the statistical functions we use.
+
+::: example
+**Handling missing values**
+
+In the case of our **AnnPopGrowth** variable, We know why it is missing: we
+cannot calculate annual growth rates in the first year of our data. So we
+can exclude the missing values.
+
 ```{r MeanAnnPopGrowthWithoutNA}
+# We can add the na.rm = TRUE argument to drop the missing values
 mean(EmpData$AnnPopGrowth, na.rm = TRUE)
+# These lines of code will do the same thing:
+mean(na.omit(EmpData$AnnPopGrowth))
+mean(EmpData$AnnPopGrowth[!is.na(EmpData$AnnPopGrowth)])
 ```
+:::
 
 ### Tables of statistics 
 
 Suppose we want to calculate the sample average for each column in our
-tibble. We could just call `mean()` for each of them, but there should
-be a quicker way. Here is the code to do that:
+tibble. We could just call `mean()` for each of them, but there is
+a quicker way.
+
+:::example
+**Producing a table of statistics**
+
+Here is the code to do that:
 ```{r MeanTable}
 # Mean of each column
 EmpData %>%
@@ -316,29 +422,47 @@ EmpData %>%
   select(where(is.numeric)) %>%
   lapply(sd, na.rm = TRUE) 
 ```
-  
+:::
 
 ### Frequency tables 
 
-We can also construct frequency tables for both discrete and continuous
-variables:
+We can construct simple frequency tables for discrete variables
+using the `count()` function
+
+::: example
+**Using `count()` to make a simple frequency table**
+
 ```{r CountTables}
 # COUNT creates a frequency table for discrete variables
 EmpData %>% 
   count(PrimeMinister)
+```
+:::
+
+We can also construct binned frequency tables for continuous variables using
+the `count()` function in combination with the `cut_interval()` function.
+
+::: example
+**Using `count()` to make a binned frequency table**
+
+```{r BinCountTables}
 # COUNT and CUT_INTERVAL create a binned frequency table
 EmpData %>% 
   count(cut_interval(UnempPct, 6))
 ```
+:::
+
 As you might imagine, there are various ways of customizing the intervals
 just like in Excel.
 
 ### Probability distributions in R
 
-R has a family built-in functions for each commonly-used probability
+R has a family of built-in functions for each commonly-used probability
 distribution.  
 
-For example:
+
+::: example
+**Some probability distributions**
 
 - The  `dnorm()` function gives the normal PDF:
   ```{r}
@@ -362,41 +486,54 @@ For example:
   # Four random numbers from the N(0,1) distribution
   rnorm(4)
   ```
-
 There is a similar set of functions available for the 
 uniform distribution (`dunif`, `punif`, `qunif`, `runif`), the
 binomial distribution (`dbinom`, `pbinom`, `qbinom`,`rbinom`),
 and Student's T distribution (`dt`, `pt`, `qt`, `rt`), along 
 with many others.
+:::
 
 ## Graphs with ggplot
 
 The Tidyverse also contains a powerful graphics package called[^1101] ***ggplot***.
+The ggplot package has capabilities well beyond what R's built-in commands can
+do, or what Excel can do.
 
 [^1101]: The package is technically called `ggplot2` since it is the second
        version of `ggplot`.  But everyone calls it "ggplot" anyway.
 
 ### Creating a graph
 
-We can start by making a histogram of the unemployment rate:
+The `ggplot` function can be used to create a graph.  It has a non-standard
+syntax.
+
+::: example
+**Two ggplot graphs**
+
+We can start by making a histogram of the unemployment rate, much like the
+one we made earlier in Excel
 ```{r ggplotHistogram}
 ggplot(data = EmpData,
        mapping = aes(x = UnempPct)) + 
   geom_histogram()
 ```
 
-We can also make a time series (line) graph:
+We can also make a time series (line) graph, much like the one we made earlier
+in Excel.
 ```{r ggplotTimeSeries}
 ggplot(data = EmpData,
        mapping = aes(x = MonthYr, 
                      y = UnempPct)) + 
   geom_line() 
 ```
+:::
+
 
 The `ggplot()` function has a non-standard syntax, so I'd like to go over 
 it. 
 
-- The first line sets up the basic characteristics of the graph:
+- The first expression/line calls `ggplot()` to set up the basic characteristics
+  of the graph:
     - The `data` argument tells R which data set (tibble) will be
       used
     - the `mapping` argument describes the basic ***aesthetics***
@@ -410,8 +547,7 @@ it.
     - The `geom_histogram()` geometry produces a histogram
     - The `geom_line()` geometry produces a line
 
-A graph can include multiple geometries in a given graph, as we will see
-shortly.
+A single graph can include multiple geometries, as we will see shortly.
 
 ### Modifying a graph
 
@@ -420,7 +556,13 @@ but we can improve upon it in various ways.
 
 #### Titles and labels
 
-You can add a title and subtitle, and you can change the axis titles: 
+You can use `labs()` to add titles, subtitles, etc.  You can also use
+`xlab()` and `ylab()` to change the axis titles.
+
+:::example
+**Modifying titles and labels**
+
+
 ```{r ggplotTitles}
 ggplot(data = EmpData,
        aes(x = MonthYr, 
@@ -433,23 +575,32 @@ ggplot(data = EmpData,
   xlab("") +
   ylab("Unemployment rate, %")
 ```
+:::
 
 #### Color 
 
-You can change the color of any geometric element
-using the `col=` argument:
+You can change the color of any geometric elementusing the `col=` argument.
+
+::: example
+**Using colors**
+
 ```{r ggplotColor}
 ggplot(data = EmpData,
        aes(x = MonthYr, 
            y = UnempPct)) + 
   geom_line(col = "blue") 
 ```
+:::
 
-Colors can be given in ordinary English (or local language) words,
-or with detailed color codes in RGB or CMYK format. 
+Colors can be given in ordinary English (or local language) words, or with
+detailed color codes in RGB or CMYK format.
 
 Some geometric elements, such as the bars in a histogram, also have 
-a ***fill*** color:
+a ***fill*** color.
+
+:::example
+**Setting the fill color***
+
 ```{r ggplotFill}
 ggplot(data = EmpData,
        aes(x = UnempPct)) + 
@@ -459,11 +610,16 @@ ggplot(data = EmpData,
 
 As you can see, the `col=` argument sets the color for the exterior
 of each bar, and the `fill=` argument sets the color for the interior.
+:::
 
 ### Adding graph elements 
 
-We can include multiple geometries in the same graph.  For example, we can
-include lines for both unemployment and labour force participation:
+We can include multiple geometries in the same graph.
+
+::: example
+**Including multiple lines**
+
+We can include lines for both unemployment and labour force participation:
 ```{r ggplotTwoLines}
 ggplot(data = EmpData,
        aes(x = MonthYr, 
@@ -480,9 +636,16 @@ A few things to note here:
 - We have used color to differentiate the two lines, but there is no legend 
   to tell the reader which line is which.  We will need to fix that.
 - The vertical axis is labeled **UnempPct**. We will need to fix that.
+:::
 
-We could add a legend here, but it is better (and friendlier to the color-blind)
-to just label the lines. We can use the `geom_text` geometry to do this:
+When including multiple elements, we may need to add information clarify what
+element describes.  We can add a legend, but it is better (and friendlier to
+the color-blind) to just label the lines. We can use the `geom_text` geometry
+to do this:
+
+:::example
+**Using `geom_text()` to add text**
+
 ```{r ggplotAddText}
 ggplot(data = EmpData,
        aes(x = MonthYr)) + 
@@ -499,10 +662,14 @@ ggplot(data = EmpData,
             label = "LFP",
             col = "red")
 ```
+:::
 
-The graphs below combine all of the features described above to yield clean
-and clear graphs.
+Finally, we can combine all of these elements.
 
+::: example
+**Fancy graphs**
+
+The graphs below combine all of the features described above:
 ```{r ggplotFancyHistogram}
 ggplot(data = EmpData,
        aes(x = UnempPct)) + 
@@ -546,6 +713,8 @@ ggplot(data = EmpData,
   xlab("") +
   ylab("Percent")
 ```
+:::
+
 
 ## Chapter review {-#review-using-r}
 

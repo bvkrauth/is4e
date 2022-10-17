@@ -88,9 +88,12 @@ correlation as defined in Chapter \@ref(more-on-random-variables).
 ### Covariance and correlation in R
 
 The sample covariance and correlation can be calculated in R using 
-the `cov()` and `cor()` functions. 
+the `cov()` and `cor()` functions.  These functions can be applied
+to any two columns of data:
 
-These functions can be applied to any two columns of data:
+::: example
+**using `cov()` and `cor()` to calculate a covariance/correlation**
+
 ```{r CovCor}
 # For two specific columns of data
 cov(EmpData$UnempPct, EmpData$LFPPct)
@@ -101,26 +104,38 @@ As you can see, unemployment and labour force participation are
 low. This makes sense given the economics: if it is hard to find
 a job, people will move into other activities that take one out
 of the labour force: education, childcare, retirement, etc.
+:::
 
 Both `cov()` and `cor()` can also be applied to (the numeric variables in)
 an entire data set.  The result is what is called a 
 ***covariance matrix*** or ***correlation matrix***:
+
+::: example
+**using `cov()` and `cor()` to calculate a covariance/correlation matrix**
+
 ```{r CorMatrix}
-# Correlation matrix for the whole data set (at least the numerical parts)
+# Covariance matrix for the whole data set (at least the numerical parts)
 EmpData %>%
   select(where(is.numeric)) %>%
   cor()
+# Correlation matrix for selected variables
+EmpData %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
+  cor()
 ```
 Each element in the matrix reports the covariance or correlation
-of a pair of variables.  As you can see, the matrix is symmetric
-since $cov(x,y) = cov(y,x)$.  In addition, the diagonal elements
-of the covariance matrix are $cov(x,x) = var(x)$ and the diagonal
-elements of the correlation matrix are $cor(x,x) = 1$.
+of a pair of variables.  As you can see:
 
-Every variable's correlation with **AnnPopGrowth** is `NA`, so we will
-want to exclude `NA` values from the calculation.  Excluding missing
-values is more complicated for covariance and correlation matrices because
-there are two different ways to exclude them:
+- The matrix is symmetric since $cov(x,y) = cov(y,x)$.
+- The diagonal elements of the covariance matrix are $cov(x,x) = var(x)$
+- The diagonal elements of the correlation matrix are $cor(x,x) = 1$.
+- All covariances/correlations involving **AnnPopGrowth** variable are 
+  `NA` since **AnnPopGrowth** contains `NA` values.
+:::
+
+Just like with univariate statistics, we can exclude missing values when
+calculating a covariance or correlation matrix.  However, there are two
+slightly different ways to exclude missing values:
 
 1. ***Pairwise deletion***: when calculating the covariance or correlation 
    of two variables, exclude observations with a missing values for either 
@@ -129,18 +144,24 @@ there are two different ways to exclude them:
    covariance or correlation of two variables, exclude observations with 
    a missing value for *any* variable.
 
-The `use` argument allows you to specify which approach you want to use:
+The `use` argument allows you to specify which approach you want to use.
+
+::: example
+**Pairwise and casewise deletion of missing values**
+
 ```{r PairwiseOrListwise}
 # EmpData has missing data in 1976 for the variable AnnPopGrowth
 # Pairwise will only exclude 1976 from calculations involving AnnPopGrowth
 EmpData %>%
-  select(where(is.numeric)) %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
   cor(use = "pairwise.complete.obs")
 # Casewise will exclude 1976 from all calculations
 EmpData %>%
-  select(where(is.numeric)) %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
   cor(use = "complete.obs")
 ```
+:::
+
 In most applications, pairwise deletion makes the most sense because it
 avoids throwing out data. But it is occasionally important to use the
 same data for all calculations, in which case we would use 
@@ -209,7 +230,7 @@ office for each Canadian prime minister:
 
 1. Check the box next to **PrimeMinister**. The Pivot Table will look 
    like this:  
-   ![A list of prime ministers](bin/PrimeMinisterList.png){width=20%}  
+   ![A list of prime ministers](bin/PrimeMinisterList.png){width=13%}  
 2. Drag **MonthYr** into the box marked "$\Sigma$ values". The Pivot Table 
    will now look like this:  
    ![Number of months served by each prime minister](bin/PrimeMinisterCounts.png){width=30%}  
@@ -486,21 +507,26 @@ underlying numerical methods in courses like ECON 333.
 A ***scatter plot*** is the simplest way to view the relationship between
 two variables in data.  The horizontal ($x$) axis represents
 one variable, the vertical ($y$) axis represents the other variable,
-and each point represents an observation.
+and each point represents an observation. In some sense, the scatter
+plot shows everything you can show about the relationship
+between the two variables, since it shows every observation. 
 
-Scatter plots can be created in R using the `geom_point()` geometry:
+Scatter plots can be created in R using the `geom_point()` geometry.
+
+::: example
+**Creating a scatter plot**
+
 ```{r ScatterPlot}
 ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct)) +
   geom_point()
 ```
-
-In some sense, the scatter plot shows everything about the relationship
-between the two variables, since it shows every observation. The
-negative relationship between the two variables indicated by the
-correlation we calculated earlier (`r cor(EmpData$UnempRate,EmpData$LFPRate)`)
-is clear, but it is also clear that this relationship is not very strong.
+Note that the scatter plot is consistent with the negative relationship between
+the two variables indicated by the correlation we calculated earlier 
+(`r cor(EmpData$UnempRate,EmpData$LFPRate)`).  At the same time, it is clear
+that this negative relationship is not very strong.
+:::
 
 #### Jittering
 
@@ -509,6 +535,9 @@ a single observation.  But if both variables are actually discrete,
 points can "stack" on top of each other.  In that case, the same point
 can represent multiple observations, leading to a misleading scatter
 plot.
+
+::: example
+**A scatter plot with discrete variables**
 
 For example, suppose we had rounded our unemployment and LFP data to 
 the nearest percent:
@@ -530,11 +559,17 @@ ggplot(data = RoundedEmpData,
 
 As you can see from the graph, the scatter plot is misleading: there
 are 541 observations in the data set represented by only 40 points.
+:::
 
 A common solution to this problem is to ***jitter*** the data by adding a 
 small amount of random noise so that every observation is at least a little
 different and appears as a single point.  We can use the `geom_jitter()` 
-geometry to do a jittered scatter plot:
+geometry to do a jittered scatter plot.
+
+
+::: example
+**A "jittered" scatter plot with discrete variables**
+
 ```{r ScatterPlotJittered}
 ggplot(data = RoundedEmpData,
        aes(x = UnempPct,
@@ -546,18 +581,27 @@ ggplot(data = RoundedEmpData,
 
 As you can see the jittered rounded data (small blue dots) more accurately
 reflects the original unrounded data than the rounded data (large red dots).
+:::
 
 #### Using color as a third dimension
 
 We can use color to add a third dimension to the data.  That is, we can 
 color-code points based on a third variable by including it as part of 
-the aesthetic:
+the aesthetic.
+
+:::example
+**Using color to add a third dimension**
+
+We can use color to represent a third variable, whether it is discrete 
+or continuous.
 ```{r ScatterPlotColorCoded}
+# Party is discrete/categorical, so each value is represented by a distinct color
 ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct,
            col = Party)) + 
   geom_point()
+# MonthYr is (nearly) continuous, so values are represented along a spectrum
 ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct,
@@ -565,22 +609,27 @@ ggplot(data = EmpData,
   geom_point()
 ```
 
-As these graphs show, R will use a discrete or continuous color scheme
-depending on whether the variable is discrete or continuous.
+:::
 
 As we discussed earlier, you want to make sure your graph can be read by a
 reader who is color blind or is printing in black and white. So we can use 
-shapes in addition to color:
+shapes in addition to color.
+
+::: example
+**Using shapes to add a third dimension**
+
 ```{r UsingShapes}
 ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct,
-           col = Party)) + 
-  geom_point(aes(shape = Party))
+           col = Party,
+           shape = Party)) + 
+  geom_point()
 ```
+:::
 
-We would also choose a color scheme other than red and green, since that
-is the most common form of color blindness.
+We might also want to change the color scheme, since the most common form of 
+color blindness is the inability to distinguish red and green.
 
 ::: {.fyi data-latex=""}
 **Scatter plots in Excel**
@@ -606,8 +655,13 @@ bin. This kind of plot is called a ***binned scatterplot***.
 Binned scatterplots are not difficult to do in R but the code is quite 
 a bit more complex than you are used to.  As a result, I will not ask
 you to be able to produce binned scatter plots, I will only ask you
-to interpret them.  Here is my binned scatter plot with 20 bins:
-```{r BinnedScatterPlot, echo = FALSE}
+to interpret them.  
+
+::: example
+**A binned scatter plot**
+
+Here is my binned scatter plot with 20 bins:
+```{r BinnedScatterPlot, echo = TRUE}
 ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct)) + 
@@ -623,48 +677,43 @@ ggplot(data = EmpData,
                    size = 0.5, 
                    geom = 'line')
 ```
+:::
 
-The number of bins is an important choice.  The graph below adds a 
-red line based on 4 bins and a green line based on 100 bins.
+The number of bins is an important choice. More bins allows us to find more 
+complex patterns in the relationship.  But more bins also means fewer
+observations per bin, which means more noise (variance) in our estimates.
+
+;:: example
+**How many bins?**
+
+The graph below includes the original binned scatter plot (based on 20 bins),
+and adds a line based on 4 bins (orange) and a line based on 100 bins (light
+blue).
+
 ```{r HowManyBins}
 ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct)) + 
- geom_point(size = 0.5) +
-  stat_summary_bin(fun = 'mean',
-                   bins = 4,
-                   col = "red", 
-                   size = 1, 
-                   geom = 'point') +
+  geom_point(size = 0.5) +
   stat_summary_bin(fun = 'mean', 
                    bins = 4,
-                   col = "red", 
-                   size = 0.5, 
+                   col = "orange", 
+                   size = 0.75, 
                    geom = 'line') +
   stat_summary_bin(fun = 'mean', 
                    bins = 20,
                    col = "blue", 
-                   size = 1, 
-                   geom = 'point') +
-  stat_summary_bin(fun = 'mean', 
-                   bins = 20,
-                   col = "blue", 
-                   size = 0.5, 
+                   size = 0.75, 
                    geom = 'line') +
   stat_summary_bin(fun = 'mean', 
                    bins = 100,
-                   col = "green", 
-                   size = 1, 
-                   geom = 'point') +
-  stat_summary_bin(fun = 'mean', 
-                   bins = 100,
-                   col = "green", 
-                   size = 0.5, 
+                   col = "lightblue", 
+                   size = 1.0, 
                    geom = 'line') +
   geom_text(x = 13.8,
             y = 64.1,
             label = "4 bins",
-            col = "red") +
+            col = "orange") +
   geom_text(x = 13.8,
             y = 62.5,
             label = "20 bins",
@@ -672,7 +721,7 @@ ggplot(data = EmpData,
   geom_text(x = 13.8,
             y = 60,
             label = "100 bins",
-            col = "green")
+            col = "lightblue")
 ```
 
 As you can see, the binned scatterplot tends to be smooth when there 
@@ -680,6 +729,7 @@ are only a few bins, and jagged when there are many bins.  This reflects a
 trade-off between bias (too few bins may lead us to miss important 
 patterns in the data) and variance (too many bins may lead us to
 see patterns in the data that aren't really part of the DGP).
+:::
 
 ### Smoothing
 
@@ -691,7 +741,11 @@ with $x_i$ close to that point and low (or zero) weights on observations
 with $x_i$ far from that point.  The calculations required for smoothing 
 can be quite complex and well beyond the scope of this course.
 
-Fortunately, smoothing is easy to do in R using the `geom_smooth()` geometry:
+Fortunately, smoothing is easy to do in R using the `geom_smooth()` geometry.
+
+::: example
+**Using `geom_smooth()` to add a smooth curve**
+
 ```{r SmoothedRegression}
 ggplot(data = EmpData,
        aes(x = UnempRate,
@@ -705,6 +759,7 @@ Notice that by default, the graph includes both the fitted line
 the line).  Also note that the confidence interval is narrow in the 
 middle (where there is a lot of data) and wide in the ends (where
 there is less data).
+:::
 
 ### Linear regression
 
@@ -714,7 +769,11 @@ variables is linear, and estimate it by a technique called
 line that fits the data best.
 
 You can include a linear regression line in your plot by adding the 
-`method=lm` argument to the `geom_smooth()` geometry:
+`method=lm` argument to the `geom_smooth()` geometry.
+
+::: example
+**Using `geom_smooth()` to add a linear curve**
+
 ```{r LinearRegression}
 ggplot(data = EmpData,
        aes(x = UnempPct,
@@ -737,6 +796,7 @@ ggplot(data = EmpData,
 As you can see, the two fits are quite similar for unemployment rates below
 12%, but diverge quite a bit above that level.  This is inevitable, because
 the smooth fit becomes steeper, but linear fit *can't* do that.
+:::
 
 Linear regression is much more restrictive than smoothing, but has
 several important advantages:
@@ -750,7 +810,7 @@ two variables and a reasonably large data set.  The advantages of linear
 regression become overwhelming when you have more than two 
 variables to work with. As a result, linear regression is the
 most important tool in applied econometrics, and you will spend much of
-your time in ECON 333 learning to use it.
+your next econometrics course learning to use it.
 
 ## Chapter review {-#review-multivariate-data-analysis}
 

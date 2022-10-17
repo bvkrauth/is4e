@@ -86,25 +86,35 @@ lower left corner.
 **Using the console window**
 
 Move your cursor into the console window, type the command 
-`print("Hello world!")` and press the `Enter` key to execute the command.  
-```{r HelloWorld}
+`print("Hello world!")` and press the `Enter` key to execute the command.
+```{r HelloWorld1, eval = FALSE}
 print("Hello world!")
 ```
-As you type your command in, you may notice that RStudio showed various
-pop-ups with helpful information about the command.  It will also
-auto-complete your command for you.
+R will respond with something like:
+```{r HelloWorld2, echo = FALSE}
+print("Hello world!")
+```
+Note that if you are viewing this textbook in a browser, you can copy any block
+of code by clicking in is upper right-hand corner.  You can then paste it in
+the console window.
 :::
 
-R maintains a ***command history*** that remembers commands you
-have previously entered.  This is useful when you did something a while
-ago, but either don't remember exactly how you did it, or don't want to type
-it all in from the beginning.
+RStudio has various features to make your work in the console window more
+efficient:
+
+- As you type your command in, you may notice that RStudio shows various
+  pop-ups with helpful information about the command.
+- RStudio will offer to auto-complete your command.
+- R maintains a ***command history*** that remembers commands you
+  have previously entered.  This is useful when you did something a while
+  ago, but either don't remember exactly how you did it, or don't want to type
+  it all in from the beginning.
 
 The simplest way of accessing recent commands is to press the up-arrow
 key while in the console window.
 
 :::example
-**Accessing the command history**
+**Using the command history**
 
 Suppose you decide you want to say "Hello [your name]!" instead of 
 "Hello world", and you don't want to type in the whole command. Then
@@ -133,17 +143,21 @@ convention, an R script should have the `.R` extension but any text file will
 work. 
 
 ::: example
-**Creating an R script**
+**Using an R script**
 
 To create an R script  
 
 1. Select `File > New File > R Script` from the menu.
-2. Enter a valid command in the first line of the file, for example 
-  `print("Hello world!")`
-3. Enter another valid command in the second line of the file,
-   for example `print("Goodbye world?")`
-4. Select `File > Save` to save your file.
-   - Name it *Chapter10Example.R*
+2. Enter a valid R command in the first line of the file, for example
+   ```{r, eval = FALSE}
+   print("Hello world!")
+   ```
+3. Enter another valid R command in the second line of the file,
+   for example
+   ```{r, eval = FALSE}
+   print("Goodbye world?")
+   ```
+4. Select `File > Save` to save your file with the name `Chapter10Example.R`.
 
 To run your script:
 
@@ -212,17 +226,20 @@ To create our first R Markdown file:
 1. Select `File > New File > R Markdown` from the menu.
    - You will see a dialog box that looks like this:  
      ![New R Markdown file](bin/NewRMarkdown.png){width=50%}
-2. The default options are fine, so select `OK`.
+2. The default options are fine, so select `OK`. RStudio will create an
+   example R Markdown file that you can use as a template. It will look
+   something like this:
+   ![R Mardown example file](bin/r-markdown-example.png){width=70%}
 3. Save the file.
 
-RStudio has taken the liberty of creating an example R Markdown file that
-you can use as a template.  
+You can see that the R Markdown document is a mix of text, formatting
+information, and small pieces of R code.
 :::
 
-You can run the R code in an R Markdown document in one of two ways:
-
-You can run and display results for individual ***chunks*** of code. A 
-chunk is a few lines of R code surrounded by a code fence.
+You can run the R code in an R Markdown document in one of two ways. First,
+you can run and display results for individual ***chunks*** of code. A
+chunk is a few lines of R code surrounded by a "code fence" that serves
+to distinguish R code from ordinary text.
 
 ::: example
 **Running code chunks**
@@ -238,19 +255,19 @@ will be displayed below.
    ![Code chunk with output](bin/CodeChunkWithOutput.png){width=50%}
 :::
 
-You can also ***knit*** the entire R Markdown file into an HTML/word/PDF
-document that includes both the text and the R results by pressing 
-the Knit button.
+You can also press the Knit button to ***knit*** the entire R Markdown file into
+an HTML, Word, or PDF document that includes both the text and the R results.
 
 ::: example
 **Knitting an R Markdown document**
 
-To knit an entire document:
+To knit the entire document:
 
 1. Press the ![Knit](bin/KnitButton.png){height=16pt} button.
 
 It will take a few moments to process the file, and then the HTML
-file will open in a browser.
+file will open in a browser.  Read the document and compare it to the original
+R Markdown file to get an idea of the capabilities of R Markdown.
 :::
 
 By default, R Markdown files usually knit to HTML, but we can knit
@@ -297,14 +314,20 @@ In the menu:
 - You can select `Session > Restart R` to clear the memory and 
   restart the current R session.
 
-We are done for now, so close RStudio. You may get a warning message that 
-looks something like this:  
+:::example
+**Closing R**
+
+We are done for now, so close RStudio.
+
+You may get a warning message that looks something like this:
   ![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
 
 Never click on the `Save` button here, as it would cause R to
 save the current state of its memory and re-load it next time you start R.
 In the interest of reproducibility, you should start R "clean" every time.
+
 Click on the `Don't Save` button, and you will exit RStudio.
+:::
 
 ## The R language
 
@@ -331,10 +354,23 @@ Every valid R expression ***returns*** a value, also called an
     just like in Excel.
   - Objects can also be much more complex
 
-You can execute any valid R expression as a command, and have it display
-the value it returns.  
+In addition, some expressions have a ***side effect***.  That is, they
+make something happen like:
+
+  - Cause something to appear on your screen.
+  - Create or modify a file on your computer.
+  - Change something in R's memory.
+
+You can execute any valid R expression as a command.
+
+:::example
+**Expressions**
+
+When you enter an expression as a command, R will usually display the value it
+returns.
 ```{r ExpressionExample}
 # This is a comment. R ignores everything in a line after the "#"
+# The line below is an expression, and the line below that is its value.
 4+5
 ```
 
@@ -343,20 +379,18 @@ You can also use any valid R expression within a larger expression.
 sqrt(4+5)
 ```
 
-In addition, some expressions have a ***side effect***.  That is, they make
-something happen: they cause something to appear on your computer screen, or
-change a file, or change something in R's memory. 
+This expression has a side effect.  It causes R to plot a histogram of 100
+random numbers from the $N(0,1)$ distribution.
 
 ```{r SideEffectExample}
-# This expression has a side effect
-# It causes R to plot a histogram of 100 N(0,1) random numbers
 hist(rnorm(100))
 ```
 
 Although we call it a "side effect", the side effect is often the 
 main purpose of the expression.
+:::
 
-### Assignment
+### Variables and assignment
 
 We can use the `<-` or ***assignment*** operator to assign the results
 of an expression to a named variable.  We can then use that
@@ -384,13 +418,21 @@ print(y)
 
 :::
 
-We can display the contents of an object using the `print()` 
-function, or by simply giving its name:
+We can display the contents of a variable or other object by using the `print()`
+function, or by simply giving its name
+
+:::example
+**Displaying the contents of a variable**
+
 ```{r PrintExample}
+# Create a variable called x - note that its value is not displayed
 x <- 5
+# Display its contents using the print() function
 print(x) 
+# Display its contents by giving its name
 x
 ```
+:::
 
 ### Vectors
 
@@ -409,14 +451,24 @@ The elements of an atomic vector need to be all part of the same
 atomic type; a single vector cannot contain both strings and numbers,
 for example. 
   
-We can construct a vector by enumeration using the `c()` function:
+We can construct a vector by enumeration using the `c()` function.
+
+:::example
+**Constructing a vector with the `c()` function**
+
 ```{r EnumerationExample}
 fruits <- c("Avocado", "Banana", "Cantaloupe")
 print(fruits)
 ```
+:::
+
 There are many other functions that can be used to construct vectors. Two
 particularly useful ones are `rep` which repeats something a particular
-number of times, and `seq` which creates a sequence:
+number of times, and `seq` which creates a sequence.
+
+:::example
+**Constructing vectors with `rep()` and `seq()`**
+
 ```{r RepExample}
 # REP repeats something (like Excel's Fill tool)
 ones <- rep(1, times = 10)
@@ -427,9 +479,14 @@ print(evens)
 # You can also create a sequence with the : operator:
 print(1:10)
 ```
+:::
 
 Mathematical functions in R operate directly on vectors, and automatically
-expand scalars (single numbers) to vectors as needed:
+expand scalars (single numbers) to vectors as needed.
+
+:::example
+**Using vectors in expressions**
+
 ```{r VectorExpansionExample}
 # This command subtracts 1 from every element in evens
 odds <- evens - ones
@@ -438,26 +495,39 @@ print(odds)
 odds <- evens - 1
 print(odds)
 ```
+:::
 
 The ***subscript operator*** `[]` can be used to select part of a 
-vector. You can enumerate the indexes of the elements you want:
+vector.
+
+:::example
+**Using the subscript operator**
+
 ```{r SubscriptOperatorExample}
-# You can give a single index
-# evens[2] is the 2nd element in evens
+# You can give a single index: evens[2] is the 2nd element in evens
 x <- evens[2]
 print(x)
-# You can give a vector of indices
-# evens[c(2,5)] is a vector containing the 2nd and 5th element in evens 
+# Or a vector of indices: evens[c(2,5)] contains the 2nd and 5th element in evens
 x <- evens[ c(2, 5) ]
 print(x)
-# You can give a range of indices
-# evens[2:5] is a vector containing the 2nd, 3rd, 4th and 5th element in evens 
+# Or a range of indices: evens[2:5] contains 2nd, 3rd, 4th and 5th element in evens
 x <- evens[2:5]
 print(x)
+# You can use the subscript operator on either side of the assignment operator
+x <- evens
+print(x)
+# This assigns the number 1000 to the 2nd element in x
+x[2] <- 1000
+print(x)
 ```
+:::
 
 You can also provide logical values instead of numeric indices. R will then 
-operate on those elements whose corresponding item has the value `TRUE`:
+operate on those elements whose corresponding item has the value `TRUE`.
+
+:::example
+**Using logical subscripts**
+
 ```{r LogicalSelectionExample}
 print(evens)
 # This creates a vector of the same length as evens, that contains TRUE
@@ -472,15 +542,7 @@ print(x)
 x <- evens[evens < 10]
 print(x)
 ```
-
-Vector subscripting can be used on either side of the assignment operator:
-```{r LeftSideSubscriptingExample}
-x <- evens
-print(x)
-# This assigns the number 1000 to the 2nd element in x
-x[2] <- 1000
-print(x)
-```
+:::
 
 ### Lists 
 
@@ -489,43 +551,73 @@ elements are themselves other vectors. These vectors can be any
 type, so we can use lists inside lists to build very complex 
 objects.  
 
-Lists can be built using the `list()` function:
+Lists can be built using the `list()` function.
+
+:::example
+**Constructing a list**
+
 ```{r ListExample}
 everything <- list(fruits, evens, odds)
 print(everything)
 ```
-You can (and should) assign names to the elements of a list:
+:::
+
+
+You can (and should) assign names to the elements of a list.
+
+:::example
+**Constructing a named list**
+
 ```{r NamedListExample}
 everything <- list(fruits=fruits,
                    evens=evens,
                    odds=odds)
 print(everything)
 ```
+:::
+
 You can access part of a list by specifying its numerical index inside of the 
-`[[]]` operator:
+`[[]]` operator,
+
+
+:::example
+**Selecting parts of a list**
+
 ```{r ListSubscriptExample}
 print( everything[[2]] )
 ```
-If the items in a list are named, you can also access 
-them by name using either `[[]]` or `$` notation
+:::
+
+If the items in a list are named, you can also access them by name using either
+`[[]]` or `$` notation. You can also use the `$` notation to add new items to
+an existing list.
+
+:::example
+**Selecting parts of a named list**
+
+We can access the elements of a list by name:
 ```{r ListDollarsignExample}
 print( everything[["evens"]] )
 print( everything$fruits )
 ```
 
-You can also use the `$` notation to add new items to an existing list:
+And we can add named elements:
 ```{r AddToListExample}
 # There is no element in everything called "allnumbers" 
 everything$allnumbers <- c(evens, odds)
 # But now there is...
 print(everything)
 ```
+:::
 
 ### Attributes
 
 Any object can also have ***attributes***.  This attributes of an
 object are a list associated with the object that provides additional 
 information.
+
+:::example
+**Attributes**
 
 Let's see if any of the objects we have created have 
 attributes:
@@ -540,20 +632,31 @@ Note that:
   R's way of saying they have no attributes
 - our list stores the names of its three elements in 
   the `$names` attribute.  
+:::
 
-R has hundreds of standard object types that are built from atomic vectors,
-lists, and attributes.  These object types include matrices, arrays,
-data sets, objects structured as the output of a particular statistical analysis,
-descriptions of graphs, and so on.  Users can also define their own object
-types, and there is an extensive system for generic functions and
-object-based programming (if you know what that is). 
+R has hundreds of additional object types, including:
+
+- Matrices
+- Arrays
+- Data sets
+- Statistical results from various commands
+- Plots
+
+These object types are all built from the basic components of atomic vectors,
+lists, and attributes. Users can also define their own object
+types, and there is an extensive system to support generic functions and
+object-oriented programming (if you know what that is).
 
 ### Functions and operators
 
-There are hundreds of built-in mathematical and statistical ***functions*** 
-in R, and users can easily define their own functions. As you have seen, 
-their format and usage is quite similar to Excel though there are a few important 
+R has hundreds of built-in mathematical and statistical ***functions***, and
+users can define their own functions. You have already seen a few.
+Their format and usage is quite similar to Excel, but there are some important
 differences.
+
+
+::: example
+**The `seq()` function**
 
 Let's get to know the main features of functions in R by considering the
 `seq()` function.  We have already seen this function: it is used to
@@ -594,6 +697,7 @@ tool.
    value.
 5. Some functions also produce ***side effects***, as we have described
    earlier.
+:::
 
 In addition to functions, R has the usual binary mathematical 
 ***operators*** such as `+`, `-`, `*` and `/`.  Operators are
@@ -605,44 +709,48 @@ the `sum()` function:
 2 + 2
 sum(2, 2)
 ```
-There are several other commonly used operators:
+
+There are several other commonly used operators including comparison operators,
+logical operators, and the assignment operator.
+
+:::example
+**A few useful operators**
+
 ```{r OtherOperators}
 # Basic arithmetic operators
-2 + 3
-2 - 3
-2 * 3
-2 / 3
-2 ^ 3
+2 + 3 # plus
+2 - 3 # minus
+2 * 3 # times
+2 / 3 # division
+2 ^ 3 # power
 # Comparison operators
-2 < 3
-2 == 3
-2 > 3
+2 < 3  # less than
+2 <= 3 # less than or equal
+2 == 3 # equal
+2 > 3  # greater than
+2 >= 3 # greater than or equal
 # Logical operators
-2 == 3 & 2 < 3 # this is logical AND
-2 == 3 | 2 < 3 # this is logical OR
-```
-The assignment operator is also an operator. It is equivalent to the 
-`assign()` function:
-```{r AssignmentIsAnOperator}
-# These two statements are equivalent:
+2 == 3 & 2 < 3 # logical AND
+2 == 3 | 2 < 3 # logical OR
+# Assignment
 x <- 2
-assign(y, 2)
 print(x)
-print(y)
-# The assign function returns its own value, so you can do this:
+# The assign() function returns its own value, so you can also do this:
 x <- y <- 3
 print(x)
 print(y)
 ```
+:::
 
 ## Packages and the Tidyverse
 
-R has many useful built-in functions and features.  But one of its 
-most useful features is how easy it can be extended by users, and the 
-fact that it has a large user community who have 
-provided ***packages*** of useful new functions and data.  
-There are thousands of packages available online.  We will use a particularly
-useful package called the ***Tidyverse***. 
+R has many useful built-in functions and features.  But one of its most useful
+features is how easy it can be extended by users, and the fact that it has a
+large user community who have provided ***packages*** of useful new functions
+and data.
+
+There are thousands of packages available online.  We will use a
+particularly useful package called the ***Tidyverse***.
 
 ::: {.fyi data-latex=""}
 **What is the Tidyverse?**
@@ -689,7 +797,7 @@ Once the package is installed and loaded, you can use its functions
 and other features.
 
 :::example
-**Loading the Tidyverse**
+**Installing and loading the Tidyverse**
 
 You can get a list of all available CRAN packages by simply executing
 the `install.packages()` function with no arguments:
@@ -712,116 +820,36 @@ library("tidyverse")
 You can then use the Tidyverse functions and other tools.
 :::
 
-## Some examples
-
-I have explained some of the basic structure of R, but the best 
-way to learn a tool is by using it.
-
-::: example
-**Plotting a PDF**
-
-Suppose we want to plot the $N(0,1)$ PDF. We can start by describing 
-step-by-step what we need to do:
-
-1. Construct a vector $x$ of values at which to plot the PDF.
-2. Calculate a vector $p = \phi(x)$, where $\phi(\cdot)$ is the
-  $N(0,1)$ PDF.
-3. Plot $p$ against $x$.
-
-Then we need to figure out how to accomplish each step using R:
-
-1. Our first step can be accomplished using the `seq()` function, 
-   which we have already used. If you know the name of the function 
-   you want to use, you can access its help page by executing the 
-   command `? [function name here]`:
-   ```{r}
-   # ? seq
-   ```
-   As you can see, the `seq()` function takes arguments `from=` (for the 
-   starting point), `to=` (for the end point), and `length.out=` (for the
-   total number of points).  Let's plot the function at 10 points between -4 
-   and 4:
-   ```{r}
-   x <- seq(from=-4,to=4,length.out=10)
-   print(x)
-   ```
-   Note that I've picked only 10 points here so that our code is easy
-   to check.
-2. The next step is to calculate the standard normal PDF at each of these 
-   points. R is a program for statisticians, so it presumably has that PDF
-   available as a built-in function. But what if we don't know its name? 
-   We can just Google "normal pdf in r" and click on a page or two to find 
-   out that the function we need is called `dnorm()`. 
-   ```{r DnormExample}
-   p <- dnorm(x)
-   print(p)
-   ```
-3. Our last step is to plot $p$ against $x$. We could Google, or we
-   could guess that the function for creating plots is called `plot()`
-   and try something out. Don't be scared to try things out, nothing
-   bad could possibly happen here.
-   ```{r PlotExample}
-   plot(x,p)
-   ```
-   You will see this plot in the *Plots* tab in the lower right corner
-   of your screen.
-
-Well, that's not too bad, but we might want to make some improvements:
-
-1. Plot it at more points (1000 rather than 10, for example)
-2. Connect the points with a line
-3. Add a title
-
-So we can read through the documentation for the `plot()` function,
-try a few things out, and we can produce a much prettier graph
-by just adding a few options:
-```{r FancyPlotExample}
-x <- seq(from = -4, to = 4, length.out = 1000)
-p <- dnorm(x)
-plot(x, p, 
-     type = "l", 
-     ylab = expression(phi(x)),
-     main = "PDF of N(0,1) distribution")
-```
-
-As you can see, we have a much nicer and clearer looking plot.
-:::
 
 ## Reading and viewing data in R {#reading-and-viewing-data-in-r}
 
-Before doing any statistical or graphical analysis, we need to
-get the data into R.  We will also want to look at our data
-before diving into the analysis, and we may want to do some data
-cleaning as well.
-
-We will use numerous Tidyverse functions, so we need to load the
-Tidyverse package:
-```{r LoadTidyverseAgain}
-# Load the tidyverse
-library("tidyverse")
-```
+Having skimmed the basic features of R, it is time to use it for some real
+work.  As with Excel, we start  any data analysis project in R by
+opening the data file, viewing it, and constructing a plan to clean it.
 
 We will work with the employment data.
 
-### Reading a CSV file
+### Reading CSV files
 
 Our first step will be reading the data in from the CSV file. The Tidyverse
 function to do this is called `read_csv()`.  It has one required argument:
-the name of the CSV file.
+the name of the CSV file, either as a local file address or a URL.
 
-- Ye can access the online data set directly in R.
-- If you have a slow connection or want to work offline, you can download
-  the data set from
-  [https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv](sampledata/EmploymentData.csv) and then access the local data set.
+:::example
+**Reading a CSV file in R**
+
+The code below reads in the CSV file, and stores it in the object `EmpData`.
 
 ```{r ReadEmpDataFromCSV}
-# The code below accesses the online data.  You can also download the
-# file "EmploymentData.csv" and change the argument to read_csv()
-# to the local file location
+# Load the Tidyverse if you have not already done so
+library("tidyverse")
+# You can directly read online data by giving read_csv() the URL.
 EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+# You can also download the file and give read_csv() the local location
+# EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```
 As you can see, R guesses each variable's data type, and reports its
-guess.  It is always a good idea to read this output and make sure
+guess.  It is always a good idea to review this output and make sure
 that everything is the way that we want it:
 
 - The numeric variables are all stored as `col_double()`.
@@ -836,7 +864,8 @@ that everything is the way that we want it:
     variable, so we make a note of that issue here and will
     fix it later.
 
-We have assigned the data in the CSV file to the variable `EmpData`.
+:::
+
 
 ::: {.fyi data-latex=""}
 **Additional options**
@@ -856,28 +885,43 @@ but `read_csv()` is preferable for various reasons.
 
 ### Viewing a data table
 
-The `read_csv()` function creates an object called a ***tibble***. A
-tibble is a Tidyverse object type that describes a tidy data table.
+The `read_csv()` function creates an object called a data table or
+***tibble***. A tibble is a Tidyverse object type that describes a table of
+tidy data.
 
 - Each row in the tibble represents an observation
 - Each column represents a variable, and has a name.
 
 The base R equivalent of a tibble is called a ***data frame***. Tibbles
-and data frames are interchangeable in most applications, but
-tibbles have some additional features that make them work better
+and data frames are interchangeable in most applications (in the language of
+object-oriented programming, the tibble class "inherits" from the data frame
+class), but tibbles have some additional features that make them work better
 with the Tidyverse.
 
-We have several ways of viewing the contents of a tibble. We can
-start with the ***print*** function, which we have already seen in
-other contexts:
+We have several ways of viewing the contents of a tibble. As with other objects,
+we can use the `print()` function,
+
+:::example
+**Printing a tibble**
+
 ```{r PrintEmpData}
 print(EmpData)
 ```
-Tibbles can be quite large, so the `print()` function will usually
-show an abbreviated version of the table.
+Tibbles can be quite large, so the `print()` function usually shows an
+abbreviated version of the table.
+:::
 
-We can also see the whole table by executing the command `View(EmpData)` or
-through RStudio:
+We can also see the whole table by using the `View()` command or through
+RStudio.
+
+:::example
+**Viewing a tibble**
+
+You can view the full tibble by executing the command:
+```
+View(EmpData)
+```
+or through RStudio by following these steps:
 
 1. Go to the *Environment* tab in the upper right window.
    - You will see a list of all variables currently in memory,
@@ -886,26 +930,36 @@ through RStudio:
 
 You will see a spreadsheet-like display of `EmpData`. As in Excel, you can sort
 and filter this table.  Unlike Excel, you cannot edit it here.
+:::
+
 
 ### Data table properties
 
 There are several R functions available for exploring the properties
 of a data table.
 
-We can obtain the column names of a tibble using the `names()` function:
+- We can obtain the column names of a tibble using the `names()` function.
+- We can access any individual column using the `$` notation.
+- We can count the rows and columns with `nrow()` and `ncol()`, or we
+  can use the `length()` function.
+
+:::example
+**Viewing properties of a tibble**
+
 ```{r NamesEmpData}
+# Column names
 names(EmpData)
-```
-and we can count the rows and columns with `nrow()` and `ncol()` respectively:
-```{r NrowNcolEmpData}
+# Number of rows - either of these will work
 nrow(EmpData)
-ncol(EmpData)
-```
-We can access any variable by name using the `$` notation:
-```{r LengthExample}
 length(EmpData$UnempRate)
+# Number of columns
+ncol(EmpData)
+length(EmpData)
 ```
-As you can see, the `length()` function returns the length of a vector.
+:::
+
+In a later chapter, we will learn how to view other table properties such
+as summary statistics.
 
 ## Chapter review {-#review-introduction-to-r}
 
@@ -916,17 +970,6 @@ yet with data, but we will over the next few chapters.  In particular,
 we will learn how to move data from Excel to R, how to view data in R,
 and how to clean and analyze data in R.  We will also learn a sophisticated
 R graphing package called ggplot.
-
-Although you will be tested on specific knowledge, you should also 
-keep in mind the bigger picture: my real goal here is for you to develop
-some long-lasting skills that you will find useful in the future.  This
-should be your goal as well. 
-
-A year from now, or five years from now, you will probably not be able 
-to remember exactly what the format of the `seq` function is, nor will
-you need to. Instead I want you to focus on learning how to think about 
-a coding task, how to find information, and how to design and implement 
-your plans. 
 
 ::: {.fyi data-latex=""}
 **For more information on R**
