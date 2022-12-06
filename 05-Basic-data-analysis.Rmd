@@ -1,10 +1,12 @@
 # Basic data analysis with Excel {#basic-data-analysis-with-excel}
 
-In a previous chapter, we learned how to 
-[clean a simple data set](#basic-data-cleaning-with-excel). The next step
-is to learn how to analyze it. In this chapter, we will use Excel to
-construct ***univariate*** statistics and charts, i.e., statistics and charts
-that describe a single variable.
+Once we have [cleaned our data](#basic-data-cleaning-with-excel) we are ready
+to start analyzing it. Our analysis can include viewing the data, summarizing
+it in tables, and visualizing it in charts.
+
+In this chapter, we will use Excel to construct ***univariate*** statistics
+and charts, i.e., statistics and charts that describe a single variable. We
+will also learn some Excel tools for viewng data.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
@@ -15,12 +17,15 @@ In this chapter, we will learn how to:
    - Sorting
    - Filtering
    - Freezing panes
-2. Calculate and interpret the main univariate summary statistics by hand:
+2. Calculate and interpret univariate summary statistics by hand:
+   - Sample size (count)
+   - Sample average
+   - Sample variance and standard deviation
+3. Calculate univariate summary statistics in Excel.
    - Sample size (count)
    - Sample average
    - Sample percentiles and median
    - Sample variance and standard deviation
-3. Calculate the main univariate summary statistics in Excel.
 4. Construct and interpret simple and binned frequency tables in Excel
 5. Construct and interpret time series (line) graphs in Excel
 6. Construct and interpret bar graphs and histograms in Excel
@@ -29,24 +34,9 @@ In this chapter, we will learn how to:
 To prepare for this chapter, please review the chapter on
 [basic data cleaning with Excel](#basic-data-cleaning-with-excel).
 
-## Exploratory data analysis
+## Viewing large data files
 
-Our emphasis in this chapter, and in much of this course will be on 
-performing ***exploratory*** data analysis. Exploratory data analysis
-is the first step in any data analysis project: we use simple statistics
-and graphs to identify and understand patterns in the data.  Our 
-knowledge of these patterns can then inform our subsequent formal
-or model-based analysis.
-
-The audience for exploratory data analysis is the analyst themselves. But
-we will often be interested in presenting the patterns we have discovered
-to another audience: your teacher, your boss, or your client. So we will
-also discuss how to effectively present your results.
-
-### Looking at the data
-
-The first step in any exploratory data analysis is to literally look at 
-the data.
+The first step in any data analysis is to literally look at the data.
 
 ::: example
 **Historical employment data for Canada**
@@ -54,14 +44,18 @@ the data.
 Our analysis in this chapter will use historical employment data for
 Canada from January 1976 through January 2021.
 
-1. Download the file at
-[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx).
-2. Make a working copy.
+1. Set up a project folder.
+2. Download the file at
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx) and put it in your raw data subfolder.
+3. Make a working copy in your project folder
    - I called mine  `CanEmpHist_WC.xlsx`.
-3. Open your working copy. It will look something like this:
+4. Open your working copy. It will look something like this:
 ![*Canadian employment data, 1976-2021*](bin/CanadaEmploymentHistorical.png)
 
-Our main data set for analysis is the worksheet *Data for Analysis*, 
+There is a worksheet titled *Raw data* that contains the original data as
+obtained from Statistics Canada, along with information on its sources.
+
+Our main data set for analysis is in the worksheet *Data for Analysis*,
 which includes the following variables:
 
 - **MonthYr**: the month and year of the observation.
@@ -84,18 +78,15 @@ which includes the following variables:
 - **AnnPopGrowth**: the rate of population growth over the previous 12 months,
   calculated as a proportion and displayed as a percentage.  Note that this
   variable is blank for the first 12 months of the data set.
-  
-In addition, there is a worksheet titled *Raw data* that contains the original
-data as obtained from Statistics Canada.  Source information is also in that 
-worksheet.
+
+Note that this data set covers over 500 months, and is much larger than the
+single month of data we cleaned earlier.
 :::
 
-Our historical employment data set covers over 500 months. Other data
-sets are often much larger: large surveys from Statistics Canada can have
-hundreds of observations and hundreds of thousands of variables, and companies
-and governments often work with transactions-level data that includes millions
-of observations. 
-
+Most data sets of interest are very large.  For example, surveys from
+Statistics Canada can have hundreds of observations and hundreds of
+thousands of variables, and companies and governments often work with
+transactions-level data that includes millions of observations.
 Humans are smart, but not smart enough to fully understand a large data set
 without some kind of simplification or "dimension reduction." Instead of trying
 to directly interpret thousands or millions of numbers, we will need to

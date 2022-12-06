@@ -26,12 +26,12 @@ In this chapter, we will learn how to:
 3. Use basic Excel terminology and concepts including:
    - Workbooks, worksheets, and cells
    - Cell contents and display format
-   - Cell ranges
-4. Use fill and series to enter new data.
-5. Use Excel formulas to construct new variables.
-6. Use relative and absolute cell addresses in Excel formulas.
-7. Use logical and text data in Excel.
-8. Use dates in Excel.
+   - Cell addresses and ranges
+   - Fill and series
+4. Use Excel formulas to construct new variables.
+5. Use relative and absolute cell addresses in Excel formulas.
+6. Use logical and text data in Excel.
+7. Use dates in Excel.
 :::
 
 To prepare for this chapter, please ensure you have a computer with Excel

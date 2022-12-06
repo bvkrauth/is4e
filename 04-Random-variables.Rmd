@@ -8,15 +8,15 @@ knitr::opts_chunk$set(echo = FALSE,
 library("tidyverse")
 ```
 
-In a previous chapter, we developed a general framework for modeling
-[random outcomes and events](#probability-and-random-events). This
-framework can be applied to any set of random outcomes, no 
-matter how complex.
+Economics is a mostly *quantitative* field: its outcomes can be usually
+described using numbers: price, quantity, interest rates, unemployment rates,
+GDP, etc. Statistics is also a quantitative field: every statistic is a number
+calculated from data.  When a random outcome is described by a number, we call
+that number a "random variable."  We can use probability theory to describe and
+model random variables.
 
-This chapter develops additional tools for the case when the 
-random outcomes we are interested in are quantitative,
-that is, they can be described by a number. Quantitative outcomes 
-are also called "random variables." 
+This chapter will introduce the basic terminology and mathematical tools for
+working with simple random variables.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
@@ -27,18 +27,19 @@ In this chapter, we will learn how to:
 2.  Determine the support and range of a random variable.
 3.  Calculate and interpret the PDF of a discrete random variable.
 4.  Calculate and interpret the CDF of a discrete random variable.
-5.  Identify standard properties of the PDF and CDF.
+5.  Calculate interval probabilities from the CDF.
 6.  Calculate the expected value of a discrete random variable from its PDF.
-7.  Calculate quantiles of a random variable from its CDF.
-8.  Calculate the variance and standard deviation of a discrete random variable
-    from its PDF.
-9.  Calculate the variance and standard deviation using the expected
-    value formula.
+7.  Calculate a quantile from the CDF.
+8.  Calculate the variance of a discrete random variable from its PDF.
+9.  Calculate the variance from expected values.
+9.  Calculate the standard deviation from the variance.
 10. Calculate the expected value for a linear function of a random variable.
 11. Calculate the variance and standard deviation for a linear function
     of a random variable.
-12. Work with standard discrete probability distributions including the 
-    Bernoulli, binomial, and discrete uniform.
+12. Use standard discrete probability distributions
+    - Bernoulli
+    - binomial
+    - discrete uniform.
 :::
 
 To prepare for this chapter, please review the chapter on

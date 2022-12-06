@@ -14,9 +14,9 @@ In this chapter, we will learn how to:
 
 1.  Define the outcome and sample space for a given random process
 2.  Use set theory to define and manipulate events for a given random process.
-3.  Calculate event probabilities from elementary event probabilities.
-4.  Calculate and interpret joint and conditional probabilities
-5.  Apply the axioms and derived rules of probability.
+3.  Apply the axioms and derived rules of probability.
+4.  Calculate event probabilities from elementary event probabilities.
+5.  Calculate and interpret joint and conditional probabilities
 6.  Interpret and evaluate the claim that two events are independent.
 7.  Use the law of total probability and Bayes' law
 :::
