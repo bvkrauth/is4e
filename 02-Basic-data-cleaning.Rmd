@@ -1,30 +1,28 @@
 # Basic data cleaning with Excel {#basic-data-cleaning-with-excel}
 
 Before we can analyze data, we usually need to ***clean*** it. Cleaning data
-means putting it into a form that is ready to analyze, and can include:
-
-- Converting data files from one file format to another
-- Reorganizing complex tables of data into simple tables
-- Combining data from multiple tables into a single table
-- Modifying existing variables
-- Creating new variables
-
-In this course, we will do most of our data cleaning using Excel. 
+means putting it into a form that is ready to analyze, and can include
+importing data tables from various files, reorganizing complex tables
+into simple ones, combining data from multiple tables into a single table,
+modifying existing variables, and creating new variables.  In this course,
+we will do most of our data cleaning using Excel.
 
 This chapter will develop both both some principles of data cleaning and the
-basic Excel tools needed to implement them .  We will also apply this
-knowledge by using Excel to clean a real data set.
+basic Excel tools needed to implement them. The best way to learn data skills
+is by working on a real data project, soe will also apply this knowledge by
+using Excel to clean a real data set.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter, we will learn how to:
 
-1. Identify and implement the principles of tidy data.
-2. Identify and implement the principles of reproducible research, including:
-   - Data documentation
+1. Identify and implement the principles of reproducible research, including:
+   - Provenance
+   - Portability
    - Version control
-2. Identify and work with ID variables.
+   - Tidy data
+2. Identify and use ID variables.
 3. Use basic Excel terminology and concepts including:
    - Workbooks, worksheets, and cells
    - Cell contents and display format
@@ -37,15 +35,80 @@ In this chapter, we will learn how to:
 :::
 
 To prepare for this chapter, please ensure you have a computer with Excel
-installed. Refer to the [installation instructions](#installing-microsoft-excel) as
-needed.
+installed so you can follow along. Refer to the
+[installation instructions](#installing-microsoft-excel) as needed.
 
-## Application: Canadian employment data
+## Introduction to Excel {#a-quick-tour-of-excel}
+
+Microsoft Excel is the most commonly-used example of a ***spreadsheet***, which
+is a software program designed for the tabulation, analysis, and display of
+data. Its main competitors include Google Sheets and Apple Numbers. It is widely
+used in business and government, so good Excel skills are valuable in the labour
+market.
+
+Many of you have probably used Excel before, but there are many features
+you are probably not yet familiar with. So we will start from the beginning.
+
+### Terminology and interface {#terminology-and-interface}
+
+Start Excel. Your screen should look something like this:
+![Excel screenshot](bin/ExcelBlankWorkbook.png)
+
+When giving instructions, I will refer to various elements of Excel's user
+interface by name. You can use these elements for years without ever
+learning their names, so I will list them here for your reference:
+
+- The ***menu bar*** is at the top of the screen:  
+   ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)
+- The ***ribbon*** is below the menu bar  
+   ![It is a row of buttons.](bin/Excel ribbon.jpg)
+  - The ribbon has buttons for performing simple actions.
+  - The buttons are grouped by function, for example the ribbon above depicts
+    groups called `Clipboard`, `Font`, etc.
+    - Within each function group, there is usually a little
+      ![Additional options icon](bin/Excel additional options.jpg)
+      icon in the lower-right corner that you can click for additional
+      options.
+  - If the ribbon is not visible:
+    - You can make it visible by selecting any option (like `Home`)
+      on the menu bar.
+    - Once you have made the ribbon visible, you can keep it visible by
+      clicking on the little thumbtack
+      ![Thumbtack icon](bin/thumbtack.png)
+      icon in its lower right corner.
+  - The contents of the ribbon depend on the currently-active menu bar option
+    (usually but not always `Home`).
+    - I will assume that `Home` is the currently-active option; if it isn't
+      you can just select `Home` to make it the currently-active option.
+- There are several items just below the ribbon that we will learn to
+  use later in this chapter.
+  - The ***formula bar*** is the long white box just below the ribbon.  
+    ![formula bar](bin/Excel formula bar.jpg)
+  - The ***insert function*** button is to the left of the formula bar.  
+    ![fx](bin/Excel insert function button.jpg){height=16pt}
+- Most of the screen displays a rectangular grid of ***cells*** that is
+  called a ***spreadsheet*** or ***worksheet***:  
+  ![cell grid](bin/ExcelCellGrid.png)
+  - Columns are identified by letter.
+  - Rows are identified by number.
+  - Cells are identified by column and row.  For example, the cell in column A,
+    row 2 is called cell A2.
+- Below the worksheet is a row of ***tabs***:
+  ![tabs](bin/Excel tabs.jpg)
+  - Each tab corresponds to a worksheet. In this example, there is a single
+    worksheet named *Book 1*.
+  - Click on a tab to switch to that worksheet.
+  - Double-click on a tab to change its name.
+  - Click on the "+" button to add a new worksheet.
+- An Excel file is called a ***workbook***.
+  - Each workbook contains one or more worksheets.
+  - in Windows, Excel files normally have the `.xlsx` extension.
+  - Older files sometimes have the `.xls` extension.
+
+### Application: Canadian employment data
 
 We will demonstrate the key principles and tools in this chapter 
-by cleaning the November 2020 employment data for Canadian provinces. The 
-data can be found in the file  
-[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx) 
+by cleaning the November 2020 employment data for Canadian provinces.
 
 ::: {.economics data-latex=""}
 **Economics review: Employment statistics**
@@ -86,10 +149,28 @@ are having difficulty finding work, and a lower-than-usual LPF rate
 means that some workers have stopped looking for work.
 :::
 
+The data can be found in the file
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx).
+
+::: example
+**Opening the employment data**
+
+Open the file
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
+in Excel.  You can do this by either double-clicking on it, or by using
+`File > Open` from Excel's menu.  The file should look something like this:
+![Excel screenshot](bin/EmploymentData.png)
+
+Note that three of the key employment variables (**Population**, **Employed**,
+and **Unemployed**) are in the data set, but the other ones are not. We will
+need to calculate them as part of our data cleaning project.
+:::
+
 ## Data cleaning principles
 
 Next, we describe some of the core principles we will follow 
-in cleaning and managing our data.
+in cleaning and managing our data. We will refer back to these principles as
+we go through the application.
 
 ### Reproducibility {#data-management}
 
@@ -111,37 +192,94 @@ particular, we should:
    - When downloading data files, document the original URL and date of access.
    - You can add a small text file (usually called `README.txt`) that
      explains the provenance and provides other relevant information.
-2. Keep an unmodified copy of all original data files.
-   - Avoid changing the file name if possible.
-   - Use folders and your `README` file to clarify the contents of each file.
-3. Avoid directly editing data. Add new data instead.
-   - Sometimes this is not possible or practical, which is
-     why we keep an unmodified copy of the original data.
-4. Give files and variables brief but informative names.
-   - Make your names ***portable***, i.e., easily moved across operating
-     systems, file formats, and applications.  For example, stick to letters
-     and numbers, and avoid using spaces or special characters.
-   - Following a naming convention may help make your names more informative
-5. Use ***version control*** to manage different versions of your work.
-   - Start your project by creating a ***working copy*** of every file you plan
-     to edit.
+   - Keep an unmodified copy of all original data files, and avoid changing
+     their names.
+   - More generally, avoid directly editing data. Data storage is cheap, and
+     adding data is almost always preferable to changing or deleting it.
+2. Keep your data and analysis projects as ***portable*** as possible. Data is
+   portable if it can be easily moved between operating systems, file formats,
+   and applications.
+   - Organize your work into clear projects, and keep all of the files for
+     a given project in a single project folder.
+   - Give files and variables brief, informative, and portable names.
+     - For example, stick to letters and numbers, and avoid using spaces,
+       special characters, accents, etc.
+     - Following a naming convention may help make your names more informative
+       without making them too long.
+4. Use ***version control*** to manage and track changes to your files as you
+   work. Version control systems can be very elaborate, but I will teach you a
+   simple folder-based workflow:
+   - Create a ***working copy*** of each file you plan to edit.
      - There should only be one working copy of each file.
      - You can edit the working copy.
-   - Each time you complete a major step in your project, make your current
-     working copy the ***master version***.
+   - Each time you complete a step in your project, make your current
+     working copy the ***master version*** of that file.
      - There should only be one master version of each file.
      - The master version represents the project at its most-recently-completed
        stage. It should not include any half-finished work.
-     - The master version should not be directly edited, but it can be replaced
-       with the most recent working copy.
+     - The master version should not be directly edited, but should regularly be
+       replaced with the current working copy.
    - You can also have ***archived versions***.
      - There can be as many archived versions as you like.
      - An archived version is a previous master version or working copy that
        you want to keep for reference.
+     - Use some file naming convention to distinguish between archived versions.
+       - You could number them sequentially (e.g., "archive-01")
+       - Or you could use dates (e.g., "archive-20dec2022")
      - Archived versions should not be directly edited.
 
-We will discuss the implementation of these principles later in this
-chapter.
+The first step in implementing these principles is usually to set up a project
+folder.
+
+::: example
+**Setting up a project folder**
+
+To set up a project folder for the cleaning and analysis of the November 2020
+Canadian employment data:
+
+1. Create a project folder on your computer.
+   - It will contain all of your data and analysis for this project.
+   - Give it a brief, clear, and portable name (call it
+      "employment-nov-2020").
+2. Create two sub-folders inside your project folder.
+   - One will contain the original data (call it "raw-data").
+   - One will contain archived versions of the data. (call it "archive").
+2. Obtain the source data
+   - Download the file
+     [https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
+   - Put it in the `raw-data` folder.
+   - Do not change the file name.
+3. Document the provenance of all data sources
+   - Create a text file called "readme.txt".
+   - Put it in the `raw-data` folder.
+   - Enter information in this file about the provenance of the
+     `CanEmpNov20.xlsx` file.
+4. Create a master version and working copy.
+   - Make two copies of the `CanEmpNov20.xlsx` file.
+   - Put them in the main project folder (`employment-nov-2020`).
+   - One will be your original master version (call it "CanEmpNov20Clean.xlsx")
+   - One will be your working copy (call it "CanEmpNov20-working.xlsx").
+:::
+
+We will return to these principles later as we complete our data cleaning
+project.
+
+
+::: fyi
+**Version control systems**
+
+Software developers and professional data analysts use formal version control
+systems like [GitHub](https://github.com/). GitHub tracks every change ever made
+to a group of files, and can allow multiple users to work together on a project.
+It is based on a model in which each user has their own working copy, and
+can commit (or propose) changes to the master version, along with an explanation
+of the changes.  You can see my GitHub page at https://github.com/bvkrauth.
+
+GitHub takes a little time to set up and learn, but is an extremely useful tool
+if you do a lot of coding or data analysis.
+:::
+
+
 
 ### Tidy data {#tidy-data}
 
@@ -155,8 +293,8 @@ has the following seven properties:
    - Variable names are often displayed in the top row of the table.
 4. Each row in a table (after the top row) represents a distinct
    ***observation***, ***data point*** or ***case***.
-6. Each observation has a unique value for some **unique identifier** or **ID**
-   variable.
+6. Each observation has a unique value for some ***unique identifier*** or
+   ***ID*** variable.
    - The ID variable is often displayed in the first column of the table.
 5. All observations in a given table come from the same 
    ***unit of observation***.
@@ -171,158 +309,11 @@ Data that is not tidy is sometimes called ***messy*** data. One
 of the first steps in cleaning data is rearranging it from a messy
 format to a tidy format.
 
-### Observations and identifiers
-
-Each tidy data set normally includes at least one unique identifier or ID 
-variable. By definition, an ID variable *must* take on a different value 
-for each observation.  With this property, we can use ID variables to 
-link and combine data from multiple sources.
-
-::: example
-**ID variables at SFU**
-
-SFU is one of British Columbia's largest organizations, and relies
-heavily on ID variables to organize its information:
-
-- Each person at SFU (faculty, staff or student) has a unique 16-digit ID
-  number and a unique computing ID.
-- Each semester at SFU has a 4-digit semester code. For example,
-  Fall 2021 is assigned the semester code 1217.
-- Each academic program at SFU has a 2-letter to 4-letter program code
-  such as IS, BUS, or ECON.
-- Each course at SFU is uniquely identified by the combination of its 
-  program code (e.g. ECON) its numeric course code (e.g. 233), its section 
-  number (e.g., D100), and its semester number (e.g., 1217).  
-  
-Your library records, grades, financial records, and almost any other 
-information SFU has about you includes one or more of these IDs.
-:::
-
-The example above shows several common characteristics of ID variables:
-
-1. They can be numbers (like your student ID number) or text 
-   strings (like your computing ID). 
-2. They can be 
-   - Assigned sequentially or arbitrarily (like your student ID number), 
-   - Constructed by a formula (like semester codes).
-   - Standardized and listed in a table (like program codes)
-3. An observation can sometimes be identified by combining identifiers. For 
-   example, a specific course at SFU might be "ECON233-D100-1217".
-
-ID variables should ideally be portable across applications and systems. That
-is, our ID variable should still work if we move data from a Windows PC to 
-a Linux or Apple system, and should still work if we move from Excel
-to R or Python.  To maximize portability, keep in mind the following
-potential issues:
-
-
-| Issue                                       | Solution                            |
-|---------------------------------------------|-------------------------------------|
-| Some applications will round non-integer values (changing 1.23 to 1) or drop leading zeros (changing 00045 to 45). | Numeric ID variables should always be integers without leading zeros, or converted to text.  | 
-| Some applications will reject or transform spaces or unusual characters. | Text ID variables should only use (Latin) letters and (Arabic) digits. |
-| Some applications are case-sensitive (so that "hello" and "Hello" are different values) and others are not. | Text ID variables should typically use either all upper-case or all lower-case. |
-
-
-It's OK for an ID variable to be nearly-but-not-exactly identical to some other variable. For
-example a Canadian data set might have both a **Province** variable that takes on values like
-"Québec" and "Nova Scotia" and a **ProvinceID** variable that takes on values like "QUEBEC"
-and "NOVASCOTIA."
-
-::: {.fyi data-latex=""}
-**Names, IDs, and probabilistic matching**
-
-Proper names are typically *not* used as ID variables since they are not necessarily 
-unique. In addition, they are not always written 
-consistently.  For example, the same person might be called "Doug" in
-one data set and "Douglas" in another. 
-
-Occasionally a data set will not have a standardized ID variable, and our only 
-option is to match observations based on a proper name.  For
-example, each student in BC grades K to 12 is assigned an ID number called
-a PEN while each person in the healthcare system is assigned a
-different ID number called a PHN. There is no direct way to match PEN and PHN, 
-so we have to match education and health records on a combination of proper
-names and other information such as year of birth.  Matches made this way are
-called "probabilistic" matches, meaning (roughly) that the records probably
-describe the same person but might not.
-:::
-
-## Introduction to Excel {#a-quick-tour-of-excel}
-
-Microsoft Excel is the most commonly-used example of a ***spreadsheet***, which
-is a software program designed for the tabulation, analysis, and display of
-data. Its main competitors include Google Sheets and Apple Numbers. It is widely
-used in business and government, so good Excel skills are valuable in the labour
-market.
-
-Many of you have probably used Excel before, but there are many features
-you are probably not yet familiar with.  We will start by going over some
-of its basic characteristics and terminology.
-
-### Terminology and interface {#terminology-and-interface}
-
-Start Excel. Your screen should look something like this:  
-![Excel screenshot](bin/ExcelBlankWorkbook.png)  
-
-When giving instructions, I will refer to various elements of Excel's user
-interface by name. You may have been using these elements for years without
-ever knowing their names, so I will list them here for your reference:
-
-- The ***menu bar*** is at the top of the screen:   
-   ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)  
-- The ***ribbon*** is below the menu bar  
-   ![It is a row of buttons.](bin/Excel ribbon.jpg)  
-  - The ribbon has buttons for performing simple actions.
-  - The buttons are grouped by function, for example the ribbon above 
-    depicts groups called `Clipboard`, `Font`, etc.
-    - Within each function group, there is usually a little 
-      ![Additional options icon](bin/Excel additional options.jpg)
-      icon in the lower-right corner that you can click on to access 
-      additional options.
-  - If your ribbon is not visible:
-    - You can make it visible by selecting `Home` (or anything else) on the
-      menu bar. 
-    - Once you have made the ribbon visible, you can keep it visible by
-      clicking on the little thumbtack icon in its lower right corner.
-  - The contents of the ribbon depend on the currently-active menu bar option
-    (usually but not always `Home`). 
-    - I will assume that `Home` is the currently-active option; if it isn't
-      you can just select `Home` to make it the currently-active option.
-- The ***formula bar*** is just below the ribbon.  
-   ![the long white box ](bin/Excel formula bar.jpg) 
-   - It shows the contents of the current cell.
-   - You can type in it to change the contents of the current cell.
-- The ***insert function*** button is to the left of the formula bar. 
-   ![fx](bin/Excel insert function button.jpg){height=16pt} 
-   - We will learn to use this later.
-- Most of the screen displays a grid of ***cells*** that is called 
-   a ***spreadsheet*** or ***worksheet***:  
-   ![cell grid](bin/ExcelCellGrid.png)  
-  - Columns are identified by letter.
-  - Rows are identified by number.
-  - Cells are identified by column and row.  For example, the cell 
-    in column A, row 2 is called cell A2.
-- Below the worksheet is a row of ***tabs***:
-  ![tabs](bin/Excel tabs.jpg)
-  - You can click on a tab to switch to that worksheet.
-  - You can double-click on a tab to change its name.
-  - You can click on the "+" button to add a new worksheet.
-- An Excel file is called a ***workbook***.
-  - Each workbook contains one or more worksheets.
-  - in Windows, Excel files normally have the `.xlsx` extension. 
-  - Older files sometimes have the `.xls` extension.
-
-
-### Viewing data
-
-The first step in any data cleaning exercise is to look at the data
-and assess what needs to be done.
-
 ::: example
 **Overview of the employment data**
 
-Open the data file in Excel.  As you can see, this Excel workbook 
-contains three worksheets:
+Open your working copy of the employment data file in Excel.  As you can see,
+this Excel workbook contains three worksheets:
 
 - The worksheet *Employment Nov 2020* is our main data table:
    ![Excel screenshot](bin/EmploymentData.png) 
@@ -335,10 +326,10 @@ contains three worksheets:
   - The provinces are listed in alphabetical order, but the 
     interpretation of the table would not change if they were 
     listed in some other order
-- The worksheet *Raw data* is the original data as downloaded from Statistics
-  Canada.  
+- The worksheet *Raw data* is the original data table as I downloaded it from
+  Statistics Canada.  
    ![Excel screenshot](bin/RawEmploymentData.png)
-  It is ***messy*** (the opposite of tidy)
+  It is messy in various ways:
   - The table starts in cell A6 rather than cell A1.
   - Variables (Population, Labour Force, etc.) are in rows rather
     than columns.
@@ -349,22 +340,19 @@ contains three worksheets:
     describes Nova Scotia because it comes after row 16 (which does say
     it describes Nova Scotia).  As a result, the order of rows is very 
     important.
-- The worksheet *Source* describes where the original data was obtained.
+- The worksheet *Source* describes the provenance of the data:
    ![Excel screenshot](bin/Source.png)
+   It is not a data table, just a few lines of text.
    - There is a text description of the data, provided by Statistics Canada.
-   - There are also two URLs linking to the original data source.  Click
-     on either one, or copy and paste it into your browser, to see what
-     the original data source looks like.
+   - There are also two URLs linking to the original data source.  Copy and
+     paste either of them into your browser to see what the original data
+     source looks like.
    - There should also be some information on the date of access, but there
      currently isn't.
 
-Note that we are following good data management practice by saving
-a copy of the original data and creating a new data set based on it, rather
-than by directly editing the original data.  We are also documenting
-data sources.  Both of these practices will enhance the reproducibility
-and reliability of our analysis.
+We will do all of our edits to the *Employment Nov 2020* worksheet, and will
+leave both *Raw data* and *Source* alone.
 :::
-
 
 
 :::fyi
@@ -373,177 +361,286 @@ and reliability of our analysis.
 One common barrier to reproducibility is "link rot" - the tendency of a given
 URL to stop working over time as organizations make changes to their websites.
 Most links only work for a few months or a few years, depending on the data
-provider and how careful they are.
+provider and how careful they are. To minimize the potential consequences of
+link rot, you should always save an unmodified local copy of the original data.
 
-One strategy for dealing with link rot is to always save a local copy of the
-data. Another is to use a [digital object identifier](https://www.doi.org/)
+Anoter strategy for addressing link rot is to use a
+[digital object identifier](https://www.doi.org/)
 or ***DOI*** if one is available. DOI is an international system that allows
-participating organizations to provide persistent links to web pages or other
-files. The *Sources* worksheet above provides both regular and DOI addresses.
+participating organizations to provide persistent links to documents, files and
+web pages. The *Sources* worksheet above provides both regular and DOI
+addresses.
 
 - The regular URL (https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703
-) tells us where the file is located
+) tells your browser where the file is located:
   - Go to the server www150.statcan.gc.ca
-  - Look in the folder/directory t1/tbl1/en/tv.action
+  - Look in the folder t1/tbl1/en/tv.action
   - Pass the server the parameter "pid=1410028703"
-- The DOI URL (https://doi.org/10.25318/1410028701-eng) also tells us where a
-  file is located, but the file at that location is not the actual data file.
-  Instead it is a link that (currently) redirects the user to the address
+- The DOI URL (https://doi.org/10.25318/1410028701-eng) also tells the browser
+  where a file is located, but the file at that location is not the actual data
+  file. Instead, the file at that location is a link that (currently) redirects
+  the user to the address
   https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703.
 
-When Statistics Canada moves the file at some point in the future, the original
+Statistics Canada will probably reorganize its website and move the original
+document at some point in the future.  At that point, the original
 URL will stop working. But the DOI will continue working because Statistics
-Canada will (hopefully) update the DOI entry with the new URL.
+Canada will (hopefully) update the DOI entry for that document with the new URL.
 :::
 
-### Cell formatting {#cell-formatting}
 
-In Excel, we distinguish between the contents of a cell and how it is displayed.
-We can change the appearance of our data without changing
-its content by adjusting the ***cell formatting*** for one or more
-cells.  Cell formatting characteristics include:
 
-- Column width
-- Row height
-- Font
-- Bold/italics/underline
-- Text color
-- Background color
-- Cell borders
-- Alignment (left/right/center as well as top/bottom/middle) 
+### Observations and identifiers
 
-Another important cell formatting characteristic is the number format,
-which will be discussed in a later section.
+Each tidy data set normally includes at least one unique identifier or ID
+variable. By definition, an ID variable *must* take on a different value
+for each observation.  With this property, we can use ID variables to
+link and combine data from multiple sources.
 
-The procedure for modifying the cell format is straightforward if you 
-regularly use productivity applications like Microsoft Word.  You select
-the cells you are interested in modifying, then you go through the
-menus.
+Proper names of people, places or organizations are typically *not* used
+as ID variables since they are not necessarily  unique. For example, there are
+many people in Canada named "Doug Smith."  In addition, proper names are not
+always written consistently.  For example, the same person might be called
+"Doug Smith" in one data set and "Douglas Smith" in another.
 
 ::: example
-**Changing cell size**
+**Is the province name a good ID variable?**
 
-You may notice that cell B8 (Ontario population) appears to contain "######" 
-rather than a number.  The cause of this problem is that the cell is not wide
-enough to display the correct number. So let's make it wider.
+The province name in our employment data is an example of a proper name, and
+we typically avoid using proper names as ID variables becuase they are not
+necessarily unique or consistently written. Although province names *are*
+unique within Canada, they are not always consistently written:
 
-We have several options for doing this:
+- Newfoundland and Labrador (as it is called in our employment data) is
+  called "Newfoundland" in older data sets as that was the province's
+  official name before December 6, 2001.
+- Quebec (as it is called in our employment data) is called "Québec" in some
+  data sets.
 
-- *From the menu*: Select any cell in column B, and then select 
-  `Home > Format > Cell Width...`.  A dialog box will appear that allows you
-  to enter your preferred width. Try 10.
-- *With the mouse*: Move your cursor to the line between column headers B 
-  and C until the cursor looks like this: ![cursor](bin/cell width change.png){height=16pt}. Click on the mouse and drag the cursor to
-  resize the column.
-- *Auto-fit* (this is what I usually do):  Move your cursor to the 
-  line between column headers B and C, and double-click.  The column 
-  width will automatically adjust to fit the data.
-  
-You can follow similar procedures to adjust the row height, but we do not need
-to do that here.
+This inconsistency may cause problems when we try to link data sources, so
+we should avoid using the province name as an ID variable.
 :::
 
-### Saving your work {#saving-your-work}
+ID variables have several common characteristics:
 
-As mentioned in the section on [reproducibility](#data-management), we
-will want to save a working copy of our file before proceeding.  In
-addition, it is wise to save your work frequently.
+1. They can be numbers or text strings.
+2. They can be:
+   - Assigned ***arbitrarily***, i.e. following no consistent rule.
+   - Assigned ***sequentially*** according to some natural ordering.
+   - Assigned by a ***standardized code*** that is listed in some published
+     table.
+   - ***Constructed by formula*** from other information.
+3. They can be defined by an ***explicit combination***
+   (a new ID variable is constructed) of other identifiers, or an
+   ***implicit combination*** of those identifiers (no new variable is
+   constructed).
+
+It's OK for an ID variable to be nearly-but-not-exactly identical to some other
+variable. For example a Canadian data set might have both a **Province**
+variable that takes on values like "Québec" and "Nova Scotia" and a
+**ProvinceID** variable that takes on values like "QUEBEC" and "NOVASCOTIA."
+
+::: sfu
+**ID variables at SFU**
+
+SFU is one of British Columbia's largest organizations. Like most large
+organizations, it maintains large administrative records that are organized
+and linked using various ID variables:
+
+- Each person at SFU (faculty, staff or student) has a unique
+  16-digit ID number that is arbitrarily/sequentially assigned.
+- Each computing account at SFU has a unique (text) user name that is also
+  used as an email address. Some user names are constructed according to rules,
+  but those rules have not been applied consistently over the years so we can
+  think of user names as arbitrarily assigned.
+- Each academic program at SFU has a standardized 2-letter to 4-letter program
+  code. For example, the program code for economics is ECON. The full list of
+  program codes can be found at
+  https://www.sfu.ca/students/calendar/2023/spring/academic-programs.html.
+- Each program assigns (mostly) arbitrary numeric course codes. For example
+  the economics department has assigned the numeric course code 233 to its
+  introductory statistics course.
+- Each semester at SFU has a 4-digit semester code constructed by a formula
+  based on the year and term. For example, Fall 2021 is assigned the semester
+  code 1217.  The first three digits represent the year (2021 -1900 = 121) and
+  the last digit represents the term (Spring = 1, Summer = 4, Fall = 7).
+- Each course at SFU is uniquely identified by the combination of its
+  program code (e.g. ECON) its numeric course code (e.g. 233), its section
+  number (e.g., D100), and its semester number (e.g., 1217). These can be
+  explicitly combined into a unique course ID variable (e.g.,
+  "ECON233-D100-1217").
+
+Your library record, grades, financial records, and almost any other
+information SFU has about you includes one or more of these IDs.
+:::
+
+Like file and variable names, ID variables are ideally portable across
+applications and platforms. That is, our ID variable should still work if we
+move data from a Windows PC to a Linux or Apple system, and should still work
+if we move from Excel to R or Python.  Try to keep them short and simple.
+
+::: fyi
+**Keeping ID variables portable**
+
+To maximize portability of ID variables, keep in mind the following potential
+issues and solutions for avoiding them:
+
+| Issue |Description                           | Solution                            |
+|-------|--------------------------------------|-------------------------------------|
+| *Rounding* | Some applications will round non-integer values (changing 1.23 to 1) or drop leading zeros (changing 00045 to 45). | Numeric ID variables should always be integers without leading zeros, or converted to text variables.  | 
+| *Special characters* | Some applications will reject or transform spaces or unusual characters. | Text ID variables should only use (Latin) letters and (Arabic) digits. |
+| *Case* | Some applications are case-sensitive (so that "hello" and "Hello" are different values) and others are not. | Text ID variables should typically use either all upper-case or all lower-case. |
+| *Length* | Some applications will have a maximum length for a text variable, and will cut off everything above that maximum length. | Text ID variables should not be extremely long. |
+
+:::
+
 
 ::: example
-**Saving a working copy**
+**Choosing an ID variable**
 
-To save a working copy of your file:
+Having decided that the province name is not a good ID variable for our
+employment data, we need to choose another one. Although only one ID variable
+is needed, I will choose two for demonstration purposes:
 
-1. Select `File > Save As` from the menu.
-   - You need to select `Save As` rather than `Save` so you can change the file
-     name.
-2. Follow the usual steps in the dialog box to save a file.
-   - Choose a new file name, and a convenient location.
-   - I would choose the file name  `CanEmpNov20_WC.xlsx`.to make clear that this
-     file is my working copy.
+1. **ID**: an arbitrary/sequential number assigned to each observation.
+2. **ProvAbb**: a standardized (text) code based on the two-letter
+   postal abbreviation.
+
+We will add these two variables while cleaning our data.
 :::
 
+::: {.fyi data-latex=""}
+**Names, IDs, and probabilistic matching**
 
-## Cleaning data {#cleaning-data}
+Occasionally a data set will not have a standardized ID variable, and our only
+option is to match observations based on a proper name.  For
+example, each student in BC grades K to 12 is assigned an ID number called
+a PEN while each person in the healthcare system is assigned a
+different ID number called a PHN. There is no direct way to match PEN and PHN,
+so we have to match education and health records on a combination of proper
+names and other information such as date of birth.  Matches made this way are
+called "probabilistic" matches, meaning (roughly) that the records probably
+describe the same person but might not.
+:::
 
-We are now ready to start actively cleaning our data. Since our data set is
-already tidy, this will mostly involve defining new variables based on the
-existing variables.
+### Planning {#cleaning-plan}
 
-### Preparation
+Before diving into cleaning our data, it is often wise to look closely at the
+data and construct a  ***cleaning plan***. Here is a simple template:
 
-The next step is to look at the data and construct a cleaning plan. Your 
-cleaning plan should have several steps:
-
-1. Convert all data into tidy-format tables.
-2. Ensure that each table has a unique ID variable.
+1. Convert all data sources into tidy-format tables in the application(s) we
+   intend to use.
+2. Select or construct a unique ID variable for each table.
 3. Identify and address problems in existing variables.
 4. Create new variables that may be useful.
-5. Link data across tables.
 
-The data cleaning plan should be based around what we plan to do 
-with the data, but should preserve flexibility in case we want to
-use the data for other purposes.
+The cleaning plan should be based around what we plan to do with the data, but
+should preserve flexibility in case we want to use the data for other purposes.
 
 ::: example
 **A plan for cleaning the employment data**
 
-The first step in cleaning the employment data is to ensure
-we have tidy data.  This step has already been completed, so
-we can move on.
+Following the template above, we can construct a simple data cleaning plan for
+the employment data:
 
-The second step is to ensure that each table has a unique
-ID variable. In our employment data, the province name
-*could* serve as a unique identifier, but names typically have some drawbacks:
+1. *Convert all data into tidy-format tables*
 
-- Names are not always unique. This is obviously not an issue with Canadian 
-  provinces, but it is an issue in many other data sets. For example, there 
-  are 41 cities and towns in the United States named "Springfield." 
-- The same observation often appears with different names in different 
-  data sets.  For example, some older data sets call the province of 
-  Newfoundland and Labrador just "Newfoundland" as that was the province's 
-  name before December 6, 2001.
+   Our employment data table is already in tidy format, so no action is
+   required.
 
-As a result, it is typically not advisable to use names as ID 
-variables. Instead, we could:
+2. *Select or construct a unique ID variable for each table*
 
-- Use a **standardized code** such as the two-letter postal abbreviation.
-- Assign an arbitrary number to each observation.
+   As discussed earlier, the province name is not an ideal ID variable so we
+   will construct two alternative ID variables: an arbitrary/sequential number
+   and the two-letter postal abbreviation.
 
-We will do both. This is not necessary, but allows us to see the relative
-benefits of the two approaches
+3. *Identify and address problems in existing variables*
 
-The third step is to identify and address problems in our existing
-variables. Following the general principle to avoid editing data, we will
-do this by creating new-and-improved versions of these variables rather than
-editing the existing variables.
+   The only problem I see in the current data is in cell B8, which is supposed
+   to display the population of Ontario but instead shows "########". We will
+   need to investigate and fix this.
 
-The fourth step is to consider is whether there
-are any variables we would like to analyze that have not yet
-been constructed.  In our employment data, we will want to construct
+   Remember the general principle to avoid editing data.  So if we do find
+   problems, we would ideally fix them by creating new-and-improved versions of
+   these variables rather than directly editing the existing variables.
 
-- Labour force
-- Labour force participation rate
-- Unemployment rate
+4. *Create new variables that may be useful*
 
-We will also want to include information on which specific month 
-these observations are describing (November 2020).  Although that 
-information is in the *Raw data* worksheet and in the title of 
-the main worksheet (*Employment Nov 2020*) it may be useful to 
-have it in the table as well.
+   We will want to construct new variables for:
+
+   - the specific month these observations are describing (November 2020).
+   - the two unique ID variables described in step 2.
+   - the labour force
+   - the labour force participation rate
+   - the unemployment rate
+
+We will also add a few more variables, mostly to demonstrate various features
+of Excel. It's OK to move beyond the initial cleaning plan as we learn more
+about our data.
 :::
 
-We will now add several variables to our working data set. Be sure to save 
-the file after adding each variable so that you don't lose your work.
+## Cleaning data in Excel {#cleaning-data}
 
-### Inserting cells
+We are now ready to start using Excel to active clean our data. We will also
+introduce a set of important Excel tools and concepts that are useful in
+cleaning data. Be sure to use your working copy of the data, and to save
+the file after completing each task so that you don't lose your work.
+
+### Cell formatting {#cell-formatting}
+
+Excel distinguishes between the *contents* of a cell and how those contents
+are *displayed*. You can usually see the contents of a cell by selecting it
+and looking at the formula bar.
+
+We can change the appearance of our data without changing
+its content by adjusting the ***cell formatting*** for one or more
+cells.  Cell formatting characteristics include:
+
+- Text font, size, style (bold/italics/underline) and color.
+- Text alignment (left/right/center as well as top/bottom/middle)
+- Column width
+- Row height
+- Background color
+- Cell borders
+- Number format (will be discussed in a later section)
+
+The procedure for modifying a cell's format is straightforward if you
+regularly use Microsoft Word or similar applications.  You select
+the cell(s) you are interested in modifying, then you go through the
+menus to choose the modifications.
+
+::: example
+**Changing cell size**
+
+As mentioned earlier, cell B8 (Ontario population) appears to contain "######"
+rather than a number. If you select this cell and look in the formula bar
+you will see it actually does contain the number 12378900.  The reason
+that the cell displays "######" is that the cell is not wide enough to show
+the correct number.
+
+We can solve this problem by making column B wider:
+
+- *From the menu*: Select any cell in column B, and then select
+  `Home > Format > Cell Width...`.  A dialog box will appear that allows you
+  to enter your preferred width. Try 10.
+- *With the mouse*: Move your cursor to the line between column headers B
+  and C until the cursor looks like this: ![cursor](bin/cell width change.png){height=16pt}. Click on the mouse and drag the cursor to
+  resize the column.
+- *Auto-fit* (this is what I usually do):  Move your cursor to the
+  line between column headers B and C, and double-click.  The column
+  width will automatically adjust to fit the data.
+
+You can follow similar procedures to adjust the row height.
+:::
+
+### Inserting and deleting cells
 
 Most of the time we will add data to the end of the existing table, adding
 new variables after the last column or new observations after the last row. But
 occasionally we will want to insert a column or row into our table.
 
 ::: example
-**Adding a column for the ID variable**
+**Inserting a column**
 
 We will want our first column to include a not-yet-constructed ID
 variable, so we need to insert a column to the left.
@@ -552,13 +649,13 @@ variable, so we need to insert a column to the left.
 2. Select `Home > Insert > Insert Sheet Columns` from the menu.
 
 This will shift all columns to the right, and insert a new blank
-column A.  We will fill in column A shortly.
+column A.  We will enter data in this column later.
 :::
 
 We can also insert rows, delete rows or columns, and even insert or
 delete individual cells.
 
-### Data entry, fill and series {#entering-new-data}
+### Data entry {#entering-new-data}
 
 The simplest way to add a variable to an Excel table is by typing data
 directly into the cells.  
@@ -588,8 +685,10 @@ The postal abbreviation is useful for at least two reasons
 
 1. It is *standardized*, while the full province name may not be.
    - The postal abbreviations were originally created by Canada Post.
-   - They are also internationally recognized through the ISO standard
-     [ISO 3166-2](https://www.iso.org/standard/72483.html).
+   - They are also internationally recognized through the
+     [ISO 3166-2](https://www.iso.org/standard/72483.html) standard
+     on "Codes for the representation of names of countries and
+     their subdivisions."
 2. It is *short*, which can be useful in charts.
 
 To add this variable:
@@ -646,6 +745,8 @@ To be honest, Excel allows nearly anything in a variable name since it does not
 normally use the variable names in its calculations.  But good naming practices
 are still important since you may need to move data between programs.
 :::
+
+### Fill and series {#fill-and-series}
 
 Excel also has several tools available to speed the process of entering
 data.  First, you can ***copy-and-paste*** or ***cut-and-paste*** the contents
@@ -744,7 +845,7 @@ Most of our new variables will be calculated from existing variables
 using ***formulas***. A formula is just a rule for calculating a value
 from some other values.
 
-Formulas always start with the equals sign `=` followed by a mathematical
+Formulas always start with the equal sign `=` followed by a mathematical
 expression that can include any combination of:
 
 - Specific values, for example `=2` or `=TRUE`
@@ -755,7 +856,7 @@ expression that can include any combination of:
 Formulas can be simple, or they can be quite complex.
 
 ::: example
-**Calculating the labour force**
+**A simple formula**
 
 Returning to our application, everyone who is either employed or unemployed
 is in what economists call the "labour force." So let's add that variable.
@@ -782,7 +883,7 @@ Formulas can use the results from other formulas, as shown in
 the example below.
 
 ::: example
-**Calculating unemployment and LFP rates**
+**Formulas that use other formulas**
 
 Let's add a column for the labour force participation rate. To remind you,
 this is the proportion or percentage of the population (column C) that is in
@@ -811,19 +912,56 @@ Excel has about 500 built-in ***functions*** that we can use in formulas. Each
 function has a ***function name*** and a set of ***arguments*** whose values you
 can set.
 
-To use a function, you simply include its name and its arguments as 
+Excel has several built-in tools for finding information on the names and
+arguments of its functions. Search engines such as Google can also be helpful.
+
+::: example
+**Finding a function**
+
+Suppose we want to find the natural logarithm of a particular number. Excel
+probably has a built-in function for that, but we may not know its name or
+structure.
+
+- *Google*
+
+  Go to your favorite search engine and enter "Excel natural log". When I do
+  this, the top recommendation is for Microsoft's online documentation for the
+  `LN()` function. Read the documentation, which says that the `LN()`function
+  takes a single numeric argument and returns the natural logarithm of that
+  argument.
+
+- *Built-in Excel tools*
+
+  Excel's built-in tools for finding and using functions can be helpful in
+  using more complex functions.
+
+   1. Click on the insert function button
+      ![insert function button](bin/Excel insert function button.jpg){height=16pt} 
+      to the left of the formula bar.
+   2. The `Insert Function` dialog box will appear.
+      ![insert function dialog box](bin/InsertFunction.png)
+      It will show a long list of functions. You will want to narrow this list
+      down, and you have several options for doing so:
+      - Search: Enter `logarithm` in the `Search for a function` text box.
+      - Browse: Select `Math & Trig` from the `Or select a category`
+        drop-down box.
+   3. Once you have narrowed the list down, it is easy to find the
+      function you want (`LN`). Select `LN` from the `Select a function`
+      list box, and then select `OK`.You will now see the `Function Arguments`
+      dialog box for the `LN` function.
+      ![function arguments dialog box](bin/FunctionArguments.png)
+   4. As the dialog box shows, the `LN` function takes one argument
+      (the number you want the log of).
+:::
+
+To use a function, you simply include its name and its arguments as
 part of the formula.  For example, the `SQRT()` function takes a single
 numeric argument and returns the square root of the argument. So if
-you enter `=SQRT(2)` in a cell, the cell will display `1.414`, the 
-square root of 2. You can use the contents of other cells as an argument,
-or you can also use the result of another function.
+you enter `=SQRT(2)` in a cell, the cell will display `1.414`, the
+square root of 2.
 
-Excel also has extensive tools for:
-
-- Finding the function you need for a particular calculation task.
-- Figuring out what arguments to use in the function.
-
-You can also use a search engine like Google to find this information.
+You can use the contents of other cells as arguments, or you can also
+use the result of another function.
 
 ::: example
 **A simple function**
@@ -832,42 +970,33 @@ Suppose we want to add a new variable for the (natural) log of population.
 
 1. Enter **LogPop** in cell K1 to give the variable a name.
 2. Select cell K2.
-3. If we already know the name of the function for taking the natural 
-   log, we can just type in our formula.  But suppose we don't know 
-   the name of the function, or even whether there is such a function.
-   a. Click on the insert function button 
-      ![insert function button](bin/Excel insert function button.jpg){height=16pt} 
-      to the left of the formula bar.
-   b. The `Insert Function` dialog box will appear.
-      ![insert function dialog box](bin/InsertFunction.png)
-      It will show a long list of functions. You will want to narrow this list
-      down, and you have several options for doing so:
-      - Search: Enter `logarithm` in the `Search for a function` text box.
-      - Browse: Select `Math & Trig` from the `Or select a category`
-        drop-down box.
-   c. Once you have narrowed the list down, it is easy to find the 
-      function you want (`LN`). Select `LN` from the `Select a function`
-      list box, and then select `OK`.You will now see the `Function Arguments`
-      dialog box for the `LN` function.
+3. We have two options for calculating the natural log of cell C2 in this
+   cell:
+
+   *Direct entry:* Read the documentation, figure out that the correct formula
+   is `=LN(C2)`and enter that formula in cell K2.
+
+   *Built-in Excel tools* This is probably unnecessary for a function as simple
+   as `LN()`, but can be very helpful with more complex functions.
+
+   a. Follow the steps in the previous example to reach the `Function Arguments`
+      dialog box for the `LN` function:
       ![function arguments dialog box](bin/FunctionArguments.png)
-4. As you can see, the `LN` function takes one argument (the number you want 
-   the log of). You want to take the log of cell C2, so enter the text `C2` 
-   here or click on cell C2.
-   - the dialog box will display the value in cell C2 (`3588700`)
-     as well as the calculated value for the log of cell
-     C2 (`15.0933058`).
-6. Select `OK`.
-7. Save your working copy.
+   b. Click in the entry box labeled `Number`.
+   c. Either enter the text `C2` here or click on cell C2. The dialog box
+      will display the value in cell C2 (`3588700`) as well as the calculated
+      value for the log of cell C2 (`15.0933058`).
+   d. Select `OK`.
+
+4. Save your working copy.
 
 You will see that cell K2 now contains `=LN(C2)` which displays as `15.0933`. 
-Note that if you already knew the function and arguments you needed, you could 
-have just typed `=LN(C2)` into cell K2 instead.
 :::
 
 ### Cell ranges {#cell-ranges}
 
 Some functions like `SUM()` and `AVERAGE()` operate on a ***range*** of cells
-rather than a single cell. A range is just a rectangular set of cells, 
+rather than a single cell. A range is just a rectangular grid of cells,
 and is described by its upper-left and lower-right cells, separated 
 by a colon (":"). For example:
 
@@ -879,7 +1008,7 @@ A single cell can also be thought of as a range of cells with one
 row and one column.
 
 ::: example
-**Total population**
+**A formula using a cell range**
 
 Suppose we want to create a new variable that reports the total population
 across all observations in the data. The function to do that is `SUM()`. 
@@ -950,13 +1079,23 @@ we copy the contents of this cell to other cells, we get:
 This is usually exactly what we want Excel to do. 
 
 ::: example
-**Relative references**
+**Relative references are usually what we want**
 
-Select cell H3 and take a look at the formula bar. You'll notice that
-while the original cell H2 contains `=D2+E2`, cell H3 actually contains
-`=D3+E3`. This is exactly what we would want; each cell in column H
-calculates the province's labour force by adding together the unemployed
-and employed counts from the same province (i.e. same row).
+Select cell H3 and take a look at the formula bar to see its contents. Notice
+that:
+
+- the original cell H2 contains `=D2+E2`
+- cell H3 contains`=D3+E3`
+
+This is exactly what we would want; each cell in column H
+calculates the province's labour force by adding the unemployed
+count (column D) and employed count (column E) from the same province
+(same row).  So cell H2 should contain `=D2+E2` and cell H3 should contain
+`=D3+E3`.
+
+Similarly, the formulas in columns I (**LFPRate**), J (**UnempRate**),
+and K (**LogPop**) have all copied exactly as we would would want them
+to be.
 :::
 
 Sometimes we will want Excel to treat cell references as 
@@ -964,7 +1103,7 @@ Sometimes we will want Excel to treat cell references as
 reference exactly as written. 
 
 ::: example
-**Total population, part 2**
+**Relative references are not always what we want**
 
 Take a look at the **TotPop** variable in column L.  This variable 
 is supposed to represent the total Canadian population, but each 
@@ -972,15 +1111,19 @@ cell in this column shows a different number.
 
 Because Excel treats cell references as relative, copying the 
 cell L2 to the rest of column L produces:
+
 - Cell L2 contains `=SUM(C2:C11)`
 - Cell L3 contains `=SUM(C3:C12)`
 - Cell L4 contains `=SUM(C4:C13)`
+- etc.
 
-but in this case we want *all* of the cells to contain `=SUM(C2:C11)`.
+In this case, that is not what we want.  We want  *all* of the cells to
+contain the total population of all provinces, which means all of them
+should contain the formula `=SUM(C2:C11)`.
 :::
 
 We can tell Excel to treat a given cell reference as absolute by
-adding the `$` character to the cell reference. For example, 
+adding the `$` character in front of the reference. For example,
 suppose that we copy the formula in cell C2 to cell D3. Then:
 
 |  If cell C2 contains  | Then cell D3 contains |
@@ -995,15 +1138,16 @@ calculation in the cell, it only affects how the formula is copied
 over to other cells.
 
 ::: example
-**Total population, part 2**
+**Using absolute references in a formula**
 
-To fix the **TotPop** variable:
+To fix the **TotPop** variable, we can change the relative references to
+absolute references:
 
 1. Go back to cell L2.
 2. Change `=SUM(C2:C11)` to `=SUM(C$2:C$11)`.
-   - Notice that the value in this cell does not change.
+   - Notice that the value in *this* cell does not change.
 3. Copy/paste or fill cell L2 into cells L3:L11.
-   - Notice that all cells in this column contain the same formula
+   - Notice that all cells in this column now contain the same formula
       (`=SUM(C$2:C$11)`) and display the same value (`31,275,600`)
 4. Save your working copy.
 
@@ -1015,33 +1159,29 @@ same formula.  This typically will happen when we want to compare the
 current observation to the other observations.
 
 :::example
-**Population rank**
+**Combining relative and absolute references**
 
 Suppose we want to create a new variable that is the province's population
 *rank*. That is, the province with the highest population has a rank of 1, 
 second highest has a rank of 2, etc. The function to do that is `RANK.EQ()`,
-which takes two arguments: the value to rank, and the list of values
+which takes two arguments: the value to rank, and the range of values
 to use for the ranking.  We want the first argument (the province's population)
-to vary across provinces, but we want the list of values (the populations of
+to vary across observations, but we want the range of values (the populations of
 all of the provinces) to stay the same.
 
 1. Enter **PopRank** in cell M1 to give the variable a name.
-2. Select cell M2.
-3. Use the `Insert Function` tool to access the arguments for `RANK.EQ()`. Enter
-   the appropriate arguments and select `OK`:
-   - `Number` is the number we wish to rank: enter C2 for Alberta's population.
-   - `Ref` is the set of values we want to rank within: enter the range `C$2:C$11`
-     for the list of all provinces' populations.
-   - `Order` is an optional argument: leave it blank.
-4. Copy/paste or fill cell M2 into cells M3:M11.
-5. Save your working copy.
+2. Enter the formula `=RANK.EQ(C2,C$2:C$11)` in cell M2. Note that the first argument
+   uses a relative reference, and the second uses absolute references.
+3. Copy/paste or fill cell M2 into cells M3:M11.
+4. Save your working copy.
 
-As you can see, Excel displays the correct ranks. We can check this by sorting
-on **Population** and seeing if **PopRank** is also sorted.
+As you can see, Excel displays the correct ranks. If you aren't sure how
+this works, look at the contents of each cell of column M to see how the
+formula copied from cell M2.
 :::
 
 ::: {.fyi data-latex=""}
-**Advanced options**
+**Advanced options for ranking in Excel**
 
 The `RANK.EQ()` function has several relatives with similar syntax:
 
@@ -1051,7 +1191,7 @@ The `RANK.EQ()` function has several relatives with similar syntax:
   functions return ranks in percentiles.
 :::
 
-## Data types {#excel-data-types}
+## Excel data types {#excel-data-types}
 
 Most of the data we work with is numeric. However, there are other types
 of information we regularly encounter:
@@ -1060,7 +1200,7 @@ of information we regularly encounter:
 - Logical (true/false) values
 - Dates and times
 
-Excel has various tools for entering, storing and processing 
+Excel has various specialized tools for entering, storing and processing
 these data types.
 
 ### Numeric data {#numeric-data}
@@ -1076,15 +1216,15 @@ on the screen. We can change the display format of a cell or
 group of cells without changing its contents. 
 
 ::: example
-**Displaying unemployment and LFP rates as percentages**
+**Displaying a cell in percentage format**
 
-Both **UnempRate** and **LFPRate** are calculated as proportions 
+**UnempRate** and **LFPRate** are both calculated in proportional units
 (a number between 0 and 1). But we might prefer to display them 
-as percentages (a number between 0 and 100).
+in percentage units (a number between 0 and 100).
 
-We *could* change the formulas (for example, change the `LPFRate` 
-formula to `=100*H2/C2`) or we could just change the cells'
-display format:
+We *could* do this by changing the formulas (for example, change the `LPFRate`
+formula to `=100*H2/C2`).  An easier approach is to change the cells'
+numeric display format:
 
 1. Select cells I2:J11.
 2. Select `Home > Number Format` (it is a little drop down box that 
@@ -1131,7 +1271,7 @@ statements. It is also useful for constructing ID variables.
 
 
 ::: {.fyi data-latex=""}
-**Advanced options**
+**Advanced options for working with text data**
 
 There are many useful functions to manipulate text strings in Excel:
 
@@ -1214,7 +1354,7 @@ variables.
 
 
 ::: {.fyi data-latex=""}
-**Advanced options**
+**Advanced options for logical variables**
 
 Some additional functions that work with logical variables:
 
@@ -1375,38 +1515,37 @@ date and time.
 
 At this point our data cleaning project is complete, and our data is ready for
 analysis.  Returning to the version control concepts discussed in the section
-on [reproducibility](#data-management), the next step is to:
-
-1. Check the file for mistakes and incomplete work.
-2. Update the master version to the current working copy.
+on [reproducibility](#data-management), the next step is to archive and update
+the master version.
 
 ::: example
-**Updating the master version**
+**Finishing up**
 
-We do not yet have a master version, so we will need to create one.
+To update your master version:
 
-1. Select `File > Save As` to save the file under a new name.
-2. Follow the usual steps to save the file under a new name.
-   - I would choose `CanEmpNov20Clean.xlsx`.
+1. Check your working copy for mistakes and incomplete work.
 
-You can compare your master version to my version at
-[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx) 
+   You can compare your working copy to my master version at
+[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
+
+2. Archive your current master version by renaming it and moving it to the
+   `archives` sub-folder.
+
+   - This is optional since your current master version is identical to the
+     source data.
+
+3. Copy the current working copy to the master version by either:
+
+   - Selecting `File > Save As` in Excel to save the open file under another
+     name.
+   - Closing Excel and copying, pasting, and renaming the working copy file.
+
+You should now have two identical cleaned data sets (one master file and one
+working copy), one raw data set (in the `raw-data` subfolder), and possibly
+one archived data set (in the `archives` subfolder).
 :::
 
 
-::: fyi
-**Version control systems**
-
-Software developers and professional data analysts use formal version control
-systems like [GitHub](https://github.com/). GitHub tracks every change ever made
-to a group of files, and can allow multiple users to work together on a project.
-It is based on a model in which each user has their own working copy, and 
-can commit (or propose) changes to the master version, along with an explanation
-of the changes.  You can see my GitHub page at https://github.com/bvkrauth. 
-
-GitHub takes a little time to set up and learn, but is an extremely useful tool
-if you do a lot of coding or data analysis.
-:::
 
 ## Chapter review {-#review-basic-data-cleaning-with-excel}
 
@@ -1418,11 +1557,11 @@ with data regularly encounters complex and messy data in need of cleaning.
 In this chapter, we have learned some important data cleaning concepts, including
 reproducible research, tidy data, ID variables, and version control.  We have also 
 learned how to implement these concepts in Excel using tools such as fill/series, 
-sorting, formatting, formulas, and functions.  
+formatting, formulas, and functions.
 
-We will soon use Excel to do some 
+Once we have clean data, we can use it to  do some
 [basic statistical analysis and graphing](#basic-data-analysis-with-excel)
-using our cleaned data. Later on, we will learn more 
+in Excel. Later on, we will learn more
 [advanced data cleaning](#advanced-data-cleaning)
 concepts such as linking, aggregating, error validation/handling, 
 importing and exporting, as well has how to to implement them in both Excel 
