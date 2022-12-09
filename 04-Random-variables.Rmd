@@ -36,7 +36,8 @@ In this chapter, we will learn how to:
 10. Calculate the expected value for a linear function of a random variable.
 11. Calculate the variance and standard deviation for a linear function
     of a random variable.
-12. Use standard discrete probability distributions
+12. Standardize a random variable.
+13. Use standard discrete probability distributions
     - Bernoulli
     - binomial
     - discrete uniform.
@@ -886,6 +887,41 @@ The standard deviation has analogous properties to the variance:
 
 These properties follow directly from the corresponding properties of
 the variance.
+
+### Standardization {#standardization}
+
+It is sometimes useful to ***standardize*** a random variable. This means
+constructing a new random variable of the form:
+  $$z = \frac{x - E(x)}{sd(x)}$$
+By construction, the standardized random variable $z$ has expected value
+$E(z) = 0$ and and variance/standard deviation $var(z) = sd(z) = 1$.
+Standardization is commonly used in fields like psychology or educational
+testing when there is no natural unit of measurement.
+
+::: example
+
+**A standardized test score**
+
+Suppose that the ECON 233 exam is graded on a scale from 0 to 100, with a
+mean score of $E(x) = 70$ and a standard deviation of $sd(x) = 10$. For any
+individual student's score $x$, the standardized score is:
+  $$ z = \frac{x-70}{10} $$
+or (equivalently):
+  $$z = 0.1  x - 7 $$
+Applying our results on linear functions of a random variable:
+  \begin{align}
+    E(z) &= 0.1 E(x) - 7 \\
+      &= 0.1 \times 70 - 7 \\
+      &= 0 \\
+    sd(z) &= 0.1  sd(x) \\
+      &= 0.1 \times 10 \\
+      &= 1
+  \end{align}
+Students with a positive standardized test score $(z > 0)$ did better than
+average, while students with a negative standardized score did worse than
+average.
+:::
+
 
 ## Standard discrete distributions {#standard-distributions}
 
