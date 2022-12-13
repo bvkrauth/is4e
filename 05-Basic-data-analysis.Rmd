@@ -187,7 +187,7 @@ To undo this, select `View > Freeze Panes > Unfreeze Panes`.
 Instead of freezing the first row, you can freeze the first column, or
 you can freeze any number of rows and columns.
 
-## Univariate statistics in Excel
+## Univariate statistics in Excel {#univariate-statistics-in-excel}
 
 We will start by calculating some commonly-used ***univariate*** statistics, 
 which are statistics that describe a single variable in isolation. In Section
@@ -232,6 +232,16 @@ are the same, the concepts are *not* exactly the same.
    observations and below the other 90\% of observations.
 6. The sample ***median*** is a number that is above half of 
    observations and below the other half.
+   - The sample median (and any other quantile/percentile) is what statisticians
+     call an "order statistic" - it is constructed by sorting observations
+     and choosing a particular value in the sorted list.
+   - When the number of observations is *odd*, the sample median is easy to
+     calculate: for example the sample median of $D_3 = (4,1,3)$ is the
+     second-lowest/second-highest value $\hat{m} = 3$.
+   - When the number of observations is *even*, definitions of the sample
+     median vary.  For example, what is the sample median of $D_4 = (4,1,3,2)$?
+     It could be the second-lowest value ($2$), the second-highest value ($3$),
+     or the average of the two ($2.5$).
 7. The sample 90th percentile is a number that is above 90\% of
    observations and below the other 10\% of observations.
 8. The sample ***maximum*** is the highest value observed in the data.
