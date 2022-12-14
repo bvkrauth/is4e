@@ -47,16 +47,21 @@ In this chapter, we will learn how to:
 To prepare for this chapter, please review the chapter on
 [statistics](#statistics).
 
-## Principles of inference
+## Questions and evidence
 
-### Evidence
+We often analyze data with a specific research question in mind.  That is, there
+is some statement about the world whose truth we are interested in assessing.
+For example, we might want to know:
 
-The purpose of statistical inference is to systematically account for the
-uncertainty associated with limited evidence.  That is, there are important
-aspects of the data generating process we do not know. The data provide
-some evidence about those unknown aspects, but the evidence they provide
-may not be strong.  Statistical inference asks us what statements about 
-the data generating process can be made with confidence based on the data.
+- Do men earn more than women with similar skills?
+- Does increasing the minimum wage reduce employment?
+- Do poor economies grow faster or slower than rich ones?
+
+Sometimes the data allow us to answer these questions decisively, sometimes not.
+That is, the strength of our evidence can vary. The aim of statistical inference
+is to give us a clear and rigorous way of thinking about the strength of
+evidence, and a systematic way of setting a standard of evidence for reaching a
+particular conclusion.
 
 ::: example
 **Fair and unfair roulette games**
