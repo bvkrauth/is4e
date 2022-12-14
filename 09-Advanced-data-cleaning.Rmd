@@ -10,12 +10,15 @@ knitr::opts_chunk$set(echo = TRUE,
 library("tidyverse")
 ```
 
-In an earlier chapter, we learned some basic data
-[cleaning](#basic-data-cleaning-with-excel) and
-[analysis](#basic-data-analysis-with-excel)
-skills using Excel.  This chapter will build on these skills by teaching some
-more advanced tools and concepts. We will do this while building a data set
-describing long-run economic growth in a wide cross-section of countries.
+In previous chapters, we have used Excel to
+[clean data](#basic-data-cleaning-with-excel) and
+[calculate univariate statistics and graphs](#basic-data-analysis-with-excel).
+The next few chapters will further develop our data skills.
+
+In this chapter, we will build a data set describing long-run economic growth in
+a wide cross-section of countries. In doing so, we will encounter some more
+advanced data cleaning techniques such as merging and aggregation.  We will
+also learn some advanced Excel functions and tools for data management.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
@@ -30,6 +33,7 @@ In this chapter, we will learn how to:
    - Crosswalk tables.
    - Aggregation by groups using "IFS" functions.
 3. Describe and use Excel data-management tools:
+   - Error codes
    - Data validation and error handling
    - Data protection
 :::
@@ -216,7 +220,7 @@ To open this file in Excel, use the Text Import Wizard:
    to the correct folder, and to change the file type to "All files (*.*)"
 4. The first dialog box of the Text Import Wizard allows you to specify
    the overall structure of your data file:  
-   ![Text Import Wizard- Step 1 of 3](bin/TIW1.png){width=50%} 
+   ![Text Import Wizard- Step 1 of 3](bin/TIW1.png){width=50%}  
    Excel guesses about the structure of your data, but you may need to
    correct its guesses. In this case, you should change the file
    type from `Delimited` to `Fixed width`, and select `Next>`.
@@ -411,7 +415,7 @@ An easier approach in most situations is to just combine everything into
 a single Excel workbook.
 
 :::example
-**Combining our cross-country data files**
+**Combining worksheets in a single file**
 
 We currently have three data files: *pwt100.xlsx*, *CountryCodes.csv*,
 and *TaxRates_WC.xlsx*. To combine them in a single file:
@@ -470,9 +474,10 @@ variables or ***keys***.
 
 All statistics packages have tools to link observations.  In Excel, 
 the table you are obtaining data from is called a ***lookup table***
-and the key tool is the `XLOOKUP()` function:
+and the key tool is the `XLOOKUP()` function.
 
-- The `XLOOKUP()` function takes three main/required arguments:
+The `XLOOKUP()` function takes three main/required arguments:
+
   1. The `lookup_value` is the value in the current table to look up.
   2. The `lookup_array` is the range containing the column of IDs.
   3. The `return_array` is the range containing the column of values
@@ -483,7 +488,7 @@ for a row/observation with the value "California" in column A (cells A1:A10),
 and then returns the value in column C (cells C1:C10) for that row/observation.
 
 :::example
-**Adding country codes to the tax rate data**
+**Matching with a crosswalk table**
 
 The *TaxRates* worksheet from the Tax Foundation and the *Data* worksheet from 
 the Penn World Table both provide information at the country level. But 
@@ -602,7 +607,7 @@ value in column C of all of the observations whose value in
 column A is "California".
 
 :::example
-**Average investment share by country**
+**Constructing an aggregate variable**
 
 Suppose we are interested in whether high-tax countries tend to have higher
 or lower investment rates than low-tax countries.  In order to do this,
@@ -745,28 +750,21 @@ let's add this as a data validation requirement:
    b. Select `greater than or equal to` from the `Data` drop-down box
    c. Enter `0` in the `Minimum` drop-down box.
 4. Select `OK`.
-5. Save your file.
 
 Although nothing appears to have changed, column K is now subject to 
-data validation.
-:::
+data validation. To test it:
 
-Once we have added data validation to a range of cells, several things
-will happen.  First, Excel will not allow you to enter invalid data into 
-a cell with validation turned on. This feature will help avoid problems
-in the first place.
-
-:::example
-**Entering invalid data**
-
-Go to cell K43, and (try to) enter `-1`.  You will see this dialog
-box telling you that this is an invalid value:  
+5. Go to cell K43, and (try to) enter `-1`.  You will see this dialog
+   box telling you that this is an invalid value:  
    ![Invalid Data Entered box](bin/InvalidDataEntered.png){width=50%}
 
-Select `Cancel`.
+6. Select `Cancel`.
+7. Save your file.
 :::
 
-The Data Validation tool also allows you to identify previously-entered
+Excel will not allow you to enter invalid data into a cell with validation
+turned on. This feature will help avoid problems in the first place.  In
+addition, the Data Validation tool allows you to identify previously-entered
 observations with invalid data.
 
 :::example
@@ -803,7 +801,7 @@ To remove data validation from the **Pop2019** variable:
 
 You can confirm that data validation has been removed by entering
 an invalid value (Excel will now let you do this) or by adding
-validation circles (there will not be any).
+validation circles (Excel will no longer show any).
 :::
 
 ### Protecting data
@@ -826,15 +824,16 @@ at a cost.
 One way of avoiding this cost is to make a practice of making
 your original data "read only." Excel does this through the
 combined mechanisms of ***protecting*** sheets and ***locking***
-cells.
+cells.  Protecting and locking work according to three rules:
 
-- Each worksheet is either protected or unprotected.
-  - By default, all worksheets are unprotected.
-  - You can change the status of any worksheet.
-- Each cell is either locked or unlocked.
-  - By default, all cells are locked.
-  - You can change the status of a cell or cell range.
-- Any locked cell in any protected sheet cannot be edited.
+1. Each worksheet is either protected or unprotected.
+   - By default, all worksheets are unprotected.
+2. Each cell is either locked or unlocked.
+   - By default, all cells are locked.
+3. Any locked cell in any protected sheet cannot be edited.
+
+You can change the status of any worksheet, or of any cell in an unprotected
+worksheet.
 
 ::: example
 **Protecting an entire worksheet**
@@ -872,8 +871,8 @@ keep the other columns unlocked:
 4. Protect the worksheet by selecting `Home > Format > Protect Sheet`
 5. The `Protect Sheet` dialog box will appear; select `OK`.
 
-Note that you have to do it in this order - Excel will not let you 
-unlock locked cells after you have protected the sheet.
+Note that you have to do it in this order since Excel will not let you unlock
+locked cells in a protected sheet.
 
 You will now get an error message if you try to edit any of the
 locked cells, but you can edit the unlocked cells in any way you 
@@ -885,8 +884,8 @@ selecting `Home > Format > Unprotect Sheet`.
 
 ## Finishing up {#finishing-up-advanced-data-cleaning}
 
-As always, be sure to save your work and update/create the master version of
-your cleaned data file.
+As always, be sure to save your working copy and update/create the master
+version of your cleaned data file.
 
 :::example
 **Finishing up**
