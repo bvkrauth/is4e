@@ -1052,7 +1052,7 @@ That is we expect this betting strategy to lose an average of
 about \$3 per game.
 :::
 
-### Covariance
+### Covariance {#population-covariance}
 
 The ***covariance*** of two random variables $x$ and $y$ is defined as:
   $$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
@@ -1182,7 +1182,7 @@ $x$ and $y$, or the covariance of any two such functions.
 :::
 
 
-### Correlation
+### Correlation {#population-correlation}
 
 The ***correlation coefficient*** of two random variables $x$ and $y$ is 
 defined as:

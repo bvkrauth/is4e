@@ -14,51 +14,41 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 
-In previous chapters, we have learned to perform *univariate* statistical
-analysis in both Excel and R. The statistics and graphs we have learned
-can be used to describe the behavior of a single variable.
+In previous chapters, we have learned to perform univariate statistical
+analysis in both [Excel](#basic-data-analysis-with-excel) and
+[R](#using-r). That is, the statistics and graphs we have learned describe
+the behavior of a *single* variable. These statistics are useful, but most data
+analysis in economics is focused on understanding relationships between
+*two or more* variables.
 
-This chapter will develop some simple techniques for understanding the
-relationship *between* two or more variables. Most data analysis in economics
-is focused on understanding relationships between variables, so this is an
-important topic that will be central to the next statistics course you take.
-Here, we will only introduce a few basic ideas and methods.
+This chapter will develop some simple statistical and graphical techniques for
+describing the relationship between two variables. We will also apply these
+techniques with our historical employment data, using both Excel and R.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter, we will learn how to:
 
-1. Calculate and interpret the sample covariance and correlation.
-2. Distinguish between pairwise and casewise deletion of missing
+1. Construct and interpret frequency tables, cross-tabulations, and conditional
+   averages using Excel pivot tables.
+2. Calculate and interpret the sample covariance and correlation.
+3. Distinguish between pairwise and casewise deletion of missing
    values.
-3. Construct and interpret pivot tables in Excel including
-   - Frequency tables
-   - Cross-tabulations
-   - Conditional averages
-4. Construct and interpret scatter plots in R.
-5. Construct and interpret smoothed-mean and linear regression plots in R.
+4. Construct and interpret a scatter plot in R.
+5. Construct and interpret a smoothed-mean or linear regression plot in R.
 :::
 
-To prepare for this chapter, please review the section on
-[multiple random variables](#multiple random variables) and previous chapters
-on using Excel and R.
+To prepare for this chapter, please review the material on
+[multiple random variables](#multiple-random-variables) and previous chapters
+on using [Excel](#basic-data-analysis-with-excel) and [R](#using-r) for data
+analysis.
 
+To prepare for the Excel data analysis, make a working copy of the Excel file:
+[https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
+and open it in Excel.
 
-::: example
-**Obtaining the data**
-
-The primary application in this chapter will use our Canadian employment
-data.  We will be using both Excel and R in our examples.
-
-For the Excel examples we will start with the file
-[https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).  This file is similar to the employment data file we used in Chapter 
-\@ref(basic-data-analysis-with-excel).
-
-For the R examples we will start with the 
-[EmploymentData.csv](sampledata/EmploymentData.csv)
-file we used in Chapter \@ref(using-r).  Execute the following R code to get 
-started:
+To prepare for the R data analysis, start R and execute the following code:
 ```{r Setup12ForStudents, eval = FALSE}
 library(tidyverse)
 EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
@@ -68,112 +58,7 @@ EmpData <- EmpData %>%
   mutate(UnempPct = 100*UnempRate) %>% 
   mutate(LFPPct = 100*LFPRate)
 ```
-:::
 
-## Covariance and correlation {#sample-covariance-and-correlation}
-
-When both variables are numeric, we can summarize their relationship
-using the ***sample covariance***:
-  $$s_{x,y} = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})$$
-and the ***sample correlation***
-  $$\rho_{x,y} = \frac{s_{x,y}}{s_x s_y}$$
-where $\bar{x}$ and $\bar{y}$ are the sample averages and 
-$s_{x}$ and $s_{y}$ are the the sample standard deviations. These
-univariate statistics are defined in Chapter \@ref(statistics).
-
-The sample covariance and sample correlation can be interpreted
-as estimates of the corresponding population covariance and
-correlation as defined in Chapter \@ref(more-on-random-variables).
-
-### Covariance and correlation in R
-
-The sample covariance and correlation can be calculated in R using 
-the `cov()` and `cor()` functions.  These functions can be applied
-to any two columns of data:
-
-::: example
-**using `cov()` and `cor()` to calculate a covariance/correlation**
-
-```{r CovCor}
-# For two specific columns of data
-cov(EmpData$UnempPct, EmpData$LFPPct)
-cor(EmpData$UnempPct, EmpData$LFPPct)
-```
-As you can see, unemployment and labour force participation are 
-*negatively* correlated: when unemployment is high, LFP tends to be
-low. This makes sense given the economics: if it is hard to find
-a job, people will move into other activities that take one out
-of the labour force: education, childcare, retirement, etc.
-:::
-
-Both `cov()` and `cor()` can also be applied to (the numeric variables in)
-an entire data set.  The result is what is called a 
-***covariance matrix*** or ***correlation matrix***:
-
-::: example
-**using `cov()` and `cor()` to calculate a covariance/correlation matrix**
-
-```{r CorMatrix}
-# Covariance matrix for the whole data set (at least the numerical parts)
-EmpData %>%
-  select(where(is.numeric)) %>%
-  cor()
-# Correlation matrix for selected variables
-EmpData %>%
-  select(UnempRate, LFPRate, AnnPopGrowth) %>%
-  cor()
-```
-Each element in the matrix reports the covariance or correlation
-of a pair of variables.  As you can see:
-
-- The matrix is symmetric since $cov(x,y) = cov(y,x)$.
-- The diagonal elements of the covariance matrix are $cov(x,x) = var(x)$
-- The diagonal elements of the correlation matrix are $cor(x,x) = 1$.
-- All covariances/correlations involving **AnnPopGrowth** variable are 
-  `NA` since **AnnPopGrowth** contains `NA` values.
-:::
-
-Just like with univariate statistics, we can exclude missing values when
-calculating a covariance or correlation matrix.  However, there are two
-slightly different ways to exclude missing values:
-
-1. ***Pairwise deletion***: when calculating the covariance or correlation 
-   of two variables, exclude observations with a missing values for either 
-   of *those two* variables.
-2. ***Casewise*** or ***listwise deletion***: when calculating the 
-   covariance or correlation of two variables, exclude observations with 
-   a missing value for *any* variable.
-
-The `use` argument allows you to specify which approach you want to use.
-
-::: example
-**Pairwise and casewise deletion of missing values**
-
-```{r PairwiseOrListwise}
-# EmpData has missing data in 1976 for the variable AnnPopGrowth
-# Pairwise will only exclude 1976 from calculations involving AnnPopGrowth
-EmpData %>%
-  select(UnempRate, LFPRate, AnnPopGrowth) %>%
-  cor(use = "pairwise.complete.obs")
-# Casewise will exclude 1976 from all calculations
-EmpData %>%
-  select(UnempRate, LFPRate, AnnPopGrowth) %>%
-  cor(use = "complete.obs")
-```
-:::
-
-In most applications, pairwise deletion makes the most sense because it
-avoids throwing out data. But it is occasionally important to use the
-same data for all calculations, in which case we would use 
-listwise deletion.
-
-::: {.fyi data-latex=""}
-**Covariance and correlation in Excel**
-
-The sample covariance and correlation between two variables (data ranges) 
-can be calculated in Excel using the `COVARIANCE.S()` and `CORREL()` 
-functions.  
-:::
 
 ##  Pivot tables
 
@@ -218,9 +103,9 @@ Pivot Table.
 
 ### Simple frequencies
 
-The simplest application of a Pivot Table is to construct a table of 
-frequencies. By default, Pivot Tables report ***absolute frequencies*** - 
-a count of the *number* of times we observe a particular value in the data.
+The simplest application of a Pivot Table is to automatically construct a table
+of frequencies. By default, Pivot Tables report ***absolute frequencies***:
+the *number* of times we observe a particular value in the data.
 
 :::example
 **A simple frequency table**
@@ -240,10 +125,10 @@ As we can see, the table shows the number of observations for each value of the
 office for each prime minister. It also shows a grand total.
 :::
 
-In many applications, we are also interested in ***relative frequencies*** - the
-*fraction* or *percentage* of observations that take on a particular value. As
-we discussed earlier, a relative frequency can be interpreted as an estimate
-of the corresponding relative probability.
+In many applications, we are also interested in ***relative frequencies***: the
+*fraction* or *percentage* of observations that take on a particular value. When
+data are constructed from a random sample, the relative frequency can be
+interpreted as an estimate of the corresponding probability.
 
 :::example
 **Reporting relative frequencies**
@@ -296,8 +181,8 @@ Conservative party.
 We can also construct crosstabs using relative frequencies, but there is 
 more than one kind of relative frequency we can use here. A 
 ***joint frequency crosstab*** shows the count in each cell 
-as a percentage of all observations. Joint frequency tables can be 
-interpreted as estimates of joint probabilities.
+as a percentage of all observations. If the data come from a random sample,
+joint frequencies can be interpreted as estimates of joint probabilities.
 
 :::example
 **A joint frequency crosstab**
@@ -316,8 +201,9 @@ prime minister represent 19.22% of all months in our data.
 :::
 
 A ***conditional frequency crosstab*** shows the count in each cell as a 
-percentage in that row or column.  Conditional frequencies can be
-interpreted as estimates of conditional probabilities.
+percentage in that row or column. If the data come from a random sample,
+conditional frequencies can be interpreted as estimates of conditional
+probabilities.
 
 :::example
 **A conditional frequency crosstab**
@@ -339,13 +225,13 @@ For example, Brian Mulroney's 104 months as prime minister represent
 
 We can also use Pivot Tables to report ***conditional averages***. A
 conditional average is just the average of one variable, taken within a
-sub-population defined by another variable.  For example, we might be interested
-in average earnings for men in Canada versus average earnings for women.  
+sub-population defined by another variable.  If the data come from a random
+sample, the conditional average can be interpreted as an estimate of the
+corresponding conditional average in the population.
 
-A conditional average can be interpreted as an estimate of the corresponding
-conditional mean; for example average earnings for men in a random sample of 
-Canadians can be interpreted as an estimate of average earnings among all Canadian
-men.
+For example, we might calculate average earnings for men and for women in
+a random sample of Canadians.  They can be interpreted as measuring average
+earnings for all Canadian men and women.
 
 ::: example
 **Adding a conditional average**
@@ -401,7 +287,8 @@ changed.  To exclude those months from our main table:
 The table no longer includes the Transfer value:  
 ![Pivot table with transfer excluded](bin/TransferExcluded.png){width=50%}
 
-Note that the grand total has also gone down from 541 to 532.
+Note that the grand total has also gone down from 541 to 532 to reflect the
+filtered observations.
 :::
 
 By default, the table is sorted on the row labels, but we can sort on any
@@ -487,6 +374,113 @@ You can download the full set of Pivot Tables and associated charts
 generated in this chapter at
 [https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
 
+## Covariance and correlation {#sample-covariance-and-correlation}
+
+When two variables are both numeric, we can summarize their relationship
+using their ***sample covariance***:
+  $$s_{x,y} = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})$$
+and their ***sample correlation***
+  $$\rho_{x,y} = \frac{s_{x,y}}{s_x s_y}$$
+where $\bar{x}$ and $\bar{y}$ are the
+[sample averages](#summary-statistics-theory) and $s_{x}$ and $s_{y}$ are the
+[sample standard deviations](#summary-statistics-theory) as defined previously.
+
+The sample covariance and sample correlation can be interpreted as estimates of
+the corresponding population [covariance](#population-covariance) and
+[correlation](#population-correlation) as defined previously.
+
+### Covariance and correlation in R
+
+The sample covariance and correlation can be calculated in R using the `cov()`
+and `cor()` functions.  These functions can be applied to any two columns of
+data.
+
+::: example
+**using `cov()` and `cor()` to calculate a covariance/correlation**
+
+If you haven't done so already, open up R and execute the code from the
+[introduction](#multivariate-data-analysis) to this chapter. You can
+then execute the following code:
+
+```{r CovCor}
+# For two specific columns of data
+cov(EmpData$UnempPct, EmpData$LFPPct)
+cor(EmpData$UnempPct, EmpData$LFPPct)
+```
+As you can see, unemployment and labour force participation are
+*negatively* correlated: when unemployment is high, LFP tends to be
+low. This makes sense given the economics: if it is hard to find
+a job, people will move into other activities that take one out
+of the labour force: education, childcare, retirement, etc.
+:::
+
+Both `cov()` and `cor()` can also be applied to (the numeric variables in)
+an entire data set.  The result is what is called a ***covariance matrix*** or
+***correlation matrix***.
+
+::: example
+**using `cov()` and `cor()` to calculate a covariance/correlation matrix**
+
+```{r CorMatrix}
+# Covariance matrix for the whole data set (at least the numerical parts)
+EmpData %>%
+  select(where(is.numeric)) %>%
+  cor()
+# Correlation matrix for selected variables
+EmpData %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
+  cor()
+```
+Each element in the matrix reports the covariance or correlation
+of a pair of variables.  As you can see:
+
+- The matrix is symmetric since $cov(x,y) = cov(y,x)$.
+- The diagonal elements of the covariance matrix are $cov(x,x) = var(x)$
+- The diagonal elements of the correlation matrix are $cor(x,x) = 1$.
+- All covariances/correlations involving **AnnPopGrowth** variable are
+  `NA` since **AnnPopGrowth** contains `NA` values.
+:::
+
+Just like with univariate statistics, we can exclude missing values when
+calculating a covariance or correlation matrix.  However, there are two
+slightly different ways to exclude missing values from a data table:
+
+1. ***Pairwise deletion***: when calculating the covariance or correlation
+   of two variables, exclude observations with a missing values for either
+   of *those two* variables.
+2. ***Casewise*** or ***listwise deletion***: when calculating the
+   covariance or correlation of two variables, exclude observations with
+   a missing value for *any* variable.
+
+The `use` argument allows you to specify which approach you want to use.
+
+::: example
+**Pairwise and casewise deletion of missing values**
+
+```{r PairwiseOrListwise}
+# EmpData has missing data in 1976 for the variable AnnPopGrowth
+# Pairwise will only exclude 1976 from calculations involving AnnPopGrowth
+EmpData %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
+  cor(use = "pairwise.complete.obs")
+# Casewise will exclude 1976 from all calculations
+EmpData %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
+  cor(use = "complete.obs")
+```
+:::
+
+In most applications, pairwise deletion makes the most sense because it
+avoids throwing out data. But it is occasionally important to use the
+same data for all calculations, in which case we would use listwise deletion.
+
+::: {.fyi data-latex=""}
+**Covariance and correlation in Excel**
+
+The sample covariance and correlation between two variables (data ranges) can
+be calculated in Excel using the `COVARIANCE.S()` and `CORREL()` functions.
+:::
+
 ## Graphical methods
 
 Bivariate summary statistics like the covariance and correlation provide
@@ -499,12 +493,12 @@ and a continuous variable.
 In order to develop a detailed understanding of the relationship between two
 continuous variables (or discrete variables with many values), we need
 to develop some additional methods.  The methods that we will explore in
-this class are primarily graphical.  You will learn more about the 
-underlying numerical methods in courses like ECON 333.
+this course are primarily graphical.  You will learn more about the
+underlying numerical methods in later courses.
 
 ### Scatter plots 
 
-A ***scatter plot*** is the simplest way to view the relationship between
+A ***scatter plot*** is the simplest way to visualize the relationship between
 two variables in data.  The horizontal ($x$) axis represents
 one variable, the vertical ($y$) axis represents the other variable,
 and each point represents an observation. In some sense, the scatter
@@ -554,7 +548,7 @@ The scatter plot with the rounded data would look like this:
 ggplot(data = RoundedEmpData, 
        aes(x = UnempPct,
            y = LFPPct)) + 
-  geom_point(col = "red")
+  geom_point(col = "darkorange")
 ```
 
 As you can see from the graph, the scatter plot is misleading: there
@@ -574,9 +568,9 @@ geometry to do a jittered scatter plot.
 ggplot(data = RoundedEmpData,
        aes(x = UnempPct,
            y = LFPPct)) + 
-  geom_point(col = "red") +
+  geom_point(col = "darkorange") +
   geom_jitter(size = 0.5, 
-              col = "blue")
+              col = "navyblue")
 ```
 
 As you can see the jittered rounded data (small blue dots) more accurately
@@ -640,17 +634,16 @@ produces less satisfactory results.
 
 ### Binned averages
 
-In section \@ref(conditional-averages) we calculated a conditional average
-of the (continuous) variable **UnempRate** for each observed value of the 
-discrete variable **PrimeMinister**.  When both variables are continuous,
-this isn't such a good idea: there are as many values of each variable
-as there are observations, so the "conditional average" ends up just
-being the original data
+We earlier used pivot table to construct a
+[conditional average](#conditional-averages) of the variable $y_i$
+(**UnempRate** in the example) for each value of some discrete variable
+$x_i$ (**PrimeMinister** in the example).
 
-When both variables are continuous, one solution is to divide the range 
-for $x_i$ into a set of bins and then take averages within each bin. We can 
-then plot the average $y_i$ within each bin against the midpoint of the 
-bin. This kind of plot is called a ***binned scatterplot***.
+When the $x_i$ variable is continuous, it takes on too many distinct values
+to construct such a table.  Instead, we would want to divide its range into a
+set of bins and then calculate averages within each bin. We can then plot the
+average $y_i$ within each bin against the average $x_i$ within the same bin.
+This kind of plot is called a ***binned scatterplot***.
 
 Binned scatterplots are not difficult to do in R but the code is quite 
 a bit more complex than you are used to.  As a result, I will not ask
@@ -668,12 +661,12 @@ ggplot(data = EmpData,
  geom_point(size = 0.5) +
   stat_summary_bin(fun = 'mean', 
                    bins=20,
-                   col = "blue", 
+                   col = "darkorange",
                    size = 3, 
                    geom = 'point') +
   stat_summary_bin(fun = 'mean', 
                    bins = 20,
-                   col = "blue", 
+                   col = "darkorange",
                    size = 0.5, 
                    geom = 'line')
 ```
@@ -683,12 +676,12 @@ The number of bins is an important choice. More bins allows us to find more
 complex patterns in the relationship.  But more bins also means fewer
 observations per bin, which means more noise (variance) in our estimates.
 
-;:: example
+::: example
 **How many bins?**
 
-The graph below includes the original binned scatter plot (based on 20 bins),
-and adds a line based on 4 bins (orange) and a line based on 100 bins (light
-blue).
+The graph below includes the original binned scatter plot based on 20 bins
+(orange), and adds a line based on 4 bins (dark blue) and a line based on 100
+bins (light blue).
 
 ```{r HowManyBins}
 ggplot(data = EmpData,
@@ -697,27 +690,27 @@ ggplot(data = EmpData,
   geom_point(size = 0.5) +
   stat_summary_bin(fun = 'mean', 
                    bins = 4,
-                   col = "orange", 
+                   col = "navyblue",
                    size = 0.75, 
                    geom = 'line') +
   stat_summary_bin(fun = 'mean', 
                    bins = 20,
-                   col = "blue", 
+                   col = "darkorange",
                    size = 0.75, 
                    geom = 'line') +
   stat_summary_bin(fun = 'mean', 
                    bins = 100,
-                   col = "lightblue", 
+                   col = "lightblue",
                    size = 1.0, 
                    geom = 'line') +
   geom_text(x = 13.8,
             y = 64.1,
             label = "4 bins",
-            col = "orange") +
+            col = "navyblue") +
   geom_text(x = 13.8,
             y = 62.5,
             label = "20 bins",
-            col = "blue") +
+            col = "darkorange") +
   geom_text(x = 13.8,
             y = 60,
             label = "100 bins",
@@ -788,9 +781,9 @@ ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct)) + 
   geom_point(size = 0.5) +
-  geom_smooth(col = "red") + 
+  geom_smooth(col = "darkorange") +
   geom_smooth(method = "lm",
-              col = "blue") 
+              col = "navyblue")
 ```
 
 As you can see, the two fits are quite similar for unemployment rates below
@@ -801,8 +794,8 @@ the smooth fit becomes steeper, but linear fit *can't* do that.
 Linear regression is much more restrictive than smoothing, but has
 several important advantages:
 
-- The relationship is much easier to interpret, as it can be summarized
-  by a single number: the slope of the line.
+- The relationship is easier to interpret, as it can be summarized by a single
+  number (the slope).
 - The linear relationship is much more precisely estimated 
 
 These advantages are not particularly important in this case, with only
