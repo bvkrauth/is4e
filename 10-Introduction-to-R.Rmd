@@ -27,7 +27,13 @@ In this chapter, we will learn how to:
     - Executing commands in the console window.
     - Creating, opening, closing and executing scripts.
     - Creating and kitting R Markdown documents.
-2.  Use R expressions and vectors.
+2.  Describe and use R language elements, including:
+    - Expressions
+    - Variables
+    - Vectors
+    - Lists
+    - Attributes
+    - Functions and operators
 3.  Install and load R packages.
 4.  Import and view data in R.
 :::
@@ -48,28 +54,29 @@ learn much more about R in ECON 333 and (if you take it) ECON 334.
 
 ## A brief tour of RStudio
 
-Start the program RStudio. You should see something that looks like
-this:
+Start the program RStudio. You should see something that looks like this:
 ![RStudio screen shot](bin/Rstudio.png)
 
 You may wonder what the difference is between R and RStudio.
 
-- R is a programming language designed for statistical analysis.
-- R is also the computer program that runs R commands.
-  - It can also run R  ***scripts***, which are just a series of
-    R commands written in a text file.
-- RStudio is an *integrated development environment* (IDE) for 
-  R. It combines R with a set of additional useful tools: 
-  - an interactive session of R (running in the "Console" window).
-  - a text editor for writing R scripts and R Markdown documents.
-  - tools for managing files and packages used by R
-  - tools for comparing and combining scripts and other files
-  - help and documentation
+R is a programming language designed for statistical analysis along with the
+computer program that runs R commands.  RStudio is an
+*integrated development environment* (IDE) for R. It combines a set of useful
+tools for writing and running R code:
+
+  - An interactive session of R (running in the "Console" window).
+  - A text editor for writing R code, with features like syntax highlighting,
+    spell check, and command auto-complete.
+  - Tools for managing files and packages used by R
+  - Tools for comparing and combining scripts and other files
+  - Help and documentation
   -  many other features
 
-You can run commands and scripts in R itself, but without RStudio
-you won't have all these handy extra features.  So most people 
-these days use RStudio or another IDE.
+and puts them in a single user-friendly interface.
+
+You can run commands and scripts in R itself, but without RStudio you won't have
+all these handy extra features. Most people these days use RStudio or another
+IDE.
 
 RStudio normally displays three or four open windows, each of which has tabs 
 you can select to access different features. We will not use most of them, 
@@ -95,22 +102,22 @@ R will respond with something like:
 print("Hello world!")
 ```
 Note that if you are viewing this textbook in a browser, you can copy any block
-of code by clicking in is upper right-hand corner.  You can then paste it in
+of code by clicking in its upper right-hand corner.  You can then paste it in
 the console window.
 :::
 
 RStudio has various features to make your work in the console window more
 efficient:
 
-- As you type your command in, you may notice that RStudio shows various
-  pop-ups with helpful information about the command.
 - RStudio will offer to auto-complete your command.
-- R maintains a ***command history*** that remembers commands you
+- RStudio shows pop-ups with helpful information about your command as you type
+  it.
+- RStudio maintains a ***command history*** that remembers commands you
   have previously entered.  This is useful when you did something a while
   ago, but either don't remember exactly how you did it, or don't want to type
   it all in from the beginning.
 
-The simplest way of accessing recent commands is to press the up-arrow
+The simplest way of accessing the command history is to press the up-arrow
 key while in the console window.
 
 :::example
@@ -133,14 +140,11 @@ pressing `<enter>`.
 
 ### Scripts
 
-The Console window is ideal for simple tasks and experimentation, and 
-we will continue using it regularly.  But in order to create reproducible
-research and take full advantage of R's capabilities, we will need 
-to write and execute ***scripts***. 
-
-An script is just a text file containing a sequence of R commands.  By 
-convention, an R script should have the `.R` extension but any text file will 
-work. 
+The Console window is ideal for simple tasks and experimentation, and we will
+continue using it regularly.  But in order to create reproducible research and
+take full advantage of R's capabilities, we will need to write and execute
+***scripts***. A script is just a text file containing a sequence of R commands.
+By convention, R scripts have file names ending in the `.R` extension.
 
 ::: example
 **Using an R script**
@@ -163,34 +167,32 @@ To run your script:
 
 1. Press the ![Source](bin/RSourceButton.png){width=10%} button.
 
-You will see the results of your commands in the Console window.
+You will see the results of both commands in the Console window.
 :::
 
 ### R Markdown
 
 RStudio can also run text files written in the ***R Markdown*** format. R
-Markdown files have the `.Rmd` extension. 
+Markdown files have the `.Rmd` extension. R Markdown is a language for
+producing documents - HTML files (web pages), Microsoft Word documents,
+PDF files, etc. - that have R code and analysis embedded in them. In fact, this
+book is written in R Markdown.
 
-R Markdown is a language for producing documents - HTML files (web pages), 
-Microsoft Word documents, PDF files, etc. - that have R code and analysis
-embedded in them. In fact, this book is written in R Markdown.
-
-R Markdown is an implementation of the Markdown markup language in R. 
 
 ::: {.fyi data-latex=""}
-**What is Markdown?**
+**R Markdown, Markdown, and other markup languages**
 
-Markdown is a markup language just like HTML, which means that it is 
-a way of writing documents in text files whose content is
-readable directly but can also be formatted and displayed (rendered)
-in a visually appealing way. 
+R Markdown is an implementation of the Markdown markup language in R.
+A markup language is a way of writing documents in text files whose content is
+directly readable but also can be formatted and displayed (rendered) in a
+visually appealing way. The best-known markup language is HTML, which is the
+language web pages are written in.
 
-The original idea of HTML was that content creators could write 
-their content in text files (pages), with a few HTML tags sprinkled
-around to give the browser information about structure, and then 
-the browser would display the page.  However, as web users demanded
-fancy graphics, custom colors, interactivity, and mobile-friendly
-display, HTML became much more complicated.
+The original idea of HTML was that content creators could write their content in
+text files (pages), with a few HTML tags sprinkled around to give the browser
+information about structure, and then the browser would display the page.
+However, as web users demanded fancy graphics, custom colors, interactivity,
+and mobile-friendly display, HTML became much more complicated.
 
 Markdown was created as radically simplified markup language. The basic
 idea is to use common conventions for how to indicate structure in
@@ -285,8 +287,8 @@ unexpected.
 If you want to try something new in R Markdown, or have forgotten how to do 
 something, the most useful resource is the one-page *R Markdown Cheat sheet*.  It 
 is available directly in RStudio, or at 
-https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf.
-You can also just search for "r markdown cheatsheet".
+https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf. You can also
+just search for "r markdown cheatsheet".
 :::
 
 ### Other RStudio features
@@ -317,16 +319,16 @@ In the menu:
 :::example
 **Closing R**
 
-We are done for now, so close RStudio.
+We are done for now.
 
-You may get a warning message that looks something like this:
-  ![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
+1. Close RStudio. You may get a warning message that looks something like this:
+   ![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
 
-Never click on the `Save` button here, as it would cause R to
-save the current state of its memory and re-load it next time you start R.
-In the interest of reproducibility, you should start R "clean" every time.
+   *Never choose "Save" here*, as it would cause R to
+   save the current state of its memory and re-load it next time you start R.
+   In the interest of reproducibility, you should start R "clean" every time.
 
-Click on the `Don't Save` button, and you will exit RStudio.
+2. Click on the `Don't Save` button, and you will exit RStudio.
 :::
 
 ## The R language
@@ -392,14 +394,13 @@ main purpose of the expression.
 
 ### Variables and assignment
 
-We can use the `<-` or ***assignment*** operator to assign the results
-of an expression to a named variable.  We can then use that
-variable in later expressions.
+We can use the `<-` or ***assignment*** operator to assign the result of an
+expression to a named variable.  We can then use that variable in later
+expressions.
 
-For example, the R command `x <- 2` assigns the value `2`
-(i.e., the number 4) to the variable `x`.  Any subsequent code
-can then refer to the variable `x` in its own calculations or 
-actions.
+For example, the R command `x <- 2` assigns the value `2` to the variable `x`.
+Any subsequent code can then refer to the variable `x` in its own calculations
+or actions.
 
 :::example
 **Using the assignment operator**
@@ -501,7 +502,7 @@ The ***subscript operator*** `[]` can be used to select part of a
 vector.
 
 :::example
-**Using the subscript operator**
+**Using subscripts**
 
 ```{r SubscriptOperatorExample}
 # You can give a single index: evens[2] is the 2nd element in evens
@@ -522,8 +523,8 @@ print(x)
 ```
 :::
 
-You can also provide logical values instead of numeric indices. R will then 
-operate on those elements whose corresponding item has the value `TRUE`.
+You can also provide logical values as subscripts. R will then operate on those
+elements whose corresponding item has the value `TRUE`.
 
 :::example
 **Using logical subscripts**
@@ -663,14 +664,16 @@ Let's get to know the main features of functions in R by considering the
 create a vector with a sequence of numbers, much like Excel's *Series*
 tool.
 
-1. Every function has a name.
-   - In our example, the function's name is `seq`.
+1. Every function has a ***name***.
+   - In this case, the function's name is `seq`.
 2. You can obtain help on any function by entering `?` and its name
    in the console window
-   - Try `? seq`.
-3. Most functions accept one or more ***arguments***. 
+   - Enter `? seq` in the console window, and look in the Help window (you
+     can find it in the lower-right panel).
+3. Most functions accept one or more ***arguments***.
+   - The arguments are described in the function's help page.
    - The `seq` function's arguments include `from`, 
-    `to`, `by` and `length.out`
+    `to`, `by`, `length.out`, and `along.with`.
    - Every argument has a *name* and a *position*.  For example,
      the `from` argument is in position one, the `to` argument
      is in position two, etc.
@@ -681,10 +684,10 @@ tool.
      - I recommend passing by position for simple functions, 
        and passing by name for more complex functions, but it
        is really just a matter of what works for you.
-   - Some arguments are required. They must be provided every time the
+   - Some arguments are *required*. They must be provided every time the
      function is called, or else the function will return an error. 
-   - Some arguments are optional. They *can* be provided, but have
-     a default value if not provided. 
+   - Some arguments are *optional*. They *can* be provided, but have
+     a *default* value if not provided.
      - All arguments to `seq()` are optional; execute the command `seq()` 
        to see what happens.
 4. Every function returns a value.  This is even true for functions 
@@ -760,25 +763,25 @@ the key people behind RStudio) as a way of solving some long-standing problems
 with R.  The Tidyverse is both an R package containing a set of new functions 
 and data structures as well as a philosophy about *how* to analyze data.
 
-The basic structure of R dates back to 1976 (R itself was created in the early
-1990s but is closely based on an earlier program called S). Computer science
-has advanced a lot since 1976, so some design aspects of R seemed like a good
-idea at the time but would be designed differently today.  
+The main language elements of R date back to 1976 (R itself was created in the
+early 1990s but is closely based on an earlier program called S). Computer
+science has advanced a lot since 1976, so some design aspects of R seemed like a
+good idea at the time but would be designed differently today:
 
 - Too many different ways of doing the same thing
 - Too many rarely-used functions,
 - Some functions that don't do what they should. 
 
-Unfortunately, we can't change any of the original functions without 
-causing thousands of existing programs to stop working.
+Unfortunately, it is not possible to make significant changes to the existing
+language without causing thousands of existing programs to stop working.
 
-The Tidyverse addresses this problem by replacing many Base R 
-functions with alternative versions that are easier to use, 
-better-designed, and usually faster. It does this in part by 
-being "opinionated" - for example, most data analysis tools 
-in the Tidyverse expect data to be in a tidy format.  This
-reflects a philosophy that data cleaning should precede and be
-separate from data analysis.
+The Tidyverse addresses this problem by replacing many Base R functions with
+alternative versions that are easier to use, better-designed, and usually
+faster. It does this in part by being "opinionated" - taking a clear position
+on the right way to do things and building the language around this position.
+For example, most data analysis tools in the Tidyverse expect data to be in a
+tidy format.  This reflects a philosophy that data cleaning should precede and
+be separate from data analysis.
 :::
 
 Most commonly-used packages including the Tidyverse are open-source,
@@ -855,7 +858,8 @@ that everything is the way that we want it:
 - The numeric variables are all stored as `col_double()`.
   - This means double-precision (64 bit) real number
   - This is what we want.
-- The two text variables are both stored as `col_character()`.
+- The text variables **Party** and **PrimeMinister** are both stored as
+  `col_character()`.
   - This means character or text string
   - This is what we want.
 - The **MonthYr** variable is also stored as `col_character()`.
