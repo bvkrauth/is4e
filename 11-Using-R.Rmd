@@ -11,25 +11,28 @@ EmpData <- read_csv("sampledata/EmploymentData.csv")
 
 In a previous chapter we learned some 
 [basic R terminology and how to run R](#an-introduction-to-r), and how
-to use R to [read and view data](#reading-and-viewing-data-in-r). In 
-this chapter, we will use this knowledge to do some useful analysis
-of the Canadian employment data we have already worked with.  We will
-also use ggplot, R's powerful graphing system.
+to use R to [read and view data](#reading-and-viewing-data-in-r). We are now
+ready to start using R with real data.
+
+In this chapter, we will use this knowledge to do further cleaining and analysis
+of the Canadian employment data we have already worked with.  We will also use
+ggplot, a powerful graphing system that is part of the Tidyverse package.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter, we will learn how to:
 
-1. Use the `mutate` function to add or modify variables in a data table.
-2. Use the `select`, `arrange`, and `filter` functions to modify a data table.
-3. Calculate univariate statistics for a single variable.
-4. Construct a table of summary statistics.
-5. Recognize and handle missing data problems.
-6. Construct a simple or binned frequency table.
-7. Perform simple probability calculations.
-8. Create a histogram with ggplot.
-9.  Create a line graph with ggplot.
+1.  Use the pipe operator.
+2.  Use the `mutate` function to add or modify variables in a data table.
+3.  Use the `filter`, `select`, and `arrange` functions to modify a data table.
+4.  Calculate a univariate statistic in R.
+5.  Construct a table of summary statistics in R.
+6.  Recognize and handle missing data problems in R.
+7.  Construct a simple or binned frequency table in R.
+8.  Perform simple probability calculations in R.
+9.  Create a histogram with ggplot.
+10. Create a line graph with ggplot.
 :::
 
 To prepare for this chapter, review the [introduction to R](#introduction-to-r).
@@ -41,7 +44,7 @@ EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData
 ```
 
 
-## Cleaning data in R
+## Data cleaning in R
 
 We will not spend a lot of time on data cleaning in R, as we can always clean
 data in Excel and export it to R. However, we have a few Tidyverse tools
@@ -162,7 +165,7 @@ print(EmpData)
 ```
 :::
 
-### Filter, arrange, and select
+### Filter, select, and arrange
 
 Excel provides a tool called "filtering" that allows you to choose observations
 according to some criteria you specify.  R has a function called `filter()`
@@ -251,8 +254,8 @@ Because it is command-based, R enables an entirely different and much
 more reproducible model for data cleaning and analysis.  In Excel, the
 original data, the data cleaning, the data analysis, and the results
 are all mixed in together in a single file or even a single worksheet.
-This is convenient and simple to use in many applications, but it can be a
-disaster in complex projects.
+This is convenient and simple to use in many applications, but it can lead
+to disaster in more complex projects.
 
 In contrast, R allows you to have three separate files or groups of files
 
@@ -261,13 +264,12 @@ In contrast, R allows you to have three separate files or groups of files
 2. Your **code** to clean and analyze the data
    - Maintain it carefully using master versions, working copies and archives.
    - Your code can be saved in an R script, or as part of an R Markdown document.
-   - This code can be split into multiple files.
-   - You can have one script to clean the data and another to analyze it.
-3. Your **results**
+   - Your code can be split into multiple files, for example one file to clean
+     the data and another to analyze it.
+3. Your **cleaned data** and **results**
    - Treat them as temporary output files.
-   - You can regenerate ypur results at any time by running your code.
-   - This can include the results of your analysis
-   - It can also include your cleaned data.
+   - You can regenerate your cleaned data and results at any time by running
+     your code.
 
 The key is to make sure that all of your cleaned data and results can be 
 regenerated from the original data at any time by running your code.
@@ -366,14 +368,14 @@ median(EmpData$AnnPopGrowth)
 ```
 :::
 
-Some other applications simply drop missing data from the calculation. This is
+Some applications automatically drop missing data from the calculation. This is
 a simple solution, but R does what it does for a good reason. Missing values
 can be a sign of an error in the data or code, so we should always catch them
 and investigate their cause before dropping them.
 
 Once we have investigated the missing values, we can tell R explicitly
-to exclude them from the calculation by adding the `na.rm = TRUE` option to
-many of the statistical functions we use.
+to exclude them from the calculation by adding the `na.rm = TRUE` optional
+argument.
 
 ::: example
 **Handling missing values**
@@ -457,32 +459,24 @@ just like in Excel.
 
 ### Probability distributions in R
 
-R has a family of built-in functions for each commonly-used probability
-distribution.  
-
+Just like Excel, R has a family of built-in functions for each commonly-used
+probability distribution.
 
 ::: example
 **Some probability distributions**
 
-- The  `dnorm()` function gives the normal PDF:
+The  `dnorm()`, `pnorm()`, and `qnorm()` functions return PDF, CDF, and quantile
+functions of the normal distribution, while the `rnorm()` function returns a
+vector of normally distributed random numbers:
   ```{r}
   # The N(0,1) PDF, evaluated at 1.96
   dnorm(1.96)
   # The N(1,4) PDF, evaluated at 1.96
   dnorm(1.96,mean=1,sd=4)
-  ```
-- The `pnorm()` function gives the normal CDF:
-  ```{r}
   # The N(0,1) CDF, evaluated at 1.96
   pnorm(1.97)
-  ```
-- The `qnorm()` function gives the inverse normal CDF (or quantile function):
-  ```{r}
   # The 97.5 percentile of the N(0,1) CDF
   qnorm(0.975)
-  ```
-- The `rnorm()` function produces normal random numbers:
-  ```{r}
   # Four random numbers from the N(0,1) distribution
   rnorm(4)
   ```
@@ -529,20 +523,20 @@ ggplot(data = EmpData,
 :::
 
 
-The `ggplot()` function has a non-standard syntax, so I'd like to go over 
-it. 
+The `ggplot()` function has a non-standard syntax, so some explanation is
+needed:
 
-- The first expression/line calls `ggplot()` to set up the basic characteristics
+- The first expression/line calls `ggplot()` to set up the basic structure
   of the graph:
     - The `data` argument tells R which data set (tibble) will be
       used
-    - the `mapping` argument describes the basic ***aesthetics***
+    - the `mapping` argument describes the main ***aesthetics***
       of the graph, i.e., the relationship in the data we will
       be graphing.
       - For the histogram, our aesthetic includes only one variable
       - For the line graph, our aesthetic includes two variables
 - The rest of the command is one or more statements separated by 
-  a `+` sign.  These are called ***geometries*** and are geometric
+  a `+` sign.  These are called ***geometries*** and are graph
   elements to be included in the plot.
     - The `geom_histogram()` geometry produces a histogram
     - The `geom_line()` geometry produces a line
@@ -551,12 +545,12 @@ A single graph can include multiple geometries, as we will see shortly.
 
 ### Modifying a graph
 
-As when making graphs in Excel, the basic graph gives us some useful information
-but we can improve upon it in various ways.
+As when making graphs in Excel, the basic ggplot graph gives us some useful
+information but we can improve upon it in various ways.
 
 #### Titles and labels
 
-You can use `labs()` to add titles, subtitles, etc.  You can also use
+You can use `labs()` to add titles, subtitles, alt text, etc.  You can also use
 `xlab()` and `ylab()` to change the axis titles.
 
 :::example
@@ -570,6 +564,7 @@ ggplot(data = EmpData,
   geom_line() + 
   labs(title = "Unemployment rate",
       subtitle = "January 1976 - January 2021",
+      alt = "Time series of Canada unemployment rate, January 1976 - January 2021",
       caption = "Source: Statistics Canada, Labour Force Survey",
       tag = "Canada") +
   xlab("") +
@@ -579,7 +574,7 @@ ggplot(data = EmpData,
 
 #### Color 
 
-You can change the color of any geometric elementusing the `col=` argument.
+You can change the color of any geometric element using the `col=` argument.
 
 ::: example
 **Using colors**
@@ -588,15 +583,17 @@ You can change the color of any geometric elementusing the `col=` argument.
 ggplot(data = EmpData,
        aes(x = MonthYr, 
            y = UnempPct)) + 
-  geom_line(col = "blue") 
+  geom_line(col = "darkorange")
 ```
 :::
 
-Colors can be given in ordinary English (or local language) words, or with
-detailed color codes in RGB or CMYK format.
+Colors can be given in ordinary English (or local language) words like "red"
+or "blue." You can get the full list of built-in color names by executing the
+expression `colors()` in the command window.  You can also set custom colors
+using color codes in RGB or CMYK format.
 
-Some geometric elements, such as the bars in a histogram, also have 
-a ***fill*** color.
+Some geometric elements, such as the bars in a histogram, also have a
+***fill*** color.
 
 :::example
 **Setting the fill color***
@@ -604,8 +601,8 @@ a ***fill*** color.
 ```{r ggplotFill}
 ggplot(data = EmpData,
        aes(x = UnempPct)) + 
-  geom_histogram(col = "red",
-                 fill = "blue") 
+  geom_histogram(col = "darkorange",
+                 fill = "navyblue")
 ```
 
 As you can see, the `col=` argument sets the color for the exterior
@@ -624,9 +621,9 @@ We can include lines for both unemployment and labour force participation:
 ggplot(data = EmpData,
        aes(x = MonthYr, 
            y = UnempPct)) + 
-  geom_line(col = "blue") +
+  geom_line(col = "navyblue") +
   geom_line(aes(y = LFPPct),
-            col = "red")
+            col = "darkorange")
 ```
 
 A few things to note here:
@@ -634,8 +631,9 @@ A few things to note here:
 - The third line gives `geom_line()` an aesthetics argument `aes(y=LFPPct)`.  This
   overrides the aesthetics in the first line.  
 - We have used color to differentiate the two lines, but there is no legend 
-  to tell the reader which line is which.  We will need to fix that.
-- The vertical axis is labeled **UnempPct**. We will need to fix that.
+  or label to tell the reader which line is which.  We will need to fix that.
+- The vertical axis is labeled **UnempPct** which is the name of one of
+  the variables but not the other. We will need to fix that.
 :::
 
 When including multiple elements, we may need to add information clarify what
@@ -650,17 +648,17 @@ to do this:
 ggplot(data = EmpData,
        aes(x = MonthYr)) + 
   geom_line(aes(y = UnempPct),
-            col = "blue") +
+            col = "navyblue") +
   geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
             y = 15,
             label = "Unemployment",
-            col = "blue") +
+            col = "navyblue") +
   geom_line(aes(y = LFPPct),
-            col = "red") +
+            col = "darkorange") +
   geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
             y = 60,
             label = "LFP",
-            col = "red")
+            col = "darkorange")
 ```
 :::
 
@@ -671,10 +669,14 @@ Finally, we can combine all of these elements.
 
 The graphs below combine all of the features described above:
 ```{r ggplotFancyHistogram}
+# Use RGB codes to exactly match color scheme of this book
+AstroBlue <- "#002D62"
+AstroOrange <- "#EB6E1F"
+# Fancy histogram
 ggplot(data = EmpData,
        aes(x = UnempPct)) + 
   geom_histogram(binwidth = 0.5,
-                 fill = "blue") +
+                 fill = AstroBlue) +
   geom_density() +
   labs(title = "Unemployment rate",
       subtitle = paste("January 1976 - January 2021 (",
@@ -682,6 +684,7 @@ ggplot(data = EmpData,
                      " months)",
                      sep = "",
                      collapse = ""),
+      alt = "Histogram of Canada unemployment rate, January 1976 - January 2021",
       caption = "Source: Statistics Canada, Labour Force Survey",
       tag = "Canada") +
   xlab("Unemployment rate, %") +
@@ -689,25 +692,30 @@ ggplot(data = EmpData,
 ```
 
 ```{r ggplotFancyTimeSeries}
+# Use RGB codes to exactly match color scheme of this book
+AstroBlue <- "#002D62"
+AstroOrange <- "#EB6E1F"
+# Fancy time series plot
 ggplot(data = EmpData,
        aes(x = MonthYr)) + 
   geom_line(aes(y = UnempPct),
-            col = "blue") +
+            col = AstroBlue) +
   geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
             y = 15,
-            label = "Unemployment",col="blue") +
+            label = "Unemployment", col=AstroBlue) +
   geom_line(aes(y = LFPPct),
-            col = "red") +
+            col = AstroOrange) +
   geom_text(x = as.Date("1/1/2000", "%m/%d/%Y"),
             y = 60,
             label = "LFP",
-            col = "red") +
+            col = AstroOrange) +
   labs(title = "Unemployment and LFP rates",
       subtitle = paste("January 1976 - January 2021 (",
                      nrow(EmpData),
                      " months)",
                      sep = "",
                      collapse = ""),
+      alt = "Time series of Canada unemployment and LFP, January 1976 - January 2021",
       caption = "Source: Statistics Canada, Labour Force Survey",
       tag = "Canada") +
   xlab("") +
