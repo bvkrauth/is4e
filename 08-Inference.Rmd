@@ -76,9 +76,15 @@ Before getting caught up in math, let's think about how we might assess
 evidence: 
 
 1. A fair game implies a particular win probability for each bet.
+   - For example, the win probability for a bet on red will be
+     $18/37 \approx 0.486$ in a fair game.
 2. The law of large numbers implies that the win rate over many games will be
    close to the win probability, but the win rate and win probability are
-   unlikely to be identical in a finite sample
+   unlikely to be identical in a finite sample.
+   - In 100 games, we would expect red to win about 48 or 49 times in a fair
+     game.
+   - But these are games of chance; even in a fair game, red may win a little
+     less than 48 times or a little more than 49 times.
 3. In a given data set:
    - We might have results from many games, or only a few games.
    - Our results may have a win rate close to the expected rate for a fair
@@ -97,7 +103,7 @@ of evidence, and our conclusion depends on what the evidence shows. But
 if we do not have a lot of evidence, we cannot make a confident conclusion
 either way.
 
-In this chapter we will formalize these basic ideas about evidence.
+This chapter will formalize these basic ideas about evidence.
 :::
 
 ## Hypothesis tests
