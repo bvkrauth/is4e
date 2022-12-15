@@ -805,23 +805,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
 
 [Click here to see the problems](#problems-statistics)
 
-1. A random sample needs to be independent (not just uncorrelated) and identically 
-   distributed (not just the same mean and variance).
-   a. Possibly a random sample.
-   b. Possibly a random sample.
-   c. Not a random sample.
-   d. Definitely a random sample.
-   e. Possibly a random sample.
-   f. Not a random sample.
-2. Identify the sampling type (random sample, time series, stratified sample,
-   cluster sample, census, convenience sample) for each of the following data 
-   sets.
-   a. This is a convenience sample.
-   b. This is a random sample.
-   c. This is a stratified sample.
-   d. This is a time series.
-   e. This is a census.
-3. Since we have a random sample, the joint PDF is just a product of the marginal
+
+1. Since we have a random sample, the joint PDF is just a product of the marginal
    PDFs.
    a. The support is just the set of all possible combinations: 
       $$S_{D_n} = \{(1,1),(1,2),(2,1),(2,2)\}$$
@@ -849,6 +834,22 @@ This appendix contains solutions to all end-of-chapter practice problems.
           &= 0.6*0.6 \\
           &= 0.36
       \end{align}
+2. A random sample needs to be independent (not just uncorrelated) and
+   identically distributed (not just the same mean and variance).
+   a. Possibly a random sample.
+   b. Possibly a random sample.
+   c. Not a random sample.
+   d. Definitely a random sample.
+   e. Possibly a random sample.
+   f. Not a random sample.
+3. Identify the sampling type (random sample, time series, stratified sample.
+   cluster sample, census, convenience sample) for each of the following data
+   sets.
+   a. This is a convenience sample.
+   b. This is a random sample.
+   c. This is a stratified sample.
+   d. This is a time series.
+   e. This is a census.
 4. This is a long question but we can make it easier by preparing a simple table mapping each 
    of the four possible values of $D_n$ into a value for each statistic:
    

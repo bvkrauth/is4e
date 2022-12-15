@@ -1191,40 +1191,9 @@ manner, we will next learn some principles of
 
 Answers can be found in the [appendix](#answers-statistics).
 
-**SKILL #1: Identify whether a data set is a random sample**
+**GOAL #1: Describe the joint probability distribution of a very simple data set**
 
-1. Suppose we have a data set $D_n = (x_1,x_2)$ of size $n = 2$.  For
-   each of the following conditions, identify whether it implies
-   that $D_n$ is (i) definitely a random sample; (ii) definitely
-   not a random sample; or (iii) possibly a random sample.
-   a. The two observations are independent and have the same mean 
-      $E(x_1) = E(x_2) = \mu_x$.
-   b. The two observations are independent and have the same mean 
-      $E(x_1) = E(x_2) = \mu_x$ and variance $var(x_1)=var(x_2)=\sigma_x^2$.
-   c. The two observations are independent and have different means 
-      $E(x_1) \neq E(x_2)$.
-   d. The two observations have the same PDFs, and are independent.
-   e. The two observations have the same PDFs, and have 
-      $corr(x_1,x_2) = 0$
-   f. The two observations have the same PDFs, and have $cov(x_1,x_2) > 0$
-
-**SKILL #2: Classify data sets by sampling types**
-
-2. Identify the sampling type (random sample, time series, stratified sample,
-   cluster sample, census, convenience sample) for each of the following data 
-   sets.
-   a. A data set from a survey of 100 SFU students who I found waiting in line
-      at Tim Horton's.
-   b. A data set from a survey of 1,000 randomly selected SFU students.
-   c. A data set from a survey of 100 randomly selected SFU students from each
-      faculty.
-   d. A data set that reports total SFU enrollment for each year from 2005-2020.
-   e. A data set from administrative sources that describes demographic information
-      and postal code of residence for all SFU students in 2020.
-
-**SKILL #3: Describe the probability distribution of a very simple data set**
-
-3. Suppose we have a data set $D_n = (x_1,x_2)$ that is a random sample
+1. Suppose we have a data set $D_n = (x_1,x_2)$ that is a random sample
    of size $n = 2$ on the random variable $x_i$ which has discrete PDF:
     \begin{align}
       f_x(a) &= \begin{cases}
@@ -1239,7 +1208,38 @@ Answers can be found in the [appendix](#answers-statistics).
    c. Find $f_{D_n}(1,2)$
    d. Find $f_{D_n}(2,2)$
 
-**SKILL #4: Find the sampling distribution of a very simple statistic**
+**GOAL #2: Identify the key features of a random sample**
+
+2. Suppose we have a data set $D_n = (x_1,x_2)$ of size $n = 2$.  For
+   each of the following conditions, identify whether it implies
+   that $D_n$ is (i) definitely a random sample; (ii) definitely
+   not a random sample; or (iii) possibly a random sample.
+   a. The two observations are independent and have the same mean 
+      $E(x_1) = E(x_2) = \mu_x$.
+   b. The two observations are independent and have the same mean 
+      $E(x_1) = E(x_2) = \mu_x$ and variance $var(x_1)=var(x_2)=\sigma_x^2$.
+   c. The two observations are independent and have different means 
+      $E(x_1) \neq E(x_2)$.
+   d. The two observations have the same PDFs, and are independent.
+   e. The two observations have the same PDFs, and have 
+      $corr(x_1,x_2) = 0$
+   f. The two observations have the same PDFs, and have $cov(x_1,x_2) > 0$
+
+**GOAL #3: Classify data sets by sampling types**
+
+3. Identify the sampling type (random sample, time series, stratified sample,
+   cluster sample, census, convenience sample) for each of the following data 
+   sets.
+   a. A data set from a survey of 100 SFU students who I found waiting in line
+      at Tim Horton's.
+   b. A data set from a survey of 1,000 randomly selected SFU students.
+   c. A data set from a survey of 100 randomly selected SFU students from each
+      faculty.
+   d. A data set that reports total SFU enrollment for each year from 2005-2020.
+   e. A data set from administrative sources that describes demographic information
+      and postal code of residence for all SFU students in 2020.
+
+**GOAL #4: Find the sampling distribution of a very simple statistic**
 
 4. Suppose we have the data set described in question 3 above. Find the support 
    $S$ and sampling distribution $f(\cdot)$ for each of the following statistics:
@@ -1250,7 +1250,7 @@ Answers can be found in the [appendix](#answers-statistics).
     e. The sample minimum $xmin = \min(x_1, x_2)$.
     f. The sample maximum $xmax = \max(x_1, x_2)$.
 
-**SKILL #5: Find the mean and variance of a statistic from its sampling distribution**
+**GOAL #5: Find the mean and variance of a statistic from its sampling distribution**
 
 5. Suppose we have the data set described in question 3 above. Find the mean of each
    of the following statistics:
@@ -1268,7 +1268,7 @@ Answers can be found in the [appendix](#answers-statistics).
     c. The sample minimum $xmin = \min(x_1, x_2)$.
     d. The sample maximum $xmax = \max(x_1, x_2)$.
 
-**SKILL #6: Find the mean and variance of a linear statistic**
+**GOAL #6: Find the mean and variance of a statistic that is linear in the data**
 
 7. Suppose we have a data set $D_n = (x_1,x_2)$ that is a random sample
    of size $n = 2$ on the random variable $x_i$ which has mean $E(x_i) = 1.6$
@@ -1278,7 +1278,7 @@ Answers can be found in the [appendix](#answers-statistics).
     b. The sample average $\bar{x} = (x_1 + x_2)/2$.
     c. The weighted average $w = 0.2*x_1 + 0.8*x_2$.
 
-**SKILL #7: Distinguish between parameters and statistics**
+**GOAL #7: Distinguish between parameters, statistics, and estimators**
 
 8. Suppose $D_n$ is a random sample of size $n=100$ on a random variable
    $x_i$ which has the $N(\mu,\sigma^2)$ distribution.  Which of the following 
@@ -1306,7 +1306,7 @@ Answers can be found in the [appendix](#answers-statistics).
     e. The population minimum $\min(S_x)$.
     f. The population maximum $\max(S_x)$.
 
-**SKILL #8: Calculate sampling error**
+**GOAL #8: Calculate the sampling error of an estimator**
 
 10. Suppose we have the data set described in question 3 above. Suppose we use the sample maximum
       $xmax = \max(x_1,x_2)$ population maximum $\max(S_x)$.
@@ -1314,7 +1314,7 @@ Answers can be found in the [appendix](#answers-statistics).
      b. Find the PDF $f_{err}(\cdot)$ for the sampling distribution of the 
         sampling error $err$.
 
-**SKILL #9: Calculate bias and classify estimators as biased or unbiased**  
+**GOAL #9: Calculate bias and classify estimators as biased or unbiased**
 
 11. Suppose we have the data set described in question 3 above. Classify each of the 
     following estimators as biased or unbiased, and calculate the bias.
@@ -1346,7 +1346,7 @@ Answers can be found in the [appendix](#answers-statistics).
        biased or unbiased estimator of the population earnings ratio 
        $\mu_M/\mu_W$? Explain.
 
-**SKILL #10: Calculate mean squared error**  
+**GOAL #10: Calculate the mean squared error of an estimator**
 
 13. Suppose we have the data set described in question 3 above. Calculate the mean squared error 
     for each of the following estimators.
@@ -1355,7 +1355,7 @@ Answers can be found in the [appendix](#answers-statistics).
     c. The sample minimum $xmin$  as an estimator of the population minimum $\min(S_x)$.
     d. The sample maximum $xmax$  as an estimator of the population maximum $\max(S_x)$.
 
-**SKILL #11: Apply MVUE and MSE criteria to select an estimator**  
+**GOAL #11: Apply MVUE and MSE criteria to select an estimator**
 
 14. Suppose you have a random sample of size $n=2$ on the random variable 
     $x$ with mean $E\left(x\right)=\mu$ and variance $var(x_i)=\sigma^2$. Two
@@ -1371,14 +1371,14 @@ Answers can be found in the [appendix](#answers-statistics).
     f. Which estimator is preferred under the MVUE criterion?
     g. Which estimator is preferred under the MSE criterion?
 
-**SKILL #12: Calculate the standard error for a sample average**  
+**GOAL #12: Calculate the standard error for a sample average**
 
 15. Suppose that we have a random sample $D_n$ of size $n=100$ on the random
     variable $x_i$ with unknown mean $\mu$ and unknown variance $\sigma^2$. Suppose
     that the sample average is $\bar{x} = 12$ and the sample variance is 
     $\hat{\sigma}^2 = 4$.  Find the standard error of $\bar{x}$.
 
-**SKILL #13: Explain and interpret the law of large numbers**
+**GOAL #13: Explain the law of large numbers and what it means for an estimator to be consistent**
 
 16. Suppose we have a random sample of size $n$ on the random variable $x_i$ with mean
     $E(x_i) = \mu$.  Which of the following statistics are consistent estimators of $\mu$?
@@ -1387,4 +1387,3 @@ Answers can be found in the [appendix](#answers-statistics).
     c. The first observation $x_1$.
     d. The average of all even-numbered observations.
     e. The average of the first 100 observations.
-
