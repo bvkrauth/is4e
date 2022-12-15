@@ -1103,82 +1103,84 @@ Let the random variable $t$ be the total showing on the pair of dice, and let
 the random variable $y = I(t=11)$ be an indicator for whether a bet on "Yo" 
 wins. 
 
-**SKILL #1: Define a random variable in terms of its underlying outcome**
+**GOAL #1: Define a random variable in terms of a random outcome**
 
 1. Define $t$ in terms of the underlying outcome $(r,w)$.
+
 2. Define $y$ in terms of the underlying outcome $(r,w)$.
 
-**SKILL #2: Find the support of a random variable**
+**GOAL #2: Determine the support and range of a random variable**
 
 3. Find the support of the following random variables:
    a. Find the support $S_r$ of the random variable $r$.
    b. Find the support $S_t$ of the random variable $t$.
    c. Find the support $S_y$ of the random variable $y$.
 
-**SKILL #3: Find the range from the support**
-
 4. Find the range of each of the following random variables
    a. Find the range of $r$.
    b. Find the range of $t$.
    c. Find the range of $y$.
 
-**SKILL #4: Find the (discrete) PDF for a simple example**
+**GOAL #3: Calculate and interpret the PDF of a discrete random variable**
 
 5. Find the following PDFs:
    a. Find the PDF $f_r$ for the random variable $r$.
    b. Find the PDF $f_t$ for the random variable $t$.
    c. Find the PDF $f_y$ for the random variable $y$.
 
-**SKILL #5: Find the CDF from the (discrete) PDF**
+**GOAL #4: Calculate and interpret the CDF of a discrete random variable**
 
 6. Using the PDFs you found earlier, find the following CDFs
    a. Find the CDF $F_r$ for the random variable $r$.
    b. Find the CDF $F_y$ for the random variable $y$.
 
-**SKILL #6: Find the expected value from the (discrete) PDF**
+**GOAL #5: Calculate interval probabilities from the CDF**
 
-7. Using the PDFs you found earlier, find the following expected values:
+7. Suppose that the discrete random variable $x$ has CDF $F_x$ where
+   $F_x(0) = 0.3$, $F_x(5) = 0.8$, $f_x(0) = 0.1$, and $f_x(5) = 0.1$. Find the
+   following interval probabilities:
+   a. $\Pr(x \leq 5)$
+   b. $\Pr(x < 5)$
+   c. $\Pr(x > 5)$
+   d. $\Pr(x \geq 5)$
+   e. $\Pr(0 < x \leq 5)$
+   f. $\Pr(0 \leq x \leq 5)$
+   g. $\Pr(0 < x < 5)$
+   h. $\Pr(0 \leq x < 5)$
+
+**GOAL #6: Calculate the expected value of a discrete random variable from its PDF**
+
+8. Using the PDFs you found earlier, find the following expected values:
    a. Find the expected value $E(r)$.
    b. Find the expected value $E(r^2)$.
 
-**SKILL #7: Find quantiles from the CDF**
+**GOAL #7: Calculate a quantile from the CDF**
 
-8. Using the CDFs you found earlier, find the following quantiles:
+9. Using the CDFs you found earlier, find the following quantiles:
    a. Find the median $Med(r)$.
    b. Find the 0.25 quantile $F_r^{-1}(0.25)$.
    c. Find the 75th percentile of $r$.
 
-**SKILL #8: Calculate variance and standard deviation from the (discrete) PDF**
+**GOAL #8: Calculate the variance of a discrete random variable from its PDF**
 
-9. Let $d = (y - E(y))^2$ 
-   a. Find the PDF $f_d$ of $d$.
-   b. Use this PDF to find $E(d)$
-   c. Use the results above to find the variance $var(y)$.
-   d. Use the results above to find the standard deviation $sd(y)$.
+10. Let $d = (y - E(y))^2$.
+    a. Find the PDF $f_d$ of $d$.
+    b. Use this PDF to find $E(d)$
+    c. Use these results to find the variance $var(y)$.
 
-**SKILL #9: Calculate variance and standard deviation from expected values**
+**GOAL #9: Calculate the variance from expected values**
 
-10. In question (7) above, you calculated $E(r)$ and $E(r^2)$ from the PDF.  
-    a. Use these results to find $var(r)$
-    b. Use these results to find $sd(r)$
+11. In question (8) above, you calculated $E(r)$ and $E(r^2)$ from the PDF. Use
+    these results to find $var(r)$.
 
-**SKILL #10: Identify and use random variables from standard discrete distributions**
-  
-11. The random variable $y$ can be described using a standard distribution. 
-    a. What standard distribution describes $y$?
-    b. Use standard results for this distribution to find $E(y)$
-    c. Use standard results for this distribution to find $var(y)$
+**GOAL #10: Calculate the standard deviation from the variance**
 
-12. Let $Y_{10}$ be the number of times in 10 dice rolls that a bet on "Yo" 
-    wins.
-    a. What standard distribution describes $Y_{10}$?
-    b. Use existing results for this distribution to find $E(Y_{10})$.
-    c. Use existing results for this distribution to find $var(Y_{10})$.
-    d. Use Excel to calculate $\Pr(Y_{10} = 0)$.
-    e. Use Excel to calculate $\Pr(Y_{10} \leq 10/16)$.
-    f. Use Excel to calculate $\Pr(Y_{10} > 10/16)$.
+12. Find the following standard deviations:
+    a. Find $sd(y)$. You can use your result from question (10) above.
+    b. Find $sd(r)$. You can use your result from question (11) above.
 
-**SKILL #11: Calculate mean and variance for a linear function of a random variable**
+**GOAL #11: Calculate the expected value for a linear function of a random variable**
+**GOAL #12: Calculate variance and standard deviation for a linear function of a random variable**
 
 13. The "Yo" bet pays out at 15:1, meaning you win \$15 for each dollar bet. Suppose
     you bet \$10 on Yo.  Your net winnings in that case will be $W = 160*y - 10$.
@@ -1194,18 +1196,26 @@ wins.
     c. The event $W_{10} > 0$ (your net winnings are positive) is identical to the
        event $Y_{10} > 10/16$.  Using earlier results, find $\Pr(W_{10} > 0)$.
 
-**SKILL #12: Interpret means and variances**
+**GOAL #13: Standardize a random variable**
 
-15. If you have \$10 and care mostly about expected net winnings, which would 
-    be your preferred betting strategy?
-    - Bet Yo \$10 on a single roll. 
-    - Bet Yo \$1 on each of 10 rolls.
-    - Keep your \$10 and not bet at all.
-16. Which of the following two betting strategies produces the highest probability 
-    of walking away from the table with more money than you started with?
-    - Bet Yo \$10 on a single roll. 
-    - Bet Yo \$1 on each of 10 rolls.
-17. Which of the following two betting strategies has more variable net winnings?
-    - Bet Yo \$10 on a single roll. 
-    - Bet Yo \$1 on each of 10 rolls.
+15. Let $z$ be the standardized form of the random variable $y$.
+    a. What is the formula defining $z$? Use actual numbers for $E(y)$ and
+       $sd(y)$.
+    b. Find the support of $z$.
+    c. Find the PDF of $z$.
 
+**GOAL #14: Use standard standard discrete probability distributions**
+
+16. The random variable $y$ can be described using a standard distribution.
+    a. What standard distribution describes $y$?
+    b. Use standard results for this distribution to find $E(y)$
+    c. Use standard results for this distribution to find $var(y)$
+
+17. Let $Y_{10}$ be the number of times in 10 dice rolls that a bet on "Yo"
+    wins.
+    a. What standard distribution describes $Y_{10}$?
+    b. Use existing results for this distribution to find $E(Y_{10})$.
+    c. Use existing results for this distribution to find $var(Y_{10})$.
+    d. Use Excel to calculate $\Pr(Y_{10} = 0)$.
+    e. Use Excel to calculate $\Pr(Y_{10} \leq 10/16)$.
+    f. Use Excel to calculate $\Pr(Y_{10} > 10/16)$.

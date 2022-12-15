@@ -254,16 +254,18 @@ This appendix contains solutions to all end-of-chapter practice problems.
 
 1. We can define $t = r+w$.
 2. We can define $y = I(r+w = 11)$.
-3. The support of a random variable is the set of all values with positive probability.
+3. The support of a random variable is the set of all values with positive
+   probability.
    a. The support of $r$ is $S_r = \{1,2,3,4,5,6\}$.
    b. The support of $t$ is $S_t = \{2,3,4,5,6,7,8,9,10,11,12\}$.
    c. The support of $y$ is $S_y = \{0,1\}$.
-4. The range of a random variable is just the interval defined by the support's minimum and maximum values.
+4. The range of a random variable is just the interval defined by the support's
+   minimum and maximum values.
    a. The range of $r$ is $[1,6]$.
    b. The range of $t$ is $[2,12]$.
    c. The range of $y$ is $[0,1]$.
-5. The PDF can be derived from the probability distribution of the underlying outcome
-   $(r,w)$, which was calculated in the previous chapter.
+5. The PDF can be derived from the probability distribution of the underlying
+   outcome $(r,w)$, which was calculated in the previous chapter.
    a. The PDF of $r$ is:
     \begin{align}
       f_r(a) &= \begin{cases}
@@ -312,7 +314,16 @@ This appendix contains solutions to all end-of-chapter practice problems.
         1 & a \geq 1 \\
         \end{cases}
      \end{align}
-7. We find the expected value by applying the definition:
+7. The interval probabilities are:
+   a. $\Pr(x \leq 5) = F_x(5) = 0.8$
+   b. $\Pr(x < 5) = F_x(5) - f_x(5) = 0.7$
+   c. $\Pr(x > 5) = 1 - F_x(5) = 0.2$
+   d. $\Pr(x \geq 5) 1 - F_x(5) + f_x(5) = 0.3$
+   e. $\Pr(0 < x \leq 5) = F_x(5) - F_x(0) = 0.5$
+   f. $\Pr(0 \leq x \leq 5) = F_x(5) - F_x(0) + f_x(0) = 0.6$
+   g. $\Pr(0 < x < 5) = F_x(5) - F_x(0) - f_x(5) = 0.4$
+   h. $\Pr(0 \leq x < 5) = F_x(5) - F_x(0) + f_x(0) - f_x(5) = 0.5$
+8. We find the expected value by applying the definition:
    a. The expected value is 
       \begin{align}
         E(r) &= \sum_{a \in S_r} a\Pr(r=a) \\
@@ -327,7 +338,7 @@ This appendix contains solutions to all end-of-chapter practice problems.
           &= 91/6 \\
           &= 15.17 
       \end{align}
-8. The key here is to write down the definition of the specific quantile you are 
+9. The key here is to write down the definition of the specific quantile you are
    looking for, then substitute the CDF you derived earlier.
    a. The median of $r$ is:
       \begin{align}
@@ -350,64 +361,40 @@ This appendix contains solutions to all end-of-chapter practice problems.
           &= \min \{a: a \geq 5\} \\
           &= 5
       \end{align}
-9. Let $d = (y - E(y))^2$ 
-   a. We can derive the PDF of $d$ from the PDF of $y$:
-    \begin{align}
-      f_{d}(a) &= \begin{cases}
-        17/18 & a = (0-1/18)^2 \\
-        1/18 & a = (1-1/18)^2 \\
-        0 & \textrm{otherwise} \\
-        \end{cases}
-     \end{align}
-   b. The expected value is:
-      \begin{align}
-        E(d) &= (0-1/18)^2 * \frac{17}{18} + (1-1/18)^2 *\frac{1}{18} \\
-          &\approx 0.0525 
+10. Let $d = (y - E(y))^2$.
+    a. We can derive the PDF of $d$ from the PDF of $y$:
+     \begin{align}
+       f_{d}(a) &= \begin{cases}
+         17/18 & a = (0-1/18)^2 \\
+         1/18 & a = (1-1/18)^2 \\
+         0 & \textrm{otherwise} \\
+         \end{cases}
       \end{align}
-   b. The variance is:
-      \begin{align}
-        var(y) &= E(d) \\
-          &\approx 0.0525 
-      \end{align}
-   b. The standard deviation is 
-      $$sd(y) = \sqrt{var(y)} \approx \sqrt{0.0525} \approx 0.229$$
-10. Earlier, you found $E(r) = 3.5$ and $E(r^2) = 15.17$.  So we can apply
+    b. The expected value is:
+       \begin{align}
+         E(d) &= (0-1/18)^2 * \frac{17}{18} + (1-1/18)^2 *\frac{1}{18} \\
+           &\approx 0.0525
+       \end{align}
+    c. The variance is:
+       \begin{align}
+         var(y) &= E(d) \\
+           &\approx 0.0525
+       \end{align}
+11. Earlier, you found $E(r) = 3.5$ and $E(r^2) = 15.17$.  So we can apply
     our result that $var(x) = E(x^2) - E(x)^2$ for a simpler way of calculating
-    the variance.  
-    a. The variance is:
-      \begin{align}
-        var(r) &= E(r^2) - E(r)^2 \\
-          &= 15.17 - 3.5^2 \\
-          &= 2.92
-      \end{align}
+    the variance:
+    \begin{align}
+      var(r) &= E(r^2) - E(r)^2 \\
+        &= 15.17 - 3.5^2 \\
+        &= 2.92
+    \end{align}
+12. The standard deviation is just the square root of the variance.
+    a. The standard deviation is:
+       $$sd(y) = \sqrt{var(y)} \approx \sqrt{0.0525} \approx 0.229$$
     b. The standard deviation is:
       \begin{align}2
         sd(r) &= \sqrt{var(r)} = \sqrt{2.92} \approx 1.71
       \end{align}
-11. The Bernoulli distribution describes any random variable (like $y$) that
-    has a binary $\{0,1\}$ support.
-    a. $y$ has the $Bernouili(p)$ distribution with $p=1/18$, or
-      $$y \sim Bernoulli(1/18)$$
-    b. In the Bernoulli distribution $E(y)=p =1/18$.
-    c. In the Bernoulli distribution, $var(y) = p*(1-p) = 1/18 * 17/18 \approx 0.525$.
-12. The binomial distribution describes any random variable that describes the
-    number of times an event happens in a fixed number of independent trials.
-    a. $Y_{10}$ has the binomial distribution with $n=10$ and $p=1/18$.  We 
-      can also write that as 
-      $$Y_{10} \sim Binomial(10,1/18)$$
-    b. For the Binomial distribution we have 
-       $$E(Y_{10}) = np = 10*1/18 \approx 0.556$$
-    c. For the binomial distribution we have 
-       $$var(Y_{10}) = np(1-p) = 10*1/18*17/18 \approx 0.525$$
-    d. The Excel formula for $\Pr(Y_{10} = 0)$ would be 
-       `=BINOM.DIST(0,10,1/18,FALSE)` which produces the result 
-       $$\Pr(Y_{10} = 0) \approx 0.565$$
-    e. The Excel formula for $\Pr(Y_{10} \leq 10/16)$ would be 
-       `=BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result 
-        $$\Pr(Y_{10} \leq 10/16) \approx 0.565$$
-    f. The Excel formula for $\Pr(Y_{10} > 10/16)$ would be
-       `=1-BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result 
-       $$\Pr(Y_{10} > 10/16) \approx 0.435$$
 13. The key here is to apply the formulas for the expected value and variance 
     of a linear function of a random variable.
     a. The expected value is:
@@ -447,12 +434,50 @@ This appendix contains solutions to all end-of-chapter practice problems.
        \begin{align}
         \Pr(W_{10} > 0) &= \Pr(Y_{10} > 10/16) \approx 0.435
        \end{align}
-15. If you care mostly about expected net winnings, you should just keep 
-    your \$10 and not bet at all. This strategy has an expected net winnings of
-    zero, while the others both have *negative* expected net winnings.
-16. Betting \$1 on ten rolls produces the highest probability of walking 
-       away from the table with more money than you started with.
-17. Betting \$10 on one roll produces more variable net winnings.
+15. The standardized form is constructed by subtracting the mean and dividing
+    by the standard deviation.
+    a. Since $E(y) = 1/18 \approx 0.056$ and $sd(y) \approx 0.229$, the
+       standardized variable will be:
+       \begin{equation}
+          z = \frac{y - E(y)}{sd(y)} = \frac{y - 0.056}{0.229}
+       \end{equation}
+    b. The support of $y$ is $S_y = \{0,1\}$, so the support of $z$ is:
+       \begin{align}
+         S_z &= \left\{\frac{0 - 0.056}{0.229}, \frac{1 - 0.056}{0.229} \right\} \\
+           &= \{-0.245, 4.122\}
+       \end{align}
+    c. The PDF of $z$ is:
+       \begin{align}
+         f_z(a) &= \begin{cases}
+             17/18 & a = -0.245 \\
+             1/18 & a = 4.122 \\
+             0 & \textrm{otherwise} \\
+             \end{cases}
+       \end{align}
+16. The Bernoulli distribution describes any random variable (like $y$) that
+    has a binary $\{0,1\}$ support.
+    a. $y$ has the $Bernouili(p)$ distribution with $p=1/18$, or
+      $$y \sim Bernoulli(1/18)$$
+    b. In the Bernoulli distribution $E(y)=p =1/18$.
+    c. In the Bernoulli distribution, $var(y) = p*(1-p) = 1/18 * 17/18 \approx 0.525$.
+17. The binomial distribution describes any random variable that describes the
+    number of times an event happens in a fixed number of independent trials.
+    a. $Y_{10}$ has the binomial distribution with $n=10$ and $p=1/18$.  We can
+       also write that as:
+       $$Y_{10} \sim Binomial(10,1/18)$$
+    b. For the Binomial distribution we have:
+       $$E(Y_{10}) = np = 10*1/18 \approx 0.556$$
+    c. For the binomial distribution we have:
+       $$var(Y_{10}) = np(1-p) = 10*1/18*17/18 \approx 0.525$$
+    d. The Excel formula for $\Pr(Y_{10} = 0)$ would be
+       `=BINOM.DIST(0,10,1/18,FALSE)` which produces the result
+       $$\Pr(Y_{10} = 0) \approx 0.565$$
+    e. The Excel formula for $\Pr(Y_{10} \leq 10/16)$ would be
+       `=BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result:
+        $$\Pr(Y_{10} \leq 10/16) \approx 0.565$$
+    f. The Excel formula for $\Pr(Y_{10} > 10/16)$ would be
+       `=1-BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result:
+       $$\Pr(Y_{10} > 10/16) \approx 0.435$$
 
 ## **5** Basic data analysis with Excel {-#answers-basic-data-analysis}
 
