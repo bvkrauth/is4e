@@ -110,75 +110,79 @@ This appendix contains solutions to all end-of-chapter practice problems.
 4. Statements (a) and (d) are true. 
 5. Statements (b) and (c) are true.
 6. Event (c) is an elementary event.
-7. All three elementary events have probability $1/36 \approx 0.028$
-8. The probability of each event can be calculated by adding up the probabilities
-   of its elementary events:
-   a. The probability a bet on Yo wins is:
-      \begin{align}
-        \Pr(Yo) &= \Pr(\{(5,6),(6,5)\}) \\
-          &= \Pr(\{(5,6)\}) + \Pr(\{(6,5)\}) \\
-          &= 2/36 \\
-          &\approx 0.056
-      \end{align}
-   b. The probability a bet on Snake eyes wins is:
-      \begin{align}
-        \Pr(SnakeEyes) &= \Pr(\{(1,1)\}) \\
-          &= 1/36 \\
-          &\approx 0.028
-      \end{align}
-   c. The probability a bet on Boxcars wins is:
-      \begin{align}
-        \Pr(Boxcars) &= \Pr(\{(6,6)\}) \\
-          &= 1/36 \\
-          &\approx 0.028
-      \end{align}
-   d. The probability a bet on Field wins is:
-      \begin{align}
-        \Pr(Field) &= \Pr\left(\left\{\begin{aligned}
-            & (1,1),(1,2),(1,3), \\
-            & (2,1),(2,2), \\
-            & (3,1),(3,6), \\
-            & (4,5),(4,6), \\
-            & (5,4),(5,5),(5,6), \\
-            & (6,3),(6,4),(6,5),(6,6) \\
-            \end{aligned}\right\}\right) \\
-          &= \Pr(\{(1,1)\}) + \Pr(\{(1,2)\}) + \cdots + \Pr(\{(6,6)\}) \\
-          &= 16/36 \\
-          &\approx 0.444
-      \end{align}
-9. To calculate the joint probability, start by calculating the intersection
-   of the two events:
-   a. The joint probability is:
-      \begin{align}
-        \Pr(Yo \cap Boxcars) 
-           &= \Pr(\{(5,6),(6,5)\} \cap \{(6,6)\}) \\
-           &= \Pr(\emptyset) \\
-           &= 0 
-      \end{align}
-   b. The joint probability is:
-      \begin{align}
-        \Pr(Yo \cap Field) 
-          &= \Pr\left(\{(5,6),(6,5)\} \cap \left\{\begin{aligned}
-            & (1,1),(1,2),(1,3), \\
-            & (2,1),(2,2), \\
-            & (3,1),(3,6), \\
-            & (4,5),(4,6), \\
-            & (5,4),(5,5),(5,6), \\
-            & (6,3),(6,4),(6,5),(6,6) \\
-            \end{aligned}\right\}\right) \\
-          &= \Pr(\{(5,6),(6,5)\}) \\
-          &= 2/36 \\
-          &\approx 0.056
-      \end{align}
-   c. The joint probability is:
-      \begin{align}
-       \Pr(Yo \cap Boxcars^C) 
-           &= \Pr(\{(5,6),(6,5)\} \cap \{(6,6)\}^C) \\
+7. Statements (a), (c), (e), (g), and (i) are true.
+8. Statements (b) and (c) are true.
+9. Statements (a), (d), (e), (f), and (h) are true.
+10. Statements (a) and (b) are true.
+11. All three elementary events have probability $1/36 \approx 0.028$
+12. The probability of each event can be calculated by adding up the probabilities
+    of its elementary events:
+    a. The probability a bet on Yo wins is:
+       \begin{align}
+         \Pr(Yo) &= \Pr(\{(5,6),(6,5)\}) \\
+           &= \Pr(\{(5,6)\}) + \Pr(\{(6,5)\}) \\
+           &= 2/36 \\
+           &\approx 0.056
+       \end{align}
+    b. The probability a bet on Snake eyes wins is:
+       \begin{align}
+         \Pr(SnakeEyes) &= \Pr(\{(1,1)\}) \\
+           &= 1/36 \\
+           &\approx 0.028
+       \end{align}
+    c. The probability a bet on Boxcars wins is:
+       \begin{align}
+         \Pr(Boxcars) &= \Pr(\{(6,6)\}) \\
+           &= 1/36 \\
+           &\approx 0.028
+       \end{align}
+    d. The probability a bet on Field wins is:
+       \begin{align}
+         \Pr(Field) &= \Pr\left(\left\{\begin{aligned}
+             & (1,1),(1,2),(1,3), \\
+             & (2,1),(2,2), \\
+             & (3,1),(3,6), \\
+             & (4,5),(4,6), \\
+             & (5,4),(5,5),(5,6), \\
+             & (6,3),(6,4),(6,5),(6,6) \\
+             \end{aligned}\right\}\right) \\
+           &= \Pr(\{(1,1)\}) + \Pr(\{(1,2)\}) + \cdots + \Pr(\{(6,6)\}) \\
+           &= 16/36 \\
+           &\approx 0.444
+       \end{align}
+13. To calculate the joint probability, start by calculating the intersection
+    of the two events:
+    a. The joint probability is:
+       \begin{align}
+         \Pr(Yo \cap Boxcars)
+            &= \Pr(\{(5,6),(6,5)\} \cap \{(6,6)\}) \\
+            &= \Pr(\emptyset) \\
+            &= 0
+       \end{align}
+    b. The joint probability is:
+       \begin{align}
+         \Pr(Yo \cap Field)
+           &= \Pr\left(\{(5,6),(6,5)\} \cap \left\{\begin{aligned}
+             & (1,1),(1,2),(1,3), \\
+             & (2,1),(2,2), \\
+             & (3,1),(3,6), \\
+             & (4,5),(4,6), \\
+             & (5,4),(5,5),(5,6), \\
+             & (6,3),(6,4),(6,5),(6,6) \\
+             \end{aligned}\right\}\right) \\
            &= \Pr(\{(5,6),(6,5)\}) \\
            &= 2/36 \\
-           &\approx 0.056 
-      \end{align}
-10. The conditional probability is just the ratio of the joint probability to 
+           &\approx 0.056
+       \end{align}
+    c. The joint probability is:
+       \begin{align}
+        \Pr(Yo \cap Boxcars^C)
+            &= \Pr(\{(5,6),(6,5)\} \cap \{(6,6)\}^C) \\
+            &= \Pr(\{(5,6),(6,5)\}) \\
+            &= 2/36 \\
+            &\approx 0.056
+       \end{align}
+14. The conditional probability is just the ratio of the joint probability to
     the probability of the event we are conditioning on:
     a. The conditional probability is:
        \begin{align}
@@ -215,12 +219,34 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= \frac{0}{2/36} \\
             &= 0
         \end{align}
-11. The events in (e) are independent.
-12. Statements (a), (c), (e), (g), and (i) are true.
-13. Statements (b) and (c) are true.
-14. Statements (a), (d), (e), (f), and (h) are true.
-15. Statements (a) and (b) are true.
+15. The events in (e) are independent.
 16. Statements (b) and (c) are true.
+17. The probability that Pass wins is:
+    \begin{align*}
+      \Pr(Pass) &= \Pr(Pass|c = 2)\Pr(c = 2) + \cdots + \Pr(Pass|c = 12)\Pr(c = 12) \nonumber \\
+          &= \begin{aligned}[t]
+             & (0 \times 1/36) + (0 \times 2/36) + (3/9 \times 3/36) \\
+             & + (4/10 \times 4/36) + (5/11 \times 5/36) + (1 \times 6/36) \\
+             & + (5/11 \times 5/36) + (4/10 \times 4/36) + (3/9 \times 3/36) \\
+             & + (1 \times 2/36) + (0 \times 1/36) \\
+             \end{aligned} \\
+          &= 244/495 \\
+          &\approx 0.4929
+    \end{align*}
+    Notice that this is less than 50\% (the house always has an advantage) but
+    it is greater than the probability of winning a  bet on red or black in
+    roulette, which we earlier calculated to be about 0.486.  Craps is typically
+    the most favoralbe casino game to players (lowest house advantage), if you
+    play Pass.
+18. The conditional return probabilities are:
+    \begin{align*}
+      \Pr(Return|Body) &= \frac{\Pr(Body|Return)\Pr(Return)}{\Pr(Body)} \\
+        &= \frac{0.7 \times 0.8}{0.6} \\
+        &\approx 0.93 \\
+      \Pr(Return|Engine) &= \frac{\Pr(Engine|Return)\Pr(Return)}{\Pr(Engine)} \\
+        &= \frac{0.1 \times 0.8}{0.6} \\
+        &\approx 0.13
+    \end{align*}
 
 ## **4** Introduction to random variables {-#answers-random-variables}
 
