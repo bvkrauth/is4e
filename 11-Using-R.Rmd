@@ -737,8 +737,9 @@ be comfortable using both.
 
 Answers can be found in the [appendix](#answers-using-r).
 
-**SKILL #1: Use mutate to add or change a variable**  
-**SKILL #2: Use filter, arrange and select to modify a data table**
+**GOAL #1: Use the pipe operator**
+**GOAL #2: Use the mutate function to add or change a variable**
+**GOAL #3: Use the filter, select, and arrange functions to modify a data table**
 
 1. Starting with the data table `EmpData`:
    a. Add the numeric variable **Year** based on the existing variable **MonthYr**. The
@@ -752,9 +753,9 @@ Answers can be found in the [appendix](#answers-using-r).
    d. Sort observations by **EmpRate**.
    e. Give the resulting data table the name `PPData`.
 
-**SKILL #3: Calculate univariate statistics for a single variable**  
-**SKILL #4: Construct a table of summary statistics**  
-**SKILL #5: Recognize and handle missing data problems**
+**GOAL #4: Calculate a univariate statistic in R**
+**GOAL #5: Construct a table of summary statistics in R**
+**GOAL #6: Recognize and handle missing data problems in R**
 
 2. Starting with the `PPData` data table you created in question (1) above:
    a. Calculate and report the mean employment rate since 2010.
@@ -763,11 +764,11 @@ Answers can be found in the [appendix](#answers-using-r).
    c. Did any variables in `PPData` have missing data?  If so, how did you decide to
       address it in your answer to (b), and why?
 
-**SKILL #6: Construct a simple or binned frequency table**
+**GOAL #7: Construct a simple or binned frequency table in R**
 
 3. Using the `PPData`data set, construct a frequency table of the employment rate.
 
-**SKILL #7: Perform simple probability calculations in R**
+**GOAL #8: Perform simple probability calculations in R**
 
 4. Calculate the following quantities in R:
    a. The 45th percentile of the $N(4,6)$ distribution.
@@ -775,11 +776,11 @@ Answers can be found in the [appendix](#answers-using-r).
    c. The value of the standard uniform CDF, evaluated at 0.75.
    d. 5 random numbers from the $Binomial(10,0.5)$ distribution.
 
-**SKILL #8: Create a histogram with ggplot**
+**GOAL #9: Create a histogram with ggplot**
 
 5. Using the `PPData`data set, create a histogram of the employment rate.
 
-**SKILL #9: Create a line graph with ggplot**
+**GOAL #10: Create a line graph with ggplot**
 
 6. Using the `PPData` data set, create a time series graph of the employment rate.
 
