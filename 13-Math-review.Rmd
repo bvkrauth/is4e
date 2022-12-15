@@ -2,12 +2,28 @@
 
 # Math review {#math-review}
 
-The math used in this textbook is all covered in high school or in 
-introductory calculus. However, you may have forgotten it, or never 
-understood it very well in the first place.  This appendix provides
-a review of the most important mathematical terms, concepts and 
-methods.  It can be used to review ideas before starting the main
+The math used in this textbook is all covered in high school or in introductory
+calculus. However, you may have forgotten it, or never understood it very well
+in the first place.
+
+This appendix provides a review of the most important mathematical terms,
+concepts and methods.  It can be used to review ideas before starting the main
 text, or as a reference while going through the main text.
+
+::: {.goals data-latex=""}
+**Chapter goals**
+
+In this appendix, we will review how to:
+
+1.  Define a set using enumeration or set-builder notation.
+2.  Determine the cardinality (size) of a set.
+3.  Identify whether sets are identical, disjoint, or subsets.
+4.  Perform set algebra operations on simple sets.
+5.  Use the indicator function.
+6.  Use the summation operator.
+7.  Apply the rules of arithmetic to a summation.
+8.  Find the limit of a sequence.
+:::
 
 If you have trouble with a few of these ideas, don't panic.  This is
 not a math class. For example, if you forget what it means for two sets
@@ -234,10 +250,14 @@ simple enumeration.
 Since the function $s: \{Avocado,Banana,Cantaloupe\} \rightarrow \mathbb{Z}$ 
 has a finite domain, we can define it by listing all of its
 values:
-   $$s(Avocado) = 1$$
-   $$s(Banana) = 0$$
-   $$s(Cantaloupe) = 500$$
-We could also make a table:
+\begin{align}
+  s(x) &= \begin{cases}
+    0 & \textrm{if $x = Banana$} \\
+    1 & \textrm{if $x = Avocado$} \\
+    500 & \textrm{if $x = Cantaloupe$} \\
+    \end{cases}
+\end{align}
+or we could make a table:
 
 | $fruit$ | $s(fruit)$ |
 |-------|------------|
@@ -270,8 +290,16 @@ in a given problem. But please ask if you aren't sure.
 ### The indicator function {#the-indicator-function}
 
 The ***indicator function*** is a special function whose argument
-is a *statement*. The indicator function is typically represented by $I(\cdot)$ or $\mathbb{1}(\cdot)$.  It returns a value of 1
-if the statement is true, and 0 if it is false. 
+is a *statement*. The indicator function is typically represented by $I(\cdot)$ or $\mathbb{1}(\cdot)$.  It returns a value of one if the statement is true, and 
+zero if it is false:
+\begin{align}
+  I(statement) &= \begin{cases}
+    0 & \textrm{if $statement$ is false} \\
+    1 & \textrm{if $statement$ is true} \\
+    \end{cases}
+\end{align}
+We use indicator functions all the time in probability and statistics because
+they allow us to express qualitative statements as quantitative variables.
 
 ::: example
 **Indicator functions**
@@ -282,9 +310,6 @@ $$I(\textrm{Ottawa is the capital of Canada}) = 1$$
 $$I(\textrm{Ottawa is in Alberta}) = 0$$
 :::
 
-We use indicator functions all the time in probability and statistics because they allow us
-to convert a qualitative statement like "Bob is employed" 
-into a quantitative statement like $I(\textrm{Bob is employed}) = 1$.
 
 ## Sequences and summations {#sequences-and-summations}
 
