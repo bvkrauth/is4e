@@ -1176,42 +1176,48 @@ This appendix contains solutions to all end-of-chapter practice problems.
           &= 0.035894296 + 1 - 0.964105704 \\
           &\approx 0.07
       \end{align}
-      and the formula for calculating this in Excel is `=T.DIST(-1.96,13,TRUE) +1 - T.DIST(1.96,13,TRUE)`.
+      and the formula for calculating this in Excel is
+      `=T.DIST(-1.96,13,TRUE) +1 - T.DIST(1.96,13,TRUE)`.
    b. The size is:
       \begin{align}
         size &= \Phi(-1.96) + 1 - \Phi(1.96) \\
           &= 0.024997895 + 1 - 0.975002105 \\
           &\approx 0.05
       \end{align}
-      and the formula for calculating this in Excel is `=NORM.S.DIST(-1.96,TRUE) +1 - NORM.S.DIST(1.96,TRUE)`.
+      and the formula for calculating this in Excel is
+      `=NORM.S.DIST(-1.96,TRUE) +1 - NORM.S.DIST(1.96,TRUE)`.
    c. The size is:
       \begin{align}
         size &= F_{T_{13}}(-3) + 1 - F_{T_{13}}(2) \\
           &\approx 0.005119449 + 1 - 0.966579821 \\
           &\approx 0.04
       \end{align}
-      and the formula for calculating this in Excel is `=T.DIST(-3,13,TRUE) +1 - T.DIST(1.96,13,TRUE)`.
+      and the formula for calculating this in Excel is
+      `=T.DIST(-3,13,TRUE) +1 - T.DIST(1.96,13,TRUE)`.
    d. The size is:
       \begin{align}
         size &= \Phi(-3) + 1 - \Phi(2) \\
           &\approx 0.001349898 + 1 - 0.977249868 \\
           &\approx 0.02
       \end{align}
-      and the formula for calculating this in Excel is `=NORM.S.DIST(-3,TRUE) +1 - NORM.S.DIST(2,TRUE)`.
+      and the formula for calculating this in Excel is
+      `=NORM.S.DIST(-3,TRUE) +1 - NORM.S.DIST(2,TRUE)`.
    e. The size is:
       \begin{align}
         size &= F_{T_{13}}(-\infty) + 1 - F_{T_{13}}(2) \\
           &\approx 0 + 1 - 0.966579821 \\
           &\approx 0.03
       \end{align}
-      and the formula for calculating this in Excel is `=1 - T.DIST(2,13,TRUE)`.
+      and the formula for calculating this in Excel is
+      `=1 - T.DIST(2,13,TRUE)`.
    f. The size is:
       \begin{align}
         size &= \Phi(-\infty) + 1 - \Phi(2) \\
           &\approx 0 + 1 - 0.977249868 \\
           &\approx 0.02
       \end{align}
-      and the formula for calculating this in Excel is `=1 - NORM.S.DIST(2,TRUE)`.
+      and the formula for calculating this in Excel is
+      `=1 - NORM.S.DIST(2,TRUE)`.
 6. This problem asks you to find the critical values that deliver a given size.
    a. The critical values are:
       \begin{align}
@@ -1247,8 +1253,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
         c_H &= \Phi^{-1}(0.995) \\
           &\approx 2.58
       \end{align}
-      and the formulas for calculating this in Excel are `=NORM.S.INV(0.005)` and
-      `=NORM.S.INV(0.995)`.
+      and the formulas for calculating this in Excel are `=NORM.S.INV(0.005)`
+      and `=NORM.S.INV(0.995)`.
    e. The critical values are:
       \begin{align}
         c_L &= \Phi^{-1}(0.025) \\
@@ -1256,8 +1262,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
         c_H &= \Phi^{-1}(0.975) \\
           &\approx 1.96
       \end{align}
-      and the formulas for calculating this in Excel are `=NORM.S.INV(0.025)` and
-      `=NORM.S.INV(0.975)`.
+      and the formulas for calculating this in Excel are `=NORM.S.INV(0.025)`
+      and `=NORM.S.INV(0.975)`.
    f. The critical values are:
       \begin{align}
         c_L &= \Phi^{-1}(0.05) \\
@@ -1267,38 +1273,53 @@ This appendix contains solutions to all end-of-chapter practice problems.
       \end{align}
       and the formulas for calculating this in Excel are `=NORM.S.INV(0.05)` and
       `=NORM.S.INV(0.95)`.
-7. The confidence interval for a mean always follows the same formula
+7. The only thing we have tested here is whether there is no effect.  We
+   rejected that null, so we can rule out the possibility that there is no
+   effect.  But that does not tell us whether the effect is small or large - in
+   order to say anything about that question we need to test other nulls, or
+   construct a confidence interval.
+   a. Probably false.
+   b. Probably true.
+   c. Possibly true.
+8. The only thing we have tested here is whether there is no effect, and we
+   haven't been able to rule out that possibility.  So we can't really rule
+   anything out.
+   a. Possibly true.
+   b. Possibly true.
+   c. Possibly true.
+9. The confidence interval for a mean always follows the same formula
    a. The confidence interval is:
       \begin{align}
         CI^{95} &= \bar{x} \pm F_{T_{15}}^{-1}(0.975)*\hat{\sigma}/\sqrt{n} \\
           &\approx 4 \pm 2.13*0.3/\sqrt{16} \\
           &\approx (3.84, 4.16)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.975,15)*0.3/SQRT(16)`
-      and `=4+T.INV(0.975,15)*0.3/SQRT(16)`
+      and the formulas for calculating these numbers in Excel are
+      `=4-T.INV(0.975,15)*0.3/SQRT(16)` and `=4+T.INV(0.975,15)*0.3/SQRT(16)`
    b. The confidence interval is:
       \begin{align}
         CI^{90} &= \bar{x} \pm F_{T_{15}}^{-1}(0.95)*\hat{\sigma}/\sqrt{n} \\
           &\approx 4 \pm 1.75*0.3/\sqrt{16} \\
           &\approx (3.87, 4.13)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.95,15)*0.3/SQRT(16)`
-      and `=4+T.INV(0.95,15)*0.3/SQRT(16)`
+      and the formulas for calculating these numbers in Excel are
+      `=4-T.INV(0.95,15)*0.3/SQRT(16)` and `=4+T.INV(0.95,15)*0.3/SQRT(16)`
    c. The confidence interval is:
       \begin{align}
         CI^{99} &= \bar{x} \pm F_{T_{15}}^{-1}(0.995)*\hat{\sigma}/\sqrt{n} \\
           &\approx 4 \pm 2.95*0.3/\sqrt{16} \\
           &\approx (3.77, 4.22)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-T.INV(0.995,15)*0.3/SQRT(16)`
-      and `=4+T.INV(0.995,15)*0.3/SQRT(16)`
+      and the formulas for calculating these numbers in Excel are
+      `=4-T.INV(0.995,15)*0.3/SQRT(16)` and `=4+T.INV(0.995,15)*0.3/SQRT(16)`.
    d. The confidence interval is:
       \begin{align}
         CI^{95} &= \bar{x} \pm \Phi^{-1}(0.975)*\hat{\sigma}/\sqrt{n} \\
           &\approx 4 \pm 1.96*0.3/\sqrt{16} \\
           &\approx (3.85, 4.15)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.975)*0.3/SQRT(16)`
+      and the formulas for calculating these numbers in Excel are
+      `=4-NORM.S.INV(0.975)*0.3/SQRT(16)`
       and `=4+NORM.S.INV(0.975)*0.3/SQRT(16)`
    e. The confidence interval is:
       \begin{align}
@@ -1306,8 +1327,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
           &\approx 4 \pm 1.64*0.3/\sqrt{16} \\
           &\approx (3.88, 4.12)
       \end{align}
-      and the formulas for calculating these numbers in Excel are `=4-NORM.S.INV(0.95)*0.3/SQRT(16)`
-      and `=4+NORM.S.INV(0.95)*0.3/SQRT(16)`
+      and the formulas for calculating these numbers in Excel are
+      `=4-NORM.S.INV(0.95)*0.3/SQRT(16)` and `=4+NORM.S.INV(0.95)*0.3/SQRT(16)`
    f. The confidence interval is:
       \begin{align}
         CI^{99} &= \bar{x} \pm \Phi^{-1}(0.995)*\hat{\sigma}/\sqrt{n} \\
@@ -1315,23 +1336,10 @@ This appendix contains solutions to all end-of-chapter practice problems.
           &\approx (3.81, 4.19)
       \end{align}
       and the formulas for calculating these numbers in Excel are
-      `=4-NORM.S.INV(0.995)*0.3/SQRT(16)`
-      and `=4+NORM.S.INV(0.995)*0.3/SQRT(16)`
-8. The only thing we have tested here is whether there is no effect.  We rejected that null,
-   so we can rule out the possibility that there is no effect.  But that does not tell us whether the
-   effect is small or large - in order to say anything about that question we need to test 
-   other nulls, or construct a confidence interval.
-   a. Probably false.
-   b. Probably true.
-   c. Possibly true.
-9. The only thing we have tested here is whether there is no effect, and we haven't been
-   able to rule out that possibility.  So we can't really rule anything out.
-   a. Possibly true.
-   b. Possibly true.
-   c. Possibly true.
-10. In effect, the confidence interval simultaneously reports the results of every possible
-    null hypothesis.  So anything in the range $(0.10,0.40)$ cannot be ruled out but anything
-    outside of that range can be ruled out.
+      `=4-NORM.S.INV(0.995)*0.3/SQRT(16)` and `=4+NORM.S.INV(0.995)*0.3/SQRT(16)`
+10. In effect, the confidence interval simultaneously reports the results of
+    every possible null hypothesis.  So anything in the range $(0.10,0.40)$
+    cannot be ruled out but anything outside of that range can be ruled out.
     a. Probably false.
     b. Probably true.
     c. Probably true.

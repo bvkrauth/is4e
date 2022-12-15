@@ -1208,79 +1208,104 @@ data and applications.
 
 Answers can be found in the [appendix](#answers-inference).
 
-**SKILL #1: Identify parameter, null and alternative**
+**GOAL #1: Select a parameter of interest, null hypothesis, and alternative hypothesis**
 
-1. Suppose we have a research study of the effect of the minimum wage on employment.  Let $\beta$ 
-   be the parameter defining that effect. Formally state a null hypothesis corresponding to the
-   idea that the minimum wage has no effect on employment, and state the alternative hypothesis 
-   as well.
+1. Suppose we have a research study of the effect of the minimum wage on
+   employment.  Let $\beta$ be the parameter defining that effect. Formally
+   state a null hypothesis corresponding to the idea that the minimum wage has
+   no effect on employment, and state the alternative hypothesis as well.
 
-**SKILL #2: Classify test statistics as valid or invalid**
+**GOAL #2: Identify the properties of a valid test statistic**
 
 2. Which of the following characteristics do test statistics need to possess?
    a. The distribution of the test statistic is known under the null.
    b. The distribution of the test statistic is known under the alternative.
-   c. The test statistic has the same distribution whether the null is true or false.
-   d. The test statistic has a different distribution when the null is true versus when
-      the null is false.
-   e. The test statistic needs to be a number that can be calculated from the data.
+   c. The test statistic has the same distribution whether the null is true or
+      false.
+   d. The test statistic has a different distribution when the null is true
+      versus when the null is false.
+   e. The test statistic needs to be a number that can be calculated from the
+      data.
    f. The test statistic needs to have a normal distribution.
    g. The test statistic's value depends on the true value of the parameter.
 
-**SKILL #3: Find distribution of test statistic under the null**
+**GOAL #3: Find distribution of a simple test statistic under the null and alternative**
 
-3. Suppose we have a random sample of size $n$ on the random variable $x_i$ with unknown
-   mean $\mu$ and unknown variance $\sigma^2$. The conventional T-statistic for the mean 
-   is defined as
+3. Suppose we have a random sample of size $n$ on the random variable $x_i$
+   with unknown mean $\mu$ and unknown variance $\sigma^2$. The conventional
+   T-statistic for the mean is defined as:
     $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
    where $\bar{x}$ is the sample average, $\mu_0$ is the value of $\mu$ under
    the null, and $\hat{\sigma}_x$ is the sample standard deviation.
-   a. What needs to be true in order for $t$ to have the $T_{n-1}$ distribution under
-      the null?
+   a. What needs to be true in order for $t$ to have the $T_{n-1}$ distribution
+      under the null?
    b. What is the asymptotic distribution of $t$?
-
-**SKILL #4: Describe distribution of test statistic under the alternative**
 
 4. Consider the setting from problem 3 above, and suppose that the true value of 
    $\mu$ is some number $\mu_1 \neq \mu_0$.  Write an expression describing $t$ 
-   as the sum of (a) a random variable that has the $T_{n-1}$ distribution and (b) a 
-   random variable that is proportional to $\mu_1-\mu_0$.
+   as the sum of (a) a random variable that has the $T_{n-1}$ distribution and
+   (b) a random variable that is proportional to $\mu_1-\mu_0$.
 
-**SKILL #5: Find the size of a test**
+**GOAL #4: Find the size/significance of a simple test**
 
 5. Suppose that we have a random sample of size $n=14$ on the random variable
    $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis 
    $H_0: \mu = 0$.  Suppose we use the standard t-statistic:
     $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
-   a. Suppose we use critical values $c_L = -1.96$ and $c_H = 1.96$.  Use Excel to calculate 
-      the exact size of this test.
-   b. Suppose we use critical values $c_L = -1.96$ and $c_H = 1.96$.  Use Excel to calculate 
-      the asymptotic size of this test.
-   c. Suppose we use critical values $c_L = -3$ and $c_H = 2$.  Use Excel to calculate 
-      the exact size of this test.
-   d. Suppose we use critical values $c_L = -3$ and $c_H = 2$.  Use Excel to calculate 
-      the asymptotic size of this test.
-   e. Suppose we use critical values $c_L = -\infty$ and $c_H = 1.96$.  Use Excel to calculate 
-      the exact size of this test.
-   f. Suppose we use critical values $c_L = -\infty$ and $c_H = 1.96$.  Use Excel to calculate 
-      the asymptotic size of this test.
+   a. Suppose we use critical values $c_L = -1.96$ and $c_H = 1.96$.  Use Excel
+      to calculate the exact size of this test.
+   b. Suppose we use critical values $c_L = -1.96$ and $c_H = 1.96$.  Use Excel
+      to calculate the asymptotic size of this test.
+   c. Suppose we use critical values $c_L = -3$ and $c_H = 2$.  Use Excel to
+      calculate the exact size of this test.
+   d. Suppose we use critical values $c_L = -3$ and $c_H = 2$.  Use Excel to
+      calculate the asymptotic size of this test.
+   e. Suppose we use critical values $c_L = -\infty$ and $c_H = 1.96$.  Use
+      Excel to calculate the exact size of this test.
+   f. Suppose we use critical values $c_L = -\infty$ and $c_H = 1.96$.  Use
+      Excel to calculate the asymptotic size of this test.
 
-**SKILL #6: Find critical values**
+**GOAL #5: Find critical values for a test of given size**
 
 6. Suppose that we have a random sample of size $n=18$ on the random variable
    $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis 
    $H_0: \mu = 0$.  Suppose we use the standard t-statistic:
     $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
-   a. Use Excel to calculate the (two-tailed) critical values that produce an exact size of 1\%.
-   b. Use Excel to calculate the (two-tailed) critical values that produce an exact size of 5\%.
-   c. Use Excel to calculate the (two-tailed) critical values that produce an exact size of 10\%.
-   d. Use Excel to calculate the (two-tailed) critical values that produce an asymptotic size of 1\%.
-   e. Use Excel to calculate the (two-tailed) critical values that produce an asymptotic size of 5\%.
-   f. Use Excel to calculate the (two-tailed) critical values that produce an asymptotic size of 10\%.
+   a. Use Excel to calculate the (two-tailed) critical values that produce an
+      exact size of 1\%.
+   b. Use Excel to calculate the (two-tailed) critical values that produce an
+      exact size of 5\%.
+   c. Use Excel to calculate the (two-tailed) critical values that produce an
+      exact size of 10\%.
+   d. Use Excel to calculate the (two-tailed) critical values that produce an
+      asymptotic size of 1\%.
+   e. Use Excel to calculate the (two-tailed) critical values that produce an
+      asymptotic size of 5\%.
+   f. Use Excel to calculate the (two-tailed) critical values that produce an
+      asymptotic size of 10\%.
 
-**SKILL #7: Construct and interpret a confidence interval**
+**GOAL #6: Implement and interpret a hypothesis test**
 
-7. Suppose we have a random sample of size $n = 16$ on the random variable 
+7. Suppose you estimate the effect of a university degree on earnings at age 30,
+   and you test the null hypothesis that this effect is zero.  You conduct a
+   test at the 5\% level of significance, and reject the null.  Based on this
+   information, classify each of these statements as "probably true",
+   "possibly true", or "probably false":
+   a. A university degree has no effect on earnings.
+   b. A university degree has some effect on earnings.
+   c. A university degree has a large effect on earnings.
+8. Suppose you estimate the effect of a university degree on earnings at age 30,
+   and you test the null hypothesis that this effect is zero.  You conduct a
+   test at the 5\% level of significance, and fail to reject the null.  Based on
+   this information, classify each of these statements as "probably true",
+   "possibly true", or "probably false":
+   a. A university degree has no effect on earnings.
+   b. A university degree has some effect on earnings.
+   c. A university degree has a large effect on earnings.
+
+**GOAL #7: Construct and interpret a confidence interval**
+
+9. Suppose we have a random sample of size $n = 16$ on the random variable
    $x_i \sim N(\mu,\sigma^2)$, and we calculate the sample average $\bar{x} = 4$
    and the sample standard deviation $\hat{\sigma} = 0.3$.
    a. Use Excel to calculate the 95\% (exact) confidence interval for $\mu$.
@@ -1290,31 +1315,15 @@ Answers can be found in the [appendix](#answers-inference).
    e. Use Excel to calculate the 90\% asymptotic confidence interval for $\mu$.
    f. Use Excel to calculate the 99\% asymptotic confidence interval for $\mu$.
 
-**SKILL #8: Interpret test results and confidence intervals**
-
-8. Suppose you estimate the effect of a university degree on earnings at age 30, and 
-   you test the null hypothesis that this effect is zero.  You conduct a test at the
-   5\% level of significance, and reject the null.  Based on this information, classify 
-   each of these statements as "probably true", 'possibly true", or "probably false":
-   a. A university degree has no effect on earnings.
-   b. A university degree has some effect on earnings.
-   c. A university degree has a large effect on earnings.
-9. Suppose you estimate the effect of a university degree on earnings at age 30, and 
-   you test the null hypothesis that this effect is zero.  You conduct a test at the
-   5\% level of significance, and fail to reject the null.  Based on this information, 
-   classify each of these statements as "probably true", 'possibly true", or "probably false":
-   a. A university degree has no effect on earnings.
-   b. A university degree has some effect on earnings.
-   c. A university degree has a large effect on earnings.
-10. Suppose you estimate the effect of a university degree on earnings at age 30, and 
-    your 95\% confidence interval for the effect is $(0.10,0.40)$, where an effect of 0.10 
-    means a degree increases earnings by 10\% and an effect of 0.40 means that a degree
-    increases earnings by 40\%. Based on this information, 
-    classify each of these statements as "probably true", 'possibly true", or "probably false":
+10. Suppose you estimate the effect of a university degree on earnings at age
+    30, and your 95\% confidence interval for the effect is $(0.10,0.40)$, where
+    an effect of 0.10 means a degree increases earnings by 10\% and an effect of
+    0.40 means that a degree increases earnings by 40\%. Based on this
+    information, classify each of these statements as "probably true",
+    "possibly true", or "probably false":
     a. A university degree has no effect on earnings.
     b. A university degree has some effect on earnings.
-    c. A university degree has a large effect on earnings, where "large" means at least 10\%.
-    d. A university degree has a very large effect on earnings, where "very large" means 
-      at least 50\%.
-
-
+    c. A university degree has a large effect on earnings, where "large" means
+       at least 10\%.
+    d. A university degree has a very large effect on earnings, where
+       "very large" means at least 50\%.
