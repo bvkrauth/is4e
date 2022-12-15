@@ -914,7 +914,7 @@ analysis in both Excel and R.
 
 Answers can be found in the [appendix](#answers-advanced-data-cleaning).
 
-**SKILL #1: Identify common data file formats**
+**GOAL #1: Identify and work with common data file formats**
 
 1. Identify each of these text files as fixed-width, tab/space separated, or CSV
    format.
@@ -937,21 +937,21 @@ Answers can be found in the [appendix](#answers-advanced-data-cleaning).
       Betty,32
       ```
 
-**SKILL #2: Explain and implement common data cleaning tasks**
+**GOAL #2: Describe and implement common data cleaning tasks**
 
 2. What is the purpose of each of the following:
    a. A crosswalk table
    b. Matching observations by keys
    c. Aggregating data by groups
 
-**SKILL #3: Describe and use Excel data management tools**
+**GOAL #3: Describe and use Excel data management tools**
 
 3. Under which of these scenarios can you edit cell A1?
    a. You open a blank sheet.
    b. You open a blank sheet, and protect the sheet.
    c. You open a blank sheet, unlock cells A1:C9 and protect the sheet.
    d. You open a blank sheet, lock cells A1:C9 and protect the sheet.
+
 4. What will happen if you:
    a. Add data validation to a column that contains invalid data.
    b. Add data validation to a column, and then try to enter invalid data
-
