@@ -1316,7 +1316,7 @@ produced that data.
 
 Answers can be found in the [appendix](#answers-more-on-random-variables).
 
-Questions 1- 7 below continue our [craps example](#problems-probability). To 
+Questions 6 - 18 below continue our [craps example](#problems-probability). To
 review that example, we have:
 
 - An outcome $(r,w)$ where $r$ and $w$ are the numbers rolled on a pair of 
@@ -1325,9 +1325,9 @@ review that example, we have:
   - The total showing on the pair of dice: $t = r+w$
   - An indicator for whether a bet on "Yo" wins: $y = I(t=11)$.
 
-In addition, let $b = I(t=12)$ be an indicator of whether a bet on "Boxcars" wins. Since
-it is an indicator variable $b$ has the $Bernoulli(p)$ distribution with $p = 1/36$, so
-it has mean
+In addition, let $b = I(t=12)$ be an indicator of whether a bet on "Boxcars"
+wins. Since it is an indicator variable $b$ has the $Bernoulli(p)$ distribution
+with $p = 1/36$, so it has mean:
   $$E(b) = p = 1/36$$
 and variance:
   $$var(b) = p(1-p) = 1/36*35/36 \approx 0.027 $$
@@ -1397,7 +1397,9 @@ and variance:
 
 **GOAL #6: Derive the joint PDF of two discrete random variables from the probability distribution of a random outcome **
 
-6. Let $f_{y,b}(\cdot)$ be the joint PDF of $y$ and $b$.
+6. Let $f_{y,b}(\cdot)$ be the joint PDF of $y$ and $b$, where $y$ is an
+   indicator for winning a "Yo" bet in craps, and $b$ is an indicator for
+   winning a "Boxcars" bet.
    a. Find $f_{y,b}(1,1)$
    b. Find $f_{y,b}(0,1)$
    c. Find $f_{y,b}(1,0)$
@@ -1405,14 +1407,17 @@ and variance:
 
 **GOAL #7: Calculate a marginal PDF from a (discrete) joint PDF **
 
-7.  Let $f_b(\cdot)$ be the marginal PDF of $b$.
+7.  Let $f_b(\cdot)$ be the marginal PDF of $b$, where $b$ is an indicator for
+    winning a "Boxcars" bet in craps
     a. Find $f_b(0)$ based on the joint PDF $f_{y,b}(\cdot)$.
     b. Find $f_b(1)$ based on the joint PDF $f_{y,b}(\cdot)$.
     c. Find $E(b)$ based on this marginal PDF you found in parts (a) and (b).
 
 **GOAL #8: Derive a conditional PDF from a (discrete) joint PDF**
 
-8. Let $f_{y|b}(1,1)$ be the conditional PDF of $y$ given $b$.
+8. Let $f_{y|b}(1,1)$ be the conditional PDF of $y$ given $b$, where $y$ is an
+   indicator for winning a "Yo" bet in craps, and $b$ is an indicator for
+   winning a "Boxcars" bet.
    a. Find $f_{y|b}(1,1)$.
    b. Find $f_{y|b}(0,1)$.
    c. Find $f_{y|b}(1,0)$.
@@ -1429,7 +1434,8 @@ and variance:
 
 **GOAL #10: Determine whether two random variables are independent**
 
-10. Which of the following pairs of random variables are independent?
+10. Which of the following pairs of random variables are independent for a
+    single game of craps?
     a. $y$ and $t$
     b. $y$ and $b$
     c. $r$ and $w$
@@ -1437,18 +1443,23 @@ and variance:
 
 **GOAL #11: Calculate the covariance of two discrete random variables from their joint PDF**
 
-11. Find $cov(y,b)$ using the joint PDF $f_{y,b}(\cdot)$.
+11. Find $cov(y,b)$ using the joint PDF $f_{y,b}(\cdot)$ calculated in problem
+    (6) above.
 
 **GOAL #12: Calculate the covariance of two random variables using the expected value formula**
 
-12. Find the following covariances using the alternate formula:
+12. Find the following covariances using the alternate formula, where $y$ is an
+    indicator for winning a "Yo" bet in craps, and $b$ is an indicator for
+    winning a "Boxcars" bet.
     a. Find $E(yb)$ using the joint PDF $f_{y,b}(\cdot)$.
     b. Find $cov(y,b)$ using your result in (a).
     c. Is your answer in (b) the same as your answer to question 5 above?
 
 **GOAL #13: Calculate the correlation of two random variables from their covariance**
 
-13. Find $corr(y,b)$ using the results you found earlier.
+13. Find $corr(y,b)$ using the results you found earlier, where $y$ is an
+    indicator for winning a "Yo" bet in craps, and $b$ is an indicator for
+    winning a "Boxcars" bet.
 
 14. We can find the correlation from the covariance, but we can also find the
     covariance from the correlation.  For example, suppose we already know that
@@ -1463,7 +1474,8 @@ and variance:
 
 **GOAL #14: Calculate the correlation and covariance of two independent random variables**
 
-15. We earlier found that $r$ and $w$ were independent. Using this information:
+15. We earlier found that $r$ and $w$ (the values rolled on two separate dice)
+    are independent. Using this information:
     a. Find $cov(r,w)$.
     b. Find $corr(r,w)$.
 
@@ -1474,7 +1486,9 @@ and variance:
     a. Find $E(y + b)$
     b. Find $E(16y + 31b - 2)$
 
-17. Find the following variances and covariances:
+17. Find the following variances and covariances,, where $y$ is an
+   indicator for winning a "Yo" bet in craps, and $b$ is an indicator for
+   winning a "Boxcars" bet.
     a. Find $cov(16y,31b)$
     b. Find $var(y + b)$
 
