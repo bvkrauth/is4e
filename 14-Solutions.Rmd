@@ -519,107 +519,207 @@ This appendix contains solutions to all end-of-chapter practice problems.
 
 [Click here to see the problems](#problems-more-on-random-variables)
 
-1. The key here is to redefine joint events for $y$ and $b$ as 
-   events for the single random variable $t$.
-   a. The joint PDF is:
+1.  Based on these figures:
+    a. $x$ is continuous.
+    b. The top graph shows the PDF and thebottom graph shows the CDF.
+    c. The median of $x$ is about 3.
+    d. $x$ is more likely to be between 0 and 10.
+2.  This question uses various formulas for the uniform distribution.
+    a. The PDF is:
       \begin{align}
-        f_{y,b}(1,1) &= \Pr(y = 1 \cap b = 1) \\
-          &= \Pr(t = 11 \cap t = 12) \\
-          &= \Pr(\emptyset)  \\
-          &= 0
+        f_x(a) &= \begin{cases}
+          0 & a < -1 \\
+          0.5 & -1 \leq a \leq 1 \\
+          0 & a > 1 \\
+          \end{cases}
+      \end{align}
+     b. The CDF is:
+       \begin{align}
+         f_x(a) &= \begin{cases}
+           0 & a < -1 \\
+           \frac{a+1}{2} & -1 \leq a \leq 1 \\
+           1 & a > 1 \\
+           \end{cases}
        \end{align}
-   b. The joint PDF is:
-      \begin{align}
-        f_{y,b}(0,1) &= \Pr(y \neq 1 \cap b = 1) \\
-          &= \Pr(t \neq 11 \cap t = 12) \\
-          &= \Pr(t = 12) \\
-          &= f_t(12) \\
-          &= 1/36
+     c. $x$ is a continuous random variable so $\Pr(x = 0) = 0$
+     d. $x$ is a continuous random variable so:
+        \begin{align}
+          \Pr(0 < x < 0.5) &= F_x(0.5) - F_x(0) \\
+            &= \frac{0.5+1}{2} - \frac{1}{2} \\
+            &= 0.25
+        \end{align}
+     e. $x$ is a continuous random variable so:
+        \begin{align}
+          \Pr(0 \leq x \leq 0.5) &= F_x(0.5) - F_x(0) \\
+             &= \frac{0.5+1}{2} - \frac{1}{2} \\
+            &= 0.25
+        \end{align}
+     f. The median is:
+        \begin{align}
+          F_x^{-1}(0.5) &= \min \{a: \Pr(x \leq a) \geq 0.5\} \\
+            &= \min \{a: F_x(a) \geq 0.5\} \\
+            &= \min \{a: \frac{a+1}{2} \geq 0.5\} \\
+            &= \textrm{the $a$ that solves the equation $\frac{a+1}{2} = 0.5$} \\
+            &= 0
+        \end{align}
+     g. The 75th percentile is
+        \begin{align}
+          F_x^{-1}(0.75) &= \min \{a: \Pr(x \leq a) \geq 0.75\} \\
+            &= \min \{a: F_x(a) \geq 0.75\} \\
+            &= \min \{a: \frac{a+1}{2} \geq 0.75\} \\
+            &= \textrm{the $a$ that solves the equation $\frac{a+1}{2} = 0.75$} \\
+            &= 0.5
+        \end{align}
+     h. The mean of a $Uniform(a,b)$ random variable is $(a+b)/2$, so
+        \begin{align}
+          E(x) &= \frac{1 + (-1)}{2} \\
+            &= 0
        \end{align}
-   c. The joint PDF is:
-      \begin{align}
-        f_{y,b}(1,0) &= \Pr(y = 1 \cap b = 0) \\
-          &= \Pr(t = 11 \cap t \neq 12) \\
-          &= \Pr(t = 11)  \\
-          &= f_t(11) \\
-          &= 1/18
+     i. The variance of a $Uniform(a,b)$ random variable is $(b-a)^2/12$, so
+        \begin{align}
+          var(x) &= (b-a)^2/12 \\
+            &= \frac{(1 - (-1))^2}{12} \\
+            &\approx 0.33
+        \end{align}
+3.  A linear function of a uniform random variable is also uniform.
+    a. When $x = -1$, we have $y = 3*(-1)+5 = 2$. When $x = 1$, we have
+       $y = 3*(1)+5 = 8$.  Therefore $y \sim U(2,8)$
+    b. The expected value is $E(y) = (2+8)/2 = 5$.
+4.  This question applies various formulas for the normal distribution.
+    a. The expected value of a $N(\mu,\sigma^2)$ random variable is $\mu$,
+       so $E(x) = 10$
+    b. The median of a $N(\mu,\sigma^2)$ random variable is $\mu$,
+       so $Median(x) = 10$.
+    c. The variance of a $N(\mu,\sigma^2)$ random variable is $\sigma^2$,
+       so $var(x) = 4$.
+    d. The standard deviation is $sd(x) = \sqrt{var(x)} = \sqrt{4} = 2$
+    b. The Excel formula would be `=NORM.DIST(11,10,2,TRUE)` which
+       yields the result $\Pr(x \leq 11) \approx 0.691$
+5.  A linear function of a normal random variable is also normal.
+    a. The distribution of $y$ will be normal with mean $3E(x) + 5 = 35$ and variance
+       $3^2 var(x) = 36$, so $y \sim N(35,36)$
+    b. If $x \sim N(10,4)$ then $z = \frac{x - 10}{2} \sim N(0,1)$.
+    c. Solving for $x$ in terms of $z$ we get $x = 2z + 10$
+       \begin{align}
+          \Pr(x \leq 11) &= \Pr(2z + 10 \leq 11) \\
+            &= \Pr(z \leq (11-10)/2) \\
+            &= \Pr(z \leq 0.5) \\
+            &= \Phi(0.5)
        \end{align}
-   d. The joint PDF is:
-      \begin{align}
-        f_{y,b}(0,0) &= \Pr(y = 0 \cap b = 0) \\
-          &= \Pr(t \neq 11 \cap t \neq 12) \\
-          &= \Pr(t \notin \{11,12\})  \\
-          &= 1 - \Pr(t \in \{11,12\}) \\
-          &= 1 - 1/36 - 1/18 \\
-          &= 11/12
+    d. The correct Excel formula would be `=NORM.S.DIST(0.5,TRUE)` which
+       yields the result $\Pr(x \leq 11) \approx 0.691$.
+6.  The key here is to redefine joint events for $y$ and $b$ as events for the
+    single random variable $t$.
+    a. The joint PDF is:
+       \begin{align}
+         f_{y,b}(1,1) &= \Pr(y = 1 \cap b = 1) \\
+           &= \Pr(t = 11 \cap t = 12) \\
+           &= \Pr(\emptyset)  \\
+           &= 0
        \end{align}
-2. The marginal PDF is constructed by adding together the joint PDFs.
+    b. The joint PDF is:
+       \begin{align}
+         f_{y,b}(0,1) &= \Pr(y \neq 1 \cap b = 1) \\
+           &= \Pr(t \neq 11 \cap t = 12) \\
+           &= \Pr(t = 12) \\
+           &= f_t(12) \\
+           &= 1/36 \\
+           &\approx 0.028
+       \end{align}
+    c. The joint PDF is:
+       \begin{align}
+         f_{y,b}(1,0) &= \Pr(y = 1 \cap b = 0) \\
+           &= \Pr(t = 11 \cap t \neq 12) \\
+           &= \Pr(t = 11)  \\
+           &= f_t(11) \\
+           &= 1/18 \
+           &\approx 0.056
+       \end{align}
+    d. The joint PDF is:
+       \begin{align}
+         f_{y,b}(0,0) &= \Pr(y = 0 \cap b = 0) \\
+           &= \Pr(t \neq 11 \cap t \neq 12) \\
+           &= \Pr(t \notin \{11,12\})  \\
+           &= 1 - \Pr(t \in \{11,12\}) \\
+           &= 1 - 1/36 - 1/18 \\
+           &= 11/12 \\
+           &\approx 0.917
+       \end{align}
+7.  The marginal PDF is constructed by adding together the joint PDFs.
     a. The marginal PDF is:
        \begin{align}
           f_b(0) &= f_{y,b}(0,0) + f_{y,b}(1,0) \\
             &= 11/12 + 1/18 \\
-            &= 35/36
+            &= 35/36 \\
+            &\approx 0.972
         \end{align}
     b. The marginal PDF is:
        \begin{align}
           f_b(1) &= f_{y,b}(0,1) + f_{y,b}(1,1) \\
             &= 1/36 + 0 \\
-            &= 1/36
+            &= 1/36 \\
+            &\approx 0.028
         \end{align}
     c. The expected value is:
         \begin{align}
           E(b) &= 0*f_b(0) + 1*f_b(1) \\
             &= f_b(1) \\
-            &= 1/36
+            &= 1/36 \\
+            &\approx 0.028
         \end{align}
-3. The conditional PDF is the ratio of the joint PDF to the marginal PDF:
-   a. The conditional PDF is:
-      \begin{align}
-        f_{y|b}(1,1) &= \Pr(y=1|b=1) \\
-          &= \frac{f_{y,b}(1,1)}{f_b(1)} \\
-          &= \frac{0}{1/36} \\
-          &= 0
+8.  The conditional PDF is the ratio of the joint PDF to the marginal PDF:
+    a. The conditional PDF is:
+       \begin{align}
+         f_{y|b}(1,1) &= \Pr(y=1|b=1) \\
+           &= \frac{f_{y,b}(1,1)}{f_b(1)} \\
+           &= \frac{0}{1/36} \\
+           &= 0
       \end{align}
-   b. The conditional PDF is:
-      \begin{align}
-        f_{y|b}(0,1) &= \Pr(y=0|b=1) \\
-          &= \frac{f_{y,b}(0,1)}{f_b(1)} \\
-          &= \frac{1/36}{1/36} \\
-          &= 1
+    b. The conditional PDF is:
+       \begin{align}
+         f_{y|b}(0,1) &= \Pr(y=0|b=1) \\
+           &= \frac{f_{y,b}(0,1)}{f_b(1)} \\
+           &= \frac{1/36}{1/36} \\
+           &= 1
       \end{align}
-   c. The conditional PDF is:
-      \begin{align}
-        f_{y|b}(1,0) &= \Pr(y=1|b=0) \\
-          &= \frac{f_{y,b}(1,0)}{f_b(0)} \\
-          &= \frac{1/18}{35/36} \\
-          &\approx 0.057
+    c. The conditional PDF is:
+       \begin{align}
+         f_{y|b}(1,0) &= \Pr(y=1|b=0) \\
+           &= \frac{f_{y,b}(1,0)}{f_b(0)} \\
+           &= \frac{1/18}{35/36} \\
+           &\approx 0.057
       \end{align}
-   d. The conditional PDF is:
-      \begin{align}
-        f_{y|b}(0,0) &= \Pr(y=0|b=0) \\
-          &= \frac{f_{y,b}(0,0)}{f_b(0)} \\
-          &= \frac{11/12}{35/36} \\
-          &\approx 0.943
+    d. The conditional PDF is:
+       \begin{align}
+         f_{y|b}(0,0) &= \Pr(y=0|b=0) \\
+           &= \frac{f_{y,b}(0,0)}{f_b(0)} \\
+           &= \frac{11/12}{35/36} \\
+           &\approx 0.943
       \end{align}
-4. $r$ and $w$ are independent.
-5. Since $E(y) = 1/18$ and $E(b) = 1/36$ we have
-   \begin{align}
-    cov(y,b) &= E((y-E(y))(b-E(b))) \\
-      &= \begin{aligned}[t]
-        & (0-E(y))*(0-E(b))*f_{y,b}(0,0) \\
-        &+ (1-E(y))*(0-E(b))*f_{y,b}(1,0) \\
-        &+ (0-E(y))*(1-E(b))*f_{y,b}(0,1) \\
-        &+ (1-E(y))*(1-E(b))*f_{y,b}(1,1) \\
-        \end{aligned} \\
-      &= \begin{aligned}[t]
-        & (0-1/18)*(0-1/36)*(11/12) \\
-        &+ (1-1/18)*(0-1/36)*(1/18) \\
-        &+ (0-1/18)*(1-1/36)*(1/36) \\
-        &+ (1-1/18)*(1-1/36)*(0) \\
-        \end{aligned} \\
-      &\approx -0.00154
+9.  Based on your previous calculations:
+    a. The probability you and Betty both win is $f_{y,b}(1,1) = 0$.
+    b. The probability you and Betty both lose is $f_{y,b}(0,0) \approx 0.917$.
+    c. The probability Betty wins is $f_b(1) \approx 0.028$.
+    d. The probability that you win when Betty loses is $f_{y|b}(1,0) \approx 0.057$.
+10. $r$ and $w$ (item c) are independent.
+11. Since $E(y) = 1/18$ and $E(b) = 1/36$ we have
+    \begin{align}
+     cov(y,b) &= E((y-E(y))(b-E(b))) \\
+       &= \begin{aligned}[t]
+         & (0-E(y))*(0-E(b))*f_{y,b}(0,0) \\
+         &+ (1-E(y))*(0-E(b))*f_{y,b}(1,0) \\
+         &+ (0-E(y))*(1-E(b))*f_{y,b}(0,1) \\
+         &+ (1-E(y))*(1-E(b))*f_{y,b}(1,1) \\
+         \end{aligned} \\
+       &= \begin{aligned}[t]
+         & (0-1/18)*(0-1/36)*(11/12) \\
+         &+ (1-1/18)*(0-1/36)*(1/18) \\
+         &+ (0-1/18)*(1-1/36)*(1/36) \\
+         &+ (1-1/18)*(1-1/36)*(0) \\
+         \end{aligned} \\
+       &\approx -0.00154
     \end{align}
-6. The alternate formula for the covariance is $cov(y,b) = E(yb) - E(y)E(b)$.
+12. The alternate formula for the covariance is $cov(y,b) = E(yb) - E(y)E(b)$.
     a. The expected value is:
        \begin{align}
         E(yb) &= \begin{aligned}
@@ -638,14 +738,14 @@ This appendix contains solutions to all end-of-chapter practice problems.
           &\approx -0.00154
         \end{align}
     c. Yes, if you have done it right you should get the same answer.
-7. The correlation is:
-   \begin{align}
+13. The correlation is:
+    \begin{align}
       corr(y,b) &= \frac{cov(y,b)}{\sqrt{var(y)var(b)}} \\
         &\approx \frac{-0.00154}{\sqrt{ 0.0525*0.027}} \\
         &\approx -0.04
     \end{align}
-8. In this question we know the correlation and several values of the formula
-   defining it, and we use this to solve for the missing value.
+14. In this question we know the correlation and several values of the formula
+    defining it, and we use this to solve for the missing value.
     a. We know that $corr(b,t) = \frac{cov(b,t)}{\sqrt{var(b)var(t)}}$, so
        we can substitute known values to get:
        \begin{align}
@@ -666,11 +766,11 @@ This appendix contains solutions to all end-of-chapter practice problems.
           E(bt) &= 0.139 + (1/36)*7 \\
             &= 0.333
        \end{align}
-9. Remember that independent events are also uncorrelated. So:
+15. Remember that independent events are also uncorrelated. So:
     a. The covariance is $cov(r,w) = 0$.
     b. The correlation is $corr(r,w) = 0$.
-10. This question uses the formulas for the mean of a linear function of 
-    two random variables. 
+16. This question uses the formulas for the mean of a linear function of two
+    random variables.
     a. The expected value is:
        \begin{align}
           E(y+b) &= E(y) + E(b) \\
@@ -684,8 +784,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= 16/18 + 31/36 - 2 \\
             &= -9/36
        \end{align}
-11. This question uses the formulas for the variance and covariance of 
-    a linear function of two random variables. 
+17. This question uses the formulas for the variance and covariance of a linear
+    function of two random variables.
     a. The covariance is:
        \begin{align}
           cov(16y,31b) &= 16 * 31 * cov(y,b) \\
@@ -698,92 +798,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &\approx 0.0525 + 0.027 + 2*(-0.00154) \\
             &\approx 0.07642
         \end{align}
-12. The result of a bet on Boxcars is *negatively* related to the
-    result of a bet on Yo.
-13. This question uses various formulas for the uniform distribution.
-    a. The PDF is:
-      \begin{align}
-        f_x(a) &= \begin{cases}
-          0 & a < -1 \\
-          0.5 & -1 \leq a \leq 1 \\
-          0 & a > 1 \\
-          \end{cases}
-      \end{align}
-    b. The CDF is:
-      \begin{align}
-        f_x(a) &= \begin{cases}
-          0 & a < -1 \\
-          \frac{a+1}{2} & -1 \leq a \leq 1 \\
-          1 & a > 1 \\
-          \end{cases}
-      \end{align}
-    c. $x$ is a continuous random variable so $\Pr(x = 0) = 0$
-    d. $x$ is a continuous random variable so 
-       \begin{align}
-          \Pr(0 < x < 0.5) &= F_x(0.5) - F_x(0) \\
-            &= \frac{0.5+1}{2} - \frac{1}{2} \\
-            &= 0.25
-        \end{align}
-    e. $x$ is a continuous random variable so 
-       \begin{align}
-          \Pr(0 \leq x \leq 0.5) &= F_x(0.5) - F_x(0) \\
-            &= \frac{0.5+1}{2} - \frac{1}{2} \\
-            &= 0.25
-        \end{align}
-    f. The median is:
-       \begin{align}
-         F_x^{-1}(0.5) &= \min \{a: \Pr(x \leq a) \geq 0.5\} \\
-           &= \min \{a: F_x(a) \geq 0.5\} \\
-           &= \min \{a: \frac{a+1}{2} \geq 0.5\} \\
-           &= \textrm{the $a$ that solves the equation $\frac{a+1}{2} = 0.5$} \\
-           &= 0
-        \end{align}
-    g. The 75th percentile is
-       \begin{align}
-         F_x^{-1}(0.75) &= \min \{a: \Pr(x \leq a) \geq 0.75\} \\
-           &= \min \{a: F_x(a) \geq 0.75\} \\
-           &= \min \{a: \frac{a+1}{2} \geq 0.75\} \\
-           &= \textrm{the $a$ that solves the equation $\frac{a+1}{2} = 0.75$} \\
-           &= 0.5
-        \end{align}
-    h. The mean of a $Uniform(a,b)$ random variable is $(a+b)/2$, so
-       \begin{align} 
-          E(x) &= \frac{1 + (-1)}{2} \\
-            &= 0
-       \end{align}
-    i. The variance of a $Uniform(a,b)$ random variable is $(b-a)^2/12$, so
-       \begin{align}
-          var(x) &= (b-a)^2/12 \\
-            &= \frac{(1 - (-1))^2}{12} \\
-            &\approx 0.33
-        \end{align}
-14. A linear function of a uniform random variable is also uniform.
-    a. When $x = -1$, we have $y = 3*(-1)+5 = 2$. When $x = 1$, we have 
-       $y = 3*(1)+5 = 8$.  Therefore $y \sim U(2,8)$
-    b. The expected value is $E(y) = (2+8)/2 = 5$.
-15. This question applies various formulas for the normal distribution.
-    a. The expected value of a $N(\mu,\sigma^2)$ random variable is $\mu$, 
-       so $E(x) = 10$
-    b. The median of a $N(\mu,\sigma^2)$ random variable is $\mu$, 
-       so $Median(x) = 10$.
-    c. The variance of a $N(\mu,\sigma^2)$ random variable is $\sigma^2$, 
-       so $var(x) = 4$.
-    d. The standard deviation is $sd(x) = \sqrt{var(x)} = \sqrt{4} = 2$
-    b. The Excel formula would be `=NORM.DIST(11,10,2,TRUE)` which
-       yields the result $\Pr(x \leq 11) \approx 0.691$
-16. A linear function of a normal random variable is also normal.
-    a. The distribution of $y$ will be normal with mean $3E(x) + 5 = 35$ and variance
-       $3^2 var(x) = 36$, so $y \sim N(35,36)$
-    b. If $x \sim N(10,4)$ then $z = \frac{x - 10}{2} \sim N(0,1)$.
-    c. Solving for $x$ in terms of $z$ we get $x = 2z + 10$
-       \begin{align}
-          \Pr(x \leq 11) &= \Pr(2z + 10 \leq 11) \\
-            &= \Pr(z \leq (11-10)/2) \\
-            &= \Pr(z \leq 0.5) \\
-            &= \Phi(0.5)
-       \end{align}
-    d. The correct Excel formula would be `=NORM.S.DIST(0.5,TRUE)` which
-       yields the result $\Pr(x \leq 11) \approx 0.691$. 
+18. Statement (b) is correct: the result of a bet on Boxcars is *negatively*
+    related to the result of a bet on Yo.
 
 ## **7** Statistics {-#answers-statistics}
 

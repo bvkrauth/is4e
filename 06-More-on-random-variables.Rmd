@@ -1332,94 +1332,33 @@ it has mean
 and variance:
   $$var(b) = p(1-p) = 1/36*35/36 \approx 0.027 $$
 
-**SKILL #1: Derive a joint distribution from the underlying outcome **
 
-1. Let $f_{y,b}(\cdot)$ be the joint PDF of $y$ and $b$.
-   a. Find $f_{y,b}(1,1)$
-   b. Find $f_{y,b}(0,1)$
-   c. Find $f_{y,b}(1,0)$
-   d. Find $f_{y,b}(0,0)$
+**GOAL #1: Interpret the CDF and PDF of a continuous random variable**
 
-**SKILL #2: Derive a marginal distribution from a joint distribution **
+1. The figure below shows the PDF and CDF of a random variable $x$.
+   ```{r goal1}
+   simdata <- tibble(a = seq(-3,40,len=200),
+                     f = dchisq(a,df=4),
+                     F = pchisq(a,df=4))
+   ggplot(data = simdata, mapping = aes(x = a, y =f)) +
+     geom_line(col="blue") +
+     xlab("a") +
+     ylab("f(a)")
+   ggplot(data = simdata, mapping = aes(x = a, y =F)) +
+     geom_line(col="blue") +
+     xlab("a") +
+     ylab("F(a)")
+   ```
 
-2. Let $f_b(\cdot)$ be the marginal PDF of $b$ 
-    a. Find $f_b(0)$ based on the joint PDF $f_{y,b}(\cdot)$.
-    b. Find $f_b(1)$ based on the joint PDF $f_{y,b}(\cdot)$.
-    c. Find $E(b)$ based on this marginal PDF you found in parts (a) and (b).
+   Based on these figures:
+   a. Is $x$ discrete or continuous?
+   b. Which graph shows the PDF and which graph shows the CDF?
+   c. Approximately what value is the median of $x$?
+   d. Is $x$ more likely to be between 0 and 10, or between 10 and 20?
 
-**SKILL #3: Derive a conditional distribution from a joint distribution**
+**GOAL #2: Know and use the key properties of the uniform distribution**
 
-3. Let $f_{y|b}(1,1)$ be the conditional PDF of $y$ given $b$.
-   a. Find $f_{y|b}(1,1)$.
-   b. Find $f_{y|b}(0,1)$.
-   c. Find $f_{y|b}(1,0)$.
-   d. Find $f_{y|b}(0,0)$.
-
-**SKILL #4: Identify whether two random variables are independent**
-
-4. Which of the following pairs of random variables are independent?
-   - $y$ and $t$
-   - $y$ and $b$
-   - $r$ and $w$
-   - $r$ and $y$
-
-**SKILL #5: Find covariance from a PDF**
-
-5. Find $cov(y,b)$ using the joint PDF $f_{y,b}(\cdot)$.
-
-**SKILL #6: Find covariance using the alternate formula**
-
-6. Find the following covariances using the alternate formula:
-    a. Find $E(yb)$ using the joint PDF $f_{y,b}(\cdot)$.
-    b. Find $cov(y,b)$ using your result in (a).
-    c. Is your answer in (b) the same as your answer to question 5 above?
-
-**SKILL #7: Find correlation from covariance**
-
-7. Find $corr(y,b)$ using the results you found earlier.
-
-8. We can find the correlation from the covariance, but we can also find the 
-   covariance from the correlation.  For example, suppose we already know that
-    \begin{align}
-      E(t) &= 7 \\
-      var(t) &\approx 5.83  \\
-      corr(b,t) &\approx 0.35 \\
-    \end{align}
-    Using this information and the values of $E(b)$ and $var(b)$ provided above:
-    a. Find $cov(b,t)$.
-    b. Find $E(bt)$.
-
-**SKILL #8: Find correlation and covariance for independent random variables**
-
-9. We earlier found that $r$ and $w$ were independent. Using this information:
-    a. Find $cov(r,w)$.
-    b. Find $corr(r,w)$.
-
-**SKILL #9: Work with linear functions of random variables**
-
-10. Your net winnings if you bet \$1 on Yo and \$1 on Boxcars can
-    be written $16y + 31b - 2$. Find the following expected values:
-    a. Find $E(y + b)$
-    b. Find $E(16y + 31b - 2)$
-
-11. Find the following variances and covariances:
-    a. Find $cov(16y,31b)$
-    b. Find $var(y + b)$
-
-**SKILL #10: Interpret covariances and correlations**
-
-12. Based on your results, which of the following statements is 
-    correct?
-    - The result of a bet on Boxcars is *positively* related to the
-      result of a bet on Yo.
-    - The result of a bet on Boxcars is *negatively* related to the
-      result of a bet on Yo.
-    - The result of a bet on Boxcars is *not* related to the
-      result of a bet on Yo.
-
-**SKILL #11: Use the properties of the uniform distribution**
-
-13. Suppose that $x \sim U(-1,1)$.
+2.  Suppose that $x \sim U(-1,1)$.
     a. Find the PDF $f_x(\cdot)$ of $x$
     b. Find the CDF $F_x(\cdot)$ of $x$
     c. Find $\Pr(x = 0)$
@@ -1430,29 +1369,121 @@ and variance:
     h. Find $E(x)$
     i. Find $var(x)$
 
-**SKILL #12: Work with linear functions of uniform random variables**
+**GOAL #3: Derive the distribution for a linear function of a uniform random variable**
 
-14. Suppose that $x \sim U(-1,1)$, and let $y = 3x + 5$.
+3.  Suppose that $x \sim U(-1,1)$, and let $y = 3x + 5$.
     a. What is the probability distribution of $y$?
     b. Find $E(y)$.
 
-**SKILL #13: Use the properties of the normal distribution**
+**GOAL #4: Know and use the key properties of the normal distribution**
 
-15. Suppose that $x \sim N(10,4)$.
+4.  Suppose that $x \sim N(10,4)$.
     a. Find $E(x)$.
     b. Find the median of $x$.
     c. Find $var(x)$.
     d. Find $sd(x)$.
     b. Use Excel to find $\Pr(x \leq 11)$.
 
-**SKILL #14: Work with linear functions of a normal random variable**
+**GOAL #5: Derive the distribution for a linear function of a normal random variable**
 
-16. Suppose that $x \sim N(10,4)$.
+5.  Suppose that $x \sim N(10,4)$.
     a. Find the distribution of $y = 3x + 5$.
     b. Find a random variable $z$ that is a linear function of $x$ and
        has the standard normal distribution
-    c. Find an expression for $\Pr(x \leq 11)$ in terms of the standard 
-       normal CDF $\Phi(\cdot)$.
+    c. Find an expression for $\Pr(x \leq 11)$ in terms of the standard normal
+       CDF $\Phi(\cdot)$.
     d. Use the Excel function `NORM.S.DIST` and the previous result to
        find to find the value of $\Pr(x \leq 11)$.
 
+**GOAL #6: Derive the joint PDF of two discrete random variables from the probability distribution of a random outcome **
+
+6. Let $f_{y,b}(\cdot)$ be the joint PDF of $y$ and $b$.
+   a. Find $f_{y,b}(1,1)$
+   b. Find $f_{y,b}(0,1)$
+   c. Find $f_{y,b}(1,0)$
+   d. Find $f_{y,b}(0,0)$
+
+**GOAL #7: Calculate a marginal PDF from a (discrete) joint PDF **
+
+7.  Let $f_b(\cdot)$ be the marginal PDF of $b$.
+    a. Find $f_b(0)$ based on the joint PDF $f_{y,b}(\cdot)$.
+    b. Find $f_b(1)$ based on the joint PDF $f_{y,b}(\cdot)$.
+    c. Find $E(b)$ based on this marginal PDF you found in parts (a) and (b).
+
+**GOAL #8: Derive a conditional PDF from a (discrete) joint PDF**
+
+8. Let $f_{y|b}(1,1)$ be the conditional PDF of $y$ given $b$.
+   a. Find $f_{y|b}(1,1)$.
+   b. Find $f_{y|b}(0,1)$.
+   c. Find $f_{y|b}(1,0)$.
+   d. Find $f_{y|b}(0,0)$.
+
+**GOAL #9: Interpret joint, marginal, and conditional distributions**
+
+9.  You have bet on Yo and your friend Betty bet on Boxcars. Based on your
+    previous calculations:
+    a. What is the probability you and Betty both win?
+    b. What is the probability you and Betty both lose?
+    c. What is the probability Betty wins?
+    d. What is the probability that you win if Betty loses?
+
+**GOAL #10: Determine whether two random variables are independent**
+
+10. Which of the following pairs of random variables are independent?
+    a. $y$ and $t$
+    b. $y$ and $b$
+    c. $r$ and $w$
+    d. $r$ and $y$
+
+**GOAL #11: Calculate the covariance of two discrete random variables from their joint PDF**
+
+11. Find $cov(y,b)$ using the joint PDF $f_{y,b}(\cdot)$.
+
+**GOAL #12: Calculate the covariance of two random variables using the expected value formula**
+
+12. Find the following covariances using the alternate formula:
+    a. Find $E(yb)$ using the joint PDF $f_{y,b}(\cdot)$.
+    b. Find $cov(y,b)$ using your result in (a).
+    c. Is your answer in (b) the same as your answer to question 5 above?
+
+**GOAL #13: Calculate the correlation of two random variables from their covariance**
+
+13. Find $corr(y,b)$ using the results you found earlier.
+
+14. We can find the correlation from the covariance, but we can also find the
+    covariance from the correlation.  For example, suppose we already know that
+    \begin{align}
+      E(t) &= 7 \\
+      var(t) &\approx 5.83  \\
+      corr(b,t) &\approx 0.35 \\
+    \end{align}
+    Using this information and the values of $E(b)$ and $var(b)$ provided above:
+    a. Find $cov(b,t)$.
+    b. Find $E(bt)$.
+
+**GOAL #14: Calculate the correlation and covariance of two independent random variables**
+
+15. We earlier found that $r$ and $w$ were independent. Using this information:
+    a. Find $cov(r,w)$.
+    b. Find $corr(r,w)$.
+
+**GOAL #15: Calculate the expected value of a linear function of two or more random variables**
+
+16. Your net winnings if you bet \$1 on Yo and \$1 on Boxcars can
+    be written $16y + 31b - 2$. Find the following expected values:
+    a. Find $E(y + b)$
+    b. Find $E(16y + 31b - 2)$
+
+17. Find the following variances and covariances:
+    a. Find $cov(16y,31b)$
+    b. Find $var(y + b)$
+
+**GOAL #16: Interpret covariances and correlations**
+
+18. Based on your results, which of the following statements is correct?
+    a. The result of a bet on Boxcars is *positively* related to the
+       result of a bet on Yo.
+    b. The result of a bet on Boxcars is *negatively* related to the
+       result of a bet on Yo.
+    c. The result of a bet on Boxcars is *not* related to the
+       result of a bet on Yo.
