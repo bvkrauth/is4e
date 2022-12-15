@@ -1460,18 +1460,18 @@ ggplot(data = PPData, mapping = aes(x = MonthYr, y = EmpRate)) + geom_line()
 
 [Click here to see the problems](#problems-multivariate-data-analysis)
 
-1. The covariance and correlation is negative here, so periods of high population growth
+1. The tables are
+   a. Simple frequency table
+   b. Conditional average
+   c. Crosstab
+2. The covariance and correlation is negative here, so periods of high population growth
    tend to be periods of *low* unemployment.
 ``` {r PP_12_01}
 cov(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
 cor(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
 ```
 
-2. I used casewise deletion but it does not matter. It only matters when you add a third variable.
-3. The tables are
-   a. Simple frequency table
-   b. Conditional average
-   c. Crosstab
+3. I used casewise deletion but it does not matter. It only matters when you add a third variable.
 4. The scatter plot should look something like this:
 ``` {r PP_12_04}
 ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_point()
