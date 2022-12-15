@@ -993,14 +993,14 @@ There are many free sources of useful information about R.
 
 Answers can be found in the [appendix](#answers-introduction-to-r).
 
-**SKILL #1: Perform basic tasks in RStudio**
+**GOAL #1: Perform basic tasks in RStudio**
 
 1. Open RStudio and do the following:
    a. Execute a command in the console window.
    b. Write and execute (source) a brief script.
    c. Write and knit a brief R Markdown document.
    
-**SKILL #2: Use R expressions and vectors**
+**GOAL #2: Describe and use R language elements**
 
 2. Which of the following are valid R expressions?
    a. `"Hello world"`
@@ -1009,6 +1009,7 @@ Answers can be found in the [appendix](#answers-introduction-to-r).
    d. `2+2`
    e. `x <- 2 + 2`
    f. `x <- 2 +`
+
 3. Write the R code to perform the following actions:
    a. Create a vector named `cookies` that contains the elements "oatmeal", 
       "chocolate chip", and "shortbread".
@@ -1019,7 +1020,7 @@ Answers can be found in the [appendix](#answers-introduction-to-r).
    d. Create a list named `threecookies` that contains `cookies` and 
       `threes`.
 
-**SKILL #3: Use R packages**
+**GOAL #3: Install and load R packages**
 
 4. Load the tidyverse package (you will need to install it if you have not already
    done so), and execute the R code below:
@@ -1028,10 +1029,8 @@ Answers can be found in the [appendix](#answers-introduction-to-r).
    ggplot(mtcars, aes(wt, mpg)) + geom_point(aes(colour=factor(cyl), size = qsec))
    ```
 
-**SKILL #4: Import and view data in R**
+**GOAL #4: Import and view data in R**
 
 5. Use R (with the Tidyverse loaded) to open the data file
    https://people.sc.fsu.edu/~jburkardt/data/csv/deniro.csv
    and count the number of observations and variables in it.
-
-
