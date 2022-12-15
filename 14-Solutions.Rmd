@@ -1509,15 +1509,15 @@ ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_po
    a. $I(x < 5) = I(4 < 5) =1$
    b. $I(x \textrm{ is an odd number}) = I(4 \textrm{ is an odd number}) = 0$
    c. $I(x < 5) - I(\sqrt{x} \textrm{ is an integer}) = I(4 < 5) - I(\sqrt{4} \textrm{ is an integer}) = 1 - 1 = 0$
-7. The limits are:
+7. The summation values are:
+   a. $\sum_{x = 1}^5 x^2 = 1^2 + 2^2 + 3^2 + 4^2 + 5^2 = 55$
+   b. $\sum_{i \in \{1,3,5\}} \ln(i) = \ln(1) + \ln(3) + \ln(5) \approx 2.708$
+   c. $\sum_{i \in 1}^\infty x_i I(i < 4) = x_1 + x_2 + x_3$
+8. Statements (a) and (c) are true.
+9. The limits are:
    a. The limit of this sequence is $0$
    b. This sequence has no limit.
    c. The limit of this sequence is $5$
    d. The limit of this sequence is $0$
    e. The limit of this sequence is $\infty$
-8. The summation values are:
-   a. $\sum_{x = 1}^5 x^2 = 1^2 + 2^2 + 3^2 + 4^2 + 5^2 = 55$
-   b. $\sum_{i \in \{1,3,5\}} \ln(i) = \ln(1) + \ln(3) + \ln(5) \approx 2.708$
-   c. $\sum_{i \in 1}^\infty x_i I(i < 4) = x_1 + x_2 + x_3$
-9. Statements (a) and (c) are true.
 

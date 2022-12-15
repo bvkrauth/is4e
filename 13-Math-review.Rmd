@@ -493,16 +493,16 @@ Finally, you can just ask.
 
 Answers can be found in the [appendix](#answers-math-review).
 
-**SKILL #1: Define a set using enumeration or set-builder notation**
+**GOAL #1: Define a set using enumeration or set-builder notation**
 
 1. Use enumeration to define $A$ as the set of "people who live in your house".
 2. Use set-builder notation to define $B$ as the set of integers between 1 and 1,000.
 
-**SKILL #2: Determine the cardinality of a set**
+**GOAL #2: Determine the cardinality (size) of a set**
 
 3. Calculate the cardinality of the sets you defined in problems (1) and (2) above.
 
-**SKILL #3: Identify whether sets are identical, disjoint, or subsets**
+**GOAL #3: Identify whether sets are identical, disjoint, or subsets**
 
 4. Let $A = \{1,2,3\}$, let $B = \{2\}$, let $C = \emptyset$, and let 
    $D = \{x \in \mathbb{Z}: 1 < x < 3\}$
@@ -511,7 +511,7 @@ Answers can be found in the [appendix](#answers-math-review).
    c. Which sets are subsets of $A$?
    d. Which sets are subsets of $B$?
 
-**SKILL #4: Perform set algebra operations on simple sets**
+**GOAL #4: Perform set algebra operations on simple sets**
 
 5. Let $A = \{1,2,3\}$, let $B = \{2,4\}$, let $C = \emptyset$, and let 
    $D = \{x \in \mathbb{Z}: 1 < x < 3\}$
@@ -522,34 +522,33 @@ Answers can be found in the [appendix](#answers-math-review).
    e. Suppose the universe set is $U = \{1,2,3,4,5\}$. Find $B^C$.
    f. Suppose the universe set is the set of integers $\mathbb{Z}$.  Find $B^C$ 
 
-**SKILL #5: Use the indicator function**
+**GOAL #5: Use the indicator function**
 
 6. Let $x = 4$.  Find the value of each of the following:
    a. $I(x < 5)$
    b. $I(x \textrm{ is an odd number})$
    c. $I(x < 5) - I(\sqrt{x} \textrm{ is an integer})$.
 
-**SKILL #6: Use sequences and limits**
+**GOAL #6: Use the summation operator**
 
-7. Find the limit of each of these sequences, if it exists.
-   a. $(1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \ldots)$
-   b. $(1, -1, 1, -1, \ldots)$
-   c. $(6, 5 \frac{1}{2}, 5 \frac{1}{3}, 5 \frac{1}{4}, \ldots)$
-   d. $(-1, \frac{1}{2}, -\frac{1}{3}, \frac{1}{4}, \ldots)$
-   e. $(1, 2, 3, 4, \ldots)$
-
-**SKILL #7: Use the summation operator**
-
-8. Find the values of each of these summations
+7. Find the values of each of these summations
    a. $\sum_{x = 1}^5 x^2$
    b. $\sum_{i \in \{1,3,5\}} \ln(i)$
    c. $\sum_{i \in 1}^\infty x_i I(i < 4)$
 
-**SKILL #8: Apply the rules of arithmetic to a summation**
+**GOAL #7: Apply the rules of arithmetic to a summation**
 
-9. Which of the following statements are true?
+8. Which of the following statements are true?
    a. $\sum_{i=1}^n (5 + 2 x_i) = 5 + 2 \sum_{i=1}^n x_i$
    b. $\sum_{i=1}^n (x_i \times y_i) = \sum_{i=1}^n x_i \times \sum_{i=1}^n y_i$
    c. $\sum_{i=1}^n (x_i + y_i) = \sum_{i=1}^n x_i + \sum_{i=1}^n y_i$
    d. $\left(\sum_{i=1}^n x_i\right)^2 = \sum_{i=1}^n x_i^2$
 
+**GOAL #8: Find the limit of a sequence**
+
+9. Find the limit of each of these sequences, if it exists.
+   a. $(1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \ldots)$
+   b. $(1, -1, 1, -1, \ldots)$
+   c. $(6, 5 \frac{1}{2}, 5 \frac{1}{3}, 5 \frac{1}{4}, \ldots)$
+   d. $(-1, \frac{1}{2}, -\frac{1}{3}, \frac{1}{4}, \ldots)$
+   e. $(1, 2, 3, 4, \ldots)$
