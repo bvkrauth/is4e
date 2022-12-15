@@ -483,22 +483,22 @@ This appendix contains solutions to all end-of-chapter practice problems.
 
 [Click here to see the problems](#problems-basic-data-analysis)
 
-1. The answers are:
+1. The table should look like this:
+   ![*Sort and filter example*](bin/sort-filter-practice.png)
+2. The answers are:
    a. Sample size is 3
-   b. Sample average age is 45.
-   c. Sample median of age is 32.
-   d. Sample 25th percentile of age is 28.5.
-   e. Sample variance of age is 829.
-   f. Sample standard deviation of age is 28.8.
-2. The numerical answers are the same as in question 1.  Assuming the table starts
-   in cell A1, the Excel formulas are:
-   a. `=COUNT(B2:B4)`
-   b. `=AVERAGE(B2:B4)`
-   c. `=MEDIAN(B2:B4)`
-   d. `=PERCENTILE.INC(B2:B4,0.25)`
-   e. `=VAR.S(B2:B4)`
-   f. `=STDEV.S(B2:B4)`
-3. The binned frequency table should look something like this:
+   b. Sample average of age is 45.
+   c. Sample variance of age is 829.
+   d. Sample standard deviation of age is 28.8.
+3. The numerical answers and Excel formulas (assuming the table starts in cell
+   A1) are:
+   a. 3 `=COUNT(B2:B4)`
+   b. 45 `=AVERAGE(B2:B4)`
+   c. 32 `=MEDIAN(B2:B4)`
+   d. 28.5  `=PERCENTILE.INC(B2:B4,0.25)`
+   e. 829 `=VAR.S(B2:B4)`
+   f. 28.8 `=STDEV.S(B2:B4)`
+4. The binned frequency table should look something like this:
 
    | Range | Frequency | % Freq |
    |-------|-----------|--------|
@@ -510,9 +510,9 @@ This appendix contains solutions to all end-of-chapter practice problems.
    | 51-60 |    0      |   0    |
    | 61-70 |    0      |   0    |
    | 71-80 |    1      |  33    |
-4. The time series graph should look something like this:
+5. The time series graph should look something like this:
    ![*Time series of Al's age*](bin/PP_6_4_TimeSeries.png)
-5. The histogram should look something like this:
+6. The histogram should look something like this:
    ![*Histogram of age*](bin/PP_6_5_Histogram.png)
 
 ## **6** More on random variables {-#answers-more-on-random-variables}

@@ -1128,9 +1128,16 @@ developed theory of random events and random variables to
 
 Answers can be found in the [appendix](#answers-basic-data-analysis).
 
-**SKILL #1: Calculate summary statistics by hand**
+**GOAL #1: Use Excel tools for viewing larger data tables**
 
-1. Consider the following table of data
+1. Open a copy of the historical unemployment data file
+   [CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx).  Use sort and filter to show
+   only those months with unemployment rates over 12.5\%, sorted in descending
+   order by unemployment rate (i.e., highest unemployment rates at the top).
+
+**GOAL #2: Calculate and interpret univariate summary statistics by hand**
+
+2. Consider the following table of data
 
    | Name  | Age |
    |-------|-----|
@@ -1138,19 +1145,16 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
    | Betty |  32 |
    | Carl  |  78 |
    
-   Use a calculator or pencil and paper to calculate the following statistics
-   (*please skip parts c and d of this question*):
+   Use a calculator or pencil and paper to calculate the following statistics:
    
    a. Sample size.
    b. Sample average age.
-   c. ~~Sample median of age.~~  
-   d. ~~Sample 25th percentile of age.~~
-   e. Sample variance of age.
-   f. Sample standard deviation of age.
+   c. Sample variance of age.
+   d. Sample standard deviation of age.
 
-**SKILL #2: Calculate summary statistics in Excel**
+**GOAL #3: Calculate univariate summary statistics in Excel**
 
-2. Consider the following table of data
+3. Consider the following table of data
 
    | Name  | Age |
    |-------|-----|
@@ -1168,9 +1172,9 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
    e. Sample variance of age.
    f. Sample standard deviation of age.
 
-**SKILL #3: Construct (simple and binned) frequency tables in Excel**
+**GOAL #4: Construct and interpret simple and binned frequency tables in Excel**
 
-3. Consider the following table of data
+4. Consider the following table of data
 
    | Name  | Age |
    |-------|-----|
@@ -1180,9 +1184,9 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
    
    Use Excel to construct a binned frequency table of age, with bin widths of 10 years.
 
-**SKILL #4: Construct time series (line) graphs in Excel**
+**GOAL #5: Construct and interpret time series (line) graphs in Excel**
 
-4. Consider the following table of data
+5. Consider the following table of data
 
    | Year  | Al's age |
    |-------|----------|
@@ -1194,9 +1198,9 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
 
    Use Excel to construct a time series graph of Al's age.
 
-**SKILL #5: Construct bar graphs and histograms in Excel**
+**GOAL #6: Construct and interpret bar graphs and histograms in Excel**
 
-5. Consider the following table of data
+6. Consider the following table of data
 
    | Name  | Age |
    |-------|-----|
