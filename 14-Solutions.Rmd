@@ -14,14 +14,33 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 
+This appendix contains solutions to all end-of-chapter practice problems.
+
 ## **2** Basic data cleaning with Excel {-#answers-basic-data-cleaning-with-excel}
 
 [Click here to see the problems](#problems-basic-data-cleaning-with-excel)
 
-1. Table (b) shows a tidy data set. 
-2. Characteristic (a) is necessary for a variable to function
+1. Table (b) shows a tidy data set.
+2. Master, working, and archive versions have the following features:
+   a. The master version represents the project at its most recent completed
+      stage. There should be only one, and it should not be edited directly.
+   b. A working copy represents current work in progress. There should be one,
+      and it can be edited directly.
+   c. An archive copy represents an earlier master version or working copy that
+      you are keeping for future reference.  There can be many, and they should
+      not be edited directly.
+3. Characteristic (a) is necessary for a variable to function
    as an ID variable.
-3. Cell E15 is 2 columns and 3 rows away from cell C12.  So we change all relative 
+4. The relevant tools are:
+   a. Fill (copy/paste is also OK here).
+   b. Copy/paste (fill only works on adjacent cells).
+   c. Series.
+   d. Insert.
+5. The formulas are:
+   a. `=SQRT(A2)`
+   b. `=MIN(A2:A100)`
+   c. `=ABS(A2-B2)`
+6. Cell E15 is 2 columns and 3 rows away from cell C12.  So we change all relative
    references from column B to column D, and all relative references from row 2 to 
    row 5, and all relative references from row 10 to row 13.  Absolute references
    are not changed.
@@ -33,15 +52,11 @@ EmpData <- EmpData %>%
    f. `=SUM($B$2:$B$10)`
    g. `=SUM($B5,$B13)`
    h. `=SUM(D$2,D$10)`
-4. The formulas are:
-   a. `=SQRT(A2)`
-   b. `=MIN(A2:A100)`
-   c. `=ABS(A2-B2)`
-5. The formulas are:
+7. The formulas are:
    a. `=IF(A2<0.05,"Reject","Fail to reject")`
    b. `=CONCAT("A2 = ",A2)`
    c. `=LEFT(A2,2)`
-6. The formulas are:
+8. The formulas are:
    a. `=MONTH(TODAY())`
    b. `=TODAY()+100`
    c. `=TODAY()-DATE(1969,11,20)` - using my birthday; yours will obviously be

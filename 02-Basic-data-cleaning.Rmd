@@ -1569,13 +1569,13 @@ and R.
 
 ## Practice problems {-#problems-basic-data-cleaning-with-excel}
 
-Each chapter will include a few simple practice problems to help you check
-your knowledge.  They are organized by the specific skill or area of knowledge
+Each chapter includes a few simple practice problems to help you check
+your knowledge.  They are organized by the specific skill or knowledge base
 you are practicing.
 
 Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
 
-**SKILL #1: Identify features of tidy data**
+**GOAL #1: Identify and implement the principles of reproducible research**
 
 1. Which of the following tables shows a tidy data set?
    a. 
@@ -1600,17 +1600,42 @@ Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
       | Occupation | Waiter |
 
 
-**SKILL #2: Identify features of ID variables**
+2. A typical version control system includes three different version types. For
+   each of these version types, indicate its purpose, whether you should
+   edit it directly, and the maximum number of files of the type you should
+   have.
+   a. Master version/versions
+   b. Working copy/copies
+   c. Archive copy/copies
 
-2. Which of the following characteristics is necessary for a variable to
+
+**GOAL #2: Identify and use ID variables**
+
+3. Which of the following characteristics is necessary for a variable to
    function as an ID variable?
    a. It takes on a different value for each observation.
    b. Each value it can take on has an associated observation.
    c. It can take only one value.
 
-**SKILL #3: Use absolute and relative references in Excel**
+**GOAL #3: Use basic Excel terminology and concepts**
 
-3. For each of the following Excel formulas, suppose we copy that from cell
+4. Which tool (fill, series, insert, or copy/paste) would you use for each of
+   the following tasks?
+   a. Copy the contents of a cell to one or more adjacent cells.
+   b. Copy the contents of a cell to a far-away range of cells.
+   c. Fill a cell range with a sequence of ascending even numbers (e.g., 2, 4, 6).
+   d. Add a row or column to the middle of your data set.
+
+**GOAL #4: Use Excel formulas to construct new variables**
+
+5. Construct an Excel formula to do each of the following.
+   a. Find the square root of the number in cell A2.
+   b. Find the lowest value in cells A2:A100.
+   c. Find the absolute value of the difference between cells A2 and B2.
+
+**GOAL #5: Use absolute and relative cell references in Excel formulas**
+
+6. For each of the following Excel formulas, suppose we copy that from cell
    C12 to cell E15. What formula appears in cell E15?
    a. `=B2`
    b. `=$B$2`
@@ -1623,25 +1648,17 @@ Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
 
 If you aren't sure, try it out in Excel and see what happens.
 
-**SKILL #4: Construct Excel formulas**
+**GOAL #6: Use logical and text data in Excel**
 
-4. Construct an Excel formula to do each of the following.
-   a. Find the square root of the number in cell A2.
-   b. Find the lowest value in cells A2:A100.
-   c. Find the absolute value of the difference between cells A2 and B2.
-
-**SKILL #5: Use logical and text data in Excel**
-
-5. Construct an Excel formula to do each of the following.
+7. Construct an Excel formula to do each of the following.
    a. Display "Reject" if cell A2 contains a number less than 0.05,
-      and display "Fail to reject" otherwise.
+      and display "Fail t reject" otherwise.
    b. Display the text "A2 = " followed by the value in cell A2.
    c. Display the first two letters of the text in cell A2.
 
-**SKILL #6: Use dates in Excel**
+**GOAL #7: Use dates in Excel**
 
-6. Construct an Excel formula to do each of the following:
+8. Construct an Excel formula to do each of the following:
    a. Display the current month. 
    b. Display the date 100 days from today.
    c. Display the number of days since your birth.
-
