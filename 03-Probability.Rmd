@@ -689,14 +689,22 @@ of the statistical issues.
 
 ## Chapter review {-#review-probability}
 
-In this chapter we have learned the basic terminology and concepts of probability. You
-may have seen a number of these terms and ideas in high school, but we are approaching
-them at a higher level. Be sure to review these terms and concepts in detail, and
-do the practice problems to test your knowledge.
+Probability provides a rigorous mathematical language for describing and
+managing uncertainty. It also provides the foundation for serious statistical
+analysis.
 
-Our next step is to take our general framework of outcomes and events, and apply
-them to [random variables](#random-variables) - outcomes that are specifically 
-numerical.  
+In this chapter we have learned the basic terminology and concepts of
+probability: events, outcomes, joint/conditional/marginal probabilities,
+and independence.  We have also learned various tools for calculating
+probabilities, including the axioms of probability, their associated rules,
+the law of total probability, and Bayes' law.  You may have seen many of these
+terms and ideas in high school, but we are approaching them at a higher level.
+Be sure to review these terms and concepts in detail, and do the practice
+problems to test your knowledge.
+
+The next step is to take the general framework of outcomes and events developed
+in this chapter, and apply them to [random variables](#random-variables):
+random outcomes that take the form of a number.
 
 ## Practice problems {-#problems-probability}
 

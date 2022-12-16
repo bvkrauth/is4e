@@ -900,15 +900,17 @@ You can compare your work to my Excel file at
 
 ## Chapter review {-#review-advanced-data-cleaning}
 
-In this chapter, we learned about many loosely-related topics.  The underlying
-theme that connects them all is that real data can be complicated. We will 
-often need to get data from multiple sources and in varying formats, and we 
-cannot trust either ourselves or others not to make mistakes. So we need
-to be both disciplined in handling our data, and flexible in finding solutions
-to the problems that pop up.
+The theme that connects the various topics of this chapter is that real data is
+often complicated. We will usually obtain data from multiple sources and in
+varying formats, the data will usually be complex in structure, and mistakes are
+all too easy to make. So we need to be disciplined in handling our data, and
+flexible in finding solutions to problems that pop up.
 
-In the next two chapters, we will develop more advanced methods for data 
-analysis in both Excel and R.
+In the next few chapters, we will continue to develop applied methods. Our focus
+will shift to [learning R](#introduction-to-r) for both
+[data cleaning and analysis](#using-r), but we will also learn how to
+create [pivot tables](#pivot-tables) in Excel.
+
 
 ## Practice problems {-#problems-advanced-data-cleaning}
 

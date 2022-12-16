@@ -1109,20 +1109,21 @@ You can download
 [https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpHistResults.xlsx](sampledata/CanEmpHistResults.xlsx) if you want to check your work against mine. 
 :::
 
-
-
-
 ## Chapter review {-#review-basic-data-analysis}
 
+Statistical analysis does not need to be complex to be useful.  Simple
+univariate statistics and graphs can tell us a great deal about the economy.
 
-In this chapter, we learned how to calculate simple statistics in Excel. Calculating 
-the statistics is typically the easiest part of a statistical analysis - cleaning data 
-and interpreting the results is much more challenging.  So hopefully you have found
-this chapter an easy break from the last few.
+In this chapter, we learned how to calculate simple statistics in Excel, and
+how to construct simple graphs. Calculating the statistics is typically the
+easiest part of a statistical analysis - cleaning data and interpreting the
+results is much more challenging.
 
-In the next chapter, we will bring this chapter together with the previously
-developed theory of random events and random variables to
-[interpret statistics as random variables](#statistics).
+Later in the course, we will [bring theory and data together](#statistics)
+by interpreting the statistics calculated in this chapter as random variables.
+We will also move beyond the univariate statistics and graphs described in
+this chapter by developing tools for
+[multivariate data analysis](#multivariate-data-analysis).
 
 ## Practice problems {-#problems-basic-data-analysis}
 

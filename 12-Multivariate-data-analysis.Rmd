@@ -60,7 +60,7 @@ EmpData <- EmpData %>%
 ```
 
 
-##  Pivot tables
+##  Pivot tables {#pivot-tables}
 
 Excel's ***Pivot Tables*** are a powerful tool for the analysis of
 frequencies, conditional averages, and various other aspects of the 
@@ -809,13 +809,20 @@ your next econometrics course learning to use it.
 
 Econometrics is mostly about the relationship between variables: price
 and quantity, consumption and savings, labour and capital, today and 
-tomorrow.  So most of what we do is multivariate analysis.  
+tomorrow.  So most of what we do is multivariate analysis.
 
 This chapter has provided a brief view of some of the main techniques for 
-multivariate analysis.  Our higher-level statistics courses (ECON 333, 
-ECON 334, ECON 335, ECON 433, ECON 435) are all about multivariate analysis,
-and will develop both the theory behind these tools and the set of applications
-in much greater detail.
+multivariate analysis: frequency tables, cross-tabulations, conditional
+averages, covariance and correlation, and scatter plots.  We have also
+learned how to implement these techniques using Excel pivot tables and
+various tools in R.
+
+The methods used here only scratch the surface of multivariate analysis. Any
+subsequent course you take in econometrics will place heavy emphasis on
+multivariate methods, especially linear regression. Those more advanced
+methods will build on the core ideas introduced in this course: probability,
+random variables, estimation, and inference.  They will also further develop
+your coding skills in R or a similar statistical package.
 
 ## Practice problems {-#problems-multivariate-data-analysis}
 

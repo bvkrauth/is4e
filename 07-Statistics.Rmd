@@ -1173,16 +1173,17 @@ course.  The important thing to know is that it can be done, and to have a
 clear idea what consistency means.
 :::
 
-
 ## Chapter review {-#review-statistics}
 
-In this chapter we have learned to model a data generating process,
-describe the probability distribution of a statistic,
-interpret a statistic as an estimator of some unknown parameter of 
-the underlying data generating process.
+Statistics is the core subject of this course, making this chapter the most
+important one in the entire book.
 
-Almost by definition, estimators are rarely identical to the parameter
-of interest, so any conclusions based on estimators have a degree of
+In this chapter we have learned to model a data generating process, describe the
+probability distribution of a statistic, and interpret a statistic as estimating
+some unknown parameter of the underlying data generating process.
+
+An estimator is rarely identical to the parameter of interest, so any
+conclusions based on estimating a parameter of interest have a degree of
 uncertainty.  To describe this uncertainty in a rigorous and quantitative
 manner, we will next learn some principles of 
 [statistical inference](#statistical-inference). 

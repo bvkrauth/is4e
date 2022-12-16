@@ -475,11 +475,10 @@ if for any $\delta > 0$ there exists an $N_{\delta}$ such that
    $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
 :::
 
-
 ## Chapter review {-#review-math-review}
 
 This appendix provides some of the basic mathematical background needed for this 
-course. There are many other useful sources if you need further information. 
+course. There are many other useful sources if you need further information:
 
 - Wikipedia's coverage of mathematics and introductory statistics content is 
   usually quite reliable, and there is no shame in using it.
@@ -487,7 +486,8 @@ course. There are many other useful sources if you need further information.
   sequences, and limits, and almost any undergraduate math textbook will include
   an appendix on set theory.
 
-Finally, you can just ask.
+Finally, you can always just ask.  Many students are reluctant to ask questions,
+but instructors are generally happy to answer them.
 
 ## Practice problems {-#problems-math-review}
 

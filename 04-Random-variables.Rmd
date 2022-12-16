@@ -1079,17 +1079,21 @@ uniform distribution on $\Omega = \{0,1,\ldots,36\}$.
 
 ## Chapter review {-#review-random-variables}
 
+Random variables are simply numerical random outcomes. Economics is a primarily
+quantitative field, in the sense that most outcomes we study are numbers.
+This quantification helps us be more precise in our analysis and predictions.
+
 In this chapter we have learned various ways of describing the probability 
 distribution of a simple random variable - a single random variable that 
 takes on values in a finite set.  We have also learned some standard probability
 distributions for simple random variables.
 
-Later we will deal with
+Later in the course we will deal with
 [more complex random variables](#more-on-random-variables)
 including random variables that take on values in a continuous set,
-or random variables that are related to other random variables.  We will then
-use the concept of a random variable to understand both data and statistics
-calculated from data.
+as well as pairs or groups of related random variables.  We will then
+apply the concept of a random variable to
+[statistics](#statistics) calculated from data.
 
 ## Practice problems {-#problems-random-variables}
 

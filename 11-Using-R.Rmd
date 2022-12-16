@@ -44,7 +44,7 @@ EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData
 ```
 
 
-## Data cleaning in R
+## Data cleaning in R {#data-cleaning-in-r}
 
 We will not spend a lot of time on data cleaning in R, as we can always clean
 data in Excel and export it to R. However, we have a few Tidyverse tools
@@ -291,7 +291,7 @@ EmpData <- EmpData %>%
 ```
 :::
 
-## Data analysis in R
+## Data analysis in R {#data-analysis-in-r}
 
 Having read and cleaned our data set, we can now move on to some summary 
 statistics.
@@ -487,7 +487,7 @@ and Student's T distribution (`dt`, `pt`, `qt`, `rt`), along
 with many others.
 :::
 
-## Graphs with ggplot
+## Graphs with ggplot {#graphs-with-ggplot}
 
 The Tidyverse also contains a powerful graphics package called[^1101] ***ggplot***.
 The ggplot package has capabilities well beyond what R's built-in commands can
@@ -730,8 +730,19 @@ As we have seen, we can do many of the same things in Excel and R.  R is typical
 more difficult to use for simple analysis tasks, and there is nothing 
 wrong with using Excel when it is easier.  But the usability gap gets smaller
 with more complicated tasks, and there are many tasks where Excel doesn't do
-everything that R can do.  You should think of them as complementary tools, and
+everything that R can do. You should think of them as complementary tools, and
 be comfortable using both.
+
+In this chapter we learned how to use the pipe operator, the four key Tidyverse
+functions for cleaning data, and the necessary tools for calculating univariate
+statistics.  In addition, we learned the basics of ggplot.
+
+Our next applications of R will be for the analysis of relationships between
+[multiple variables](#multivariate-data-analysis).  The capabilities
+of ggplot for constructing graphical elements like scatter plots and curve fits
+will be well beyond what you can do in Excel, and will hopefully justify
+your investment in learning R.
+
 
 ## Practice problems {-#problems-using-r}
 

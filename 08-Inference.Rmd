@@ -1187,22 +1187,24 @@ on an exact, parametric or asymptotic test.
 
 ## Chapter review {-#review-inference}
 
-In this chapter we have learned to formulate and test hypotheses, and to construct
-confidence intervals. The mechanics of doing so are complicated, but you should not
-let the various formulas distract you from the more basic idea of evidence: hypothesis
+Hypothesis tests and confidence intervals are important tools for addressing
+uncertainty in our statistical analysis.
+
+In this chapter, we have learned to formulate and test hypotheses, and to construct
+confidence intervals. The mechanics are complicated, but do not let the various
+formulas distract you from the more basic idea of evidence: hypothesis
 testing is about how strong the evidence is in favor of (or against) a particular 
 true/false statement about the data generating process, and confidence intervals are
-about finding a range of values for a parameter that are consistent with the observed
-data.
-
-In practice, modern statistical packages automatically calculate and report confidence
+about finding a range of values for a parameter that are consistent with the
+observed data. Modern statistical packages automatically calculate and report confidence
 intervals for most estimates, and report the result of some basic hypothesis tests
 as well. When you need something more complicated, it is usually just a matter of 
-looking up the command. I will ask you to do these calculations yourself so you get used
-to them, but it is more important that you can correctly interpret the results.
+looking up the command. The most important skill is to correctly interpret the
+results.
 
-This is the last primarily theoretical chapter. The remaining chapters will be oriented towards
-data and applications.
+This is the last primarily theoretical chapter in this book, so congratulations
+for making it this far. The remaining chapters will be data-oriented and will
+help you build your computer skills.
 
 ## Practice problems {-#problems-inference}
 

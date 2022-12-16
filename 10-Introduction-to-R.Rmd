@@ -967,13 +967,23 @@ as summary statistics.
 
 ## Chapter review {-#review-introduction-to-r}
 
+R has capabilities well beyond what you can do in Excel, in part because it is
+a full-featured language and not just an application.  These capabilities come
+at a cost, which is that it takes more time and effort to learn how to do
+basic tasks. If you have little to no experience coding, this will take some
+extra effort but will be worth it.  All languages commonly used for statistical
+analysis - R, Stata, SAS, Python, etc. - have more similarities than
+differences, and your experience using R will be useful regardless of what
+language you end up coding in later.
+
 In this chapter, we learned how to run R programs whether in the console, in
-a script, or in an R Markdown document.  We also learned some basics of
-the R language. We haven't learned how to do much of anything useful
-yet with data, but we will over the next few chapters.  In particular, 
-we will learn how to move data from Excel to R, how to view data in R,
-and how to clean and analyze data in R.  We will also learn a sophisticated
-R graphing package called ggplot.
+a script, or in an R Markdown document.  We also learned the main elements of
+the R language. We haven't learned how to do much of anything useful yet with
+data, but we will over the next few chapters.
+
+In the next chapter, we will learn to use R to [clean](#data-cleaning-in-r)
+and [analyze](#data-analysis-in-r) data.  We will also learn a sophisticated R
+graphing package called[ggplot](#graphs-with-ggplot).
 
 ::: {.fyi data-latex=""}
 **For more information on R**
