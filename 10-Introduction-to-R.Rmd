@@ -10,10 +10,9 @@ library("tidyverse")
 
 As we have seen, Excel is a useful tool for both
 [cleaning](#basic-data-cleaning-with-excel) and 
-[analyzing](#basic-data-analysis-with-excel) data. R is an application
-that has many of the same features as Excel, but is specially 
-designed for statistical analysis. It is a little more complex, 
-but more powerful in many important ways.
+[analyzing](#basic-data-analysis-with-excel) data. R is an application that has
+many of the same features as Excel, but is specially designed for statistical
+analysis. It is a little more complex, but more powerful in many important ways.
 
 This chapter will introduce you to some of the basic concepts of R and
 associated tools such as R Markdown, RStudio, and the Tidyverse.
@@ -38,19 +37,18 @@ In this chapter, we will learn how to:
 4.  Import and view data in R.
 :::
 
-To prepare for this chapter, please ensure that you have R and RStudio
-available on your computer. Refer to the 
+To prepare for this chapter, please ensure that you have R and RStudio available
+on your computer. Refer to the 
 [installation instructions](#installing-r-and-rstudio) as needed.
 
 ::: sfu
 
-In this course, we will only have time to learn a little bit about
-R, so my goal is not to give a comprehensive treatment. My goal here 
-is primarily to introduce you to the terminology and concepts of R, 
-and to show you a few applications where R outshines Excel.  You will
-learn much more about R in ECON 333 and (if you take it) ECON 334. 
+In this course, we will only have time to learn a little bit about R, so my goal
+is not to give a comprehensive treatment. My goal here is primarily to introduce
+you to the terminology and concepts of R, and to show you a few applications
+where R outshines Excel.  You will learn much more about R in ECON 333 and (if
+you take it) ECON 334. 
 :::
-
 
 ## A brief tour of RStudio
 
@@ -70,7 +68,7 @@ tools for writing and running R code:
   - Tools for managing files and packages used by R
   - Tools for comparing and combining scripts and other files
   - Help and documentation
-  -  many other features
+  - many other features
 
 and puts them in a single user-friendly interface.
 
@@ -78,16 +76,15 @@ You can run commands and scripts in R itself, but without RStudio you won't have
 all these handy extra features. Most people these days use RStudio or another
 IDE.
 
-RStudio normally displays three or four open windows, each of which has tabs 
-you can select to access different features. We will not use most of them, 
-but some of them will be very handy indeed.
+RStudio normally displays three or four open windows, each of which has tabs you
+can select to access different features. We will not use most of them, but some
+of them will be very handy indeed.
 
 ### The console window
 
-Like most programming languages, R is designed to execute a series
-of commands provided by the user.  The simplest way to have R execute
-a command is by entering it into the ***Console*** window in the 
-lower left corner.
+Like most programming languages, R is designed to execute a series of commands
+provided by the user.  The simplest way to have R execute a command is by
+entering it into the ***Console*** window in the lower left corner.
 
 ::: example
 **Using the console window**
@@ -112,30 +109,29 @@ efficient:
 - RStudio will offer to auto-complete your command.
 - RStudio shows pop-ups with helpful information about your command as you type
   it.
-- RStudio maintains a ***command history*** that remembers commands you
-  have previously entered.  This is useful when you did something a while
-  ago, but either don't remember exactly how you did it, or don't want to type
-  it all in from the beginning.
+- RStudio maintains a ***command history*** that remembers commands you have
+  previously entered.  This is useful when you did something a while ago, but
+  either don't remember exactly how you did it, or don't want to type it all in
+  from the beginning.
 
-The simplest way of accessing the command history is to press the up-arrow
-key while in the console window.
+The simplest way of accessing the command history is to press the up-arrow key
+while in the console window.
 
 :::example
 **Using the command history**
 
-Suppose you decide you want to say "Hello [your name]!" instead of 
-"Hello world", and you don't want to type in the whole command. Then
-you can:
+Suppose you decide you want to say "Hello [your name]!" instead of "Hello
+world", and you don't want to type in the whole command. Then you can:
 
 1. Press the up-arrow key in the *Console* window to show the most recently 
-  executed command. If you press it a second time it gives you the 
-  command before that, and so on.
-2. Look at the to the *History* window in the upper right corner to see
-   a full list of recently executed commands.  You can double-click on 
-   any command in the window to copy it to the Console window.
+   executed command. If you press it a second time it gives you the command
+   before that, and so on.
+2. Look at the to the *History* window in the upper right corner to see a full
+   list of recently executed commands.  You can double-click on any command in
+   the window to copy it to the Console window.
 
-Once you have copied the previous command, you can edit it before
-pressing `<enter>`.
+Once you have copied the previous command, you can edit it before pressing
+`<enter>`.
 :::
 
 ### Scripts
@@ -156,8 +152,7 @@ To create an R script
    ```{r, eval = FALSE}
    print("Hello world!")
    ```
-3. Enter another valid R command in the second line of the file,
-   for example
+3. Enter another valid R command in the second line of the file, for example
    ```{r, eval = FALSE}
    print("Goodbye world?")
    ```
@@ -178,15 +173,14 @@ producing documents - HTML files (web pages), Microsoft Word documents,
 PDF files, etc. - that have R code and analysis embedded in them. In fact, this
 book is written in R Markdown.
 
-
 ::: {.fyi data-latex=""}
 **R Markdown, Markdown, and other markup languages**
 
-R Markdown is an implementation of the Markdown markup language in R.
-A markup language is a way of writing documents in text files whose content is
-directly readable but also can be formatted and displayed (rendered) in a
-visually appealing way. The best-known markup language is HTML, which is the
-language web pages are written in.
+R Markdown is an implementation of the Markdown markup language in R. A markup
+language is a way of writing documents in text files whose content is directly
+readable but also can be formatted and displayed (rendered) in a visually
+appealing way. The best-known markup language is HTML, which is the language web
+pages are written in.
 
 The original idea of HTML was that content creators could write their content in
 text files (pages), with a few HTML tags sprinkled around to give the browser
@@ -194,31 +188,28 @@ information about structure, and then the browser would display the page.
 However, as web users demanded fancy graphics, custom colors, interactivity,
 and mobile-friendly display, HTML became much more complicated.
 
-Markdown was created as radically simplified markup language. The basic
-idea is to use common conventions for how to indicate structure in
-a text file.
+Markdown was created as radically simplified markup language. The basic idea is
+to use common conventions for how to indicate structure in a text file.
 
 - Adjacent lines of text are interpreted as part of the same paragraph.
 - A line of text following a blank line starts a new paragraph.
-- A line of text that begins with "#" is a header, with "#" for level 
-  one headers, "##" for level two, etc.
+- A line of text that begins with "#" is a header, with "#" for level one
+  headers, "##" for level two, etc.
 - A line of text that begins with "-" is a bullet point.
 - A line of text that begins with a number is part of a numbered list.
 - Text written like `*this*` is rendered like *this*. 
 - Text written like `**this**` is rendered like **this**. 
 - Text written like `***this***` is rendered like ***this***. 
 
-Markdown documents can also include links and pictures (by simply
-providing the URL or file name), tables, and all sorts of 
-other things.
+Markdown documents can also include links and pictures (by simply providing the
+URL or file name), tables, and all sorts of other things.
 :::
 
-In addition to ordinary text and Markdown information, R Markdown
-documents can include pieces of executable R code.  R code needs to be 
-surrounded by a ***code fence*** that identifies the text inside 
-the fence as R code, and in some cases provides additional information
-about how it should be executed.  This sounds complicated, but is
-easy to see in a real R Markdown file.
+In addition to ordinary text and Markdown information, R Markdown documents can
+include pieces of executable R code.  R code needs to be surrounded by a
+***code fence*** that identifies the text inside the fence as R code, and in
+some cases provides additional information about how it should be executed.
+This might sound complicated, but is easy to see in a real R Markdown file.
 
 :::example
 **Creating an R Markdown file**
@@ -228,9 +219,9 @@ To create our first R Markdown file:
 1. Select `File > New File > R Markdown` from the menu.
    - You will see a dialog box that looks like this:  
      ![New R Markdown file](bin/NewRMarkdown.png){width=50%}
-2. The default options are fine, so select `OK`. RStudio will create an
-   example R Markdown file that you can use as a template. It will look
-   something like this:
+2. The default options are fine, so select `OK`. RStudio will create an example
+   R Markdown file that you can use as a template. It will look something like
+   this:
    ![R Mardown example file](bin/r-markdown-example.png){width=70%}
 3. Save the file.
 
@@ -238,10 +229,10 @@ You can see that the R Markdown document is a mix of text, formatting
 information, and small pieces of R code.
 :::
 
-You can run the R code in an R Markdown document in one of two ways. First,
-you can run and display results for individual ***chunks*** of code. A
-chunk is a few lines of R code surrounded by a "code fence" that serves
-to distinguish R code from ordinary text.
+You can run the R code in an R Markdown document in one of two ways. First, you
+can run and display results for individual ***chunks*** of code. A chunk is a
+few lines of R code surrounded by a "code fence" that serves to distinguish R
+code from ordinary text.
 
 ::: example
 **Running code chunks**
@@ -252,8 +243,8 @@ To run a code chunk in our R Markdown file:
    ![An example code chunk](bin/CodeChunk.png){width=50%}
 2. Press the ![Run current chunk](bin/RunCurrentChunk.png){height=16pt} button.
 
-As you can see, the code in the chunk will run and the results
-will be displayed below.  
+As you can see, the code in the chunk will run and the results will be displayed
+below:
    ![Code chunk with output](bin/CodeChunkWithOutput.png){width=50%}
 :::
 
@@ -267,25 +258,23 @@ To knit the entire document:
 
 1. Press the ![Knit](bin/KnitButton.png){height=16pt} button.
 
-It will take a few moments to process the file, and then the HTML
-file will open in a browser.  Read the document and compare it to the original
-R Markdown file to get an idea of the capabilities of R Markdown.
+It will take a few moments to process the file, and then the HTML file will open
+in a browser.  Read the document and compare it to the original R Markdown file
+to get an idea of the capabilities of R Markdown.
 :::
 
-By default, R Markdown files usually knit to HTML, but we can knit
-to other file formats including Word and PDF.  We will stick to 
-HTML in this course.
+By default, R Markdown files usually knit to HTML, but we can knit to other file
+formats including Word and PDF.  We will stick to HTML in this course.
 
 ::: {.fyi data-latex=""}
 **R Markdown resources**
 
-R Markdown is as simple or as complicated as you want to make it. A plain
-text file with a few lines of content is a valid R Markdown file, and
-like HTML, Markdown is designed so it still "works" if you do something
-unexpected.
+R Markdown is as simple or as complicated as you want to make it. A plain text
+file with a few lines of content is a valid R Markdown file, and like HTML,
+Markdown is designed so it still "works" if you do something unexpected.
 
 If you want to try something new in R Markdown, or have forgotten how to do 
-something, the most useful resource is the one-page *R Markdown Cheat sheet*.  It 
+something, the most useful resource is the one-page *R Markdown Cheat sheet*. It 
 is available directly in RStudio, or at 
 https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf. You can also
 just search for "r markdown cheatsheet".
@@ -293,28 +282,26 @@ just search for "r markdown cheatsheet".
 
 ### Other RStudio features
 
-RStudio has many other features, most of which we will not use. But I
-would like to highlight a few that may seem useful.
+RStudio has many other features, most of which we will not use. But I would like
+to highlight a few that may seem useful.
 
 In the lower right window:
 
-- The *Files* tab gives you easy access to files in the current 
-  active folder.
+- The *Files* tab gives you easy access to files in the current active folder.
 - The *Plots* tab will display plots, when you create them.
-- The *Packages* tab is useful for managing packages (more
-  on them later)
+- The *Packages* tab is useful for managing packages (more on them later)
 - The *Help* tab allows you to access R's help system.
   
-In the upper right window
+In the upper right window:
 
-- The *Environment* tab allows you to view all currently-defined
-  variables and their values.
+- The *Environment* tab allows you to view all currently-defined variables and
+  their values.
 - The *History* tab shows the command history.
 
 In the menu:
 
-- You can select `Session > Restart R` to clear the memory and 
-  restart the current R session.
+- You can select `Session > Restart R` to clear the memory and restart the
+  current R session.
 
 :::example
 **Closing R**
@@ -333,31 +320,30 @@ We are done for now.
 
 ## The R language
 
-Next, we will learn some basic features of the R language.  Open RStudio
-and go to the console window so we can enter commands and see what they
-do.
+Next, we will learn some basic features of the R language.  Open RStudio and go
+to the console window so we can enter commands and see what they do.
 
 ### Expressions 
 
-An ***expression*** is any piece of R code that can be evaluated on its
-own. For example:
+An ***expression*** is any piece of R code that can be evaluated on its own. For
+example:
 
-- Any text, numerical or logical constant: `"Hello world"`, `105`, `1.34`, or `TRUE`. 
-- Any complete formula built from functions and arithmetic
-  operators: `log(10)` or `2+2`
+- Any text, numerical or logical constant: `"Hello world"`, `105`, `1.34`, or
+  `TRUE`. 
+- Any complete formula built from functions and arithmetic operators: `log(10)`
+  or `2+2`
 
-An expression needs to be complete, for example `ln(` is not an
-expression, nor is `2+`.  
+An expression needs to be complete, for example `ln(` is not an expression, nor
+is `2+`.  
 
-Every valid R expression ***returns*** a value, also called an 
-***object***.  
+Every valid R expression ***returns*** a value, also called an ***object***.  
 
-  - An object can be a number, a text string, a date, or a logical value,
-    just like in Excel.
-  - Objects can also be much more complex
+  - An object can be a number, a text string, a date, or a logical value, just
+    like in Excel.
+  - Objects can also be much more complex.
 
-In addition, some expressions have a ***side effect***.  That is, they
-make something happen like:
+In addition, some expressions have a ***side effect***.  That is, they make
+something happen like:
 
   - Cause something to appear on your screen.
   - Create or modify a file on your computer.
@@ -388,8 +374,8 @@ random numbers from the $N(0,1)$ distribution.
 hist(rnorm(100))
 ```
 
-Although we call it a "side effect", the side effect is often the 
-main purpose of the expression.
+Although we call it a "side effect", the side effect is often the main purpose
+of the expression.
 :::
 
 ### Variables and assignment
@@ -437,20 +423,18 @@ x
 
 ### Vectors
 
-The primary data structure in R is a ***vector***, which is just 
-an ordered list of elements.  
+The primary data structure in R is a ***vector***, which is just an ordered list
+of elements.  
 
-The simplest type of vector is called an ***atomic vector*** - its 
-elements are normally from one of R's basic or ***atomic*** data
-types: 
+The simplest type of vector is called an ***atomic vector*** - its elements are
+normally from one of R's basic or ***atomic*** data types: 
 
-- text strings 
-- numbers 
-- logical values (either `TRUE`  or `FALSE`)
+- Text strings 
+- Numbers 
+- Logical values (either `TRUE`  or `FALSE`)
   
-The elements of an atomic vector need to be all part of the same 
-atomic type; a single vector cannot contain both strings and numbers,
-for example. 
+The elements of an atomic vector need to be all part of the same atomic type; a
+single vector cannot contain both strings and numbers, for example. 
   
 We can construct a vector by enumeration using the `c()` function.
 
@@ -464,8 +448,8 @@ print(fruits)
 :::
 
 There are many other functions that can be used to construct vectors. Two
-particularly useful ones are `rep` which repeats something a particular
-number of times, and `seq` which creates a sequence.
+particularly useful ones are `rep` which repeats something a particular number
+of times, and `seq` which creates a sequence.
 
 :::example
 **Constructing vectors with `rep()` and `seq()`**
@@ -498,8 +482,7 @@ print(odds)
 ```
 :::
 
-The ***subscript operator*** `[]` can be used to select part of a 
-vector.
+The ***subscript operator*** `[]` can be used to select part of a vector.
 
 :::example
 **Using subscripts**
@@ -547,10 +530,9 @@ print(x)
 
 ### Lists 
 
-The other type of vector is a ***list***.  A list is a vector whose
-elements are themselves other vectors. These vectors can be any 
-type, so we can use lists inside lists to build very complex 
-objects.  
+The other type of vector is a ***list***.  A list is a vector whose elements are
+themselves other vectors. These vectors can be any type, so we can use lists
+inside lists to build very complex objects.  
 
 Lists can be built using the `list()` function.
 
@@ -562,7 +544,6 @@ everything <- list(fruits, evens, odds)
 print(everything)
 ```
 :::
-
 
 You can (and should) assign names to the elements of a list.
 
@@ -578,7 +559,7 @@ print(everything)
 :::
 
 You can access part of a list by specifying its numerical index inside of the 
-`[[]]` operator,
+`[[]]` operator.
 
 
 :::example
@@ -613,15 +594,13 @@ print(everything)
 
 ### Attributes
 
-Any object can also have ***attributes***.  This attributes of an
-object are a list associated with the object that provides additional 
-information.
+Any object can also have ***attributes***.  This attributes of an object are a
+list associated with the object that provides additional information.
 
 :::example
 **Attributes**
 
-Let's see if any of the objects we have created have 
-attributes:
+Let's see if any of the objects we have created have attributes:
 ```{r AttributesExample}
 print(attributes(fruits))
 print(attributes(evens))
@@ -629,83 +608,75 @@ print(attributes(everything))
 ```
 Note that:
 
-- our two atomic vectors have attributes NULL. That's
-  R's way of saying they have no attributes
-- our list stores the names of its three elements in 
-  the `$names` attribute.  
+- our two atomic vectors have attributes NULL. That's R's way of saying they
+  have no assigned attributes
+- our list stores the names of its three elements in the `$names` attribute.  
 :::
 
 R has hundreds of additional object types, including:
 
-- Matrices
-- Arrays
-- Data sets
-- Statistical results from various commands
-- Plots
+- Matrices.
+- Arrays.
+- Data sets.
+- Statistical results from various commands.
+- Plots.
 
 These object types are all built from the basic components of atomic vectors,
-lists, and attributes. Users can also define their own object
-types, and there is an extensive system to support generic functions and
-object-oriented programming (if you know what that is).
+lists, and attributes. Users can also define their own object types, and there
+is an extensive system to support generic functions and object-oriented
+programming (if you know what that is).
 
 ### Functions and operators
 
 R has hundreds of built-in mathematical and statistical ***functions***, and
-users can define their own functions. You have already seen a few.
-Their format and usage is quite similar to Excel, but there are some important
-differences.
-
+users can define their own functions. You have already seen a few. Their format
+and usage is quite similar to Excel, but there are some important differences.
 
 ::: example
 **The `seq()` function**
 
 Let's get to know the main features of functions in R by considering the
-`seq()` function.  We have already seen this function: it is used to
-create a vector with a sequence of numbers, much like Excel's *Series*
-tool.
+`seq()` function.  We have already seen this function: it is used to create a
+vector with a sequence of numbers, much like Excel's *Series* tool.
 
 1. Every function has a ***name***.
    - In this case, the function's name is `seq`.
-2. You can obtain help on any function by entering `?` and its name
-   in the console window
-   - Enter `? seq` in the console window, and look in the Help window (you
-     can find it in the lower-right panel).
+2. You can obtain help on any function by entering `?` and its name in the
+   console window
+   - Enter `? seq` in the console window, and look in the Help window (you can
+     find it in the lower-right panel).
 3. Most functions accept one or more ***arguments***.
    - The arguments are described in the function's help page.
-   - The `seq` function's arguments include `from`, 
-    `to`, `by`, `length.out`, and `along.with`.
-   - Every argument has a *name* and a *position*.  For example,
-     the `from` argument is in position one, the `to` argument
-     is in position two, etc.
+   - The `seq` function's arguments include `from`, `to`, `by`, `length.out`,
+     and `along.with`.
+   - Every argument has a *name* and a *position*.  For example, the `from` 
+     argument is in position one, the `to` argument is in position two, etc.
    - Arguments can be passed to the function by *name* or by *position*.
-     - Passing by name looks like this:`seq(from=1,to=5)`
-     - Passing by position looks like this: `seq(1,5)`
-     - You can mix both methods: `seq(1,5,length.out=10)`
-     - I recommend passing by position for simple functions, 
-       and passing by name for more complex functions, but it
-       is really just a matter of what works for you.
+     - Passing by name looks like this:`seq(from=1,to=5)`.
+     - Passing by position looks like this: `seq(1,5)`.
+     - You can mix both methods: `seq(1,5,length.out=10)`.
+     - I recommend passing by position for simple functions, and passing by name
+       for more complex functions, but it is really just a matter of what works
+       for you.
    - Some arguments are *required*. They must be provided every time the
      function is called, or else the function will return an error. 
-   - Some arguments are *optional*. They *can* be provided, but have
-     a *default* value if not provided.
-     - All arguments to `seq()` are optional; execute the command `seq()` 
-       to see what happens.
-4. Every function returns a value.  This is even true for functions 
-   like `print()`.  To see this: 
+   - Some arguments are *optional*. They *can* be provided, but have a *default*
+     value if not provided.
+     - All arguments to `seq()` are optional; execute the command `seq()` to see
+       what happens.
+4. Every function returns a value.  This is even true for functions like
+   `print()`. To see this: 
    ```{r}
    y <- print("Hello world")
    print(y)
    ```
-   As you can see, `print("Hello world")` returns "Hello world" as its
-   value.
-5. Some functions also produce ***side effects***, as we have described
-   earlier.
+   As you can see, `print("Hello world")` returns "Hello world" as its value.
+5. Some functions also produce ***side effects***, as we have described earlier.
 :::
 
-In addition to functions, R has the usual binary mathematical 
-***operators*** such as `+`, `-`, `*` and `/`.  Operators are
-just another way of expressing functions.  For example
-the `+` operator is really just another way of calling 
+In addition to functions, R has the usual binary mathematical ***operators***
+such as `+`, `-`, `*` and `/`.  Operators are just another way of expressing
+functions.  For example the `+` operator is really just another way of calling 
 the `sum()` function:
 ```{r OperatorExample}
 # These two statements are equivalent
@@ -752,25 +723,25 @@ features is how easy it can be extended by users, and the fact that it has a
 large user community who have provided ***packages*** of useful new functions
 and data.
 
-There are thousands of packages available online.  We will use a
-particularly useful package called the ***Tidyverse***.
+There are thousands of packages available online.  We will use a particularly
+useful package called the ***Tidyverse***.
 
 ::: {.fyi data-latex=""}
 **What is the Tidyverse?**
 
-The Tidyverse was created by the data scientist Hadley Wickham (also one of 
-the key people behind RStudio) as a way of solving some long-standing problems
-with R.  The Tidyverse is both an R package containing a set of new functions 
-and data structures as well as a philosophy about *how* to analyze data.
+The Tidyverse was created by the data scientist Hadley Wickham (also one of the
+key people behind RStudio) as a way of solving some long-standing problems with
+R.  The Tidyverse is both an R package containing a set of new functions and
+data structures as well as a philosophy about *how* to analyze data.
 
 The main language elements of R date back to 1976 (R itself was created in the
 early 1990s but is closely based on an earlier program called S). Computer
 science has advanced a lot since 1976, so some design aspects of R seemed like a
 good idea at the time but would be designed differently today:
 
-- Too many different ways of doing the same thing
-- Too many rarely-used functions,
-- Some functions that don't do what they should. 
+- Too many different ways of doing the same thing.
+- Too many rarely-used functions.
+- Some functions that don't do what they should.
 
 Unfortunately, it is not possible to make significant changes to the existing
 language without causing thousands of existing programs to stop working.
@@ -784,59 +755,59 @@ tidy format.  This reflects a philosophy that data cleaning should precede and
 be separate from data analysis.
 :::
 
-Most commonly-used packages including the Tidyverse are open-source,
-and are available online from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/). 
+Most commonly-used packages including the Tidyverse are open-source, and are
+available online from the
+[Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/). 
 
 Before you can use any package, two steps must be followed:
 
-1. The package needs to be ***installed*** on your computer using 
-   the `install.packages()` function. 
+1. The package needs to be ***installed*** on your computer using the 
+   `install.packages()` function. 
    - This only needs to be done *once* for each package.
 2. The package needs to be ***loaded*** into memory using the `library()` 
    function.
    - This needs to be done in *every* R session.
 
-Once the package is installed and loaded, you can use its functions
-and other features.
+Once the package is installed and loaded, you can use its functions and other
+features.
 
 :::example
 **Installing and loading the Tidyverse**
 
-You can get a list of all available CRAN packages by simply executing
-the `install.packages()` function with no arguments:
+You can get a list of all available CRAN packages by simply executing the 
+`install.packages()` function with no arguments:
 ```{r ListPackages, eval = FALSE}
 install.packages()
 ```
-If you know the name of the CRAN package you want to install, 
-you can provide it as the argument:
+If you know the name of the CRAN package you want to install, you can provide it
+as the argument:
 ```{r InstallTidyverse, eval = FALSE}
 install.packages("tidyverse")
 ```
 You only need to install each package once.
 
-However, installing a package only puts the files on your computer. In order
-to actually use the features of a package you need to load it into 
-memory during your current R session using the `library()` function:
+However, installing a package only puts the files on your computer. In order to
+actually use the features of a package you need to load it into memory during
+your current R session using the `library()` function:
 ```{r LibraryTidyverse, eval = FALSE}
 library("tidyverse")
 ```
 You can then use the Tidyverse functions and other tools.
 :::
 
-
 ## Reading and viewing data in R {#reading-and-viewing-data-in-r}
 
-Having skimmed the basic features of R, it is time to use it for some real
-work.  As with Excel, we start  any data analysis project in R by
-opening the data file, viewing it, and constructing a plan to clean it.
+Having skimmed the basic features of R, it is time to use it for some real work.
+As with Excel, we start  any data analysis project in R by opening the data
+file, viewing it, and constructing a plan to clean it.
 
 We will work with the employment data.
 
 ### Reading CSV files
 
 Our first step will be reading the data in from the CSV file. The Tidyverse
-function to do this is called `read_csv()`.  It has one required argument:
-the name of the CSV file, either as a local file address or a URL.
+function to do this is called `read_csv()`.  It has one required argument: the
+name of the CSV file, either as a local file address or a URL.
 
 :::example
 **Reading a CSV file in R**
@@ -851,9 +822,9 @@ EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData
 # You can also download the file and give read_csv() the local location
 # EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```
-As you can see, R guesses each variable's data type, and reports its
-guess.  It is always a good idea to review this output and make sure
-that everything is the way that we want it:
+As you can see, R guesses each variable's data type, and reports its guess. It
+is always a good idea to review this output and make sure that everything is the
+way that we want it:
 
 - The numeric variables are all stored as `col_double()`.
   - This means double-precision (64 bit) real number
@@ -864,36 +835,32 @@ that everything is the way that we want it:
   - This is what we want.
 - The **MonthYr** variable is also stored as `col_character()`.
   - This is *not* what we want.
-  - We will want **MonthYr** to be stored explicitly as a date
-    variable, so we make a note of that issue here and will
-    fix it later.
-
+  - We will want **MonthYr** to be stored explicitly as a date variable, so we
+    make a note of that issue here and will fix it later.
 :::
-
 
 ::: {.fyi data-latex=""}
 **Additional options**
 
-Our data file happens to be a nice and tidy one, so `read_csv()` worked
-just fine with its default options.  Not all data files are so
-tidy, so `read_csv()` has many optional arguments.  There are
-also functions for other delimited file types:
+Our data file happens to be a nice and tidy one, so `read_csv()` worked just
+fine with its default options.  Not all data files are so tidy, so `read_csv()`
+has many optional arguments.  There are also functions for other delimited file
+types:
 
-- `read_csv2()` for files delimited by semicolons rather than commas
-- `read_tsv()` for tab-delimited files
-- `read_delim()` for files delimited using any other character
+- `read_csv2()` for files delimited by semicolons rather than commas.
+- `read_tsv()` for tab-delimited files.
+- `read_delim()` for files delimited using any other character.
 
-Base R function has a similar function called `read.csv()`,
-but `read_csv()` is preferable for various reasons.
+Base R function has a similar function called `read.csv()`, but `read_csv()` is
+preferable for various reasons.
 :::
 
 ### Viewing a data table
 
-The `read_csv()` function creates an object called a data table or
-***tibble***. A tibble is a Tidyverse object type that describes a table of
-tidy data.
+The `read_csv()` function creates an object called a data table or ***tibble***.
+A tibble is a Tidyverse object type that describes a table of tidy data.
 
-- Each row in the tibble represents an observation
+- Each row in the tibble represents an observation.
 - Each column represents a variable, and has a name.
 
 The base R equivalent of a tibble is called a ***data frame***. Tibbles
@@ -928,8 +895,8 @@ View(EmpData)
 or through RStudio by following these steps:
 
 1. Go to the *Environment* tab in the upper right window.
-   - You will see a list of all variables currently in memory,
-     including **EmpData**.
+   - You will see a list of all variables currently in memory, including
+     **EmpData**.
 2. Double-click on `EmpData`.
 
 You will see a spreadsheet-like display of `EmpData`. As in Excel, you can sort
@@ -939,13 +906,13 @@ and filter this table.  Unlike Excel, you cannot edit it here.
 
 ### Data table properties
 
-There are several R functions available for exploring the properties
-of a data table.
+There are several R functions available for exploring the properties of a data
+table.
 
 - We can obtain the column names of a tibble using the `names()` function.
 - We can access any individual column using the `$` notation.
-- We can count the rows and columns with `nrow()` and `ncol()`, or we
-  can use the `length()` function.
+- We can count the rows and columns with `nrow()` and `ncol()`, or we can use
+  the `length()` function.
 
 :::example
 **Viewing properties of a tibble**
@@ -962,8 +929,8 @@ length(EmpData)
 ```
 :::
 
-In a later chapter, we will learn how to view other table properties such
-as summary statistics.
+In a later chapter, we will learn how to view other table properties such as
+summary statistics.
 
 ## Chapter review {-#review-introduction-to-r}
 
@@ -997,7 +964,6 @@ There are many free sources of useful information about R.
   or your local book shop, and is also available as a free e-book at 
   https://r4ds.had.co.nz/index.html.
 :::
-
 
 ## Practice problems {-#problems-introduction-to-r}
 

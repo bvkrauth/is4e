@@ -14,7 +14,7 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 
-This appendix contains solutions to all end-of-chapter practice problems.
+This appendix provides solutions to all end-of-chapter practice problems.
 
 ## **2** Basic data cleaning with Excel {-#answers-basic-data-cleaning-with-excel}
 
@@ -29,8 +29,7 @@ This appendix contains solutions to all end-of-chapter practice problems.
    c. An archive copy represents an earlier master version or working copy that
       you are keeping for future reference.  There can be many, and they should
       not be edited directly.
-3. Characteristic (a) is necessary for a variable to function
-   as an ID variable.
+3. Characteristic (a) is necessary for a variable to function as an ID variable.
 4. The relevant tools are:
    a. Fill (copy/paste is also OK here).
    b. Copy/paste (fill only works on adjacent cells).
@@ -40,10 +39,10 @@ This appendix contains solutions to all end-of-chapter practice problems.
    a. `=SQRT(A2)`
    b. `=MIN(A2:A100)`
    c. `=ABS(A2-B2)`
-6. Cell E15 is 2 columns and 3 rows away from cell C12.  So we change all relative
-   references from column B to column D, and all relative references from row 2 to 
-   row 5, and all relative references from row 10 to row 13.  Absolute references
-   are not changed.
+6. Cell E15 is 2 columns and 3 rows away from cell C12.  So we change all
+   relative references from column B to column D, and all relative references
+   from row 2 to row 5, and all relative references from row 10 to row 13.
+   Absolute references are not changed.
    a. `=D5`
    b. `=$B$2`
    c. `=$B5`
@@ -66,8 +65,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
 
 [Click here to see the problems](#problems-probability)
 
-1. The sample space is the set of all possible outcomes for $(r,w)$, and its cardinality
-   is just the number of elements it has.
+1. The sample space is the set of all possible outcomes for $(r,w)$, and its
+   cardinality is just the number of elements it has.
    a. The sample space is:
       \begin{align}
         \Omega &= \left\{ \begin{aligned}
@@ -81,8 +80,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
           \right\}
       \end{align}
    b. Counting up the number of elements in the set, we get $|\Omega| = 36$.
-2. Each event is just a set listing the $(r,w)$ outcomes that satisfy the relevant
-   conditions.
+2. Each event is just a set listing the $(r,w)$ outcomes that satisfy the
+   relevant conditions.
    a. Yo wins whenever $r+w = 11$.
       \begin{align}
         Yo &= \{(5,6),(6,5)\}
@@ -115,8 +114,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
 9. Statements (a), (d), (e), (f), and (h) are true.
 10. Statements (a) and (b) are true.
 11. All three elementary events have probability $1/36 \approx 0.028$
-12. The probability of each event can be calculated by adding up the probabilities
-    of its elementary events:
+12. The probability of each event can be calculated by adding up the
+    probabilities of its elementary events.
     a. The probability a bet on Yo wins is:
        \begin{align}
          \Pr(Yo) &= \Pr(\{(5,6),(6,5)\}) \\
@@ -236,7 +235,7 @@ This appendix contains solutions to all end-of-chapter practice problems.
     Notice that this is less than 50\% (the house always has an advantage) but
     it is greater than the probability of winning a  bet on red or black in
     roulette, which we earlier calculated to be about 0.486.  Craps is typically
-    the most favoralbe casino game to players (lowest house advantage), if you
+    the most favorable casino game to players (lowest house advantage), if you
     play Pass.
 18. The conditional return probabilities are:
     \begin{align*}
@@ -521,7 +520,7 @@ This appendix contains solutions to all end-of-chapter practice problems.
 
 1.  Based on these figures:
     a. $x$ is continuous.
-    b. The top graph shows the PDF and thebottom graph shows the CDF.
+    b. The top graph shows the PDF and the bottom graph shows the CDF.
     c. The median of $x$ is about 3.
     d. $x$ is more likely to be between 0 and 10.
 2.  This question uses various formulas for the uniform distribution.
@@ -596,8 +595,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
     b. The Excel formula would be `=NORM.DIST(11,10,2,TRUE)` which
        yields the result $\Pr(x \leq 11) \approx 0.691$
 5.  A linear function of a normal random variable is also normal.
-    a. The distribution of $y$ will be normal with mean $3E(x) + 5 = 35$ and variance
-       $3^2 var(x) = 36$, so $y \sim N(35,36)$
+    a. The distribution of $y$ will be normal with mean $3E(x) + 5 = 35$ and
+       variance $3^2 var(x) = 36$, so $y \sim N(35,36)$
     b. If $x \sim N(10,4)$ then $z = \frac{x - 10}{2} \sim N(0,1)$.
     c. Solving for $x$ in terms of $z$ we get $x = 2z + 10$
        \begin{align}
@@ -806,29 +805,33 @@ This appendix contains solutions to all end-of-chapter practice problems.
 [Click here to see the problems](#problems-statistics)
 
 
-1. Since we have a random sample, the joint PDF is just a product of the marginal
-   PDFs.
+1. Since we have a random sample, the joint PDF is just a product of the
+   marginal PDFs.
    a. The support is just the set of all possible combinations: 
       $$S_{D_n} = \{(1,1),(1,2),(2,1),(2,2)\}$$
-   b. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
+   b. Since we have a random sample, the joint PDF is the product of the
+      marginal PDFs: 
       \begin{align}
         f_{D_n}(1,1) &= f_x(1)f_x(1) \\
           &= 0.4*0.4 \\
           &= 0.16
       \end{align}
-   c. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
+   c. Since we have a random sample, the joint PDF is the product of the
+      marginal PDFs: 
       \begin{align}
         f_{D_n}(2,1) &= f_x(2)f_x(1) \\
           &= 0.6*0.4 \\
           &= 0.24
       \end{align}
-   d. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
+   d. Since we have a random sample, the joint PDF is the product of the
+      marginal PDFs: 
       \begin{align}
         f_{D_n}(1,2) &= f_x(1)f_x(2) \\
           &= 0.4*0.6 \\
           &= 0.24
       \end{align}
-   e. Since we have a random sample, the joint PDF is the product of the marginal PDFs: 
+   e. Since we have a random sample, the joint PDF is the product of the
+      marginal PDFs: 
       \begin{align}
         f_{D_n}(2,2) &= f_x(2)f_x(2) \\
           &= 0.6*0.6 \\
@@ -850,8 +853,9 @@ This appendix contains solutions to all end-of-chapter practice problems.
    c. This is a stratified sample.
    d. This is a time series.
    e. This is a census.
-4. This is a long question but we can make it easier by preparing a simple table mapping each 
-   of the four possible values of $D_n$ into a value for each statistic:
+4. This is a long question but we can make it easier by preparing a simple table
+   mapping each of the four possible values of $D_n$ into a value for each
+   statistic:
    
    | $x_1$ | $x_2$ |$f_{D_n}(\cdot)$|$\hat{f}_1$ |$\bar{x}$ | $\hat{\sigma}_x^2$ | $\hat{\sigma}_x$ | $xmin$ | $xmax$ |
    |-------|-------|--------------|-------------|----------|--------------------|------------------|--------|--------|
@@ -889,8 +893,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= f_{D_n}(2,2) \\
             &= 0.36 
        \end{align}
-   c. The support is $S_{\hat{\sigma}_x^2} = \{0,0.5\}$ and the sampling distribution
-      is:
+   c. The support is $S_{\hat{\sigma}_x^2} = \{0,0.5\}$ and the sampling 
+      distribution is:
       \begin{align}
           f_{\hat{\sigma}_x^2}(0) &= \Pr(\hat{\sigma}_x^2 = 0) \\
             &= f_{D_n}(1,1) + f_{D_n}(2,2)\\
@@ -901,8 +905,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= 0.24 + 0.24 \\
             &= 0.48 
        \end{align}
-   d. The support is $S_{\hat{\sigma}_x} = \{0,0.71\}$ and the sampling distribution
-      is:
+   d. The support is $S_{\hat{\sigma}_x} = \{0,0.71\}$ and the sampling
+      distribution is:
       \begin{align}
           f_{\hat{\sigma}_x^2}(0) &= \Pr(\hat{\sigma}_x = 0) \\
             &= f_{D_n}(1,1) + f_{D_n}(2,2)\\
@@ -913,8 +917,7 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= 0.24 + 0.24 \\
             &= 0.48 
        \end{align}
-   e. The support is $S_{xmin} = \{1,2\}$ and the sampling distribution
-      is:
+   e. The support is $S_{xmin} = \{1,2\}$ and the sampling distribution is:
       \begin{align}
           f_{xmin}(1) &= \Pr(xmin = 1) \\
             &= f_{D_n}(1,1) + f_{D_n}(2,1) + f_{D_n}(1,2) \\
@@ -924,8 +927,7 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= f_{D_n}(2,2) \\
             &= 0.36 
         \end{align}
-   f. The support is $S_{xmax} = \{1,2\}$ and the sampling distribution
-      is:
+   f. The support is $S_{xmax} = \{1,2\}$ and the sampling distribution is:
       \begin{align}
           f_{xmax}(1) &= \Pr(xmax = 1) \\
             &= f_{D_n}(1,1) \\
@@ -935,7 +937,7 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= 0.36 + 0.24 + 0.24 \\
             &= 0.84 
         \end{align}
-5. The mean can be calculated from each statistic's PDF:
+5. The mean can be calculated from each statistic's PDF.
    a. The mean is:
       \begin{align}
           E(\hat{f}_1) &= 0*f_{\hat{f}_1}(0) +  0.5*f_{\hat{f}_1}(0) +  1*f_{\hat{f}_1}(1) \\
@@ -972,8 +974,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
              &= 1*0.16 + 2*0.84 \\
              &= 1.84  
       \end{align}
-6. We have already found the mean of each statistic, so we can calculate the variance using
-   the alternative formula $var(x) = E(x^2) - E(x)^2$
+6. We have already found the mean of each statistic, so we can calculate the
+   variance using the alternative formula $var(x) = E(x^2) - E(x)^2$.
    a. To calculate the variance, we can use the alternative formula:
       \begin{align}
           E(\hat{f}_1^2) &= 0^2*f_{\hat{f}_1}(0) +  0.5^2*f_{\hat{f}_1}(0) +  1^2*f_{\hat{f}_1}(1) \\
@@ -1010,8 +1012,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= 3.52 - 1.84^2 \\
             &= 0.134
       \end{align}
-7. All three of these statistics are simple linear functions of the data, so their mean
-   and variance can be calculated without using the PDF:
+7. All three of these statistics are simple linear functions of the data, so
+   their mean and variance can be calculated without using the PDF.
    a. The mean and variance are already given to us:
       \begin{align}
         E(x_1) &= 1.6 \\
@@ -1038,8 +1040,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
           &= 0.2^2*0.24 + 0.8^2*0.24  + 2*0.2*0.8*0 \\
           &= 0.16 
       \end{align}
-8. Unknown parameters: $\mu$,$\sigma^2$, $E(x_i)$, $E(x_i^3)$, $var(x_i)$, and $sd(x_i)/\sqrt{n}$.  
-   Statistics: $D_n$, $\bar{x}$.
+8. Unknown parameters: $\mu$,$\sigma^2$, $E(x_i)$, $E(x_i^3)$, $var(x_i)$, and
+   $sd(x_i)/\sqrt{n}$. Statistics: $D_n$, $\bar{x}$.
 9. We can find the true values directly from the PDF $f_x(\cdot)$:
    a. The true probability is:
       $\Pr(x_i = 1) = 0.4$
@@ -1063,8 +1065,9 @@ This appendix contains solutions to all end-of-chapter practice problems.
             &= 0.24 + 0.24 + 0.36 \\
             &= 0.84
        \end{align}
-11. We have already calculated the mean of each statistic and the true value of each parameter,
-    so we can calculate the bias and then use the result to classify each estimator:
+11. We have already calculated the mean of each statistic and the true value of
+    each parameter, so we can calculate the bias and then use the result to
+    classify each estimator.
     a. Unbiased
        \begin{align}
          bias(\hat{f}_1) &= E(\hat{f}_1) - \Pr(x_i=1) \\
@@ -1101,12 +1104,12 @@ This appendix contains solutions to all end-of-chapter practice problems.
            &= 1.84 - 2 \\
            &= -0.16
         \end{align}
-12. Remember that the expected value passes through *linear* functions, but not *nonlinear* 
-    functions:
+12. Remember that the expected value passes through *linear* functions, but not
+    *nonlinear* functions.
     a. It is unbiased, as $E(\bar{y}_M - \bar{y}_W) = E(\bar{y}_M) - E(\bar{y}_W) = \mu_M - \mu_W$.
     b. It is biased, as $E(\bar{y}_M/\bar{y}_W) \neq E(\bar{y}_M)/E(\bar{y}_W) = \mu_M/\mu_W$.
-13. We have already calculated the variance and bias, so we can apply the formula
-    $MSE = var + bias^2$:
+13. We have already calculated the variance and bias, so we can apply the
+    formula $MSE = var + bias^2$.
     a. The MSE is:
        \begin{align}
          MSE(\hat{f}_1) &= var(\hat{f}_1) + bias(\hat{f}_1)^2 \\
@@ -1131,8 +1134,8 @@ This appendix contains solutions to all end-of-chapter practice problems.
            &= 0.13 + (-0.16)^2 \\
            &= 0.16
         \end{align}
-14. Again, these estimators are both linear functions of the data, so their mean and 
-    variance are easy to calculate.
+14. Again, these estimators are both linear functions of the data, so their mean
+    and variance are easy to calculate.
     a. Both estimators are unbiased.
     b. The variance is $var(\bar{x}) = \sigma^2/2$
     c. The variance is $var(x_2) = \sigma^2$
@@ -1146,14 +1149,15 @@ This appendix contains solutions to all end-of-chapter practice problems.
         &= \sqrt{4}/\sqrt{100} \\
         &= 0.2
     \end{align}
-16. Both the sample average (a) and the average of all even numbered observations (d) are 
-    consistent estimators of $\mu$, because they keep using more and more information as 
-    the sample size increases.  In contrast the estimators based on the first observation,
-    and on the first 100 observations are both unbiased, but they do not change as the 
-    sample size increases.  So the LLN does not apply, and the estimators are not 
-    consistent. The LLN does apply to the sample median because of Slutsky's theorem, 
-    but that makes it a consistent estimator of the population *median*, which may or
-    may not be equal to the population *mean*.
+16. Both the sample average (a) and the average of all even numbered
+    observations (d) are consistent estimators of $\mu$, because they keep using
+    more and more information as the sample size increases.  In contrast the
+    estimators based on the first observation, and on the first 100 observations
+    are both unbiased, but they do not change as the sample size increases.  So
+    the LLN does not apply, and the estimators are not consistent. The LLN does
+    apply to the sample median because of Slutsky's theorem, but that makes it a
+    consistent estimator of the population *median*, which may or may not be
+    equal to the population *mean*.
 
 ## **8** Statistical inference {-#answers-inference}
 
@@ -1354,17 +1358,17 @@ This appendix contains solutions to all end-of-chapter practice problems.
    b. Space or tab delimited
    c. CSV 
 2. Here are my descriptions, yours may be somewhat different:
-   a. A crosswalk table is a data table we can use to translate variables that are 
-      expressed in one way into another way.  For example, we might use a crosswalk
-      table to translate country names into standardized country codes, or to 
-      translate postal codes into provinces.
-   b. When we have two data tables that contain information on related cross-sectional  
-      units, we can combine their information into a single table by matching observations
-      based on a variable that (a) exists in both tables and (b) connects the observations
-      in some way.
-   c. Aggregating data by groups allows us to group observations according to a common
-      characteristic, and describe those groups using data calculated from the 
-      individual observations.
+   a. A crosswalk table is a data table we can use to translate variables that
+      are expressed in one way into another way.  For example, we might use a
+      crosswalk table to translate country names into standardized country
+      codes, or to translate postal codes into provinces.
+   b. When we have two data tables that contain information on related
+      cross-sectional units, we can combine their information into a single
+      table by matching observations based on a variable that (a) exists in both
+      tables and (b) connects the observations in some way.
+   c. Aggregating data by groups allows us to group observations according to a
+      common characteristic, and describe those groups using data calculated
+      from the individual observations.
 3. You can edit cell A1 under scenarios (a) and (c).
 4. If you do this:
    a. Nothing will happen, but you can ask Excel to mark invalid data.
@@ -1464,14 +1468,15 @@ ggplot(data = PPData, mapping = aes(x = MonthYr, y = EmpRate)) + geom_line()
    a. Simple frequency table
    b. Conditional average
    c. Crosstab
-2. The covariance and correlation is negative here, so periods of high population growth
-   tend to be periods of *low* unemployment.
+2. The covariance and correlation is negative here, so periods of high
+   population growth tend to be periods of *low* unemployment.
 ``` {r PP_12_01}
 cov(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
 cor(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
 ```
 
-3. I used casewise deletion but it does not matter. It only matters when you add a third variable.
+3. I used casewise deletion but it does not matter. It only matters when you add
+   a third variable.
 4. The scatter plot should look something like this:
 ``` {r PP_12_04}
 ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_point()
@@ -1489,7 +1494,8 @@ ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_po
 
 1. In my case it would be $A = (Brian, Charlie, Hazel, Sue)$.
 2. This would be $B = \{x \in Z: 1 \leq x \leq 1000\}$
-3. The cardinality is $|A| = 4$ (in my case, yours may be different) and $|B| = 1000$.
+3. The cardinality is $|A| = 4$ (in my case, yours may be different) and
+   $|B| = 1000$.
 4. Remember that sets are subsets of themselves.
    a. $B$ and $D$ are identical ($B = D$)
    b. $C$ is disjoint with $A$
@@ -1515,9 +1521,8 @@ ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_po
    c. $\sum_{i \in 1}^\infty x_i I(i < 4) = x_1 + x_2 + x_3$
 8. Statements (a) and (c) are true.
 9. The limits are:
-   a. The limit of this sequence is $0$
+   a. The limit of this sequence is $0$.
    b. This sequence has no limit.
-   c. The limit of this sequence is $5$
-   d. The limit of this sequence is $0$
-   e. The limit of this sequence is $\infty$
-
+   c. The limit of this sequence is $5$.
+   d. The limit of this sequence is $0$.
+   e. The limit of this sequence is $\infty$.

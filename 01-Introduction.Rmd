@@ -2,21 +2,6 @@
 
 # Introduction {#introduction}
 
-Before we dive into the day-to-day course material, it is important to understand
-the big picture of what we are trying to do here, and to get set up for our work.
-
-::: {.goals data-latex=""}
-**Chapter goals**
-
-In this chapter we will:
-
-1. Review course educational goals
-2. Establish course expectations
-3. Gather resources and tools, including all needed computer software.
-:::
-
-## Course goals and context {#course-goals-and-context}
-
 This is an introductory course in statistics for economics. It is similar to
 courses taught all over the world to first and second year university students
 in business, economics, and other social sciences.
@@ -60,14 +45,16 @@ and can't wait to learn more about it.  But most of you are taking it because
 it's a required course. So I'd like to motivate everyone to take this course
 as an opportunity to learn some very useful skills.
 
+## Course context {#course-goals-and-context}
+
 The context of this course is a world that is awash in data:
 
-- retailers maintain databases of transactions
-- manufacturers track product quality and costs
-- marketers collect data on customers and potential customers
-- governments record everyone's interactions with schools,
-    tax authorities, social welfare, health care and criminal justice, 
-- employers maintain detailed personnel records. 
+- Retailers maintain databases of transactions.
+- Manufacturers track product quality and costs.
+- Marketers collect data on customers and potential customers.
+- Governments record everyone's interactions with schools,
+    tax authorities, social welfare, health care and criminal justice.
+- Employers maintain detailed personnel records. 
  
 These databases can be linked and analyzed in various ways, and many 
 of the world's most successful companies rely heavily on the innovative
@@ -122,94 +109,92 @@ ability to recognize the economic context of a situation, you will do
 quite well.
 :::
 
-
 ## Expectations {#organization-and-expectations}
 
 This textbook and course are constructed under the assumptions that:
 
-1. You have taken introductory microeconomics and introductory 
-   macroeconomics.
+1. You have taken introductory microeconomics and introductory  macroeconomics.
    -  Ideas from those courses will be used in applications and examples.
-2. You can do high-school level math including algebra and basic set theory
-   and have taken or are currently taking an introductory calculus course.
-   - I will not ask you to take derivatives or solve integrals
+2. You can do high-school level math including algebra and basic set theory and
+   have taken or are currently taking an introductory calculus course.
+   - I will not ask you to solve integrals.
+   - I may ask you to take a simple derivative or two.
    - But I will refer to concepts like functions, sequences and limits.
    - The math review appendix provides material and practice problems if you
      need to review these concepts and tools.
 3. You have access to a desktop or laptop computer, and basic computer skills.
 
-This is not a textbook on introductory economics, high school math, or
-computer skills. If you are a little behind in those skills, be sure to
-ask for help as needed.
+This is not a textbook on introductory economics, high school math, or computer
+science. If you are a little behind in those skills, you can catch up but you
+will need to be proactive in asking for help.
 
 ::: sfu
 **ECON 233**
 
-ECON 233 is the first course in the two-course econometrics sequence 
-that is required for all economics majors.  If you've never seen the word
-before, "econometrics" just means statistics and data analysis for
-economics.
+ECON 233 is the first course in the two-course econometrics sequence that is
+required for all economics majors.  If you've never seen the word before,
+"econometrics" just means statistics and data analysis for economics.
 
-All economics majors have the option of taking ECON 233 or 
-BUS 232, so you may be wondering what the difference is. Either course 
-is suitable preparation for ECON 333, but there are some key differences: 
+All economics majors have the option of taking ECON 233 or BUS 232, so you may
+be wondering what the difference is. Either course is suitable preparation for
+ECON 333, but there are some key differences: 
 
 - *Tools:* ECON 233 uses both Excel and R, while BUS 232 uses Excel. 
-  - You are likely to use R in ECON 333 and other upper-division ECON
-    courses, so it is nice to get used to it now.
-- *Applications:* ECON 233 emphasizes economics applications, while 
-  BUS 232 emphasizes business applications.
+  - You are likely to use R in ECON 333 and other upper-division ECON courses,
+    so it is nice to get used to it now.
+- *Applications:* ECON 233 emphasizes economics applications, while BUS 232
+  emphasizes business applications.
 
-ECON 233 is part of the Social Data and Analytics (SDA) minor; if you 
-are an economics student and are interested in that minor you are 
-recommended to take ECON 233.
+ECON 233 is part of the Social Data and Analytics (SDA) minor; if you are an
+economics student and are interested in that minor you are recommended to take
+ECON 233.
 :::
 
 If you continue in an economics major, you will take at least one additional
-course  in econometrics. In those courses, you will learn more advanced techniques
-such as linear regression, you will use statistical packages such as R more
-extensively, and you will go deeper into the theory.
+course  in econometrics. In those courses, you will learn more advanced
+techniques such as linear regression, you will use statistical packages such as
+R more extensively, and you will go deeper into the theory.
 
 ::: sfu
 **Related courses**
 
-The second course in the econometrics sequence for economics majors
-is [ECON 333:Statistical Analysis of Economic Data](https://www.sfu.ca/students/calendar/2022/fall/courses/econ/333.html). In
-ECON 333, you will learn a more advanced set of techniques including
-linear regression analysis and you will gain more experience with R.
+The second required course in the econometrics sequence for economics majors is
+[ECON 333:Statistical Analysis of Economic Data](https://www.sfu.ca/students/calendar/2022/fall/courses/econ/333.html).
+In ECON 333, you will learn a more advanced set of techniques including linear
+regression analysis and you will gain more experience with R.
 
-We also offer several related electives. If you find you enjoy and/or do well
-in this course, I would encourage you to take some of these course:
+We also offer several related electives. If you find you enjoy and/or do well in
+this course, I would encourage you to take some of these course:
 
 - [ECON 334: Data Visualization and Economic Analysis](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/334.html) 
-  is an elective focusing on exploratory data analysis and visualization
+  is an elective focusing on exploratory data analysis and visualization.
  - [ECON 335: Introduction to Causal Inference and Policy Evaluation](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/335.html)
   is an elective focusing on the problem of inferring cause-and-effect from
-   economic data, and using data to forecast the effects of economic
-   policies.
- - [ECON 433: Financial and Time Series Econometrics](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/433.html) is an advanced elective focusing on techniques 
-   for analyzing the kind of time series data that is used in macroeconomics
-   and financial markets.
- - [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html) is an advanced course in statistics 
-   and econometrics that is part of our honours sequence. It gives you the
-   opportunity and tools to write a serious empirical research
-   paper.  Non-honours students are eligible to take it if they have 
-   a 3.0 CGPA and the course prerequisites.
+   economic data, and using data to forecast the effects of economic policies.
+ - [ECON 433: Financial and Time Series Econometrics](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/433.html) 
+   is an advanced elective focusing on techniques for analyzing the kind of time
+   series data that is used in macroeconomics and financial markets.
+ - [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html)
+   is an advanced course in statistics and econometrics that is part of our
+   honours sequence. It gives you the opportunity and tools to write a serious
+   empirical research paper.  Non-honours students are eligible to take it if
+   they have a 3.0 CGPA and the course prerequisites.
    
-I would also encourage you to take courses outside of the economics
-department, and to consider a [Statistics minor](http://www.sfu.ca/students/calendar/2021/spring/programs/statistics/minor.html) or the new
-interdisciplinary [Social Data Analytics (SDA) minor](http://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html) . 
+I would also encourage you to take courses outside of the economics department,
+and to consider a 
+[Statistics minor](http://www.sfu.ca/students/calendar/2021/spring/programs/statistics/minor.html)
+or the interdisciplinary
+[Social Data Analytics (SDA) minor](http://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html) . 
 :::
-
 
 ## Computer resources {#computer-resources}
 
 To do the computer work you will need a computer with internet access and
-the following software packages installed:
+the following software applications installed:
 
-- Microsoft Excel
-- R
-- RStudio
+1. Microsoft Excel
+2. R
+3. RStudio
 
 You will also want to install an R "package" known as the Tidyverse.
 
@@ -228,43 +213,44 @@ Course materials including the syllabus, lectures, and assignments are
 available at the course Canvas site https://canvas.sfu.ca/courses/73884.
 :::
 
-
 ### Installing Microsoft Excel {#installing-microsoft-excel}
 
-Microsoft Excel is a well-known spreadsheet program that is available for both Windows 
-and macOS. Alternatives to Excel include Google Sheets and Apple Numbers.  We will
-use Excel here, but the basic skills are transferable to any spreadsheet program
-including these alternatives.
+Microsoft Excel is a well-known spreadsheet program that is available for both
+Windows and macOS. Alternatives to Excel include
+[Google Sheets](https://www.google.ca/sheets/about/) and Apple's
+[Numbers](https://www.apple.com/ca/numbers/).  We will use Excel, but the basic
+skills are transferable to any spreadsheet program.
 
 ::: sfu
 **Using Excel at SFU**
 
 SFU has a licensing agreement with Microsoft that allows its students 
 free installation of the entire Microsoft Office suite, including Excel. 
-Installation instructions are available at
+Installation instructions are available at:
 
 https://www.sfu.ca/itservices/technical/software/office365.html.
 
 Excel is also available in all campus computer labs.
 :::
 
-Once you have installed Excel, you should confirm that it is working by
-starting the program. You should see something that looks like this:  
+Once you have installed Excel, you should confirm that it is working by starting
+the program. You should see something that looks like this:  
 ![Excel blank workbook](bin/ExcelBlankWorkbook.png) 
 
 ### Installing R and RStudio {#installing-r-and-rstudio}
 
-We will also use a more specialized statistical
-program called R, and a related program called RStudio. 
+We will also use a more specialized statistical program called R, and a related
+application called RStudio. R is a programming language used for statistical
+analysis, and the application that interprets and executes R code.  RStudio is
+an "Integrated Development Environment" (IDE) for R.  An IDE is a collection of
+tools tools for building and running programs, packaged up in a single
+user-friendly interface.
 
-- R is a programming language used for statistical analysis.
-- RStudio is an "Integrated Development Environment" for R, that is
-  it is an integrated set of tools for building and running R 
-  programs.
-
-Alternatives to R include the (quite expensive) statistical packages
-SAS and Stata, as well as the (free) general-purpose programming
-language Python.
+Alternatives to R include the (quite expensive) statistical packages 
+[SAS](https://www.sas.com/) and [Stata](https://www.stata.com/), as well as the
+(free) general-purpose programming language [Python](https://www.python.org/).
+The best known IDE is Microsoft's 
+[Visual Studio](https://visualstudio.microsoft.com/).
 
 ::: sfu
 **Using R/RStudio at SFU**
@@ -275,7 +261,8 @@ You can also install them on your own computer by following the instructions
 below.
 :::
 
-Both R and RStudio are open-source, and are available free of charge for both Windows and macOS. Installation instructions are available at:
+Both R and RStudio are open-source, and are available free of charge for both
+Windows and macOS. Installation instructions are available at:
 
 https://rstudio.com/products/rstudio/download/#download.
 
@@ -289,25 +276,26 @@ opening RStudio.  You should see something like this:
 
 One of the most useful features of R is that it allows users to write and
 distribute ***packages*** that extend its capabilities. There are thousands
-of packages available; we will use a particularly popular and
-useful package called the ***Tidyverse***.
+of packages available; we will use a particularly popular and useful package
+called the ***Tidyverse***.
 
 To install the Tidyverse package:
 
 1. Open RStudio if it isn't already open.
-2. Click in the `Console` window (you will see it towards the bottom of the screen)
-3. Enter `install.packages("tidyverse")` (i.e., type it and hit the `<enter>` key)
+2. Click in the `Console` window (you will see it towards the bottom of the
+   screen).
+3. Enter `install.packages("tidyverse")` (i.e., type it and hit the `<enter>`
+   key).
 
-Once the installation is concluded and the `>` prompt reappears you can test 
-to make sure the installation worked.
+Once the installation is concluded and the `>` prompt reappears you can test to
+make sure the installation worked.
 
 4. Enter `library(tidyverse)` in the console window.  
    - If you get an error message like
      ```Error in library(tidyverse) : there is no package called ‘tidyverse’```
      you may have forgotten to install the package; go back to step 2 above.
-   - If you don't get an error message (it's OK if you get some message
-     about "Conflicts"), the installation worked.
+   - If you don't get an error message (it's OK if you get some message about
+     "Conflicts"), the installation worked.
 
 If you run into trouble here, don't worry. We will not need the Tidyverse for 
 a few weeks, so there is plenty of time to get help.
-

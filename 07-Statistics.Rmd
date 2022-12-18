@@ -1,18 +1,18 @@
 # Statistics {#statistics}
 
 In earlier chapters, we learned to use Excel to construct common
-[univariate statistics and charts](#basic-data-analysis-with-excel).  We
-also learned the basics of [probability theory](#probability-and-random-events),
-and working with [simple](#random-variables) or
-[complex](#more-on-random-variables) random variables. The next step is to bring
-these concepts together, and appply the theoretical tools of probability and
-random variables to statistics calculated from data.
+[univariate statistics and charts](#basic-data-analysis-with-excel).  We also
+learned the basics of [probability theory](#probability-and-random-events), and
+working with [simple](#random-variables) or [complex](#more-on-random-variables)
+random variables. The next step is to bring these concepts together, and apply
+the theoretical tools of probability and random variables to statistics
+calculated from data.
 
-This chapter will develop a framework for talking about data
-and the statistics calculated from that data as the outcome of a random data
-generating process. We will also explore one of the most important uses of
-statistics: to ***estimate*** or guess at the value at, some unknown feature of
-the data generating process.
+This chapter will develop the theory of mathematical statistics, which is one in
+which each statistic is treated as the outcome of a random data generating
+process.  We will also explore one of the most important uses of statistics: to
+***estimate*** or guess at the value at, some unknown feature of the data
+generating process.
 
 ::: {.goals data-latex=""}
 ***Chapter goals***
@@ -54,9 +54,9 @@ from data to infer or predict other quantities that are *not* in the data.
    use statistics based on that survey to ***infer*** how the other
    38+ million Canadians would have responded to that survey.
    - This is the main application we will consider in this course.
-2. Wal-Mart may use historical sales data to ***predict*** how many chocolate bunnies
-   it will sell this Easter.  It will then use this prediction to determine how
-   many chocolate bunnies to order.
+2. Wal-Mart may use historical sales data to ***predict*** how many chocolate
+   bunnies it will sell this Easter.  It will then use this prediction to
+   determine how many chocolate bunnies to order.
    - We will talk a little about this kind of application.
 3. Economists and other researchers will often be interested in making
    ***causal*** or ***counterfactual*** inferences.
@@ -97,7 +97,6 @@ fair, but did have access to a data set of past results?
 2. We can use the data to *test* the hypothesis that the game is fair.
    - This application will be covered in the chapter on
      [statistical inference](#statistical-inference)
-
 :::
 
 ## Data and the data generating process
@@ -110,8 +109,8 @@ For this chapter, we will simplify by assuming that $K = 1$, i.e., that
 $D_n = (x_1,x_2,\ldots,x_n)$ contains $n$ observations on a single numeric
 variable $x_i$. This case will cover all of the univariate statistics and
 methods described in the chapter on
-[basic data analysis](#basic-data-analysis-with-excel). A later
-chapter will consider data sets with [multiple variables](#multivariate-data-analysis),
+[basic data analysis](#basic-data-analysis-with-excel). A later chapter will
+consider data sets with [multiple variables](#multivariate-data-analysis),
 along with some tools for analyzing the relationship between two or more
 variables.
 
@@ -123,10 +122,9 @@ of roulette.  Let $b_i$ be the outcome in game $i$, and let $x_i$ be the result
 of a bet on red:
   $$x_i = I(b_i \in RED) = \begin{cases} 1 & b_i \in RED \\ 0 & b_i \notin RED \\ \end{cases}$$
 Suppose our data set has observations from two games ($n = 2$). Then
-$D_2 = (x_1,x_2)$ where $x_1$ is the result from the first game and $x_2$
-is the result from the second game.  For example, suppose red loses the
-first game and wins the second game. Then our data could be written in
-tabular form as:
+$D_2 = (x_1,x_2)$ where $x_1$ is the result from the first game and $x_2$ is the
+result from the second game.  For example, suppose red loses the first game and
+wins the second game. Then our data could be written in tabular form as:
 
 | Game \# ($i$) | Result of bet on red ($x_i$) |
 |:-------------:|:----------------------------:|
@@ -136,11 +134,10 @@ tabular form as:
 or in a list as $D_2 = (0,1)$.
 :::
 
-Our data set $D_n$ is a table or list of *numbers*, but we can also think of
-it as a set of *random variables* with an unknown joint PDF $f_D$.  This
-PDF is sometimes called the ***data generating process*** or DGP for the data
-set. The exact DGP is usually unknown, but we usually have some information
-about it.
+Our data set $D_n$ is a table or list of *numbers*, but we can also think of it
+as a set of *random variables* with an unknown joint PDF $f_D$.  This PDF is
+sometimes called the ***data generating process*** or DGP for the data set. The
+exact DGP is usually unknown, but we usually have some information about it.
 
 ::: example
 **The DGP for the roulette data**
@@ -164,48 +161,46 @@ the support:
     &= p^2 \\
   f_D(a,b) &= 0 \qquad \textrm{otherwise}
 \end{align}
-where $p = \Pr(x_i = 1)$ is the unkown probability that a bet on red wins.
+where $p = \Pr(x_i = 1)$ is the unknown probability that a bet on red wins.
 
 While it is feasible to calculate the DGP for this very small data set, it
 quickly becomes impractical^[To get an idea what I mean by "impractical", the
-support of $D_n$ has $|S_x|^n$ possible values, where $|S_x|$
-is the number of values in the support of $x_i$ and $n$ is the sample size.
-If our roulette data set had results from 100 games (this would still be a
-fairly small sample in economics), this would mean we need to calculate the
-joint PDF for $2^{100} \approx 1.3 \times 10^30$ (that's a one followed by
-30 zeros) different combinations.] to do so as the number of observations
-increase. Fortunately, we don't usually need to calculate the DGP.  We just need
-to know that it *could* be calculated.
+support of $D_n$ has $|S_x|^n$ possible values, where $|S_x|$ is the number of
+values in the support of $x_i$ and $n$ is the sample size. If our roulette data
+set had results from 100 games (this would still be a fairly small sample in
+economics), this would mean we need to calculate the joint PDF for 
+$2^{100} \approx 1.3 \times 10^30$ (that's a one followed by 30 zeros) different
+combinations.] to do so as the number of observations increase. Fortunately, we
+don't usually need to calculate the DGP.  We just need to know that it *could*
+be calculated.
 :::
 
 ### Simple random sampling
 
 In most applications, we can simplify the DGP by assuming that $D_n$ is
 ***independent and identically distributed*** (IID) or a
-***simple random sample*** from a large ***population***.
-A simple random sample has two features:
+***simple random sample*** from a large ***population***. A simple random sample
+has two features:
 
-1. The observations are **independent**: Each $x_i$ is independent of the
-   others.
+1. The observations are **independent**: Each $x_i$ is independent of the others.
 2. The observations are **identically distributed**: Each $x_i$ has the same
    (unknown) marginal distribution.
 
-The reason we call this "independent and identically distributed"
-is hopefully obvious, but what does it mean to say we have a 
-"random sample" from a "population"? Well, one simple way of 
-generating an IID sample is to:
+The reason we call this "independent and identically distributed" is hopefully
+obvious, but what does it mean to say we have a "random sample" from a
+"population"? Well, one simple way of generating an IID sample is to:
 
 1. Define the population of interest, for example all Canadian residents.
 2. Use some purely random mechanism[^602] to choose a small subset of cases
    from this population.
    - The subset is called our ***sample***
-   - "Purely random" here means some mechanism like a computer's 
-     random number generator, which can then be used to 
-     dial random telephone numbers or select cases from a list.
+   - "Purely random" here means some mechanism like a computer's random number
+     generator, which can then be used to dial random telephone numbers or
+     select cases from a list.
 3. Collect data from every case in our sample.
 
-It will turn out that a moderately-sized random sample provides 
-surprisingly accurate information on the underlying population.
+It will turn out that a moderately-sized random sample provides surprisingly
+accurate information on the underlying population.
 
 [^602]: As a technical matter, the assumption of independence requires
   that we sample *with replacement*. This means we allow
@@ -216,12 +211,10 @@ surprisingly accurate information on the underlying population.
 ::: example
 **Our roulette data is a random sample**
 
-Each observation $x_i$ in our roulette data is an independent
-random draw from the $Bernouilli(p)$ distribution where 
-$p = \Pr(b \in Red)$.
+Each observation $x_i$ in our roulette data is an independent random draw from
+the $Bernouilli(p)$ distribution where $p = \Pr(b \in Red)$.
 
-Therefore, this data set satisfies the criteria for a simple 
-random sample.
+Therefore, this data set satisfies the criteria for a simple random sample.
 :::
 
 The joint PDF of a simple random sample can be written:
@@ -238,25 +231,25 @@ marginal PDF for each observation.
 employment data set is an example of time series data, as are most other
 macroeconomic variables such as GDP, population, inflation, interest rates, etc.
 
-Time series have several features that are inconsistent with the random 
-sampling assumption:
+Time series have several features that are inconsistent with the random sampling
+assumption:
 
 - They usually have clear *time trends*.  
-  - For example, Canada's real GDP has been steadily growing for as 
-    long as we have data.
+  - For example, Canada's real GDP has been steadily growing for as long as we
+    have data.
   - This violates the assumption that observations are identically distributed
     since the expected value changes from one year to the next.
 - They usually have clear recurring cyclical patterns or *seasonality*.  
-  - For example, unemployment in Canada is usually lower from September 
-    through December.
+  - For example, unemployment in Canada is usually lower from September through
+    December.
   - This violates the assumption that observations are identically distributed
-    since the expected value changes from one monthto the next.
+    since the expected value changes from one month to the next.
 - They usually exhibit what is called *autocorrelation*. 
-  - For example, shocks to the economy that affect GDP in one month or
-    quarter (think of COVID or a financial crisis) are likely to have 
-    a similar (if smaller) effect on GDP in the next month or quarter.  
-  - This violates the assumption that observations are independent since
-    values in nearby time periods are related.
+  - For example, shocks to the economy that affect GDP in one month or quarter
+    (think of COVID or a financial crisis) are likely to have a similar (if
+    smaller) effect on GDP in the next month or quarter.  
+  - This violates the assumption that observations are independent since values
+    in nearby time periods are related.
 
 We can calculate statistics for time series, and we already did in Chapter
 \@ref(basic-data-analysis-with-excel).  However, using time series data for
@@ -278,52 +271,50 @@ example:
 - A ***stratified sample*** is collected by dividing the population into
   *strata* (subgroups) based on some observable characteristics, and then randomly
   sampling a predetermined number of cases within each strata. 
-  - Most professional surveys are constructed from stratified samples 
-    rather than random samples.
-  - Stratified sampling is often combined with *oversampling* of 
-    some smaller strata that are of particular interest. 
+  - Most professional surveys are constructed from stratified samples rather
+    than random samples.
+  - Stratified sampling is often combined with *oversampling* of some smaller
+    strata that are of particular interest. 
     - The LFS oversamples residents of Prince Edward Island (PEI) because a
-      national random sample would not catch enough PEI residents to
-      accurately measure PEI's unemployment rate.
+      national random sample would not catch enough PEI residents to accurately
+      measure PEI's unemployment rate.
     - Government surveys typically oversample disadvantaged groups..
   - Stratified samples can usually be handled as if they were from a random
     sample, with some adjustments.
-- A ***cluster sample*** is gathered by dividing the population
-  into ***clusters***, randomly selecting some of these clusters, and
-  sampling cases within the cluster.  
-  - Educational data sets are often gathered this way: we pick a random 
-    sample of schools, and then collect data from each student 
-    within those schools.
-  - Cluster samples can usually be handled as if they were from
-    a random sample, with some adjustments.
+- A ***cluster sample*** is gathered by dividing the population into
+  ***clusters***, randomly selecting some of these clusters, and sampling cases
+  within the cluster.  
+  - Educational data sets are often gathered this way: we pick a random sample
+    of schools, and then collect data from each student within those schools.
+  - Cluster samples can usually be handled as if they were from a random sample,
+    with some adjustments.
 - A ***census*** gathers data on every case in the population. 
-  - For example, we might have data on all 50 US states, or all 
-    10 Canadian provinces, or all of the countries of the world. 
-  - Data from administrative sources such as tax records or 
-    school records often cover the entire population of interest as well. 
+  - For example, we might have data on all fifty US states, or all ten Canadian
+    provinces, or all of the countries of the world. 
+  - Data from administrative sources such as tax records or school records often
+    cover the entire population of interest as well. 
   - Censuses are often treated as random samples from some hypothetical
     population of "possible" cases.
 - A ***convenience sample*** is gathered by whatever method is convenient.
-  - For example, we might gather a survey from people who walk by,
-    or we might recruit our friends to participate in the survey.
-  - Convenience samples are the worst-case scenario; in many cases they
-    simply aren't usable for accurate statistical analysis.
+  - For example, we might gather a survey from people who walk by, or we might
+    recruit our friends to participate in the survey.
+  - Convenience samples are the worst-case scenario; in many cases they simply
+    aren't usable for accurate statistical analysis.
  
-Many data sets combine several of these elements.  For example,
-Canada's unemployment rate is calculated using data from the 
-Labour Force Survey (LFS). The LFS is built from a stratified 
-sample of the civilian non-institutionalized working-age population 
-of Canada. There is also some clustering: the LFS will typically
-interview whole households, and will do some geographic clustering
-to save on travel costs. The LFS is gathered monthly, and the
-resulting unemployment rate is a time series.
+Many data sets combine several of these elements.  For example, Canada's
+unemployment rate is calculated using data from the Labour Force Survey (LFS).
+The LFS is built from a stratified sample of the civilian non-institutionalized
+working-age population of Canada. There is also some clustering: the LFS will
+typically interview whole households, and will do some geographic clustering
+to save on travel costs. The LFS is gathered monthly, and the resulting
+unemployment rate is a time series.
 
 ### Sample selection and representativeness
 
-Random samples and their close relatives have the feature that they
-are ***representative*** of the population from which they are 
-drawn. In a sense that will be made more clear over the next few chapters,
-any sufficiently large random sample tends to closely resemble the population.
+Random samples and their close relatives have the feature that they are
+***representative*** of the population from which they are drawn. In a sense
+that will be made more clear over the next few chapters, any sufficiently large
+random sample tends to closely resemble the population.
 
 Unfortunately, a simple random sample is not always possible. Even if we are
 able to randomly select cases, we often run into the following problems:
@@ -332,50 +323,50 @@ able to randomly select cases, we often run into the following problems:
   provide the information requested by the survey
   - ***Survey-level*** nonresponse occurs when the sampled individual does not
     answer any questions. 
-      - This can occur if the sampled individual cannot be found, refuses 
-        to answer, or cannot answer (for example, is incapacitated due to
-        illness or disability).
+      - This can occur if the sampled individual cannot be found, refuses to
+        answer, or cannot answer (for example, is incapacitated due to illness
+        or disability).
       - Recent response rates to telephone surveys have been around 9\%,
         implying over 90\% of those contacted do not respond.
-  - ***Item-level*** nonresponse occurs when the sampled individual does 
-    not answer a particular question.  
-    - This can occur if the respondent refuses to answer, or the 
-      question is not applicable or has no valid answer.
+  - ***Item-level*** nonresponse occurs when the sampled individual does not
+    answer a particular question.  
+    - This can occur if the respondent refuses to answer, or the question is not
+      applicable or has no valid answer.
     - Item-level nonresponse is particularly common on sensitive questions
       including income.
 - ***Censoring*** occurs when a particular quantity of interest cannot be
-  observed for a particular case.  Censored outcomes are extremely common
-  in economics, for example:
+  observed for a particular case.  Censored outcomes are extremely common in
+  economics, for example:
     - In labour market analysis, we cannot observe the market wage for
       individuals who are not currently employed. 
-    - In supply/demand analysis, we only observe quantity supplied and
-      quantity demanded at the current market price.
+    - In supply/demand analysis, we only observe quantity supplied and quantity
+      demanded at the current market price.
 
-When observations are subject to nonresponse or censoring, we must interpret
-the data carefully.
+When observations are subject to nonresponse or censoring, we must interpret the
+data carefully.
 
 ::: example
 **Wald's airplanes**
 
 Abraham Wald was a Hungarian/American statistician and econometrician who made 
-important contributions to both the theory of statistical inference and the development
-of economic index numbers such as the Consumer Price Index. 
+important contributions to both the theory of statistical inference and the
+development of economic index numbers such as the Consumer Price Index. 
 
-Like many scientists of his time, he advised the US government during
-World War II. As part of his work, he was provided with data on combat damage 
-received by airplanes, with the hopes that the data could be used to help make
-the planes more robust to damage. Planes can be reinforced with additional
-steel, but this is costly and makes them heavier and slower.
+Like many scientists of his time, he advised the US government during World War
+II. As part of his work, he was provided with data on combat damage received by
+airplanes, with the hopes that the data could be used to help make the planes
+more robust to damage. Planes can be reinforced with additional steel, but this
+is costly and makes them heavier and slower.
 
 The data looked something like this (this isn't the real data, just a
 visualization constructed for the example):
 
 <a title="Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept), CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg"><img width="256" alt="Survivorship-bias" src="bin/WaldPlane.png"></a>
 
-You will notice that most of the damage seems to be in the wings and in
-the middle of the fuselage (body), while there is little damage to the
-nose, engines, and back of the fuselage. You might think that means that
-the wings and middle fuselage are the areas that should be reinforced.
+You will notice that most of the damage seems to be in the wings and in the
+middle of the fuselage (body), while there is little damage to the nose,
+engines, and back of the fuselage. You might think that means that the wings and
+middle fuselage are the areas that should be reinforced.
 
 Wald's team realized that this was wrong: the data were taken from planes
 *that returned*, which is not a random sample of planes that went out. Planes
@@ -393,15 +384,14 @@ There are two basic solutions to nonresponse and censoring:
     that flew, and a random sample of planes that returned.
   - Canadian survey data can be interpreted as a a random sample of Canadians
     who answer surveys.
-- ***Imputation***: we assume or ***impute*** values for all missing
-  quantities.
+- ***Imputation***: we assume or ***impute*** values for all missing quantities.
   - Abraham Wald's team assumed that the distribution of damage was roughly
     uniform across all planes that flew.
   - We might assume that Canadians who do not respond to surveys would give
     similar responses to those given by survey respondents.
   - We might assume that Canadians who do not respond to surveys would give
-    similar responses to those given by survey respondents of the same
-    age, gender, and education.
+    similar responses to those given by survey respondents of the same age,
+    gender, and education.
 
 Like many real-world statistical issues, nonresponse and censoring do not have
 a purely technical solution.  Careful thought is required.  If we are imputing
@@ -413,9 +403,9 @@ data are simply not good enough to answer our questions.
 ::: {.fyi data-latex=""}
 **Nonresponse bias in US presidential elections**
 
-Going into both the 2016 and 2020 US presidential elections, polls
-indicated that the Democratic candidate had a substantial lead over
-the Republican candidate: 
+Going into both the 2016 and 2020 US presidential elections, polls indicated
+that the Democratic candidate had a substantial lead over the Republican
+candidate: 
 
 - Hillary Clinton led Donald Trump by 4-6\% nationally in 2016 
 - Joe Biden led Trump by 8\% nationally in 2020.  
@@ -425,12 +415,11 @@ The actual vote was much closer:
 - Clinton won the popular vote (but lost the election) by 2\%
 - Biden won the popular vote (and won the election) by about 4.5\%.  
 
-The generally accepted explanation among pollsters for the clear 
-disparity between polls and voting is systematic nonresponse: for
-some reason, Trump voters are less likely to respond to
-polls. Since most people do not respond to standard telephone polls
-any more (response rates are typically around 9\%), it does not
-take much difference in response rates to produce a large difference
+The generally accepted explanation among pollsters for the clear disparity
+between polls and voting is systematic nonresponse: for some reason, Trump
+voters are less likely to respond to polls. Since most people do not respond to
+standard telephone polls any more (response rates are typically around 9\%),
+it does not take much difference in response rates to produce a large difference
 in responses.  For example, suppose that:
 
 - We call 1,000 voters
@@ -440,10 +429,10 @@ in responses.  For example, suppose that:
 - 8\% of Trump voters respond (40 voters)
 
 The overall response rate is 9\% (similar to what we usually see in surveys),
-Biden has the support of $50/90 = 56\%$ of the respondents
-while Trump has the support of $40/90 = 44\%$.  Actual support is
-even, but the polls show a 12 percentage point gap in support, entirely
-because of the small difference in response rates.
+Biden has the support of $50/90 = 56\%$ of the respondents while Trump has the
+support of $40/90 = 44\%$.  Actual support is even, but the polls show a 12
+percentage point gap in support, entirely because of the small difference in
+response rates.
 
 Polling organizations employ statisticians who are well aware of this problem,
 and they made various adjustments after the 2016 election to address it. For
@@ -475,7 +464,7 @@ In our two-observation roulette data, the total number of wins is:
 Since this is a number calculated from our data, it is a statistic.
 
 Since the observations are independent draws from the $Bernoulli(p)$
-distribution, the total humber of wins has the $Binomial(2,p)$ distribution.
+distribution, the total number of wins has the $Binomial(2,p)$ distribution.
 :::
 
 ### Summary statistics {#summary-statistics-theory}
@@ -493,15 +482,15 @@ reproduced below for convenience:
 - The ***sample standard deviation*** is:
   $$s_x = \sqrt{s_x^2}$$
 
-We also learned to construct both [simple](#simple-frequency-tables)
-and [binned](#binned-frequency-tables) frequency tables.  Let
+We also learned to construct both [simple](#simple-frequency-tables) and
+[binned](#binned-frequency-tables) frequency tables.  Let
 $B \subset \mathbb{R}$ be a bin of values. Then we can define:
 
-- The ***sample frequency*** or ***relative sample frequency*** of bin $B$
-  is the proportion of cases in which $x_i$ is in $B$:
+- The ***sample frequency*** or ***relative sample frequency*** of bin $B$ is
+  the proportion of cases in which $x_i$ is in $B$:
   $$\hat{f}_B = \frac{1}{n} \sum_{i=1}^n I(x_i \in B)$$
-- The ***absolute sample frequency*** of bin $B$ is the *number* of cases
-  in which $x_i$ is in $B$:
+- The ***absolute sample frequency*** of bin $B$ is the *number* of cases in
+  which $x_i$ is in $B$:
   $$n \hat{f}_B = \sum_{i=1}^n I(x_i \in B)$$
 
 We can then construct each cell in a frequency table by choosing the appropriate
@@ -539,7 +528,6 @@ doesn't matter much since adjacent order statistics will tend to be close in
 reasonably large data sets.
 :::
 
-
 ### The sampling distribution
 
 Since the data itself is a collection of random variables, any statistic
@@ -573,21 +561,20 @@ Therefore the sampling distribution of $\bar{x}$ can be described by the PDF:
 \end{align}
 :::
 
-Unfortunately, most statistics typically have sampling distributions that
-are quite difficult to calculate for the same reason the DGP is quite
-difficult to calculate: there are just too many possible values.
-
+Unfortunately, most statistics typically have sampling distributions that are 
+quite difficult to calculate for the same reason the DGP is quite difficult to
+calculate: there are just too many possible values.
 
 ### The mean of a statistic {#the-mean-of-a-statistic}
 
-If our statistic has a probability distribution, it (usually) has a mean
-and variance as well.
+If our statistic has a probability distribution, it (usually) has a mean and
+variance as well.
 
 ::: example
 **The mean of the sample average in the roulette data**
 
-We can calculate the expected value of $\bar{x}$ in the two-observation
-roulette data directly from the PDF derived in the previous example:
+We can calculate the expected value of $\bar{x}$ in the two-observation roulette
+data directly from the PDF derived in the previous example:
 \begin{align}
   E(\bar{x}) &= 0 \times f_{\bar{x}}(0) + 0.5 \times f_{\bar{x}}(0.5) + 1 \times f_{\bar{x}}(1) \\
     &= 0 \times (1-p)^2 + 0.5 \times 2p(1-p) + 1.0 \times p^2 \\
@@ -616,7 +603,6 @@ function. This is an important and fairly general result in statistics -
 although we have derived it here for the specific case of a simple random
 sample, it applies for many other common sampling schemes.
 
-
 ### The variance {#the-variance-of-a-statistic}
 
 The variance of a statistic can also be calculated in many cases.
@@ -637,8 +623,8 @@ In the two-observation roulette data, the variance of the sample average is:
 Notice that $var(\bar{x}_n) < var(x_i)$.
 :::
 
-In general, the variance of the sample average in a random sample of size
-$n$ is:
+In general, the variance of the sample average in a random sample of size $n$
+is:
   $$var(\bar{x}_n) = \frac{\sigma_x^2}{n}$$
 where $\sigma_x^2 = var(x_i)$. Similarly the standard deviation of the sample
 average in a random sample of size $n$ is $\sigma_x/\sqrt{n}$.
@@ -680,23 +666,23 @@ Sometimes a group of parameters completely describe the DGP:
   
 And sometimes a parameter only partially describes the DGP
 
-- If $x_i$ is a random sample from some unknown distribution
-  with unknown mean $\mu_x = E(x_i)$, then $\mu_x$ is a parameter.
-- If $x_i$ is a random sample from some unknown distribution
-  with unknown median $m_x = q_{0.5}(x_i)$, then $m_x$ is a parameter.
+- If $x_i$ is a random sample from some unknown distribution with unknown mean
+  $\mu_x = E(x_i)$, then $\mu_x$ is a parameter.
+- If $x_i$ is a random sample from some unknown distribution with unknown median
+  $m_x = q_{0.5}(x_i)$, then $m_x$ is a parameter.
 :::
 
-Typically there will be particular parameters whose value we wish
-to know.  Such a parameter is called a ***parameter of interest***.
-Our model may include other parameters, which are typically called
-*auxiliary parameters* or *nuisance parameters*. 
+Typically there will be particular parameters whose value we wish to know. Such
+a parameter is called a ***parameter of interest***. Our model may include other
+parameters, which are typically called *auxiliary parameters* or
+*nuisance parameters*. 
 
 ### Estimators
 
-An ***estimator*** is a statistic $\hat{\theta}_n = \hat{\theta}(D_n)$
-that is being used to ***estimate*** (guess at the value of) an unknown
-parameter of interest $\theta$.  Since it is a statistic constructed
-from $D_n$, an estimator is generally:
+An ***estimator*** is a statistic $\hat{\theta}_n = \hat{\theta}(D_n)$ that is
+used to ***estimate*** (guess at the value of) an unknown parameter of interest
+$\theta$.  Since it is a statistic constructed from $D_n$, an estimator is
+generally:
 
   - Observed since $D_n$ is observed.
   - A random variable with a well defined but unknown probability distribution
@@ -749,8 +735,8 @@ parameter, and a bad estimator of another parameter.
 
 In choosing an estimator, we can consider several criteria.
 
-The first is the ***bias*** of the estimator, which is defined as
-its expected sampling error:
+The first is the ***bias*** of the estimator, which is defined as its expected
+sampling error:
 \begin{align}
   bias(\hat{\theta}_n) &= E(err(\hat{\theta}_n)) \\
     &= E(\hat{\theta}_n - \theta) \\
@@ -781,12 +767,12 @@ The first observation is also an unbiased estimator of $\mu_x$ since:
       &= \mu_x - \mu_x \\
       &= 0
   \end{align}
-This example illustrates a general principle: there is rarely exactly
-one unbiased estimator.  There are either none, or many.
+This example illustrates a general principle: there is rarely exactly one
+unbiased estimator.  There are either none, or many.
 :::
 
-If the bias is nonzero, we would say that $\hat{\theta}_n$ is a
-***biased*** estimator of $\theta$.
+If the bias is nonzero, we would say that $\hat{\theta}_n$ is a ***biased***
+estimator of $\theta$.
 
 ::: example
 **A biased estimator of the median**
@@ -832,26 +818,24 @@ median, for reasons we will discuss soon.
 
 ### Variance and the MVUE
 
-If there are multiple unbiased estimators available for a given 
-parameter, we need to apply a second criterion to choose 
-one.  A natural second criterion is the ***variance*** of 
-the estimator:
+If there are multiple unbiased estimators available for a given parameter, we
+need to apply a second criterion to choose one.  A natural second criterion is
+the ***variance*** of the estimator:
   $$var(\hat{\theta}_n) = E[(\hat{\theta}_n-(E(\hat{\theta}_n))^2]$$
 Why do we care about the variance? A low variance means that $\hat{\theta}_n$
 is usually close to its own expected value.  If $\hat{\theta}_n$ is unbiased,
 then that means it is also close to $\theta$. So low variance is preferable to
 high variance, at least when comparing unbiased estimators.
 
-The ***minimum variance unbiased estimator*** (MVUE) of a parameter is
-the unbiased estimator with the lowest variance, and the ***MVUE criterion***
-for choosing an estimator says to choose the MVUE.
+The ***minimum variance unbiased estimator*** (MVUE) of a parameter is the
+unbiased estimator with the lowest variance, and the ***MVUE criterion*** for
+choosing an estimator says to choose the MVUE.
 
 ::: example
 **The variance of two estimators of the mean**
 
 Suppose we have a random sample of size $n > 1$ on the random variable $x_i$
-with unknown mean $\mu_x = E(x_i)$ and unknown variance
-$\sigma_x^2 = var(x_i)$.
+with unknown mean $\mu_x = E(x_i)$ and unknown variance $\sigma_x^2 = var(x_i)$.
 
 We earlier showed that the sample average $\bar{x}_n$ and the first observation
 $x_1$ are both unbiased estimators of $\mu_x$.  We can select the "better"
@@ -867,29 +851,28 @@ estimator of these two unbiased estimators under the MVUE criterion.
 
 ### Mean squared error
 
-Unfortunately, once we move beyond the simple case of estimating 
-the population mean, we run into several complications:
+Unfortunately, once we move beyond the simple case of the sample average, we run
+into several complications:
 
-The first complication is that an unbiased estimator may not 
-exist for a particular parameter of interest. If there is
-no unbiased estimator, there is no minimum variance unbiased 
-estimator. So we need some other way of choosing an estimator.  
+The first complication is that an unbiased estimator may not exist for a
+particular parameter of interest. If there is no unbiased estimator, there is no
+MVUE. So we need some other way of choosing an estimator.  
 
 ::: example
 **The sample median**
 
-There is no generally unbiased estimator of the median of a random variable
-with unknown distribution.
+There is no generally unbiased estimator of the median of a random variable with
+unknown distribution.
 :::
 
 The second complication is that we often have access to an unbiased estimator
-and a biased estimator with lower variance. Depending on the details, the
-biased estimator may be clearly preferable to the unbiased estimator.
+and a biased estimator with lower variance. Depending on the details, the biased
+estimator may be clearly preferable to the unbiased estimator.
 
 ::: example
 **The relationship between age and earnings**
 
-Labour economists are often interested in the relationship beteen age and
+Labour economists are often interested in the relationship between age and
 earnings.
 
 Suppose we want to estimate the earnings of the average 35-year-old Canadian.
@@ -913,9 +896,9 @@ introduce bias (since they have added people that are not exactly like
 35-year-olds).
 :::
 
-This suggests that we need a criterion that
+This suggests that we need a criterion that:
 
-  - Can be used to choose between biased estimators
+  - Can be used to choose between biased estimators.
   - Can choose slightly biased estimators with low variance over unbiased
     estimators with high variance.
 
@@ -936,19 +919,19 @@ The mean squared error of the sample average is:
   $$MSE(\bar{x}_n) = var(\bar{x}_n) + [bias(\bar{x}_n)]^2 = \frac{\sigma_x^2}{n} + 0^2 = \frac{\sigma_x^2}{n}$$
 and the mean squared error of the first observation estimator is:
   $$MSE(x_1) = \sigma_x^2$$
-The sample average is the preferred estimator by the MSE criterion,
-so in this case we get the same result as applying the MVUE criterion.
+The sample average is the preferred estimator by the MSE criterion, so in this
+case we get the same result as applying the MVUE criterion.
 :::
 
-The MSE criterion allows us to choose a biased estimator with low variance
-over an unbiased estimator with high variance, and also allows us to choose
-between biased estimators when no unbiased estimator exists.
+The MSE criterion allows us to choose a biased estimator with low variance over
+an unbiased estimator with high variance, and also allows us to choose between
+biased estimators when no unbiased estimator exists.
 
 ### Standard errors
 
 Parameter estimates are typically reported along with their
-***standard errors***.  The standard error of a statistic is
-an estimate of its standard deviation.
+***standard errors***.  The standard error of a statistic is an estimate of its
+standard deviation.
 
 The first step in constructing a standard error is to find the actual standard
 deviation of the statistic, in terms of (probably unknown) parameters of the
@@ -983,7 +966,7 @@ The sample variance is an unbiased estimator of the population variance:
   $$E(s_x^2) = \sigma_x^2 = var(x_i)$$
 This is not hard to prove, but I will skip it for now.
 
-Unfortunately, the square root is not a linear function.
+Unfortunately, the square root is not a linear function:
   $$E(s_x) = E(\sqrt{s_x^2}) \neq \sqrt{E(s_x^2)} = \sigma_x$$
 so the sample standard deviation is a biased estimator of the population
 standard deviation.  Even so, the bias is typically small and so this is the
@@ -995,8 +978,8 @@ Finally, we substitute to get the formula for the standard error.
 ::: example
 **The standard error of the average**
 
-The usual standard error for the sample average in a random sample of size
-$n$ is:
+The usual standard error for the sample average in a random sample of size $n$
+is:
   $$se(\bar{x}_n) = \frac{s_x}{\sqrt{n}}$$
 where $s_x$ is the sample standard deviation.
 :::
@@ -1029,21 +1012,19 @@ properties.
 
 We will state two main asymptotic results in this chapter: the law of large
 numbers and Slutsky's theorem.  A third asymptotic result called the central 
-limit theorem will be stated in the next chapter. 
+limit theorem will be discussed later. 
 
-All three results rely on the concept of a limit, which you would
-have learned in your calculus course.  If you need to review that
-concept, please see the [section on limits](#limits)
-in the math appendix.  However, I will not expect you to do
-any significant amount of math with these results.  Please focus 
-on the intuition and interpretation and don't worry 
-too much about the math.
+All three results rely on the concept of a limit, which you would have learned
+in your calculus course.  If you need to review that concept, please see the
+[section on limits](#limits) in the math appendix.  However, I will not expect
+you to do any significant amount of math with these results.  Please focus on
+the intuition and interpretation and don't worry too much about the math.
 
 ### Defining the LLN
 
 The ***law of large numbers*** (LLN) says that for a large enough random
-sample, the sample average is nearly identical to the corresponding
-population mean with a very high probability.
+sample, the sample average is nearly identical to the corresponding population
+mean with a very high probability.
 
 ::: fyi
 **The law of large numbers**
@@ -1064,8 +1045,7 @@ for any positive number $\epsilon > 0$.
 
 Intuitively, what this means is that for a sufficiently large $n$ 
 (the $\lim_{n \rightarrow \infty}$ part), $s_n$ is almost certainly
-(the $\Pr(\cdot) = 1$ part) very close to $c$
-(the $|s_n-c| < \epsilon$ part).
+(the $\Pr(\cdot) = 1$ part) very close to $c$ (the $|s_n-c| < \epsilon$ part).
 
 We have a compact way of writing convergence in probability:
   $$w_n \rightarrow^p c$$
@@ -1075,7 +1055,7 @@ Having defined our terms we can now state the law of large numbers.
 
 **LAW OF LARGE NUMBERS**: Let $\bar{x}_n$ be the sample average 
 from a random sample of size $n$ on the random variable $x_i$ with
-mean $E(x_i) = \mu_x$. Then
+mean $E(x_i) = \mu_x$. Then:
   $$\bar{x}_n \rightarrow^p \mu_x$$
 :::
 
@@ -1120,14 +1100,14 @@ winning probability and/or total payout for each outcome.
 
 ### Consistent estimation
 
-We say that the statistic $\hat{\theta}_n$ is a ***consistent***
-estimator of a parameter $\theta$ if $\hat{\theta}_n$ is nearly identical
-to $\theta$ with very high probability for a large enough sample.
+We say that the statistic $\hat{\theta}_n$ is a ***consistent*** estimator of a
+parameter $\theta$ if $\hat{\theta}_n$ is nearly identical to $\theta$ with very
+high probability for a large enough sample.
 
 The law of large numbers implies that the sample average is a consistent
-estimator of the corresponding population mean, but we can go much further
-than that.  Almost all of the estimators we use in practice are consistent
-in a random sample:
+estimator of the corresponding population mean, but we can go much further than
+that.  Almost all of the estimators we use in practice are consistent in a
+random sample:
 
 - The sample variance is a consistent estimator of the population variance.
 - The sample standard deviation is a consistent estimator of the population
@@ -1203,11 +1183,11 @@ Answers can be found in the [appendix](#answers-statistics).
               \end{cases}
     \end{align}
    Let $f_{D_n}(a,b) = \Pr(x_1=a \cap x_2 = b)$ be the joint PDF of the data set
-   a. Find the support $S_{D_n}$
-   a. Find $f_{D_n}(1,1)$
-   b. Find $f_{D_n}(2,1)$
-   c. Find $f_{D_n}(1,2)$
-   d. Find $f_{D_n}(2,2)$
+   a. Find the support $S_{D_n}$.
+   b. Find $f_{D_n}(1,1)$.
+   c. Find $f_{D_n}(2,1)$.
+   d. Find $f_{D_n}(1,2)$.
+   e. Find $f_{D_n}(2,2)$.
 
 **GOAL #2: Identify the key features of a random sample**
 
@@ -1224,7 +1204,7 @@ Answers can be found in the [appendix](#answers-statistics).
    d. The two observations have the same PDFs, and are independent.
    e. The two observations have the same PDFs, and have 
       $corr(x_1,x_2) = 0$
-   f. The two observations have the same PDFs, and have $cov(x_1,x_2) > 0$
+   f. The two observations have the same PDFs, and have $cov(x_1,x_2) > 0$.
 
 **GOAL #3: Classify data sets by sampling types**
 
@@ -1243,7 +1223,7 @@ Answers can be found in the [appendix](#answers-statistics).
 **GOAL #4: Find the sampling distribution of a very simple statistic**
 
 4. Suppose we have the data set described in question 3 above. Find the support 
-   $S$ and sampling distribution $f(\cdot)$ for each of the following statistics:
+   $S$ and sampling distribution $f(\cdot)$ for:
     a. The sample frequency $\hat{f}_1 = \frac{I(x_1=1) + I(x_2=1)}{2}$.
     b. The sample average $\bar{x} = (x_1 + x_2)/2$.
     c. The sample variance $\hat{\sigma}_x^2 = (x_1-\bar{x})^2 + (x_2-\bar{x})^2$.
@@ -1253,8 +1233,8 @@ Answers can be found in the [appendix](#answers-statistics).
 
 **GOAL #5: Find the mean and variance of a statistic from its sampling distribution**
 
-5. Suppose we have the data set described in question 3 above. Find the mean of each
-   of the following statistics:
+5. Suppose we have the data set described in question 3 above. Find the
+   expected value of:
     a. The sample frequency $\hat{f}_1 = \frac{I(x_1=1) + I(x_2=1)}{2}$.
     b. The sample average $\bar{x} = (x_1 + x_2)/2$.
     c. The sample variance $\hat{\sigma}_x^2 = (x_1-\bar{x})^2 + (x_2-\bar{x})^2$.
@@ -1263,7 +1243,7 @@ Answers can be found in the [appendix](#answers-statistics).
     f. The sample maximum $xmax = \max(x_1, x_2)$.
 
 6. Suppose we have the data set described in question 3 above. Find the 
-   variance of the following statistics:
+   variance of:
     a. The sample frequency $\hat{f}_1 = \frac{I(x_1=1) + I(x_2=1)}{2}$.
     b. The sample average $\bar{x} = (x_1 + x_2)/2$.
     c. The sample minimum $xmin = \min(x_1, x_2)$.
@@ -1273,8 +1253,7 @@ Answers can be found in the [appendix](#answers-statistics).
 
 7. Suppose we have a data set $D_n = (x_1,x_2)$ that is a random sample
    of size $n = 2$ on the random variable $x_i$ which has mean $E(x_i) = 1.6$
-   and variance $var(x_i) = 0.24$. Find the mean and variance of the 
-   following statistics:
+   and variance $var(x_i) = 0.24$. Find the mean and variance of:
     a. The first observation $x_1$.
     b. The sample average $\bar{x} = (x_1 + x_2)/2$.
     c. The weighted average $w = 0.2*x_1 + 0.8*x_2$.
@@ -1299,18 +1278,19 @@ Answers can be found in the [appendix](#answers-statistics).
    l. $\bar{x}$
 
 9. Suppose we have the data set described in question 3 above. Find the 
-   true value of each of the following parameters:
+   true value of:
     a. The probability $\Pr(x_i=1)$.
-    b. The population mean $E(x_i)$
-    c. The population variance $var(x_i)$
-    d. The population standard deviation $sd(x_i)$
+    b. The population mean $E(x_i)$.
+    c. The population variance $var(x_i)$.
+    d. The population standard deviation $sd(x_i)$.
     e. The population minimum $\min(S_x)$.
     f. The population maximum $\max(S_x)$.
 
 **GOAL #8: Calculate the sampling error of an estimator**
 
-10. Suppose we have the data set described in question 3 above. Suppose we use the sample maximum
-      $xmax = \max(x_1,x_2)$ population maximum $\max(S_x)$.
+10. Suppose we have the data set described in question 3 above. Suppose we use
+    the sample maximum $xmax = \max(x_1,x_2)$ to estimate the population maximum
+    $\max(S_x)$.
      a. Find the support $S_{err}$ of the sampling error $err = \max(x_1,x_2) - max(S_x)$.
      b. Find the PDF $f_{err}(\cdot)$ for the sampling distribution of the 
         sampling error $err$.
@@ -1319,70 +1299,77 @@ Answers can be found in the [appendix](#answers-statistics).
 
 11. Suppose we have the data set described in question 3 above. Classify each of the 
     following estimators as biased or unbiased, and calculate the bias.
-    a. The sample frequency $\hat{f}_1$ as an estimator of the probability $\Pr(x_i=1)$.
-    b. The sample average $\bar{x}$ as an estimator of the population mean $E(x_i)$
-    c. The sample variance $\hat{\sigma}_x^2$  as an estimator of the population variance $var(x_i)$
-    d. The sample standard deviation $\hat{\sigma}_x$ as an estimator of the population standard deviation $sd(x_i)$
-    e. The sample minimum $xmin$  as an estimator of the population minimum $\min(S_x)$.
-    f. The sample maximum $xmax$  as an estimator of the population maximum $\max(S_x)$.
+    a. The sample frequency $\hat{f}_1$ as an estimator of the probability
+       $\Pr(x_i=1)$.
+    b. The sample average $\bar{x}$ as an estimator of the population mean
+       $E(x_i)$
+    c. The sample variance $\hat{\sigma}_x^2$  as an estimator of the population
+       variance $var(x_i)$
+    d. The sample standard deviation $\hat{\sigma}_x$ as an estimator of the
+       population standard deviation $sd(x_i)$
+    e. The sample minimum $xmin$  as an estimator of the population minimum
+       $\min(S_x)$.
+    f. The sample maximum $xmax$  as an estimator of the population maximum
+       $\max(S_x)$.
 
-12. Suppose we are interested in the following parameters:  
+12. Suppose we are interested in the following parameters:
     - The average earnings of Canadian men: $\mu_M$.
     - The average earnings of Canadian women: $\mu_W$.
     - The male-female earnings gap in Canada: $\mu_M - \mu_W$.
     - The male-female earnings ratio in Canada: $\mu_M/\mu_W$. 
-      
     and we have calculated the following statistics from a random sample of Canadians:
-    - The average earnings of men in our sample $\bar{y}_{M}$
-    - The average earnings of women in our sample $\bar{y}_{W}$
+    - The average earnings of men in our sample $\bar{y}_{M}$.
+    - The average earnings of women in our sample $\bar{y}_{W}$.
     - The male-female earnings gap in our sample $\bar{y}_{M} - \bar{y}_{W}$.
     - The male-female earnings ratio in our sample $\bar{y}_{M}/\bar{y}_{W}$.
-      
     We already know that $\bar{y}_{M}$ is an unbiased estimator of
     $\mu_M$ and $\bar{y}_{W}$ is an unbiased estimator of $\mu_W$.
-    a. Is the sample earnings gap $\bar{y}_M - \bar{y}_W$ a 
-       biased or  unbiased estimator of the population gap 
-       $\mu_M - \mu_W$? Explain.
-    b. Is the sample earnings ratio $\bar{y}_M/\bar{y}_W$ a
-       biased or unbiased estimator of the population earnings ratio 
-       $\mu_M/\mu_W$? Explain.
+    a. Is the sample earnings gap $\bar{y}_M - \bar{y}_W$ a biased or unbiased
+       estimator of the population gap $\mu_M - \mu_W$? Explain.
+    b. Is the sample earnings ratio $\bar{y}_M/\bar{y}_W$ a biased or unbiased
+       estimator of the population earnings ratio $\mu_M/\mu_W$? Explain.
 
 **GOAL #10: Calculate the mean squared error of an estimator**
 
-13. Suppose we have the data set described in question 3 above. Calculate the mean squared error 
-    for each of the following estimators.
-    a. The sample frequency $\hat{f}_1$ as an estimator of the probability $\Pr(x_i=1)$.
-    b. The sample average $\bar{x}$ as an estimator of the population mean $E(x_i)$
-    c. The sample minimum $xmin$  as an estimator of the population minimum $\min(S_x)$.
-    d. The sample maximum $xmax$  as an estimator of the population maximum $\max(S_x)$.
+13. Suppose we have the data set described in question 3 above. Calculate the
+    mean squared error for:
+    a. The sample frequency $\hat{f}_1$ as an estimator of the probability
+       $\Pr(x_i=1)$.
+    b. The sample average $\bar{x}$ as an estimator of the population mean
+       $E(x_i)$.
+    c. The sample minimum $xmin$  as an estimator of the population minimum
+       $\min(S_x)$.
+    d. The sample maximum $xmax$  as an estimator of the population maximum
+       $\max(S_x)$.
 
 **GOAL #11: Apply MVUE and MSE criteria to select an estimator**
 
 14. Suppose you have a random sample of size $n=2$ on the random variable 
     $x$ with mean $E\left(x\right)=\mu$ and variance $var(x_i)=\sigma^2$. Two
-    potential estimators of $\mu$ are the sample average
+    potential estimators of $\mu$ are the sample average:
       $$\bar{x} = \frac{x_1 + x_2}{2}$$
-    and the last observation
-     $$x_2$$  
+    and the last observation:
+     $$x_2$$
     a. Are these estimators biased or unbiased?
-    b. Find $var(\bar{x})$
-    c. Find $var(x_2)$
-    d. Find $MSE(\bar{x})$
-    e. Find $MSE(x_2)$
+    b. Find $var(\bar{x})$.
+    c. Find $var(x_2)$.
+    d. Find $MSE(\bar{x})$.
+    e. Find $MSE(x_2)$.
     f. Which estimator is preferred under the MVUE criterion?
     g. Which estimator is preferred under the MSE criterion?
 
 **GOAL #12: Calculate the standard error for a sample average**
 
 15. Suppose that we have a random sample $D_n$ of size $n=100$ on the random
-    variable $x_i$ with unknown mean $\mu$ and unknown variance $\sigma^2$. Suppose
-    that the sample average is $\bar{x} = 12$ and the sample variance is 
+    variable $x_i$ with unknown mean $\mu$ and unknown variance $\sigma^2$.
+    Suppose that the sample average is $\bar{x} = 12$ and the sample variance is
     $\hat{\sigma}^2 = 4$.  Find the standard error of $\bar{x}$.
 
 **GOAL #13: Explain the law of large numbers and what it means for an estimator to be consistent**
 
-16. Suppose we have a random sample of size $n$ on the random variable $x_i$ with mean
-    $E(x_i) = \mu$.  Which of the following statistics are consistent estimators of $\mu$?
+16. Suppose we have a random sample of size $n$ on the random variable $x_i$
+    with mean $E(x_i) = \mu$.  Which of the following statistics are consistent
+    estimators of $\mu$?
     a. The sample average $\bar{x}$
     b. The sample median.
     c. The first observation $x_1$.

@@ -16,14 +16,13 @@ and the basic theoretical concepts for thinking about random events and random
 variables. Over the next few chapters, we will connect these tools by
 conceptualizing data sets and the statistics calculated as random variables.
 This connection is what makes statistics a tool for *science* and not just a
-set of calculation procedures.
+set of calculation procedures. The first step in building that connection is
+to extend our theory of random variables from a 
+[single discrete random variable](#random-variables) to a wider range of
+possibilities.
 
-This chapter takes the first step in making this connection between theory and
-data by extending our theory of random variables from a
-[single discrete random variable](#random-variables) to continuous random
-variables and to multiple random variables. There are many applications in
-economics and statistics where the variable of interest is continuous, or
-there is more than one variable of interest.
+This chapter extends our theory to both continuous random variables and to
+pairs or groups of random variables.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
@@ -53,8 +52,8 @@ In this chapter, we will learn how to:
 17. Interpret covariances and correlations.
 :::
 
-To prepare for this chapter, please review the introductory chapter
-on [random variables](#random-variables).
+To prepare for this chapter, please review the introductory chapter on
+[random variables](#random-variables).
 
 ## Continuous random variables {#continuous-random-variables}
 
@@ -63,13 +62,13 @@ can take on any value in a particular range.  Examples of such variables
 include:
 
 - Physical quantities such as distance, mass, volume, or temperature.
-- Time values such as the current time or the time it takes to drive from your
-  home to SFU
+- Time values such as the current time or the time it takes to drive to school
+  from your home.
 
 Because continuous random variables can take on any value in a particular
 range, the chance that they take on any specific value is very low (in fact,
-it is zero). This makes continuous random variables a little harder to work
-with.
+it is zero). This makes the math for continuous random variables a little
+harder, which is why we started with discrete random variables.
 
 ::: example
 **Labour force participation**
@@ -86,31 +85,30 @@ so it is a continuous random variable.
 We can describe the general properties of a continuous random variable by
 comparing them to the properties of a discrete random variable.
 
-We learned in an earlier chapter that the support of a discrete random
-variable typically includes a *finite* number of values, each of which
-has strictly *positive* probability, and most formulas for probabilities
-(including PDFs and CDFs) and expected values use just
-*addition and subtraction*.
+We learned in an earlier chapter that the support of a discrete random variable
+typically includes a *finite* number of values, each of which has strictly
+*positive* probability, and most formulas for probabilities (including PDFs and
+CDFs) and expected values use just *addition and subtraction*.
 
-In contrast, the support of a continuous random variable includes an
-*infinite* number of values, each of which has *zero* probability,
-and most formulas for probabilities and expected values use *calculus*.
+In contrast, the support of a continuous random variable includes an *infinite*
+number of values, each of which has *zero* probability, and most formulas for
+probabilities and expected values use *calculus*.
 
 ::: sfu
 **ECON 233 calculus prerequisites**
 
-Differential calculus (MATH 151 or 157) is a prerequisite for ECON 233,
-but integral calculus (MATH 152 or 158) is not. I will not assume
-you know how to interpret or calculate an integral, and will not require you to
-do so in any assigned or graded work.
+Differential calculus (MATH 151 or 157) is a prerequisite for ECON 233, but
+integral calculus (MATH 152 or 158) is not. I will not assume you know how to
+interpret or calculate an integral, and will not require you to do so in any
+assigned or graded work.
 :::
 
 But deep down, there is no important *practical* difference between continuous
-and discrete random variables. The intuition for this is that
-you can closely approximate any continuous random variable by rounding it.
-The rounded variable will be discrete, and our earlier results for discrete
-random variables apply. With only a few exceptions, everything that is true
-for discrete random variables is also true for continuous ones.
+and discrete random variables. The intuition for this is that you can closely
+approximate any continuous random variable by rounding it. The rounded variable
+will be discrete, and our earlier results for discrete random variables apply.
+With only a few exceptions, everything that is true for discrete random
+variables is also true for continuous ones.
 
 ::: example
 **Rounding a continuous variable to make it discrete**
@@ -123,45 +121,43 @@ to the nearest 1/1,000,000th of a percentage point, etc. As we round to a
 higher and higher precision, the approximation gets closer and closer.
 :::
 
-As a result, our coverage of continuous random variables will be brief and
-will mostly avoid calculus.
+As a result, our coverage of continuous random variables will be brief and will
+mostly avoid calculus.
 
 ::: fyi
 **Formulas using integrals**
 
-When a relevant mathematical formula uses integrals, I will put it in an
-"FYI" box like this one. This means I am providing the formula to show you
-that it exists, but do not expect you to understand, remember, or perform
-any calculation using the formula.
+When a relevant mathematical formula uses integrals, I will put it in an "FYI"
+box like this one. This means I am providing the formula to show you that it
+exists, but do not expect you to understand, remember, or perform any
+calculation using the formula.
 
-If you *do* know some integral calculus, you might notice that the formulas
-for continuous random variables look just like the ones for discrete random
+If you *do* know some integral calculus, you might notice that the formulas for
+continuous random variables look just like the ones for discrete random
 variables, but with sums replaced by integrals.  This should not be surprising
 since an integral *is* a sum, or at least the limit of a sequence of sums.
 :::
 
-
 ### The continuous CDF {#continuous-pdf-and-cdf}
 
-The CDF of a continuous random variable $x$ is defined exactly the same
-way as for the discrete case:
+The CDF of a continuous random variable $x$ is defined exactly the same way as
+for the discrete case:
   $$F_x(a) = \Pr(x \leq a)$$
-The only difference is how it looks.
-If you recall, the CDF of a discrete random variable takes on a stair-step form: 
-increasing in discrete jumps at every point in the discrete support, and flat 
-everywhere else. In contrast, the CDF of a continuous random variable increases
-continuously over its support.  It can have flat parts, but never jumps.
+The only difference is how it looks. If you recall, the CDF of a discrete random
+variable takes on a stair-step form: increasing in discrete jumps at every point
+in the discrete support, and flat everywhere else. In contrast, the CDF of a
+continuous random variable increases smoothly over its support.  It can have
+flat parts, but it never jumps.
 
 ::: example
 **The standard uniform distribution**
 
-Consider a random variable $x$ that has the ***standard uniform*** 
-distribution.  This is a distribution with continuous support:
+Consider a random variable $x$ that has continuous support:
 $$S_x = [0, 1]$$
 and CDF:
   $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
-We can roughly interpret the standard uniform distribution as placing
-equal probability on all values between zero and one.
+This particular probability distribution is called the 
+***standard uniform distribution*** and will be discussed in more detail later.
 
 ```{r StdUniformCDF, fig.cap = "*CDF for the standard uniform distribution*"}
 UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
@@ -183,11 +179,11 @@ distribution.  As you can see, this CDF is smoothly increasing over the support
 between zero and one, and is flat everywhere else.
 :::
 
-Section \@ref(the-cdf) describes the properties of a CDF, and these
-properties apply to continuous random variables too. In addition,
-interval probabilities are easier to calculate for continuous random
-variables: the probability of any specific value is zero, so it does not
-matter whether inequalities are strict ($<$) or weak ($\leq$).
+Section \@ref(the-cdf) describes the properties of a CDF, and these properties
+apply to continuous random variables too. In addition, interval probabilities
+are easier to calculate for continuous random variables: the probability of any
+specific value is zero, so it does not matter whether inequalities are strict
+($<$) or weak ($\leq$).
 
 ::: example
 **Interval probabilities for the standard uniform**
@@ -202,18 +198,18 @@ We can use our usual formula for interval probabilities to get:
     &= 0.70 - 0.65 + 0 \\
     &= 0.05
 \end{align*}
-So a standard uniform random variable has a 5\% chance of being between
-0.65 and 0.70.
+So a standard uniform random variable has a 5\% chance of being between 0.65 and
+0.70.
 :::
 
 ### The continuous PDF {#continuous-pdf}
 
-While the CDF has the same definition whether the random variable is
-discrete or continuous, the same does not hold for the PDF.
+While the CDF has the same definition whether the random variable is discrete or
+continuous, the same does not hold for the PDF.
 
-- In the discrete case, the PDF $f_x(a)$ is defined as the size of the
-  "jump" in the CDF at $a$, or (equivalently) the probability $\Pr(x=a)$ of
-  observing that particular value.
+- In the discrete case, the PDF $f_x(a)$ is defined as the size of the "jump" in
+  the CDF at $a$, or (equivalently) the probability $\Pr(x=a)$ of observing that
+  particular value.
 - In the continuous case, there are no jumps, and the probability of observing
   any specific value is always zero. So a PDF based on $\Pr(x=a)$ would be
   useless in describing the probability distribution of a continuous random
@@ -222,8 +218,8 @@ discrete or continuous, the same does not hold for the PDF.
 Instead, the ***PDF of a continuous random variable*** $x$ is defined as as the
 slope or derivative of the CDF:
   $$f_x(a) = \frac{d F_x(a)}{da}$$
-In other words, instead of the *amount* the CDF increases (jumps) at 
-$a$, it is the *rate* at which it (smoothly) increases.
+In other words, instead of the *amount* the CDF increases (jumps) at $a$, it is
+the *rate* at which it (smoothly) increases.
 
 ::: example
 **The PDF of the standard uniform distribution**
@@ -248,38 +244,33 @@ The PDF of a continuous random variable is a good way to visualize its
 probability distribution, and this is about the only way we will use
 the continuous PDF in this class (since everything else requires integration).
 
-
 ::: example
 **Interpreting the standard uniform PDF**
 
 The standard uniform PDF shows the key feature of this distribution: in some
 loose sense, all values in the support are "equally likely", much like in the
-[discrete uniform distribution](#discrete-uniform)
-described earlier. In fact, if you round a uniform random variable, you get
-a discrete uniform random variable.
+[discrete uniform distribution](#discrete-uniform) described earlier. In fact,
+if you round a uniform random variable, you get a discrete uniform random
+variable.
 :::
 
 Like the discrete PDF, the continuous PDF is always non-negative:
-
-\begin{equation*}
-  f_x(a) \geq 0 \qquad \textrm{for all $a \in \mathbb{R}$}
-\end{equation*}
-
+ \begin{equation*}
+   f_x(a) \geq 0 \qquad \textrm{for all $a \in \mathbb{R}$}
+ \end{equation*}
 and is strictly positive on the support:
-
-\begin{equation*}
-  f_x(a) > 0 \qquad \textrm{for all $a \in S_x$}
-\end{equation*}
-
+ \begin{equation*}
+   f_x(a) > 0 \qquad \textrm{for all $a \in S_x$}
+ \end{equation*}
 But unlike the discrete PDF, the continuous PDF is *not* a probability. In
 particular, it can be greater than one.
 
 ::: {.fyi data-latex=""}
 **Additional properties of the continuous PDF**
 
-If you recall, we can calculate probabilities from the discrete PDF
-by addition.  We can use this property to derive the CDF and show that
-the discrete PDF sums to one.
+If you recall, we can calculate probabilities from the discrete PDF by addition.
+We can use this property to derive the CDF and show that the discrete PDF sums
+to one.
 
 Similarly, we can calculate probabilities from the continuous PDF by
 integrating:
@@ -297,9 +288,24 @@ that they *can* be solved.
 
 The quantiles of a random variable have the same
 [definition, interpretation, and properties](#quantiles-and-percentiles)
-whether the random variable is continuous or discrete.
-The same applies to percentiles and the median since they are also quantiles.
-Quantiles are typically easier to calculate for continuous random variables.
+whether the random variable is continuous or discrete. The same applies to
+percentiles and the median since they are also quantiles. Quantiles are
+usually easier to calculate for continuous random variables.
+
+::: example
+**Quantiles for the standard uniform**
+
+Suppose that $x$ has the standard uniform distribution. The $q$ quantile of $x$
+is:
+\begin{align}
+  F_x^{-1}(q) &= \min \{a \in S_x : F_x(a) \geq q\} \\
+    &= \min \{a \in [0,1] : a \geq q\} \\
+    &= \min [q,1] \\
+    &= q
+\end{align}
+For example, the median of $x$ is 0.5, the 10th percentile is 0.10, the 75th
+percentile is 0.75, etc.
+:::
 
 ### Expected values {#continuous-expected-values}
 
@@ -313,8 +319,8 @@ an integral.
 
 When $x$ is continuous, its expected value is defined as:
   $$E(x) = \int_{-\infty}^{\infty} af_x(a)da$$
-Notice that this looks just like the definition for the discrete case, but
-with the sum replaced by an integral sign.
+Notice that this looks just like the definition for the discrete case, but with
+the sum replaced by an integral sign.
 :::
 
 The variance and standard deviation are both defined in terms of expected
@@ -338,8 +344,8 @@ The uniform distribution has continuous support:
   $$S_x = [L,H]$$
 and continuous PDF:
   $$f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
-The uniform distribution can be interpreted as placing equal probability on
-all values between $L$ and $H$.
+The uniform distribution can be interpreted as placing equal probability on all
+values between $L$ and $H$.
 
 ::: example
 **The PDF of the $U(2,5)$ distribution**
@@ -363,17 +369,14 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
 ```
 :::
 
-
 ### The uniform CDF
 
-The CDF of the $U(L,H)$ distribution is
+The CDF of the $U(L,H)$ distribution is:
   $$F_x(a) = \begin{cases}
     0 & a \leq L \\ 
     \frac{a-L}{H-L} & L < a < H \\ 
     1 & a \geq H \\ 
     \end{cases}$$
-
-
 
 ::: example
 **The CDF of the $U(2,5)$ distribution**
@@ -395,11 +398,10 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
 ```
 :::
 
-
 ### Quantiles {#uniform-quantiles}
 
-Like any other random variable, we can calculate the quantiles of a
-uniform random variable by inverting the CDF. That is:
+Like any other random variable, we can calculate the quantiles of a uniform
+random variable by inverting the CDF. That is:
   $$F_x^{-1}(q) = L + q(H-L)$$
 is the $q$ quantile of a $U(L,H)$ random variable.
 
@@ -423,23 +425,22 @@ when they are difficult to calculate.
 
 Any linear function of a uniform random variable also has a uniform
 distribution. That is, if $x \sim U(L,H)$ and $y = a + bx$ where^[if $b <0$,
-then $y \sim U(a + bH, a + bL)$.]
-$b > 0$, then:
+then $y \sim U(a + bH, a + bL)$.] $b > 0$, then:
   $$y \sim U(a + bL, a + bH)$$
 Nonlinear functions of a uniform random variable are generally not uniform.
 
 ::: {.fyi data-latex=""}
 **Uniform distributions in video games**
 
-Uniform distributions are important in many computer applications
-including video games. Games need to be at least somewhat unpredictable
-in order to stay interesting.
+Uniform distributions are important in many computer applications including
+video games. Games need to be at least somewhat unpredictable in order to stay
+interesting.
 
-It is easy for a computer to generate a random number from the 
-$U(0,1)$ distribution, and that distribution has the unusual feature
-that its $q$ quantile is equal to $q$.
+It is easy for a computer to generate a random number from the  $U(0,1)$
+distribution, and that distribution has the unusual feature that its $q$
+quantile is equal to $q$.
 
-As a result, you can generate a random variable with any probability 
+As a result, you can generate a random variable with any probability
 distribution you like by following these steps:
 
 1. Let $F_{w}(\cdot)$ be the CDF of the distribution you want.
@@ -450,9 +451,8 @@ distribution you like by following these steps:
 Then $x$ is a random variable with the CDF $F_w(\cdot)$
 
 Any modern video game is constantly generating and transforming $U(0,1)$
-random numbers to determine the behavior of non-player characters,
-the location of weapons and other resources, or the results of a particular
-player action.
+random numbers to determine the behavior of non-player characters, the location
+of weapons and other resources, or the results of a particular player action.
 :::
 
 ## The normal distribution {#normal-and-standard-normal}
@@ -461,16 +461,15 @@ The ***normal distribution*** is typically written as:
   $$ x \sim N(\mu,\sigma^2)$$ 
 where $\mu$ and $\sigma^2 \geq 0$ are numbers.
 
-The normal distribution is also called the ***Gaussian*** distribution,
-and the $N(0,1)$ distribution is called the ***standard normal*** 
-distribution.
+The normal distribution is also called the ***Gaussian*** distribution, and the
+$N(0,1)$ distribution is called the ***standard normal*** distribution.
 
 ::: {.fyi data-latex=""}
 **The central limit theorem**
 
-An important result called the central limit theorem implies that many
-"real world" random variables tend to be normally distributed.
-We will discuss the central limit theorem in much more detail later.
+An important result called the central limit theorem implies that many "real
+world" random variables tend to be normally distributed. We will discuss the
+central limit theorem in much more detail later.
 :::
 
 ### The normal PDF
@@ -481,8 +480,7 @@ $$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
 The Excel function `NORM.DIST()` can be used to calculate this PDF.
 
 The $N(\mu,\sigma^2)$ distribution is bell-shaped and symmetric around $\mu$,
-with the "spread" of the distribution depending on the
-value of $\sigma^2$:
+with the "spread" of the distribution depending on the value of $\sigma^2$:
 ```{r NormalPDF, fig.cap = "*PDF for several normal distributions*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=pnorm(seq(from=-6,to=6,length.out=100)),
@@ -503,7 +501,6 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
        caption = "", 
        tag = "")
 ```
-
 
 ### The normal CDF
 
@@ -537,14 +534,15 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=Fa)) +
 
 ### Quantiles {#normal-quantiles}
 
-Quantiles of the normal distribution can be calculated using the Excel
-function `NORM.INV()`.
+Quantiles of the normal distribution can be calculated using the Excel function
+`NORM.INV()`.
 
 The median of a $N(\mu,\sigma^2)$ random variable is $\mu$.
 
 ### Expected values {#normal-means}
 
-Integral calculus is required to calculate the mean, variance and standard deviation, so I report them below for reference:
+Integral calculus is required to calculate the mean, variance and standard
+deviation, so I report them below for reference:
   $$E(x) = \mu$$
   $$var(x) = \sigma^2$$
   $$sd(x) = \sigma$$
@@ -563,21 +561,18 @@ Then for any constants $a$ and $b$:
   $$ax + b \sim N(a\mu + b, a^2\sigma^2)$$
 Nonlinear functions of a normal random variable are generally *not* normal.
 
-
-
 ::: fyi
 **Other distributions based on the normal**
 
 There are many other standard distributions that are based on functions
-of one or more normal random variables and are derived from the
-normal distribution. For example, if you draw $k$ independent
-$N(0,1)$ random variables, square them, and add them up, the distribution of
-that sum has a distribution we call the $\chi^2(k)$ distribution.
+of one or more normal random variables and are derived from the normal
+distribution. For example, if you draw $k$ independent $N(0,1)$ random
+variables, square them, and add them up, the distribution of that sum has a
+distribution called the $\chi^2(k)$ distribution.
 
-Other such distributions include the $F$ distribution and the $T$
-distribution. All of these standard distributions have important
-applications in statistical analysis and would be covered in a more
-advanced course.
+Other such distributions include the $F$ distribution and the $T$ distribution.
+All of these standard distributions have important applications in statistical
+analysis and would be covered in a more advanced course.
 :::
 
 ### Standardization
@@ -594,13 +589,12 @@ then its standardized value $z$ has the standard normal distribution:
     x \sim N(\mu, \sigma^2) &\Rightarrow z \sim N\left(\mu-\mu, \left(\frac{1}{\sigma}\right)^2 \sigma^2\right) \\
       &\Rightarrow z \sim N(0,1)
   \end{align}
-The standard normal distribution is so useful that we have special
-symbol for its PDF:
+The standard normal distribution is so useful that we have special symbol for
+its PDF:
   $$\phi(a) = \frac{1}{\sqrt{2\pi}} e^{-\frac{a^2}{2}}$$
 and its CDF:
   $$\Phi(a) = \int_{-\infty}^a \phi(b)db$$
-$\phi$ is the lower-case Greek letter *phi*, and $\Phi$ is the upper-case
-Greek letter *phi*.
+$\phi$ is the lower-case Greek letter *phi*, and $\Phi$ is the upper-case *phi*.
 
 We can take advantage of standardization to express the CDF of any normal
 random variable in terms of the standard normal CDF. That is, suppose that:
@@ -639,19 +633,18 @@ Then the CDF of $x$ is:
 ## Multiple random variables
 
 Almost all interesting data sets have multiple observations and multiple
-variables. So before we start talking about data, we need to develop 
-some tools and terminology for thinking about multiple random variables.
+variables. So before we start talking about data, we need to develop some tools
+and terminology for thinking about multiple random variables.
 
 To keep things simple, most of the definitions and examples will be stated in
 terms of *two* discrete random variables.  The extension to more than two random
 variables is conceptually straightforward but will be skipped.
 
-
 ### Joint distribution
 
-Let $x$ and $y$ be two random variables defined in terms of the same
-underlying random outcome. Their ***joint probability distribution***
-assigns a value to all joint probabilities of the form
+Let $x$ and $y$ be two random variables defined in terms of the same underlying
+random outcome. Their ***joint probability distribution*** assigns a value to
+all joint probabilities of the form:
   $$\Pr(x \in A \cap y \in B)$$
 for any sets $A, B \subset \mathbb{R}$.
 
@@ -664,8 +657,8 @@ independence - can be defined in terms of the joint distribution.
 **Three joint distributions**
 
 The scatter plots in Figure \@ref(fig:JointIsNotMarginal) below depict
-simulation results for a pair of random variables $(x,y)$, with a
-different joint distribution in each graph.
+simulation results for a pair of random variables $(x,y)$, with a different
+joint distribution in each graph.
 
 ```{r JointIsNotMarginal, fig.cap = "*x and y are drawn from a different joint distribution in each graph.*"}
 simdata <- tibble(x = rnorm(100),
@@ -796,23 +789,23 @@ The joint distribution of any two (discrete or continuous) random variables can
 be fully described by their joint CDF:
 $$F_{x,y}(a,b) = \Pr(x \leq a \cap y \leq b)$$
 
-Similarly, the joint distribution of any two continuous random variables
-can be fully described by their (continuous) joint PDF:
+Similarly, the joint distribution of any two continuous random variables can be
+fully described by their (continuous) joint PDF:
 $$f_{x,y}(a,b) = \frac{\partial F_{x,y}(a,b)}{\partial a \partial b}$$
 :::
 
 ### Marginal distributions
 
 When two random variables have a joint distribution, we call the probability
-distribution of random variable its **marginal distribution**.  Both
-marginal distributions are part of the joint distribution:
+distribution of random variable its **marginal distribution**.  Both marginal
+distributions are part of the joint distribution:
 \begin{align}
   \Pr(x \in A) &= \Pr(x \in A \cap y \in \mathbb{R}) \\
   \Pr(y \in A) &= \Pr(x \in \mathbb{R} \cap y \in A)
 \end{align}
-Note that there is no difference between a random variable's
-"marginal distribution" and its "distribution".  We just add the word "marginal"
-in this context to distinguish it from the joint distribution.
+Note that there is no difference between a random variable's "marginal
+distribution" and its "distribution".  We just add the word "marginal" in this
+context to distinguish it from the joint distribution.
 
 The marginal distribution is fully described by the corresponding
 ***marginal PDF***, which can be derived from the joint PDF. Let $x$ and $y$ be
@@ -863,22 +856,22 @@ Note that this is the same PDF we found in an earlier chapter.
 :::
 
 While you can always derive the two marginal distributions from the joint
-distribution, you cannot derive the joint distribution from the two
-marginal distributions.  A given pair of marginal distributions
-is typically consistent with an infinite number of joint distributions.
-For example, the three joint distributions shown in Figure
-\@ref(fig:JointIsNotMarginal) all depict random variables with the same
-marginal distribution (both $x$ and $y$ have the standard normal distribution
-in all three graphs) but very different joint distributions.
+distribution, you cannot derive the joint distribution from the two marginal
+distributions.  A given pair of marginal distributions is typically consistent
+with an infinite number of joint distributions. For example, the three joint
+distributions shown in Figure \@ref(fig:JointIsNotMarginal) all depict random
+variables with the same marginal distribution (both $x$ and $y$ have the
+standard normal distribution in all three graphs) but very different joint
+distributions.
 
 ::: example
 **Two joint distributions with identical marginal distributions**
 
 Suppose Al, Betty, and Carl each place a bet on the same roulette game. Al
-and Betty both bet on red, and Carl bets on black.  Let $w_{Al}$
-$w_{Betty}$ and $w_{Carl}$ be their respective winnings.
+and Betty both bet on red, and Carl bets on black.  Let $w_{Al}$,
+$w_{Betty}$, and $w_{Carl}$ be their respective winnings.
 
-All three players have the same marginal distribution:
+All three players have the same marginal distribution of winnings:
 \begin{align}
   f_{Al}(a) = f_{Betty}(a) = f_{Carl}(a) &= \begin{cases}
     19/37 & \textrm{if $a = -1$} \\
@@ -930,15 +923,14 @@ from their joint PDF:
 \end{align}
 :::
 
-
 ### Conditional distribution
 
 The ***conditional distribution*** of a random variable $y$ given another random
 variable $x$ assigns values to all conditional probabilities of the form:
   $$\Pr(y \in A| x \in B) = \frac{\Pr(y \in A \cap x \in B)}{\Pr(x \in B)}$$
 Since a conditional probability is just the ratio of the joint probability 
-to the marginal probability, the conditional distribution can always be 
-derived from the joint distribution.
+to the marginal probability, the conditional distribution can always be derived
+from the joint distribution.
 
 The conditional distributions of any two discrete random variables $x$ and $y$
 can be fully described by the ***conditional PDF***:
@@ -972,8 +964,8 @@ on 14 is defined as:
       0 & \textrm{otherwise} \\
       \end{cases}
 \end{align}
-The conditional PDF of the payout for a bet on 14 given the payout for a bet
-on red is defined as:
+The conditional PDF of the payout for a bet on 14 given the payout for a bet on
+red is defined as:
 \begin{align}
   f_{14|red}(a,b) &= \Pr(w_{14} = a| w_{red} = b) \\
     &= \frac{f_{red,14}(b,a)}{f_{red}(b)} \\
@@ -992,10 +984,9 @@ on red is defined as:
 \end{align}
 :::
 
-As we said earlier that you cannot derive the joint distribution from
-the two marginal distributions.  However, you can derive it by combining
-a conditional distribution with the corresponding marginal distribution:
-For example:
+As we said earlier that you cannot derive the joint distribution from the two
+marginal distributions.  However, you can derive it by combining a conditional
+distribution with the corresponding marginal distribution. For example:
 \begin{align}
   \underbrace{\Pr(x \in A \cap y \in B)}_{\textrm{joint}} &=
     \underbrace{\Pr(x \in A | y \in B)}_{\textrm{conditional}}
@@ -1008,8 +999,8 @@ A similar result applies to joint, conditional and marginal PDFs.
 
 We can describe any conditional distribution with the conditional CDF:
   $$F_{x|y}(a,b) = \Pr(x \leq a|y=b)$$
-We can also describe the conditional distribution of one continuous random variable
-given another with the continuous conditional PDF:
+We can also describe the conditional distribution of one continuous random
+variable given another with the continuous conditional PDF:
   \begin{align}
     f_{x|y}(a,b) &= \frac{\partial}{\partial a}F_{x|y}(a,b) \\
       &= \frac{f_{x,y}(a,b)}{f_y(b)}
@@ -1024,8 +1015,7 @@ a third random variable $z = g(x,y)$.  What can we say about the probability
 distribution of $z$?
 
 1. It has a well-defined probability distribution, PDF, CDF, expected value,
-   etc. all of which can be derived from the joint distribution of $x$ and
-   $y$.
+   etc. all of which can be derived from the joint distribution of $x$ and $y$.
 2. If $z$ is a *linear* function of $x$ and $y$, its expected value is a linear
    function of $E(x)$ and $E(y)$:
     $$E(a + bx + cy) = a + bE(x) + cE(y)$$
@@ -1048,8 +1038,8 @@ which has expected value:
       &= 100 \, \underbrace{E(w_{red})}_{\approx -0.027} + 10 \, \underbrace{E(w_{14})}_{\approx -0.027} \\
       &\approx -3 
   \end{align}
-That is we expect this betting strategy to lose an average of 
-about \$3 per game.
+That is we expect this betting strategy to lose an average of about \$3 per
+game.
 :::
 
 ### Covariance {#population-covariance}
@@ -1072,7 +1062,7 @@ together.
 - If the covariance is *zero*, there is no simple pattern of co-movement
   for $x$ and $y$.
 - Higher (positive or negative) values of the covariance are associated with:
-  - Greater variability of $x$ and $y$
+  - Greater variability of $x$ and $y$.
   - Stronger (positive or negative) relationship between $x$ and $y$.
 
 For example, the first scatter plot in Figure \@ref(fig:JointIsNotMarginal)
@@ -1091,8 +1081,7 @@ The covariance of $w_{red}$ and $w_{14}$ is:
         \end{aligned} \\
       &\approx 0.999 
     \end{align}
-That is, the returns from a bet on red and a bet on 14 are positively
-related.
+That is, the returns from a bet on red and a bet on 14 are positively related.
 :::
 
 As with the variance, we can derive an alternative formula for the covariance:
@@ -1134,9 +1123,9 @@ The alternate formula for the covariance can be derived as follows:
   \end{align}
 :::
 
-The key to understanding the covariance is that it is the expected
-value of a *product* $(x-E(x))(y-E(y))$, and the expected value itself
-is just a sum. As a result it is easy to prove that:
+The key to understanding the covariance is that it is the expected value of a
+*product* $(x-E(x))(y-E(y))$, and the expected value itself is just a sum. As a
+result it is easy to prove that:
 
 1. Order does not matter:
    $$cov(x,y) = cov(y,x)$$
@@ -1181,15 +1170,14 @@ We can use a similar approach to find the variance of any linear function of
 $x$ and $y$, or the covariance of any two such functions.
 :::
 
-
 ### Correlation {#population-correlation}
 
-The ***correlation coefficient*** of two random variables $x$ and $y$ is 
-defined as:
+The ***correlation coefficient*** of two random variables $x$ and $y$ is defined
+as:
   $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
 Like the covariance, the correlation describes the strength of a (linear) 
-relationship between $x$ and $y$.  But it is re-scaled in a way that makes
-it more convenient for some purposes.
+relationship between $x$ and $y$.  But it is re-scaled in a way that makes it
+more convenient for some purposes.
 
 ::: example
 **Correlation in roulette**
@@ -1203,12 +1191,12 @@ The correlation of $w_{red}$ and $w_{14}$ is:
   \end{align}
 :::
 
-The covariance and correlation always have the same sign since 
-standard deviations are always[^601] positive. The key
-difference between them is that correlation is scale-invariant.
+The covariance and correlation always have the same sign since standard
+deviations are always[^601] positive. The key difference between them is that
+correlation is scale-invariant.
 
 1. The correlation always lies between -1 and 1.
-2. The correlation is unchanged by any re-scaling or change in units.  That is,
+2. The correlation is unchanged by any re-scaling or change in units.  That is:
    $$corr(ax,by) = corr(x,y)$$
    for any positive^[More generally,
    $corr(ax+b,cy+d) = sign(a)\,sign(b)\,corr(x,y)$ for any (positive or
@@ -1242,44 +1230,43 @@ same:
 The first graph in Figure \@ref(fig:JointIsNotMarginal) shows an example of
 what independent random variables look like in data: a cloud of unrelated points.
   
-Independence also means that the joint and conditional distributions can be derived
-from the marginal distributions.  When $x$ and $y$ are both discrete, this
-implication can be expressed in terms of PDFs:
+Independence also means that the joint and conditional distributions can be
+derived from the marginal distributions.  When $x$ and $y$ are both discrete,
+this implication can be expressed in terms of PDFs:
   $$f_{x,y}(a,b) = f_x(a)f_y(b)$$
   $$f_{y|x}(a,b) = f_y(a)$$
 As with independence of events, this will be very handy in simplifying the
-analysis.  But remember: independence is an *assumption* that
-we can only make when it's reasonable to do so.
+analysis.  But remember: independence is an *assumption* that we can only make
+when it's reasonable to do so.
 
 ::: example
 **Independence in roulette**
 
-The winnings from a bet on red $(w_{red})$ and the winnings from 
-a bet on 14 $(w_{14})$ in the same game are *not* independent. 
+The winnings from a bet on red $(w_{red})$ and the winnings from a bet on 14
+$(w_{14})$ in the same game are *not* independent. 
 
-However the winnings from a bet on red and a bet on 14 in two different 
-games *are* independent since the underlying outcomes are independent.
+However the winnings from a bet on red and a bet on 14 in two different games
+*are* independent since the underlying outcomes are independent.
 :::
 
-When random variables are independent, their covariance and correlation
-are both exactly zero. However, it does not go the other way around.  The
-intuition here is that covariance and correlation describe the *linear*
-relationship between the two variables, and indpendence means that there
-is no *linear or nonlinear* relationship between the two variables. If
-there is a nonlinear relationship between two variables, they are not
-independent but they could have a covariance or correlation of zero.
+When random variables are independent, their covariance and correlation are both
+exactly zero. However, it does not go the other way around.  The intuition here
+is that covariance and correlation describe the *linear* relationship between
+the two variables, and independence means that there is no *linear or nonlinear*
+relationship between the two variables. If there is a nonlinear relationship
+between two variables, they are not independent but they could have a covariance
+or correlation of zero.
 
 ::: example
 **Zero covariance does not imply independent**
 
-Figure \@ref(fig:UncorrelatedButNotIndependent) below shows a scatter plot
-from a simulation of two random variables^[In this particular example
-$x$ is a random number from the $N(0,1)$ distribution and $y = x^2$.] that are
-clearly related (and therefore not independent) but whose covariance is exactly
-zero.
+Figure \@ref(fig:UncorrelatedButNotIndependent) below shows a scatter plot from
+a simulation of two random variables^[In this particular example $x$ is a random
+number from the $N(0,1)$ distribution and $y = x^2$.] that are clearly related
+(and therefore not independent) but whose covariance is exactly zero.
 
 Intuitively, covariance can be interpreted as a measure of the *linear*
-relationship between two variables.  When variables have a nonlinear 
+relationship between two variables.  When variables have a nonlinear
 relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent), the
 covariance may miss it.
 
@@ -1298,17 +1285,16 @@ ggplot(data = simdata, mapping = aes(x = x, y =y)) +
 Over the course of this chapter and the previous ones on
 [probability](#probability) and [simple random variables](#random-variables),
 we have learned the basic terminology and tools for working with random
-variables: PDFs, CDFs, and expected values. You should work hard and do
-as many practice problems as you can, as a clear understanding of random
-variables will make the rest of the course much easier to follow.
+variables: PDFs, CDFs, and expected values. You should work hard and do as many
+practice problems as you can, as a clear understanding of random variables will
+make the rest of the course much easier to follow.
 
 The next step is to use the tools of probability and random variables to build
 a theoretical framework in which we can
 [interpret each statistic as a random variable](#statistics)
-and each data set as a collection of random variables. This 
-theory will allow us to use statistics not only as a way of
-describing data, but as a way of understanding the process that 
-produced that data.
+and each data set as a collection of random variables. This theory will allow us
+to use statistics not only as a way of describing data, but as a way of
+understanding the process that produced that data.
 
 ## Practice problems {-#problems-more-on-random-variables}
 
@@ -1357,15 +1343,15 @@ and variance:
 **GOAL #2: Know and use the key properties of the uniform distribution**
 
 2.  Suppose that $x \sim U(-1,1)$.
-    a. Find the PDF $f_x(\cdot)$ of $x$
-    b. Find the CDF $F_x(\cdot)$ of $x$
-    c. Find $\Pr(x = 0)$
-    d. Find $\Pr(0 < x < 0.5)$
-    e. Find $\Pr(0 \leq x \leq 0.5)$
+    a. Find the PDF $f_x(\cdot)$ of $x$.
+    b. Find the CDF $F_x(\cdot)$ of $x$.
+    c. Find $\Pr(x = 0)$.
+    d. Find $\Pr(0 < x < 0.5)$.
+    e. Find $\Pr(0 \leq x \leq 0.5)$.
     f. Find the median of $x$.
     g. Find the 75th percentile of $x$.
-    h. Find $E(x)$
-    i. Find $var(x)$
+    h. Find $E(x)$.
+    i. Find $var(x)$.
 
 **GOAL #3: Derive the distribution for a linear function of a uniform random variable**
 
@@ -1387,7 +1373,7 @@ and variance:
 5.  Suppose that $x \sim N(10,4)$.
     a. Find the distribution of $y = 3x + 5$.
     b. Find a random variable $z$ that is a linear function of $x$ and
-       has the standard normal distribution
+       has the standard normal distribution.
     c. Find an expression for $\Pr(x \leq 11)$ in terms of the standard normal
        CDF $\Phi(\cdot)$.
     d. Use the Excel function `NORM.S.DIST` and the previous result to
@@ -1398,15 +1384,15 @@ and variance:
 6. Let $f_{y,b}(\cdot)$ be the joint PDF of $y$ and $b$, where $y$ is an
    indicator for winning a "Yo" bet in craps, and $b$ is an indicator for
    winning a "Boxcars" bet.
-   a. Find $f_{y,b}(1,1)$
-   b. Find $f_{y,b}(0,1)$
-   c. Find $f_{y,b}(1,0)$
-   d. Find $f_{y,b}(0,0)$
+   a. Find $f_{y,b}(1,1)$.
+   b. Find $f_{y,b}(0,1)$.
+   c. Find $f_{y,b}(1,0)$.
+   d. Find $f_{y,b}(0,0)$.
 
 **GOAL #7: Calculate a marginal PDF from a (discrete) joint PDF **
 
 7.  Let $f_b(\cdot)$ be the marginal PDF of $b$, where $b$ is an indicator for
-    winning a "Boxcars" bet in craps
+    winning a "Boxcars" bet in craps.
     a. Find $f_b(0)$ based on the joint PDF $f_{y,b}(\cdot)$.
     b. Find $f_b(1)$ based on the joint PDF $f_{y,b}(\cdot)$.
     c. Find $E(b)$ based on this marginal PDF you found in parts (a) and (b).
@@ -1479,23 +1465,23 @@ and variance:
 
 **GOAL #15: Calculate the expected value of a linear function of two or more random variables**
 
-16. Your net winnings if you bet \$1 on Yo and \$1 on Boxcars can
-    be written $16y + 31b - 2$. Find the following expected values:
+16. Your net winnings if you bet \$1 on Yo and \$1 on Boxcars can be written 
+    $16y + 31b - 2$. Find the following expected values:
     a. Find $E(y + b)$
     b. Find $E(16y + 31b - 2)$
 
-17. Find the following variances and covariances,, where $y$ is an
-   indicator for winning a "Yo" bet in craps, and $b$ is an indicator for
-   winning a "Boxcars" bet.
+17. Find the following variances and covariances,, where $y$ is an indicator for
+    winning a "Yo" bet in craps, and $b$ is an indicator for winning a "Boxcars"
+    bet.
     a. Find $cov(16y,31b)$
     b. Find $var(y + b)$
 
 **GOAL #16: Interpret covariances and correlations**
 
 18. Based on your results, which of the following statements is correct?
-    a. The result of a bet on Boxcars is *positively* related to the
-       result of a bet on Yo.
-    b. The result of a bet on Boxcars is *negatively* related to the
-       result of a bet on Yo.
-    c. The result of a bet on Boxcars is *not* related to the
-       result of a bet on Yo.
+    a. The result of a bet on Boxcars is *positively* related to the result of a
+       bet on Yo.
+    b. The result of a bet on Boxcars is *negatively* related to the result of a
+       bet on Yo.
+    c. The result of a bet on Boxcars is *not* related to the result of a bet on
+       Yo.

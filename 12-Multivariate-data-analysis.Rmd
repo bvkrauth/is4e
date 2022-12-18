@@ -33,8 +33,7 @@ In this chapter, we will learn how to:
 1. Construct and interpret frequency tables, cross-tabulations, and conditional
    averages using Excel pivot tables.
 2. Calculate and interpret the sample covariance and correlation.
-3. Distinguish between pairwise and casewise deletion of missing
-   values.
+3. Distinguish between pairwise and casewise deletion of missing values.
 4. Construct and interpret a scatter plot in R.
 5. Construct and interpret a smoothed-mean or linear regression plot in R.
 :::
@@ -59,18 +58,15 @@ EmpData <- EmpData %>%
   mutate(LFPPct = 100*LFPRate)
 ```
 
-
 ##  Pivot tables {#pivot-tables}
 
-Excel's ***Pivot Tables*** are a powerful tool for the analysis of
-frequencies, conditional averages, and various other aspects of the 
-data.  They are somewhat tricky to use, and we will only scratch
-the surface here. But the more comfortable you can get with them,
-the better.
+Excel's ***Pivot Tables*** are a powerful tool for the analysis of frequencies,
+conditional averages, and various other aspects of the data. They are somewhat
+tricky to use, and we will only scratch the surface here. But the more
+comfortable you can get with them, the better.
 
-The first step is to create a blank Pivot Table that is tied to a 
-particular data table.  We can create as many Pivot Tables as we
-want.
+The first step is to create a blank Pivot Table that is tied to a particular
+data table.  We can create as many Pivot Tables as we want.
 
 ::: example
 **Creating a blank Pivot Table**
@@ -90,12 +86,12 @@ Excel will open a new worksheet that looks like this:
 The Pivot Table itself is on the left side of the new worksheet.
 :::
 
-The next step is to add elements to the table.  There are various tools 
+The next step is to add elements to the table. There are various tools 
 available to do that: 
 
-- the `Pivot Table Fields` box on the right side of the screen
-- the `PivotTable Analyze` menu
-- the `Design` menu.  
+- The `Pivot Table Fields` box on the right side of the screen
+- The `PivotTable Analyze` menu
+- The `Design` menu.  
 
 These tools only appear in context, so they will disappear if you click a cell 
 outside of the Pivot Table. You can fix this by just clicking any cell in the 
@@ -110,14 +106,13 @@ the *number* of times we observe a particular value in the data.
 :::example
 **A simple frequency table**
 
-To create a simple frequency table showing the number of months in
-office for each Canadian prime minister:
+To create a simple frequency table showing the number of months in office for
+each Canadian prime minister:
 
-1. Check the box next to **PrimeMinister**. The Pivot Table will look 
-   like this:  
+1. Check the box next to **PrimeMinister**. The Pivot Table will look like this:  
    ![A list of prime ministers](bin/PrimeMinisterList.png){width=13%}  
-2. Drag **MonthYr** into the box marked "$\Sigma$ values". The Pivot Table 
-   will now look like this:  
+2. Drag **MonthYr** into the box marked "$\Sigma$ values". The Pivot Table will
+   now look like this:  
    ![Number of months served by each prime minister](bin/PrimeMinisterCounts.png){width=30%}  
 
 As we can see, the table shows the number of observations for each value of the
@@ -155,11 +150,11 @@ the total:
 
 ### Cross tabulations
 
-We can also construct frequency tables for pairs of variables. There are 
-various ways of laying out such a table, but the simplest is to have one
-variable in rows and the other variable in columns.  When the table is
-set up this way, we often call it a ***cross tabulation*** or crosstab. Crosstabs
-can be expressed in terms of absolute frequency, relative frequency, or both.
+We can also construct frequency tables for pairs of variables. There are various
+ways of laying out such a table, but the simplest is to have one variable in
+rows and the other variable in columns.  When the table is set up this way, we
+often call it a ***cross tabulation*** or crosstab. Crosstabs can be expressed
+in terms of absolute frequency, relative frequency, or both.
 
 :::example
 **An absolute frequency table**
@@ -196,8 +191,8 @@ To convert our absolute frequency crosstab into a joint frequency crosstab:
 Your table will now look like this:  
 ![Joint frequency](bin/JointFreq.png){width=50%}
 
-For example, the table tells us that Brian Mulroney's 104 months as 
-prime minister represent 19.22% of all months in our data.
+For example, the table tells us that Brian Mulroney's 104 months as prime
+minister represent 19.22% of all months in our data.
 :::
 
 A ***conditional frequency crosstab*** shows the count in each cell as a 
@@ -210,15 +205,15 @@ probabilities.
 
 To convert our crosstab into a conditional frequency crosstab:
 
-1. Right click on "Count of MonthYr" and select `Value Field Settings`
-2. Select the `Show Values As` tab, and select "% of column total"
+1. Right click on "Count of MonthYr" and select `Value Field Settings`.
+2. Select the `Show Values As` tab, and select "% of column total."
    from the Show Values As drop-down box.
 
 Your table will now look like this:  
 ![Conditional frequency](bin/CondFreq.png){width=50%} 
 
-For example, Brian Mulroney's 104 months as prime minister represent
-44.64% of all months served by a Conservative prime minister in our data.
+For example, Brian Mulroney's 104 months as prime minister represent 44.64% of
+all months served by a Conservative prime minister in our data.
 :::
 
 ### Conditional averages
@@ -229,15 +224,15 @@ sub-population defined by another variable.  If the data come from a random
 sample, the conditional average can be interpreted as an estimate of the
 corresponding conditional average in the population.
 
-For example, we might calculate average earnings for men and for women in
-a random sample of Canadians.  They can be interpreted as measuring average
+For example, we might calculate average earnings for men and for women in a
+random sample of Canadians.  They can be interpreted as measuring average
 earnings for all Canadian men and women.
 
 ::: example
 **Adding a conditional average**
 
-Suppose we want to add the average unemployment rate during
-each prime minister's time in office to this Pivot Table:  
+Suppose we want to add the average unemployment rate during each prime
+minister's time in office to this Pivot Table:  
 ![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png){width=30%}
 
 1. Drag **UnempRate** into the box marked "$\Sigma$ values".  The table will 
@@ -249,7 +244,7 @@ each prime minister, but instead we see the *sum* of unemployment
 rates for each prime minister.  To change this:
 
 3. Right-click "Sum of UnempRate", then select `Value Field Settings...`.
-4. Select `Average`
+4. Select `Average`.
 
 The table now looks like this:  
 ![Average of unemployment rate](bin/UnempRateAvg.png){width=40%} 
@@ -267,16 +262,16 @@ including variances, standard deviations, minimum, and maximum.
 As you might expect, we can modify Pivot Tables in various ways to make them 
 clearer, more informative, and more visually appealing.
 
-As with other tables in Excel, we can filter and sort them.  Filtering
-is particularly useful with Pivot Tables since there are often categories
-we want to exclude.
+As with other tables in Excel, we can filter and sort them.  Filtering is
+particularly useful with Pivot Tables since there are often categories we want
+to exclude.
 
 :::example
 **Filtering a Pivot Table**
 
 There is no Canadian prime minister named "Transfer." If you recall, we used
-that value to represent months in the data where the prime minister
-changed.  To exclude those months from our main table:
+that value to represent months in the data where the prime minister changed.
+To exclude those months from our main table:
 
 1. Click on the ![Row Labels button](bin/RowLabelsButton.png){height=16pt}. The 
    sort and filter menu will appear:  
@@ -303,15 +298,15 @@ To sort our table by months in office:
    sort and filter menu will appear.
 2. Select `More sort options`; the Pivot Table sort dialog box will appear:  
    ![Pivot table sort](bin/PTSort.png){width=30%} 
-3. Select the `Descending (Z to A)` radio button and "Count of MonthYr" 
-   from the drop-down box.
+3. Select the `Descending (Z to A)` radio button and "Count of MonthYr" from
+   the drop-down box.
 
 The table is now sorted by number of months in office:  
 ![Pivot table sorted](bin/PivotTableSorted.png){width=40%}
 :::
 
-We can change number formatting, column and row titles, and various
-other aspects of the table's appearance.
+We can change number formatting, column and row titles, and various other
+aspects of the table's appearance.
 
 ::: example
 **Cleaning up a table's appearance**
@@ -322,16 +317,16 @@ reporting the unemployment rate in percentage terms and fewer decimal places:
 1. Right-click on "Average of UnempRate", and then select
    `Value Field Settings...`
 2. Enter "Average Unemployment" in the `Custom Name` text box.
-3. Select `Number Format`, then change the number format to Percentage 
-   with 1 decimal place.
+3. Select `Number Format`, then change the number format to Percentage with 1
+   decimal place.
 4. Select `OK` and then `OK` again. The table will now look like this:  
    ![Pivot Table with unemployment in percentages](bin/UnempRateAvgPct.png){width=50%}
 
-5. Change the other three headers.  You can do this through `Value Field Settings...`
-   but you can also just edit the text directly.
-   - Change "Row Labels" to "Prime Minister"
-   - Change "Count of MonthYr" to "Months in office"
-   - Change "Count of MonthYr2" to "% in office"
+5. Change the other three headers.  You can do this through
+   `Value Field Settings...` but you can also just edit the text directly.
+   - Change "Row Labels" to "Prime Minister".
+   - Change "Count of MonthYr" to "Months in office".
+   - Change "Count of MonthYr2" to "% in office".
 
 Our final table looks like this:  
 ![Final Pivot Table](bin/PivotTableFinal.png){width=50%}  
@@ -342,14 +337,12 @@ Finally, we can use Pivot Tables to create graphs.
 ::: example
 **A Pivot Table graph**
 
-To create a simple bar graph depicting months in office, we start by
-cleaning up the Pivot Table so that it shows the data we want to
-represent:
+To create a simple bar graph depicting months in office, we start by cleaning up
+the Pivot Table so that it shows the data we want to represent:
 
 1. Select any cell in this table:  
   ![Joint absolute frequencies](bin/JointAbsFreq.png){width=50%}
-2. Use filtering to remove "Transfer" from the list
-   of prime ministers.
+2. Use filtering to remove "Transfer" from the list of prime ministers.
 3. Use sorting to sort by (grand total) number of months in office.
 
    The table should now look like this:  
@@ -366,20 +359,20 @@ Then we can generate the graph:
 Your graph will look like this:  
 ![A bar graph showing months in office for each prime minister](bin/PTChartExample.png){width=50%}
 
-As always, there are various ways we could customize this graph to
-be more attractive and informative.
+As always, there are various ways we could customize this graph to be more
+attractive and informative.
 :::
 
-You can download the full set of Pivot Tables and associated charts 
-generated in this chapter at
+You can download the full set of Pivot Tables and associated charts  generated
+in this chapter at
 [https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
 
 ## Covariance and correlation {#sample-covariance-and-correlation}
 
-When two variables are both numeric, we can summarize their relationship
-using their ***sample covariance***:
+When two variables are both numeric, we can summarize their relationship using
+their ***sample covariance***:
   $$s_{x,y} = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})$$
-and their ***sample correlation***
+and their ***sample correlation***:
   $$\rho_{x,y} = \frac{s_{x,y}}{s_x s_y}$$
 where $\bar{x}$ and $\bar{y}$ are the
 [sample averages](#summary-statistics-theory) and $s_{x}$ and $s_{y}$ are the
@@ -399,23 +392,23 @@ data.
 **using `cov()` and `cor()` to calculate a covariance/correlation**
 
 If you haven't done so already, open up R and execute the code from the
-[introduction](#multivariate-data-analysis) to this chapter. You can
-then execute the following code:
+[introduction](#multivariate-data-analysis) to this chapter. You can then
+execute the following code:
 
 ```{r CovCor}
 # For two specific columns of data
 cov(EmpData$UnempPct, EmpData$LFPPct)
 cor(EmpData$UnempPct, EmpData$LFPPct)
 ```
-As you can see, unemployment and labour force participation are
-*negatively* correlated: when unemployment is high, LFP tends to be
-low. This makes sense given the economics: if it is hard to find
-a job, people will move into other activities that take one out
-of the labour force: education, childcare, retirement, etc.
+As you can see, unemployment and labour force participation are *negatively*
+correlated: when unemployment is high, LFP tends to be low. This makes sense
+given the economics: if it is hard to find a job, people will move into other
+activities that take one out of the labour force: education, childcare,
+retirement, etc.
 :::
 
-Both `cov()` and `cor()` can also be applied to (the numeric variables in)
-an entire data set.  The result is what is called a ***covariance matrix*** or
+Both `cov()` and `cor()` can also be applied to (the numeric variables in) an
+entire data set.  The result is what is called a ***covariance matrix*** or
 ***correlation matrix***.
 
 ::: example
@@ -431,8 +424,8 @@ EmpData %>%
   select(UnempRate, LFPRate, AnnPopGrowth) %>%
   cor()
 ```
-Each element in the matrix reports the covariance or correlation
-of a pair of variables.  As you can see:
+Each element in the matrix reports the covariance or correlation of a pair of
+variables.  As you can see:
 
 - The matrix is symmetric since $cov(x,y) = cov(y,x)$.
 - The diagonal elements of the covariance matrix are $cov(x,x) = var(x)$
@@ -445,12 +438,12 @@ Just like with univariate statistics, we can exclude missing values when
 calculating a covariance or correlation matrix.  However, there are two
 slightly different ways to exclude missing values from a data table:
 
-1. ***Pairwise deletion***: when calculating the covariance or correlation
-   of two variables, exclude observations with a missing values for either
-   of *those two* variables.
-2. ***Casewise*** or ***listwise deletion***: when calculating the
-   covariance or correlation of two variables, exclude observations with
-   a missing value for *any* variable.
+1. ***Pairwise deletion***: when calculating the covariance or correlation of
+   two variables, exclude observations with a missing values for either of
+   *those two* variables.
+2. ***Casewise*** or ***listwise deletion***: when calculating the covariance or
+   correlation of two variables, exclude observations with a missing value for
+   *any* variable.
 
 The `use` argument allows you to specify which approach you want to use.
 
@@ -470,9 +463,9 @@ EmpData %>%
 ```
 :::
 
-In most applications, pairwise deletion makes the most sense because it
-avoids throwing out data. But it is occasionally important to use the
-same data for all calculations, in which case we would use listwise deletion.
+In most applications, pairwise deletion makes the most sense because it avoids
+throwing out data. But it is occasionally important to use the same data for all
+calculations, in which case we would use listwise deletion.
 
 ::: {.fyi data-latex=""}
 **Covariance and correlation in Excel**
@@ -483,27 +476,25 @@ be calculated in Excel using the `COVARIANCE.S()` and `CORREL()` functions.
 
 ## Graphical methods
 
-Bivariate summary statistics like the covariance and correlation provide
-a simple way of characterizing the relationship between any two numeric 
-variables. Frequency tables, cross tabulations, and conditional averages 
-allow us to gain a greater understanding of the relationship between two
-discrete or categorical variables, or between a discrete/categorical variable 
-and a continuous variable.
+Bivariate summary statistics like the covariance and correlation provide a
+simple way of characterizing the relationship between any two numeric variables.
+Frequency tables, cross tabulations, and conditional averages allow us to gain a
+greater understanding of the relationship between two discrete or categorical
+variables, or between a discrete/categorical variable and a continuous variable.
 
 In order to develop a detailed understanding of the relationship between two
-continuous variables (or discrete variables with many values), we need
-to develop some additional methods.  The methods that we will explore in
-this course are primarily graphical.  You will learn more about the
-underlying numerical methods in later courses.
+continuous variables (or discrete variables with many values), we need to
+develop some additional methods.  The methods that we will explore in this
+course are primarily graphical.  You will learn more about the underlying
+numerical methods in later courses.
 
 ### Scatter plots 
 
 A ***scatter plot*** is the simplest way to visualize the relationship between
-two variables in data.  The horizontal ($x$) axis represents
-one variable, the vertical ($y$) axis represents the other variable,
-and each point represents an observation. In some sense, the scatter
-plot shows everything you can show about the relationship
-between the two variables, since it shows every observation. 
+two variables in data.  The horizontal ($x$) axis represents one variable, the
+vertical ($y$) axis represents the other variable, and each point represents an
+observation. In some sense, the scatter plot shows everything you can show about
+the relationship between the two variables, since it shows every observation. 
 
 Scatter plots can be created in R using the `geom_point()` geometry.
 
@@ -524,17 +515,16 @@ that this negative relationship is not very strong.
 
 #### Jittering
 
-If both of our variables are truly continuous, each point represents
-a single observation.  But if both variables are actually discrete,
-points can "stack" on top of each other.  In that case, the same point
-can represent multiple observations, leading to a misleading scatter
-plot.
+If both of our variables are truly continuous, each point represents a single
+observation.  But if both variables are actually discrete, points can "stack"
+on top of each other.  In that case, the same point can represent multiple
+observations, leading to a misleading scatter plot.
 
 ::: example
 **A scatter plot with discrete variables**
 
-For example, suppose we had rounded our unemployment and LFP data to 
-the nearest percent:
+For example, suppose we had rounded our unemployment and LFP data to the nearest
+percent:
 ```{r RoundEmpData}
 # Round UnempPct and LFPPct to nearest integer
 RoundedEmpData <- EmpData %>% 
@@ -551,15 +541,14 @@ ggplot(data = RoundedEmpData,
   geom_point(col = "darkorange")
 ```
 
-As you can see from the graph, the scatter plot is misleading: there
-are 541 observations in the data set represented by only 40 points.
+As you can see from the graph, the scatter plot is misleading: there are 541
+observations in the data set represented by only 40 points.
 :::
 
-A common solution to this problem is to ***jitter*** the data by adding a 
-small amount of random noise so that every observation is at least a little
-different and appears as a single point.  We can use the `geom_jitter()` 
-geometry to do a jittered scatter plot.
-
+A common solution to this problem is to ***jitter*** the data by adding a small
+amount of random noise so that every observation is at least a little different
+and appears as a single point.  We can use the `geom_jitter()` geometry to
+create a jittered scatter plot.
 
 ::: example
 **A "jittered" scatter plot with discrete variables**
@@ -580,14 +569,14 @@ reflects the original unrounded data than the rounded data (large red dots).
 #### Using color as a third dimension
 
 We can use color to add a third dimension to the data.  That is, we can 
-color-code points based on a third variable by including it as part of 
-the aesthetic.
+color-code points based on a third variable by including it as part of the
+aesthetic.
 
 :::example
 **Using color to add a third dimension**
 
-We can use color to represent a third variable, whether it is discrete 
-or continuous.
+We can use color to represent a third variable, whether it is discrete or
+continuous.
 ```{r ScatterPlotColorCoded}
 # Party is discrete/categorical, so each value is represented by a distinct color
 ggplot(data = EmpData,
@@ -628,16 +617,16 @@ color blindness is the inability to distinguish red and green.
 ::: {.fyi data-latex=""}
 **Scatter plots in Excel**
 
-Scatter plots can also be created in Excel, though it is more work and 
-produces less satisfactory results.
+Scatter plots can also be created in Excel, though it is more work and produces
+less satisfactory results.
 :::
 
 ### Binned averages
 
 We earlier used pivot table to construct a
 [conditional average](#conditional-averages) of the variable $y_i$
-(**UnempRate** in the example) for each value of some discrete variable
-$x_i$ (**PrimeMinister** in the example).
+(**UnempRate** in the example) for each value of some discrete variable $x_i$
+(**PrimeMinister** in the example).
 
 When the $x_i$ variable is continuous, it takes on too many distinct values
 to construct such a table.  Instead, we would want to divide its range into a
@@ -645,10 +634,9 @@ set of bins and then calculate averages within each bin. We can then plot the
 average $y_i$ within each bin against the average $x_i$ within the same bin.
 This kind of plot is called a ***binned scatterplot***.
 
-Binned scatterplots are not difficult to do in R but the code is quite 
-a bit more complex than you are used to.  As a result, I will not ask
-you to be able to produce binned scatter plots, I will only ask you
-to interpret them.  
+Binned scatterplots are not difficult to do in R but the code is quite a bit
+more complex than you are used to.  As a result, I will not ask you to be able
+to produce binned scatter plots, I will only ask you to interpret them.  
 
 ::: example
 **A binned scatter plot**
@@ -727,12 +715,12 @@ see patterns in the data that aren't really part of the DGP).
 ### Smoothing
 
 An alternative to binned averaging is ***smoothing***, which calculates a 
-smooth curve that fits the data as well as possible.  There are many 
-different techniques for smoothing, but they are all based on taking a
-weighted average of $y_i$ near each point, with high weights on observations 
-with $x_i$ close to that point and low (or zero) weights on observations 
-with $x_i$ far from that point.  The calculations required for smoothing 
-can be quite complex and well beyond the scope of this course.
+smooth curve that fits the data as well as possible.  There are many different
+techniques for smoothing, but they are all based on taking a weighted average of
+$y_i$ near each point, with high weights on observations with $x_i$ close to
+that point and low (or zero) weights on observations with $x_i$ far from that
+point.  The calculations required for smoothing can be quite complex and well
+beyond the scope of this course.
 
 Fortunately, smoothing is easy to do in R using the `geom_smooth()` geometry.
 
@@ -747,19 +735,17 @@ ggplot(data = EmpData,
   geom_smooth()
 ```
 
-Notice that by default, the graph includes both the fitted line
-(in blue) and a 95\% confidence interval (the shaded area around
-the line).  Also note that the confidence interval is narrow in the 
-middle (where there is a lot of data) and wide in the ends (where
-there is less data).
+Notice that by default, the graph includes both the fitted line and a 95\%
+confidence interval (the shaded area around the line).  Also note that the
+confidence interval is narrow in the middle (where there is a lot of data) and
+wide in the ends (where there is less data).
 :::
 
 ### Linear regression
 
-Our last approach is to assume that the relationship between the two
-variables is linear, and estimate it by a technique called 
-***linear regression***.  Linear regression calculates the straight
-line that fits the data best.
+Our last approach is to assume that the relationship between the two variables
+is linear, and estimate it by a technique called ***linear regression***. Linear
+regression calculates the straight line that fits the data best.
 
 You can include a linear regression line in your plot by adding the 
 `method=lm` argument to the `geom_smooth()` geometry.
@@ -787,29 +773,28 @@ ggplot(data = EmpData,
 ```
 
 As you can see, the two fits are quite similar for unemployment rates below
-12%, but diverge quite a bit above that level.  This is inevitable, because
-the smooth fit becomes steeper, but linear fit *can't* do that.
+12%, but diverge quite a bit above that level.  This is inevitable, because the
+smooth fit becomes steeper, but linear fit *can't* do that.
 :::
 
-Linear regression is much more restrictive than smoothing, but has
-several important advantages:
+Linear regression is much more restrictive than smoothing, but has several
+important advantages:
 
 - The relationship is easier to interpret, as it can be summarized by a single
   number (the slope).
 - The linear relationship is much more precisely estimated 
 
-These advantages are not particularly important in this case, with only
-two variables and a reasonably large data set.  The advantages of linear
-regression become overwhelming when you have more than two 
-variables to work with. As a result, linear regression is the
-most important tool in applied econometrics, and you will spend much of
-your next econometrics course learning to use it.
+These advantages are not particularly important in this case, with only two
+variables and a reasonably large data set.  The advantages of linear regression
+become overwhelming when you have more than two variables to work with. As a
+result, linear regression is the most important tool in applied econometrics,
+and you will spend much of your next econometrics course learning to use it.
 
 ## Chapter review {-#review-multivariate-data-analysis}
 
-Econometrics is mostly about the relationship between variables: price
-and quantity, consumption and savings, labour and capital, today and 
-tomorrow.  So most of what we do is multivariate analysis.
+Econometrics is mostly about the relationship between variables: price and
+quantity, consumption and savings, labour and capital, today and tomorrow. So
+most of what we do is multivariate analysis.
 
 This chapter has provided a brief view of some of the main techniques for 
 multivariate analysis: frequency tables, cross-tabulations, conditional
@@ -871,4 +856,3 @@ Answers can be found in the [appendix](#answers-multivariate-data-analysis).
 
 5. Using the `EmpData` data set, construct the same scatter plot as in
    problem (4) above, but add a smooth fit and a linear fit.
-

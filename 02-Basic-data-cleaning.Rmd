@@ -9,7 +9,7 @@ we will do most of our data cleaning using Excel.
 
 This chapter will develop both both some principles of data cleaning and the
 basic Excel tools needed to implement them. The best way to learn data skills
-is by working on a real data project, soe will also apply this knowledge by
+is by working on a real data project, so will also apply this knowledge by
 using Excel to clean a real data set.
 
 ::: {.goals data-latex=""}
@@ -60,7 +60,7 @@ learning their names, so I will list them here for your reference:
 
 - The ***menu bar*** is at the top of the screen:  
    ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)
-- The ***ribbon*** is below the menu bar  
+- The ***ribbon*** is below the menu bar:
    ![It is a row of buttons.](bin/Excel ribbon.jpg)
   - The ribbon has buttons for performing simple actions.
   - The buttons are grouped by function, for example the ribbon above depicts
@@ -80,12 +80,10 @@ learning their names, so I will list them here for your reference:
     (usually but not always `Home`).
     - I will assume that `Home` is the currently-active option; if it isn't
       you can just select `Home` to make it the currently-active option.
-- There are several items just below the ribbon that we will learn to
-  use later in this chapter.
-  - The ***formula bar*** is the long white box just below the ribbon.  
-    ![formula bar](bin/Excel formula bar.jpg)
-  - The ***insert function*** button is to the left of the formula bar.  
-    ![fx](bin/Excel insert function button.jpg){height=16pt}
+- The ***formula bar*** is the long white box just below the ribbon:  
+  ![formula bar](bin/Excel formula bar.jpg)
+- The ***insert function*** button is to the left of the formula bar:  
+  ![fx](bin/Excel insert function button.jpg){height=16pt}
 - Most of the screen displays a rectangular grid of ***cells*** that is
   called a ***spreadsheet*** or ***worksheet***:  
   ![cell grid](bin/ExcelCellGrid.png)
@@ -120,11 +118,11 @@ review the basics:
 - These statistics are reported monthly by Statistics Canada and
   are based on the Labour Force Survey (LFS), a monthly survey of the
   **civilian, non-institutionalized, working-age population of Canada**.
-  - "civilian" excludes those on active military duty
+  - "civilian" excludes those on active military duty.
   - "non-institutionalized" excludes people in prison, hospitals, 
     nursing homes, etc.
-  - "working-age" excludes those under age 15
-  - People living on reserve are also not covered by the LFS
+  - "working-age" excludes those under age 15.
+  - People living on reserve are also not covered by the LFS.
 - The LFS population is grouped into three categories:
   - **Employed**: worked for pay or profit in the previous week, or had
     a job and was absent (e.g. due to illness or vacation).
@@ -174,19 +172,18 @@ we go through the application.
 
 ### Reproducibility {#data-management}
 
-When analyzing data it is important for the results of our analysis to
-be ***reproducible***. Reproducibility means that an interested reader
-should be able to figure out exactly how you got your results, 
-and should be able to generate those results themselves.
+When analyzing data it is important for the results of your analysis to be
+***reproducible***. Reproducibility means that an interested reader should be
+able to figure out exactly how you got your results, and should be able to
+generate those results themselves.
 
-The "interested reader" might be *you*, as it is common to return to an
-analysis you did earlier.  Without reproducibility, you may not 
-remember where you found the data, what you have done with it, or 
-what it means.  The interested reader might also be your coworkers, your boss,
-or your clients.
+The "interested reader" might be *you*, as it is common to return to an analysis
+you did earlier.  Without reproducibility, you may not remember where you found
+the data, what you have done with it, or what it means.  The interested reader
+might also be your coworkers, your boss, or your clients.
 
-Reproducibility requires that we treat our data with care.  In
-particular, we should:
+Reproducibility requires that we treat our data with care.  In particular, we
+should:
 
 1. Document the ***provenance*** or original source for all data.
    - When downloading data files, document the original URL and date of access.
@@ -200,7 +197,7 @@ particular, we should:
    portable if it can be easily moved between operating systems, file formats,
    and applications.
    - Organize your work into clear projects, and keep all of the files for
-     a given project in a single project folder.
+     a given project in a single ***project folder***.
    - Give files and variables brief, informative, and portable names.
      - For example, stick to letters and numbers, and avoid using spaces,
        special characters, accents, etc.
@@ -224,8 +221,8 @@ particular, we should:
      - An archived version is a previous master version or working copy that
        you want to keep for reference.
      - Use some file naming convention to distinguish between archived versions.
-       - You could number them sequentially (e.g., "archive-01")
-       - Or you could use dates (e.g., "archive-20dec2022")
+       - You could number them sequentially (e.g., "archive-01").
+       - Or you could use dates (e.g., "archive-20dec2022").
      - Archived versions should not be directly edited.
 
 The first step in implementing these principles is usually to set up a project
@@ -244,12 +241,12 @@ Canadian employment data:
 2. Create two sub-folders inside your project folder.
    - One will contain the original data (call it "raw-data").
    - One will contain archived versions of the data. (call it "archive").
-2. Obtain the source data
+2. Obtain the source data.
    - Download the file
      [https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
    - Put it in the `raw-data` folder.
    - Do not change the file name.
-3. Document the provenance of all data sources
+3. Document the provenance of all data sources.
    - Create a text file called "readme.txt".
    - Put it in the `raw-data` folder.
    - Enter information in this file about the provenance of the
@@ -257,35 +254,33 @@ Canadian employment data:
 4. Create a master version and working copy.
    - Make two copies of the `CanEmpNov20.xlsx` file.
    - Put them in the main project folder (`employment-nov-2020`).
-   - One will be your original master version (call it "CanEmpNov20Clean.xlsx")
+   - One will be your original master version (call it "CanEmpNov20Clean.xlsx").
    - One will be your working copy (call it "CanEmpNov20-working.xlsx").
 :::
 
 We will return to these principles later as we complete our data cleaning
 project.
 
-
 ::: fyi
 **Version control systems**
 
 Software developers and professional data analysts use formal version control
-systems like [GitHub](https://github.com/). GitHub tracks every change ever made
-to a group of files, and can allow multiple users to work together on a project.
-It is based on a model in which each user has their own working copy, and
-can commit (or propose) changes to the master version, along with an explanation
-of the changes.  You can see my GitHub page at https://github.com/bvkrauth.
+systems like [Git](https://git-scm.com/) and[GitHub](https://github.com/).
+These systems track every change ever made to a group of files, and can allow
+multiple users to work together on a project. It is based on a model in which
+each user has their own working copy, and can commit (or propose) changes to the
+master version, along with an explanation of the changes.  You can see my GitHub
+page at https://github.com/bvkrauth.
 
-GitHub takes a little time to set up and learn, but is an extremely useful tool
-if you do a lot of coding or data analysis.
+Git and GitHub take a little time to set up and learn, but are extremely useful
+tools if you do a lot of coding or data analysis.
 :::
-
-
 
 ### Tidy data {#tidy-data}
 
-To keep analysis easy and minimize errors, data should be organized
-as what data scientists have come to call ***tidy*** data. Tidy data 
-has the following seven properties:
+To keep analysis easy and minimize errors, data should be organized as what data
+scientists have come to call ***tidy*** data. Tidy data has the following seven
+properties:
 
 1. Data is arranged in one or more simple rectangular grids or ***tables***.
 2. Each column in a table represents a distinct ***variable*** or attribute.
@@ -305,9 +300,8 @@ has the following seven properties:
    - That is, the interpretation of the table would not change if its rows 
      or columns were in a different order.
 
-Data that is not tidy is sometimes called ***messy*** data. One 
-of the first steps in cleaning data is rearranging it from a messy
-format to a tidy format.
+Data that is not tidy is sometimes called ***messy*** data. One of the first
+steps in cleaning data is rearranging it from a messy format to a tidy format.
 
 ::: example
 **Overview of the employment data**
@@ -319,27 +313,24 @@ this Excel workbook contains three worksheets:
    ![Excel screenshot](bin/EmploymentData.png) 
    It is in tidy format:
   - There is a single rectangular table starting in cell A1.
-  - Each row represents a Canadian province 
-  - Canadian provinces are the unit of observation
-  - Each column represents a variable describing that province
-  - The top row shows brief but clear names for each variable
-  - The provinces are listed in alphabetical order, but the 
-    interpretation of the table would not change if they were 
-    listed in some other order
+  - Each row represents a Canadian province.
+  - Canadian provinces are the unit of observation.
+  - Each column represents a variable describing that province.
+  - The top row shows brief but clear names for each variable.
+  - The provinces are listed in alphabetical order, but the interpretation of
+    the table would not change if they were listed in some other order.
 - The worksheet *Raw data* is the original data table as I downloaded it from
-  Statistics Canada.  
+  Statistics Canada:
    ![Excel screenshot](bin/RawEmploymentData.png)
   It is messy in various ways:
   - The table starts in cell A6 rather than cell A1.
-  - Variables (Population, Labour Force, etc.) are in rows rather
-    than columns.
-  - Observations (the unit of observation is the province-month) are
-    in both rows and columns.
-  - Cells are filled in "implicitly".  For example, there is nothing in
-    row 17 that says what province it describes, but we know that it
-    describes Nova Scotia because it comes after row 16 (which does say
-    it describes Nova Scotia).  As a result, the order of rows is very 
-    important.
+  - Variables (Population, Labour Force, etc.) are in rows rather than columns.
+  - Observations (the unit of observation is the province-month) are in both
+    rows and columns.
+  - Cells are filled in "implicitly".  For example, there is nothing in row 17
+    that says what province it describes, but we know that it describes Nova
+    Scotia because it comes after row 16 (which does say it describes Nova
+    Scotia).  As a result, the order of rows is very important.
 - The worksheet *Source* describes the provenance of the data:
    ![Excel screenshot](bin/Source.png)
    It is not a data table, just a few lines of text.
@@ -354,7 +345,6 @@ We will do all of our edits to the *Employment Nov 2020* worksheet, and will
 leave both *Raw data* and *Source* alone.
 :::
 
-
 :::fyi
 **Link rot and the DOI**
 
@@ -364,7 +354,7 @@ Most links only work for a few months or a few years, depending on the data
 provider and how careful they are. To minimize the potential consequences of
 link rot, you should always save an unmodified local copy of the original data.
 
-Anoter strategy for addressing link rot is to use a
+Another strategy for addressing link rot is to use a
 [digital object identifier](https://www.doi.org/)
 or ***DOI*** if one is available. DOI is an international system that allows
 participating organizations to provide persistent links to documents, files and
@@ -373,9 +363,9 @@ addresses.
 
 - The regular URL (https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703
 ) tells your browser where the file is located:
-  - Go to the server www150.statcan.gc.ca
-  - Look in the folder t1/tbl1/en/tv.action
-  - Pass the server the parameter "pid=1410028703"
+  - Go to the server www150.statcan.gc.ca.
+  - Look in the folder t1/tbl1/en/tv.action.
+  - Pass the server the parameter "pid=1410028703".
 - The DOI URL (https://doi.org/10.25318/1410028701-eng) also tells the browser
   where a file is located, but the file at that location is not the actual data
   file. Instead, the file at that location is a link that (currently) redirects
@@ -387,8 +377,6 @@ document at some point in the future.  At that point, the original
 URL will stop working. But the DOI will continue working because Statistics
 Canada will (hopefully) update the DOI entry for that document with the new URL.
 :::
-
-
 
 ### Observations and identifiers
 
@@ -407,7 +395,7 @@ always written consistently.  For example, the same person might be called
 **Is the province name a good ID variable?**
 
 The province name in our employment data is an example of a proper name, and
-we typically avoid using proper names as ID variables becuase they are not
+we typically avoid using proper names as ID variables because they are not
 necessarily unique or consistently written. Although province names *are*
 unique within Canada, they are not always consistently written:
 
@@ -503,8 +491,8 @@ employment data, we need to choose another one. Although only one ID variable
 is needed, I will choose two for demonstration purposes:
 
 1. **ID**: an arbitrary/sequential number assigned to each observation.
-2. **ProvAbb**: a standardized (text) code based on the two-letter
-   postal abbreviation.
+2. **ProvAbb**: a standardized (text) code based on the two-letter postal
+   abbreviation.
 
 We will add these two variables while cleaning our data.
 :::
@@ -513,14 +501,14 @@ We will add these two variables while cleaning our data.
 **Names, IDs, and probabilistic matching**
 
 Occasionally a data set will not have a standardized ID variable, and our only
-option is to match observations based on a proper name.  For
-example, each student in BC grades K to 12 is assigned an ID number called
-a PEN while each person in the healthcare system is assigned a
-different ID number called a PHN. There is no direct way to match PEN and PHN,
-so we have to match education and health records on a combination of proper
-names and other information such as date of birth.  Matches made this way are
-called "probabilistic" matches, meaning (roughly) that the records probably
-describe the same person but might not.
+option is to match observations based on a proper name.  For example, each
+student in BC grades K to 12 is assigned an ID number called a PEN while each
+person in the healthcare system is assigned a different ID number called a PHN.
+There is no direct way to match PEN and PHN, so we have to match education and
+health records on a combination of proper names and other information such as
+date of birth.  Matches made this way are called "probabilistic" matches,
+meaning (roughly) that the records probably describe the same person but might
+not.
 :::
 
 ### Planning {#cleaning-plan}
@@ -568,8 +556,8 @@ the employment data:
 
    We will want to construct new variables for:
 
-   - the specific month these observations are describing (November 2020).
-   - the two unique ID variables described in step 2.
+   - the specific month these observations are describing (November 2020)
+   - the two unique ID variables described in step 2
    - the labour force
    - the labour force participation rate
    - the unemployment rate
@@ -581,10 +569,10 @@ about our data.
 
 ## Cleaning data in Excel {#cleaning-data}
 
-We are now ready to start using Excel to active clean our data. We will also
+We are now ready to start using Excel to actively clean our data. We will also
 introduce a set of important Excel tools and concepts that are useful in
-cleaning data. Be sure to use your working copy of the data, and to save
-the file after completing each task so that you don't lose your work.
+cleaning data. Be sure to use your working copy of the data, and to save the
+file after completing each task so that you don't lose your work.
 
 ### Cell formatting {#cell-formatting}
 
@@ -596,7 +584,7 @@ We can change the appearance of our data without changing
 its content by adjusting the ***cell formatting*** for one or more
 cells.  Cell formatting characteristics include:
 
-- Text font, size, style (bold/italics/underline) and color.
+- Text font, size, style (bold/italics/underline) and color
 - Text alignment (left/right/center as well as top/bottom/middle)
 - Column width
 - Row height
@@ -618,24 +606,28 @@ you will see it actually does contain the number 12378900.  The reason
 that the cell displays "######" is that the cell is not wide enough to show
 the correct number.
 
-We can solve this problem by making column B wider:
+We can solve this problem by making column B wider.  There are three ways of 
+doing this:
 
 - *From the menu*: Select any cell in column B, and then select
   `Home > Format > Cell Width...`.  A dialog box will appear that allows you
-  to enter your preferred width. Try 10.
+  to enter your preferred width. Try a few numbers there until you get a column
+  width that you like.
 - *With the mouse*: Move your cursor to the line between column headers B
-  and C until the cursor looks like this: ![cursor](bin/cell width change.png){height=16pt}. Click on the mouse and drag the cursor to
-  resize the column.
-- *Auto-fit* (this is what I usually do):  Move your cursor to the
-  line between column headers B and C, and double-click.  The column
-  width will automatically adjust to fit the data.
+  and C until the cursor looks like this:
+  ![cursor](bin/cell width change.png){height=16pt}.
+  Click on the mouse and drag the cursor to resize the column until you get a
+  column width that you like.
+- *Auto-fit* (this is what I usually do):  Move your cursor to the line between
+  column headers B and C, and double-click.  The column width will automatically
+  adjust to fit the data.
 
 You can follow similar procedures to adjust the row height.
 :::
 
 ### Inserting and deleting cells
 
-Most of the time we will add data to the end of the existing table, adding
+Most of the time, we will add data to the end of the existing table, adding
 new variables after the last column or new observations after the last row. But
 occasionally we will want to insert a column or row into our table.
 
@@ -697,7 +689,6 @@ To add this variable:
 2. Fill in cells F2:F11 with the correct postal abbreviation.
 3. Save your working copy.
 :::
-
 
 ::: fyi
 **Choosing variable names**
@@ -765,9 +756,9 @@ and year these particular observations describe (November 2020).
 
 1. Enter **MonthYr** in cell G1 to name the variable.
 2. Enter "11/2020" in cell G2.
-   - You may notice that Excel displays the date differently from
-     how you entered it - on my computer it displays as `Nov-20` but yours
-     may look different. We will talk more later about how Excel handles dates.
+   - You may notice that Excel displays the date differently from how you
+     entered it - on my computer it displays as `Nov-20` but yours may look
+     different. We will talk more later about how Excel handles dates.
 
 Now we could enter the exact same date in cells G3:G11, but we can save
 ourselves some time by using Excel's fill tool:
@@ -780,8 +771,8 @@ As you can see, Excel fills in all selected cells with the value in the
 top cell.
 :::
 
-Excel's ***series*** tool allows you to fill in a group of cells
-with an ascending or descending sequence of numbers or dates.
+Excel's ***series*** tool allows you to fill in a group of cells with an
+ascending or descending sequence of numbers or dates.
 
 ::: example
 **Using series**
@@ -832,12 +823,9 @@ These are the ones I find most useful:
 | Italics       | `Ctrl-i`         |
 | Underline     | `Ctrl-u`         |
 
-
 Additional shortcuts and macOS information are available at
 https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f.
 :::
-
-
 
 ### Formulas {#formulas}
 
@@ -851,7 +839,7 @@ expression that can include any combination of:
 - Specific values, for example `=2` or `=TRUE`
 - References to other cells, for example `=D2`
 - Standard arithmetic operators, for example `=2+2` or `=D2/4`
-- Functions, for example `=SQRT(D2)` or `=SUM(D2:D10)`.
+- Functions, for example `=SQRT(D2)` or `=SUM(D2:D10)`
 
 Formulas can be simple, or they can be quite complex.
 
@@ -872,39 +860,36 @@ Cell H2 now displays `2,493,300` which is in fact the value in cell D2
 plus the value in cell E2. 
 :::
 
-As discussed earlier, it is important to distinguish between what is
-the *contents* of a cell and how those contents are *displayed*. For
-example, the true contents of cell H2 in our example above are the
-formula `= D2 + E2` but the cell shows the number  `2,493,300`. If 
-you change the number in cell D2 or cell E2, the number shown in
-cell H2 will adjust accordingly.
+As discussed earlier, it is important to distinguish between the *contents* of a
+cell and how those contents are *displayed*. For example, the true contents of
+cell H2 in our example above are the formula `= D2 + E2` but the cell shows the
+number  `2,493,300`. If you change the number in cell D2 or cell E2, the number
+shown in cell H2 will adjust accordingly.
 
-Formulas can use the results from other formulas, as shown in 
-the example below.
+Formulas can use the results from other formulas, as shown in the example below.
 
 ::: example
 **Formulas that use other formulas**
 
-Let's add a column for the labour force participation rate. To remind you,
-this is the proportion or percentage of the population (column C) that is in
-the labour force (column H).
+Let's add a column for the labour force participation rate. To remind you, this
+is the proportion or percentage of the population (column C) that is in the
+labour force (column H).
 
 1. Enter **LFPRate** in cell I1 to name the variable.
 2. Enter `=H2/C2` in cell I2 to calculate the variable.
 
-Let's also add a column for the unemployment rate.  To remind you, this is
-the proportion or percentage of the labour force (column H) that is
-unemployed (column E).
+Let's also add a column for the unemployment rate.  To remind you, this is the
+proportion or percentage of the labour force (column H) that is unemployed
+(column E).
 
 3. Enter **UnempRate** in cell J1 to name the variable.
 4. Enter `=E2/H2` in cell J2 to calculate the variable.
 5. Save your working copy.
 
-Notice that both of these formulas use cell H2, which itself contains 
-a formula. It is often useful to break up a complex formula into steps
-like this, as it is easier to check your work and spot problems.
+Notice that both of these formulas use cell H2, which itself contains a formula.
+It is often useful to break up a complex formula into steps like this, as it is
+easier to check your work and spot problems.
 :::
-
 
 ### Functions {#built-in-functions}
 
@@ -922,7 +907,7 @@ Suppose we want to find the natural logarithm of a particular number. Excel
 probably has a built-in function for that, but we may not know its name or
 structure.
 
-- *Google*
+- *Google or other search engine*
 
   Go to your favorite search engine and enter "Excel natural log". When I do
   this, the top recommendation is for Microsoft's online documentation for the
@@ -938,7 +923,7 @@ structure.
    1. Click on the insert function button
       ![insert function button](bin/Excel insert function button.jpg){height=16pt} 
       to the left of the formula bar.
-   2. The `Insert Function` dialog box will appear.
+   2. The `Insert Function` dialog box will appear:
       ![insert function dialog box](bin/InsertFunction.png)
       It will show a long list of functions. You will want to narrow this list
       down, and you have several options for doing so:
@@ -948,7 +933,7 @@ structure.
    3. Once you have narrowed the list down, it is easy to find the
       function you want (`LN`). Select `LN` from the `Select a function`
       list box, and then select `OK`.You will now see the `Function Arguments`
-      dialog box for the `LN` function.
+      dialog box for the `LN` function:
       ![function arguments dialog box](bin/FunctionArguments.png)
    4. As the dialog box shows, the `LN` function takes one argument
       (the number you want the log of).
@@ -966,7 +951,7 @@ use the result of another function.
 ::: example
 **A simple function**
 
-Suppose we want to add a new variable for the (natural) log of population.
+Suppose we want to add a new variable for the (natural) log of population:
 
 1. Enter **LogPop** in cell K1 to give the variable a name.
 2. Select cell K2.
@@ -1004,8 +989,8 @@ by a colon (":"). For example:
 - Range A2:C2 consists of cells A2, B2, and C2.
 - Range A2:B3 consists of cells A2, B2, A3, and C3.
 
-A single cell can also be thought of as a range of cells with one
-row and one column.
+A single cell can also be thought of as a range of cells with one row and one
+column.
 
 ::: example
 **A formula using a cell range**
@@ -1017,54 +1002,49 @@ across all observations in the data. The function to do that is `SUM()`.
 2. Enter `=SUM(C2:C11)` in cell L2.  
 3. Save your working copy.
 
-Cell L2 should display `31,275,600` which is indeed the sum of 
-cells C2 to C11.
+Cell L2 should display `31,275,600` which is indeed the sum of cells C2 to C11.
 :::
 
 ### Copying formulas {#copying-pasting-and-relative-references}
 
-In Excel, you can copy-and-paste the contents of a cell to any 
-other cell. This is particularly handy when a cell contains a 
-formula, as it would be inconvenient to type the same formula 
-into each cell.
+In Excel, you can copy-and-paste the contents of a cell to any other cell. This
+is particularly handy when a cell contains a formula, as it would be
+inconvenient to type the same formula into each cell.
 
 ::: example
 **Copying a formula**
 
-To use copy-and-paste to copy the formula in cell H2 to the 
-other cells in column H:
+To use copy-and-paste to copy the formula in cell H2 to the other cells in
+column H:
 
 1. Select cell H2 and copy it.
 2. Select cells H3:H11 and paste.
 3. Save your working copy.
-
 :::
 
-You can also use fill for this purpose, and it is usually
-quicker.
+You can also use fill for this purpose, and it is usually quicker.
 
 ::: example
 **Filling a formula**
 
-To use fill to copy the formulas in cells I2:L2 to the other 
-cells in columns I through L:
+To use fill to copy the formulas in cells I2:L2 to the other cells in columns I
+through L:
 
-3. Select cells I2:L11
-4. Select `Home > Fill > Down`
+3. Select cells I2:L11.
+4. Select `Home > Fill > Down`.
 5. Save your working copy.
-
 :::
 
 ### Relative and absolute references 
 
-Excel is smart and normally treats cell addresses in formulas 
-as ***relative references*** when copying and pasting cells.  That
-is, when a formula is copied to another cell $r$ columns to the right
-and $d$ rows down, the column letters in the formula are increased
-by $r$ units, and the row numbers are increased by $d$ units.
+Excel is smart and normally treats cell addresses in formulas as
+***relative references*** when copying and pasting cells.  That is, when a
+formula is copied to another cell $r$ columns to the right and $d$ rows down,
+the column letters in the formula are increased by $r$ units, and the row
+numbers are increased by $d$ units.
 
-For example, suppose cell B5 contains the formula `=A1`.  If
-we copy the contents of this cell to other cells, we get:
+For example, suppose cell B5 contains the formula `=A1`.  If we copy the
+contents of this cell to other cells, we get:
 
 |  Cell  | Formula |
 |--------|:-------:|
@@ -1084,47 +1064,45 @@ This is usually exactly what we want Excel to do.
 Select cell H3 and take a look at the formula bar to see its contents. Notice
 that:
 
-- the original cell H2 contains `=D2+E2`
-- cell H3 contains`=D3+E3`
+- the original cell H2 contains `=D2+E2`.
+- cell H3 contains`=D3+E3`.
 
-This is exactly what we would want; each cell in column H
-calculates the province's labour force by adding the unemployed
-count (column D) and employed count (column E) from the same province
-(same row).  So cell H2 should contain `=D2+E2` and cell H3 should contain
-`=D3+E3`.
+This is exactly what we would want; each cell in column H calculates the
+province's labour force by adding the unemployed count (column D) and employed
+count (column E) from the same province (same row).  So cell H2 should contain
+`=D2+E2` and cell H3 should contain `=D3+E3`.
 
-Similarly, the formulas in columns I (**LFPRate**), J (**UnempRate**),
-and K (**LogPop**) have all copied exactly as we would would want them
-to be.
+Similarly, the formulas in columns I (**LFPRate**), J (**UnempRate**), and 
+K (**LogPop**) have all copied exactly as we would would want them to be.
 :::
 
-Sometimes we will want Excel to treat cell references as 
-***absolute references*** instead.  That is, we want to copy the cell 
-reference exactly as written. 
+Sometimes we will want Excel to treat cell references as
+***absolute references*** instead.  That is, we want to copy the cell reference
+exactly as written. 
 
 ::: example
 **Relative references are not always what we want**
 
-Take a look at the **TotPop** variable in column L.  This variable 
-is supposed to represent the total Canadian population, but each 
-cell in this column shows a different number.
+Take a look at the **TotPop** variable in column L.  This variable is supposed
+to represent the total Canadian population, but each cell in this column shows a
+different number.
 
-Because Excel treats cell references as relative, copying the 
-cell L2 to the rest of column L produces:
+Because Excel treats cell references as relative, copying the cell L2 to the
+rest of column L produces:
 
-- Cell L2 contains `=SUM(C2:C11)`
-- Cell L3 contains `=SUM(C3:C12)`
-- Cell L4 contains `=SUM(C4:C13)`
+- Cell L2 contains `=SUM(C2:C11)`.
+- Cell L3 contains `=SUM(C3:C12)`.
+- Cell L4 contains `=SUM(C4:C13)`.
 - etc.
 
-In this case, that is not what we want.  We want  *all* of the cells to
-contain the total population of all provinces, which means all of them
-should contain the formula `=SUM(C2:C11)`.
+In this case, that is not what we want.  We want  *all* of the cells to contain
+the total population of all provinces, which means all of them should contain
+the formula `=SUM(C2:C11)`.
 :::
 
-We can tell Excel to treat a given cell reference as absolute by
-adding the `$` character in front of the reference. For example,
-suppose that we copy the formula in cell C2 to cell D3. Then:
+We can tell Excel to treat a given cell reference as absolute by adding the 
+`$` character in front of the reference. For example, suppose that we copy the
+formula in cell C2 to cell D3. Then:
 
 |  If cell C2 contains  | Then cell D3 contains |
 |-----------------------|:---------------------:|
@@ -1133,9 +1111,8 @@ suppose that we copy the formula in cell C2 to cell D3. Then:
 |   `=A$1`              | `=B$1`                |
 |   `=$A$1`             | `=$A$1`               |
  
-Note that the presence or absence of the `$` does not affect the
-calculation in the cell, it only affects how the formula is copied
-over to other cells.
+Note that the presence or absence of the `$` does not affect the calculation in
+the cell, it only affects how the formula is copied over to other cells.
 
 ::: example
 **Using absolute references in a formula**
@@ -1148,15 +1125,15 @@ absolute references:
    - Notice that the value in *this* cell does not change.
 3. Copy/paste or fill cell L2 into cells L3:L11.
    - Notice that all cells in this column now contain the same formula
-      (`=SUM(C$2:C$11)`) and display the same value (`31,275,600`)
+      (`=SUM(C$2:C$11)`) and display the same value (`31,275,600`).
 4. Save your working copy.
 
 This is what we want.
 :::
 
-Sometimes we will want to combine absolute and relative references in the
-same formula.  This typically will happen when we want to compare the 
-current observation to the other observations.
+Sometimes we will want to combine absolute and relative references in the same
+formula.  This typically will happen when we want to compare the current
+observation to the other observations.
 
 :::example
 **Combining relative and absolute references**
@@ -1164,10 +1141,10 @@ current observation to the other observations.
 Suppose we want to create a new variable that is the province's population
 *rank*. That is, the province with the highest population has a rank of 1, 
 second highest has a rank of 2, etc. The function to do that is `RANK.EQ()`,
-which takes two arguments: the value to rank, and the range of values
-to use for the ranking.  We want the first argument (the province's population)
-to vary across observations, but we want the range of values (the populations of
-all of the provinces) to stay the same.
+which takes two arguments: the value to rank, and the range of values to use for
+the ranking.  We want the first argument (the province's population) to vary
+across observations, but we want the range of values (the populations of all of
+the provinces) to stay the same.
 
 1. Enter **PopRank** in cell M1 to give the variable a name.
 2. Enter the formula `=RANK.EQ(C2,C$2:C$11)` in cell M2. Note that the first argument
@@ -1175,9 +1152,9 @@ all of the provinces) to stay the same.
 3. Copy/paste or fill cell M2 into cells M3:M11.
 4. Save your working copy.
 
-As you can see, Excel displays the correct ranks. If you aren't sure how
-this works, look at the contents of each cell of column M to see how the
-formula copied from cell M2.
+As you can see, Excel displays the correct ranks. If you aren't sure how this
+works, look at the contents of each cell of column M to see how the formula
+copied from cell M2.
 :::
 
 ::: {.fyi data-latex=""}
@@ -1185,90 +1162,81 @@ formula copied from cell M2.
 
 The `RANK.EQ()` function has several relatives with similar syntax:
 
-- The `RANK()` and `RANK.AVG()` functions also return the rank, but
-  use slightly different rules for handling ties.
-- The `PERCENTRANK()`, `PERCENTRANK.EXC()` and `PERCENTRANK.INC()` 
-  functions return ranks in percentiles.
+- The `RANK()` and `RANK.AVG()` functions also return the rank, but use slightly
+  different rules for handling ties.
+- The `PERCENTRANK()`, `PERCENTRANK.EXC()` and `PERCENTRANK.INC()` functions
+  return ranks in percentiles.
 :::
 
 ## Excel data types {#excel-data-types}
 
-Most of the data we work with is numeric. However, there are other types
-of information we regularly encounter:
-
-- Text
-- Logical (true/false) values
-- Dates and times
-
-Excel has various specialized tools for entering, storing and processing
-these data types.
+Most of the data we work with is numeric. However, we also regularly encounter
+text, logical (true/false) values, dates, and times. Excel has various
+specialized tools for entering, storing and processing these data types.
 
 ### Numeric data {#numeric-data}
 
-Most modern computer applications, including Excel, do numeric calculations
-in double-precision (64-bit) binary floating point format.  Calculations in
-this format are typically accurate up to the 15th decimal place.
+Most modern computer applications, including Excel, do numeric calculations in
+double-precision (64-bit) binary floating point format.  Calculations in this
+format are typically accurate up to the 15th decimal place.
 
-But the results of these calculations are typically displayed to 
-fewer decimal places than that.  A cell's contents are distinct 
-from its ***numeric display format***, which is how it appears 
-on the screen. We can change the display format of a cell or 
-group of cells without changing its contents. 
+But the results of these calculations are typically displayed to fewer decimal
+places than that.  A cell's contents are distinct from its
+***numeric display format***, which is how it appears on the screen. We can
+change the display format of a cell or group of cells without changing their
+contents.
 
 ::: example
 **Displaying a cell in percentage format**
 
-**UnempRate** and **LFPRate** are both calculated in proportional units
-(a number between 0 and 1). But we might prefer to display them 
-in percentage units (a number between 0 and 100).
+**UnempRate** and **LFPRate** are both calculated in proportional units (a
+number between 0 and 1). But we might prefer to display them in percentage units
+(a number between 0 and 100).
 
 We *could* do this by changing the formulas (for example, change the `LPFRate`
-formula to `=100*H2/C2`).  An easier approach is to change the cells'
-numeric display format:
+formula to `=100*H2/C2`).  An easier approach is to change the cells' numeric
+display format:
 
 1. Select cells I2:J11.
 2. Select `Home > Number Format` (it is a little drop down box that 
    currently displays `General`), and then select `Percentage`.
 3. Save your working copy.
 
-You will see that the cell now displays the rates in percentage, to
-two decimal places.  I think it would be more readable if we round to 
-just one decimal place.  To do that, select `Home > Decrease Decimal`.
+You will see that the cell now displays the rates in percentage, to two decimal
+places.  I think it would be more readable if we round to just one decimal
+place.  To do that, select `Home > Decrease Decimal`.
 :::
 
-An important thing to understand here: all we have done is change how
-the numbers are *displayed*.  If we do any calculations with these
-cells, the calculation will use the original proportional value
-without rounding.
+An important thing to understand here: all we have done is change how the
+numbers are *displayed*.  If we do any calculations with these cells, the
+calculation will use the original proportional value without rounding.
 
 ### Text data {#text-data}
 
-***Text data*** is also called ***character data*** or 
-***string data***. In Excel, text values can be entered directly in a 
-cell, can be used in a formula, and can be the result of a formula.
+***Text data*** is also called ***character data*** or ***string data***. In
+Excel, text values can be entered directly in a cell, can be used in a formula,
+and can be the result of a formula.
 
-Excel has many functions for working with text data.  A particularly useful one is
-the `CONCAT()` function, which allows you to join or ***concatenate***
-two or more strings. This is useful in building reports, in constructing
-ID variables, and in many other applications.
+Excel has many functions for working with text data.  A particularly useful one
+is the `CONCAT()` function, which allows you to join or ***concatenate***
+two or more strings. This is useful in building reports, in constructing ID
+variables, and in many other applications.
 
 ::: example
-**Using CONCAT()**
+**Concatenating strings**
 
-To use the `CONCAT()` function to create a sentence
-that describes our data as if it we were writing a written report.
+To use the `CONCAT()` function to create a sentence that describes our data as
+if it we were writing a written report:
 
-1. Enter **Description** in cell N1 to name the variable
+1. Enter **Description** in cell N1 to name the variable.
 2. Enter `=CONCAT(C2," people live in ",B2)` in cell N2. 
-   - The cell should display `3588700 people live in Alberta`
+   - The cell should display `3588700 people live in Alberta`.
 3. Copy/paste/fill in cells N3:N11.
 4. Save your working copy.
 
 As you can see, `CONCAT()` is useful for converting data into human-readable 
 statements. It is also useful for constructing ID variables.
 :::
-
-
 
 ::: {.fyi data-latex=""}
 **Advanced options for working with text data**
@@ -1287,16 +1255,16 @@ There are many useful functions to manipulate text strings in Excel:
    - `=PROPER("Hello world!")` returns "Hello World!".
 - `FIND()` allows you to find a particular substring within a larger string.
    For example:
-   - `=FIND("world!","Hello world!")` returns 7
+   - `=FIND("world!","Hello world!")` returns 7.
 - `REPLACE()` allows you to replace part of a string. For example:
-   - `=REPLACE("Hello world!",7,5,"mom")` returns "Hello mom!"
+   - `=REPLACE("Hello world!",7,5,"mom")` returns "Hello mom!".
 :::
 
 ### Logical data {#logical-data}
 
-In addition to text and numbers, cells can also contain ***logical***
-values (`TRUE` or `FALSE`). Logical values can be entered directly 
-in a cell, can be used in a formula, and can be the result of a formula.
+In addition to text and numbers, cells can also contain ***logical*** values 
+(`TRUE` or `FALSE`). Logical values can be entered directly in a cell, can be
+used in a formula, and can be the result of a formula.
 
 Mathematical expressions using the ***comparison operators*** 
 `=` (equal), `<>` (not equal),
@@ -1307,70 +1275,65 @@ can be used to create logical values.
 ::: example
 **Creating a logical variable**
 
-To create a logical variable that indicates whether a province has 
-a labour force participation rate below 64%.
+To create a logical variable that indicates whether a province has a labour
+force participation rate below 64%.
 
 1. Enter **LowLFP** in cell O1 to name the variable.
 2. Enter `=(I2 < 0.64)` in cell O2.
-   - Notice that `(I2 < 0.64)` is a *statement* that is either
-     true or false, not a numeric expression.
-   - Logical statements can use other comparison operators, 
-     including `=`, `<`, `>`, and `<=`.
+   - Notice that `(I2 < 0.64)` is a *statement* that is either true or false,
+     not a numeric expression.
+   - Logical statements can use other comparison operators, including `=`, `<`,
+     `>`, and `<=`.
 3. Copy/paste or fill cell O2 into cells O3:O11.
 4. Save your working copy.
 
-As you can see, the cells display `TRUE` in the three provinces 
-with LFP rates below 64%, and `FALSE` in the other seven.
+As you can see, the cells display `TRUE` in the three provinces with LFP rates
+below 64%, and `FALSE` in the other seven.
 :::
 
-Logical values are particularly powerful in combination with the
-`IF()` function.  This function takes three arguments:
+Logical values are particularly powerful in combination with the `IF()`
+function.  This function takes three arguments:
 
-- a statement.
-- a value to return if the statement is true.
-- a value to return if the statement is false.
+- a statement
+- a value to return if the statement is true
+- a value to return if the statement is false
 
 ::: example
 **Using IF() to create an indicator variable**
 
-An ***indicator*** variable is the numerical version of a logical
-variable: it takes on the value 1 if a particular statement
-is true, and 0 if the statement is false.  
+An ***indicator*** variable is the numerical version of a logical variable: it
+takes on the value 1 if a particular statement is true, and 0 if the statement
+is false.  
 
-To create an indicator variable for low labour force 
-participation:
+To create an indicator variable for low labour force participation:
 
 1. Enter **LowLFPInd** in cell P1 to name the variable.
 2. Enter `=IF(I2 < 0.64,1,0)` in cell P2.
 3. Copy/paste or fill cell P2 into cells P3:P11.
 4. Save your working copy.
 
-As you can see, the cells display `1` in the three provinces 
-with LFP rates below 64%, and `0` in the other seven. When cleaning
-data we will typically use indicator variables rather than logical
-variables.
+As you can see, the cells display `1` in the three provinces with LFP rates
+below 64%, and `0` in the other seven. When cleaning data we will typically use
+indicator variables rather than logical variables.
 :::
-
-
 
 ::: {.fyi data-latex=""}
 **Advanced options for logical variables**
 
 Some additional functions that work with logical variables:
 
-- `NOT()` returns `TRUE` if its argument is `FALSE` and 
-   `FALSE` if its argument is `TRUE`.
+- `NOT()` returns `TRUE` if its argument is `FALSE` and `FALSE` if its argument
+  is `TRUE`.
 - `AND()` returns `TRUE` if *all* of its arguments are `TRUE`.
 - `OR()` returns `TRUE` if *any* of its arguments are `TRUE`.
-- `SWITCH()` and `IFS()` are extensions of `IF()` that take 
-   multiple conditions.
+- `SWITCH()` and `IFS()` are extensions of `IF()` that take multiple conditions.
 :::
 
 ### Dates and times {#dates-and-times}
 
 In additions to numbers, text, and logical values, Excel can handle ***dates***
-and ***times***.  Dates and times are a surprisingly complex subject
-that can create all sorts of problems on a computer, for several reasons:
+and ***times***.  Dates and times are a surprisingly complex subject that can
+create all sorts of problems on a computer, for several reasons:
 
 - There are many conventional ways of writing the same date:
    - November 1, 2020
@@ -1381,118 +1344,115 @@ that can create all sorts of problems on a computer, for several reasons:
    - 11-1-2020
    - 2020/11/1
    - etc.
-- Conventions vary across cultures and organizations
+- Conventions vary across cultures and organizations:
   - in some places 11/1 means November 1 and in others it means January 11.
 - We want to be able to sort and rank in time order rather than alphabetical
   order:
   - January 10, 2020 should come before December 10, 2020.
-- We want to be able to add and subtract dates and times
+- We want to be able to add and subtract dates and times:
   - January 4, 2021 comes 5 days after December 30, 2020.
-- We want to handle time zones, daylight savings time, leap years,
-  and even leap seconds.
-- We want to do this in a way that is perfectly accurate, but 
-  hides all of these complexities in normal usage.
+  - 11:30 pm on December 31, 2020 is 45 minutes before 12:15 am on January 1,
+    2021
+- We want to handle time zones, daylight savings time, leap years, and even leap
+  seconds.
+- We want to do this in a way that is perfectly accurate but hides all of these
+  complexities in normal usage.
 
 As you might imagine, this is not easy. Each application has its own rules for
 handling dates and times, but there are some standards that have developed.
 Excel handles dates and times as follows:
 
-1. Dates are *stored* as the number of days elapsed since some base 
-   date. In Excel the base date is January 1, 1900, which means that
+1. Dates are *stored* as the number of days elapsed since some base date or
+  "epoch." In Excel, the base date is January 0, 1900, which means that:
    - January 1, 1900 is day 1.
    - January 2, 1900 is day 2.
    - November 1, 2020 is day 44136.
-2. Dates are *displayed* according to the cell's display formatting. 
-   - The default display formatting varies across regions, so 
-     the same date in the same Excel file might appear different
-     on your computer and my computer.
+2. Dates are *displayed* according to the cell's display formatting:
+   - The default display formatting varies across regions, so the same date in
+     the same Excel file might display differently on two different computers.
 3. When you enter something into a cell that looks like a date, Excel does
    several things behind the scenes:
-   - it guesses the date format for what you have entered
-   - it converts what you have entered to the internal storage form (days since base date).
-   - it changes the display format to what Excel thinks it should be (based on your location
-     settings).
+   - Excel guesses the date format for what you have entered.
+   - Excel converts what you have entered to the internal storage form (days
+     since base date).
+   - Excel changes the display format to what Excel thinks it should be (based
+     on your location settings).
 
-Most of the time, this system works seamlessly and you don't even notice it. But
-it can cause problems, and understanding the underlying structure can help you
-to solve those problems.
+Most of the time, this system works seamlessly and you don't even notice it.
 
 ::: example
 **How dates are stored and displayed**
 
 The **MonthYr** variable in column G is a date.  Remember that we created it
-by typing in "11/2020". Let's see what Excel did with that.
+by typing in "11/2020". Let's see what Excel did with that:
 
 1. Select cell G2, and compare the formula bar to what is displayed in the cell.
    On my computer:
    - The cell displays `Nov-20`
    - The formula bar displays `11/1/2020`.
-2. To see how Excel sees this date, change the cell's number format 
-   `General` or `Number`
+2. To see how Excel sees this date, change the cell's number format to
+   `General` or `Number`:
    - Now the cell displays the number `44136`, which is the date-time value that
      Excel uses to represent November 1, 2020.
 
-Now while a date of 44136 is quite clear to Excel, we want to display
-dates in a more human-readable way.  I don't like the `Nov-20` display
-format, since it isn't obvious whether that means November 2020 or
-November 20. So let's change the formatting:
+Now while a date of 44136 is quite clear to Excel, we want to display dates in
+a more human-readable way.  I don't like the `Nov-20` display format, since it
+isn't obvious whether that means November 2020 or November 20. So let's change
+the formatting:
 
 3. Select cells G2:G11.
 4. Select `Number Format > Short Date`.
 5. Save your working copy.
 
-You can see even more options if you select `More number formats`
+You can see even more options if you select `More number formats`.
 :::
 
-We can also do calculations with dates, and there are various functions
-using dates. 
+We can also do calculations with dates, and there are various functions using
+dates. 
 
 ::: example
 **Some date calculations**
 
 To calculate how long ago November 2020 was:
 
-1. Enter **Today** in cell Q1 to name the variable
+1. Enter **Today** in cell Q1 to name the variable.
 2. Enter `=TODAY()` in cell Q2 to put in today's date.
    - This will display today's date.
    - Tomorrow, the cell will display tomorrow's date.
 3. Enter **HowLongAgo** in cell R1.
 4. Enter `=Q2-G2` in cell R2.
-   - This will display the number of days that have passed between
-      November 1, 2020 and today.
+   - This will display the number of days that have passed between November 1,
+     2020 and today.
 5. Save your working copy.
 :::
 
-Most of the time, Excel's handling of dates works seamlessly and is
-very clever. But sometimes Excel guesses wrong, and this can create
-all sorts of problems. 
+Unfortunately, Excel sometimes guesses wrong, and this can create all sorts of
+problems. Understanding how Excel handles dates and times can help you avoid
+or address these problems.
 
 ::: {.fyi data-latex=""}
 **Excel dates and genetics**
 
-Excel's handling of dates caused a significant unanticipated problem
-in the the field of human genetics, where it is a widely used
-tool.
+Excel's handling of dates caused a significant unanticipated problem in the the
+field of human genetics, where it is a widely used tool.
 
-Each gene has a standard abbreviation like "TCEA1" or "CTCF" assigned
-by a scientific body called the HUGO Gene Nomenclature Committee (HGNC). 
-Unfortunately, 27 of these genes have abbreviations that Excel 
-misinterprets as dates, for example "Membrane Associated Ring-CH-Type 
-Finger 2," also known as "MARCH2". If you enter the text "MARCH2" in 
-an Excel cell, Excel will automatically convert it to the date of 
-March 2 in the current year. A 2016 research paper found that roughly 
-20% of published research articles in the field used data that was 
-affected by this problem.
+Each gene has a standard abbreviation like "TCEA1" or "CTCF" assigned by a
+scientific body called the HUGO Gene Nomenclature Committee (HGNC).
+Unfortunately, 27 of these genes have abbreviations that Excel misinterprets as
+dates, for example "Membrane Associated Ring-CH-Type Finger 2," also known as
+"MARCH2". If you enter the text "MARCH2" in an Excel cell, Excel will
+automatically convert it to the date of March 2 in the current year. A 2016
+research paper found that roughly 20% of published research articles in the
+field used data that was affected by this problem.
 
-Unfortunately, it is too late to "fix" Excel to keep this from 
-happening. Any change to its behavior would "break" Excel in thousands
-of other applications that rely on its current behavior. 
+Unfortunately, it is too late to "fix" Excel to keep this from happening. Any
+change to its behavior would "break" Excel in thousands of other applications
+that rely on its current behavior. 
 
-When you can't fix a problem in a computer application, you need to
-find a ***workaround***: a modification to how you
-use the application that avoids or minimizes the effects of the 
-problem. So the HGNC changed the names of these 27 genes in  2020. For 
-example, the gene MARCH2 is now called MARCHF2.
+When you can't fix a problem in a computer application, you need to find a
+***workaround***: a modification to how you use the application that avoids or
+minimizes the effects of the problem. So the HGNC changed the names of these 27
+genes in  2020. For example, the gene MARCH2 is now called MARCHF2.
 :::
 
 In addition to dates, Excel can also handle date-time values such as 
@@ -1501,14 +1461,13 @@ In addition to dates, Excel can also handle date-time values such as
 ::: {.fyi data-latex=""}
 **How Excel handles times**
 
-Excel treats times as partial days. For example,
-Excel will store `11/1/2020  12:00:00 PM` as day number `44136.5`
-and `11/1/2020  1:00:00 PM` as day number `44136.5416666667`. 
+Excel treats times as partial days. For example, Excel will store 
+`11/1/2020  12:00:00 PM` as day number `44136.5`and 
+`11/1/2020  1:00:00 PM` as day number `44136.5416666667`. 
 
-There are also functions that work with date-time values.  For
-example, we have already seen the function `TODAY(.)` which returns the 
-current date but there is also a function `NOW(.)` that returns the current
-date and time.
+There are also functions that work with date-time values.  For example, we have
+already seen the function `TODAY(.)` which returns the current date but there is
+also a function `NOW(.)` that returns the current date and time.
 :::
 
 ## Finishing up {#finishing-up}
@@ -1545,8 +1504,6 @@ working copy), one raw data set (in the `raw-data` subfolder), and possibly
 one archived data set (in the `archives` subfolder).
 :::
 
-
-
 ## Chapter review {-#review-basic-data-cleaning-with-excel}
 
 Data cleaning is among the most important practical skills one can develop in 
@@ -1554,24 +1511,23 @@ applied statistical analysis. Simple statistical methods like averages
 and frequencies are all most people will ever use, but everyone who works
 with data regularly encounters complex and messy data in need of cleaning.
 
-In this chapter, we have learned some important data cleaning concepts, including
-reproducible research, tidy data, ID variables, and version control.  We have also 
-learned how to implement these concepts in Excel using tools such as fill/series, 
-formatting, formulas, and functions.
+In this chapter, we have learned some important data cleaning concepts,
+including reproducible research, tidy data, ID variables, and version control.
+We have also learned how to implement these concepts in Excel using tools such
+as fill/series, formatting, formulas, and functions.
 
 Once we have clean data, we can use it to  do some
 [basic statistical analysis and graphing](#basic-data-analysis-with-excel)
 in Excel. Later on, we will learn more
 [advanced data cleaning](#advanced-data-cleaning)
-concepts such as linking, aggregating, error validation/handling, 
-importing and exporting, as well has how to to implement them in both Excel 
-and R.
+concepts such as linking, aggregating, error validation/handling, importing and
+exporting, as well has how to to implement them in both Excel and R.
 
 ## Practice problems {-#problems-basic-data-cleaning-with-excel}
 
-Each chapter includes a few simple practice problems to help you check
-your knowledge.  They are organized by the specific skill or knowledge base
-you are practicing.
+Each chapter includes a few simple practice problems to help you check your
+knowledge.  They are organized by the specific skill or knowledge base you are
+practicing.
 
 Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
 
@@ -1623,12 +1579,13 @@ Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
    the following tasks?
    a. Copy the contents of a cell to one or more adjacent cells.
    b. Copy the contents of a cell to a far-away range of cells.
-   c. Fill a cell range with a sequence of ascending even numbers (e.g., 2, 4, 6).
+   c. Fill a cell range with a sequence of ascending even numbers
+      (e.g., 2, 4, 6).
    d. Add a row or column to the middle of your data set.
 
 **GOAL #4: Use Excel formulas to construct new variables**
 
-5. Construct an Excel formula to do each of the following.
+5. Construct an Excel formula to do each of the following:
    a. Find the square root of the number in cell A2.
    b. Find the lowest value in cells A2:A100.
    c. Find the absolute value of the difference between cells A2 and B2.
@@ -1651,8 +1608,8 @@ If you aren't sure, try it out in Excel and see what happens.
 **GOAL #6: Use logical and text data in Excel**
 
 7. Construct an Excel formula to do each of the following.
-   a. Display "Reject" if cell A2 contains a number less than 0.05,
-      and display "Fail t reject" otherwise.
+   a. Display "Reject" if cell A2 contains a number less than 0.05, and display
+      "Fail to reject" otherwise.
    b. Display the text "A2 = " followed by the value in cell A2.
    c. Display the first two letters of the text in cell A2.
 
