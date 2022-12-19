@@ -128,7 +128,7 @@ roulette at a local casino. More specifically,let:
 We will consider two cases:
 
 | Case number | Wins by red (out of 100) | $\bar{x}$ |  $s_x$  |
-|:-----------:|:------------------------:|:---------:|:-------:|
+|:------------|:------------------------:|:---------:|:-------:|
 | $1$         | $35$                     |  $0.35$   | $0.479$ |
 | $2$         | $40$                     |  $0.40$   | $0.492$ |
 
@@ -340,7 +340,7 @@ We can generalize the test we have constructed so far to the case of the
 probability of any event:
 
 | Test component         |  Roulette example                    |General case               |
-|------------------------|--------------------------------------|---------------------------|
+|:-----------------------|:------------------------------------:|:-------------------------:|
 | Parameter              | $p_{red} = \Pr(\textrm{Red wins})$   | $p = \Pr(\textrm{event})$ |
 | Null hypothesis        | $H_0:p_{red} = 18/37$                | $H_0:p = p_0$             | 
 | Alternative hypothesis | $H_1: p_{red} \neq 18/37$            |$H_1: p \neq p_0$          | 

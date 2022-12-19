@@ -261,7 +261,7 @@ has a finite domain, we can define it by listing all of its values:
 or we could make a table:
 
 | $fruit$    | $s(fruit)$ |
-|------------|------------|
+|:-----------|:----------:|
 | Avocado    | 1          |
 | Banana     | 0          |
 | Cantaloupe | 500        |

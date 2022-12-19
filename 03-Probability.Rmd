@@ -854,19 +854,19 @@ white die is showing 4.
     probability of each value of the come out roll, and the probability that
     pass wins for each value of the come out roll.
 
-    |$c$ | $\Pr(c)$ | $\Pr(Pass|c)$ |
-    |:--:|:--------:|:-------------:|
-    |  2 |   1/36   |      0        |
-    |  3 |   2/36   |      0        |
-    |  4 |   3/36   |    3/9        |
-    |  5 |   4/36   |   4/10        |
-    |  6 |   5/36   |   5/11        |
-    |  7 |   6/36   |      1        |
-    |  8 |   5/36   |   5/11        |
-    |  9 |   4/36   |   4/10        |
-    | 10 |   3/36   |    3/9        |
-    | 11 |   2/36   |      1        |
-    | 12 |   1/36   |      0        |
+    |Come out ($c$) | Probability ($\Pr(c)$) | Win probability $\Pr(Pass|c)$ |
+    |:--------------|:----------------------:|:-----------------------------:|
+    |  2            |   1/36                 |      0                        |
+    |  3            |   2/36                 |      0                        |
+    |  4            |   3/36                 |    3/9                        |
+    |  5            |   4/36                 |   4/10                        |
+    |  6            |   5/36                 |   5/11                        |
+    |  7            |   6/36                 |      1                        |
+    |  8            |   5/36                 |   5/11                        |
+    |  9            |   4/36                 |   4/10                        |
+    | 10            |   3/36                 |    3/9                        |
+    | 11            |   2/36                 |      1                        |
+    | 12            |   1/36                 |      0                        |
 
     Use the Law of Total Probability to calculate $\Pr(Pass)$, the probability
     that a bet on Pass wins.

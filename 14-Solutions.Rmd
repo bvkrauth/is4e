@@ -500,7 +500,7 @@ This appendix provides solutions to all end-of-chapter practice problems.
 4. The binned frequency table should look something like this:
 
    | Range | Frequency | % Freq |
-   |-------|-----------|--------|
+   |:------|:---------:|:------:|
    | 0-10  |    0      |   0    |
    | 11-20 |    0      |   0    |
    | 21-30 |    1      |  33    |

@@ -820,18 +820,18 @@ Answers can be found in the [appendix](#answers-multivariate-data-analysis).
    conditional averages:
    a. 
       | Educational attainment     |  Percent   |
-      |----------------------------|------------|
+      |:---------------------------|:----------:|
       | Below high school          |     6      |
       | High school                |    31      |
       | Tertiary (e.g. university) |    63      |
    b.
       | Gender | Years of schooling |
-      |--------|--------------------|
+      |:-------|:------------------:|
       | Male   |   14.06            |
       | Female |   14.74            |
    c.
       | Educational attainment | Male | Female |
-      |------------------------|------|--------|
+      |:-----------------------|:----:|:------:|
       | Below high school      |  7   |    5   |
       | High school            | 38   |   24   |
       | Tertiary               | 55   |   71   |

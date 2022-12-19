@@ -128,7 +128,7 @@ result from the second game.  For example, suppose red loses the first game and
 wins the second game. Then our data could be written in tabular form as:
 
 | Game \# ($i$) | Result of bet on red ($x_i$) |
-|:-------------:|:----------------------------:|
+|:--------------|:----------------------------:|
 |      1        |       0                      |
 |      2        |       0                      |
 

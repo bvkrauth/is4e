@@ -265,7 +265,7 @@ project.
 **Version control systems**
 
 Software developers and professional data analysts use formal version control
-systems like [Git](https://git-scm.com/) and[GitHub](https://github.com/).
+systems like [Git](https://git-scm.com/) and [GitHub](https://github.com/).
 These systems track every change ever made to a group of files, and can allow
 multiple users to work together on a project. It is based on a model in which
 each user has their own working copy, and can commit (or propose) changes to the
@@ -1047,7 +1047,7 @@ For example, suppose cell B5 contains the formula `=A1`.  If we copy the
 contents of this cell to other cells, we get:
 
 |  Cell  | Formula |
-|--------|:-------:|
+|:-------|:-------:|
 |   B5   | =A1     |
 |   B6   | =A2     |
 |   B7   | =A3     |
@@ -1105,7 +1105,7 @@ We can tell Excel to treat a given cell reference as absolute by adding the
 formula in cell C2 to cell D3. Then:
 
 |  If cell C2 contains  | Then cell D3 contains |
-|-----------------------|:---------------------:|
+|:----------------------|:---------------------:|
 |   `=A1`               | `=B2`                 |
 |   `=$A1`              | `=$A2`                |
 |   `=A$1`              | `=B$1`                |
@@ -1536,18 +1536,18 @@ Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
 1. Which of the following tables shows a tidy data set?
    a. 
       | PersonID   | 101  | 102    |
-      |------------|------|--------|
+      |:-----------|:----:|:------:|
       | Name       | Bob  | Joe    |
       | Age        |  30  | 35     |
       | Occupation | Chef | Waiter |
    b. 
       |  Name      | Age  | Occupation |
-      |------------|------|------------|
+      |:-----------|:----:|:----------:|
       | Bob        | 30   | Chef       |
       | Joe        | 35   | Waiter     |
    c. 
       | Variable   | Value  |
-      |------------|--------|
+      |:-----------|:------:|
       | Name       |  Bob   |
       | Age        |   30   |
       | Occupation |  Chef  |

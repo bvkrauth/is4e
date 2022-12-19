@@ -201,7 +201,7 @@ each variable in our data set.  For example, our table of summary statistics
 might look like this:
 
 | Statistic       | *(variable name 1)* | *(variable name 2)* | *(etc.)* |
-|-----------------|---------------------|---------------------|----------|
+|:----------------|:-------------------:|---------------------|---------|
 | Count           | *(count of valid observations)*
 | Average         | *(average)*
 | StdDev          | *(standard deviation)*
@@ -420,7 +420,7 @@ variable is discrete, categorical, or even non-numeric.  The frequency table for
 this kind of variable looks like this:
 
 | variablename     | Count        | Percentage   |
-|------------------|--------------|--------------|
+|:-----------------|:------------:|:------------:|
 | *(value1)*       | *(# value1)* | *(% value1)* |
 | *(value2)*       | *(# value2)* | *(% value2)* |
 | *(value3)*       | *(# value3)* | *(% value3)* |
@@ -460,7 +460,7 @@ Let's create a frequency table for the **Party** variable in our data set. It
 should look like this:
 
 | Party          | Count              | Percentage         |
-|----------------|--------------------|--------------------|
+|:---------------|:------------------:|:------------------:|
 | *Liberal*      | *(# Liberal)*      | *(% Liberal)*      |
 | *Conservative* | *(# Conservative)* | *(% Conservative)* |
 | *NDP*          | *(# NDP)*          | *(% NDP)*          |
@@ -521,7 +521,7 @@ percentage of observations that fall within each bin.  A binned frequency table
 looks like this:
 
 | From      | To       | Count | Percentage |
-|-----------|----------|-------|------------|
+|:----------|:--------:|:-----:|:----------:|
 | *(from1)* | *(to1)*  |       |            |
 | *(from2)* | *(to2)*  |       |            | 
 | etc.      |          |       |            |
@@ -560,7 +560,7 @@ comparisons (that's the difference between `COUNTIF()` and `COUNTIFS()`).
 Let's create the following table for the unemployment rate variable: 
 
 | From  | To     | Count | Percentage |
-|-------|--------|-------|------------|
+|:------|:------:|:-----:|:----------:|
 |  0.0% |   5.0% |       |            |
 |  5.0% |   7.5% |       |            |
 |  7.5% |  10.0% |       |            |
@@ -944,7 +944,7 @@ also available in Excel along with 3-dimensional variations on both pie and bar
 graphs:  
 
 | Graph type   | Example                                                             |
-|--------------|:-------------------------------------------------------------------:|
+|:-------------|:-------------------------------------------------------------------:|
 | Pie graph    | ![*Pie chart of* **Party** *variable*](bin/PieChart.png){width=30%} |
 | 3D pie graph | ![3D pie chart of Party variable](bin/3DPieChart.png){width=30%}    |    
 | 3D bar graph | ![3D bar chart of Party variable](bin/3DBarChart.png){width=30%}    |
@@ -1095,7 +1095,7 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
 2. Consider the following table of data:
 
    | Name  | Age |
-   |-------|-----|
+   |:------|:---:|
    | Al    |  25 |
    | Betty |  32 |
    | Carl  |  78 |
@@ -1112,7 +1112,7 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
 3. Consider the following table of data:
 
    | Name  | Age |
-   |-------|-----|
+   |:------|:---:|
    | Al    |  25 |
    | Betty |  32 |
    | Carl  |  78 |
@@ -1132,7 +1132,7 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
 4. Consider the following table of data:
 
    | Name  | Age |
-   |-------|-----|
+   |:------|:---:|
    | Al    |  25 |
    | Betty |  32 |
    | Carl  |  78 |
@@ -1144,7 +1144,7 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
 5. Consider the following table of data:
 
    | Year  | Al's age |
-   |-------|----------|
+   |:------|:--------:|
    | 2017  |  25      |
    | 2018  |  26      |
    | 2019  |  27      |
@@ -1158,7 +1158,7 @@ Answers can be found in the [appendix](#answers-basic-data-analysis).
 6. Consider the following table of data:
 
    | Name  | Age |
-   |-------|-----|
+   |:------|:---:|
    | Al    |  25 |
    | Betty |  32 |
    | Carl  |  78 |

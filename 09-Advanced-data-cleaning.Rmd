@@ -250,11 +250,11 @@ Elizabeth I,1533,1603
 ```
 will appear in Excel as the table:
 
-| Name                 | Year of birth | Year of death
-|----------------------|---------------|---------------
-| Mary, Queen of Scots |    1542       |    1547
-| Mary I               |    1516       |    1558
-| Elizabeth I          |    1533       |    1603
+| Name                 | Year of birth | Year of death |
+|:---------------------|:-------------:|:-------------:|
+| Mary, Queen of Scots |    1542       |    1547       |
+| Mary I               |    1516       |    1558       |
+| Elizabeth I          |    1533       |    1603       |
 
 Notice that the quotes around "Mary, Queen of Scots" are needed in order for the
 comma to be interpreted as an actual comma rather than a delimiter between
@@ -653,7 +653,7 @@ Excel will return an ***error code*** to indicate what has gone wrong. Excel's
 most commonly-used error codes are:
 
 |  Code     | Explanation                             | Example               |
-|:---------:|:----------------------------------------|:---------------------:|
+|:----------|:---------------------------------------:|:---------------------:|
 | `#VALUE!` | Wrong argument type for function        |`=SQRT("HELLO")`       |
 | `#NAME?`  | Function does not exist                 | `=NOTAREALFUNCTION(1)`|
 | `DIV/0!`  | Division by zero                        | `=1/0`                |
