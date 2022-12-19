@@ -40,7 +40,7 @@ Then open R, load the Tidyverse, and read in our employment data:
 
 ```{r ReadEmpDataFromCSV_11, eval=FALSE}
 library(tidyverse)
-EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
 ```
 
 ## Data cleaning in R {#data-cleaning-in-r}
@@ -278,7 +278,7 @@ Create an R script called `EmpData.R` with the following code:
 # Load the Tidyverse
 library(tidyverse)
 # Load the data
-EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
 # Clean the data
 EmpData <- EmpData %>%
   mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>%

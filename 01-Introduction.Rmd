@@ -168,23 +168,23 @@ this course, I would encourage you to take some of these course:
 
 - [ECON 334: Data Visualization and Economic Analysis](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/334.html) 
   is an elective focusing on exploratory data analysis and visualization.
- - [ECON 335: Introduction to Causal Inference and Policy Evaluation](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/335.html)
+- [ECON 335: Introduction to Causal Inference and Policy Evaluation](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/335.html)
   is an elective focusing on the problem of inferring cause-and-effect from
-   economic data, and using data to forecast the effects of economic policies.
- - [ECON 433: Financial and Time Series Econometrics](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/433.html) 
-   is an advanced elective focusing on techniques for analyzing the kind of time
-   series data that is used in macroeconomics and financial markets.
- - [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html)
-   is an advanced course in statistics and econometrics that is part of our
-   honours sequence. It gives you the opportunity and tools to write a serious
-   empirical research paper.  Non-honours students are eligible to take it if
-   they have a 3.0 CGPA and the course prerequisites.
+  economic data, and using data to forecast the effects of economic policies.
+- [ECON 433: Financial and Time Series Econometrics](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/433.html)
+  is an advanced elective focusing on techniques for analyzing the kind of time
+  series data that is used in macroeconomics and financial markets.
+- [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html)
+  is an advanced course in statistics and econometrics that is part of our
+  honours sequence. It gives you the opportunity and tools to write a serious
+  empirical research paper.  Non-honours students are eligible to take it if
+  they have a 3.0 CGPA and the course prerequisites.
    
 I would also encourage you to take courses outside of the economics department,
 and to consider a 
-[Statistics minor](http://www.sfu.ca/students/calendar/2021/spring/programs/statistics/minor.html)
+[Statistics minor](https://www.sfu.ca/students/calendar/2021/spring/programs/statistics/minor.html)
 or the interdisciplinary
-[Social Data Analytics (SDA) minor](http://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html) . 
+[Social Data Analytics (SDA) minor](https://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html).
 :::
 
 ## Computer resources {#computer-resources}

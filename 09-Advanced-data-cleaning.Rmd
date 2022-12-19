@@ -41,9 +41,9 @@ To prepare for this chapter, please review the chapter on
 [basic data cleaning with Excel](#basic-data-cleaning-with-excel).
 and download the following three data files:
 
-> [https://bookdown.org/bkrauth/BOOK/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)  
-> [https://bookdown.org/bkrauth/BOOK/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
-> [https://bookdown.org/bkrauth/BOOK/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
+> [https://bookdown.org/bkrauth/IS4E/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)  
+> [https://bookdown.org/bkrauth/IS4E/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
+> [https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
 
 The third file may display in your browser rather than downloading like the other 
 files.  If that happens, you can right-click on the link above and select 
@@ -57,7 +57,7 @@ cross-country data set covering real GDP, population, and other macroeconomic
 variables. It has been used extensively by macroeconomists seeking to
 understand why some countries have more rapid economic growth than others.
 
-The current version of the PWT is available at http://www.ggdc.net/pwt and is
+The current version of the PWT is available at https://www.ggdc.net/pwt and is
 built from two distinct data sources:
 
 - National income data from each country's national statistical agency.
@@ -860,7 +860,7 @@ version of your cleaned data file.
    - I chose the file name `GrowthData.xlsx`.
 
 You can compare your work to my Excel file at
-[https://bookdown.org/bkrauth/BOOK/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
+[https://bookdown.org/bkrauth/IS4E/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
 :::
 
 ## Chapter review {-#review-advanced-data-cleaning}

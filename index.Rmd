@@ -16,7 +16,7 @@ favicon: bin/favicon.ico
 cover-image: bin/logo.png
 site: bookdown::bookdown_site
 github-repo: https://github.com/bvkrauth/econ233
-url: https://bookdown.org/bkrauth/BOOK/
+url: https://bookdown.org/bkrauth/IS4E/
 ---
 
 # About this book {-}
@@ -38,7 +38,7 @@ tidy data, and credible inference. The only way to get all of these
 features was to write my own book.
 
 The book is available at no charge (MIT License) in HTML, PDF, and EPUB formats
-from https://bookdown.org/bkrauth/BOOK/. Instructors are welcome to assign
+from https://bookdown.org/bkrauth/IS4E/. Instructors are welcome to assign
 it as a course textbook, but are strongly encouraged to contact me first
 as the book contents may change without warning.
 
@@ -120,7 +120,7 @@ might be of interest to some students.
 ## About the author {-}
 
 Brian Krauth is Associate Professor of Economics at Simon Fraser University.
-His research and CV are available at http://briankrauth.com.
+His research and CV are available at https://briankrauth.com.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

@@ -44,13 +44,13 @@ on using [Excel](#basic-data-analysis-with-excel) and [R](#using-r) for data
 analysis.
 
 To prepare for the Excel data analysis, make a working copy of the Excel file:
-[https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
+[https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
 and open it in Excel.
 
 To prepare for the R data analysis, start R and execute the following code:
 ```{r Setup12ForStudents, eval = FALSE}
 library(tidyverse)
-EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
 # Make permanent changes to EmpData
 EmpData <- EmpData %>%
   mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
@@ -365,7 +365,7 @@ attractive and informative.
 
 You can download the full set of Pivot Tables and associated charts  generated
 in this chapter at
-[https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
+[https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
 
 ## Covariance and correlation {#sample-covariance-and-correlation}
 

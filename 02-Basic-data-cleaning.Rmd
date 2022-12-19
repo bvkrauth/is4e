@@ -148,13 +148,13 @@ means that some workers have stopped looking for work.
 :::
 
 The data can be found in the file
-[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx).
+[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx).
 
 ::: example
 **Opening the employment data**
 
 Open the file
-[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
+[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
 in Excel.  You can do this by either double-clicking on it, or by using
 `File > Open` from Excel's menu.  The file should look something like this:
 ![Excel screenshot](bin/EmploymentData.png)
@@ -243,7 +243,7 @@ Canadian employment data:
    - One will contain archived versions of the data. (call it "archive").
 2. Obtain the source data.
    - Download the file
-     [https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
+     [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
    - Put it in the `raw-data` folder.
    - Do not change the file name.
 3. Document the provenance of all data sources.
@@ -1485,7 +1485,7 @@ To update your master version:
 1. Check your working copy for mistakes and incomplete work.
 
    You can compare your working copy to my master version at
-[https://bookdown.org/bkrauth/BOOK/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
+[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
 
 2. Archive your current master version by renaming it and moving it to the
    `archives` sub-folder.
