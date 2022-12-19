@@ -37,8 +37,9 @@ In this chapter, we will learn how to:
 
 To prepare for this chapter, please review both the
 [introductory](#random-variables) and [advanced](#more-on-random-variables)
-chapters on random variables, as well as the section in the data analysis
-chapter on [univariate statistics](#univariate-statistics-in-excel).
+chapters on random variables, as well as the sections in the data analysis
+chapter on [summary statistics](#summary-statistics) and
+[frequency tables](#frequency-tables).
 
 ## Using statistics
 

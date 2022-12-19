@@ -186,7 +186,7 @@ To undo this, select `View > Freeze Panes > Unfreeze Panes`.
 Instead of freezing the first row, you can freeze the first column, or you can
 freeze any number of rows and columns.
 
-## Univariate statistics in Excel {#univariate-statistics-in-excel}
+## Summary statistics
 
 We will start by calculating some commonly-used ***univariate*** statistics, 
 which are statistics that describe a single variable in isolation. In Section
@@ -195,8 +195,6 @@ univariate graphs.
 
 Multivariate statistics describe the relationships among multiple variables,
 and will be covered in Chapter \@ref(multivariate-data-analysis).
-
-### Summary statistics
 
 A table of ***summary statistics*** reports various univariate statistics for
 each variable in our data set.  For example, our table of summary statistics
@@ -254,7 +252,7 @@ As you might imagine, while these two sets of concepts are distinct, they are
 related.  We will discuss how they are related in Chapter \@ref(statistics). For
 now, just keep in mind that they are distinct.
 
-#### Constructing the table
+### Constructing the table
 
 We are going to create a nice table of summary statistics for some of our
 variables.
@@ -350,7 +348,7 @@ If we wanted to, we could set up the table to calculate summary statistics for
 all of the variables.  But let's just stop with these, and move on to making the
 table look a little nicer.
 
-#### Cleaning up the table
+### Cleaning up the table
 
 Our table now has all of the information we need, but it is still kind of ugly.
 Let's make it look nice and presentable.
@@ -409,11 +407,13 @@ We now have a nice table of summary statistics:
 that we could put into a Word or PowerPoint document, and share with an audience.
 :::
 
-### Simple frequency tables
+## Frequency tables
 
 Another way of looking at a single variable is to construct a
 ***frequency table***.  A frequency table describes the distribution of values
 for a single variable. 
+
+### Simple frequency tables
 
 Frequency tables are at their simplest and most useful when the underlying
 variable is discrete, categorical, or even non-numeric.  The frequency table for
