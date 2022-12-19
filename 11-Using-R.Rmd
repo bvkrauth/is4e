@@ -335,7 +335,7 @@ values are given the special value `NA` which stands for "not available."
 ::: example
 **Missing values in the employment data**
 
-The *AnnPopGrowth* variable in our data set is missing for the first year of
+The **AnnPopGrowth** variable in our data set is missing for the first year of
 data (1976), since calculating the growth rate for 1976 would require data from
 1975, and we don't have that data.
 
@@ -386,6 +386,23 @@ mean(EmpData$AnnPopGrowth, na.rm = TRUE)
 mean(na.omit(EmpData$AnnPopGrowth))
 mean(EmpData$AnnPopGrowth[!is.na(EmpData$AnnPopGrowth)])
 ```
+:::
+
+::: fyi
+**Missing values in Excel**
+
+Excel also has rules for handling missing values. You can represent missing
+values in one of two ways:
+
+1. Leave cells with missing values blank, or enter some text string like "."
+   - Excel will *exclude* these cells from most statistical calculations,
+   - This is similar to how R handles `NA` values with the `na.rm=TRUE`
+     argument.
+2. Indicate missing cells with the formula `=NA()`.
+   - The `NA()` function returns the error code `#N/A`, as will any function of
+     `NA()`
+   - This is similar to how R handles `NA` values by default.
+
 :::
 
 ### Tables of statistics 
