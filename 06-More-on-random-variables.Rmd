@@ -679,6 +679,9 @@ p3 <- ggplot(data = simdata, mapping = aes(x = x)) +
 library("cowplot")
 plot_grid(p1,p2,p3,ncol=3,nrow=1)
 ```
+
+As you can see, the relationship between the two variables differs in the three
+cases.
 :::
 
 The joint distribution of any two *discrete* random random variables can be fully
@@ -1264,10 +1267,6 @@ a simulation of two random variables^[In this particular example $x$ is a random
 number from the $N(0,1)$ distribution and $y = x^2$.] that are clearly related
 (and therefore not independent) but whose covariance is exactly zero.
 
-Intuitively, covariance can be interpreted as a measure of the *linear*
-relationship between two variables.  When variables have a nonlinear
-relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent), the
-covariance may miss it.
 
 ```{r UncorrelatedButNotIndependent, fig.cap = "*x and y are uncorrelated, but clearly related.*"}
 simdata <- tibble(x = rnorm(100),
@@ -1277,6 +1276,11 @@ ggplot(data = simdata, mapping = aes(x = x, y =y)) +
   xlab("x") + 
   ylab("y")
 ```
+
+Intuitively, covariance can be interpreted as a measure of the *linear*
+relationship between two variables.  When variables have a nonlinear
+relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent) above, the
+covariance may miss it.
 :::
 
 ## Chapter review {-#review-more-on-random-variables}

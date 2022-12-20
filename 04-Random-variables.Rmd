@@ -216,7 +216,9 @@ ggplot(data = RoulettePDF, mapping = aes(x = a)) +
        caption = "", 
        tag = "")
 ```
-Test.
+
+Note that the points overlap, so you may not be able to see each value for a
+given PDF.
 :::
 
 The PDF provides a complete description of the probability distribution of a
