@@ -487,8 +487,9 @@ This appendix provides solutions to all end-of-chapter practice problems.
 2. The answers are:
    a. Sample size is 3
    b. Sample average of age is 45.
-   c. Sample variance of age is 829.
-   d. Sample standard deviation of age is 28.8.
+   c. Sample median of age is 32.
+   d. Sample variance of age is 829.
+   e. Sample standard deviation of age is 28.8.
 3. The numerical answers and Excel formulas (assuming the table starts in cell
    A1) are:
    a. 3 `=COUNT(B2:B4)`

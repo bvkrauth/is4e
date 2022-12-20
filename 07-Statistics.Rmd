@@ -482,6 +482,15 @@ reproduced below for convenience:
   $$s_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
 - The ***sample standard deviation*** is:
   $$s_x = \sqrt{s_x^2}$$
+- The ***sample median** is:
+  \begin{align}
+    \hat{m} &= \begin{cases}
+      x_{[(n/2) + (1/2)]} & \textrm{if $n$ is odd} \\
+      \frac{x_{[n/2]} + x_{[(n/2) + 1]}}{2} & \textrm{if $n$ is even} \\
+      \end{cases}
+  \end{align}
+  where $x_{[k]}$ is the value of $x_i$ for the $k$th-lowest observation in the
+  data set.
 
 We also learned to construct both [simple](#simple-frequency-tables) and
 [binned](#binned-frequency-tables) frequency tables.  Let
@@ -497,37 +506,6 @@ $B \subset \mathbb{R}$ be a bin of values. Then we can define:
 We can then construct each cell in a frequency table by choosing the appropriate
 bin. Each bin would contain a single value for a simple frequency table, or
 multiple values for a binned frequency table.
-
-Finally, we learned to calculate ***sample quantiles*** or
-***sample percentiles***, including the ***sample median*** and
-***sample range***.
-
-:::fyi
-**Order statistics**
-
-You will notice that I didn't give an explicit formula for the various sample
-quantiles.  These statistics are all constructed from what statisticians call
-"order statistics": we sort the observations and choosing a particular value
-from the sorted list. The calculations are simple but a general formula requires
-some notation you probably have not seen before and do not need to learn for
-this course.
-
-In general, the $k$th order statistic $x_{[k]}$ of a data series
-$(x_1,\ldots,x_n)$ is defined as the value of the $k$th smallest observation.
-We can then define any sample quantile in terms of these order statistics.
-For example, Excel's `MEDIAN()` function calculates the sample median according
-to the following rule:
-
-- When $n$ is odd, the sample median is $x_{[(n+1)/2]}$. For example, the
-  sample median of $(1,4,3)$ is $x_{[2]} = 3$.
-- When $n$ is even, the sample median is $(x_{[n/2]} + x_{[(n/2) + 1]})/2$.  For
-  example, the sample median of $(1,4,3,9)$ is $(x_{[2]} + x_{[3]})/2 =3.5$
-
-Excel's `PERCENTILE.EXC()` and `PERCENTILE.INC()` functions also average or
-"interpolate" when necessary. The exact interpolation approach varies, but
-doesn't matter much since adjacent order statistics will tend to be close in
-reasonably large data sets.
-:::
 
 ### The sampling distribution
 
