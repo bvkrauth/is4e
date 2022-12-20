@@ -388,7 +388,7 @@ mean(EmpData$AnnPopGrowth[!is.na(EmpData$AnnPopGrowth)])
 ```
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 **Missing values in Excel**
 
 Excel also has rules for handling missing values. You can represent missing

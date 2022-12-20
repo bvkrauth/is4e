@@ -50,7 +50,7 @@ January 1976 through January 2021.
 [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx) and put it in your raw data subfolder.
 3. Make a working copy in your project folder.
    - I called mine  `CanEmpHist_WC.xlsx`.
-4. Open your working copy. It will look something like this:
+4. Open your working copy. It will look something like this:  
 ![*Canadian employment data, 1976-2021*](bin/CanadaEmploymentHistorical.png)
 
 There is a worksheet titled *Raw data* that contains the original data as
@@ -105,7 +105,7 @@ the value in one or more of the columns.  Since order does not matter
 with tidy data, we can sort in whatever way we like without changing
 the content of our data.
 
-::: fyi
+::: {.fyi data-latex=""}
 Before sorting data, always make sure that the order of rows does not convey
 important information.
 :::

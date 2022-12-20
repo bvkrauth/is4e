@@ -41,7 +41,7 @@ To prepare for this chapter, please ensure that you have R and RStudio available
 on your computer. Refer to the 
 [installation instructions](#installing-r-and-rstudio) as needed.
 
-::: sfu
+::: {.sfu data-latex=""}
 
 In this course, we will only have time to learn a little bit about R, so my goal
 is not to give a comprehensive treatment. My goal here is primarily to introduce
@@ -221,7 +221,7 @@ To create our first R Markdown file:
      ![New R Markdown file](bin/NewRMarkdown.png){width=50%}
 2. The default options are fine, so select `OK`. RStudio will create an example
    R Markdown file that you can use as a template. It will look something like
-   this:
+   this:  
    ![R Mardown example file](bin/r-markdown-example.png){width=70%}
 3. Save the file.
 
@@ -244,7 +244,7 @@ To run a code chunk in our R Markdown file:
 2. Press the ![Run current chunk](bin/RunCurrentChunk.png){height=16pt} button.
 
 As you can see, the code in the chunk will run and the results will be displayed
-below:
+below:  
    ![Code chunk with output](bin/CodeChunkWithOutput.png){width=50%}
 :::
 
@@ -308,7 +308,8 @@ In the menu:
 
 We are done for now.
 
-1. Close RStudio. You may get a warning message that looks something like this:
+1. Close RStudio. You may get a warning message that looks something like
+   this:  
    ![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
 
    *Never choose "Save" here*, as it would cause R to

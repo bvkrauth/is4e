@@ -536,7 +536,7 @@ Fortunately, we have a very powerful asymptotic result called the
 the entire probability distribution of the sample average $\bar{x}_n$ by a
 normal distribution if the sample size is sufficiently large.
 
-::: fyi
+::: {.fyi data-latex=""}
 **The Central Limit Theorem**
 
 As with the LLN, we need to invest in some terminology before we can state the

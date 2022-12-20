@@ -94,7 +94,7 @@ In contrast, the support of a continuous random variable includes an *infinite*
 number of values, each of which has *zero* probability, and most formulas for
 probabilities and expected values use *calculus*.
 
-::: sfu
+::: {.sfu data-latex=""}
 **ECON 233 calculus prerequisites**
 
 Differential calculus (MATH 151 or 157) is a prerequisite for ECON 233, but
@@ -124,7 +124,7 @@ higher and higher precision, the approximation gets closer and closer.
 As a result, our coverage of continuous random variables will be brief and will
 mostly avoid calculus.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Formulas using integrals**
 
 When a relevant mathematical formula uses integrals, I will put it in an "FYI"
@@ -381,7 +381,7 @@ The CDF of the $U(L,H)$ distribution is:
 ::: example
 **The CDF of the $U(2,5)$ distribution**
 
-If $x \sim U(2,5)$, its CDF looks like this:
+If $x \sim U(2,5)$, its CDF looks like this:  
 ```{r UniformCDF, fig.cap = "*CDF for the U(2,5) distribution*"}
 UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
@@ -480,7 +480,7 @@ $$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
 The Excel function `NORM.DIST()` can be used to calculate this PDF.
 
 The $N(\mu,\sigma^2)$ distribution is bell-shaped and symmetric around $\mu$,
-with the "spread" of the distribution depending on the value of $\sigma^2$:
+with the "spread" of the distribution depending on the value of $\sigma^2$:  
 ```{r NormalPDF, fig.cap = "*PDF for several normal distributions*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=pnorm(seq(from=-6,to=6,length.out=100)),
@@ -561,7 +561,7 @@ Then for any constants $a$ and $b$:
   $$a + bx \sim N(a + b\mu, b^2\sigma^2)$$
 Nonlinear functions of a normal random variable are generally *not* normal.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Other distributions based on the normal**
 
 There are many other standard distributions that are based on functions
@@ -607,8 +607,7 @@ The standard normal CDF is available as a built-in function in every statistical
 package including Excel and R, so we can use this result to calculate the CDF
 for any normally distributed random variable.
 
-::: fyi
-
+::: {.fyi data-latex=""}
 **The normal and standard normal CDF**
 
 The result that any normal random variable $x \sim N(\mu,\sigma^2)$ has CDF
@@ -782,7 +781,7 @@ time consuming but requires little thought and will always get the right
 answer. You may be able to figure out a quicker approach.
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 **Other ways of describing a joint distribution**
 
 The joint distribution of any two (discrete or continuous) random variables can
@@ -906,7 +905,7 @@ We will soon develop several useful ways of describing the relationship between
 two random variables including conditional distribution, covariance,
 correlation, and independence.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Other ways of deriving a marginal distribution**
 
 The marginal CDFs of any two random (discrete or continuous) random variables
@@ -994,7 +993,7 @@ distribution with the corresponding marginal distribution. For example:
 \end{align}
 A similar result applies to joint, conditional and marginal PDFs.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Other ways of deriving a conditional distribution**
 
 We can describe any conditional distribution with the conditional CDF:
@@ -1111,7 +1110,7 @@ So the covariance is:
 which is the same result as we calculated earlier.
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 **Deriving the alternate formula**
 
 The alternate formula for the covariance can be derived as follows:

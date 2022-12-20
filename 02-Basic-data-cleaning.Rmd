@@ -51,7 +51,7 @@ you are probably not yet familiar with. So we will start from the beginning.
 
 ### Terminology and interface {#terminology-and-interface}
 
-Start Excel. Your screen should look something like this:
+Start Excel. Your screen should look something like this:  
 ![Excel screenshot](bin/ExcelBlankWorkbook.png)
 
 When giving instructions, I will refer to various elements of Excel's user
@@ -60,7 +60,7 @@ learning their names, so I will list them here for your reference:
 
 - The ***menu bar*** is at the top of the screen:  
    ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)
-- The ***ribbon*** is below the menu bar:
+- The ***ribbon*** is below the menu bar:  
    ![It is a row of buttons.](bin/Excel ribbon.jpg)
   - The ribbon has buttons for performing simple actions.
   - The buttons are grouped by function, for example the ribbon above depicts
@@ -91,7 +91,7 @@ learning their names, so I will list them here for your reference:
   - Rows are identified by number.
   - Cells are identified by column and row.  For example, the cell in column A,
     row 2 is called cell A2.
-- Below the worksheet is a row of ***tabs***:
+- Below the worksheet is a row of ***tabs***:  
   ![tabs](bin/Excel tabs.jpg)
   - Each tab corresponds to a worksheet. In this example, there is a single
     worksheet named *Book 1*.
@@ -261,7 +261,7 @@ Canadian employment data:
 We will return to these principles later as we complete our data cleaning
 project.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Version control systems**
 
 Software developers and professional data analysts use formal version control
@@ -320,7 +320,7 @@ this Excel workbook contains three worksheets:
   - The provinces are listed in alphabetical order, but the interpretation of
     the table would not change if they were listed in some other order.
 - The worksheet *Raw data* is the original data table as I downloaded it from
-  Statistics Canada:
+  Statistics Canada:  
    ![Excel screenshot](bin/RawEmploymentData.png)
   It is messy in various ways:
   - The table starts in cell A6 rather than cell A1.
@@ -331,7 +331,7 @@ this Excel workbook contains three worksheets:
     that says what province it describes, but we know that it describes Nova
     Scotia because it comes after row 16 (which does say it describes Nova
     Scotia).  As a result, the order of rows is very important.
-- The worksheet *Source* describes the provenance of the data:
+- The worksheet *Source* describes the provenance of the data:  
    ![Excel screenshot](bin/Source.png)
    It is not a data table, just a few lines of text.
    - There is a text description of the data, provided by Statistics Canada.
@@ -345,7 +345,7 @@ We will do all of our edits to the *Employment Nov 2020* worksheet, and will
 leave both *Raw data* and *Source* alone.
 :::
 
-:::fyi
+::: {.fyi data-latex=""}
 **Link rot and the DOI**
 
 One common barrier to reproducibility is "link rot" - the tendency of a given
@@ -428,7 +428,7 @@ variable. For example a Canadian data set might have both a **Province**
 variable that takes on values like "Québec" and "Nova Scotia" and a
 **ProvinceID** variable that takes on values like "QUEBEC" and "NOVASCOTIA."
 
-::: sfu
+::: {.sfu data-latex=""}
 **ID variables at SFU**
 
 SFU is one of British Columbia's largest organizations. Like most large
@@ -467,7 +467,7 @@ applications and platforms. That is, our ID variable should still work if we
 move data from a Windows PC to a Linux or Apple system, and should still work
 if we move from Excel to R or Python.  Try to keep them short and simple.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Keeping ID variables portable**
 
 To maximize portability of ID variables, keep in mind the following potential
@@ -690,7 +690,7 @@ To add this variable:
 3. Save your working copy.
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 **Choosing variable names**
 
 It takes a little bit of thought to choose brief and informative variable names
@@ -793,7 +793,7 @@ As you can see, column A now contains a unique identifier that numbers provinces
 from 1 to 10.
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 **Some useful Excel shortcuts**
 
 Switching between your keyboard and mouse/touchpad/touchscreen can be annoying
@@ -923,7 +923,7 @@ structure.
    1. Click on the insert function button
       ![insert function button](bin/Excel insert function button.jpg){height=16pt} 
       to the left of the formula bar.
-   2. The `Insert Function` dialog box will appear:
+   2. The `Insert Function` dialog box will appear:  
       ![insert function dialog box](bin/InsertFunction.png)
       It will show a long list of functions. You will want to narrow this list
       down, and you have several options for doing so:
@@ -933,7 +933,7 @@ structure.
    3. Once you have narrowed the list down, it is easy to find the
       function you want (`LN`). Select `LN` from the `Select a function`
       list box, and then select `OK`.You will now see the `Function Arguments`
-      dialog box for the `LN` function:
+      dialog box for the `LN` function:  
       ![function arguments dialog box](bin/FunctionArguments.png)
    4. As the dialog box shows, the `LN` function takes one argument
       (the number you want the log of).
@@ -965,7 +965,7 @@ Suppose we want to add a new variable for the (natural) log of population:
    as `LN()`, but can be very helpful with more complex functions.
 
    a. Follow the steps in the previous example to reach the `Function Arguments`
-      dialog box for the `LN` function:
+      dialog box for the `LN` function:  
       ![function arguments dialog box](bin/FunctionArguments.png)
    b. Click in the entry box labeled `Number`.
    c. Either enter the text `C2` here or click on cell C2. The dialog box

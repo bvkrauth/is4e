@@ -6,7 +6,7 @@ This is an introductory course in statistics for economics. It is similar to
 courses taught all over the world to first and second year university students
 in business, economics, and other social sciences.
 
-::: goals
+::: {.goals data-latex=""}
 **Course goals**
 
 By the end of this course, you will:
@@ -80,7 +80,7 @@ This course will not qualify you for those jobs - they typically require a
 graduate degree - but it is a first step in that direction. So you should take
 it as a lucrative investment opportunity.
 
-::: economics
+::: {.economics data-latex=""}
 **Be the Mona Lisa**
 
 Students should always think about the future and remember that labour markets
@@ -128,7 +128,7 @@ This is not a textbook on introductory economics, high school math, or computer
 science. If you are a little behind in those skills, you can catch up but you
 will need to be proactive in asking for help.
 
-::: sfu
+::: {.sfu data-latex=""}
 **ECON 233**
 
 ECON 233 is the first course in the two-course econometrics sequence that is
@@ -155,7 +155,7 @@ course  in econometrics. In those courses, you will learn more advanced
 techniques such as linear regression, you will use statistical packages such as
 R more extensively, and you will go deeper into the theory.
 
-::: sfu
+::: {.sfu data-latex=""}
 **Related courses**
 
 The second required course in the econometrics sequence for economics majors is
@@ -221,7 +221,7 @@ Windows and macOS. Alternatives to Excel include
 [Numbers](https://www.apple.com/ca/numbers/).  We will use Excel, but the basic
 skills are transferable to any spreadsheet program.
 
-::: sfu
+::: {.sfu data-latex=""}
 **Using Excel at SFU**
 
 SFU has a licensing agreement with Microsoft that allows its students 
@@ -252,7 +252,7 @@ Alternatives to R include the (quite expensive) statistical packages
 The best known IDE is Microsoft's 
 [Visual Studio](https://visualstudio.microsoft.com/).
 
-::: sfu
+::: {.sfu data-latex=""}
 **Using R/RStudio at SFU**
 
 R and RStudio are available in all campus computer labs.

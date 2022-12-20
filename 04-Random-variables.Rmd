@@ -216,6 +216,7 @@ ggplot(data = RoulettePDF, mapping = aes(x = a)) +
        caption = "", 
        tag = "")
 ```
+Test.
 :::
 
 The PDF provides a complete description of the probability distribution of a
@@ -392,7 +393,7 @@ and construct the PDF of a discrete random variable from its CDF. Each little
 jump in the CDF is a point in the support, and the size of the jump is exactly
 equal to the PDF.
 
-::: fyi
+::: {.fyi data-latex=""}
 In more formal mathematics, the formula for deriving the PDF of a discrete
 random variable from its CDF would be written:
 
@@ -685,7 +686,7 @@ So the full quantile function can be written:
                     1 & 19/37 < q < 1 \\
                   \end{cases}
   \end{align}
-and we can plot it below:
+and we can plot it below:  
 ```{r RouletteQuantFunction, fig.cap = "*Quantile function for $w_{red}$*"}
 RouletteQuant <- tibble(a = c(0.0001,19/37,0.9999),
                         qred = c(-1,1,1))
@@ -1010,7 +1011,7 @@ and standard deviation:
   $$sd(WIN50) = \sqrt{var(WIN50)} \approx \sqrt{12.5} \approx 3.5$$
 :::
 
-::: fyi
+::: {.fyi data-latex=""}
 The formula for the binomial PDF looks strange, but it can actually be derived
 from a fairly simple and common situation.  Let  $(b_1,b_2,\ldots,b_n)$ be a
 sequence of $n$ independent random variables from the $Bernoulli(p)$

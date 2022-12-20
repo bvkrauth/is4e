@@ -482,7 +482,7 @@ This appendix provides solutions to all end-of-chapter practice problems.
 
 [Click here to see the problems](#problems-basic-data-analysis)
 
-1. The table should look like this:
+1. The table should look like this:  
    ![*Sort and filter example*](bin/sort-filter-practice.png)
 2. The answers are:
    a. Sample size is 3
@@ -510,9 +510,9 @@ This appendix provides solutions to all end-of-chapter practice problems.
    | 51-60 |    0      |   0    |
    | 61-70 |    0      |   0    |
    | 71-80 |    1      |  33    |
-5. The time series graph should look something like this:
+5. The time series graph should look something like this:  
    ![*Time series of Al's age*](bin/PP_6_4_TimeSeries.png)
-6. The histogram should look something like this:
+6. The histogram should look something like this:  
    ![*Histogram of age*](bin/PP_6_5_Histogram.png)
 
 ## **6** More on random variables {-#answers-more-on-random-variables}

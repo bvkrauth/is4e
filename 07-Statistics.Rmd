@@ -257,7 +257,7 @@ We can calculate statistics for time series, and we already did in Chapter
 rigorous statistical analysis and prediction requires more advanced techniques
 than we will learn in this course.
 
-::: sfu
+::: {.sfu data-latex=""}
 **ECON 433**
 
 Our fourth-year course ECON 433 covers the time series econometrics, with
@@ -1005,7 +1005,7 @@ The ***law of large numbers*** (LLN) says that for a large enough random
 sample, the sample average is nearly identical to the corresponding population
 mean with a very high probability.
 
-::: fyi
+::: {.fyi data-latex=""}
 **The law of large numbers**
 
 In order to state the LLN in a more mathematically rigorous way, we need to
@@ -1045,7 +1045,7 @@ of this equation goes to zero as $n$ goes to infinity, implying that the
 distribution of $\bar{x}_n$ gradually settles down to a a very small range
 around $\mu_x$.
 
-::: economics
+::: {.economics data-latex=""}
 **The LLN in the economy**
 
 The law of large numbers is extremely powerful and important, as it
@@ -1100,7 +1100,7 @@ random sample:
 Similar results can be found for most other commonly-used estimators and
 sampling schemes.
 
-::: fyi
+::: {.fyi data-latex=""}
 **Consistency and Slutsky's theorem**
 
 More formally, we say that $\hat{\theta}_n$ is a consistent estimator of
