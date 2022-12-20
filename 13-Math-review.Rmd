@@ -289,6 +289,16 @@ It is sometimes clear from the context which  of these interpretations is
 correct in a given problem. But please ask if you aren't sure.
 :::
 
+### Linear functions {#linear-functions}
+
+A ***linear function*** is one that takes the form:
+\begin{align}
+  f(x) &= a + bx
+\end{align}
+where $a$ and $b$ are constants.  For example $x$ is a linear function of $x$,
+as are $3 + x$, $5x$, etc. Linear functions are particularly easy to work with,
+and we will see them regularly in statitics.
+
 ### The indicator function {#the-indicator-function}
 
 The ***indicator function*** is a special function whose argument is a

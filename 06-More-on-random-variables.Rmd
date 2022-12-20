@@ -412,7 +412,7 @@ i.e., the midpoint of the support.
 ### Expected values {#uniform-mean-and-variance}
 
 Integral calculus is required to calculate the mean, variance and standard
-deviation, so I report them below for reference:
+deviation of the uniform distribution, so I report them below for reference:
 \begin{align*}
   E(x)   &= 0.5(L+H) \\
   var(x) &= \frac{(H-L)^2}{12} \\
@@ -542,7 +542,7 @@ The median of a $N(\mu,\sigma^2)$ random variable is $\mu$.
 ### Expected values {#normal-means}
 
 Integral calculus is required to calculate the mean, variance and standard
-deviation, so I report them below for reference:
+deviation of the normal distribution, so I report them below for reference:
   $$E(x) = \mu$$
   $$var(x) = \sigma^2$$
   $$sd(x) = \sigma$$
@@ -551,14 +551,14 @@ deviation, so I report them below for reference:
 ### Functions of a normal
 
 As discussed in an earlier chapter, all random variables have the property that
-$E(ax +b) = aE(x) + b$ and $var(ax+b) = a^2 var(x)$ for any linear function
-$ax+b$.
+$E(a +bx) = a + bE(x)$ and $var(a+bx) = b^2 var(x)$ for any constants $a$ and
+$b$.
 
 Normal random variables have an additional property: any linear function of a
 normal random variable is also normal. That is, if:
   $$x \sim N(\mu,\sigma^2)$$
 Then for any constants $a$ and $b$:
-  $$ax + b \sim N(a\mu + b, a^2\sigma^2)$$
+  $$a + bx \sim N(a + b\mu, b^2\sigma^2)$$
 Nonlinear functions of a normal random variable are generally *not* normal.
 
 ::: fyi

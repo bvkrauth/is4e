@@ -448,7 +448,7 @@ the PDF or CDF of a function of a random variable directly from the PDF or CDF
 of the original random variable.
 
 We say that $y$ is a ***linear function*** of $x$ if:
-  $$y = ax + b$$
+  $$y = a + bx$$
 where $a$ and $b$ are constants.
 
 ::: example
@@ -459,7 +459,7 @@ from the underlying outcome $b$. We can use the indicator function to write it
 in a compact form:
   $$w_{red} = 2I(b \in Red) - 1$$
 We could also define it as a function of the random variable $r$:
-  $$w_{red} = 2r-1$$
+  $$w_{red} = 2r -1$$
 Applying the definitions above, $w_{red}$ can be considered a linear function
 of $r$, or a nonlinear function of $b$.
 :::
@@ -920,7 +920,13 @@ the Bernoulli, the binomial, and the discrete uniform - and their properties.
 The ***Bernoulli*** probability distribution is usually written:
 $$x \sim Bernoulli(p)$$
 It has discrete support $S_x = \{0,1\}$ and PDF:
-$$f_x(a) = \begin{cases} (1-p) & a = 0 \\ p & a = 1 \\ 0 & a = \textrm{anything else}\\ \end{cases}$$
+\begin{align}
+  f_x(a) &= \begin{cases}
+    (1-p) & \textrm{if $a = 0$} \\
+    p & \textrm{if $a = 1$} \\
+    0 & \textrm{otherwise}\\
+    \end{cases}
+\end{align}
 Note that the "Bernoulli distribution" isn't really a (single) probability
 distribution.  Instead it is what we call a ***parametric family*** of
 distributions.  That is, the $Bernoulli(p)$ is a different distribution with a
@@ -955,8 +961,8 @@ $$x \sim Binomial(n,p)$$
 It has discrete support $S_x = \{0,1,2,\ldots,n\}$ and its PDF is:
 $$f_x(a) = 
   \begin{cases} 
-    \frac{n!}{a!(n-a)!} p^a(1-p)^{n-a} & a \in S_x \\ 
-    0 & \textrm{anything else} \\ 
+    \frac{n!}{a!(n-a)!} p^a(1-p)^{n-a} & \textrm{if $a \in S_x$} \\ 
+    0 & \textrm{otherwise} \\ 
   \end{cases}$$
 You do not need to memorize or even understand this formula.  The Excel function 
 `BINOMDIST()` can be used to calculate the PDF or CDF of the binomial
