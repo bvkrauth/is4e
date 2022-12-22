@@ -28,7 +28,7 @@ In this chapter, we will learn how to:
    - Excel native (.xlsx) format
    - Text format (CSV, tab/space delimited, fixed width)
 2. Describe and implement common data-cleaning tasks:
-   - Matching/merging using the XLOOKUP function
+   - Matching/merging using the VLOOKUP function
    - Crosswalk tables
    - Aggregation by groups using "IFS" functions
 3. Describe and use Excel data-management tools:
@@ -456,15 +456,22 @@ observations in the two tables on the basis of one or more ID variables or
 
 All statistics packages have tools to link observations.  In Excel, the table
 you are obtaining data from is called a ***lookup table*** and the key tool is
-the `XLOOKUP()` function.
+the `VLOOKUP()` function.
 
-The `XLOOKUP()` function takes three main/required arguments:
+The `VLOOKUP()` function takes three required arguments and one optional
+argument:
 
-  1. The `lookup_value` is the value in the current table to look up.
-  2. The `lookup_array` is the range containing the column of IDs.
-  3. The `return_array` is the range containing the column of values to return.
+  1. `Lookup_value` is the value or cell in the current table to look up.
+  2. `Table_array` is the range containing the table of data.
+  3. `Col_index_num` is a number indicating which column of values in
+     `Table_array` to return.
+  4. `Range_lookup` sets the rules for matching. For our purposes, this should
+     always be set to `FALSE`.
 
-For example, the formula `=XLOOKUP("California",A1:A10,C1:C10)` looks for a
+and returns the value in column `Col_index_num` and the row in the first column
+of `Table_array` that maches `Lookup_value`.
+
+For example, the formula `=VLOOKUP("California",A1:G10,3,FALSE)` looks for a
 row/observation with the value "California" in column A (cells A1:A10), then
 returns the value in column C (cells C1:C10) for that row/observation.
 
@@ -493,7 +500,7 @@ country name, including name variations like "Republic of Korea" and
 for this purpose. If you take a look at it, you will notice that there are
 observations for both "Republic of Korea" and "South Korea."
 
-Let's use our crosswalk table and the `XLOOKUP()` function to add a country code
+Let's use our crosswalk table and the `VLOOKUP()` function to add a country code
 to the *GrowthData* worksheet.
 
 1. Insert a new column to the left of the current column A.
@@ -501,22 +508,23 @@ to the *GrowthData* worksheet.
      `Home > Insert > Insert Sheet Columns`
 2. Enter **CountryCode** in cell A1 to name the variable.
 3. Construct the appropriate formula in cell A2:
-   - `lookup_value` should be the country name of the current observation
+   - `Lookup_value` should be the country name of the current observation
      (`B2`).
-   - `lookup_array` should be the full list of country names
-     (`CountryCodes!A2:A185`).
-   - `return_array` should be the full list of country codes
-     (`CountryCodes!B2:B185`).
+   - `Table_array` should be the full table of country names and codes
+     (`CountryCodes!A2:B185`).
+   - `Col_index_num` should refer to the second column in `Table_array` since
+     that column contains the ISO codes (`2`).
+   - `Range_lookup` should be `FALSE`.
 4. Change references in the formula from relative to absolute as appropriate.
    The resulting formula will be 
-   `=XLOOKUP(B2,CountryCodes!A$2:A$185,CountryCodes!B$2:B$185)`.
+   `=VLOOKUP(GrowthData!B2,CountryCodes!A$2:B$185,2,FALSE)`.
 5. Copy/paste or fill the formula to the remaining cells in column A.
 6. Check your work: Column A should now display the ISO country code for each
    observation.
 7. Save your file.
 :::
 
-`XLOOKUP()` can also be used to match on multiple criteria.
+`VLOOKUP()` can also be used to match on multiple criteria.
 
 :::example
 **Matching on multiple criteria**
@@ -528,14 +536,17 @@ year together in a single criterion.
 
 1. Enter **Pop2019** in cell K1 of *GrowthData* to name the variable.
 2. Enter the correct formula in cell K2:
-   - `lookup_value` should combine the country code (cell A2) with the year 
+   - `Lookup_value` should combine the country code (cell A2) with the year
      (2019), so it should be `CONCAT(A2,"2019")`.
-   - `lookup_array` should be the full range of the **CountryYear** variable in
-     the *Data* worksheet (`Data!A2:A12811`).
-   - `return_array` should be the full range of the **pop** variable in the
-     *Data* worksheet (`Data!H2:H12811`).
+   - `Table_array` should be the table in the *Data* worksheet containing the
+     **pop** variable. You could use the entire table (`Data!A2:BA12811`) or
+     just the part of the table containing the variables we need
+     (`Data!A2:H12811`).
+   - `Col_index_num` should refer to the eighth column in `Table_array` since
+     that column contains the **pop** variable (`8`).
+   - `Range_lookup` should be `FALSE`.
 3. Make the cell references absolute where needed, which will result in the
-   formula `=XLOOKUP(CONCAT(A2,"2019"),Data!A$2:A$12811,Data!H$2:H$12811)`.
+   formula `=VLOOKUP(CONCAT($A2,"2019"),Data!$A$2:$H$12811,8,FALSE)`.
 4. Copy/paste or fill the formula to the remaining cells in column K.
 
 We can also create another variable whose variable is the country's population
@@ -544,7 +555,7 @@ in 1990:
 5. Enter **Pop1990** in cell L1 of *GrowthData* to name the variable.
 6. Enter the correct formula in cell L2. It will be nearly identical to the
    formula in cell K2, but with "2019" replaced by "1990":
-   `=XLOOKUP(CONCAT(A2,"1990"),Data!A$2:A$12811,Data!H$2:H$12811)`
+   `=VLOOKUP(CONCAT($A2,"1990"),Data!$A$2:$H$12811,8,FALSE)`
 7. Copy/paste or fill the formula to the remaining cells in column K.
 8. Save your file.
    
@@ -555,16 +566,28 @@ allied with the Soviet Union. By 1990, the PWT has data for almost all
 countries.
 :::
 
-Normally, `XLOOKUP()` looks for an exact match and returns an error if no match
-is found.  This is a good default, but the optional arguments `if_not_found` and
-`match_mode` can be used if you want to do something other than that.
+Note that in all of the examples, I have said to set the optional argument
+`Range_lookup` to `FALSE`. This argument sets the rules for matching:
+
+- If `Range_lookup` is left blank or set to `TRUE`:
+  -  `VLOOKUP()` will look for the *closest*  match.
+  - This option requires `Table_array` to be sorted.
+- If `Range_lookup` is set to `FALSE`:
+  - `VLOOKUP()` will look for an *exact* match.
+  - This option does not require `Table_array` to be sorted.
+
+Since one of the principles of tidy data is that the order of observations
+should not matter, the exact match option is preferable.
 
 ::: {.fyi data-latex=""}
 **Related functions**
 
-`XLOOKUP()` is a relatively new addition to Excel, so you may see files that
-use the older functions `VLOOKUP()` and `HLOOKUP()`.  The syntax of these 
-functions is somewhat different, but the underlying idea is the same.
+Some versions of Excel have a new and improved lookup function called
+`XLOOKUP()`. It has better defaults, is more flexible, and is easier to use.
+Unfortunately, it is not available in all versions of Excel.
+
+Ther are also a function called `HLOOKUP()` for use when you have a table with
+variables in rows and observations in columns.
 :::
 
 ### Aggregating by group
