@@ -546,7 +546,7 @@ Answers can be found in the [appendix](#answers-math-review).
 7. Find the values of each of these summations
    a. Find $\sum_{x = 1}^5 x^2$.
    b. Find $\sum_{i \in \{1,3,5\}} \ln(i)$.
-   c. Find $\sum_{i \in 1}^\infty x_i I(i < 4)$.
+   c. Find $\sum_{i = 1}^\infty x_i I(i < 4)$.
 
 **GOAL #7: Apply the rules of arithmetic to a summation**
 
