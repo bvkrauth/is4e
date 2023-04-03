@@ -36,12 +36,21 @@ In this chapter, we will learn how to:
 :::
 
 To prepare for this chapter, review the [introduction to R](#introduction-to-r).
-Then open R, load the Tidyverse, and read in our employment data:
+Then open RStudio, load the Tidyverse, and read in our employment data:
 
 ```{r ReadEmpDataFromCSV_11, eval=FALSE}
 library(tidyverse)
 EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
 ```
+
+If you prefer, you can download the employment data file from [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv](sampledata/EmploymentData.csv) and have R read it in locally:
+
+```{r ReadEmpDataFromCSV_local, eval=FALSE}
+library(tidyverse)
+EmpData <- read_csv("EmploymentData.csv")
+```
+
+
 
 ## Data cleaning in R {#data-cleaning-in-r}
 
