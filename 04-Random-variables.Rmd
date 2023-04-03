@@ -1158,7 +1158,7 @@ wins.
     a. Find $sd(y)$. You can use your result from question (10) above.
     b. Find $sd(r)$. You can use your result from question (11) above.
 
-**GOAL #11: Calculate the expected value for a linear function of a random variable**
+**GOAL #11: Calculate the expected value for a linear function of a random variable**  
 **GOAL #12: Calculate variance and standard deviation for a linear function of a random variable**
 
 13. The "Yo" bet pays out at 15:1, meaning you win \$15 for each dollar bet. Suppose

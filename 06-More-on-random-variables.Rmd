@@ -1453,9 +1453,10 @@ and variance:
     \begin{align}
       E(t) &= 7 \\
       var(t) &\approx 5.83  \\
-      corr(b,t) &\approx 0.35 \\
+      corr(b,t) &\approx 0.35
     \end{align}
-    Using this information and the values of $E(b)$ and $var(b)$ provided above:
+    Using this information and the values of $E(b)$ and $var(b)$ implied by the
+    fact that $b \sim Bernoulli(1/36)$
     a. Find $cov(b,t)$.
     b. Find $E(bt)$.
 
