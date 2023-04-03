@@ -353,10 +353,11 @@ probability of any event:
 
 ### Size and power
 
-As mentioned above, the size of a test is the probability of rejecting a false
+As mentioned above, the size of a test is the probability of rejecting a true
 null.  It is a single number, since the distribution of the test statistic
-is known under the null. It is determined by our choice of critical values, or
-more precisely we choose critical values to achieve a particular size.
+is known when the null is true. It is determined by our choice of critical
+values, or more precisely we choose critical values to achieve a particular
+size.
 
 The power of a test is defined as the probability of rejecting the null when it
 is false, and is also determined by our choice of critical values. However,
