@@ -983,6 +983,30 @@ Suppose we want to add a new variable for the (natural) log of population:
 You will see that cell K2 now contains `=LN(C2)` which displays as `15.0933`. 
 :::
 
+::: {.fyi data-latex=""}
+**Advanced functions**
+
+In addition to its many built-in functions, Excel can be extended to include
+additional functions as needed for more advanced users.
+
+1. You can create your own custom functions using the JavaScript or Visual
+   Basic for Applications (VBA) programming languages. You can also use
+   these languages to modify the user interface, automate repetitive tasks,
+   and perform various other advanced tasks.
+2. You can install and use various add-in packages from Microsoft or other
+   sources.  For example, Excel usually comes with an add-in called the
+   *Analysis ToolPak* that provides additional functions and tools for use
+   in statistical analysis.
+
+These are relatively advanced Excel features, but are commonly used in a
+business environment. They also have some security risks, and Microsoft has
+substantially modified their functionality over the past few years to
+address these risks. So we will not create custom functions or use add-in
+packages in this course.
+:::
+
+
+
 ### Cell ranges {#cell-ranges}
 
 Some functions like `SUM()` and `AVERAGE()` operate on a ***range*** of cells
