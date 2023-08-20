@@ -117,12 +117,17 @@ This textbook and course are constructed under the assumptions that:
    -  Ideas from those courses will be used in applications and examples.
 2. You can do high-school level math including algebra and basic set theory and
    have taken or are currently taking an introductory calculus course.
-   - I will not ask you to solve integrals.
-   - I may ask you to take a simple derivative or two.
-   - But I will refer to concepts like functions, sequences and limits.
-   - The math review appendix provides material and practice problems if you
-     need to review these concepts and tools.
-3. You have access to a desktop or laptop computer, and basic computer skills.
+   - You will not be asked to solve integrals.
+   - You may be asked to take a simple derivative or two.
+   - We will use concepts like functions, sequences and limits that are
+     emphasized in an introductory calculus course.
+   - The [Math Review](#math-review) appendix reviews the relevant concepts
+     and provides practice problems.
+3. You have access to a desktop or laptop computer, internet access,
+   and basic computer skills:
+   - Open, close, save, rename, move, and copy files.
+   - Create and use folders (also called directories) and subfolders.
+   - Install and run applications (also called programs).
 
 This is not a textbook on introductory economics, high school math, or computer
 science. If you are a little behind in those skills, you can catch up but you
@@ -156,9 +161,10 @@ techniques such as linear regression, you will use statistical packages such as
 R more extensively, and you will go deeper into the theory.
 
 ::: {.sfu data-latex=""}
-**Related courses**
+**Related SFU courses**
 
-The second required course in the econometrics sequence for economics majors is
+The second required course in the econometrics sequence for SFU economics
+majors is
 [ECON 333:Statistical Analysis of Economic Data](https://www.sfu.ca/students/calendar/2022/fall/courses/econ/333.html).
 In ECON 333, you will learn a more advanced set of techniques including linear
 regression analysis and you will gain more experience with R.
