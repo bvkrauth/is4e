@@ -260,7 +260,7 @@ than we will learn in this course.
 ::: {.sfu data-latex=""}
 **ECON 433**
 
-Our fourth-year course ECON 433 covers the time series econometrics, with
+Our fourth-year course ECON 433 covers time series econometrics, with
 applications in macroeconomics and finance.
 :::
 
@@ -479,9 +479,12 @@ reproduced below for convenience:
 - The ***sample average*** is:
   $$\bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$$
 - The ***sample variance*** is:
-  $$s_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
+  $$sd_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
 - The ***sample standard deviation*** is:
-  $$s_x = \sqrt{s_x^2}$$
+  $$sd_x = \sqrt{sd_x^2}$$
+  Note: The conventional notation for the sample standard deviation is 
+  $s_x$; I am using $sd_x$ because I am already using $s$ to represent
+  a general statistic.
 - The ***sample median** is:
   \begin{align}
     \hat{m} &= \begin{cases}
@@ -942,11 +945,11 @@ Consider a random sample of size $n$ on the random variable $x_i$ with unknown
 mean $\mu_x = E(x_i)$ and unknown variance $\sigma_x^2 = var(x_i)$.
 
 The sample variance is an unbiased estimator of the population variance:
-  $$E(s_x^2) = \sigma_x^2 = var(x_i)$$
+  $$E(sd_x^2) = \sigma_x^2 = var(x_i)$$
 This is not hard to prove, but I will skip it for now.
 
 Unfortunately, the square root is not a linear function:
-  $$E(s_x) = E(\sqrt{s_x^2}) \neq \sqrt{E(s_x^2)} = \sigma_x$$
+  $$E(sd_x) = E(\sqrt{sd_x^2}) \neq \sqrt{E(sd_x^2)} = \sigma_x$$
 so the sample standard deviation is a biased estimator of the population
 standard deviation.  Even so, the bias is typically small and so this is the
 estimator we typically use.
@@ -959,8 +962,8 @@ Finally, we substitute to get the formula for the standard error.
 
 The usual standard error for the sample average in a random sample of size $n$
 is:
-  $$se(\bar{x}_n) = \frac{s_x}{\sqrt{n}}$$
-where $s_x$ is the sample standard deviation.
+  $$se(\bar{x}_n) = \frac{sd_x}{\sqrt{n}}$$
+where $sd_x$ is the sample standard deviation.
 :::
 
 Standard errors are useful as a data-driven measure of how variable a particular
@@ -1205,8 +1208,8 @@ Answers can be found in the [appendix](#answers-statistics).
    $S$ and sampling distribution $f(\cdot)$ for:
     a. The sample frequency $\hat{f}_1 = \frac{I(x_1=1) + I(x_2=1)}{2}$.
     b. The sample average $\bar{x} = (x_1 + x_2)/2$.
-    c. The sample variance $\hat{\sigma}_x^2 = (x_1-\bar{x})^2 + (x_2-\bar{x})^2$.
-    d. The sample standard deviation $\hat{\sigma}_x = \sqrt{\hat{\sigma}_x^2}$.
+    c. The sample variance $sd_x^2 = (x_1-\bar{x})^2 + (x_2-\bar{x})^2$.
+    d. The sample standard deviation $sd_x = \sqrt{sd_x^2}$.
     e. The sample minimum $xmin = \min(x_1, x_2)$.
     f. The sample maximum $xmax = \max(x_1, x_2)$.
 
@@ -1216,8 +1219,8 @@ Answers can be found in the [appendix](#answers-statistics).
    expected value of:
     a. The sample frequency $\hat{f}_1 = \frac{I(x_1=1) + I(x_2=1)}{2}$.
     b. The sample average $\bar{x} = (x_1 + x_2)/2$.
-    c. The sample variance $\hat{\sigma}_x^2 = (x_1-\bar{x})^2 + (x_2-\bar{x})^2$.
-    d. The sample standard deviation $\hat{\sigma}_x = \sqrt{\hat{\sigma}_x^2}$.
+    c. The sample variance $sd_x^2 = (x_1-\bar{x})^2 + (x_2-\bar{x})^2$.
+    d. The sample standard deviation $sd_x = \sqrt{sd_x^2}$.
     e. The sample minimum $xmin = \min(x_1, x_2)$.
     f. The sample maximum $xmax = \max(x_1, x_2)$.
 
@@ -1282,9 +1285,9 @@ Answers can be found in the [appendix](#answers-statistics).
        $\Pr(x_i=1)$.
     b. The sample average $\bar{x}$ as an estimator of the population mean
        $E(x_i)$
-    c. The sample variance $\hat{\sigma}_x^2$  as an estimator of the population
+    c. The sample variance $sd_x^2$  as an estimator of the population
        variance $var(x_i)$
-    d. The sample standard deviation $\hat{\sigma}_x$ as an estimator of the
+    d. The sample standard deviation $sd_x$ as an estimator of the
        population standard deviation $sd(x_i)$
     e. The sample minimum $xmin$  as an estimator of the population minimum
        $\min(S_x)$.
@@ -1296,13 +1299,18 @@ Answers can be found in the [appendix](#answers-statistics).
     - The average earnings of Canadian women: $\mu_W$.
     - The male-female earnings gap in Canada: $\mu_M - \mu_W$.
     - The male-female earnings ratio in Canada: $\mu_M/\mu_W$. 
-    and we have calculated the following statistics from a random sample of Canadians:
+    
+    and we have calculated the following statistics from a random sample
+    of Canadians:
+    
     - The average earnings of men in our sample $\bar{y}_{M}$.
     - The average earnings of women in our sample $\bar{y}_{W}$.
     - The male-female earnings gap in our sample $\bar{y}_{M} - \bar{y}_{W}$.
     - The male-female earnings ratio in our sample $\bar{y}_{M}/\bar{y}_{W}$.
+    
     We already know that $\bar{y}_{M}$ is an unbiased estimator of
     $\mu_M$ and $\bar{y}_{W}$ is an unbiased estimator of $\mu_W$.
+    
     a. Is the sample earnings gap $\bar{y}_M - \bar{y}_W$ a biased or unbiased
        estimator of the population gap $\mu_M - \mu_W$? Explain.
     b. Is the sample earnings ratio $\bar{y}_M/\bar{y}_W$ a biased or unbiased
@@ -1342,7 +1350,7 @@ Answers can be found in the [appendix](#answers-statistics).
 15. Suppose that we have a random sample $D_n$ of size $n=100$ on the random
     variable $x_i$ with unknown mean $\mu$ and unknown variance $\sigma^2$.
     Suppose that the sample average is $\bar{x} = 12$ and the sample variance is
-    $\hat{\sigma}^2 = 4$.  Find the standard error of $\bar{x}$.
+    $sd^2 = 4$.  Find the standard error of $\bar{x}$.
 
 **GOAL #13: Explain the law of large numbers and what it means for an estimator to be consistent**
 

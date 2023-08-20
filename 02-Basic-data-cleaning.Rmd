@@ -54,9 +54,10 @@ you are probably not yet familiar with. So we will start from the beginning.
 Start Excel. Your screen should look something like this:  
 ![Excel screenshot](bin/ExcelBlankWorkbook.png)
 
-When giving instructions, I will refer to various elements of Excel's user
-interface by name. You can use these elements for years without ever
-learning their names, so I will list them here for your reference:
+When giving instructions, it is necessary to refer to various elements of
+Excel's user interface by name:
+
+![Excel UI elements](bin/ExcelUIElements.png)
 
 - The ***menu bar*** is at the top of the screen:  
    ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)
@@ -82,26 +83,27 @@ learning their names, so I will list them here for your reference:
       you can just select `Home` to make it the currently-active option.
 - The ***formula bar*** is the long white box just below the ribbon:  
   ![formula bar](bin/Excel formula bar.jpg)
-- The ***insert function*** button is to the left of the formula bar:  
+  and the ***insert function button*** is to the left of the formula bar:  
   ![fx](bin/Excel insert function button.jpg){height=16pt}
-- Most of the screen displays a rectangular grid of ***cells*** that is
-  called a ***spreadsheet*** or ***worksheet***:  
+- Most of the screen displays a ***spreadsheet*** or ***worksheet***,
+  which is a rectangular grid of ***cells***:  
   ![cell grid](bin/ExcelCellGrid.png)
   - Columns are identified by letter.
   - Rows are identified by number.
   - Cells are identified by column and row.  For example, the cell in column A,
     row 2 is called cell A2.
-- Below the worksheet is a row of ***tabs***:  
+- Below the worksheet is a row of ***worksheet tabs***:  
   ![tabs](bin/Excel tabs.jpg)
   - Each tab corresponds to a worksheet. In this example, there is a single
     worksheet named *Book 1*.
   - Click on a tab to switch to that worksheet.
   - Double-click on a tab to change its name.
   - Click on the "+" button to add a new worksheet.
-- An Excel file is called a ***workbook***.
-  - Each workbook contains one or more worksheets.
-  - in Windows, Excel files normally have the `.xlsx` extension.
-  - Older files sometimes have the `.xls` extension.
+
+Excel is used to modify and display ***workbooks***, which are collections
+of one or more worksheets. Each Excel workbook is stored in a single file.
+In Windows, these files normally have the `.xlsx` extension but older files
+sometimes have the `.xls` extension instead.
 
 ### Application: Canadian employment data
 
@@ -109,13 +111,12 @@ We will demonstrate the key principles and tools in this chapter
 by cleaning the November 2020 employment data for Canadian provinces.
 
 ::: {.economics data-latex=""}
-**Economics review: Employment statistics**
+**Economics review: Canadian employment statistics**
 
-Employment statistics are typically covered in a Principles of
-Macroeconomics course (at SFU, this course is called ECON 105). To
-review the basics:
+Employment statistics are important macroeconomic indicators that are
+typically covered in your Principles of Macroeconomics course.
 
-- These statistics are reported monthly by Statistics Canada and
+- In Canada, these statistics are reported monthly by Statistics Canada and
   are based on the Labour Force Survey (LFS), a monthly survey of the
   **civilian, non-institutionalized, working-age population of Canada**.
   - "civilian" excludes those on active military duty.
@@ -140,6 +141,11 @@ review the basics:
     LFP rate is typically around 65%.
   - The **unemployment rate** is the proportion of the labour force that
     is unemployed. The Canadian unemployment rate is typically 5-10%.
+
+Almost all countries collect and report employment statistics using
+similar methodologies.  For example, U.S. employment statistics are 
+constructed and reported by the U.S. Bureau of Labor Statistics based
+on a survey called the *Current Population Survey*.
 
 The unemployment rate and LFP rate are key indicators of labour market
 conditions. A higher-than-usual unemployment rate means that workers
@@ -183,7 +189,9 @@ the data, what you have done with it, or what it means.  The interested reader
 might also be your coworkers, your boss, or your clients.
 
 Reproducibility requires that we treat our data with care.  In particular, we
-should:
+treat the various things we do with our data as part of a repeated sequence
+of steps called a ***workflow***.  Your data analysis workflow should have
+three key features:
 
 1. Document the ***provenance*** or original source for all data.
    - When downloading data files, document the original URL and date of access.
@@ -193,7 +201,7 @@ should:
      their names.
    - More generally, avoid directly editing data. Data storage is cheap, and
      adding data is almost always preferable to changing or deleting it.
-2. Keep your data and analysis projects as ***portable*** as possible. Data is
+2. Keep your data and analysis ***portable***. Data is
    portable if it can be easily moved between operating systems, file formats,
    and applications.
    - Organize your work into clear projects, and keep all of the files for
@@ -204,16 +212,18 @@ should:
      - Following a naming convention may help make your names more informative
        without making them too long.
 4. Use ***version control*** to manage and track changes to your files as you
-   work. Version control systems can be very elaborate, but I will teach you a
-   simple folder-based workflow:
+   work. Version control systems can be very elaborate and use specialized
+   software, but I will teach you a simple workflow that requires no additional
+   tools:
    - Create a ***working copy*** of each file you plan to edit.
-     - There should only be one working copy of each file.
+     - There should be exactly one working copy of each file.
      - You can edit the working copy.
    - Each time you complete a step in your project, make your current
      working copy the ***master version*** of that file.
-     - There should only be one master version of each file.
-     - The master version represents the project at its most-recently-completed
-       stage. It should not include any half-finished work.
+     - There should be exactly one master version of each file.
+     - The master version represents the project at its most-advanced
+       stage; i.e., the file you would send to your boss to show how your work
+       is going. It should not include any half-finished work.
      - The master version should not be directly edited, but should regularly be
        replaced with the current working copy.
    - You can also have ***archived versions***.
@@ -264,16 +274,17 @@ project.
 ::: {.fyi data-latex=""}
 **Version control systems**
 
-Software developers and professional data analysts use formal version control
+Software developers and professional data analysts use version control
 systems like [Git](https://git-scm.com/) and [GitHub](https://github.com/).
 These systems track every change ever made to a group of files, and can allow
 multiple users to work together on a project. It is based on a model in which
 each user has their own working copy, and can commit (or propose) changes to the
-master version, along with an explanation of the changes.  You can see my GitHub
-page at https://github.com/bvkrauth.
+master version, along with an explanation of the changes.  
 
-Git and GitHub take a little time to set up and learn, but are extremely useful
-tools if you do a lot of coding or data analysis.
+To see what Git and GitHub look like, you can see the GitHub page for this
+textbook at https://github.com/bvkrauth/is4e. Git and GitHub take a little
+time to set up and learn, but are extremely useful tools if you do a lot of
+coding or data analysis.
 :::
 
 ### Tidy data {#tidy-data}
@@ -283,15 +294,16 @@ scientists have come to call ***tidy*** data. Tidy data has the following seven
 properties:
 
 1. Data is arranged in one or more simple rectangular grids or ***tables***.
+   - Excel tables should always start in cell A1.
 2. Each column in a table represents a distinct ***variable*** or attribute.
-3. Each variable has an informative and unique ***variable name***.
-   - Variable names are often displayed in the top row of the table.
-4. Each row in a table (after the top row) represents a distinct
+3. Each row in a table (after the top row) represents a distinct
    ***observation***, ***data point*** or ***case***.
-6. Each observation has a unique value for some ***unique identifier*** or
+4. Each variable has an informative and unique ***variable name***.
+   - Variable names are often displayed in the top row of the table.
+5. Each observation has a unique value for some ***unique identifier*** or
    ***ID*** variable.
    - The ID variable is often displayed in the first column of the table.
-5. All observations in a given table come from the same 
+6. All observations in a given table come from the same 
    ***unit of observation***.
    - For example, we might have a table of Canadian cities, or a table of
      Canadian provinces.
@@ -514,15 +526,15 @@ not.
 ### Planning {#cleaning-plan}
 
 Before diving into cleaning our data, it is often wise to look closely at the
-data and construct a  ***cleaning plan***. Here is a simple template:
+data and construct a cleaning plan. Here is a simple template for such a plan:
 
 1. Convert all data sources into tidy-format tables in the application(s) we
    intend to use.
 2. Select or construct a unique ID variable for each table.
-3. Identify and address problems in existing variables.
+3. Find and address problems in existing variables.
 4. Create new variables that may be useful.
 
-The cleaning plan should be based around what we plan to do with the data, but
+The cleaning plan should be based around what we intend to do with the data, but
 should preserve flexibility in case we want to use the data for other purposes.
 
 ::: example
@@ -542,7 +554,7 @@ the employment data:
    will construct two alternative ID variables: an arbitrary/sequential number
    and the two-letter postal abbreviation.
 
-3. *Identify and address problems in existing variables*
+3. *Find and address problems in existing variables*
 
    The only problem I see in the current data is in cell B8, which is supposed
    to display the population of Ontario but instead shows "########". We will
@@ -571,8 +583,18 @@ about our data.
 
 We are now ready to start using Excel to actively clean our data. We will also
 introduce a set of important Excel tools and concepts that are useful in
-cleaning data. Be sure to use your working copy of the data, and to save the
-file after completing each task so that you don't lose your work.
+cleaning data. 
+
+::: example
+**Getting started**
+
+Open your working copy of the employment data and go to the 
+*Employment Nov 2020* worksheet.
+
+Each example in the rest of this chapter describes a task needed to clean
+this data set. Remember to save this file after completing each example
+task to ensure you don't lose your work due to a mistake.
+:::
 
 ### Cell formatting {#cell-formatting}
 
@@ -673,7 +695,7 @@ As we discussed earlier, we would like to add the two-letter postal abbreviation
 | Saskatchewan              | SK |
 | Yukon                     | YT |
 
-The postal abbreviation is useful for at least two reasons
+The postal abbreviation is useful for at least three reasons
 
 1. It is *standardized*, while the full province name may not be.
    - The postal abbreviations were originally created by Canada Post.
@@ -682,6 +704,8 @@ The postal abbreviation is useful for at least two reasons
      on "Codes for the representation of names of countries and
      their subdivisions."
 2. It is *short*, which can be useful in charts.
+3. It is *informative*. Postal abbreviations are widely used, and are familiar
+   to many Canadians.
 
 To add this variable:
 
@@ -700,13 +724,13 @@ that work well, but you will be glad you did it.
    - **Province** would have been a nice short and clear variable name,
      but it was already taken.
 2. Variable names should be *informative*.
-   -  **X** or **my variable** would have been bad variable names.
+   -  **X** or **MyVariable** would have been bad variable names.
    - So would **Province2**.
-3. Variable names should be *short*. In some older programs, variable names
-   can be no longer than 8 characters long. Most modern programs allow
-   much longer variable names, but long variable names are harder
-   to remember, harder to type without errors, and less likely to
-   display cleanly.
+3. Variable names should be *short*. 
+   - In some older programs, variable names can be no longer than 8 characters
+     long. Most modern programs allow much longer variable names, but long
+     variable names are harder to remember, harder to type without errors,
+     and less likely to display cleanly.
    - 8 characters is a good target, but it's OK to go a little over that.
    - Abbreviation is a good way to shorten names, so we use
      **ProvAbb** instead of **ProvinceAbbreviation**.
@@ -728,13 +752,13 @@ that work well, but you will be glad you did it.
      create another variable called **provabb**, **provAbb**, or
      **PROVABB**, just in case we want to use this data set in SAS.
 6. Variable naming conventions should be *consistent* within each data set.
-   - We could have used camel case or snake case for our new variable, but
-     the existing variables use Pascal case so we should use Pascal case
+   - We could have used camelCase or snake_case for our new variable, but
+     the existing variables use PascalCase so we should use PascalCase
      for all new variables too.
 
-To be honest, Excel allows nearly anything in a variable name since it does not
-normally use the variable names in its calculations.  But good naming practices
-are still important since you may need to move data between programs.
+Excel allows nearly anything in a variable name since it does not normally
+use the variable names in its calculations.  But good naming practices are
+still important since you may need to move data between programs.
 :::
 
 ### Fill and series {#fill-and-series}
@@ -850,9 +874,6 @@ Returning to our application, everyone who is either employed or unemployed
 is in what economists call the "labour force." So let's add that variable.
 
 1. Enter **LabourForce** in cell H1 to name the variable.
-   - Note that I avoid putting spaces in variable names. This is a habit of
-     mine when working with data, because spaces can cause complications 
-     when moving data across systems, e.g. from Excel to R.
 2. Enter `= D2 + E2` in cell H2.
 3. Save your working copy.
 
@@ -897,8 +918,14 @@ Excel has about 500 built-in ***functions*** that we can use in formulas. Each
 function has a ***function name*** and a set of ***arguments*** whose values you
 can set.
 
-Excel has several built-in tools for finding information on the names and
-arguments of its functions. Search engines such as Google can also be helpful.
+To use a function, you simply include its name and its arguments as
+part of the formula.  For example, the `SQRT()` function takes a single
+numeric argument and returns the square root of that argument. So if
+you enter `=SQRT(2)` in a cell, the cell will display `1.414`, the
+square root of 2.
+
+The first step in using a function is finding out the name and arguments
+of the function that does what you need. 
 
 ::: example
 **Finding a function**
@@ -910,10 +937,10 @@ structure.
 - *Google or other search engine*
 
   Go to your favorite search engine and enter "Excel natural log". When I do
-  this, the top recommendation is for Microsoft's online documentation for the
-  `LN()` function. Read the documentation, which says that the `LN()`function
-  takes a single numeric argument and returns the natural logarithm of that
-  argument.
+  this, the top recommendation is for Microsoft's 
+  [online documentation](https://support.microsoft.com/en-us/office/ln-function-81fe1ed7-dac9-4acd-ba1d-07a142c6118f) 
+  for the `LN()` function. The documentation provides a description,
+  list of arguments, and a few examples.
 
 - *Built-in Excel tools*
 
@@ -938,12 +965,6 @@ structure.
    4. As the dialog box shows, the `LN` function takes one argument
       (the number you want the log of).
 :::
-
-To use a function, you simply include its name and its arguments as
-part of the formula.  For example, the `SQRT()` function takes a single
-numeric argument and returns the square root of the argument. So if
-you enter `=SQRT(2)` in a cell, the cell will display `1.414`, the
-square root of 2.
 
 You can use the contents of other cells as arguments, or you can also
 use the result of another function.
@@ -977,6 +998,30 @@ Suppose we want to add a new variable for the (natural) log of population:
 
 You will see that cell K2 now contains `=LN(C2)` which displays as `15.0933`. 
 :::
+
+::: {.fyi data-latex=""}
+**Advanced functions**
+
+In addition to its many built-in functions, Excel can be extended to include
+additional functions as needed for more advanced users.
+
+1. You can create your own custom functions using the JavaScript or Visual
+   Basic for Applications (VBA) programming languages. You can also use
+   these languages to modify the user interface, automate repetitive tasks,
+   and perform various other advanced tasks.
+2. You can install and use various add-in packages from Microsoft or other
+   sources.  For example, Excel usually comes with an add-in called the
+   *Analysis ToolPak* that provides additional functions and tools for use
+   in statistical analysis.
+
+These are relatively advanced Excel features, but are commonly used in a
+business environment. They also have some security risks, and Microsoft has
+substantially modified their functionality over the past few years to
+address these risks. So we will not create custom functions or use add-in
+packages in this course.
+:::
+
+
 
 ### Cell ranges {#cell-ranges}
 
@@ -1171,20 +1216,20 @@ The `RANK.EQ()` function has several relatives with similar syntax:
 ## Excel data types {#excel-data-types}
 
 Most of the data we work with is numeric. However, we also regularly encounter
-text, logical (true/false) values, dates, and times. Excel has various
-specialized tools for entering, storing and processing these data types.
+text, logical (true/false) values, dates, and times. Each of these 
+***data types*** need to be handled slightly differently in terms of
+how they are entered, stored, displayed, and used in calculations.
 
 ### Numeric data {#numeric-data}
 
 Most modern computer applications, including Excel, do numeric calculations in
 double-precision (64-bit) binary floating point format.  Calculations in this
-format are typically accurate up to the 15th decimal place.
+format are typically accurate up to the 15th decimal place. 
 
-But the results of these calculations are typically displayed to fewer decimal
-places than that.  A cell's contents are distinct from its
-***numeric display format***, which is how it appears on the screen. We can
-change the display format of a cell or group of cells without changing their
-contents.
+However, Excel displays the results of these calculations according to the
+cell's ***numeric display format***, which typically rounds to much fewer
+decimal places. Remember that We can always change the display format of a
+cell or group of cells without changing the cell contents.
 
 ::: example
 **Displaying a cell in percentage format**
@@ -1213,9 +1258,11 @@ calculation will use the original proportional value without rounding.
 
 ### Text data {#text-data}
 
-***Text data*** is also called ***character data*** or ***string data***. In
-Excel, text values can be entered directly in a cell, can be used in a formula,
-and can be the result of a formula.
+***Text data*** is also called ***character data*** or ***string data***,
+and consist of a sequence (string) of letters, numbers, spaces, and symbols
+(collectively called "characters"). In Excel, text values can be entered
+directly in a cell, can be used in a formula, and can be the result of a
+formula.
 
 Excel has many functions for working with text data.  A particularly useful one
 is the `CONCAT()` function, which allows you to join or ***concatenate***
@@ -1237,6 +1284,9 @@ if it we were writing a written report:
 As you can see, `CONCAT()` is useful for converting data into human-readable 
 statements. It is also useful for constructing ID variables.
 :::
+
+As you can see from the example above, numeric and logical values in formulas
+are automatically converted into text values as needed.
 
 ::: {.fyi data-latex=""}
 **Advanced options for working with text data**
@@ -1317,6 +1367,11 @@ below 64%, and `0` in the other seven. When cleaning data we will typically use
 indicator variables rather than logical variables.
 :::
 
+Logical values in formulas automatically convert to numeric values as needed,
+with `True` converting to one and `False` converting to zero.  For example,
+the formula `=3+True` is equal to 4 and the formula `=3+False` is equal
+to 3.
+
 ::: {.fyi data-latex=""}
 **Advanced options for logical variables**
 
@@ -1331,9 +1386,9 @@ Some additional functions that work with logical variables:
 
 ### Dates and times {#dates-and-times}
 
-In additions to numbers, text, and logical values, Excel can handle ***dates***
-and ***times***.  Dates and times are a surprisingly complex subject that can
-create all sorts of problems on a computer, for several reasons:
+Excel can also handle ***dates*** and ***times***.  Dates and times are a
+surprisingly complex subject that can create all sorts of problems on a
+computer, for several reasons:
 
 - There are many conventional ways of writing the same date:
    - November 1, 2020
@@ -1353,12 +1408,12 @@ create all sorts of problems on a computer, for several reasons:
   - January 4, 2021 comes 5 days after December 30, 2020.
   - 11:30 pm on December 31, 2020 is 45 minutes before 12:15 am on January 1,
     2021
-- We want to handle time zones, daylight savings time, leap years, and even leap
-  seconds.
-- We want to do this in a way that is perfectly accurate but hides all of these
-  complexities in normal usage.
+- We want to handle time zones, daylight savings time, leap years, and
+  even leap seconds.
 
-As you might imagine, this is not easy. Each application has its own rules for
+Finally, we want to deal with these complexities in a way that is perfectly
+accurate when needed, but is simple in normal usage. As you might imagine,
+this is not easy. Each application has its own rules for
 handling dates and times, but there are some standards that have developed.
 Excel handles dates and times as follows:
 
@@ -1368,15 +1423,17 @@ Excel handles dates and times as follows:
    - January 2, 1900 is day 2.
    - November 1, 2020 is day 44136.
 2. Dates are *displayed* according to the cell's display formatting:
-   - The default display formatting varies across regions, so the same date in
-     the same Excel file might display differently on two different computers.
-3. When you enter something into a cell that looks like a date, Excel does
+   - The default display formatting varies across regions.
+   - So the same date in the same Excel file might display differently
+     on two different computers.
+3. When you enter text into a cell that looks like a date, Excel does
    several things behind the scenes:
-   - Excel guesses the date format for what you have entered.
-   - Excel converts what you have entered to the internal storage form (days
-     since base date).
-   - Excel changes the display format to what Excel thinks it should be (based
-     on your location settings).
+   - Excel guesses the date format you are using.
+   - Following that guess, Excel converts your text into its internal
+     storage form (days since base date).
+   - Excel changes the display format to what Excel thinks it should be.
+     This format is based on your location settings, and may differ from
+     what you have typed in.
 
 Most of the time, this system works seamlessly and you don't even notice it.
 
@@ -1487,8 +1544,8 @@ To update your master version:
    You can compare your working copy to my master version at
 [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
 
-2. Archive your current master version by renaming it and moving it to the
-   `archives` sub-folder.
+2. If you like, achive your current master version by renaming it and moving
+   it to the `archives` sub-folder.
 
    - This is optional since your current master version is identical to the
      source data.

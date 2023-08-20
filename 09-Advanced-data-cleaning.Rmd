@@ -106,6 +106,9 @@ format.
 Applications work most seamlessly with their native format.  However, most 
 modern applications can also ***import*** (read) and ***export*** (save) files
 in other formats including native formats of other popular programs.
+Importing and exporting across different formats is a little like translating
+between languages: information can get lost or misinterpreted, so it
+is important to be careful.
 
 There are also several standard or open file formats that are commonly used to
 share data across applications.  Most of these open file formats are built from
@@ -126,7 +129,8 @@ share data across applications.  Most of these open file formats are built from
 - Text files can be read by humans as well as computer programs.
 
 Files that are not text files are usually called ***binary*** files. Binary
-files are generally not human-readable.
+files are generally not human-readable.  If you try to open them with a
+text editor you will mostly see a bunch of odd-looking symbols.
 
 ::: {.economics data-latex=""}
 **The economics of file formats**
@@ -140,28 +144,33 @@ principle be stored and handled more efficiently than the text string "123".
 The primary technical advantage of text files is interoperability: sharing data
 across different users, applications, and devices.
 
-In a market economy, companies can increase profits by efficiently using
-*scarce* resources. Many well-known applications have moved from binary to text
-file formats as computers have become more powerful (so reducing storage and
-processing requirements becomes less valuable) and more networked (so increasing
-interoperability becomes more valuable).
+In a market economy, a business can increase profits by more efficiently using
+*scarce* resources. Many well-known applications have changed their native file
+formats from binary to text as computers have become more powerful (so reducing
+storage and processing requirements becomes less valuable) and more networked
+(so increasing interoperability becomes more valuable).
 
-Another economically important difference is that a company can control use of
-its binary file format through some combination of intellectual property rights
-(e.g. patents) and simply limiting access to information about the format (trade
-secrets). Controlling a *proprietary* file format in this manner can provide a 
-competitive advantage to a software company. However, this advantage has become
-less valuable over time as big companies demand the interoperability and
-customization potential associated with open file formats and standards.
+A business can also increase profits by establishing monopoly power and
+exploiting it to charge higher prices. A software company can control use of
+its native binary file format through some combination of intellectual
+property rights (e.g. patents) and simply limiting access to information
+about the format (trade secrets). Controlling a *proprietary* file format in
+this manner can provide a competitive advantage to a software company. However,
+this advantage has become less valuable over time as customers demand the
+interoperability and customization potential associated with open file formats
+and standards.
 
 For example, Excel's original `.xls` files were binary files in a proprietary
 format whose details were only known only by Microsoft. Its current `.xlsx`
 files are (zipped) text files in an open format whose details are published
-[here](https://docs.microsoft.com/en-us/openspecs/office_file_formats/ms-offfflp/885c7947-17de-490b-840d-91231a031383). 
+[here](https://docs.microsoft.com/en-us/openspecs/office_file_formats/ms-offfflp/885c7947-17de-490b-840d-91231a031383). Microsoft did not move from proprietary
+to open formats just to be nice; their incentives changed as a result of 
+technological advances, and they responded by changing their behavior.
 
 If you are interested in learning more about the economics of strategic
-interaction among firms, you should consider taking a course in industrial
-organization (e.g., SFU's third-year elective ECON 325).
+interaction among business, you should consider taking a course in what
+economists call "industrial organization" (e.g., SFU's third-year elective
+ECON 325).
 :::
 
 ### Fixed-width files
@@ -586,7 +595,7 @@ Some versions of Excel have a new and improved lookup function called
 `XLOOKUP()`. It has better defaults, is more flexible, and is easier to use.
 Unfortunately, it is not available in all versions of Excel.
 
-Ther are also a function called `HLOOKUP()` for use when you have a table with
+There is also a function called `HLOOKUP()` for use when you have a table with
 variables in rows and observations in columns.
 :::
 
