@@ -593,40 +593,6 @@ print(everything)
 ```
 :::
 
-### Attributes
-
-Any object can also have ***attributes***.  This attributes of an object are a
-list associated with the object that provides additional information.
-
-:::example
-**Attributes**
-
-Let's see if any of the objects we have created have attributes:
-```{r AttributesExample}
-print(attributes(fruits))
-print(attributes(evens))
-print(attributes(everything))
-```
-Note that:
-
-- our two atomic vectors have attributes NULL. That's R's way of saying they
-  have no assigned attributes
-- our list stores the names of its three elements in the `$names` attribute.  
-:::
-
-R has hundreds of additional object types, including:
-
-- Matrices.
-- Arrays.
-- Data sets.
-- Statistical results from various commands.
-- Plots.
-
-These object types are all built from the basic components of atomic vectors,
-lists, and attributes. Users can also define their own object types, and there
-is an extensive system to support generic functions and object-oriented
-programming (if you know what that is).
-
 ### Functions and operators
 
 R has hundreds of built-in mathematical and statistical ***functions***, and
@@ -715,6 +681,78 @@ x <- y <- 3
 print(x)
 print(y)
 ```
+:::
+
+### Classes and attributes
+
+Classes and attributes are something of an advanced topic, but we will briefly
+mention them here.
+
+Every object in R has a ***class***, which is just a text string identifying
+what kind of thing it is.  The class of any object can be accessed using
+the `class()` function
+
+:::example
+**Classes**
+
+```{r ClassesExample}
+print(class(fruits))
+print(class(evens))
+print(class(everything))
+print(class(print))
+```
+:::
+
+The class of an object tells R how to handle it - how to display or summarize
+its contents, how to use it in functions, etc.  R has hundreds of built-in
+classes, including:
+
+- Matrices.
+- Arrays.
+- Data sets.
+- Statistical results from various commands.
+- Plots.
+
+These object types are all built from basic components like atomic vectors
+and lists. Users can also define their own classes.
+
+::: {.fyi data-latex=""}
+**Classes and object oriented programming** 
+
+Classes appear in most modern programming languages, and are a key component of
+the "object-oriented" programming model. OOP allows programmers to design very
+complicated data structures that are also easy to use.
+
+For example, a novice user like yourself can display the contents of any object
+using the `print()` function and can get a brief summary of those contents using
+the `summary()` function. This works with simple objects like "Hello world"
+or more complex objects like a large data set, a graph of results, or a machine
+learning model.
+
+Underlying this simple user interface, `print()` is a *generic* function that
+takes any object, determines its class, and then calls a specific print
+function that is specially designed for its class. Programmers create both
+the class design and the associated specialized functions.  Normal users only
+need to know the `print()` function.
+:::
+
+Objects can also have ***attributes***. The attributes of an object are a
+list that provides additional information about the object.
+
+:::example
+**Attributes**
+
+Let's see if any of the objects we have created have attributes:
+```{r AttributesExample}
+print(attributes(fruits))
+print(attributes(evens))
+print(attributes(everything))
+```
+Note that:
+
+- our two atomic vectors (`fruits` and `evens`) have no attributes (`NULL`).
+- our list (`everything`) stores the names of its three elements in the
+  `$names` attribute.  
 :::
 
 ## Packages and the Tidyverse
