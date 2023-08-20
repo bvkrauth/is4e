@@ -46,7 +46,8 @@ $$B = \{Avocado, Banana\}$$
 Notice that the list of elements is surrounded by curly brackets.
 
 A second way of defining a set is to use ***set-builder notation***. Set builder
-notation defines sets in terms of rules they must satisfy. For example:
+notation defines sets in terms of rules their elements must satisfy. For
+example:
 
 $$C = \{x \in B: x \textrm{ is yellow} \}$$
 

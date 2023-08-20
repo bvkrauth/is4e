@@ -89,18 +89,27 @@ entering it into the ***Console*** window in the lower left corner.
 ::: example
 **Using the console window**
 
-Move your cursor into the console window, type the command 
-`print("Hello world!")` and press the `Enter` key to execute the command.
+Move your cursor into the console window, type this command:
 ```{r HelloWorld1, eval = FALSE}
 print("Hello world!")
 ```
-R will respond with something like:
+and press the `<Enter>` key. R will respond with something like:
 ```{r HelloWorld2, echo = FALSE}
 print("Hello world!")
 ```
-Note that if you are viewing this textbook in a browser, you can copy any block
-of code by clicking in its upper right-hand corner.  You can then paste it in
-the console window.
+You have just executed your first R command.
+
+The rest of this chapter will show you various R commands, and will display the
+expected results. Note that:
+
+- Commands and results will be displayed in a single block.
+- Lines with results will start with `##`.
+
+You can copy any block of R code from the web page version of this textbook by
+clicking in the upper right-hand corner of the block. You can then paste the
+block into the console window, and hit the `<Enter>` key. Give this trick a try
+with the block above; you will find it handy whens the commands are longer and
+more complex.
 :::
 
 RStudio has various features to make your work in the console window more
@@ -110,28 +119,27 @@ efficient:
 - RStudio shows pop-ups with helpful information about your command as you type
   it.
 - RStudio maintains a ***command history*** that remembers commands you have
-  previously entered.  This is useful when you did something a while ago, but
-  either don't remember exactly how you did it, or don't want to type it all in
-  from the beginning.
-
-The simplest way of accessing the command history is to press the up-arrow key
-while in the console window.
+  previously entered.  
+  
+The command history can be quite useful when you did something a while ago, but
+either don't remember exactly how you did it, or don't want to type it all in
+from the beginning.
 
 :::example
 **Using the command history**
 
-Suppose you decide you want to say "Hello [your name]!" instead of "Hello
+Suppose you decide you want to say "Hello Canada!" instead of "Hello
 world", and you don't want to type in the whole command. Then you can:
 
-1. Press the up-arrow key in the *Console* window to show the most recently 
+1. Press the `<Up-arrow>` key in the *Console* window to show the most recently 
    executed command. If you press it a second time it gives you the command
    before that, and so on.
 2. Look at the to the *History* window in the upper right corner to see a full
    list of recently executed commands.  You can double-click on any command in
    the window to copy it to the Console window.
 
-Once you have copied the previous command, you can edit it before pressing
-`<enter>`.
+Once you have found the command you want, you can edit it before pressing the
+`<Enter>` key.
 :::
 
 ### Scripts
@@ -162,16 +170,24 @@ To run your script:
 
 1. Press the ![Source](bin/RSourceButton.png){width=10%} button.
 
-You will see the results of both commands in the Console window.
+The Console window will show the results of your script:
+```{r, eval = TRUE, echo=FALSE}
+print("Hello world!")
+print("Goodbye world?")
+```
+In addition to the `Source` button, there is another button marked `Run`. 
+Pressing this button will also run the script, but the results will not be
+displayed.
 :::
 
 ### R Markdown
 
 RStudio can also run text files written in the ***R Markdown*** format. R
 Markdown files have the `.Rmd` extension. R Markdown is a language for
-producing documents - HTML files (web pages), Microsoft Word documents,
+producing documents - web pages, Microsoft Word documents,
 PDF files, etc. - that have R code and analysis embedded in them. In fact, this
-book is written in R Markdown.
+book is written in R Markdown - you can see the R Markdown document for this
+chapter at https://raw.githubusercontent.com/bvkrauth/is4e/master/10-Introduction-to-R.Rmd. 
 
 ::: {.fyi data-latex=""}
 **R Markdown, Markdown, and other markup languages**
@@ -254,13 +270,13 @@ an HTML, Word, or PDF document that includes both the text and the R results.
 ::: example
 **Knitting an R Markdown document**
 
-To knit the entire document:
+To knit the entire document into a web page:
 
 1. Press the ![Knit](bin/KnitButton.png){height=16pt} button.
 
-It will take a few moments to process the file, and then the HTML file will open
-in a browser.  Read the document and compare it to the original R Markdown file
-to get an idea of the capabilities of R Markdown.
+It will take a few moments to process the file, and then the web page (HTML
+file) will open in a browser.  Read the document and compare it to the original
+R Markdown file to get an idea of the capabilities of R Markdown.
 :::
 
 By default, R Markdown files usually knit to HTML, but we can knit to other file
@@ -270,8 +286,9 @@ formats including Word and PDF.  We will stick to HTML in this course.
 **R Markdown resources**
 
 R Markdown is as simple or as complicated as you want to make it. A plain text
-file with a few lines of content is a valid R Markdown file, and like HTML,
-Markdown is designed so it still "works" if you do something unexpected.
+file with a few lines of content is a valid R Markdown file even if it contains
+no R code. You can knit it, and R will produce a valid web page or other
+document for you.
 
 If you want to try something new in R Markdown, or have forgotten how to do 
 something, the most useful resource is the one-page *R Markdown Cheat sheet*. It 
@@ -303,28 +320,51 @@ In the menu:
 - You can select `Session > Restart R` to clear the memory and restart the
   current R session.
 
-:::example
-**Closing R**
-
-We are done for now.
-
-1. Close RStudio. You may get a warning message that looks something like
-   this:  
+I would also like to highlight a "feature" that is not at all useful and should
+be avoided. When you close R or RStudio, you will often get a warning message
+that looks something like this:
    ![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
 
-   *Never choose "Save" here*, as it would cause R to
-   save the current state of its memory and re-load it next time you start R.
-   In the interest of reproducibility, you should start R "clean" every time.
-
-2. Click on the `Don't Save` button, and you will exit RStudio.
-:::
+If you choose "Save", R will save the current state of its memory and re-load
+it next time you start R. This may seem like it would be helpful, but it is
+actually bad. We care about reproducibility, so we want R to do exactly the same
+thing every time we use it. We do not want R's actions to depend on something
+we did a few days ago. So *NEVER CHOOSE "Save" HERE*.
 
 ## The R language
 
 Next, we will learn some basic features of the R language.  Open RStudio and go
 to the console window so we can enter commands and see what they do.
 
-### Expressions 
+### Comments
+
+In programming, a ***comment*** is a piece of code that is ignored by the 
+program that interprets the code.  Comments in R are marked by the `#`
+character.  
+
+:::example
+**Comments**
+
+If you run the following code:
+```{r CommentExample, eval=FALSE}
+# This is a comment. R ignores everything on this line
+# print("This is also a comment. R will not print this.")
+print("R will print this, including the #") # but it won't print this
+```
+You will get the result:
+```{r, echo=FALSE}
+# This is a comment. R ignores everything on this line
+# print("This is also a comment. R will not print this.")
+print("R will print this, including the #") # but it won't print this
+```
+
+Note that R treats the `#` *inside* of the quotes as a normal character.
+:::
+
+Programmers use comments to explain to future users (including themselves) what
+the code is supposed to be doing.
+
+### Expressions
 
 An ***expression*** is any piece of R code that can be evaluated on its own. For
 example:
@@ -337,28 +377,35 @@ example:
 An expression needs to be complete, for example `ln(` is not an expression, nor
 is `2+`.  
 
-Every valid R expression ***returns*** a value, also called an ***object***.  
+Every valid R expression ***returns*** a value, also called an ***object***.
+For example:
 
-  - An object can be a number, a text string, a date, or a logical value, just
-    like in Excel.
-  - Objects can also be much more complex.
+- The expression `"Hello world"` returns the text string "Hello world"
+- The expression `2+2`returns the number 4.
 
-In addition, some expressions have a ***side effect***.  That is, they make
-something happen like:
+An object can be a number, a text string, a date, or a logical value, just
+like in Excel.  Objects can also be much more complex.
 
-  - Cause something to appear on your screen.
-  - Create or modify a file on your computer.
-  - Change something in R's memory.
+In addition, some expressions cause a ***side effect***. For example, executing
+an expression may cause R to:
 
-You can execute any valid R expression as a command.
+- Display something on your screen.
+- Create or modify a file on your computer.
+- Create or modify an object in R's memory.
+
+For example, the expression `print("Hello world")` returns the value 
+"Hello world" and (as a side effect) causes "Hello world" to be displayed on
+your screen.
+
+Any valid R expression can be entered in the console window, in an R script, or
+in an R Markdown document.
 
 :::example
 **Expressions**
 
-When you enter an expression as a command, R will usually display the value it
+When you enter an expression in the console window, R will usually display the value it
 returns.
 ```{r ExpressionExample}
-# This is a comment. R ignores everything in a line after the "#"
 # The line below is an expression, and the line below that is its value.
 4+5
 ```
@@ -415,9 +462,9 @@ function, or by simply giving its name
 ```{r PrintExample}
 # Create a variable called x - note that its value is not displayed
 x <- 5
-# Display its contents using the print() function
+# Use the print() function to display its contents
 print(x) 
-# Display its contents by giving its name
+# Or just give its name
 x
 ```
 :::
@@ -430,9 +477,9 @@ of elements.
 The simplest type of vector is called an ***atomic vector*** - its elements are
 normally from one of R's basic or ***atomic*** data types: 
 
-- Text strings 
 - Numbers 
-- Logical values (either `TRUE`  or `FALSE`)
+- Text strings 
+- Logical values (`TRUE`  or `FALSE`)
   
 The elements of an atomic vector need to be all part of the same atomic type; a
 single vector cannot contain both strings and numbers, for example. 
@@ -445,6 +492,8 @@ We can construct a vector by enumeration using the `c()` function.
 ```{r EnumerationExample}
 fruits <- c("Avocado", "Banana", "Cantaloupe")
 print(fruits)
+morefruits <- c(fruits, "Durian")
+print(morefruits)
 ```
 :::
 
@@ -474,6 +523,8 @@ expand scalars (single numbers) to vectors as needed.
 **Using vectors in expressions**
 
 ```{r VectorExpansionExample}
+ones <- rep(1, times = 10)
+evens <- seq(from = 2, to = 20, by = 2)
 # This command subtracts 1 from every element in evens
 odds <- evens - ones
 print(odds)
@@ -489,6 +540,8 @@ The ***subscript operator*** `[]` can be used to select part of a vector.
 **Using subscripts**
 
 ```{r SubscriptOperatorExample}
+evens <- seq(from = 2, to = 20, by = 2)
+print(evens)
 # You can give a single index: evens[2] is the 2nd element in evens
 x <- evens[2]
 print(x)
@@ -783,7 +836,8 @@ good idea at the time but would be designed differently today:
 - Some functions that don't do what they should.
 
 Unfortunately, it is not possible to make significant changes to the existing
-language without causing thousands of existing programs to stop working.
+R language (sometimes called "Base R") without causing thousands of existing
+programs to stop working.
 
 The Tidyverse addresses this problem by replacing many Base R functions with
 alternative versions that are easier to use, better-designed, and usually
@@ -844,9 +898,10 @@ We will work with the employment data.
 
 ### Reading CSV files
 
-Our first step will be reading the data in from the CSV file. The Tidyverse
-function to do this is called `read_csv()`.  It has one required argument: the
-name of the CSV file, either as a local file address or a URL.
+Our first step will be reading the data.  The most commonly used data format is
+CSV, and the Tidyverse function to read in CSV files is called `read_csv()`.
+It has one required argument: the name of the CSV file, either as a local file
+address or a URL.
 
 :::example
 **Reading a CSV file in R**
@@ -863,9 +918,7 @@ EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData
 ```
 
 ```{r ReadEmpDataFromCSV2, echo=FALSE}
-# Load the Tidyverse if you have not already done so
 library("tidyverse")
-# You can directly read online data by giving read_csv() the URL.
 EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```
 As you can see, R guesses each variable's data type, and reports its guess. It
@@ -881,8 +934,10 @@ way that we want it:
   - This is what we want.
 - The **MonthYr** variable is also stored as `col_character()`.
   - This is *not* what we want.
-  - We will want **MonthYr** to be stored explicitly as a date variable, so we
-    make a note of that issue here and will fix it later.
+  - We will want **MonthYr** to be stored explicitly as a date variable.
+
+We make a note of the issue with the **MonthYr** variable so we can fix it 
+later.
 :::
 
 ::: {.fyi data-latex=""}
@@ -916,20 +971,21 @@ class), but tibbles have some additional features that make them work better
 with the Tidyverse.
 
 We have several ways of viewing the contents of a tibble. As with other objects,
-we can use the `print()` function,
+we can use the `print()` function.
 
 :::example
 **Printing a tibble**
 
+The code below prints the contents of our data table:
+
 ```{r PrintEmpData}
 print(EmpData)
 ```
-Tibbles can be quite large, so the `print()` function usually shows an
-abbreviated version of the table.
 :::
 
-We can also see the whole table by using the `View()` command or through
-RStudio.
+Tibbles can be quite large, so the `print()` function usually shows an
+abbreviated version of the table. We can also see the whole table by using
+the `View()` command or through RStudio.
 
 :::example
 **Viewing a tibble**
@@ -1008,7 +1064,7 @@ There are many free sources of useful information about R.
 - A good longer book that focuses on the Tidyverse is Wickham and Grolemund's
   *R for Data Science*.  It can be purchased as an actual book from Amazon
   or your local book shop, and is also available as a free e-book at 
-  https://r4ds.had.co.nz/index.html.
+  https://r4ds.hadley.nz/.
 :::
 
 ## Practice problems {-#problems-introduction-to-r}

@@ -265,8 +265,8 @@ Chapter \@ref(statistics). For now, just keep in mind that they are distinct.
 
 ### Constructing the table
 
-We are going to create a nice table of summary statistics for some of our
-variables.
+The first step in constructing a table of summary statistics is to 
+create a new blank worksheet and fill in the structure of the table.
 
 ::: example
 **Table setup**
@@ -364,12 +364,12 @@ table look a little nicer.
 Our table now has all of the information we need, but it is still kind of ugly.
 Let's make it look nice and presentable.
 
-::: example
-**Cell size**
-
 The first problem is that the columns may be too narrow or too wide. If a column
 is too narrow, some of its values will display as "####". If it is too wide, it
 will take up too much room.
+
+::: example
+**Cell size**
 
 There are many different ways to adjust row heights and column widths, but here
 is the simplest:
@@ -383,11 +383,11 @@ Not only will this make everything fit, it will automatically adjust the width
 as necessary when anything changes.
 :::
 
-::: example
-**Error codes**
-
 The second problem is that the non-numeric variables report error codes like 
 `#DIV/0!` or `#NUM!` for several statistics, and nonsense values for others. 
+
+::: example
+**Error codes**
 
 It is usually better to leave something blank than have it display meaningless,
 confusing or incorrect information.  So let's just delete those columns:
@@ -396,10 +396,12 @@ confusing or incorrect information.  So let's just delete those columns:
 2. Select `Home > Delete > Delete Sheet Columns`.
 :::
 
+Finally, we might want to make the display formatting a little nicer.
+
 ::: example
 **Display formatting** 
 
-To make the display formatting a little nicer.
+To make the display formatting a little nicer:
 
 1. Put the top row in **bold**.
 2. Put the first column in *italics*.
@@ -408,29 +410,30 @@ To make the display formatting a little nicer.
    - Leave the counts as they are.
    - Display the unemployment rate, LFP rate and population growth rate in
      percentages, rounded to one decimal place.
-4. Feel free to play around with colors, fonts, etc. to get a table that you
-   like.
+4. We now have a nice table of summary statistics:
+   ![*Table of summary statistics*](bin/SummaryStatisticsTable.png){width=50%}
+   
+   that we could put into a Word or PowerPoint document, and share with an
+   audience. Feel free to play around with colors, fonts, etc. to improve
+   upon this table.
 5. Once you have the table you like, save your working copy.
 
-We now have a nice table of summary statistics:  
-![*Table of summary statistics*](bin/SummaryStatisticsTable.png){width=50%}
-
-that we could put into a Word or PowerPoint document, and share with an audience.
 :::
 
 ## Frequency tables
 
 Another way of looking at a single variable is to construct a
-***frequency table***.  A frequency table describes the distribution of values
-for a single variable. 
+***frequency table***.  A frequency table describes how often 
+each value appears in the data.
 
 ### Simple frequency tables
 
-Frequency tables are at their simplest and most useful when the underlying
-variable is discrete, categorical, or even non-numeric.  The frequency table for
-this kind of variable looks like this:
+A ***simple frequency table*** describes how many times each value
+appears in the data.  Simple frequency tables are useful when the
+underlying variable is discrete, categorical, or even non-numeric,
+and they look like this:
 
-| variablename     | Count        | Percentage   |
+| (variablename)   | Count        | Percentage   |
 |:-----------------|:------------:|:------------:|
 | *(value1)*       | *(# value1)* | *(% value1)* |
 | *(value2)*       | *(# value2)* | *(% value2)* |
@@ -828,15 +831,14 @@ misleading.
 **For further reading**
 
 Data visualization skills are valuable in the academic world and in the
-professional world.  If you are interested in developing your skills
+business world.  If you are interested in developing your skills
 further, you might consider our course
 ECON 334: *Data Visualization and Economic Analysis*.
 
-You might also get a book on data visualization, either Kieran Healy's
-*Data Visualization* or Cole Nussbaumer Knaflic's *Storytelling with Data*.
-Healy's book is aimed at a primarily academic audience using R, while Knaflic's
-is aimed at a business audience using Excel. Both of them are practical and easy
-reads, with many examples.
+You might also get a book on data visualization. Cole Nussbaumer Knaflic's
+*Storytelling with Data* is aimed at a business audience and uses Excel.
+Kieran Healy's *Data Visualization* is aimed at a primarily academic audience
+and uses R. Both of them are practical and easy reads, with many examples.
 :::
 
 ### Frequency (bar/column) graphs

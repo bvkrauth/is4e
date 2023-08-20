@@ -1286,7 +1286,7 @@ Answers can be found in the [appendix](#answers-inference).
 
 9. Suppose we have a random sample of size $n = 16$ on the random variable
    $x_i \sim N(\mu,\sigma^2)$, and we calculate the sample average $\bar{x} = 4$
-   and the sample standard deviation $\hat{\sigma} = 0.3$.
+   and the sample standard deviation $sd_x = 0.3$.
    a. Use Excel to calculate the 95\% (exact) confidence interval for $\mu$.
    b. Use Excel to calculate the 90\% (exact) confidence interval for $\mu$.
    c. Use Excel to calculate the 99\% (exact) confidence interval for $\mu$.

@@ -37,17 +37,14 @@ not run counter to) contemporary thinking about issues like reproducibility,
 tidy data, and credible inference. The only way to get all of these
 features was to write my own book.
 
-The book is available at no charge in HTML, PDF, and EPUB formats
-at https://bookdown.org/bkrauth/IS4E/. Usage is allowed under the
-[MIT License](https://github.com/bvkrauth/is4e/blob/master/LICENSE).
-Instructors are welcome to assign it as a course textbook, but are
-strongly encouraged to contact me first so that I can inform you
-about any significant changes to the content.
+The book is available at no charge (MIT License) in HTML, PDF, and EPUB formats
+from https://bookdown.org/bkrauth/IS4E/. Instructors are welcome to assign
+it as a course textbook, but are strongly encouraged to contact me first
+as the book contents may change without warning.
 
 The book itself has been created using [Bookdown](https://bookdown.org/). Its
-source code is available at https://github.com/bvkrauth/econ233, and errors or
-typos can be reported to me at <bkrauth@sfu.ca> or
-https://github.com/bvkrauth/econ233/issues.
+source code is (or will be) available at https://github.com/bvkrauth/econ233,
+and errors or typos can be reported to me at <bkrauth@sfu.ca> or https://github.com/bvkrauth/econ233/issues.
 
 
 ## Conventions of this book {-}
@@ -98,12 +95,12 @@ also used to *emphasize* important points.
 
 Pull-out information is shown in colored boxes.
 
-::: example
-Boxes like this are for examples
-:::
-
 ::: {.goals data-latex=""}
 Boxes like this are for showing course or chapter goals.
+:::
+
+::: example
+Boxes like this are for examples
 :::
 
 ::: {.economics data-latex=""}
@@ -111,8 +108,7 @@ Boxes like this are for providing economic background
 :::
 
 ::: {.sfu data-latex=""}
-Boxes like this are for providing information that is
-specific to my SFU ECON 233 course.
+Boxes like this are for providing SFU-specific information.
 :::
 
 ::: {.fyi data-latex=""}
@@ -124,7 +120,7 @@ might be of interest to some students.
 ## About the author {-}
 
 Brian Krauth is Associate Professor of Economics at Simon Fraser University.
-His research and CV are available at https://bvkrauth.github.io/.
+His research and CV are available at https://briankrauth.com.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

@@ -100,7 +100,7 @@ probabilities and expected values use *calculus*.
 Differential calculus (MATH 151 or 157) is a prerequisite for ECON 233, but
 integral calculus (MATH 152 or 158) is not. I will not assume you know how to
 interpret or calculate an integral, and will not require you to do so in any
-assigned or graded work.
+assigned or graded work in ECON 233.
 :::
 
 But deep down, there is no important *practical* difference between continuous
@@ -275,7 +275,7 @@ to one.
 Similarly, we can calculate probabilities from the continuous PDF by
 integrating:
   $$\Pr(a < x < b) = \int_a^b f_x(v)dv$$
-which implies that the CDF can be written:
+which implies that the CDF can be derived from the PDF:
   $$F_x(a) = \int_{-\infty}^a f_x(v)dv$$
 and that the PDF integrates to one:
   $$\int_{-\infty}^{\infty} f_x(v)dv = 1$$

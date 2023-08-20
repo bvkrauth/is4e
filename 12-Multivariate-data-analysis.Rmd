@@ -501,12 +501,15 @@ Scatter plots can be created in R using the `geom_point()` geometry.
 ::: example
 **Creating a scatter plot**
 
+The code below creates a scatter plot with the Candian unemployment rate on the
+horizontal axis, and the LFP rate on the vertical axis.
 ```{r ScatterPlot}
 ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct)) +
   geom_point()
 ```
+
 Note that the scatter plot is consistent with the negative relationship between
 the two variables indicated by the correlation we calculated earlier 
 (`r cor(EmpData$UnempRate,EmpData$LFPRate)`).  At the same time, it is clear
@@ -570,13 +573,13 @@ reflects the original unrounded data than the rounded data (large red dots).
 
 We can use color to add a third dimension to the data.  That is, we can 
 color-code points based on a third variable by including it as part of the
-aesthetic.
+plot's aesthetic.
 
 :::example
 **Using color to add a third dimension**
 
-We can use color to represent a third variable, whether it is discrete or
-continuous.
+We can use color to represent a third variable:
+
 ```{r ScatterPlotColorCoded}
 # Party is discrete/categorical, so each value is represented by a distinct color
 ggplot(data = EmpData,
@@ -711,6 +714,7 @@ trade-off between bias (too few bins may lead us to miss important
 patterns in the data) and variance (too many bins may lead us to
 see patterns in the data that aren't really part of the DGP).
 :::
+
 
 ### Smoothing
 

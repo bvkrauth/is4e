@@ -260,7 +260,7 @@ than we will learn in this course.
 ::: {.sfu data-latex=""}
 **ECON 433**
 
-Our fourth-year course ECON 433 covers the time series econometrics, with
+Our fourth-year course ECON 433 covers time series econometrics, with
 applications in macroeconomics and finance.
 :::
 
@@ -1299,13 +1299,18 @@ Answers can be found in the [appendix](#answers-statistics).
     - The average earnings of Canadian women: $\mu_W$.
     - The male-female earnings gap in Canada: $\mu_M - \mu_W$.
     - The male-female earnings ratio in Canada: $\mu_M/\mu_W$. 
-    and we have calculated the following statistics from a random sample of Canadians:
+    
+    and we have calculated the following statistics from a random sample
+    of Canadians:
+    
     - The average earnings of men in our sample $\bar{y}_{M}$.
     - The average earnings of women in our sample $\bar{y}_{W}$.
     - The male-female earnings gap in our sample $\bar{y}_{M} - \bar{y}_{W}$.
     - The male-female earnings ratio in our sample $\bar{y}_{M}/\bar{y}_{W}$.
+    
     We already know that $\bar{y}_{M}$ is an unbiased estimator of
     $\mu_M$ and $\bar{y}_{W}$ is an unbiased estimator of $\mu_W$.
+    
     a. Is the sample earnings gap $\bar{y}_M - \bar{y}_W$ a biased or unbiased
        estimator of the population gap $\mu_M - \mu_W$? Explain.
     b. Is the sample earnings ratio $\bar{y}_M/\bar{y}_W$ a biased or unbiased

@@ -266,18 +266,22 @@ In contrast, R allows you to have three separate files or groups of files
 
 1. Your **source data**
    - Leave it exactly as you originally obtained it.
+   - Don't forget to document its provenance.
 2. Your **code** to clean and analyze the data
    - Maintain it carefully using master versions, working copies and archives.
    - Your code can be saved in an R script, or as part of an R Markdown document.
    - Your code can be split into multiple files, for example one file to clean
      the data and another to analyze it.
+   - The code for my own research projects is often split into 10 or more
+     separate files, plus a "master" file that runs them all in the correct
+     order.
 3. Your **cleaned data** and **results**
    - Treat them as temporary output files.
-   - You can regenerate your cleaned data and results at any time by running
-     your code.
+   - You should be able to regenerate them from the source data at any time by
+     just re-running your code.
 
-The key is to make sure that all of your cleaned data and results can be 
-regenerated from the original data at any time by running your code.
+Again, reproducibility means that we always have all of the information to 
+regenerate our results directly from the source data.
 
 :::example
 **Creating an R script to clean our data**
@@ -350,7 +354,8 @@ data (1976), since calculating the growth rate for 1976 would require data from
 
 ```{r ShowMissingValues}
 EmpData %>%
-  select(MonthYr, Population, AnnPopGrowth)
+  select(MonthYr, Population, AnnPopGrowth) %>%
+  print(n=15)  # n=15 means print the first 15 rows
 ```
 :::
 
@@ -508,7 +513,8 @@ There is a similar set of functions available for the uniform distribution
 
 ## Graphs with ggplot {#graphs-with-ggplot}
 
-The Tidyverse also contains a powerful graphics package called[^1101]
+R has a built in plotting command called `plot()`, but the Tidyverse also
+contains a much more powerful graphics package called[^1101]
 ***ggplot***. The ggplot package has capabilities well beyond what R's built-in
 commands can do, or what Excel can do.
 
@@ -558,12 +564,13 @@ needed:
     - The `geom_histogram()` geometry produces a histogram.
     - The `geom_line()` geometry produces a line.
 
-A single graph can include multiple geometries, as we will see shortly.
+A single graph can include multiple aesthetics and geometries, as we will see
+shortly.
 
 ### Modifying a graph
 
-As when making graphs in Excel, the basic ggplot graph gives us some useful
-information but we can improve upon it in various ways.
+Like Excel, the basic ggplot graph gives us some useful information but we can
+improve upon it in various ways.
 
 #### Titles and labels
 
@@ -605,9 +612,11 @@ ggplot(data = EmpData,
 :::
 
 Colors can be given in ordinary English (or local language) words like "red"
-or "blue." You can get the full list of built-in color names by executing the
-expression `colors()` in the command window.  You can also set custom colors
-using color codes in RGB or CMYK format.
+or "blue." There are hundreds of built in color names including "beige",
+"hotpink" and four different shades of "chartreuse". You can get the full list
+of built-in color names by executing the expression `colors()` in the command
+window.  You can also set custom colors using color codes in RGB or CMYK
+format.
 
 Some geometric elements, such as the bars in a histogram, also have a
 ***fill*** color.
@@ -661,6 +670,8 @@ to do this:
 :::example
 **Using `geom_text()` to add text**
 
+Label each line by adding a `geom_text()` geometry.
+
 ```{r ggplotAddText}
 ggplot(data = EmpData,
        aes(x = MonthYr)) + 
@@ -677,6 +688,11 @@ ggplot(data = EmpData,
             label = "LFP",
             col = "darkorange")
 ```
+
+Note that we used color to reinforce the relationship between the label and
+text, and we used the `x=` and `y=` arguments to place the text in a particular
+location.  You will usually need to try out a few locations to get something
+that works.
 :::
 
 Finally, we can combine all of these elements.
@@ -686,7 +702,7 @@ Finally, we can combine all of these elements.
 
 The graphs below combine all of the features described above:
 ```{r ggplotFancyHistogram}
-# Use RGB codes to exactly match color scheme of this book
+# Use RGB codes to exactly match the color scheme of this book
 AstroBlue <- "#002D62"
 AstroOrange <- "#EB6E1F"
 # Fancy histogram
