@@ -184,7 +184,9 @@ the data, what you have done with it, or what it means.  The interested reader
 might also be your coworkers, your boss, or your clients.
 
 Reproducibility requires that we treat our data with care.  In particular, we
-should:
+treat the various things we do with our data as part of a repeated sequence
+of steps called a ***workflow***.  Your data analysis workflow should have
+three key features:
 
 1. Document the ***provenance*** or original source for all data.
    - When downloading data files, document the original URL and date of access.
@@ -194,7 +196,7 @@ should:
      their names.
    - More generally, avoid directly editing data. Data storage is cheap, and
      adding data is almost always preferable to changing or deleting it.
-2. Keep your data and analysis projects as ***portable*** as possible. Data is
+2. Keep your data and analysis ***portable***. Data is
    portable if it can be easily moved between operating systems, file formats,
    and applications.
    - Organize your work into clear projects, and keep all of the files for
@@ -205,16 +207,18 @@ should:
      - Following a naming convention may help make your names more informative
        without making them too long.
 4. Use ***version control*** to manage and track changes to your files as you
-   work. Version control systems can be very elaborate, but I will teach you a
-   simple folder-based workflow:
+   work. Version control systems can be very elaborate and use specialized
+   software, but I will teach you a simple workflow that requires no additional
+   tools:
    - Create a ***working copy*** of each file you plan to edit.
-     - There should only be one working copy of each file.
+     - There should be exactly one working copy of each file.
      - You can edit the working copy.
    - Each time you complete a step in your project, make your current
      working copy the ***master version*** of that file.
-     - There should only be one master version of each file.
-     - The master version represents the project at its most-recently-completed
-       stage. It should not include any half-finished work.
+     - There should be exactly one master version of each file.
+     - The master version represents the project at its most-advanced
+       stage; i.e., the file you would send to your boss to show how your work
+       is going. It should not include any half-finished work.
      - The master version should not be directly edited, but should regularly be
        replaced with the current working copy.
    - You can also have ***archived versions***.
