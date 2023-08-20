@@ -227,7 +227,7 @@ or in Excel using the `AVERAGE()` function.
 
 The ***sample standard deviation*** is a measure of variation in the data,
 and is calculated:
-  $$s_x = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2}$$
+  $$sd_x = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2}$$
 or in Excel using the `STDEV.S()` function.
 
 The ***sample minimum*** is the lowest value observed in the data, and the
@@ -323,7 +323,7 @@ To fill in the statistics for column B:
    unemployment rate in cell B4.
    - There is another built-in Excel function called `STDEV.P()` that uses a
      slightly different formula for the standard deviation:
-     $$s_x^p = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2}$$
+     $$sd_x^p = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2}$$
      We will discuss the difference between these two statistics later.
 4. Use the `MIN()` function to report the minimum unemployment rate in cell B5.
 5. Use the `PERCENTILE.INC()` function to report the 10th percentile of the

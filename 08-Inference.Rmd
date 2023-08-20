@@ -609,8 +609,8 @@ Let $D = (x_1,\ldots,x_n)$ be a random sample of size $n$ on some random
 variable $x_i$ with unknown mean $E(x_i) = \mu_x$ and variance
 $var(x_i) = \sigma_x^2$.  Let the sample average be
 $\bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$, let the sample variance be
-$s_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$ and let the sample
-standard deviation be $s_x = \sqrt{s_x^2}$.
+$sd_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$ and let the sample
+standard deviation be $sd_x = \sqrt{sd_x^2}$.
 
 ::: example
 **The mean and sample average in the roulette data**
@@ -652,7 +652,7 @@ statistic.
 
 The typical test statistic we use in this setting is called the
 ***T statistic***, and takes the form:
-  $$t_n = \frac{\bar{x}_n - \mu_0}{s_x/\sqrt{n}}$$
+  $$t_n = \frac{\bar{x}_n - \mu_0}{sd_x/\sqrt{n}}$$
 The idea here is that we take our estimate of the parameter ($\bar{x}_n$),
 subtract its expected value under the null ($\mu_0$), and divide by an estimate
 of its standard deviation ($s_x/\sqrt{n}$).
@@ -661,16 +661,16 @@ of its standard deviation ($s_x/\sqrt{n}$).
 ***The T statistic in roulette***
 
 If red wins in 35 of the 100 games, then $\bar{x} = 0.35$ and
-$s_x \approx 0.479$. So the T statistic for our test is:
+$sd_x \approx 0.479$. So the T statistic for our test is:
 \begin{align}
-  t_n &= \frac{\bar{x}-\mu_0}{s_x/\sqrt{n}} \\
+  t_n &= \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}} \\
     &\approx \frac{0.35 - 18/37}{0.479/\sqrt{100}} \\
     &\approx -2.84
 \end{align}
 If red wins in 40 of the 100 games, then $\bar{x} = 0.40$ and
-$s_x \approx 0.492$. So the T statistic for our test is:
+$sd_x \approx 0.492$. So the T statistic for our test is:
 \begin{align}
-  t_n &= \frac{\bar{x}-\mu_0}{s_x/\sqrt{n}} \\
+  t_n &= \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}} \\
     &\approx \frac{0.40 - 18/37}{0.492/\sqrt{100}} \\
     &\approx -1.75
 \end{align}
@@ -683,28 +683,30 @@ Next we need to show that this test statistic has a known distribution under
 the null and a different distribution under the alternative.  We can do some
 algebra to get:
   \begin{align}
-    t_n &= \frac{\bar{x}_n + (\mu_x - \mu_x) - \mu_0}{s_x/\sqrt{n}} \\
-      &= \frac{\bar{x}_n - \mu_x}{s_x/\sqrt{n}} + \frac{\mu_x - \mu_0}{s_x/\sqrt{n}} \\
-      &= \frac{\bar{x}_n - \mu_x}{s_x/\sqrt{n}} \frac{\sigma_x}{\sigma_x}
-        + \frac{\mu_x - \mu_0}{s_x/\sqrt{n}} \\
+    t_n &= \frac{\bar{x}_n + (\mu_x - \mu_x) - \mu_0}{sd_x/\sqrt{n}} \\
+      &= \frac{\bar{x}_n - \mu_x}{sd_x/\sqrt{n}} + \frac{\mu_x - \mu_0}{sd_x/\sqrt{n}} \\
+      &= \frac{\bar{x}_n - \mu_x}{sd_x/\sqrt{n}} \frac{\sigma_x}{\sigma_x}
+        + \frac{\mu_x - \mu_0}{sd_x/\sqrt{n}} \\
       &= \underbrace{\frac{\bar{x}_n - \mu_x}{\sigma_x/\sqrt{n}}}_{z_n}
-        \underbrace{\frac{\sigma_x}{s_x}}_{\textrm{?}}
-        + \underbrace{\sqrt{n} \frac{\mu_x - \mu_0}{s_x}}_{\textrm{$=0$ if $H_0$ is true}}
+        \underbrace{\frac{\sigma_x}{sd_x}}_{\textrm{?}}
+        + \underbrace{\sqrt{n} \frac{\mu_x - \mu_0}{sd_x}}_{\textrm{$=0$ if $H_0$ is true}}
   \end{align}
 Let's take a look at the components of this expression:
 
-1. The term $z_n = \frac{\bar{x}_n - \mu_x}{\sigma_x/\sqrt{n}}$ is a standardization
+1. The first term $z_n = \frac{\bar{x}_n - \mu_x}{\sigma_x/\sqrt{n}}$ is a standardization
    of $\bar{x}_n$.  By construction it has the following properties:
    - Mean zero: $E(z_n) = 0$.
    - Unit variance: $var(z_n) = sd(z_n) = 1$.
    - The central limit theorem applies: $z_n \rightarrow^D N(0,1)$.
-2. The term $\frac{\sigma_x}{s_x}$ features the standard deviation ($\sigma_x$)
-   divided by a consistent estimator of the standard deviation ($s_x$).
+2. The second term $\frac{\sigma_x}{sd_x}$ features the standard deviation
+   ($\sigma_x$) divided by a consistent estimator of the standard deviation
+   ($sd_x$).
    - In a given sample, this will be almost but not quite equal to one.
-3. The term $\sqrt{n} \frac{\mu_x - \mu_0}{s_x}$ features a positive number that
-   is growing to infinity as the sample size increases ($\sqrt{n}$) times a
-   number that is zero if the null is true and nonzero if the null is false
-   ($\mu_x - \mu_0$), divided by a positive random variable ($s_x$).
+3. The third term $\sqrt{n} \frac{\mu_x - \mu_0}{s_x}$ features a positive
+   number that is growing to infinity as the sample size increases
+   ($\sqrt{n}$) times a number that is zero if the null is true and nonzero
+   if the null is false ($\mu_x - \mu_0$), divided by a positive random
+   variable ($s_x$).
    - When the null is true, this term is zero.
    - When the null is false, this term is nonzero and will be large if the
      sample is large.
@@ -1088,13 +1090,13 @@ construct them by inverting the hypothesis test.
 
 Pick any $\mu_0$.  We would fail to reject the null hypothesis
 $H_0: \mu_x = \mu_0$ if our test statistic
-$t_n = \sqrt{n}\frac{\bar{x}-\mu_0}{s_x}$ is inside the critical range
+$t_n = \sqrt{n}\frac{\bar{x}-\mu_0}{sd_x}$ is inside the critical range
 $[c_L,c_H]$
 
 To summarize, we fail to reject the null if:
-  $$c_L < \sqrt{n}\frac{\bar{x}-\mu_0}{s_x} < c_H$$
+  $$c_L < \sqrt{n}\frac{\bar{x}-\mu_0}{sd_x} < c_H$$
 The next step is to solve for $\mu_0$, which produces:
-  $$\left(\bar{x} - c_H \frac{s_x}{\sqrt{n}}\right) < \mu_0 < \left(\bar{x} - c_L \frac{s_x}{\sqrt{n}}\right)$$
+  $$\left(\bar{x} - c_H \frac{sd_x}{\sqrt{n}}\right) < \mu_0 < \left(\bar{x} - c_L \frac{sd_x}{\sqrt{n}}\right)$$
 All that remains is to choose a confidence/size level, and decide whether to use
 a parametric or asymptotic test.
 
@@ -1102,9 +1104,9 @@ If we are using the asymptotic approximation to construct a 95\% confidence
 interval, then the 5\% asymptotic critical values are $c_L = -1.96$ and
 $c_H \approx 1.96$. So the 95\% confidence interval consists of all
 $\mu_0$ such that:
-  $$\left(\bar{x} - 1.96 \frac{s_x}{\sqrt{n}}\right) < \mu_0 < \left(\bar{x} - (-1.96) \frac{s_x}{\sqrt{n}}\right)$$
+  $$\left(\bar{x} - 1.96 \frac{sd_x}{\sqrt{n}}\right) < \mu_0 < \left(\bar{x} - (-1.96) \frac{sd_x}{\sqrt{n}}\right)$$
 A more compact way of stating this result is:
-  $$CI^{95} = \bar{x} \pm 1.96 \frac{s_x}{\sqrt{n}}$$
+  $$CI^{95} = \bar{x} \pm 1.96 \frac{sd_x}{\sqrt{n}}$$
 In other words, the 95\% confidence interval for $\mu_x$ is just the point
 estimate plus or minus roughly 2 standard errors.
 
@@ -1134,7 +1136,7 @@ asymptotic approximation, then we need to use the slightly larger critical
 values from the $T_{n-1}$ distribution.
 
 ::: example
-**An parametric confidence interval for the win probability**
+**A parametric confidence interval for the win probability**
 
 The 5\% critical values for the $T_{99}$ distribution are $c_L = -1.98$ and
 $c_H = 1.98$.
@@ -1211,24 +1213,24 @@ Answers can be found in the [appendix](#answers-inference).
 3. Suppose we have a random sample of size $n$ on the random variable $x_i$
    with unknown mean $\mu$ and unknown variance $\sigma^2$. The conventional
    T-statistic for the mean is defined as:
-    $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
+    $$t = \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}}$$
    where $\bar{x}$ is the sample average, $\mu_0$ is the value of $\mu$ under
-   the null, and $\hat{\sigma}_x$ is the sample standard deviation.
+   the null, and $sd_x$ is the sample standard deviation.
    a. What needs to be true in order for $t$ to have the $T_{n-1}$ distribution
       under the null?
    b. What is the asymptotic distribution of $t$?
 
 4. Consider the setting from problem 3 above, and suppose that the true value of 
    $\mu$ is some number $\mu_1 \neq \mu_0$.  Write an expression describing $t$ 
-   as the sum of (a) a random variable that has the $T_{n-1}$ distribution and
-   (b) a random variable that is proportional to $\mu_1-\mu_0$.
+   as the sum of (a) a random variable that has the $T_{n-1}$ distribution
+   and (b) a random variable that is proportional to $\mu_1-\mu_0$.
 
 **GOAL #4: Find the size/significance of a simple test**
 
 5. Suppose that we have a random sample of size $n=14$ on the random variable
    $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis 
    $H_0: \mu = 0$.  Suppose we use the standard t-statistic:
-    $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
+    $$t = \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}}$$
    a. Suppose we use critical values $c_L = -1.96$ and $c_H = 1.96$.  Use Excel
       to calculate the exact size of this test.
    b. Suppose we use critical values $c_L = -1.96$ and $c_H = 1.96$.  Use Excel
@@ -1247,7 +1249,7 @@ Answers can be found in the [appendix](#answers-inference).
 6. Suppose that we have a random sample of size $n=18$ on the random variable
    $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis 
    $H_0: \mu = 0$.  Suppose we use the standard t-statistic:
-    $$t = \frac{\bar{x}-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
+    $$t = \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}}$$
    a. Use Excel to calculate the (two-tailed) critical values that produce an
       exact size of 1\%.
    b. Use Excel to calculate the (two-tailed) critical values that produce an
