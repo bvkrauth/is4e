@@ -54,9 +54,10 @@ you are probably not yet familiar with. So we will start from the beginning.
 Start Excel. Your screen should look something like this:  
 ![Excel screenshot](bin/ExcelBlankWorkbook.png)
 
-When giving instructions, I will refer to various elements of Excel's user
-interface by name. You can use these elements for years without ever
-learning their names, so I will list them here for your reference:
+When giving instructions, it is necessary to refer to various elements of
+Excel's user interface by name:
+
+![Excel UI elements](bin/ExcelUIElements.png)
 
 - The ***menu bar*** is at the top of the screen:  
    ![It shows a list of options: `File Home Insert Draw ...`.](bin/Excel menu bar.jpg)
@@ -82,26 +83,27 @@ learning their names, so I will list them here for your reference:
       you can just select `Home` to make it the currently-active option.
 - The ***formula bar*** is the long white box just below the ribbon:  
   ![formula bar](bin/Excel formula bar.jpg)
-- The ***insert function*** button is to the left of the formula bar:  
+  and the ***insert function button*** is to the left of the formula bar:  
   ![fx](bin/Excel insert function button.jpg){height=16pt}
-- Most of the screen displays a rectangular grid of ***cells*** that is
-  called a ***spreadsheet*** or ***worksheet***:  
+- Most of the screen displays a ***spreadsheet*** or ***worksheet***,
+  which is a rectangular grid of ***cells***:  
   ![cell grid](bin/ExcelCellGrid.png)
   - Columns are identified by letter.
   - Rows are identified by number.
   - Cells are identified by column and row.  For example, the cell in column A,
     row 2 is called cell A2.
-- Below the worksheet is a row of ***tabs***:  
+- Below the worksheet is a row of ***worksheet tabs***:  
   ![tabs](bin/Excel tabs.jpg)
   - Each tab corresponds to a worksheet. In this example, there is a single
     worksheet named *Book 1*.
   - Click on a tab to switch to that worksheet.
   - Double-click on a tab to change its name.
   - Click on the "+" button to add a new worksheet.
-- An Excel file is called a ***workbook***.
-  - Each workbook contains one or more worksheets.
-  - in Windows, Excel files normally have the `.xlsx` extension.
-  - Older files sometimes have the `.xls` extension.
+
+Excel is used to modify and display ***workbooks***, which are collections
+of one or more worksheets. Each Excel workbook is stored in a single file.
+In Windows, these files normally have the `.xlsx` extension but older files
+sometimes have the `.xls` extension instead.
 
 ### Application: Canadian employment data
 
@@ -109,13 +111,12 @@ We will demonstrate the key principles and tools in this chapter
 by cleaning the November 2020 employment data for Canadian provinces.
 
 ::: {.economics data-latex=""}
-**Economics review: Employment statistics**
+**Economics review: Canadian employment statistics**
 
-Employment statistics are typically covered in a Principles of
-Macroeconomics course (at SFU, this course is called ECON 105). To
-review the basics:
+Employment statistics are important macroeconomic indicators that are
+typically covered in your Principles of Macroeconomics course.
 
-- These statistics are reported monthly by Statistics Canada and
+- In Canada, these statistics are reported monthly by Statistics Canada and
   are based on the Labour Force Survey (LFS), a monthly survey of the
   **civilian, non-institutionalized, working-age population of Canada**.
   - "civilian" excludes those on active military duty.
