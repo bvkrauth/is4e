@@ -32,6 +32,7 @@ In this chapter, we will learn how to:
 5. Use relative and absolute cell addresses in Excel formulas.
 6. Use logical and text data in Excel.
 7. Use dates in Excel.
+8. Use Excel to import and export CSV files.
 :::
 
 To prepare for this chapter, please ensure you have a computer with Excel
@@ -1527,6 +1528,174 @@ already seen the function `TODAY(.)` which returns the current date but there is
 also a function `NOW(.)` that returns the current date and time.
 :::
 
+## Saving and exporting data {#saving-and-exporting-data}
+
+Deep down, every file on your computer is just a long sequence of binary
+numbers: zeros and ones.  In order to obtain any useful information from a file,
+we need to know its ***file format***. A file format is just a list of rules
+for interpreting the sequence of zeros and ones, much like a language is a set
+of rules for interpreting the sounds that come out of people's mouths. You can
+often infer a file's format from its extension (the part of the file name after
+the ".").
+
+Applications usually save data in the application's ***native format***: a file
+format specifically designed for use with that application. Excel workbooks
+are normally saved in Excel's native format, which is typically indicated by
+the `.xlsx` extension.
+
+Many applications can also ***import*** (open) or ***export*** (save)
+information in other file formats, These other formats can be the native format
+of some other application or they can be a standardized format that is designed
+to be used by many applications.
+
+File formats are like languages, and importing and exporting data in something
+other than the application's native format is like translating to or from
+a foreign language. If you have ever used Google Translate or similar tools,
+you know that translations are never perfect.  Similarly, importing and
+exporting data can result in the loss or unintentional modification of
+information in the original data source.
+
+### Text files and text editors
+
+The most important file format is the ***text file***. A text file contains a
+sequence of characters (letters, numbers, etc.).
+
+Text files can be read and modified using a simple program called a
+***text editor***. Every computer has at least one simple built-in text editor:
+
+  - Windows has a built in text editor called *Notepad*.
+  - MacOS has a built in text editor called *TextEdit*.
+
+In addition, there are numerous other text editors that are more powerful and
+include useful features like color-coding, spell checking, and autocorrect:
+
+  - I use *Notepad++* which is powerful, easy to use, and available at no charge
+    from https://notepad-plus-plus.org/. Notepad++ is only available for
+    Windows.
+  - Microsoft's *VSCode* is popular with programmers, and is available at no
+    charge from https://code.visualstudio.com/. VSCode is available for Windows,
+    macOS, and many other platforms.
+
+There are also many tools available for comparing, combining, or otherwise
+processing text files.
+
+::: {.sfu data-latex=""}
+**Text editors in SFU campus labs**
+
+All general-purpose computer labs in the SFU Burnaby campus have the following
+text editors installed:
+
+- Windows: Notepad, Notepad++.
+- macOS: TextEdit, VSCode, BBEdit.
+:::
+
+### CSV files {#csv-files}
+
+The most commonly-used export format for Excel is called the
+***comma-separated values*** or ***CSV*** file. CSV is a standardized format
+that is very useful for representing tables of data. It is simple,
+platform-independent, human-readable, compact, and secure. Every major
+statistical analyisis application can read CSV files, as can many other
+applcations.
+
+You can save any worksheet in an Excel workbook as a CSV file.
+
+::: example
+**Creating a CSV file in Excel**
+
+To export the *Employment Nov 2020* worksheet to a CSV file:
+
+1. Select the *Employment Nov 2020* tab.
+2. Select `File > Save As` from the menu, then select the button marked
+   `Browse`.
+3. This will produce the `Save As` dialog box which looks something like this:
+   ![Save As dialog box](bin/save-as-dialog-box.png)
+4. Click on the `Save as type` drop-down box, and select 
+   "CSV (Comma delimited)(*.csv)". 
+   - Note that this will change the file extension from `.xlsx` to `.csv`.
+5. Adjust the destination folder if you want, then select `Save`.
+6. You may get a warning that looks like this:
+   ![CSV warning message](bin/CsVWarningMessage.png)
+   Select `OK`.
+8. Close Excel.
+
+You now have a CSV file.
+:::
+
+So what is a CSV file? CSV files have the following features:
+
+- CSV file names usually have the `.csv` extension.
+- CSV files are text files.
+- Each CSV file represents a table of data.
+- Each line in the CSV file represents a row in the table.
+- The cells in each row are separated or ***delimited*** by commas.
+
+CSV files have a few other features, which are best understood by using a
+text editor to view the exact contents of an actual CSV file.
+
+::: example
+**Viewing a CSV file as text**
+
+To view the exact contents of the CSV file we have created, open it in a text
+editor.
+
+The file will look something like this:
+![CSV viewed as a text file](bin/CSVAsText.png)
+
+As you can see, the CSV file contains text based on the data in your
+worksheet. Each line is a row in the worksheet, and cells are delimited by
+commas.  A few other things to notice:
+
+- There is no formatting information in the file.
+- There are no formulas, only values.
+- When the value in a cell contains a comma, the contents of the cell are
+  surrounded by quotes (`"`) so that the comma is not interpreted as the end
+  of the cell.
+
+:::
+
+You can also open any CSV file in Excel, and Excel will interpret the contents 
+of the file as a worksheet.
+
+::: example
+**Viewing a CSV file in Excel**
+
+Use Excel to open both your CSV file and your current working copy of the XLSX
+workbook. You can do this either by double-clicking on both files, or you can
+start Excel and use its menus to find and open the files.
+
+Your CSV file will look something like this:
+![CSV viewed in Excel](bin/CSVInExcel.png)
+
+We can compare this worksheet to the original Excel workbook from which it was
+exported. They are similar, but there are several important differences:
+
+1. It *only* contains the *EmploymentData* worksheet.
+   - CSV files can only contain a single table.
+2. All cell formatting is gone: the columns are all the same width, and the top
+   row is not in boldface.
+   - CSV files do not include formatting information.
+3. All formulas have been replaced with the corresponding values. For example,
+   the cell H2 contains the formula `=D2 + E2` in the Excel file, and the value
+   2493300 in the CSV file.
+   - Excel does not include formulas when exporting to CSV files.
+4. All values have been rounded. This may not be obvious, but to see an example:
+   - Change the number format in cell I2 so that the value is displayed to 5
+     decimal places.
+   - Cell I2 will display as `69.47641%` in the original Excel file.
+   - Cell I2 will display as `69.50000%` in the CSV file.
+   
+   Excel rounds according to the cell's current numeric display format when
+   exporting to CSV files.
+   
+When importing and exporting CSV files, always check to make sure that important
+information is not lost in the translation between formats.
+:::
+
+There are many commonly-used data file formats other than Excel and CSV. 
+Section \@ref(more-on-data-file-formats) in Chapter \@ref(advanced-data-cleaning)
+discusses some of these formats and how to work with them in Excel.
+
 ## Finishing up {#finishing-up}
 
 At this point our data cleaning project is complete, and our data is ready for
@@ -1676,3 +1845,16 @@ If you aren't sure, try it out in Excel and see what happens.
    a. Display the current month. 
    b. Display the date 100 days from today.
    c. Display the number of days since your birth.
+
+**GOAL #8: Use Excel to import and export CSV files**
+
+9. Suppose you import the following CSV file in Excel:
+   ```
+   Name,Year of birth,Year of death
+   "Mary, Queen of Scots",1542,1547
+   Mary I,1516,1558
+   Elizabeth I,1533,1603
+   ```
+   a. How many rows and columns does the worksheet have?
+   b. What are the contents of cell B1?
+   c. What are the contents of cell C3?

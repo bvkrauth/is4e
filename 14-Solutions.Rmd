@@ -60,6 +60,11 @@ This appendix provides solutions to all end-of-chapter practice problems.
    b. `=TODAY()+100`
    c. `=TODAY()-DATE(1969,11,20)` - using my birthday; yours will obviously be
       different.
+9. You can confirm these answers by creating the CSV file and opening it 
+   in Excel.
+   a. The worksheet will have 4 rows and 3 columns.
+   b. Cell B1 will contain the string "Mary, Queen of Scots".
+   c. Cell C3 will contain the number 1603.
 
 ## **3** Probability and random events {-#answers-probability}
 

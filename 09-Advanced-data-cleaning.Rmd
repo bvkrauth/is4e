@@ -96,37 +96,15 @@ views. It is not unusual for useful data to come from politically-motivated
 sources; for many years the best data on tobacco prices and taxes came from
 the Tobacco Institute, a tobacco industry lobbying group (https://en.wikipedia.org/wiki/Tobacco_Institute).    
 
-## Data file formats
+## More on data file formats {#more-on-data-file-formats}
 
-Nearly every software application we might use for data analysis has a 
-***native***  file format specifically designed for saving and reading data 
-in that application.  For example, Excel's native format is the `.xlsx` file 
-format.
+Section \@ref(saving-and-exporting-data) in Chapter
+\@ref(basic-data-cleaning-with-excel) discussed Excel's native file format as
+well as another format called CSV. 
 
-Applications work most seamlessly with their native format.  However, most 
-modern applications can also ***import*** (read) and ***export*** (save) files
-in other formats including native formats of other popular programs.
-Importing and exporting across different formats is a little like translating
-between languages: information can get lost or misinterpreted, so it
-is important to be careful.
-
-There are also several standard or open file formats that are commonly used to
-share data across applications.  Most of these open file formats are built from
-***text files***. 
-
-- A text file is just a sequence of lines of ***plain text*** characters with no
-  formatting, graphics, or complex structure.
-  - Most plain text characters are standard visible letters, numbers, spaces,
-    and symbols.
-  - There may also be some non-display characters, including the end-of-line 
-    character(s), the end-of-file character, and tab characters.
-- You can view and edit text files using a simple application called a 
-  ***text editor***.
-  - Windows has a simple built-in text editor called *Notepad*
-  - MacOS has a built-in text editor called *TextEdit*. 
-  - There are more advanced text editors available for free online; 
-    I use one called [*Notepad++*](https://notepad-plus-plus.org/). 
-- Text files can be read by humans as well as computer programs.
+CSV is an example of an ***open*** file format - one that is based on some
+publicly-defined standard that can be used freely by anyone.  There are many
+other open formats. Like CSV, most open file formats are based on text files.
 
 Files that are not text files are usually called ***binary*** files. Binary
 files are generally not human-readable.  If you try to open them with a
@@ -184,7 +162,7 @@ Mary, Queen of Scots   1542            1547
 Mary I                 1516            1558
 Elizabeth I            1533            1603
 ```
-or they may be in a less-readable format like this:
+or they may be in a more compact but less readable format like this:
 ```
 Mary, Queen of Scots15421547
 Mary I              15161558
@@ -197,6 +175,12 @@ point in each line.  For example:
   each line, and the year of death always starts on the 40th character.
 - In the second file, the year of birth always starts on the 21st character of
   each line, and the year of death always starts on the 25th character.
+
+Fixed with files can usually store data more efficiently than CSV files, but
+this efficiency comes at a cost: you need to know where the columns begin.
+You often see fixed-width files in large data sets like major surveys, and they
+often come with a "dictionary" file that describes where each column begins
+and ends.
 
 You can open fixed-width text files in Excel using the *Text Import Wizard*.
 
@@ -234,114 +218,42 @@ To open this file in Excel, use the Text Import Wizard:
    changing the data format for each individual column:  
    ![Text Import Wizard- Step 3 of 3](bin/TIW3.png){width=50%}  
    We do not need to worry about any of these options, so select `Finish`.
-7. Save the file under a new name to create a working copy of this data set.
-   - I would use the file name `TaxRates_WC.xlsx`.
+7. Save the file under the new name `CountryCodes_WC.xlsx` to create a
+   working copy of this data set.
 
 Our worksheet now contains the imported data, correctly arranged into cells.
 :::
 
-### CSV files
+### Delimited formats
 
-The most common and useful general-purpose format for tabular data is called the
-***comma separated values*** or ***CSV*** file format. A CSV file is just a text
-file with the following features:
+CSV is an example of a delimited format in which cells are separated or
+*delimited* by a particular character. There are other delimited formats
+that are just like CSV but use some character other than the comma as the
+delimiter:
 
-- Each line in the file represents a row in the table.
-- Within each row, cell values are separated or ***delimited*** by commas.
-- Where necessary, text values are enclosed in quotes.
+- ***Space-delimited*** text files use spaces as the delimiter. For example,
+  a space-delimited version of our table might look like this:
 
-For example, this CSV file:
-```
-Name,Year of birth,Year of death
-"Mary, Queen of Scots",1542,1547
-Mary I,1516,1558
-Elizabeth I,1533,1603
-```
-will appear in Excel as the table:
-
-| Name                 | Year of birth | Year of death |
-|:---------------------|:-------------:|:-------------:|
-| Mary, Queen of Scots |    1542       |    1547       |
-| Mary I               |    1516       |    1558       |
-| Elizabeth I          |    1533       |    1603       |
-
-Notice that the quotes around "Mary, Queen of Scots" are needed in order for the
-comma to be interpreted as an actual comma rather than a delimiter between
-cells. 
-
-::: example
-**Exporting a CSV file from Excel**
-
-To save the Excel worksheet we created in the previous section as a CSV file:
-
-1. Select `File >  Save As`. You will see:
-   - a text box giving the file name (`CountryCodes.txt`) 
-   - a drop-down box giving the file format (`Text (Tab delimited) (*.txt)`
-3. Select `CSV (Comma delimited) (*.csv)` from the drop-down box.
-4. Enter the file name `CountryCodes.csv` in the text box.
-5. Select `Save`.
-   - You may get the warning message: "The selected file type does not support
-     workbooks that contain multiple sheets. To save only the active sheet click
-     OK...." If so, select `OK`.
-6. Close Excel.
-   - You may get another warning message: "Want to save your changes to 
-     CountryCodes.csv?" If so, select `Don't save`.
-     
-You have created a CSV file.
-:::
-
-You can see the exact contents of a CSV file by opening it in a text editor.  
-
-:::example
-**Opening a CSV file as text**
-
-Use your preferred text editor to open the file CountryCodes.csv. It will look
-something like this:  
-![CountryCodes.csv viewed in a text editor](bin/CSVinNotepad.png){width=50%} 
-:::
-
-If a CSV file has `.csv` at the end of its file name, you can open it in Excel
-by just double-clicking on it. Otherwise, you can use the Text Import Wizard.
-
-CSV files (and text files in general) have several important limitations
-relative to regular Excel (`.xlsx`) files:
-
-1. A CSV file can only contain one table, while an Excel file can contain
-   multiple tables.
-2. A CSV file can only contain cell values, and cannot contain:
-   - Formulas.
-   - Formatting.
-   - Graphs.
-   - Any other fancy Excel features.
-   
-These limitations are also the main advantage of the CSV file: they are simple
-ways of reporting tabular data and can be read by virtually any program, or
-even by a human.
-
-### Other file formats
-
-In addition to CSV files, we will run into files that use characters other than
-the comma to delimit cells. 
-
- - ***Space-delimited*** text files are just like CSV files, but use spaces as
-   the delimiter.  For example, a space-delimited version of our table might
-   look like this:
-
+  ```
+  Name "Year of birth" "Year of death"
+  "Mary, Queen of Scots" 1542 1547
+  "Mary I" 1516 1558
+  "Elizabeth I" 1533 1603
    ```
-   Name "Year of birth" "Year of death"
-   "Mary, Queen of Scots" 1542 1547
-   "Mary I" 1516 1558
-   "Elizabeth I" 1533 1603
-    ```
 
- - ***Tab-delimited*** text files are just like CSV files, but use a tab
-   character as the delimiter.
+- ***Tab-delimited*** text files use a tab character as the delimiter.
 
- - ***Whitespace-delimited*** text files use some combination of tabs and spaces
+- ***Whitespace-delimited*** text files use some combination of tabs and spaces
    as the delimiter.
-
+   
+- CSV files sometimes use the semicolon (`;`) as the delimiter instead of the
+  comma. This is to accommodate users in countries that use the comma as a
+  decimal separator.
+   
 Like fixed-width and CSV files, space-delimited and tab-delimited files can be
 imported into Excel using the Text Import Wizard.
+
+### Other formats
 
 Excel also has a wide variety of tools for obtaining data from various
 databases, online services, etc. We do not have time to explore all of these
@@ -376,7 +288,7 @@ looks like the picture above. To use the Text to Columns tool:
 Your worksheet should now look like this:  
   ![After Text-to-columns](bin/TTC2.png){width=50%}
 
-Save this file and exit Excel.
+Save this file as `TaxRates_WC.xlsx` and exit Excel.
 :::
 
 ## Combining data
@@ -409,11 +321,11 @@ single Excel workbook.
 :::example
 **Combining worksheets in a single file**
 
-We currently have three data files: *pwt100.xlsx*, *CountryCodes.csv*, and 
-*TaxRates_WC.xlsx*. To combine them in a single file:
+We currently have three data files: *pwt100.xlsx*, *CountryCodes_WC.xlsx*,
+and  *TaxRates_WC.xlsx*. To combine them in a single file:
 
 1. Open all three files.
-2. Go to *CountryCodes.csv*, and right-click on the *CountryCodes* tab
+2. Go to *CountryCodes_WC.xlsx*, and right-click on the *CountryCodes* tab
    at the bottom of the page.  A menu will appear; select `Move or Copy...`
    and the `Move or Copy` dialog box will appear:  
    ![Move or Copy](bin/MoveOrCopy.png){width=30%}  
@@ -423,6 +335,9 @@ We currently have three data files: *pwt100.xlsx*, *CountryCodes.csv*, and
    workbook.
 5. At this point all of our worksheets are in a single workbook. Save the 
    workbook with name *GrowthData_WC.xlsx*, and close all other files.
+   
+We are done with the working copies *TaxRates_WC.xlsx* and
+*CountryCodes_WC.xlsx*, so you can delete those files if you like.
 :::
 
 Before proceeding, it's a good idea to make sure our data is tidy.
