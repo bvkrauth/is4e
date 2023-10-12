@@ -623,7 +623,7 @@ This is a classic probability question, as it makes use of Bayes' law and the
 law of total probability, and it has obvious practical importance.
 
 Since we want a conditional probability, we start by stating Bayes' law:
-   $$\Pr(D|T) = = \frac{\Pr(T|D)\Pr(D)}{\Pr(T)}$$
+   $$\Pr(D|T) = \frac{\Pr(T|D)\Pr(D)}{\Pr(T)}$$
 Bayes' law will allow us to calculate $\Pr(D|T)$ if we can find the components
 of the right side of this equation. We already know that $\Pr(T|D)=p$ and
 $\Pr(D)=d$, so all we need is to find $\Pr(T)$.
