@@ -298,7 +298,7 @@ A ***linear function*** is one that takes the form:
 \end{align}
 where $a$ and $b$ are constants.  For example $x$ is a linear function of $x$,
 as are $3 + x$, $5x$, etc. Linear functions are particularly easy to work with,
-and we will see them regularly in statitics.
+and we will see them regularly in statistics.
 
 ### The indicator function {#the-indicator-function}
 
