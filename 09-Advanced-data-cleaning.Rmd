@@ -1,6 +1,6 @@
 # (PART\*) Working with Data {-}
 
-# Advanced data cleaning {#advanced-data-cleaning}
+# Advanced Excel {#advanced-data-cleaning}
 
 ```{r setup10, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
@@ -16,34 +16,37 @@ In previous chapters, we have used Excel to
 The next few chapters will further develop our data skills.
 
 This chapter will develop additional concepts and Excel skills that are useful
-in cleaning complex data sets: file formats, merging, aggregation, and how to
-avoid and handle errors.
+in cleaning and managing complex data sets, and in analyzing the relationships
+between two or more variables.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
 
 In this chapter, we will learn how to:
 
-1. Identify and work with common data file formats:
+1. Identify and work with multiple data files and formats:
    - Excel native (.xlsx) format
    - Text format (CSV, tab/space delimited, fixed width)
-2. Describe and implement common data-cleaning tasks:
-   - Matching/merging using the VLOOKUP function
-   - Crosswalk tables
-   - Aggregation by groups using "IFS" functions
-3. Describe and use Excel data-management tools:
+2. Match/merge observations using the VLOOKUP function.
+3. Use crosswalk tables
+4. Aggregate observations by groups using the "IFS" functions.
+5. Describe and use Excel data-management tools:
    - Error codes
    - Data validation and error handling
    - Data protection
+6. Construct and interpret frequency tables, cross-tabulations, and conditional
+   averages using Excel pivot tables.
 :::
 
 To prepare for this chapter, please review the chapter on 
-[basic data cleaning with Excel](#basic-data-cleaning-with-excel).
-and download the following three data files:
+[basic data cleaning with Excel](#basic-data-cleaning-with-excel)
+and [basic data analysis with Excel](#basic-data-analysis-with-excel).
+Then download the following four data files:
 
 > [https://bookdown.org/bkrauth/IS4E/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)  
 > [https://bookdown.org/bkrauth/IS4E/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
 > [https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
+> [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
 
 The third file may display in your browser rather than downloading like the other 
 files.  If that happens, you can right-click on the link above and select 
@@ -52,6 +55,13 @@ files.  If that happens, you can right-click on the link above and select
 ::: {.economics data-latex=""}
 **Data on long-run economic growth**
 
+One of the most important questions in macroeconomics is why some countries have
+consistently experienced much more rapid economic growth (in per capita real
+GDP) than others. One useful if limited tool for addressing this question is
+long run cross-country comparisons: are there some country characteristics that
+are useful in predicting long run growth rates?
+
+The first three data files listed above relate to this question.
 Our main data source `pwt100.xlsx` is the ***Penn World Table*** (PWT), a
 cross-country data set covering real GDP, population, and other macroeconomic
 variables. It has been used extensively by macroeconomists seeking to
@@ -96,7 +106,7 @@ views. It is not unusual for useful data to come from politically-motivated
 sources; for many years the best data on tobacco prices and taxes came from
 the Tobacco Institute, a tobacco industry lobbying group (https://en.wikipedia.org/wiki/Tobacco_Institute).    
 
-## More on data file formats {#more-on-data-file-formats}
+## More on data files {#more-on-data-file-formats}
 
 Section \@ref(saving-and-exporting-data) in Chapter
 \@ref(basic-data-cleaning-with-excel) discussed Excel's native file format as
@@ -105,10 +115,6 @@ well as another format called CSV.
 CSV is an example of an ***open*** file format - one that is based on some
 publicly-defined standard that can be used freely by anyone.  There are many
 other open formats. Like CSV, most open file formats are based on text files.
-
-Files that are not text files are usually called ***binary*** files. Binary
-files are generally not human-readable.  If you try to open them with a
-text editor you will mostly see a bunch of odd-looking symbols.
 
 ::: {.economics data-latex=""}
 **The economics of file formats**
@@ -177,10 +183,10 @@ point in each line.  For example:
   each line, and the year of death always starts on the 25th character.
 
 Fixed with files can usually store data more efficiently than CSV files, but
-this efficiency comes at a cost: you need to know where the columns begin.
-You often see fixed-width files in large data sets like major surveys, and they
-often come with a "dictionary" file that describes where each column begins
-and ends.
+this efficiency comes at a cost: you need to know where the columns begin
+and end. You often see fixed-width files in large data sets like major surveys,
+and they often come with a "dictionary" file that describes where each column
+begins and ends.
 
 You can open fixed-width text files in Excel using the *Text Import Wizard*.
 
@@ -269,7 +275,7 @@ This can happen if a text file has been incorrectly imported, or if you have
 copied-and-pasted data from a PDF file or web page.  Fortunately, Excel has a
 way of fixing that: the ***Text to Columns*** tool.
 
-:::example
+::: example
 **Using the text-to-columns tool**
 
 Open the file [TaxRates.xlsx](sampledata/TaxRates.xlsx).  As you can see, it
@@ -288,23 +294,8 @@ looks like the picture above. To use the Text to Columns tool:
 Your worksheet should now look like this:  
   ![After Text-to-columns](bin/TTC2.png){width=50%}
 
-Save this file as `TaxRates_WC.xlsx` and exit Excel.
+Save this file as `TaxRates_WC.xlsx`.
 :::
-
-## Combining data
-
-The data that we wish to analyze often comes in multiple tables from multiple
-sources.  In order to proceed with the analysis, we often need to combine
-information in various ways:
-
-1. We will want to combine multiple data files into a single Excel file.
-2. We will want to link observations in one table with observations in another
-   table.
-3. We will want to construct new variables that are group-level aggregates
-   (counts, averages, or sums) of existing variables.
-
-This section will go through the most important tools and techniques of
-combining data in these ways.
 
 ### Combining Excel files
 
@@ -318,7 +309,7 @@ to another folder.
 An easier approach in most situations is to just combine everything into a
 single Excel workbook.
 
-:::example
+::: example
 **Combining worksheets in a single file**
 
 We currently have three data files: *pwt100.xlsx*, *CountryCodes_WC.xlsx*,
@@ -342,7 +333,7 @@ We are done with the working copies *TaxRates_WC.xlsx* and
 
 Before proceeding, it's a good idea to make sure our data is tidy.
 
-:::example
+::: example
 **Making the our workbook tidy**
 
 1. Take a look at each of our three main worksheets in `GrowthData_WC.xlsx` and
@@ -363,20 +354,64 @@ Before proceeding, it's a good idea to make sure our data is tidy.
       - For example, if row 2 depicts Aruba (ABW) in 1950, cell A2 should
         display "ABW1950".
    d. Copy/paste or fill this formula to the rest of column A.
-3. Make a copy of the *TaxRates* worksheet, and name it *GrowthData*. This sheet
-   will be the starting point for the linked data that we will construct in the
-   next two sections.
-4. Save your file.
+3. Save your working copy (as *GrowthData_WC.xlsx*).
 
-Our data set is now tidy and ready to link.
+Our data set is now tidy and ready to work with.
 :::
 
-### Linking observations
+## Linking observations
 
 One of the most common tasks in cleaning data is to combine variables from two
-or more data sets.  In order to do this, we need to ***match*** or ***link***
-observations in the two tables on the basis of one or more ID variables or
-***keys***. 
+or more data sets.  In order to do this, we need to ***link*** observations in
+the two tables on the basis of one or more ID variables or ***keys***. For
+example, we may have a table of data on data on children, and want to add
+information about their parents from another table. Or we may have data on
+the financial performance of a business, and want to link it to data on
+macroeconomic conditions. Linking goes by many other names, including
+***matching*** and ***merging***.
+
+::: example
+**Linking tax and GDP data**
+
+Suppose we are interested in exploring the relationship across countries
+between economic (GDP) growth and tax rates.  Do countries with lower taxes grow
+faster or slower than countries with higher taxes?
+
+The economic growth rates of any country in the Penn World Tables can be
+calculated using the the *Data* worksheet, and the tax rate of any country
+in the Tax Foundation data can be found in the *Tax Rates* worksheet. We
+would like to combine this information so that we have a table with each
+country's tax rate and economic growth rate.
+:::
+
+In order to link observations across two tables, the tables need to share a
+common key variable that can be used for matching. Usually both tables share
+some unique ID variable that can be used as the key.  Sometimes there is no
+such variable, but you can construct one using a third table called 
+a ***crosswalk table***.
+
+::: example
+**Using a crosswalk table**
+
+Our *Data* and *TaxRates* tables do not yet have a common key variable: 
+
+- *Data* provides two ways of identifying a country in each observation:
+   - The country name
+   - The three-letter [ISO country code](https://www.iso.org/iso-3166-country-codes.html)
+- *TaxRates* only provides the country name. 
+ 
+We could try to match on country name, but the country names are not exactly the
+same in the two tables. For example, the same country is called "South Korea" in
+*TaxRates* and "Republic of Korea" in *Data*. This is a common problem with
+proper names, so people who work with data usually prefer standardized codes.
+
+One option is to simply change the country names in one of our tables, but
+that goes against our general principle that we avoid changing data.
+
+A better solution is to use a crosswalk table. The *CountryCodes* worksheet is a crosswalk table I have created for exactly this purpose: it gives the ISO
+country code for each country name, including name variations like "Republic of
+Korea" and "South Korea."
+:::
 
 All statistics packages have tools to link observations.  In Excel, the table
 you are obtaining data from is called a ***lookup table*** and the key tool is
@@ -392,46 +427,26 @@ argument:
   4. `Range_lookup` sets the rules for matching. For our purposes, this should
      always be set to `FALSE`.
 
-and returns the value in column `Col_index_num` and the row in the first column
+It returns the value in column `Col_index_num` and the row in the first column
 of `Table_array` that maches `Lookup_value`.
 
 For example, the formula `=VLOOKUP("California",A1:G10,3,FALSE)` looks for a
 row/observation with the value "California" in column A (cells A1:A10), then
 returns the value in column C (cells C1:C10) for that row/observation.
 
-:::example
-**Matching with a crosswalk table**
+::: example
+**Linking with VLOOKUP**
 
-The *TaxRates* worksheet from the Tax Foundation and the *Data* worksheet from 
-the Penn World Table both provide information at the country level. But they do
-not yet have a common key variable: 
+Our first step is to use our crosswalk table and the `VLOOKUP()` function to
+add a country code to the tax data.
 
-- *Data* provides two ways of identifying a country in each observation:
-   - The country name
-   - The three-letter [ISO country code](https://www.iso.org/iso-3166-country-codes.html)
-- *TaxRates* only provides the country name. 
- 
-We could try to match on country name, but the country names are not exactly the
-same in the two tables. For example, the same country is called "South Korea" in
-*TaxRates* and "Republic of Korea" in *Data*. This is a common problem with
-names, so people who work with data usually prefer standardized codes.
-
-One option is to simply change the country names in one of our tables, but
-that goes against our general principle that we avoid changing data. A better
-solution is to use a ***crosswalk table*** that gives the country code for each
-country name, including name variations like "Republic of Korea" and
-"South Korea."  The *CountryCodes* worksheet is a crosswalk table I have created
-for this purpose. If you take a look at it, you will notice that there are
-observations for both "Republic of Korea" and "South Korea."
-
-Let's use our crosswalk table and the `VLOOKUP()` function to add a country code
-to the *GrowthData* worksheet.
-
-1. Insert a new column to the left of the current column A.
+1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
+2. Make a copy of the *TaxRates* worksheet, and name it *GrowthData*.
+3. Insert a new column in *GrowthData* to the left of the current column A.
    - You can do that by selecting any cell in column A, and then selecting
      `Home > Insert > Insert Sheet Columns`
-2. Enter **CountryCode** in cell A1 to name the variable.
-3. Construct the appropriate formula in cell A2:
+4. Enter **CountryCode** in cell A1 to name the variable.
+5. Construct the appropriate formula in cell A2:
    - `Lookup_value` should be the country name of the current observation
      (`B2`).
    - `Table_array` should be the full table of country names and codes
@@ -439,27 +454,33 @@ to the *GrowthData* worksheet.
    - `Col_index_num` should refer to the second column in `Table_array` since
      that column contains the ISO codes (`2`).
    - `Range_lookup` should be `FALSE`.
-4. Change references in the formula from relative to absolute as appropriate.
+6. Change references in the formula from relative to absolute as appropriate.
    The resulting formula will be 
    `=VLOOKUP(GrowthData!B2,CountryCodes!A$2:B$185,2,FALSE)`.
-5. Copy/paste or fill the formula to the remaining cells in column A.
-6. Check your work: Column A should now display the ISO country code for each
+7. Copy/paste or fill the formula in cell A2 to the remaining cells in column A.
+8. Check your work: Column A should now display the ISO country code for each
    observation.
-7. Save your file.
+9. Save your working copy of `GrowthData_WC.xlsx`.
 :::
 
-`VLOOKUP()` can also be used to match on multiple criteria.
+`VLOOKUP()` can also be used in combination with the `CONCAT()` function to
+link observations on multiple criteria.
 
-:::example
-**Matching on multiple criteria**
+::: example
+**Linking on multiple criteria**
 
-Now suppose we want to create a variable that is each country's population
-(**pop** in the *Data* worksheet) in 2019.  Since we need to match both country
-and year, we will need to use the `CONCAT()` function to put the country and
-year together in a single criterion.
+Now suppose we want to create a variable in the *GrowthData* worksheet that
+contains each country's population (**pop** in the *Data* worksheet) in 2019
+and another that contains each country's population in 1990. This will allow
+us to calculate population growth for each country over the time 1990-2019
+time period.
 
-1. Enter **Pop2019** in cell K1 of *GrowthData* to name the variable.
-2. Enter the correct formula in cell K2:
+Since we need to match both country and year, we will need to use the
+`CONCAT()` function to put the country and year together in a single criterion.
+
+1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
+2. Enter **Pop2019** in cell K1 of *GrowthData* to name the variable.
+3. Enter the correct formula in cell K2:
    - `Lookup_value` should combine the country code (cell A2) with the year
      (2019), so it should be `CONCAT(A2,"2019")`.
    - `Table_array` should be the table in the *Data* worksheet containing the
@@ -469,23 +490,23 @@ year together in a single criterion.
    - `Col_index_num` should refer to the eighth column in `Table_array` since
      that column contains the **pop** variable (`8`).
    - `Range_lookup` should be `FALSE`.
-3. Make the cell references absolute where needed, which will result in the
+4. Make the cell references absolute where needed, which will result in the
    formula `=VLOOKUP(CONCAT($A2,"2019"),Data!$A$2:$H$12811,8,FALSE)`.
-4. Copy/paste or fill the formula to the remaining cells in column K.
+5. Copy/paste or fill the formula to the remaining cells in column K.
 
 We can also create another variable whose variable is the country's population
 in 1990:
 
-5. Enter **Pop1990** in cell L1 of *GrowthData* to name the variable.
-6. Enter the correct formula in cell L2. It will be nearly identical to the
+6. Enter **Pop1990** in cell L1 of *GrowthData* to name the variable.
+7. Enter the correct formula in cell L2. It will be nearly identical to the
    formula in cell K2, but with "2019" replaced by "1990":
    `=VLOOKUP(CONCAT($A2,"1990"),Data!$A$2:$H$12811,8,FALSE)`
-7. Copy/paste or fill the formula to the remaining cells in column K.
-8. Save your file.
-   
+8. Copy/paste or fill the formula to the remaining cells in column K.
+9. Save your working copy of `GrowthData_WC.xlsx`.
+
 You may note that the PWT goes all the way back to 1950, and may wonder why I
 picked 1990 as my starting point.  The reason for this is many countries do not
-have data going back to 1950, especially those countries that were part of or
+have PWT data going back to 1950, especially those countries that were part of or
 allied with the Soviet Union. By 1990, the PWT has data for almost all
 countries.
 :::
@@ -506,19 +527,38 @@ should not matter, the exact match option is preferable.
 ::: {.fyi data-latex=""}
 **Related functions**
 
+`VLOOKUP()` only works if you have a table with observations in rows and
+variables in columns. However, there is also a function called `HLOOKUP()`
+for use when you have a table with variables in rows and observations in
+columns.
+
 Some versions of Excel have a new and improved lookup function called
 `XLOOKUP()`. It has better defaults, is more flexible, and is easier to use.
 Unfortunately, it is not available in all versions of Excel.
-
-There is also a function called `HLOOKUP()` for use when you have a table with
-variables in rows and observations in columns.
 :::
 
-### Aggregating by group
+## Aggregating observations
 
 Sometimes we will want to create a new variable that is the sum or average of
 another variable within some group, or the count of the number of observations
-in that group.
+in that group. This kind of variable is called an ***aggregate*** variable.
+
+::: example
+**Average investment shares**
+
+Suppose we are interested in whether high-tax countries tend to have higher
+or lower investment rates than low-tax countries. The PWT data include 
+the investment share of GDP in the variable **csh_i**. But investment shares
+are highly sensitive to the business cycle, so the average investment share
+over time might be a more informative measure of a country's general investment
+climate than the investment share in any particular year.
+
+So we want a single variable for each country that represents the country's
+average investment share over the period covered by the data. This is an
+example of a group-level aggregate, with the group being the country and the
+aggregation method being the sample average.
+:::
+
 
 We can construct group-level averages variables using the `AVERAGEIFS()`
 function.  It takes three arguments:
@@ -534,7 +574,7 @@ For example `=AVERAGEIFS(C1:C100,A1:A100,"California")` returns the average
 value in column C of all of the observations whose value in column A is
 "California".
 
-:::example
+::: example
 **Constructing an aggregate variable**
 
 Suppose we are interested in whether high-tax countries tend to have higher
@@ -545,18 +585,19 @@ period of the data.
 
 We can do this using the `AVERAGEIFS()` function:
 
-1. Enter **AvgIShare** in cell M1 to name the variable.
-2. Construct the correct formula in cell M2 using the function `AVERAGEIFS()`:
+1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
+2. Enter **AvgIShare** in cell M1 of *GrowthData* to name the variable.
+3. Construct the correct formula in cell M2 using the function `AVERAGEIFS()`:
    - `average_range` should be the full range of investment shares
      (`Data!AO2:AO12811`)
    - `criteria_range` should be the full range of country codes
      (`Data!A2:A12811`)
    - `criteria` should be the cell containing the country code of the current
      observation (`A2`)
-3. Adjust the formula to have the correct absolute references. The resulting
+4. Adjust the formula to have the correct absolute references. The resulting
    formula should be `=AVERAGEIFS(Data!AO$2:AO$12811,Data!A$2:A$12811,A2)`.
-4. Copy/paste or fill this formula into the remaining cells in column M.
-5. Save your file.
+5. Copy/paste or fill this formula into the remaining cells in column M.
+6. Save your working copy of `GrowthData_WC.xlsx`.
 
 The average investment share should range from a minimum of 0.13 for Bulgaria
 to a maximum of 0.44 for Cyprus.
@@ -585,49 +626,153 @@ within our data set (as in this chapter).
 **Related functions**
 
 The `COUNTIFS()`, `AVERAGEIFS()`, `SUMIFS()`, `MINIFS()` and `MAXIFS()`
-functions all allow for multiple criteria to be used.  Excel also includes
-a set of older functions `COUNTIF()`, `AVERAGEIF()`, `SUMIF()`, `MINIF()` and
-`MAXIF()` that allow only a single criterion.  You may see these functions in
-older worksheets.
+functions all allow for multiple criteria to be used.
+
+Excel also includes a set of older functions `COUNTIF()`, `AVERAGEIF()`,
+`SUMIF()`, `MINIF()` and `MAXIF()` that allow only a single criterion.
+You may see these functions in older worksheets.
 :::
 
-## Advanced data management
+## Managing data problems
+
+Real-world data analysis regularly encounters mistakes and unexpected events,
+so Excel includes various tools for avoiding, detecting, and addressing
+problems.
 
 ### Error codes
 
 Sometimes an Excel formula does not produce a valid result. When that happens,
-Excel will return an ***error code*** to indicate what has gone wrong. Excel's
-most commonly-used error codes are:
+Excel will return an ***error code*** to indicate what has gone wrong. The
+table below lists Excel's most commonly-used error codes.  There are many
+others, but you can always Google an unfamilar error code to find out what
+it means.
 
 |  Code     | Explanation                             | Example               |
 |:----------|:---------------------------------------:|:---------------------:|
 | `#VALUE!` | Wrong argument type for function        |`=SQRT("HELLO")`       |
 | `#NAME?`  | Function does not exist                 | `=NOTAREALFUNCTION(1)`|
 | `DIV/0!`  | Division by zero                        | `=1/0`                |
-| `#REF!`   | Reference to cell that has been deleted |                       |
+| `#REF!`   | Formula references a deleted cell       |                       |
 | `#NUM!`   | Result is not a number                  | `=SQRT(-1)`           |
 | `#NA`     | Lookup function unable to find match    |                       |
 
-If you aren't sure what an error code means, Google it.
+Error codes typically propagate through calculations.  For example, suppose
+cell  A1 contains the formula `=1/0` (which returns the error code
+`DIV/0!`).  Then almost any formula that refers to cell A1 will return the
+same error code.
 
-Although error codes are helpful in figuring out what has gone wrong with a
-calculation, they should not be part of your final work product. Instead, you
-should rewrite your formulas to catch and handle error conditions. 
+In some cases, you may want to rewrite your formulas to catch and handle error
+conditions.
 
-:::example
+::: example
 **Catching and handling an error condition**
 
 Suppose you want the variable in column B to be the square root of the variable
 in column A, but the variable in column A is sometimes negative.  As a result,
-the simple formula `=SQRT(A1)` displays the square root in some cases and the
-error code `#NUM!` in others.
+the simple formula 
+
+`=SQRT(A1)` 
+
+displays the square root of A1 in some cases and the error code `#NUM!` in
+others.
 
 We can use the `IF()` function to catch this error, and handle it in whatever
 way we want.  For example, the formula:
+
   `=IF(A1>=0,SQRT(A1),"")`
+
 will return the square root of A1 if A1 is positive or zero, and a blank cell if
 A1 is negative.
 ::::
+
+### Protecting data
+
+One of the most common Excel problems occurs when someone unintentionally
+changes the data in a file. For example:
+
+- Your cat walks over your keyboard and overwrites the contents of a cell.
+- You break the rule about keeping the original data untouched, and make a
+  change that you later wish you hadn't made.
+
+The risk of unintentional changes is an unavoidable consequence of Excel's
+fundamental design: there is no separation between data and analysis.  This
+design feature has the positive implication that your data is always visible
+and accessible, but it comes at a cost.
+
+One way of avoiding this cost is to make a practice of making your original data
+"read only." Excel does this through the combined mechanisms of ***protecting***
+sheets and ***locking*** cells.  Protecting and locking work according to three
+rules:
+
+1. Each worksheet is either protected or unprotected.
+   - By default, all worksheets are unprotected.
+2. Each cell is either locked or unlocked.
+   - By default, all cells are locked.
+3. Any locked cell in any protected sheet cannot be edited. All other cells can
+   be edited.
+
+   | Cell/sheet status    | Sheet is protected | Sheet is unprotected    |
+   |----------------------|--------------------|-------------------------|
+   | **Cell is locked**   | Cannot edit cell   | Can edit cell (default) |
+   | **Cell is unlocked** | Can edit cell      | Can edit cell           |
+
+By default, you can edit any cell in any worksheet. But you can change this
+behavior by changing the cell and/or sheet status.
+
+::: example
+**Protecting an entire worksheet**
+
+The PWT data table *Data* contains original raw that we do not want changed. To
+prevent changes to that worksheet, we will want the worksheet to be *protected*
+and for all of its cells to be *locked*.  By default the worksheet is
+unprotected and all cells are locked, so all we need to do is protect the sheet:
+
+1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
+2. Right-click on the *Data* tab at the bottom of the page.  A menu will appear.
+3. Select `Protect Sheet`.  The Protect Sheet dialog box will provide several
+   options:  
+  ![Protect Sheet dialog box](bin/ProtectSheet.png){width=30%}  
+4. The default options are fine, so select `OK`.
+5. Save your working copy of `GrowthData_WC.xlsx`.
+   
+Now that you have protected the *Data* worksheet, try to edit any cell. You will
+get an error message.
+:::
+
+In many cases, you will only want to protect certain cells in a given sheet. To
+do this, remember the rules: all cells are initially locked and all worksheets
+are unprotected.  So we will need to unlock all cells except the ones we want
+locked, and then protect the sheet.
+
+::: example
+**Protecting part of a worksheet**
+
+Our working data in *GrowthData* includes a mix of raw data in columns A through
+N, and calculated data in the other columns.  To prevent changes to the raw
+data but not the calculated data, we will need the worksheet to be *protected*,
+columns A through N to be *locked*, and all other columns to be *unlocked*.
+By default, the sheet is unprotected and all cells are locked.  So we will need
+to unlock all of the columns after N, and then protect the sheet:
+
+1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
+2. Select all of the cells in the *GrowthData* worksheet by clicking on the 
+   ![Select all cells](bin/Excel select all cells.jpg){height=16pt} button.
+3. Unlock all of the cells by selecting `Home > Format > Lock Cell`.
+4. Lock columns A through N by selecting them, and then selecting 
+   `Home > Format > Lock Cell`.
+5. Protect the worksheet by selecting `Home > Format > Protect Sheet`
+6. The `Protect Sheet` dialog box will appear; select `OK`.
+6. Save your working copy of `GrowthData_WC.xlsx`.
+
+Note that you have to do it in this order since Excel will not let you unlock
+locked cells in a protected sheet.
+
+You will now get an error message if you try to edit any of the locked cells,
+but you can edit the unlocked cells in any way you like.
+:::
+
+You can remove protection from any worksheet by simply selecting 
+`Home > Format > Unprotect Sheet`.
 
 ### Data validation
 
@@ -650,41 +795,42 @@ data. Data validation can be accessed by selecting `Data` from the menu and then
 clicking on the Data Validation button, which looks like this:
 ![Data Validation button](bin/DataValidationButton.png){height=16pt}. 
 
-:::example
+::: example
 **Adding data validation**
 
 The **Pop2019** variable (column K in the *GrowthData* table) is a country's
 population in 2019.  Population cannot be negative, so let's add this as a data
 validation requirement:
 
-1. Select column K in *GrowthData*.
-2. Select `Data > Data Validation`.  The Data Validation dialog box will 
+1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
+2. Select column K in *GrowthData*.
+3. Select `Data > Data Validation`.  The Data Validation dialog box will 
    appear:  
    ![Data Validation box](bin/DataValidation1.png){width=50%}  
    By default, it allows "Any value", which means no restriction at all.
-3. To add a restriction that negative values are not allowed:
+4. To add a restriction that negative values are not allowed:
    a. Select `Decimal` from the `Allow` drop-down box.
    b. Select `greater than or equal to` from the `Data` drop-down box
    c. Enter `0` in the `Minimum` drop-down box.
-4. Select `OK`.
+5. Select `OK`.
 
 Although nothing appears to have changed, column K is now subject to data
 validation. To test it:
 
-5. Go to cell K43, and (try to) enter `-1`.  You will see this dialog box
+6. Go to cell K43, and (try to) enter `-1`.  You will see this dialog box
    telling you that this is an invalid value:  
    ![Invalid Data Entered box](bin/InvalidDataEntered.png){width=50%}
 
-6. Select `Cancel`.
-7. Save your file.
+7. Select `Cancel`.
+8. Save your working copy of `GrowthData_WC.xlsx`.
 :::
 
 Excel will not allow you to enter invalid data into a cell with validation
-turned on. This feature will help avoid problems in the first place.  In
-addition, the Data Validation tool allows you to identify previously-entered
-observations with invalid data.
+turned on. This feature will help avoid problems in the first place, if you
+enable it *before* entering data.  In addition, the Data Validation tool allows
+you to identify previously-entered observations with invalid data.
 
-:::example
+::: example
 **Finding invalid data**
 
 All of our **Pop2019** data is valid, so in order to "find" invalid data we will
@@ -703,11 +849,13 @@ need to cheat a little.
 
 5. To remove the circles, select 
    `Data > Data Validation > Clear Validation Circles`.
+   
+You do not need to save your work here, since we have not made any changes.
 :::
 
 Finally, we can remove all data validation from a cell.
 
-:::example
+::: example
 **Removing data validation**
 
 To remove data validation from the **Pop2019** variable:
@@ -721,86 +869,325 @@ value (Excel will now let you do this) or by adding validation circles (Excel
 will no longer show any).
 :::
 
-### Protecting data
+##  Pivot tables {#pivot-tables}
 
-One of the most common Excel problems occurs when someone who is analyzing a
-data set unintentionally changes the data. 
+Excel's ***Pivot Tables*** are a powerful tool for the analysis of frequencies,
+conditional averages, and various other aspects of the data. They are somewhat
+tricky to use, and we will only scratch the surface here. But the more
+comfortable you can get with them, the better.
 
-- This can happen because you accidentally touch your keyboard and overwrite
-  the contents of a cell.
-- It can also happens when an inexperienced analyst breaks the rule about
-  keeping the original data untouched, and makes a mistake.
-
-This is to some extent an unavoidable consequence of Excel's fundamental design:
-there is no separation between data and analysis.  This design feature has the
-positive implication that your data is always visible and accessible, but it
-comes at a cost.
-
-One way of avoiding this cost is to make a practice of making your original data
-"read only." Excel does this through the combined mechanisms of ***protecting***
-sheets and ***locking*** cells.  Protecting and locking work according to three
-rules:
-
-1. Each worksheet is either protected or unprotected.
-   - By default, all worksheets are unprotected.
-2. Each cell is either locked or unlocked.
-   - By default, all cells are locked.
-3. Any locked cell in any protected sheet cannot be edited.
-
-You can change the status of any worksheet, or of any cell in an unprotected
-worksheet.
+The first step is to create a blank Pivot Table that is tied to a particular
+data table.  We can create as many Pivot Tables as we want.
 
 ::: example
-**Protecting an entire worksheet**
+**Creating a blank Pivot Table**
 
-The PWT data table *Data* contains original raw that we do not want changed. To
-prevent changes to that worksheet:
+To create a blank Pivot Table based on the employment data:
 
-1. Right-click on the *Data* tab at the bottom of the page.  A menu will appear.
-2. Select `Protect Sheet`.  The Protect Sheet dialog box will provide several
-   options:  
-  ![Protect Sheet dialog box](bin/ProtectSheet.png){width=30%}  
-3. Select `OK`.
+1. Open the [EmploymentData.xlsx](sampledata/EmploymentData.xlsx) data file,
+   and save a working copy as `EmploymentData_WC.xlsx`.
+2. Select any cell in the data table in the *Data for Analysis* worksheet.
+3. Select `Insert > PivotTable` from the menu.
+4. Excel will display the `Create PivotTable` dialog box:  
+   ![Create Pivot Table dialog box](bin/CreatePivotTable.png){width=50%}  
+   The default settings are fine, so select `OK`.
+  
+   Excel will open a new worksheet that looks like this:  
+   ![A worksheet with a new Pivot Table](bin/PivotTableSheet.png){width=90%}  
+   The Pivot Table itself is on the left side of the new worksheet.
+
+Since the Pivot Table is initially blank, we will need to add elements to make
+it useful.
+:::
+
+There are various tools available to add or modify Pivot Table elements:
+
+- The `Pivot Table Fields` box on the right side of the screen
+- The `PivotTable Analyze` menu
+- The `Design` menu.  
+
+These tools only appear in context.  You can make them appear by selecting
+any cell in the Pivot Table, and can make them disappear by secting any cell
+outside of the Pivot Table.
+
+### Simple frequencies
+
+The simplest application of a Pivot Table is to automatically construct a table
+of frequencies. By default, Pivot Tables report ***absolute frequencies***:
+the *number* of times we observe a particular value in the data.
+
+::: example
+**A simple frequency table**
+
+To create a simple frequency table showing the number of months in office for
+each Canadian prime minister:
+
+1. Check the box next to **PrimeMinister**. The Pivot Table will look like this:  
+   ![A list of prime ministers](bin/PrimeMinisterList.png){width=13%}  
+2. Drag **MonthYr** into the box marked "$\Sigma$ values". The Pivot Table will
+   now look like this:  
+   ![Number of months served by each prime minister](bin/PrimeMinisterCounts.png){width=30%}
+3. Save your working copy `EmploymentData_WC.xlsx`.
+
+As we can see, the table shows the number of observations for each value of the
+**PrimeMinister** variable, which also happens to be the number of months in
+office for each prime minister. It also shows a grand total.
+:::
+
+In many applications, we are also interested in ***relative frequencies***: the
+*fraction* or *percentage* of observations that take on a particular value. When
+data are constructed from a random sample, the relative frequency can be
+interpreted as an estimate of the corresponding probability.
+
+::: example
+**Reporting relative frequencies**
+
+To add a relative frequency column, we first need to add a second absolute
+frequency column:
+
+1. In the PivotTable Fields box, drag **MonthYr** to the "$\Sigma$ values" box.  
+   ![Two absolute frequencies](bin/PrimeMinisterCounts2.png){width=30%}  
+
+Then we convert it to a relative frequency column:
+
+2. Right-click on the "Count of MonthYr2" column, and select 
+   `Value Field Settings...`  
+   ![Value Field Settings dialog box](bin/ValueFieldSettings.png){width=30%}   
+3. Click on the `Show Values As` tab and select "% of Column Total" from
+   the `Show Values As` drop-down box.
+4. Select `OK`.
+5. Save your working copy `EmploymentData_WC.xlsx`.
+
+The third column will now show the number of observations as a percentage of
+the total:  
+![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png){width=30%} 
+:::
+
+### Cross tabulations
+
+We can also construct frequency tables for pairs of variables. There are various
+ways of laying out such a table, but the simplest is to have one variable in
+rows and the other variable in columns.  When the table is set up this way, we
+often call it a ***cross tabulation*** or crosstab. Crosstabs can be expressed
+in terms of absolute frequency, relative frequency, or both.
+
+::: example
+**An absolute frequency crosstab**
+
+Starting with a blank Pivot Table:
+
+1. Drag **PrimeMinister** into the Rows box.
+2. Drag **Party** into the Columns box.
+3. Drag **MonthYr** into the $\Sigma$ values box.
+
+You will now have this table of absolute frequencies:  
+![Joint absolute frequencies](bin/JointAbsFreq.png){width=40%}
+
+For example, this crosstab tells us Brian Mulroney served 104 months as
+prime minister, with all of those months as a member of the (Progressive) 
+Conservative party.
+:::
+
+We can also construct crosstabs using relative frequencies, but there is 
+more than one kind of relative frequency we can use here. A 
+***joint frequency crosstab*** shows the count in each cell 
+as a percentage of all observations. If the data come from a random sample,
+joint frequencies can be interpreted as estimates of joint probabilities.
+
+::: example
+**A joint frequency crosstab**
+
+To convert our absolute frequency crosstab into a joint frequency crosstab:
+
+1. Right click on "Count of MonthYr" and select `Value Field Settings...`
+2. Select the `Show Values As` tab, and select "% of Grand Total"
+   from the Show Values As drop-down box.
+
+Your table will now look like this:  
+![Joint frequency](bin/JointFreq.png){width=50%}
+
+For example, the table tells us that Brian Mulroney's 104 months as prime
+minister represent 19.22% of all months in our data.
+:::
+
+A ***conditional frequency crosstab*** shows the count in each cell as a 
+percentage in that row or column. If the data come from a random sample,
+conditional frequencies can be interpreted as estimates of conditional
+probabilities.
+
+::: example
+**A conditional frequency crosstab**
+
+To convert our crosstab into a conditional frequency crosstab:
+
+1. Right click on "Count of MonthYr" and select `Value Field Settings`.
+2. Select the `Show Values As` tab, and select "% of column total."
+   from the Show Values As drop-down box.
+
+Your table will now look like this:  
+![Conditional frequency](bin/CondFreq.png){width=50%} 
+
+For example, Brian Mulroney's 104 months as prime minister represent 44.64% of
+all months served by a Conservative prime minister in our data.
+:::
+
+### Conditional averages
+
+We can also use Pivot Tables to report ***conditional averages***. A
+conditional average is just the average of one variable, taken within a
+sub-population defined by another variable.  If the data come from a random
+sample, the conditional average can be interpreted as an estimate of the
+corresponding conditional average in the population.
+
+For example, we might calculate average earnings for men and for women in a
+random sample of Canadians.  They can be interpreted as measuring average
+earnings for all Canadian men and women.
+
+::: example
+**Adding a conditional average**
+
+Suppose we want to add the average unemployment rate during each prime
+minister's time in office to this Pivot Table:  
+![Absolute and relative frequencies](bin/PrimeMinisterRelativeCounts.png){width=30%}
+
+1. Drag **UnempRate** into the box marked "$\Sigma$ values".  The table will 
+   now look like this:  
+   ![Sum of UnempRate](bin/UnempRateSum.png){width=40%} 
+
+Unfortunately, we wanted to see the *average* unemployment rate for 
+each prime minister, but instead we see the *sum* of unemployment
+rates for each prime minister.  To change this:
+
+3. Right-click "Sum of UnempRate", then select `Value Field Settings...`.
+4. Select `Average`.
+
+The table now looks like this:  
+![Average of unemployment rate](bin/UnempRateAvg.png){width=40%} 
+
+We now have the average unemployment rate for each prime minister. It
+is not very easy to read, so we will want to change the formatting
+later.
+:::
+
+In addition to conditional averages, we can report other conditional statistics 
+including variances, standard deviations, minimum, and maximum.
+
+### Modifying a Pivot Table
+
+As you might expect, we can modify Pivot Tables in various ways to make them 
+clearer, more informative, and more visually appealing.
+
+As with other tables in Excel, we can filter and sort them.  Filtering is
+particularly useful with Pivot Tables since there are often categories we want
+to exclude.
+
+::: example
+**Filtering a Pivot Table**
+
+There is no Canadian prime minister named "Transfer." If you recall, we used
+that value to represent months in the data where the prime minister changed.
+To exclude those months from our main table:
+
+1. Click on the ![Row Labels button](bin/RowLabelsButton.png){height=16pt}. The 
+   sort and filter menu will appear:  
+   ![Sort and filter menu](bin/SortAndFilter.png){width=30%}   
+
+2. Uncheck the check box next to "Transfer", and select `OK`:
+  
+The table no longer includes the Transfer value:  
+![Pivot table with transfer excluded](bin/TransferExcluded.png){width=50%}
+
+Note that the grand total has also gone down from 541 to 532 to reflect the
+filtered observations.
+:::
+
+By default, the table is sorted on the row labels, but we can sort on any
+column.
+
+::: example
+**Sorting a Pivot Table**
+
+To sort our table by months in office:
+
+1. Click on ![Row Labels button](bin/RowLabelsButton.png){height=16pt} and the 
+   sort and filter menu will appear.
+2. Select `More sort options`; the Pivot Table sort dialog box will appear:  
+   ![Pivot table sort](bin/PTSort.png){width=30%} 
+3. Select the `Descending (Z to A)` radio button and "Count of MonthYr" from
+   the drop-down box.
+
+The table is now sorted by number of months in office:  
+![Pivot table sorted](bin/PivotTableSorted.png){width=40%}
+:::
+
+We can change number formatting, column and row titles, and various other
+aspects of the table's appearance.
+
+::: example
+**Cleaning up a table's appearance**
+
+Our table can be improved by making the column headers more informative and
+reporting the unemployment rate in percentage terms and fewer decimal places:
+
+1. Right-click on "Average of UnempRate", and then select
+   `Value Field Settings...`
+2. Enter "Average Unemployment" in the `Custom Name` text box.
+3. Select `Number Format`, then change the number format to Percentage with 1
+   decimal place.
+4. Select `OK` and then `OK` again. The table will now look like this:  
+   ![Pivot Table with unemployment in percentages](bin/UnempRateAvgPct.png){width=50%}
+
+5. Change the other three headers.  You can do this through
+   `Value Field Settings...` but you can also just edit the text directly.
+   - Change "Row Labels" to "Prime Minister".
+   - Change "Count of MonthYr" to "Months in office".
+   - Change "Count of MonthYr2" to "% in office".
+
+Our final table looks like this:  
+![Final Pivot Table](bin/PivotTableFinal.png){width=50%}  
+:::
+
+Finally, we can use Pivot Tables to create graphs.
+
+::: example
+**A Pivot Table graph**
+
+To create a simple bar graph depicting months in office, we start by cleaning up
+the Pivot Table so that it shows the data we want to represent:
+
+1. Select any cell in this table:  
+  ![Joint absolute frequencies](bin/JointAbsFreq.png){width=50%}
+2. Use filtering to remove "Transfer" from the list of prime ministers.
+3. Use sorting to sort by (grand total) number of months in office.
+
+   The table should now look like this:  
+   ![Joint absolute frequencies](bin/FinalJointAbsFreq.png){width=50%}
+
+Then we can generate the graph:
+
+4. Select any cell in the table, then select `Insert > Recommended Charts` 
+   from the menu.
    
-Now that you have protected the *Data* worksheet, try to edit any cell. You will
-get an error message.
+5. Select `Column`, and then `Stacked Column` from the dialog box, and then
+   select `OK`.
+   
+Your graph will look like this:  
+![A bar graph showing months in office for each prime minister](bin/PTChartExample.png){width=50%}
+
+As always, there are various ways we could customize this graph to be more
+attractive and informative.
 :::
 
-In many cases, you will only want to protect certain cells in a given sheet. To
-do this, remember the rules: all cells are initially locked and all worksheets
-are unprotected.  So we will need to unlock all cells except the ones we want
-locked, and then protect the sheet.
-
-::: example
-**Protecting part of a worksheet**
-
-To protect and lock columns A through N in *GrowthData* but keep the other
-columns unlocked:
-
-1. Select all of the cells in the worksheet by clicking on the 
-   ![Select all cells](bin/Excel select all cells.jpg){height=16pt} button.
-2. Unlock all of the cells by selecting `Home > Format > Lock Cell`.
-3. Lock columns A through N by selecting them, and then selecting 
-   `Home > Format > Lock Cell`.
-4. Protect the worksheet by selecting `Home > Format > Protect Sheet`
-5. The `Protect Sheet` dialog box will appear; select `OK`.
-
-Note that you have to do it in this order since Excel will not let you unlock
-locked cells in a protected sheet.
-
-You will now get an error message if you try to edit any of the locked cells,
-but you can edit the unlocked cells in any way you like.
-:::
-
-Finally, you can remove protection from any worksheet by simply selecting 
-`Home > Format > Unprotect Sheet`.
+You can download the full set of Pivot Tables and associated charts  generated
+in this chapter at
+[https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
 
 ## Finishing up {#finishing-up-advanced-data-cleaning}
 
 As always, be sure to save your working copy and update/create the master
 version of your cleaned data file.
 
-:::example
+::: example
 **Finishing up**
 
 1. Save your working copy, and save again as the master version.
@@ -818,11 +1205,11 @@ varying formats, the data will usually be complex in structure, and mistakes are
 all too easy to make. So we need to be disciplined in handling our data, and
 flexible in finding solutions to problems that pop up.
 
-In the next few chapters, we will continue to develop applied methods. Our focus
-will shift to [learning R](#introduction-to-r) for both
-[data cleaning and analysis](#using-r), but we will also learn how to create
-[pivot tables](#pivot-tables) in Excel.
-
+In the next few chapters, we will shift from Excel to R. Chapter 
+\@ref(an-introduction-to-r) will introduce the R language and a few basic tools,
+while Chapter \@ref(using-r) will show how to use R for some of the same data
+cleaning and analysis tasks we have learned for Excel, along with some advanced 
+new techniques.
 
 ## Practice problems {-#problems-advanced-data-cleaning}
 
@@ -869,3 +1256,27 @@ Answers can be found in the [appendix](#answers-advanced-data-cleaning).
 4. What will happen if you:
    a. Add data validation to a column that contains invalid data.
    b. Add data validation to a column, and then try to enter invalid data
+
+**GOAL #4: Construct and interpret frequency tables, cross-tabulations and conditional averages using Excel pivot tables**
+
+5. The following tables are based on 2019 data for Canadians aged 25-34.
+   Classify each of these tables as simple frequency tables, crosstabs, or
+   conditional averages:
+   a. 
+      | Educational attainment     |  Percent   |
+      |:---------------------------|:----------:|
+      | Below high school          |     6      |
+      | High school                |    31      |
+      | Tertiary (e.g. university) |    63      |
+   b.
+      | Gender | Years of schooling |
+      |:-------|:------------------:|
+      | Male   |   14.06            |
+      | Female |   14.74            |
+   c.
+      | Educational attainment | Male | Female |
+      |:-----------------------|:----:|:------:|
+      | Below high school      |  7   |    5   |
+      | High school            | 38   |   24   |
+      | Tertiary               | 55   |   71   |
+

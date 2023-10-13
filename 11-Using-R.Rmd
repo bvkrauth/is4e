@@ -15,8 +15,9 @@ to [read and view data](#reading-and-viewing-data-in-r). We are now ready to
 start using R with real data.
 
 This chapter will use R to clean and analyze the historical Canadian employment
-data. We will also use ggplot, a powerful graphing system that is part of the
-Tidyverse package.
+data. We will also develop some simple graphical techniques in ggplot for
+describing the relationship between two variables, and apply them to the
+employment data.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
@@ -30,9 +31,13 @@ In this chapter, we will learn how to:
 5.  Construct a table of summary statistics in R.
 6.  Recognize and handle missing data problems in R.
 7.  Construct a simple or binned frequency table in R.
-8.  Perform simple probability calculations in R.
-9.  Create a histogram with ggplot.
-10. Create a line graph with ggplot.
+8. Calculate and interpret the sample covariance and correlation.
+9.  Perform simple probability calculations in R.
+10.  Create a histogram with ggplot.
+11. Create a line graph with ggplot.
+12. Distinguish between pairwise and casewise deletion of missing values.
+13. Construct and interpret a scatter plot in R.
+14. Construct and interpret a smoothed-mean or linear regression plot in R.
 :::
 
 To prepare for this chapter, review the [introduction to R](#introduction-to-r).
@@ -305,20 +310,6 @@ EmpData <- EmpData %>%
 Having read and cleaned our data set, we can now move on to some summary 
 statistics.
 
-### The summary function
-
-The `summary()` function will give a basic summary of any object.  Exactly what
-that summary looks like depends on the object. For tibbles, `summary()` produces
-a set of summary statistics for each variable:
-
-::: example
-**Summarizing a data table**
-
-```{r SummaryEmpData}
-summary(EmpData)
-```
-:::
-
 ### Univariate statistics 
 
 The R function `mean()` calculates the sample average of any numeric vector.
@@ -482,6 +473,112 @@ EmpData %>%
 As you might imagine, there are various ways of customizing the intervals just
 like in Excel.
 
+### Covariance and correlation {#sample-covariance-and-correlation}
+
+When two variables are both numeric, we can summarize their relationship using
+their ***sample covariance***:
+  $$s_{x,y} = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})$$
+and their ***sample correlation***:
+  $$\rho_{x,y} = \frac{s_{x,y}}{s_x s_y}$$
+where $\bar{x}$ and $\bar{y}$ are the
+[sample averages](#summary-statistics-theory) and $s_{x}$ and $s_{y}$ are the
+[sample standard deviations](#summary-statistics-theory) as defined previously.
+
+The sample covariance and sample correlation can be interpreted as estimates of
+the corresponding population [covariance](#population-covariance) and
+[correlation](#population-correlation) as defined previously.
+
+The sample covariance and correlation can be calculated in R using the `cov()`
+and `cor()` functions.  These functions can be applied to any two columns of
+data.
+
+::: example
+**using `cov()` and `cor()` to calculate a covariance/correlation**
+
+If you haven't done so already, open up R and execute the code from the
+[introduction](#multivariate-data-analysis) to this chapter. You can then
+execute the following code:
+
+```{r CovCor}
+# For two specific columns of data
+cov(EmpData$UnempPct, EmpData$LFPPct)
+cor(EmpData$UnempPct, EmpData$LFPPct)
+```
+As you can see, unemployment and labour force participation are *negatively*
+correlated: when unemployment is high, LFP tends to be low. This makes sense
+given the economics: if it is hard to find a job, people will move into other
+activities that take one out of the labour force: education, childcare,
+retirement, etc.
+:::
+
+Both `cov()` and `cor()` can also be applied to (the numeric variables in) an
+entire data set.  The result is what is called a ***covariance matrix*** or
+***correlation matrix***.
+
+::: example
+**using `cov()` and `cor()` to calculate a covariance/correlation matrix**
+
+```{r CorMatrix}
+# Covariance matrix for the whole data set (at least the numerical parts)
+EmpData %>%
+  select(where(is.numeric)) %>%
+  cor()
+# Correlation matrix for selected variables
+EmpData %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
+  cor()
+```
+Each element in the matrix reports the covariance or correlation of a pair of
+variables.  As you can see:
+
+- The matrix is symmetric since $cov(x,y) = cov(y,x)$.
+- The diagonal elements of the covariance matrix are $cov(x,x) = var(x)$
+- The diagonal elements of the correlation matrix are $cor(x,x) = 1$.
+- All covariances/correlations involving **AnnPopGrowth** variable are
+  `NA` since **AnnPopGrowth** contains `NA` values.
+:::
+
+Just like with univariate statistics, we can exclude missing values when
+calculating a covariance or correlation matrix.  However, there are two
+slightly different ways to exclude missing values from a data table:
+
+1. ***Pairwise deletion***: when calculating the covariance or correlation of
+   two variables, exclude observations with a missing values for either of
+   *those two* variables.
+2. ***Casewise*** or ***listwise deletion***: when calculating the covariance or
+   correlation of two variables, exclude observations with a missing value for
+   *any* variable.
+
+The `use` argument allows you to specify which approach you want to use.
+
+::: example
+**Pairwise and casewise deletion of missing values**
+
+```{r PairwiseOrListwise}
+# EmpData has missing data in 1976 for the variable AnnPopGrowth
+# Pairwise will only exclude 1976 from calculations involving AnnPopGrowth
+EmpData %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
+  cor(use = "pairwise.complete.obs")
+# Casewise will exclude 1976 from all calculations
+EmpData %>%
+  select(UnempRate, LFPRate, AnnPopGrowth) %>%
+  cor(use = "complete.obs")
+```
+:::
+
+In most applications, pairwise deletion makes the most sense because it avoids
+throwing out data. But it is occasionally important to use the same data for all
+calculations, in which case we would use listwise deletion.
+
+::: {.fyi data-latex=""}
+**Covariance and correlation in Excel**
+
+The sample covariance and correlation between two variables (data ranges) can
+be calculated in Excel using the `COVARIANCE.S()` and `CORREL()` functions.
+:::
+
+
 ### Probability distributions in R
 
 Just like Excel, R has a family of built-in functions for each commonly-used
@@ -511,61 +608,64 @@ There is a similar set of functions available for the uniform distribution
 `rt`), along with many others.
 :::
 
-## Graphs with ggplot {#graphs-with-ggplot}
+## Using ggplot {#graphs-with-ggplot}
 
-R has a built in plotting command called `plot()`, but the Tidyverse also
-contains a much more powerful graphics package called[^1101]
-***ggplot***. The ggplot package has capabilities well beyond what R's built-in
-commands can do, or what Excel can do.
+Section \@ref(introduction-to-ggplot) in Chapter \@ref(an-introduction-to-r)
+introduced the ggplot package and command for creating graphs. This section
+explores the syntax and capabilities of ggplot in substantially more detail.
 
-[^1101]: The package is technically called `ggplot2` since it is the second
-       version of `ggplot`.  But everyone calls it "ggplot" anyway.
+### Syntax {#ggplot-sytnax}
 
-### Creating a graph
-
-The `ggplot` function can be used to create a graph.  It has a non-standard
-syntax.
-
-::: example
-**Two ggplot graphs**
-
-We can start by making a histogram of the unemployment rate, much like the one
-we made earlier in Excel
-```{r ggplotHistogram}
-ggplot(data = EmpData,
-       mapping = aes(x = UnempPct)) + 
-  geom_histogram()
-```
-
-We can also make a time series (line) graph, much like the one we made earlier
-in Excel.
-```{r ggplotTimeSeries}
-ggplot(data = EmpData,
-       mapping = aes(x = MonthYr, 
-                     y = UnempPct)) + 
-  geom_line() 
-```
-:::
-
-
-The `ggplot()` function has a non-standard syntax, so some explanation is
-needed:
+The `ggplot` function has a non-standard syntax:
 
 - The first expression/line calls `ggplot()` to set up the basic structure of
   the graph:
     - The `data` argument tells R which data set (tibble) will be used.
     - the `mapping` argument describes the main ***aesthetics*** of the graph,
       i.e., the relationship in the data we will be graphing.
-      - For the histogram, our aesthetic includes only one variable.
-      - For the line graph, our aesthetic includes two variables.
 - The rest of the command is one or more statements separated by a `+` sign.
   These are called ***geometries*** and are graph elements to be included in the
   plot.
-    - The `geom_histogram()` geometry produces a histogram.
-    - The `geom_line()` geometry produces a line.
 
 A single graph can include multiple aesthetics and geometries, as we will see
 shortly.
+
+::: example
+**Syntax for two ggplot graphs**
+
+In Section \@ref(introduction-to-ggplot), we used ggplot to create a line graph:
+```{r ggplotTimeSeries2}
+ggplot(data = EmpData,
+       mapping = aes(x = MonthYr, 
+                     y = UnempPct)) + 
+  geom_line() 
+```
+and a histogram:
+```{r ggplotHistogram2}
+ggplot(data = EmpData,
+       mapping = aes(x = UnempPct)) + 
+  geom_histogram()
+```
+
+To review the syntax of these two commands:
+
+- Each starts by calling `ggplot()` to set up the basic structure of
+  the graph:
+    - The `data=EmpData` argument says to use the `EmpData` tibble as its 
+      source data
+    - the `mapping` argument describes the main ***aesthetics*** of the graph,
+      i.e., the relationship in the data we will be graphing.
+      - For the line graph, our aesthetic includes two variables: 
+        `mapping = aes(x = MonthYr, y = UnempPct)`.
+      - For the histogram, our aesthetic includes only one variable:
+        `mapping = aes(x = UnempPct)`. If we were to include other variables,
+        they would be ignored.
+- The rest of the command is one or more statements separated by a `+` sign.
+  These are called ***geometries*** and are graph elements to be included in the
+  plot.
+    - The `geom_histogram()` geometry says to produce a histogram.
+    - The `geom_line()` geometry says to produce a line.
+:::
 
 ### Modifying a graph
 
@@ -756,6 +856,327 @@ ggplot(data = EmpData,
 ```
 :::
 
+## Visualization and prediction
+
+Bivariate summary statistics like the covariance and correlation provide a
+simple way of characterizing the relationship between any two numeric variables.
+Frequency tables, cross tabulations, and conditional averages allow us to gain a
+greater understanding of the relationship between two discrete or categorical
+variables, or between a discrete/categorical variable and a continuous variable.
+
+In order to develop a detailed understanding of the relationship between two
+continuous variables (or discrete variables with many values), we need to
+develop some additional methods.  The methods that we will explore in this
+course are primarily graphical.  You will learn more about the underlying
+numerical methods in later courses.
+
+### Scatter plots 
+
+A ***scatter plot*** is the simplest way to visualize the relationship between
+two variables in data.  The horizontal ($x$) axis represents one variable, the
+vertical ($y$) axis represents the other variable, and each point represents an
+observation. In some sense, the scatter plot shows everything you can show about
+the relationship between the two variables, since it shows every observation. 
+
+Scatter plots can be created in R using the `geom_point()` geometry.
+
+::: example
+**Creating a scatter plot**
+
+The code below creates a scatter plot with the Candian unemployment rate on the
+horizontal axis, and the LFP rate on the vertical axis.
+```{r ScatterPlot}
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) +
+  geom_point()
+```
+
+Note that the scatter plot is consistent with the negative relationship between
+the two variables indicated by the correlation we calculated earlier 
+(`r cor(EmpData$UnempRate,EmpData$LFPRate)`).  At the same time, it is clear
+that this negative relationship is not very strong.
+:::
+
+#### Jittering
+
+If both of our variables are truly continuous, each point represents a single
+observation.  But if both variables are actually discrete, points can "stack"
+on top of each other.  In that case, the same point can represent multiple
+observations, leading to a misleading scatter plot.
+
+::: example
+**A scatter plot with discrete variables**
+
+For example, suppose we had rounded our unemployment and LFP data to the nearest
+percent:
+```{r RoundEmpData}
+# Round UnempPct and LFPPct to nearest integer
+RoundedEmpData <- EmpData %>% 
+  mutate(UnempPct = round(UnempPct)) %>% 
+  mutate(LFPPct = round(LFPPct))
+```
+
+The scatter plot with the rounded data would look like this:
+```{r ScatterPlotRounded} 
+# Create graph using rounded data
+ggplot(data = RoundedEmpData, 
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(col = "darkorange")
+```
+
+As you can see from the graph, the scatter plot is misleading: there are 541
+observations in the data set represented by only 40 points.
+:::
+
+A common solution to this problem is to ***jitter*** the data by adding a small
+amount of random noise so that every observation is at least a little different
+and appears as a single point.  We can use the `geom_jitter()` geometry to
+create a jittered scatter plot.
+
+::: example
+**A "jittered" scatter plot with discrete variables**
+
+```{r ScatterPlotJittered}
+ggplot(data = RoundedEmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(col = "darkorange") +
+  geom_jitter(size = 0.5, 
+              col = "navyblue")
+```
+
+As you can see the jittered rounded data (small blue dots) more accurately
+reflects the original unrounded data than the rounded data (large red dots).
+:::
+
+#### Using color as a third dimension
+
+We can use color to add a third dimension to the data.  That is, we can 
+color-code points based on a third variable by including it as part of the
+plot's aesthetic.
+
+:::example
+**Using color to add a third dimension**
+
+We can use color to represent a third variable:
+
+```{r ScatterPlotColorCoded}
+# Party is discrete/categorical, so each value is represented by a distinct color
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct,
+           col = Party)) + 
+  geom_point()
+# MonthYr is (nearly) continuous, so values are represented along a spectrum
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct,
+           col = MonthYr)) + 
+  geom_point()
+```
+
+:::
+
+As we discussed earlier, you want to make sure your graph can be read by a
+reader who is color blind or is printing in black and white. So we can use 
+shapes in addition to color.
+
+::: example
+**Using shapes to add a third dimension**
+
+```{r UsingShapes}
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct,
+           col = Party,
+           shape = Party)) + 
+  geom_point()
+```
+:::
+
+We might also want to change the color scheme, since the most common form of 
+color blindness is the inability to distinguish red and green.
+
+::: {.fyi data-latex=""}
+**Scatter plots in Excel**
+
+Scatter plots can also be created in Excel, though it is more work and produces
+less satisfactory results.
+:::
+
+### Binned averages
+
+We earlier used pivot table to construct a
+[conditional average](#conditional-averages) of the variable $y_i$
+(**UnempRate** in the example) for each value of some discrete variable $x_i$
+(**PrimeMinister** in the example).
+
+When the $x_i$ variable is continuous, it takes on too many distinct values
+to construct such a table.  Instead, we would want to divide its range into a
+set of bins and then calculate averages within each bin. We can then plot the
+average $y_i$ within each bin against the average $x_i$ within the same bin.
+This kind of plot is called a ***binned scatterplot***.
+
+Binned scatterplots are not difficult to do in R but the code is quite a bit
+more complex than you are used to.  As a result, I will not ask you to be able
+to produce binned scatter plots, I will only ask you to interpret them.  
+
+::: example
+**A binned scatter plot**
+
+Here is my binned scatter plot with 20 bins:
+```{r BinnedScatterPlot, echo = TRUE}
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+ geom_point(size = 0.5) +
+  stat_summary_bin(fun = 'mean', 
+                   bins=20,
+                   col = "darkorange",
+                   size = 3, 
+                   geom = 'point') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 20,
+                   col = "darkorange",
+                   size = 0.5, 
+                   geom = 'line')
+```
+:::
+
+The number of bins is an important choice. More bins allows us to find more 
+complex patterns in the relationship.  But more bins also means fewer
+observations per bin, which means more noise (variance) in our estimates.
+
+::: example
+**How many bins?**
+
+The graph below includes the original binned scatter plot based on 20 bins
+(orange), and adds a line based on 4 bins (dark blue) and a line based on 100
+bins (light blue).
+
+```{r HowManyBins}
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(size = 0.5) +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 4,
+                   col = "navyblue",
+                   size = 0.75, 
+                   geom = 'line') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 20,
+                   col = "darkorange",
+                   size = 0.75, 
+                   geom = 'line') +
+  stat_summary_bin(fun = 'mean', 
+                   bins = 100,
+                   col = "lightblue",
+                   size = 1.0, 
+                   geom = 'line') +
+  geom_text(x = 13.8,
+            y = 64.1,
+            label = "4 bins",
+            col = "navyblue") +
+  geom_text(x = 13.8,
+            y = 62.5,
+            label = "20 bins",
+            col = "darkorange") +
+  geom_text(x = 13.8,
+            y = 60,
+            label = "100 bins",
+            col = "lightblue")
+```
+
+As you can see, the binned scatterplot tends to be smooth when there 
+are only a few bins, and jagged when there are many bins.  This reflects a
+trade-off between bias (too few bins may lead us to miss important 
+patterns in the data) and variance (too many bins may lead us to
+see patterns in the data that aren't really part of the DGP).
+:::
+
+
+### Smoothing
+
+An alternative to binned averaging is ***smoothing***, which calculates a 
+smooth curve that fits the data as well as possible.  There are many different
+techniques for smoothing, but they are all based on taking a weighted average of
+$y_i$ near each point, with high weights on observations with $x_i$ close to
+that point and low (or zero) weights on observations with $x_i$ far from that
+point.  The calculations required for smoothing can be quite complex and well
+beyond the scope of this course.
+
+Fortunately, smoothing is easy to do in R using the `geom_smooth()` geometry.
+
+::: example
+**Using `geom_smooth()` to add a smooth curve**
+
+```{r SmoothedRegression}
+ggplot(data = EmpData,
+       aes(x = UnempRate,
+           y = LFPRate)) + 
+  geom_point(size = 0.5) +
+  geom_smooth()
+```
+
+Notice that by default, the graph includes both the fitted line and a 95\%
+confidence interval (the shaded area around the line).  Also note that the
+confidence interval is narrow in the middle (where there is a lot of data) and
+wide in the ends (where there is less data).
+:::
+
+### Linear regression
+
+Our last approach is to assume that the relationship between the two variables
+is linear, and estimate it by a technique called ***linear regression***. Linear
+regression calculates the straight line that fits the data best.
+
+You can include a linear regression line in your plot by adding the 
+`method=lm` argument to the `geom_smooth()` geometry.
+
+::: example
+**Using `geom_smooth()` to add a linear curve**
+
+```{r LinearRegression}
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(size = 0.5) +
+  geom_smooth(method = "lm") 
+```
+
+We can compare the linear and smoothed fits to see where they differ:
+```{r LinearAndSmoothed}
+ggplot(data = EmpData,
+       aes(x = UnempPct,
+           y = LFPPct)) + 
+  geom_point(size = 0.5) +
+  geom_smooth(col = "darkorange") +
+  geom_smooth(method = "lm",
+              col = "navyblue")
+```
+
+As you can see, the two fits are quite similar for unemployment rates below
+12%, but diverge quite a bit above that level.  This is inevitable, because the
+smooth fit becomes steeper, but linear fit *can't* do that.
+:::
+
+Linear regression is much more restrictive than smoothing, but has several
+important advantages:
+
+- The relationship is easier to interpret, as it can be summarized by a single
+  number (the slope).
+- The linear relationship is much more precisely estimated 
+
+These advantages are not particularly important in this case, with only two
+variables and a reasonably large data set.  The advantages of linear regression
+become overwhelming when you have more than two variables to work with. As a
+result, linear regression is the most important tool in applied econometrics,
+and you will spend much of your next econometrics course learning to use it.
+
+
 
 ## Chapter review {-#review-using-r}
 
@@ -770,11 +1191,19 @@ In this chapter we learned how to use the pipe operator, the four key Tidyverse
 functions for cleaning data, and the necessary tools for calculating univariate
 statistics.  In addition, we learned the basics of ggplot.
 
-Our next applications of R will be for the analysis of relationships between
-[multiple variables](#multivariate-data-analysis).  The capabilities of ggplot
-for constructing graphical elements like scatter plots and curve fits will be
-well beyond what you can do in Excel, and will hopefully justify your investment
-in learning R.
+This chapter has also provided a brief view of some of the main techniques for 
+prediction and the visualization of relationships between variables. 
+Econometrics is mostly about the relationship between variables: price and
+quantity, consumption and savings, labour and capital, today and tomorrow. So
+most of what we do is multivariate analysis.
+
+The methods used here only scratch the surface of the available techniques and
+their implications. Any subsequent course you take in econometrics will place
+heavy emphasis on multivariate methods, especially linear regression. Those more
+advanced methods will build on the core ideas introduced in this course:
+probability, random variables, estimation, and inference.  They will also
+further develop your coding skills in R or a similar statistical package. I 
+hope this course has given you a strong base for your further studies.
 
 ## Practice problems {-#problems-using-r}
 
@@ -812,19 +1241,41 @@ Answers can be found in the [appendix](#answers-using-r).
 3. Using the `PPData`data set, construct a frequency table of the employment
    rate.
 
-**GOAL #8: Perform simple probability calculations in R**
+**GOAL #8: Calculate and interpret the sample covariance and correlation**
 
-4. Calculate the following quantities in R:
+4. Using the `EmpData` data set, calculate the covariance and correlation of
+   **UnempPct** and **AnnPopGrowth**.  Based on these results, are periods of
+   high population growth typically periods of high unemployment?
+
+**GOAL #9: Perform simple probability calculations in R**
+
+5. Calculate the following quantities in R:
    a. The 45th percentile of the $N(4,6)$ distribution.
    b. The 97.5 percentile of the $T_8$ distribution.
    c. The value of the standard uniform CDF, evaluated at 0.75.
    d. 5 random numbers from the $Binomial(10,0.5)$ distribution.
 
-**GOAL #9: Create a histogram with ggplot**
+**GOAL #10: Create a histogram with ggplot**
 
-5. Using the `PPData`data set, create a histogram of the employment rate.
+6. Using the `PPData`data set, create a histogram of the employment rate.
 
-**GOAL #10: Create a line graph with ggplot**
+**GOAL #11: Create a line graph with ggplot**
 
-6. Using the `PPData` data set, create a time series graph of the employment
+7. Using the `PPData` data set, create a time series graph of the employment
    rate.
+
+
+**GOAL #12: Distinguish between pairwise and casewise deletion of missing values**
+
+8. In problem (2) above, did you use pairwise or casewise deletion of missing
+   values?  Did it matter?  Explain why.
+
+**GOAL #13: Construct and interpret a scatter plot in R**
+
+9. Using the `EmpData` data set, construct a scatter plot with annual population
+   growth on the horizontal axis and unemployment rate on the vertical axis.
+
+**GOAL #14: Construct and interpret a smoothed-mean or linear regression plot in R**
+
+10. Using the `EmpData` data set, construct the same scatter plot as in
+   problem (4) above, but add a smooth fit and a linear fit.

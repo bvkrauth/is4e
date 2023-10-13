@@ -1558,7 +1558,7 @@ information in the original data source.
 ### Text files and text editors
 
 The most important file format is the ***text file***. A text file contains a
-sequence of characters (letters, numbers, etc.).
+sequence of characters (letters, numbers, etc.). 
 
 Text files can be read and modified using a simple program called a
 ***text editor***. Every computer has at least one simple built-in text editor:
@@ -1578,6 +1578,10 @@ include useful features like color-coding, spell checking, and autocorrect:
 
 There are also many tools available for comparing, combining, or otherwise
 processing text files.
+
+Files that are not text files are usually called ***binary*** files. Binary
+files are generally not human-readable.  If you try to open them with a
+text editor you will mostly see a bunch of odd-looking symbols.
 
 ::: {.sfu data-latex=""}
 **Text editors in SFU campus labs**

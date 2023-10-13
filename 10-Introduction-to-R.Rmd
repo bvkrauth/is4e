@@ -1034,6 +1034,77 @@ length(EmpData)
 In a later chapter, we will learn how to view other table properties such as
 summary statistics.
 
+## Basic statistics in R
+
+
+### The summary function
+
+The `summary()`function can be used to produce a set of summary statistics for
+each variable in a tibble.
+
+::: example
+**Summarizing a data table**
+
+```{r SummaryEmpData}
+summary(EmpData)
+```
+:::
+
+Like `print()`, `summary()` is an example of a generic function. You can give it
+almost any R object as an argument, and it will return a summary of the object's
+contents. The exact information returned will depend on the object type.
+
+### Introduction to ggplot
+
+Although R has a built in plotting command called `plot()`, the Tidyverse also
+contains a much more powerful graphics package called[^1101]
+***ggplot***. The ggplot package has capabilities well beyond what R's built-in
+commands can do, or what Excel can do.
+
+[^1101]: The package is technically called `ggplot2` since it is the second
+       version of `ggplot`.  But everyone calls it "ggplot" anyway.
+
+The `ggplot` function can be used to create a graph.  It has a non-standard
+syntax.
+
+::: example
+**Two ggplot graphs**
+
+We will use ggplot to create two univariate graphs for the unemployment rate: 
+a time series (line) graph and a histogram.
+
+Before getting started, run the following code to clean the employment data:
+```{r CleanEmpData}
+# Clean EmpData
+EmpData <- EmpData %>%
+  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
+  mutate(UnempPct = 100*UnempRate) %>% 
+  mutate(LFPPct = 100*LFPRate)
+```
+The variable representing the unemployment rate is called **UnempPct** and the
+variable representing the month/year is called **MonthYr**.
+
+To make the time series (line) graph, execute the following code:
+```{r ggplotTimeSeries}
+ggplot(data = EmpData,
+       mapping = aes(x = MonthYr, 
+                     y = UnempPct)) + 
+  geom_line() 
+```
+
+
+To make the histograph, excute the following code:
+```{r ggplotHistogram}
+ggplot(data = EmpData,
+       mapping = aes(x = UnempPct)) + 
+  geom_histogram()
+```
+
+:::
+
+Section ????
+
+
 ## Chapter review {-#review-introduction-to-r}
 
 R has capabilities well beyond what you can do in Excel, in part because it is

@@ -1379,6 +1379,10 @@ This appendix provides solutions to all end-of-chapter practice problems.
 4. If you do this:
    a. Nothing will happen, but you can ask Excel to mark invalid data.
    b. Excel will not allow you to enter invalid data.
+5. The tables are
+   a. Simple frequency table
+   b. Conditional average
+   c. Crosstab
 
 ## **10** An introduction to R {-#answers-introduction-to-r}
 
@@ -1441,6 +1445,13 @@ PPData %>%
     count(cut_interval(EmpRate, 6))
 ```
 
+1. The covariance and correlation is negative here, so periods of high
+   population growth tend to be periods of *low* unemployment.
+``` {r PP_12_01}
+cov(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
+cor(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
+```
+
 4. The R code for these calculations is as follows:
    
 ```{r PP_11_04, collapse = FALSE}
@@ -1466,29 +1477,14 @@ ggplot(data = PPData, mapping = aes(x = EmpRate)) + geom_histogram()
 ggplot(data = PPData, mapping = aes(x = MonthYr, y = EmpRate)) + geom_line()
 ```
 
-## **12** Multivariate data analysis {-#answers-multivariate-data-analysis}
-
-[Click here to see the problems](#problems-multivariate-data-analysis)
-
-1. The tables are
-   a. Simple frequency table
-   b. Conditional average
-   c. Crosstab
-2. The covariance and correlation is negative here, so periods of high
-   population growth tend to be periods of *low* unemployment.
-``` {r PP_12_01}
-cov(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
-cor(EmpData$UnempPct,EmpData$AnnPopGrowth,use="complete.obs")
-```
-
-3. I used casewise deletion but it does not matter. It only matters when you add
+7. I used casewise deletion but it does not matter. It only matters when you add
    a third variable.
-4. The scatter plot should look something like this:
+8. The scatter plot should look something like this:
 ``` {r PP_12_04}
 ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_point()
 ```
 
-5. The plot should look something like this:
+9. The plot should look something like this:
 ```{r PP_12_05}
 ggplot(data = EmpData, mapping = aes(x = AnnPopGrowth, y = UnempRate)) + geom_point() + 
   geom_smooth(col = "green") + geom_smooth(method = "lm", col = "blue")
