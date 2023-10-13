@@ -66,15 +66,23 @@ The chapters themselves are organized into three parts.
 
 - Chapters 1-5 (**FUNDAMENTALS**) introduce the basic theoretical concepts
   of probability and random variables, as well as the basic computer
-  skills to work with data in Excel.  It is a prerequisite for the
-  later chapters.
+  skills to work with data in Excel.
+  - They assume basic computer skills as well as familiarity with
+    sets, functions, and the summation operator.
+  - They should be considered prerequisites for the later chapters.
+  - Chapter 5 depends on Chapter 2, and Chapter 4 depends on Chapter 3.
+    Otherwise, these chapters can be read or covered in any order.
 - Chapters 6-8 (**STATISTICAL THEORY**) develop the theory of statistics.
-  These chapters assume knowledge of the material from Chapters 1-5,
-  especially Chapters 3 and 4.
-- Chapters 9-12 (**WORKING WITH DATA**) teach more advanced data skills
-  in both Excel and R. These chapters assume knowledge of the material
-  from Chapters 1-5 (especially Chapters 2 and 5), but do not rely on
-  Chapters 6-8.
+  - They assume knowledge of the material from Chapters 1-5, especially Chapters
+    3 and 4.
+  - They are not required for Chapters 9-11.
+  - They must be covered in order.
+- Chapters 9-11 (**WORKING WITH DATA**) teach more advanced data skills
+  in both Excel and R.
+  - They chapters assume knowledge of the material from Chapters 1-5, 
+    especially Chapters 2 and 5), but do not assume Chapters 6-8.
+  - Chapter 11 depends on Chapter 10. Otherwise, they can be read or covered
+    in any order.
 
 There is also an appendix reviewing mathematical tools that are used
 throughout the book, but that should have been covered in a previous

@@ -110,10 +110,7 @@ For this chapter, we will simplify by assuming that $K = 1$, i.e., that
 $D_n = (x_1,x_2,\ldots,x_n)$ contains $n$ observations on a single numeric
 variable $x_i$. This case will cover all of the univariate statistics and
 methods described in the chapter on
-[basic data analysis](#basic-data-analysis-with-excel). A later chapter will
-consider data sets with [multiple variables](#multivariate-data-analysis),
-along with some tools for analyzing the relationship between two or more
-variables.
+[basic data analysis](#basic-data-analysis-with-excel).
 
 ::: example
 **Data from two roulette games**

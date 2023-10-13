@@ -195,7 +195,7 @@ which are statistics that describe a single variable in isolation. In Section
 univariate graphs.
 
 Multivariate statistics describe the relationships among multiple variables,
-and will be covered in Chapter \@ref(multivariate-data-analysis).
+and will be covered in later chapters.
 
 A table of ***summary statistics*** reports various univariate statistics for
 each variable in our data set.  For example, our table of summary statistics
@@ -1089,8 +1089,8 @@ results is much more challenging.
 Later in the course, we will [bring theory and data together](#statistics)
 by interpreting the statistics calculated in this chapter as random variables.
 We will also move beyond the univariate statistics and graphs described in
-this chapter by developing tools for
-[multivariate data analysis](#multivariate-data-analysis).
+this chapter by developing tools for multivariate data analysis in both
+Excel and R.
 
 ## Practice problems {-#problems-basic-data-analysis}
 

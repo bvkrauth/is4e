@@ -495,9 +495,8 @@ data.
 ::: example
 **using `cov()` and `cor()` to calculate a covariance/correlation**
 
-If you haven't done so already, open up R and execute the code from the
-[introduction](#multivariate-data-analysis) to this chapter. You can then
-execute the following code:
+You can calculate the covariance and correlation of the unemployment rate and
+labour force participation rate by executing the following code:
 
 ```{r CovCor}
 # For two specific columns of data
