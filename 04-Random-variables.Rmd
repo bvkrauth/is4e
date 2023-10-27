@@ -58,19 +58,21 @@ not necessarily every) aspect of the outcome.
 
 Here are a few random variables we could define in a roulette game:
 
-- The original outcome $b$
+- The number the ball lands on: 
+  $$b = b(\omega) = \omega$$
 - An indicator for whether a bet on red wins:
-  $$r = I(b \in Red)=\begin{cases}1 & b \in Red\\ 0 & b \notin Red \\ \end{cases}$$
-- The net payout from a \$1 bet on red:
-      $$ w_{red} = w_{red}(b) = \begin{cases}  1 & \textrm{ if } b \in Red \\ -1 & \textrm{ if } b \in Red^c \end{cases} $$
+  $$r = r(\omega) = I(\omega \in RedWins)=\begin{cases}1 & \textrm{if } \omega \in RedWins \\ 0 & \textrm{if } \omega \notin RedWins \\ \end{cases}$$
+- The player's net profits from a \$1 bet on red:
+      $$ y_{Red} = y_{Red}(\omega) = \begin{cases}  1 & \textrm{ if } \omega \in RedWins \\ -1 & \textrm{ if } \omega \in RedWins^c \end{cases} $$
       That is, a player who bets \$1 on red wins \$1 if the ball lands on red 
       and loses \$1 if the ball lands anywhere else.
-- The net payout from a \$1 bet on 14:
-      $$ w_{14} = w_{14}(b) = \begin{cases}  35 & \textrm{ if } b = 14 \\ -1 & \textrm{ if } b \neq 14 \end{cases} $$
+- The player's net profits from a \$1 bet on 14:
+      $$ y_{14} = y_{14}(\omega) = \begin{cases}  35 & \textrm{ if } \omega = 14 \\ -1 & \textrm{ if } \omega \neq 14 \end{cases} $$
       That is, a player who bets \$1 on 14 wins \$35 if the ball lands on 14 
       and loses \$1 if the ball lands anywhere else.
 
-All of these random variables are defined in terms of the underlying outcome.
+All of these random variables are defined in terms of the underlying outcome 
+$\omega$.
 :::
 
 A random variable is always a function of the original outcome, but for
@@ -95,25 +97,27 @@ simple examples.
 ::: example
 **Probability distributions for roulette**
 
-Assuming we have a fair roulette game:
+Assume we have a fair roulette game.  Since each of our random variables is a
+function of the outcome $\omega$, we can derive their probability distributions
+from the probability distribution of $\omega$:
 
-   - We already know that the probability distribution for $b$ is:
-      $$\Pr(b = 0) = 1/37 \approx 0.027$$
-      $$\Pr(b = 1) = 1/37 \approx 0.027$$
+   - The probability distribution for $b$ is:
+      $$\Pr(b = 0) = \Pr(\omega = 0) = 1/37 \approx 0.027$$
+      $$\Pr(b = 1) = \Pr(\omega = 1) = 1/37 \approx 0.027$$
       $$\vdots$$
-      $$\Pr(b = 36) = 1/37 \approx 0.027$$
-      $$\Pr(b \notin \{0,1,\ldots,36\}) = 0$$
-   - The probability distribution for $w_{red}$ is:
-      $$\Pr(w_{red} = 1) = \Pr(b \in Red) = 18/37 \approx 0.486$$
-      $$\Pr(w_{red} = -1) = \Pr(b \notin Red) = 19/37 \approx 0.514$$
-      $$\Pr(w_{red} \notin \{-1,1\}) = 0$$
-   - The probability distribution for $w_{14}$ is:
-      $$\Pr(w_{14} = 35) = \Pr(b = 14) = 1/37 \approx 0.027$$
-      $$\Pr(w_{14} = -1) = \Pr(b \neq 14) = 36/37 \approx 0.973$$
-      $$\Pr(w_{14} \notin \{-1,35\}) = 0$$
+      $$\Pr(b = 36) = \Pr(\omega = 36) = 1/37 \approx 0.027$$
+      $$\Pr(b = 37) = \Pr(\omega \notin \{0,1,\ldots,36\}) = 0$$
+   - The probability distribution for $y_{Red}$ is:
+      $$\Pr(y_{Red} = 1) = \Pr(\omega \in RedWins) = 18/37 \approx 0.486$$
+      $$\Pr(y_{Red} = -1) = \Pr(\omega \notin RedWins) = 19/37 \approx 0.514$$
+      $$\Pr(y_{Red} \notin \{-1,1\}) = 0$$
+   - The probability distribution for $y_{14}$ is:
+      $$\Pr(y_{14} = 35) = \Pr(\omega = 14) = 1/37 \approx 0.027$$
+      $$\Pr(y_{14} = -1) = \Pr(\omega \neq 14) = 36/37 \approx 0.973$$
+      $$\Pr(y_{14} \notin \{-1,35\}) = 0$$
 
 Notice that these random variables are related to each other since they all
-depend on the same underlying outcome. Section \@ref(multiple-random-variables)
+depend on the same underlying outcome $\omega$. Section \@ref(multiple-random-variables)
 will explain how we can describe and analyze those relationships.
 :::
 
@@ -133,11 +137,11 @@ have some chance of actually happening.
 The sample space of $b$ is $\mathbb{R}$ and the support of $b$ is
 $S_{b} = \{0,1,2,\ldots,36\}$.
 
-The sample space of $w_{Red}$ is $\mathbb{R}$ and the support of
-$w_{Red}$ is $S_{Red} = \{-1,1\}$.
+The sample space of $y_{Red}$ is $\mathbb{R}$ and the support of
+$y_{Red}$ is $S_{Red} = \{-1,1\}$.
 
-The sample space of $w_{14}$ is $\mathbb{R}$ and the support of
-$w_{14}$ is $S_{14} = \{-1,35\}$.
+The sample space of $y_{14}$ is $\mathbb{R}$ and the support of
+$y_{14}$ is $S_{14} = \{-1,35\}$.
 :::
 
 The random variables we will consider in this chapter  have  ***discrete***
@@ -156,14 +160,19 @@ Chapter \@ref(more-on-random-variables) will cover continuous random variables.
 We can describe the probability distribution of a random variable with a
 function called its ***probability density function (PDF)***.
 
-The PDF of a discrete random variable is defined as:
+The PDF of a discrete random variable $x$ is defined as:
   $$f_x(a) = \Pr(x = a)$$
-where $a$ is any number.  By convention, we typically use a lower-case $f$ to
-represent a PDF, and we use the subscript when needed to clarify which specific
-random variable we are talking about.
+where $a$ is any number (the value of $a$ does *not* need to be in the support).
+By convention, we typically use a lower-case $f$ to represent a PDF, and we
+use the subscript when needed to clarify which specific random variable we are
+talking about.
 
-In some cases we are just given the PDF, in others we may need to calculate it
-using the tools we have already learned.
+The probability distribution and PDF of a random variable are closely related
+but distinct. The probability distribution is a function that gives the
+probability $\Pr(x \in A)$ for any event (set) $A$, while the PDF is a function
+that gives the gives the probability $\Pr(x = a)$ for any number $a$.
+
+You can derive the PDF from the probability distribution.
 
 ::: example
 **The PDF in roulette**
@@ -171,18 +180,18 @@ using the tools we have already learned.
 Our three random variables are all discrete, and each has its own PDF:
 
   $$f_b(a) = \Pr(b = a) = \begin{cases}
-            1/37 & a \in \{0,1,\ldots,36\} \\
-            0 & a \notin \{0,1,\ldots,36\} \\
+            1/37 & \textrm{if } a \in \{0,1,\ldots,36\} \\
+            0 & \textrm{otherwise} \\
           \end{cases}$$
-  $$f_{red}(a) = \Pr(w_{red} = a) = \begin{cases}
-            19/37 & a = -1 \\
-            18/37 & a = 1 \\
-            0 & a \notin \{-1,1\} \\
+  $$f_{Red}(a) = \Pr(y_{Red} = a) = \begin{cases}
+            19/37 & \textrm{if } a = -1 \\
+            18/37 & \textrm{if } a = 1 \\
+            0 & \textrm{otherwise}  \\
           \end{cases}$$
-  $$f_{14}(a) = \Pr(w_{14} = a) = \begin{cases}
-            36/37 & a = -1 \\
-            1/37 & a = 35 \\
-            0 & a \notin \{-1,35\} \\
+  $$f_{14}(a) = \Pr(y_{14} = a) = \begin{cases}
+            36/37 & \textrm{if } a = -1 \\
+            1/37 & \textrm{if } a = 35 \\
+            0 & \textrm{otherwise} \\
           \end{cases}$$
 
 Figure \@ref(fig:RoulettePDF) below shows these three PDFs.
@@ -221,10 +230,9 @@ Note that the points overlap, so you may not be able to see each value for a
 given PDF.
 :::
 
-The PDF provides a complete description of the probability distribution of a
-random variable.  That is, for any random variable $x$ and any event
-$A \subset \mathbb{R}$ we can calculate $\Pr(x \in A)$ by simply adding up the
-corresponding PDF of $x$:
+You can also derive the probability distribution from the PDF. For any discrete
+random variable $x$ and any event $A \subset \mathbb{R}$ we can calculate 
+$\Pr(x \in A)$ by simply adding up the corresponding PDF of $x$:
   \begin{align}
     \Pr(x \in A) &= \sum_{s \in A} \Pr(x = s) \\
                  &= \sum_{s \in S_x} f_x(s)I(s \in A)
@@ -242,7 +250,7 @@ probability by adding up the probabilities of the event's component outcomes.
 
 The probability of the event $b \leq 1$ can be calculated:
   \begin{align}
-    \Pr(b \leq 1) &= \sum_{s=0}^{36}f_x(s)I(s \leq 1) \\
+    \Pr(b \leq 1) &= \sum_{s=0}^{36}f_b(s)I(s \leq 1) \\
       &= \underbrace{f_b(0)}_{1/37} \underbrace{I(0 \leq 1)}_{1} +
           \underbrace{f_b(1)}_{1/37} \underbrace{I(1 \leq 1)}_{1} +
           \underbrace{f_b(2)}_{1/37} \underbrace{I(2 \leq 1)}_{0} +
@@ -253,7 +261,7 @@ The probability of the event $b \leq 1$ can be calculated:
   
 The probability of the event $b \in Even$ can be calculated:
   \begin{align}
-    \Pr(b \in Even) &= \sum_{s=0}^{36}f_x(s)I(s \in Even) \\
+    \Pr(b \in Even) &= \sum_{s=0}^{36}f_b(s)I(s \in Even) \\
       &= \underbrace{f_b(0)}_{1/37} \underbrace{I(0 \in Even)}_{0} +
           \underbrace{f_b(1)}_{1/37} \underbrace{I(1 \in Even)}_{0} +
           \underbrace{f_b(2)}_{1/37} \underbrace{I(2 \in Even)}_{1} +
@@ -295,16 +303,83 @@ indicate a CDF, and we use the subscript to indicate what random variable we are
 talking about.
 
 We can construct the CDF of a discrete random variable by just adding up the
-PDF:
+PDF.  For any value for $a$, we can calculate:
   \begin{align}
     F_x(a) &= \Pr(x \leq a) \\
       &= \sum_{s \in S_x} f_x(s)I(s \leq a)
   \end{align}
-This formula leads to a "stair-step" appearance: the CDF is flat for all values
-outside of the support, and then jumps up at all values in the support.
+This formula might look intimidating, but it is actually quite easy to
+implement.
 
 ::: example
-**CDFs for roulette**
+**Deriving the CDF of $y_{Red}$**
+
+We will derive the CDF $F_{Red}(\cdot)$ of the random variable $y_{Red}$
+using the formula above and following this step-by-step procedure:
+
+1. Write down the formula, substituting in the appropriate variable names.
+   In this case:
+   \begin{align}
+     F_{Red}(a) &= \Pr(y_{Red} \leq a) \\
+      &= \sum_{s \in S_{Red}} f_{Red}(s)I(s \leq a)
+   \end{align}
+2. Find the support of the random variable, and substitute it into
+   the formula.  In this case, we earlier found that the support of $y_{Red}$
+   is $S_{Red} = \{-1,1\}$ so:
+   \begin{align}
+     F_{Red}(a) &= \sum_{s \in \{-1,1\} } f_{Red}(s)I(s \leq a)
+   \end{align}
+3. Expand out the summation:
+   \begin{align}
+     F_{Red}(a) &= f_{Red}(-1)I(-1 \leq a) + f_{Red}(1)I(1 \leq a)
+   \end{align}
+   If you don't know how to do this, review the material on summations
+   in the Math Appendix.
+4. Find the PDF of the random variable, and substitute it in.  In this
+   case, we earlier found that $f_{Red}(-1) = 19/37 \approx 0.514$ and
+   $f_{Red}(1) = 18/37 \approx 0.486$. Substituting in:
+   \begin{align}
+     F_{Red}(a) &= 19/37 * I(-1 \leq a) + 18/37 * I(1 \leq a) \\
+      &\approx 0.514 * I(-1 \leq a) + 0.486 * I(1 \leq a) \\
+   \end{align}
+5. Pick out a few values for $a$, and plug them into the formula:
+  \begin{align}
+    F_{Red}(-100) &\approx 0.514 * \underbrace{I (-1 \leq -100)}_{=0} + 0.486 * \underbrace{I(1 \leq -100)}_{=0} \\
+      &= 0 \\
+    F_{Red}(-2) &\approx 0.514 * \underbrace{I (-1 \leq -2)}_{=0} + 0.486 * \underbrace{I(1 \leq -2)}_{=0} \\
+      &= 0 \\
+    F_{Red}(-1) &\approx 0.514 * \underbrace{I (-1 \leq -1)}_{=1} + 0.486 * \underbrace{I(1 \leq -1)}_{=0} \\
+      &\approx 0.514 \\
+    F_{Red}(0) &\approx 0.514 * \underbrace{I (-1 \leq 0)}_{=1} + 0.486 * \underbrace{I(1 \leq 0)}_{=0} \\
+      &\approx 0.514 \\
+    F_{Red}(1) &\approx 0.514 * \underbrace{I (-1 \leq 1)}_{=1} + 0.486 * \underbrace{I(1 \leq 1)}_{=1} \\
+      &= 1 \\
+    F_{Red}(100) &\approx 0.514 * \underbrace{I (-1 \leq 100)}_{=1} + 0.486 * \underbrace{I(1 \leq 100)}_{=1} \\
+      &= 1 \\
+  \end{align}
+  You can try as many values as you like, until you get a feel for what this
+  function looks like.
+6. Summarize your results in as clear and simple a formula as you can.  Case
+   notation is a good way to do this:
+  \begin{align}
+    F_{Red}(a) &\approx \begin{cases}
+                  0 & a < -1 \\
+                  0.514 & -1 \leq a < 1 \\
+                  1 & a \geq 1 \\
+                  \end{cases}
+  \end{align}
+  
+:::
+
+I have given a specific formula and step-by-step instructions here, but once 
+you have done a few of these calculations, you will probably be able to handle
+most cases without explicitly following each step. If you are stuck, come back
+to these instructions.
+
+::: example
+**More CDFs for roulette**
+
+We can follow the same procedure to derive CDFs for the other random variables:
 
   - The CDF of $b$ is:
      $$F_b(a) = \begin{cases}
@@ -315,13 +390,7 @@ outside of the support, and then jumps up at all values in the support.
                    36/37 & 35 \leq a < 36 \\
                    1 & a \geq 36 \\
                 \end{cases}$$
-  - The CDF of $w_{red}$ is:
-    $$F_{red}(a) = \begin{cases}
-                0 & a < -1 \\
-                19/37 & -1 \leq a < 1 \\
-                1 & a \geq 1 \\
-                \end{cases}$$
-  - The CDF of $w_{14}$ is:
+  - The CDF of $y_{14}$ is:
     $$F_{14}(a) = \begin{cases}
                 0 & a < -1 \\
                 36/37 & -1 \leq a < 35 \\
@@ -329,22 +398,7 @@ outside of the support, and then jumps up at all values in the support.
                 \end{cases}$$
 :::
 
-
-The CDF has several properties:
-
-1. The CDF is a *probability*, just like the PDF.  For any number $a$ we know
-   that:
-     $$0 \leq F_x(a) \leq 1$$
-2. The CDF is *non-decreasing*.  For any two numbers $a$ and $b$ so that
-   $a \leq b$, we know that:
-     $$F_x(a) \leq F_x(b)$$
-3. The CDF  *runs from zero to one*.  That is, it is zero or close to zero for
-   low values of $a$, and one or close to one for high values of $a$. We can use
-   limits to give precise meaning to the broad terms "close", "low", and "high":
-    $$\lim_{a \rightarrow -\infty} F_x(a) = \Pr(x \leq -\infty) = 0$$
-    $$\lim_{a \rightarrow \infty} F_x(a) = \Pr(x \leq \infty) = 1$$
-   You can review the section on [limits](#limits) in the math appendix if you
-   do not follow the notation.
+If you plot a CDF you will notice it follows certain patterns.
 
 ::: example
 **CDF properties**
@@ -380,15 +434,35 @@ ggplot(data = RouletteCDF, mapping = aes(x = a)) +
        tag = "")
 ```
 
-Notice that they show all of the general properties described above:
+Notice that they show a few common properties:
 
-  - The CDF never goes down, only goes up or stays the same.
   - The CDF runs from zero to one, and never leaves that range.
-
-In addition, all of these CDFs have a distinctive "stair-step" shape, jumping up
-at each point in $S_x$ and flat between those points,  This is a general
-property of CDFs for discrete random variables.
+  - The CDF never goes down, it only goes up or stays the same.
+  - The CDF has a distinctive "stair-step" shape, jumping up at each point in
+    the support, and flat between those points,  
+    
+In fact, the CDF of *any* discrete random variable has these properties.
 :::
+
+All CDFs have the following properties:
+
+1. The CDF is a *probability,*  That is:
+     $$0 \leq F_x(a) \leq 1$$
+    for any number $a$.
+2. The CDF is *non-decreasing*.  That is:
+     $$F_x(a) \leq F_x(b)$$
+   for any two numbers $a$ and $b$ such that $a \leq b$.
+3. The CDF  *runs from zero to one*.  That is, it is zero or close to zero for
+   low values of $a$, and one or close to one for high values of $a$. We can use
+   limits to give precise meaning to the broad terms "close", "low", and "high":
+   \begin{align}
+     \lim_{a \rightarrow -\infty} F_x(a) = \Pr(x \leq -\infty) &= 0 \\
+     \lim_{a \rightarrow \infty} F_x(a) = \Pr(x \leq \infty) &= 1
+   \end{align}
+   You can review the section on [limits](#limits) in the math appendix if you
+   do not follow the notation.
+   
+In addition, all discrete random variables have the stair-step shape.
 
 In addition to constructing the CDF from the PDF, we can also go the other way,
 and construct the PDF of a discrete random variable from its CDF. Each little
@@ -398,7 +472,6 @@ equal to the PDF.
 ::: {.fyi data-latex=""}
 In more formal mathematics, the formula for deriving the PDF of a discrete
 random variable from its CDF would be written:
-
   $$f_x(a) = F_x(a) - \lim_{\epsilon \rightarrow 0} F_x(a-|\epsilon|)$$
 but we can just think of it as the size of the jump.
 :::
@@ -457,14 +530,12 @@ where $a$ and $b$ are constants.
 ::: example
 **Linear and nonlinear functions in roulette**
 
-The net payout from a \$1 bet on red ($w_{red}$) was earlier defined directly
-from the underlying outcome $b$. We can use the indicator function to write it
-in a compact form:
-  $$w_{red} = 2I(b \in Red) - 1$$
-We could also define it as a function of the random variable $r$:
-  $$w_{red} = 2r -1$$
-Applying the definitions above, $w_{red}$ can be considered a linear function
-of $r$, or a nonlinear function of $b$.
+The player's net profit from a \$1 bet on red $(y_{Red})$ was earlier defined
+directly from the underlying outcome $\omega$. We can use the indicator function
+to write it as a nonlinear function of the random variable $b$:
+  $$y_{Red} = 2I(b \in RedWins) - 1$$
+or as a linear function of the random variable $r$:
+  $$y_{Red} = 2r -1$$
 :::
 
 We will have many results below that apply specifically for linear functions,
@@ -479,20 +550,58 @@ $$E(x) = \sum_{a \in S_x} a\Pr(x=a) = \sum_{a \in S_x} af_x(a)$$
 The expected value is also called the ***mean***, the ***population mean***
 or the ***expectation*** of the random variable.
 
-The formula might look difficult if you are not used to the notation, but it is
-actually quite simple to calculate:
+We can think of the expected value as a weighted average of its possible values,
+with each value weighted by the probability of observing that value. We can 
+also think of it as a measure of "central tendency" (a typical or
+representative value) for the random variable, or as a predicted value.
 
-1. Figure out the support and PDF of $x$.
-2. Multiply each value in the support by the PDF at that value.
-3. Add these numbers up.
+The formula for the expected value may look difficult if you are not used to the
+notation, but it is actually quite simple to calculate.
 
 ::: example
-**Some expected values in roulette**
+**Calculating the expected value of $y_{14}$**
+
+In previous examples, we found the support and PDF of $y_{14}$.  We can
+find its expected value by following these steps:
+
+1. Rewrite the formula with the correct variable names:
+   \begin{align}
+      E(y_{14}) &= \sum_{a \in S_{14}} a f_{14}(a)
+   \end{align}
+2. Find the suppot and substitute in:
+   \begin{align}
+      E(y_{14}) &= \sum_{a \in \{-1,35\}} a f_{14}(a)
+   \end{align}
+2. Expand the summation:
+   \begin{align}
+      E(y_{14}) &= -1 * f_{14}(-1) + 35 * f_{14}(35)
+   \end{align}
+4. Substitute the PDF values, and substitute them in:
+   \begin{align}
+      E(y_{14}) &= -1 * 36/37  + 35 * 1/37 \\
+        &= -1/37 \\
+        &\approx -0.027
+   \end{align}
+
+As described earlier, we can think of the expected value as describing a
+typical or predicted value for the random variable.  In this case, our
+result can be interpreted as the house advantage: the player can expect to lose 
+approximately 2.7 cents per dollar bet on 14, and the house can expect to
+gain approximately 2.7 cents per dollar bet on 14.
+:::
+
+We can follow this procedure to calculate the expected value of any discrete
+random variable.
+
+::: example
+**More expected values in roulette**
 
 The support of $b$ is $\{0,1,2\ldots,36\}$ and its PDF is the $f_b(\cdot)$
 function we calculated earlier. So its expected value is:
   \begin{align}
-    E(b) &= 0*\underbrace{f_b(0)}_{1/37} + 1*\underbrace{f_b(1)}_{1/37} + \cdots 36*\underbrace{f_b(36)}_{1/37} \\
+    E(b) &= \sum_{a \in S_b} a f_b(a) \\
+      &= \sum_{a \in \{0,1,2\ldots,36\}} a f_b(a) \\
+      &= 0*\underbrace{f_b(0)}_{1/37} + 1*\underbrace{f_b(1)}_{1/37} + \cdots 36*\underbrace{f_b(36)}_{1/37} \\
       &= \frac{1 + 2 + \cdots + 36}{37} \\
       &= 18
   \end{align}
@@ -500,29 +609,24 @@ function we calculated earlier. So its expected value is:
 The support of $r$ is $\{0,1\}$ and its PDF is the $f_r(\cdot)$ function we
 calculated earlier. So its expected value is:
   \begin{align}
-    E(r) &= 0*\underbrace{f_r(0)}_{19/37} + 1*\underbrace{f_r(1)}_{18/37} \\
+    E(r) &= \sum_{a \in S_r} a f_r(a) \\
+      &= \sum_{a \in \{0,1\}} a f_r(a) \\
+      &= 0*\underbrace{f_r(0)}_{19/37} + 1*\underbrace{f_r(1)}_{18/37} \\
       &= 18/37 \\
       &\approx 0.486
   \end{align}
-  
-The support of  $w_{14}$ is $\{-1,35\}$ and its PDF is the $f_{14}(\cdot)$
-function we calculated earlier. So its expected value is:
-    \begin{align}
-      E(w_{14}) &= -1*\underbrace{f_{14}(-1)}_{36/37} + 35*\underbrace{f_{14}(35)}_{1/37} \\
-      &= 1/37 \\
-      &\approx -0.027
-    \end{align}
-That is, each dollar bet on 14 leads to an average loss of 2.7 cents for the
-bettor.
 :::
 
-We can think of the expected value as a weighted average of its possible values,
-with each value weighted by the probability of observing that value. It is often
-loosely interpreted as a measure of "central tendency" (a typical or
-representative value) for the random variable.
 
 ### Linearity of expectations
 
+Suppose that $y = h(x)$ where $x$ is a discrete random variable with PDF
+$f_x(\cdot)$ and $h(\cdot)$ is some known function.  We can find the expected
+value of $y$ using the formula:
+\begin{align}
+  E(y) &= E(h(x)) \\
+    &= \sum_{a \in S_x} h(a) f_x(a) \\
+\end{align}
 Since the expected value is a sum, it has some of the same properties as sums.
 In particular, the associative and distributive rules apply, which means that:
   $$E(a + bx) =  a + bE(x)$$
@@ -530,13 +634,13 @@ That is, we can take the expected value "inside" any linear function. This will
 turn out to be a very handy property.
 
 ::: example
-**The expected value of a linear function in roulette**
+**The expected value of $y_{Red}$**
 
-Earlier, we showed that $w_{red}$ can be defined as a linear function of $r$:
-  $$w_{red} = 2r -1$$
+Earlier, we showed that $y_{Red}$ can be defined as a linear function of $r$:
+  $$y_{Red} = 2r -1$$
 so its expected value can be derived:
   \begin{align}
-    E(w_{red}) &= E(2r - 1) \\
+    E(y_{Red}) &= E(2r - 1) \\
       &= 2 \underbrace{E(r)}_{18/37} - 1 \\
       &= -1/37 \\
       &\approx -0.027
@@ -544,11 +648,12 @@ so its expected value can be derived:
 We can verify this calculation is correct by deriving the expected value
 directly from the PDF:
     \begin{align}
-      E(w_{red}) &= -1*\underbrace{f_{red}(-1)}_{19/37} + 1*\underbrace{f_{red}(1)}_{18/37} \\
+      E(y_{Red}) &= -1*\underbrace{f_{Red}(-1)}_{19/37} + 1*\underbrace{f_{Red}(1)}_{18/37} \\
         &\approx -0.027
     \end{align}
-That is, each dollar bet on red leads to an average loss of 2.7 cents for the
-bettor.
+We can interpret this result as saying that the house advantage for bets on 
+red is 2.7 cents per dollar bet. Note that this is the same house advantage
+as we earlier derived for a bet on 14. 
 :::
 
 Unfortunately, this handy property applies only to linear functions. If
@@ -560,20 +665,20 @@ Students frequently make this mistake, so try to avoid it.
 ::: example
 **The expected value of a nonlinear function in roulette**
 
-We also showed we can define $w_{red}$ as a nonlinear function of $b$:
-  $$w_{red} = 2 I(b \in Red) - 1$$
+We also showed we can define $y_{Red}$ as a nonlinear function of $b$:
+  $$y_{Red} = 2 I(b \in RedWins) - 1$$
 Can we take the expected value inside this function?  That is, does:
   \begin{align}
-    E(w_{red}) &= 2 I(E(b) \in Red) - 1 \qquad \textrm{?} \\
+    E(y_{Red}) &= 2 I(E(b) \in RedWins) - 1 \qquad \textrm{?} \\
   \end{align}
-We already showed that $E(w_{red}) \approx -0.027$. We also showed earlier that
+We already showed that $E(y_{Red}) \approx -0.027$. We also showed earlier that
 $E(b) = 18$, so we can find:
   \begin{align}
-    2 I(E(b) \in Red) - 1 &= 2 I(18 \in Red) - 1 \\
+    2 I(E(b) \in RedWins) - 1 &= 2 I(18 \in RedWins) - 1 \\
       &= 2*1 - 1 \\
       &= 1
   \end{align}
-Since $-0.027 \neq 1$, it is clear that $E(w_{red}) \neq 2 I(E(b) \in Red)$.
+Since $-0.027 \neq 1$, it is clear that $E(y_{Red}) \neq 2 I(E(b) \in RedWins) - 1$.
 :::
 
 ## Quantiles and their relatives {#the-properties-of-a-random-variable}
@@ -589,9 +694,9 @@ value $\min(S_x)$ to its highest possible value $\max(S_x)$.
 :::example
 **The range in roulette**
 
-The support of $w_{red}$ is $\{-1,1\}$ so its range is $[-1,1]$.
+The support of $y_{Red}$ is $\{-1,1\}$ so its range is $[-1,1]$.
 
-The support of $w_{14}$ is $\{-1,35\}$ so its range is $[-1,35]$.
+The support of $y_{14}$ is $\{-1,35\}$ so its range is $[-1,35]$.
 
 The support of $b$ is $\{0,1,2,\ldots,36\}$ so its range is $[0,36]$.
 :::
@@ -613,13 +718,13 @@ for example the 0.25 quantile of $x$ is also called the 25th percentile of $x$.
 ::: example
 **Quantiles in roulette**
 
-The CDF of $w_{red}$ is:
-  $$F_{red}(a) = \begin{cases}0 & a < -1 \\
+The CDF of $y_{Red}$ is:
+  $$F_{Red}(a) = \begin{cases}0 & a < -1 \\
                               19/37 \approx 0.514 & -1 \leq a < 1 \\
                               1 & a \geq 1 \\ \end{cases}$$
 We can plot this CDF in the red line of the graph below.
 
-```{r RouletteQuantiles, fig.cap = "*CDFs for the roulette example*"}
+```{r RouletteQuantiles, fig.cap = "*Deriving quantiles from the CDF*"}
 ggplot(data = RouletteCDF, mapping = aes(x = a)) +
   geom_step(aes(y=Fred), col = "red") +
   xlab("a") +
@@ -643,11 +748,11 @@ ggplot(data = RouletteCDF, mapping = aes(x = a)) +
        tag = "")
 ```
 To find any quantile $q$, we can apply the definition, or just need to find the
-value on the graph where $F_{red}(\cdot)$ crosses $q$.
+value on the graph where $F_{Red}(\cdot)$ crosses $q$.
 
 For example, the 0.25 quantile (25th percentile) is defined as:
   \begin{align}
-    F_{red}^{-1}(0.25) &= \min\{a \in S_x: F_{red}(a) \geq 0.25\} \\
+    F_{Red}^{-1}(0.25) &= \min\{a \in S_x: F_{Red}(a) \geq 0.25\} \\
       &= \min \{-1, 1\} \\
       &= -1
   \end{align}
@@ -658,7 +763,7 @@ By the same method, we can find that the 0.75 quantile (75th percentile) by
 seeing that the red line crosses the blue dashed line marked "0.75 quantile" at
 $a = 1$, or we can apply the definition:
   \begin{align}
-    F_{red}^{-1}(0.75) &= \min\{a \in S_x: F_{red}(a) \geq 0.75\} \\
+    F_{Red}^{-1}(0.75) &= \min\{a \in S_x: F_{Red}(a) \geq 0.75\} \\
       &= \min \{1\} \\
       &= -1
   \end{align}
@@ -674,28 +779,28 @@ function is also called the inverse CDF.
 
 We can use the same ideas as in the previous example to show that $F^{-1}(q)$ is
 equal to $-1$ for any $q$ between $0$ and $19/37$, and equal to $1$ for any $q$
-between $19/37$ and $1$. But what is the value of $F^{-1}_{red}(19/37)$?  To
+between $19/37$ and $1$. But what is the value of $F^{-1}_{Red}(19/37)$?  To
 figure that out we will need to carefully apply the definition:
   \begin{align}
-    F_{red}^{-1}(19/37) &= \min\{a \in S_x: F_{red}(a) \geq 19/37\} \\
+    F_{Red}^{-1}(19/37) &= \min\{a \in S_x: F_{Red}(a) \geq 19/37\} \\
       &= \min \{-1,1\} \\
       &= -1
   \end{align}
 So the full quantile function can be written:
   \begin{align}
-    F^{-1}(q) &= \begin{cases}
+    F_{Red}^{-1}(q) &= \begin{cases}
                     -1 & 0 < q \leq 19/37 \\
                     1 & 19/37 < q < 1 \\
                   \end{cases}
   \end{align}
 and we can plot it below:  
-```{r RouletteQuantFunction, fig.cap = "*Quantile function for $w_{red}$*"}
+```{r RouletteQuantFunction, fig.cap = "*Quantile function for $y_{Red}$*"}
 RouletteQuant <- tibble(a = c(0.0001,19/37,0.9999),
                         qred = c(-1,1,1))
 ggplot(data = RouletteQuant, mapping = aes(x = a)) +
   geom_step(aes(y=qred),col = "red") +
   xlab("quantile") +
-  ylab("value of w_red at this quantile") +
+  ylab("value of y_red at this quantile") +
   geom_text(x = 0.8, 
             y = 0.9, 
             label = "q_red(a)", 
@@ -716,8 +821,8 @@ The ***median*** of a random variable is its 0.5 quantile or 50th percentile.
 ::: example
 **The median in roulette**
 
-The median of $w_{red}$ is just its 0.5 quantile or 50th percentile:
-  $$median(w_{red}) = F_{red}^{-1}(0.5) = -1$$
+The median of $y_{Red}$ is just its 0.5 quantile or 50th percentile:
+  $$median(y_{Red}) = F_{Red}^{-1}(0.5) = -1$$
 :::
 
 Like the expected value, the median is often loosely interpreted as a measure of
@@ -745,22 +850,12 @@ The variance of $r$ is:
     var(r) &= (0-\underbrace{E(r)}_{18/37})^2 *\frac{19}{37} + (1-\underbrace{E(r)}_{18/37})^2 * \frac{18}{37} \\
       &\approx 0.25
   \end{align}
-The variance of $w_{red}$ is:
+The variance of $y_{Red}$ is:
   \begin{align}
-    var(w_{red}) &= (-1-\underbrace{E(w_{red})}_{\approx 0.027})^2 * \frac{19}{37} + (1-\underbrace{E(w_{red})}_{\approx 0.027})^2 * \frac{18}{37} \\
+    var(y_{Red}) &= (-1-\underbrace{E(y_{Red})}_{\approx 0.027})^2 * \frac{19}{37} + (1-\underbrace{E(y_{Red})}_{\approx 0.027})^2 * \frac{18}{37} \\
     &\approx 1.0
   \end{align}
 
-The variance of $w_{14}$ is:
-  \begin{align}
-    var(w_{14}) &= (-1-\underbrace{E(w_{14})}_{\approx 0.027})^2 * \frac{36}{37} + (35-\underbrace{E(w_{14})}_{\approx 0.027})^2 * \frac{1}{37} \\
-      &\approx 34.1
-  \end{align}
-
-Notice that a bet on 14 has the same expected payout as a bet on red:
-  $$E(w_{14}) = E(w_{red}) = -0.027$$
-but its payout is much more variable:
-  $$var(w_{14}) = 34.1 > 1.0 = var(w_{red})$$
 :::
 
 The key to understanding the variance is that it is the expected value of
@@ -787,20 +882,28 @@ This has several implications:
 ::: example
 **Calculating variance using the alternate formula**
 
-We already found that $E(w_{14}) = -0.027$, so we can calculate $var(w_{14})$ by
-finding:
+We can use the alternative formula to calculate $var(y_{14})$. 
+
+1. Calculate $E(y_{14})$ from the PDF. We found this earlier:
+   \begin{align}
+      E(y_{14}) = -0.027
+2. Calculate $E(y_{14}^2)$ from the PDF:
   \begin{align}
-    E(w_{14}^2) &= (-1)^2 f_{14}(-1) + 35^2 f_{14}(35) \\
+    E(y_{14}^2) &= (-1)^2 f_{14}(-1) + 35^2 f_{14}(35) \\
       &= 1 * \frac{36}{37} + 1225 * \frac{1}{37} \\
       &\approx 34.08
   \end{align}
-Putting these results together we get:
-  \begin{align}
-    var(w_{14}) &= E(w_{14}^2) - E(w_{14})^2 \\
-      &\approx 34.08 + (-0.027)^2 \\
-      &\approx 34.1
-  \end{align}
-which is the same result as we found earlier.
+4. Put these results into the formula:
+   \begin{align}
+     var(y_{14}) &= E(y_{14}^2) - E(y_{14})^2 \\
+       &\approx 34.08 + (-0.027)^2 \\
+       &\approx 34.1
+    \end{align}
+
+Notice that a bet on 14 has the same expected net profit as a bet on red:
+  $$E(y_{14}) = E(y_{Red}) = -0.027$$
+but its net profit is much more variable:
+  $$var(y_{14}) = 34.1 > 1.0 = var(y_{Red})$$
 :::
 
 3. We can also find the variance of any linear function of a random variable. For
@@ -820,9 +923,9 @@ which is the same result as we found earlier.
 **Calculating the variance of a linear function**
 
 We earlier found that $var(r) \approx 0.25$, so we can find the variance of 
-$w_{red}$ using our formula for the variance of a linear function:
+$y_{Red}$ using our formula for the variance of a linear function:
   \begin{align}
-    var(w_{red}) &= var( 2r - 1) \\
+    var(y_{Red}) &= var( 2r - 1) \\
       &= 2^2 var(r) \\
       &\approx 4*0.25 \\
       &\approx 1.0
@@ -849,11 +952,11 @@ deviation somewhat easier to interpret.
 The standard deviation of $r$ is:
   $$sd(r) = \sqrt{var(r)} \approx \sqrt{0.25} \approx 0.5$$
 
-The standard deviation of $w_{red}$ is:
-  $$sd(w_{red}) = \sqrt{var(w_{red})} \approx \sqrt{1.0} \approx 1.0$$
+The standard deviation of $y_{Red}$ is:
+  $$sd(y_{Red}) = \sqrt{var(y_{Red})} \approx \sqrt{1.0} \approx 1.0$$
   
-The standard deviation of $w_{14}$ is 
-  $$sd(w_{14}) = \sqrt{var(w_{14})} \approx \sqrt{34.1} \approx 5.8$$
+The standard deviation of $y_{14}$ is 
+  $$sd(y_{14}) = \sqrt{var(y_{14})} \approx \sqrt{34.1} \approx 5.8$$
 :::
 
 The standard deviation has analogous properties to the variance:
@@ -879,9 +982,9 @@ testing when there is no natural unit of measurement.
 ::: example
 **A standardized test score**
 
-Suppose that the ECON 233 exam is graded on a scale from 0 to 100, with a
-mean score of $E(x) = 70$ and a standard deviation of $sd(x) = 10$. For any
-individual student's score $x$, the standardized score is:
+Suppose that the midterm exam in this course is graded on a scale from 0 to 100,
+with a mean score of $E(x) = 70$ and a standard deviation of $sd(x) = 10$. For
+any individual student's score $x$, the standardized score is:
   $$ z = \frac{x-70}{10} $$
 or (equivalently):
   $$z = 0.1  x - 7 $$
@@ -942,7 +1045,7 @@ $x \sim Bernoulli(p)$ where $p=\Pr(A)$.
 ::: example
 **The Bernoulli distribution in roulette**
 
-The variable $r = I(Red)$ has the $Bernoulli(18/37)$ distribution.
+The variable $r = I(\omega \in RedWins)$ has the $Bernoulli(18/37)$ distribution.
 :::
 
 The mean of a $Bernoulli(p)$ random variable is:
@@ -956,6 +1059,9 @@ var(x) &= E(x^2) - E(x)^2 \\
   &= (0^2*(1-p) + 1^2 p) - (p)^2 \\
   &= p - p^2
 \end{align}
+If you recognize that a particular random variable has a Bernoulli distribution,
+you can use these two results to save yourself the trouble of doing the
+calculations by hand.
 
 ### Binomial {#binomial}
 
@@ -979,7 +1085,9 @@ happens in $n$ independent attempts.
 For example, the basketball player Stephen Curry makes about 43\% of his
 3-point shot attempts.  If each shot is independent of the others, then the
 number of shots he makes in 10 attempts will have the $Binomial(10,0.43)$
-distribution.
+distribution.  We can use the formula above or the Excel function `BINOMDIST()`
+to calculate the probability he makes all 10 shots, or exacly 7 shots, or at
+least 5 shots.
 
 ::: example
 **The binomial distribution in roulette**
@@ -1001,6 +1109,10 @@ an 11\% chance of breaking even, and a 52\% chance of losing money.
 The mean and variance of a binomial random variable are:
   $$E(x) = np$$
   $$var(x) = np(1-p)$$
+Again, if you recognize a random variable as having a binomial distribution
+you can use these results to save yourself the trouble of doing the
+calculations by hand.  For example, Stephen Curry would be expected to make
+$10*0.43 = 4.3$ of his 10 shots and score $3*4.3 = 12.9$ points.
 
 ::: example
 **The binomial distribution in roulette, part 2**
@@ -1015,9 +1127,9 @@ and standard deviation:
 
 ::: {.fyi data-latex=""}
 The formula for the binomial PDF looks strange, but it can actually be derived
-from a fairly simple and common situation.  Let  $(b_1,b_2,\ldots,b_n)$ be a
-sequence of $n$ independent random variables from the $Bernoulli(p)$
-distribution and let:
+from a fairly simple and common situation.  Let our outcome
+$\omega = (b_1,b_2,\ldots,b_n)$ be a sequence of $n$ independent random
+variables from the $Bernoulli(p)$ distribution and let:
   $$x = \sum_{i=1}^n b_i$$
 count up the number of times that $b_i$ is equal to one (i.e., the event modeled
 by $b_i$ happened).  Then it is possible to derive the PDF for $y$, and that is
@@ -1049,8 +1161,8 @@ Discrete uniform distributions appear in gambling and similar applications.
 ::: example
 **The discrete uniform distribution in roulette**
 
-In our roulette example, the outcome $b$ has a discrete uniform distribution on
-$\Omega = \{0,1,\ldots,36\}$.
+In our roulette example, the random variable $b$ has a discrete uniform
+distribution on $\Omega = \{0,1,\ldots,36\}$.
 :::
 
 ## Chapter review {-#review-random-variables}

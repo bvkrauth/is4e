@@ -8,6 +8,7 @@ knitr::opts_chunk$set(echo = FALSE,
                       tidy = TRUE,
                       collapse = TRUE)
 library("tidyverse")
+library("cowplot")
 ```
 
 In our first few chapters, we developed the fundamental tools for understanding
@@ -575,7 +576,7 @@ All of these standard distributions have important applications in statistical
 analysis and would be covered in a more advanced course.
 :::
 
-### Standardization
+### Standardized normals
 
 We earlier defined the standardized version of a random variable $x$ as the
 following linear function of $x$:
@@ -653,7 +654,7 @@ conditional distributions, expected values, covariance, correlation, and
 independence - can be defined in terms of the joint distribution.
 
 ::: example
-**Three joint distributions**
+**Four joint distributions**
 
 The scatter plots in Figure \@ref(fig:JointIsNotMarginal) below depict
 simulation results for a pair of random variables $(x,y)$, with a different
@@ -661,9 +662,14 @@ joint distribution in each graph.
 
 ```{r JointIsNotMarginal, fig.cap = "*x and y are drawn from a different joint distribution in each graph.*"}
 simdata <- tibble(x = rnorm(100),
+                  y0 = x^2,
                   y1 = rnorm(100),
                   y2 = (-x+0.5*y1)/sqrt(1.25),
                   y3 = x)
+p0 <- ggplot(data = simdata, mapping = aes(x = x)) +
+  geom_point(aes(y=y0),col="blue") +
+  xlab("x") +
+  ylab("y")
 p1 <- ggplot(data = simdata, mapping = aes(x = x)) +
   geom_point(aes(y=y1),col="blue") +
   xlab("x") +
@@ -676,12 +682,11 @@ p3 <- ggplot(data = simdata, mapping = aes(x = x)) +
   geom_point(aes(y=y3),col="blue") +
   xlab("x") +
   ylab("y")
-library("cowplot")
-plot_grid(p1,p2,p3,ncol=3,nrow=1)
+plot_grid(p0,p1,p2,p3,ncol=2,nrow=2)
 ```
 
-As you can see, the relationship between the two variables differs in the three
-cases.
+As you can see, the relationship between the two variables differs in each of
+these cases.
 :::
 
 The joint distribution of any two *discrete* random random variables can be fully
@@ -693,12 +698,12 @@ underlying outcome.
 ::: example
 **The joint PDF in roulette**
 
-In our roulette example, both $w_{red}$ and $w_{14}$ depend on the original
+In our roulette example, both $y_{Red}$ and $y_{14}$ depend on the original
 outcome $b$. For convenience, I have created a table below that shows every
 value of $b$ in the sample space, its probability, and the associated values
-of $w_{red}$ and $w_{14}$.
+of $y_{Red}$ and $y_{14}$.
 
-| $b$ | $\Pr(b)$ | Color | $w_{red}$ | $w_{14}$ |
+| $b$ | $\Pr(b)$ | Color | $y_{Red}$ | $y_{14}$ |
 |:----|:--------:|:-----:|:---------:|:--------:|
 |  0  |  1/37    | Green |    -1     |   -1     |
 |  1  |  1/37    | Red   |     1     |   -1     |
@@ -743,13 +748,13 @@ We can construct the joint PDF by simply adding up over all possible outcomes.
 There is one outcome ($b=14$) in which both red and 14 win, and it has
 probability $1/37$:
   \begin{align}
-    f_{red,14}(1,35) &= \Pr(w_{red}=1 \cap w_{14} = 35) \\
+    f_{red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
       &= \Pr(b \in \{14\}) = 1/37
   \end{align}
 There are 17 outcomes in which red wins and 14 loses, and each has probability
 $1/37$:
   \begin{align}
-    f_{red,14}(1,-1) &= \Pr(w_{red} = 1 \cap w_{14} = -1) \\
+    f_{red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
       &= \Pr\left(b \in \left\{
         \begin{gathered}
           1,3,5,7,9,12,16,18,19,21,\\
@@ -760,7 +765,7 @@ $1/37$:
 There are 19 outcomes in which both red and 14 lose, and each has probability
 $1/37$:
   \begin{align}
-    f_{red,14}(-1,-1) &= \Pr(w_{red} = -1 \cap w_{14} = -1) \\
+    f_{red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
       &= \Pr\left(b \in \left\{
         \begin{gathered}
           0,2,4,6,7,10,11,13,15,17, \\
@@ -770,9 +775,9 @@ $1/37$:
   \end{align}
 There are no other outcomes, so all other combinations have probability zero.
 
-Therefore, the joint PDF of $w_{red}$ and $w_{14}$ is:
+Therefore, the joint PDF of $y_{Red}$ and $y_{14}$ is:
 \begin{align}
-  f_{red,14}(a,b) &= \begin{cases}
+  f_{Red,14}(a,b) &= \begin{cases}
       19/37 & \textrm{if $a = -1$ and $b = -1$} \\
       17/37 & \textrm{if $a = 1$ and $b = -1$} \\
       1/37 & \textrm{if $a = 1$ and $b = 35$} \\
@@ -823,7 +828,7 @@ formulas.
 ::: example
 **Deriving marginal PDF from joint PDF**
 
-We earlier found the joint PDF of $w_{red}$ and $w_{14}$:
+We earlier found the joint PDF of $y_{Red}$ and $y_{14}$:
 \begin{align}
   f_{red,14}(a,b) &= \begin{cases}
       19/37 & \textrm{if $a = b = -1$} \\
@@ -832,12 +837,12 @@ We earlier found the joint PDF of $w_{red}$ and $w_{14}$:
       0 & \textrm{otherwise} \\
       \end{cases} \nonumber
 \end{align}
-Then the marginal PDF of $w_{red}$ is:
+Then the marginal PDF of $y_{Red}$ is:
 \begin{align}
   f_{red}(a) &= \sum_{b \in \{-1,35\}} f_{red,14}(a,b) \\
     &= f_{red,14}(a,-1) + f_{red,14}(a,35) \\
 \end{align}
-Plugging in values in the support of $w_{red}$ we get:
+Plugging in values in the support of $y_{Red}$ we get:
 \begin{align}
   f_{red}(-1) &= f_{red,14}(-1,-1) + f_{red,14}(-1,35) \\
     &= 19/37 + 0 \\
@@ -860,7 +865,7 @@ Note that this is the same PDF we found in an earlier chapter.
 While you can always derive the two marginal distributions from the joint
 distribution, you cannot derive the joint distribution from the two marginal
 distributions.  A given pair of marginal distributions is typically consistent
-with an infinite number of joint distributions. For example, the three joint
+with an infinite number of joint distributions. For example, the last three joint
 distributions shown in Figure \@ref(fig:JointIsNotMarginal) all depict random
 variables with the same marginal distribution (both $x$ and $y$ have the
 standard normal distribution in all three graphs) but very different joint
@@ -870,8 +875,8 @@ distributions.
 **Two joint distributions with identical marginal distributions**
 
 Suppose Al, Betty, and Carl each place a bet on the same roulette game. Al
-and Betty both bet on red, and Carl bets on black.  Let $w_{Al}$,
-$w_{Betty}$, and $w_{Carl}$ be their respective winnings.
+and Betty both bet on red, and Carl bets on black.  Let $y_{Al}$,
+$y_{Betty}$, and $y_{Carl}$ be their respective winnings.
 
 All three players have the same marginal distribution of winnings:
 \begin{align}
@@ -883,7 +888,7 @@ All three players have the same marginal distribution of winnings:
 \end{align}
 since both red and black have a 18/37 chance of winning.
 
-But the joint distribution of $w_{Al}$ and $w_{Betty}$:
+But the joint distribution of $y_{Al}$ and $y_{Betty}$:
 \begin{align}
   f_{Al,Betty}(a,b)  &= \begin{cases}
     19/37 & \textrm{if $a = -1$ and $b = -1$} \\
@@ -891,7 +896,7 @@ But the joint distribution of $w_{Al}$ and $w_{Betty}$:
     0 & \textrm{otherwise} \\
     \end{cases}
 \end{align}
-is very different from the joint distribution of $w_{Al}$ and $w_{Carl}$:
+is very different from the joint distribution of $y_{Al}$ and $y_{Carl}$:
 \begin{align}
   f_{Al,Carl}(a,b)  &= \begin{cases}
     1/37 & \textrm{if $a = -1$ and $b = -1$} \\
@@ -948,10 +953,10 @@ formulas.
 ::: example
 **Conditional PDFs in roulette**
 
-The conditional PDF of the payout for a bet on red given the payout for a bet
-on 14 is defined as:
+The conditional PDF of the player's net profit from a bet on red given the
+net profit for a bet on 14 is:
 \begin{align}
-  f_{red|14}(a,b) &= \Pr(w_{red} = a| w_{14} = b) \\
+  f_{red|14}(a,b) &= \Pr(y_{Red} = a| y_{14} = b) \\
     &= \frac{f_{red,14}(a,b)}{f_{14}(b)} \\
     &= \begin{cases}
       (19/37)/(36/37) & \textrm{if $a = -1$ and $b = -1$} \\
@@ -966,10 +971,10 @@ on 14 is defined as:
       0 & \textrm{otherwise} \\
       \end{cases}
 \end{align}
-The conditional PDF of the payout for a bet on 14 given the payout for a bet on
-red is defined as:
+The conditional PDF of the player's net profit for a bet on 14 given the net
+profit for a bet on red is:
 \begin{align}
-  f_{14|red}(a,b) &= \Pr(w_{14} = a| w_{red} = b) \\
+  f_{14|red}(a,b) &= \Pr(y_{14} = a| y_{Red} = b) \\
     &= \frac{f_{red,14}(b,a)}{f_{red}(b)} \\
     &= \begin{cases}
       (19/37)/(19/37) & \textrm{if $a = -1$ and $b = -1$} \\
@@ -1032,12 +1037,12 @@ of a single random variable.
 ::: example
 **Multiple bets in roulette**
 
-Suppose we bet \$100 on red and \$10 on 14. Our net payout will be:
-  $$w_{total} = 100*w_{red} + 10*w_{14}$$
+Suppose Al bets \$100 on red and \$10 on 14. His net profit will be:
+  $$y_{Al} = 100*y_{Red} + 10*y_{14}$$
 which has expected value:
   \begin{align}
-    E(w_{total}) &= E(100 w_{red} + 10 w_{14}) \\
-      &= 100 \, \underbrace{E(w_{red})}_{\approx -0.027} + 10 \, \underbrace{E(w_{14})}_{\approx -0.027} \\
+    E(y_{Al}) &= E(100 y_{Red} + 10 y_{14}) \\
+      &= 100 \, \underbrace{E(y_{Red})}_{\approx -0.027} + 10 \, \underbrace{E(y_{14})}_{\approx -0.027} \\
       &\approx -3 
   \end{align}
 That is we expect this betting strategy to lose an average of about \$3 per
@@ -1067,19 +1072,19 @@ together.
   - Greater variability of $x$ and $y$.
   - Stronger (positive or negative) relationship between $x$ and $y$.
 
-For example, the first scatter plot in Figure \@ref(fig:JointIsNotMarginal)
-shows a case with zero correlation, the second shows a case with negative
-correlation, and the third shows a case with positive correlation.
+For example, the first two scatter plots in Figure \@ref(fig:JointIsNotMarginal)
+show cases with zero covariance, the third shows a case with negative
+covariance, and the fourth shows a case with positive covariance.
 
 ::: example
 **Calculating the covariance from the joint PDF**
 
-The covariance of $w_{red}$ and $w_{14}$ is:
+The covariance of $y_{Red}$ and $y_{14}$ is:
   \begin{align}
-    cov(w_{red},w_{14}) &= \begin{aligned}[t]
-        & (1-\underbrace{E(w_{red})}_{\approx -0.027})(35-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
-        &+ (1-\underbrace{E(w_{red})}_{\approx -0.027})(-1-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
-        &+ (-1-\underbrace{E(w_{red})}_{\approx -0.027})(-1-\underbrace{E(w_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
+    cov(y_{Red},y_{14}) &= \begin{aligned}[t]
+        & (1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
+        &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
+        &+ (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
         \end{aligned} \\
       &\approx 0.999 
     \end{align}
@@ -1094,9 +1099,9 @@ definition.
 ::: example
 **Another way to calculate the covariance**
 
-The expected value of $w_{red}w_{14}$ is:
+The expected value of $y_{Red}y_{14}$ is:
 \begin{align}
-  E(w_{red}w_{14}) &= \begin{aligned}[t]
+  E(y_{Red}y_{14}) &= \begin{aligned}[t]
         & 1*35*\underbrace{f_{red,14}(1,35)}_{1/37}\\
         &+ 1*(-1)*\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
         &+ (-1)*(-1)*\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
@@ -1106,7 +1111,7 @@ The expected value of $w_{red}w_{14}$ is:
 \end{align}
 So the covariance is:
   \begin{align}
-    cov(w_{red},w_{14}) &= E(w_{red}w_{14}) - E(w_{red})E(w_{14}) \\
+    cov(y_{Red},y_{14}) &= E(y_{Red}y_{14}) - E(y_{Red})E(y_{14}) \\
       &= 1 - (-0.027)*(-0.027) \\
       &\approx 0.999 
     \end{align}
@@ -1184,10 +1189,10 @@ more convenient for some purposes.
 ::: example
 **Correlation in roulette**
 
-The correlation of $w_{red}$ and $w_{14}$ is:
+The correlation of $y_{Red}$ and $y_{14}$ is:
   \begin{align}
-    corr(w_{red},w_{14}) 
-    &= \frac{cov(w_{red},w_{14})}{\sqrt{var(w_{red})*var(w_{14})}} \\
+    corr(y_{Red},y_{14}) 
+    &= \frac{cov(y_{Red},y_{14})}{\sqrt{var(y_{Red})*var(y_{14})}} \\
      &\approx \frac{0.999}{\sqrt{1.0*34.1}} \\
      &\approx 0.17
   \end{align}
@@ -1211,6 +1216,12 @@ correlation is scale-invariant.
 For example, suppose $x$ and $y$ are distances measured in kilometers and we
 convert them to miles. This change of units will affect $cov(x,y)$ but will
 not affect $corr(x,y)$.
+
+Returning to the scatter plots in Figure \@ref(fig:JointIsNotMarginal), the
+first two scatter plots show cases with zero correlation, the third shows a
+case with negative correlation, and the fourth shows a case with positive
+correlation.  The correlation in the fourth case is exactly equal to one,
+as $y$ is an exact linear function of $x$.
 
 [^601]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
 In that case the covariance will also be zero, and the correlation will be 
@@ -1244,8 +1255,8 @@ when it's reasonable to do so.
 ::: example
 **Independence in roulette**
 
-The winnings from a bet on red $(w_{red})$ and the winnings from a bet on 14
-$(w_{14})$ in the same game are *not* independent. 
+The winnings from a bet on red $(y_{Red})$ and the winnings from a bet on 14
+$(y_{14})$ in the same game are *not* independent. 
 
 However the winnings from a bet on red and a bet on 14 in two different games
 *are* independent since the underlying outcomes are independent.
@@ -1262,25 +1273,17 @@ or correlation of zero.
 ::: example
 **Zero covariance does not imply independent**
 
-Figure \@ref(fig:UncorrelatedButNotIndependent) below shows a scatter plot from
-a simulation of two random variables^[In this particular example $x$ is a random
-number from the $N(0,1)$ distribution and $y = x^2$.] that are clearly related
-(and therefore not independent) but whose covariance is exactly zero.
-
-
-```{r UncorrelatedButNotIndependent, fig.cap = "*x and y are uncorrelated, but clearly related.*"}
-simdata <- tibble(x = rnorm(100),
-                  y = x^2)
-ggplot(data = simdata, mapping = aes(x = x, y =y)) +
-  geom_point(col="blue") +
-  xlab("x") + 
-  ylab("y")
-```
+The first two scatter plots in Figure \@ref(fig:JointIsNotMarginal) show cases
+in which the covariance/correlation between $x$ and $y$ is exactly zero.  
+But $x$ and $y$ are only independent in the second scatter plot.  In the first
+scatter plot, there is clearly some kind of relationship between $x$ and $y$
+(in fact $y = x^2$) so they cannot be independent.
 
 Intuitively, covariance can be interpreted as a measure of the *linear*
 relationship between two variables.  When variables have a nonlinear
-relationship as in Figure \@ref(fig:UncorrelatedButNotIndependent) above, the
-covariance may miss it.
+relationship as in the first scatter plot of Figure 
+\@ref(fig:JointIsNotMarginal) above, the covariance will not necessarily
+detect any relationship.
 :::
 
 ## Chapter review {-#review-more-on-random-variables}
