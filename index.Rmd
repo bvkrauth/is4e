@@ -1,7 +1,7 @@
 --- 
 title: "Introductory Statistics for Economics"
 author: "Brian Krauth"
-date: "Fall 2023"
+date: "Spring 2024"
 output: pdf_document
 documentclass: book
 bibliography:
@@ -29,7 +29,7 @@ Fraser University.
 
 The content is similar to most other introductory statistics courses for
 business and economics students, but with a few important differences. When
-I was assigned to teach ECON 233 I reviewed the available textbooks and
+I was assigned to teach ECON 233, I reviewed the available textbooks and
 found that most of them provide a somewhat dated perspective on statistical
 analysis at an extremely high price. I wanted a textbook that was
 fairly priced, combined both Excel and R, and reflected (or at least did

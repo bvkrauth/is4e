@@ -7,7 +7,7 @@ into simple ones, combining data from multiple tables into a single table,
 modifying existing variables, and creating new variables.  In this course,
 we will do most of our data cleaning using Excel.
 
-This chapter will develop both both some principles of data cleaning and the
+This chapter will develop some principles of data cleaning as well as the
 basic Excel tools needed to implement them. The best way to learn data skills
 is by working on a real data project, so will also apply this knowledge by
 using Excel to clean a real data set.
@@ -57,7 +57,6 @@ Start Excel. Your screen should look something like this:
 
 When giving instructions, it is necessary to refer to various elements of
 Excel's user interface by name:
-
 ![Excel UI elements](bin/ExcelUIElements.png)
 
 - The ***menu bar*** is at the top of the screen:  
@@ -96,15 +95,16 @@ Excel's user interface by name:
 - Below the worksheet is a row of ***worksheet tabs***:  
   ![tabs](bin/Excel tabs.jpg)
   - Each tab corresponds to a worksheet. In this example, there is a single
-    worksheet named *Book 1*.
+    worksheet named *Book1*.
   - Click on a tab to switch to that worksheet.
   - Double-click on a tab to change its name.
+  - Right-click on a tab to access additional options.
   - Click on the "+" button to add a new worksheet.
 
 Excel is used to modify and display ***workbooks***, which are collections
-of one or more worksheets. Each Excel workbook is stored in a single file.
-In Windows, these files normally have the `.xlsx` extension but older files
-sometimes have the `.xls` extension instead.
+of one or more worksheets. Each Excel workbook is stored on your computer in a
+single file. In Windows, these files normally have the `.xlsx` extension but
+older files sometimes have the `.xls` extension instead.
 
 ### Application: Canadian employment data
 
@@ -162,8 +162,7 @@ The data can be found in the file
 
 Open the file
 [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
-in Excel.  You can do this by either double-clicking on it, or by using
-`File > Open` from Excel's menu.  The file should look something like this:
+in Excel.  The file should look something like this:
 ![Excel screenshot](bin/EmploymentData.png)
 
 Note that three of the key employment variables (**Population**, **Employed**,
@@ -179,7 +178,7 @@ we go through the application.
 
 ### Reproducibility {#data-management}
 
-When analyzing data it is important for the results of your analysis to be
+When analyzing data, it is important for the results of your analysis to be
 ***reproducible***. Reproducibility means that an interested reader should be
 able to figure out exactly how you got your results, and should be able to
 generate those results themselves.
