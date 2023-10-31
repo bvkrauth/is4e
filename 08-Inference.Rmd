@@ -127,7 +127,7 @@ roulette at a local casino. More specifically,let:
   $$x_i = I(\textrm{Red wins})$$
 We will consider two cases:
 
-| Case number | Wins by red (out of 100) | $\bar{x}$ |  $s_x$  |
+| Case number | Wins by red (out of 100) | $\bar{x}$ |  $sd_x$  |
 |:------------|:------------------------:|:---------:|:-------:|
 | $1$         | $35$                     |  $0.35$   | $0.479$ |
 | $2$         | $40$                     |  $0.40$   | $0.492$ |
@@ -257,10 +257,8 @@ Given the test statistic and critical values:
   - This means we do not have clear evidence that $H_0$ is false.
   - This does not mean we have clear evidence that $H_0$ is true. We may just
     not have enough evidence to tell whether it is true or false.
-
-I usually avoid saying "accept the null" because it can be misleading.
-
-![We reject the null if the test statistic falls outside of the critical range](bin/reject.png)
+  - I usually avoid saying "accept the null" because it can be misleading.
+    ![*We reject the null if the test statistic falls outside of the blue critical range above*](bin/reject.png)
 
 How do we choose critical values? You can think of critical values as setting a
 standard of evidence, so we need to balance two considerations:
@@ -344,7 +342,7 @@ probability of any event:
 | Parameter              | $p_{red} = \Pr(\textrm{Red wins})$   | $p = \Pr(\textrm{event})$ |
 | Null hypothesis        | $H_0:p_{red} = 18/37$                | $H_0:p = p_0$             | 
 | Alternative hypothesis | $H_1: p_{red} \neq 18/37$            |$H_1: p \neq p_0$          | 
-| Test statistic         | $t = n\hat{f}_{RED}$           | $t = n\hat{f}_{\textrm{event}}$ | 
+| Test statistic         | $t = n\hat{f}_{red}$                 | $t = n\hat{f}_{\textrm{event}}$ | 
 | Null distribution      | $Binomial(100,18/37)$                |$Binomial(n,p_0)$          | 
 | Critical value $c_L$   | 39                        | 2.5 percentile of $Binomial(n,p_0)$  |
 | Critical value $c_H$   | 58                        | 97.5 percentile of $Binomial(n,p_0)$ |
@@ -367,7 +365,7 @@ number:
 The reason for this is that there is only one $\theta$ value that is consistent
 with the null, but there are many that are consistent with the alternative.
 
-In some cases we can actually calculate the power function and plot it as a
+In some cases, we can actually calculate the power function and plot it as a
 ***power curve***. The details of power calculations are beyond the scope of
 this course, but we can at least view and interpret a power curve.
 
@@ -416,7 +414,7 @@ ggplot(data = PowerCurveData,
   geom_text(label="n=20",x=0.9,y=0.8,col="#EB6E1F") +
   geom_hline(yintercept = 0.05,col="gray") +
   geom_vline(xintercept = 18/37,col="gray") +
-  labs(title = "Power curve for fair roulette wheel", 
+  labs(title = "Power curve for test of fair roulette wheel", 
        subtitle = "", 
        caption = "H0: Pr(red wins) = 18/37, significance = 0.05", 
        tag = "")
@@ -567,23 +565,21 @@ variance $var(x_i) = \sigma_x^2$. Let $z_n$ be a standardization of $\bar{x}$:
 Then $z_n \rightarrow^D z \sim N(0,1)$.
 :::
 
-What does the central limit theorem mean?
+Fundamentally, the central limit theorem means that if $n$ is big enough then
+the probability distribution of $\bar{x}_n$ is approximately normal 
+*no matter what the original distribution of $x_i$ looks like*.
 
-  - Fundamentally, it means that if $n$ is big enough then the probability
-    distribution of $\bar{x}_n$ is approximately normal 
-    *no matter what the original distribution of $x_i$ looks like*.
-  - In order for the CLT to apply, we need to re-scale $\bar{x}_n$ so that it
-    has zero mean (by subtracting $E(\bar{x}_n) = \mu_x$) and constant variance
-    as $n$ increases (by dividing by $sd(\bar{x}_n) = \sigma_x/\sqrt{n}$)). That
-    re-scaled sample average is $z_n$.  
+  - In order for the CLT to apply, we need to standardize $\bar{x}_n$ so that it
+    has constant mean (zero) and variance (one) as $n$ increases. That re-scaled
+    sample average is $z_n$.  
   - In practice, we don't usually know $\mu_x$ or $\sigma_x$ so we can't
     calculate $z_n$ from data. Fortunately, there are some tricks for getting
     around this problem that we will talk about later.
 
 What about statistics other than the sample average?  Well it turns out that 
 Slutsky's theorem also extends to convergence in distribution, which means
-that the central limit theorem applies more broadly, and most statistics are
-asymptotically normal just like the sample average.
+that the central limit theorem applies more broadly, and most commonly-used
+statistics are also asymptotically normal.
 
 ::: {.fyi data-latex=""}
 **Slutsky's theorem for probability distributions**
@@ -595,15 +591,16 @@ a version of Slutsky's theorem for convergence in distribution:
 **SLUTSKY THEOREM**: Let $g(\cdot)$ be a continuous function. Then:
   $$s_n \rightarrow^D s \implies g(s_n) \rightarrow^D g(s)$$
 
-This version of Slutsky's theorem will allow us to extend the central limit
+This version of Slutsky's theorem can be used to extend the central limit
 theorem to most statistics.
 :::
 
 ## Inference on the mean
 
-Having described the general framework and a single example, we now move on to
-the most common application: constructing hypothesis tests and confidence
-intervals on the mean in a random sample.
+Having described the general framework of hypothesis testing and explored
+a single example in detail, we now move on to the most common application
+of statistical inference: constructing hypothesis tests and confidence intervals
+on the mean in a random sample.
 
 Let $D = (x_1,\ldots,x_n)$ be a random sample of size $n$ on some random
 variable $x_i$ with unknown mean $E(x_i) = \mu_x$ and variance
@@ -638,7 +635,7 @@ where $\mu_0$ is a number that has been chosen to reflect the research question.
 ::: example
 **Null and alternative hypotheses for the mean in roulette**
 
-The null hypothesis of a fair table can be expressed in terms of $\mu_x$:
+The null hypothesis of a fair game can be expressed in terms of $\mu_x$:
   $$H_0: \mu_x = 18/37$$
 against the alternative hypothesis:
   $$H_1: \mu_x \neq 18/37$$
@@ -819,8 +816,8 @@ $x_i$ is normally distributed is not necessarily appropriate in every setting.
 ::: example
 **Normality in the roulette data?**
 
-In our roulette data, $x_i$ has a Bernoulli distribution and could not possibly
-be normally distributed.
+In our roulette data, $x_i$ has a discrete support and could not possibly
+be normally distributed. But we will ignore that for the moment.
 :::
 
 The null distribution of the test statistic
@@ -970,8 +967,8 @@ practice?
   - It has larger critical values than the Z test.
   - It is less likely to reject the null.
   - It has lower power and lower size.
-- At some point (around $n = 30$) the difference between the two tests becomes
-  too small to make much of a difference.
+- At some point (around $n \approx 30$) the difference between the two tests
+  becomes too small to make much of a difference.
 - In the limit (as $n \rightarrow \infty$) the two tests are equivalent.
 
 As a result, statisticians typically recommend using the T test for smaller
@@ -1009,7 +1006,7 @@ rule out $\theta = \theta_0$ for a single value of $\theta_0$, they say nothing
 about other values very close to $\theta_0$.
 
 For example, suppose you are a medical researcher trying to measure the effect
-of a particular treatment, let $\theta$ be the true effect, and suppose that you
+of a particular treatment. Let $\theta$ be the true effect, and suppose that you
 have tested the null hypothesis that the treatment has no effect ($\theta = 0$).
 
 - If you reject this null, you have concluded that the effect has *some* effect.
@@ -1019,7 +1016,7 @@ have tested the null hypothesis that the treatment has no effect ($\theta = 0$).
   treatment has *no* effect.  However, this does not rule out the possibility
   that the effect is *very large*.
 
-The solution to this would be to do a hypothesis test for every possible value
+One solution to this would be to do a hypothesis test for every possible value
 of $\theta$, and classify them into values that were rejected and not rejected.
 This is the idea of a ***confidence interval***.
 
@@ -1160,24 +1157,25 @@ confidence intervals derived earlier in this section.
 :::
 
 In the end, it doesn't matter much whether you base your confidence intervals
-on an exact, parametric or asymptotic test.
+on an exact, parametric or asymptotic test. Again this makes sense: the goal
+here is to assess the strength of the evidence in a given data set, so any two
+reasonable approaches should yield similar results most of the time.
 
 ## Chapter review {-#review-inference}
 
 Hypothesis tests and confidence intervals are important tools for addressing
-uncertainty in our statistical analysis.
+uncertainty in our statistical analysis. In this chapter, we have learned to
+formulate and test hypotheses, and to construct confidence intervals.
 
-In this chapter, we have learned to formulate and test hypotheses, and to
-construct confidence intervals. The mechanics are complicated, but do not let
-the various formulas distract you from the more basic idea of evidence:
-hypothesis testing is about how strong the evidence is in favor of (or against)
-a particular true/false statement about the data generating process, and
-confidence intervals are about finding a range of values for a parameter that
-are consistent with the observed data. Modern statistical packages automatically
-calculate and report confidence intervals for most estimates, and report the
-result of some basic hypothesis tests as well. When you need something more
-complicated, it is usually just a matter of looking up the command. The most
-important skill is to correctly interpret the results.
+The mechanics are complicated, but do not let the various formulas distract you
+from the more basic idea of evidence: hypothesis testing is about how strong the
+evidence is in favor of (or against) a particular true/false statement about the
+data generating process, and confidence intervals are about finding a range of
+values for a parameter that are consistent with the observed data. Modern
+statistical packages automatically calculate and report confidence intervals for
+most estimates, and report the result of some basic hypothesis tests as well.
+When you need something more complicated, it is usually just a matter of
+looking up the command. The most important skill is to correctly interpret the results.
 
 This is the last primarily theoretical chapter in this book, so congratulations
 for making it this far. The remaining chapters will be data-oriented and will

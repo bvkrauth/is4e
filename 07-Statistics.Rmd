@@ -90,14 +90,22 @@ knowledge:
 - *We know the game is fair*: the ball is equally likely to land in all
   37 numbered slots.
 
-What if we didn't know the structure of the game, or weren't sure the game was
-fair, but did have access to a data set of past results?
+In addition, the game is simple enough that we can do all of the calculations.
 
-1. We can use the data to *estimate* the win probability of various bets.
+What if we do not know the structure of the game, are not sure the game is fair,
+or the game is too complicated to calculate the probabilities?  If we have
+access to a data set of past results, we can use that data set to:
+
+1. *estimate* the win probability of various bets.
    - This application will be covered in the current chapter.
-2. We can use the data to *test* the hypothesis that the game is fair.
+2. *test* the hypothesis that the game is fair.
    - This application will be covered in the chapter on
      [statistical inference](#statistical-inference)
+
+This approach will be particularly useful for games like poker or blackjack that
+are more complex and/or involve human decision making. The win probability in
+blackjack depends on the skill of the player, so the house advantage can vary
+across players.
 :::
 
 ## Data and the data generating process
@@ -116,9 +124,9 @@ methods described in the chapter on
 **Data from two roulette games**
 
 Suppose we have a data set $D_n$ providing the result of $n$ independent games
-of roulette.  Let $b_i$ be the outcome in game $i$, and let $x_i$ be the result
-of a bet on red:
-  $$x_i = I(b_i \in RED) = \begin{cases} 1 & b_i \in RED \\ 0 & b_i \notin RED \\ \end{cases}$$
+of roulette.  Let $b_i$ be the number the ball lands on in game $i$, and let
+$x_i$ be the result of a bet on red:
+  $$x_i = \begin{cases} 1 & \textrm{if Red wins game } i \\ 0 & \textrm{if Red loses game } i \\ \end{cases}$$
 Suppose our data set has observations from two games ($n = 2$). Then
 $D_2 = (x_1,x_2)$ where $x_1$ is the result from the first game and $x_2$ is the
 result from the second game.  For example, suppose red loses the first game and
@@ -127,7 +135,7 @@ wins the second game. Then our data could be written in tabular form as:
 | Game \# ($i$) | Result of bet on red ($x_i$) |
 |:--------------|:----------------------------:|
 |      1        |       0                      |
-|      2        |       0                      |
+|      2        |       1                      |
 
 or in a list as $D_2 = (0,1)$.
 :::
@@ -210,7 +218,7 @@ accurate information on the underlying population.
 **Our roulette data is a random sample**
 
 Each observation $x_i$ in our roulette data is an independent random draw from
-the $Bernouilli(p)$ distribution where $p = \Pr(b \in Red)$.
+the $Bernouilli(p)$ distribution where $p = \Pr(\textrm{Red wins})$.
 
 Therefore, this data set satisfies the criteria for a simple random sample.
 :::
@@ -447,9 +455,9 @@ A ***statistic*** is just a number $s_n =s(D_n)$ that is calculated from the
 data. In general, each statistic is:
 
   - Observed since $D_n$ is observed.
-  - A random variable with a well defined but unknown probability distribution
-    since $D_n$ is a set of random variables with a well-defined but unknown
-    joint probability distribution.
+  - A random variable with a probability distribution that is *well-defined* but
+    *unknown*.  This is because $D_n$ is a set of random variables with a
+    well-defined but unknown joint probability distribution.
 
 I will use $s_n$ to represent a generic statistic, but we will often use
 other letters to talk about specific statistics.
@@ -463,6 +471,7 @@ Since this is a number calculated from our data, it is a statistic.
 
 Since the observations are independent draws from the $Bernoulli(p)$
 distribution, the total number of wins has the $Binomial(2,p)$ distribution.
+This distribution is unknown because the true value of $p$ is unknown.
 :::
 
 ### Summary statistics {#summary-statistics-theory}
@@ -482,7 +491,7 @@ reproduced below for convenience:
   Note: The conventional notation for the sample standard deviation is 
   $s_x$; I am using $sd_x$ because I am already using $s$ to represent
   a general statistic.
-- The ***sample median** is:
+- The ***sample median*** is:
   \begin{align}
     \hat{m} &= \begin{cases}
       x_{[(n/2) + (1/2)]} & \textrm{if $n$ is odd} \\
@@ -494,7 +503,9 @@ reproduced below for convenience:
 
 We also learned to construct both [simple](#simple-frequency-tables) and
 [binned](#binned-frequency-tables) frequency tables.  Let
-$B \subset \mathbb{R}$ be a bin of values. Then we can define:
+$B \subset \mathbb{R}$ be a bin of values. Each bin would contain a single value for a simple frequency table, or multiple values for a binned frequency table.
+
+Given a particular bin, we can define:
 
 - The ***sample frequency*** or ***relative sample frequency*** of bin $B$ is
   the proportion of cases in which $x_i$ is in $B$:
@@ -504,8 +515,7 @@ $B \subset \mathbb{R}$ be a bin of values. Then we can define:
   $$n \hat{f}_B = \sum_{i=1}^n I(x_i \in B)$$
 
 We can then construct each cell in a frequency table by choosing the appropriate
-bin. Each bin would contain a single value for a simple frequency table, or
-multiple values for a binned frequency table.
+bin. 
 
 ### The sampling distribution
 
@@ -564,12 +574,12 @@ result that will be developed below.
 :::
 
 As mentioned earlier, it is often impractical or impossible to calculate the
-sampling distribution for a given statistic.  Fortunately, we can often
-calculate the mean of the statistic anyway.
+sampling distribution for a given statistic.  Fortunately, the mean is usually
+much easier to calculate.
 
 In particular, suppose we have a simple random sample of size $n$ on the random
-variable $x_i$ with mean $E(x_i) = \mu_x$. Then the mean of the sample average
-is:
+variable $x_i$ with unkown mean $E(x_i) = \mu_x$. Then the mean of the sample
+average is:
   \begin{align}
     E(\bar{x}_n) &= E\left( \frac{1}{n} \sum_{i=1}^n x_i\right) \\
       &= \frac{1}{n} \sum_{i=1}^n E\left( x_i\right) \\
@@ -636,7 +646,7 @@ But we do not know the true DGP, and so we do not know the value of $\mu$.
 Sometimes a single parameter completely describes the DGP:
 
 - In our roulette data set, the joint distribution of the data depends only on
-  the (known) sample size $n$ and the single parameter $p = \Pr(b \in Red)$.
+  the (known) sample size $n$ and the single parameter $p = \Pr(\textrm{Red wins})$.
   
 Sometimes a group of parameters completely describe the DGP:
 
@@ -648,7 +658,7 @@ And sometimes a parameter only partially describes the DGP
 - If $x_i$ is a random sample from some unknown distribution with unknown mean
   $\mu_x = E(x_i)$, then $\mu_x$ is a parameter.
 - If $x_i$ is a random sample from some unknown distribution with unknown median
-  $m_x = q_{0.5}(x_i)$, then $m_x$ is a parameter.
+  $m_x$, then $m_x$ is a parameter.
 :::
 
 Typically there will be particular parameters whose value we wish to know. Such
@@ -664,9 +674,7 @@ $\theta$.  Since it is a statistic constructed from $D_n$, an estimator is
 generally:
 
   - Observed since $D_n$ is observed.
-  - A random variable with a well defined but unknown probability distribution
-    since $D_n$ is a set of random variables with a well-defined but unknown
-    joint probability distribution.
+  - A random variable with a well-defined but unknown probability distribution.
 
 I will use $\hat{\theta}$ to represent a generic estimator, but we will often
 use other notation to talk about specific estimators. The circumflex or "hat"
@@ -852,11 +860,15 @@ estimator may be clearly preferable to the unbiased estimator.
 **The relationship between age and earnings**
 
 Labour economists are often interested in the relationship between age and
-earnings.
+earnings. Typically, workers earn more as they get older but earnings do not
+increase at a constant rate.  Instead, earnings rise rapidly in a typical
+worker's 20s and 30s, then gradually flatten out.  This pattern affects many
+economically important decisions like education, savings, household formation, 
+having children, etc.
 
-Suppose we want to estimate the earnings of the average 35-year-old Canadian.
-Suppose we have a random sample of 800 Canadians, and suppose that it contains
-10 observations for each age between 0 and 80.
+Suppose we want to estimate the earnings of the average 35-year-old Canadian,
+and have access to a random sample of 800 Canadians with 10 observations for
+each age between 0 and 80.
 
 The average earnings of 35-year-olds in our data would be an unbiased estimator
 of the average earnings of 35-year-olds in Canada.  However, it would be based
@@ -866,6 +878,7 @@ We could increase the sample size and reduce the variance by including
 observations from people who are *almost* 35 years old. We have many
 options, including:
 
+  - Average earnings of the  10 33 year olds in our data.
   - Average earnings of the  30 34-36 year olds in our data.
   - Average earnings of the 100 30-39 year olds in our data.
   - Average earnings of the 800  0-80 year olds in our data. 
@@ -875,7 +888,7 @@ introduce bias (since they have added people that are not exactly like
 35-year-olds).
 :::
 
-This suggests that we need a criterion that:
+This set of issues implies that we need a criterion that:
 
   - Can be used to choose between biased estimators.
   - Can choose slightly biased estimators with low variance over unbiased
@@ -906,6 +919,25 @@ The MSE criterion allows us to choose a biased estimator with low variance over
 an unbiased estimator with high variance, and also allows us to choose between
 biased estimators when no unbiased estimator exists.
 
+::: {.fyi data-latex=""}
+**Estimating bias and MSE**
+
+In most cases, the bias and mean squared error of our estimators depend on the
+unknown DGP and cannot be calculated.  So why do we bother talking about them?
+
+1. They provide a clear framework for thinking about trade-offs in data
+   analysis, even when we are unable to precisely quantify those trade-offs.
+2. Some advanced statistical techniques such as *cross-validation* and the
+   *bootstrap* make it possible to estimate the bias and/or MSE of an
+   estimator. These methods work (roughly) by estimating the parameter on
+   multiple random subsets of the data, treating the original data set as the
+   "true" population.
+   
+Cross-validation is a critical element of most machine learning techniques,
+which typically work by estimating a very large number of complex prediction
+models and then selecting the model that performs best in cross-validation.
+:::
+
 ### Standard errors
 
 Parameter estimates are typically reported along with their
@@ -931,6 +963,8 @@ and so its standard deviation is:
 \begin{align}
   sd(\bar{x}_n) &= \frac{\sigma_x}{\sqrt{n}}
 \end{align}
+The sample size $n$ is known, but the standard deviation $\sigma_x$ is
+unknown.  So we will need to estimate it in order to estimate $sd(\bar{x}_n)$.
 :::
 
 The next step is to find suitable estimators for any unknown parameter values.
@@ -984,7 +1018,8 @@ based on their ***asymptotic*** properties.  The asymptotic properties of
 a statistic are properties that hold approximately, with the approximation
 getting closer and closer to the truth as the sample size gets larger.
 
-The properties of statistics we have discussed so far hold exactly for any
+Every property of a statistic we have discussed so far - sampling distribution,
+mean, variance, bias, mean squared error, etc. -  holds exactly for any
 sample size.  Such properties are sometimes called ***exact*** or
 ***finite sample*** properties, to distinguish them from asymptotic
 properties.
@@ -996,7 +1031,7 @@ limit theorem will be discussed later.
 All three results rely on the concept of a limit, which you would have learned
 in your calculus course.  If you need to review that concept, please see the
 [section on limits](#limits) in the math appendix.  However, I will not expect
-you to do any significant amount of math with these results.  Please focus on
+you to do any significant amount of math with limits.  Please focus on
 the intuition and interpretation and don't worry too much about the math.
 
 ### Defining the LLN
@@ -1009,8 +1044,8 @@ mean with a very high probability.
 **The law of large numbers**
 
 In order to state the LLN in a more mathematically rigorous way, we need to
-clarify what "nearly identical" and  "very high" mean.  This will require the
-use of limits.
+clarify what "large enough", nearly identical" and  "very high" mean.  This will
+require the use of limits.
 
 Consider a data set $D_n$ of size $n$, and think of it as part of an infinite
 sequence of data sets $(D_1, D_2, \ldots)$ where $D_n$ is just the first $n$
@@ -1052,29 +1087,36 @@ The law of large numbers is extremely powerful and important, as it
 is the basis for the gambling industry, the insurance industry,
 and much of the banking industry. 
 
-A casino works by taking in a *large* number of *independent* small bets. As we
-have seen for the case of roulette, these bets have a small house advantage, so
-their average benefit to the casino is positive. Some bets lead to profits
-(wins) and some lead to losses but the LLN ensures that a casino will have
-more wins than losses if it takes enough bets.
+A casino makes money in games like roulette by taking in a *large* number of
+*independent* small bets. These bets have a small house advantage, so their
+expected benefit to the casino is positive. The casino makes money on some
+bets and loses money on others, but the LLN ensures that a casino is almost
+certain to have more profits than losses if it takes enough bets.
 
-An insurance company works almost the same as a casino. Each of us faces a small
-risk of a catastrophic cost: a house that burns down, a car accident leading to
-serious injury, etc. Insurance companies collect a little bit of money from each
-of us, and pay out a lot of money to the small number of people who have claims.
-Although the context is quite different, the underlying economics are identical
-to those of a casino: the insurance company prices its products so that its
-revenues exceed its expected payout, and takes on a large number of
-independent risks to ensure that its revenues exceed its actual payout.
+Gambling is often considered a glamorous but shady business and insurance is
+often considered a boring but respectable business, but in many ways they are
+the same business. An insurance company operates just like a casino. Each of us
+faces a small risk of a catastrophic cost: a house that burns down, a car
+accident leading to serious injury, etc. Insurance companies collect a little
+bit of money from each of us, and pay out a lot of money to the small number of
+people who have claims. Although the context is quite different, the underlying
+economics are identical to those of a casino: the insurance company prices its
+products so that its revenues exceed its expected payout, and takes on a large
+number of independent risks to ensure that its revenues exceed its actual
+payout.
 
 Sometimes insurance companies do lose money, and even go bankrupt. The usual
 cause of this is a big systemic event like a natural disaster, pandemic or
-financial crisis that affects everyone.  Here the independence needed for the LLN
-does not apply.
+financial crisis that affects everyone.  Here the independence needed for the
+LLN does not apply, and an insurance company can take substantial losses.  For
+example, several insurance companies in Florida went bankrupt in 2022 as a
+result of property damage claims from Hurricane Ian.
 
-Casinos also face non-independent risks, for example in sports betting. They
-typically address this by adjusting odds or point spreads to ensure the same
-winning probability and/or total payout for each outcome.
+Casinos can also face non-independent risks, for example in sports betting where
+many players are betting on the same outcome. Casinos typically address this by
+using different betting rules: they take a fixed percentage (sometimes called
+the "vigorish" or "vig") of the total amount bet, and pay the rest out to the
+winners.
 :::
 
 ### Consistent estimation
@@ -1085,8 +1127,8 @@ high probability for a large enough sample.
 
 The law of large numbers implies that the sample average is a consistent
 estimator of the corresponding population mean, but we can go much further than
-that.  Almost all of the estimators we use in practice are consistent in a
-random sample:
+that.  Almost all commonly-used estimators are consistent in a random sample.
+For example:
 
 - The sample variance is a consistent estimator of the population variance.
 - The sample standard deviation is a consistent estimator of the population
@@ -1127,7 +1169,7 @@ consistency of an estimator in two steps:
    estimator) converges to the same function of the corresponding expected
    values (the parameter).
 
-Actually doing that for a particular estimator is beyond the scope of this
+Actually doing that for a particular estimator is well beyond the scope of this
 course.  The important thing to know is that it can be done, and to have a
 clear idea what consistency means.
 :::

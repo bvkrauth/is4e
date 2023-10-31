@@ -1,10 +1,9 @@
 # Probability and random events {#probability-and-random-events}
 
-***Probability*** is a mathematical system for modeling a random process so that
-we can understand it and/or make predictions about its future results.
+***Probability*** is a mathematical system for modeling a random process.
 Probability is an essential tool for casinos, as well as for banks, insurance
-companies, and any other organization that manages risk. It also provides the
-mathematical framework for the statistical analysis of data.
+companies, and any other organization that manages risk and uncertainty. It also
+provides the mathematical framework for the statistical analysis of data.
 
 This chapter will introduce the terminology and rules of probability.
 
@@ -81,15 +80,14 @@ happen, but no one knows in advance what will happen.
 ::: {.economics data-latex=""}
 **The house always wins: The economics of gambling**
 
-The core economic principle of the US$230 billion gambling industry is that
-"the house always wins."  The "house" is a general term in gambling referring
-to the organization that is operating the game, including operators of casinos,
-lotteries, sports betting, and online games of chance. The house generally
-exists for one purpose: making money. As a result, every game and every bet the
-house offers is designed to make nearly-certain profits for the house and
-nearly-certain losses for the players. The house advantage is typically quite
-small - less than 5\% or in many popular casino games -  but it is *always*
-positive.
+The core economic principle of the gambling industry is that "the house always
+wins."  The "house" is a general term in gambling referring to the organization
+that is operating the game, including operators of casinos, lotteries, sports
+betting, and online games of chance. The house generally exists for one purpose:
+making money. As a result, every game and every bet the house offers is designed
+to make nearly-certain profits for the house and nearly-certain losses for the
+players. The house advantage is typically quite small - less than 5\% or in many
+popular casino games -  but it is *always* positive.
 
 Over the course of the semester, we will use the tools of probability and
 statistics to calculate win probabilities, the house advantage, and related
@@ -104,9 +102,10 @@ interested in. The outcome is a variable, and is often represented by the
 lower-case Greek letter omega ($\omega$).  But we can choose any variable name
 we like.
 
-An outcome can be a simple yes/no result, a number, a picture, a document, or
-a complete description of the history of the universe.  At minimum, the outcome
-should describe everything about the random process that we care about.
+An outcome can be a simple yes/no result, a number, a group of numbers, a
+picture, a document, or a complete description of the history of the universe.
+At minimum, the outcome should describe everything about the random process that
+we care about.
 
 ::: example
 **Outcomes in roulette**
@@ -232,10 +231,11 @@ possible event $A$.  The number is called the ***probability*** of event $A$.
 Probabilities are normally between zero and one and can be interpreted as
 describing how likely an event is:
 
-- If an event has probability one, it definitely *will* happen.
-- If an event has probability zero, it definitely *will not* happen.
-- If an event has probability strictly between zero and one, it *might* happen.
-- An event with a higher probability is more likely to happen.
+- An event with probability one definitely *will* happen.
+- An event with probability zero definitely *will not* happen.
+- An event with probability between zero and one *might* happen.
+- An event with a higher probability is more likely to happen than an event with
+  lower probability.
 
 Where does this probability distribution come from? That's a good question, but
 we will take it as given for the moment.
@@ -332,9 +332,8 @@ We can use our derived probability rules in various ways:
 
 ### Calculating probabilities
 
-To calculate probabilities we will need to use information or assumptions about
-the random process, and can then apply the axioms of probability and the
-associated rules.
+To calculate probabilities, we use information or assumptions about the random
+process, and then apply the axioms and derived rules.
 
 Since this is an introductory course, our sample space will usually contain a
 finite number of outcomes, as in our roulette example.  In that case,
@@ -385,11 +384,11 @@ all random processes have this property? No.
 Equal probability makes the math easy, and applies to some specific cases like
 roulette or dice games, so we often use those cases in examples when teaching
 basic probability theory.  But equal probability does not apply to random
-processes in general.  For example, suppose I run in a race against Usain
-Bolt.  The possible outcomes are "I win" and "Usain Bolt wins", but it would
-be unreasonable to think that these two outcomes have equal probability.
+processes in general.  For example, suppose I run in a race against 11-time
+world sprinting champion Usain Bolt. There are two possible outcomes - "I win"
+and "Usain Bolt wins" - but it would be unreasonable to think that these two
+outcomes have equal probability.
 :::
-
 
 Once we have the probabilities of each elementary event, calculating any other
 probability is just a matter of adding up.
@@ -612,8 +611,8 @@ game's outcome is independent, this is an easy problem:
 So we have an 11.5\% chance of winning big, and an 88.5\% chance of going broke.
 
 Very important: equation \@ref(eq:indep) only follows from the previous equation
-because we have assumed the events $RedWins_1$, $RedWins_2$, and $RedWins_3$ are
-independent.
+because we have assumed that the events $RedWins_1$, $RedWins_2$, and
+$RedWins_3$ are independent.
 :::
 
 When is it *not* reasonable to assume that events are independent? In almost any
@@ -719,8 +718,8 @@ law of total probability, and it has obvious practical importance.
 
 Since we want a conditional probability, we start by stating Bayes' law:
    $$\Pr(Sick|Positive) = \frac{\Pr(Positive|Sick)\Pr(Sick)}{\Pr(Positive)}$$
-Bayes' law will allow us to calculate $\Pr(Sick|Positive)$ if we can find thecomponents
-of the right side of this equation. 
+Bayes' law will allow us to calculate $\Pr(Sick|Positive)$ if we can find
+the components of the right side of this equation. 
 
 We already know that $\Pr(Positive|Sick)=sens$ and $\Pr(Sick)=prev$, so all we need is
 to find $\Pr(Positive)$.

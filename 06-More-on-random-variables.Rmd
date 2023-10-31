@@ -192,7 +192,8 @@ specific value is zero, so it does not matter whether inequalities are strict
 Suppose that $x$ has the standard uniform distribution. What is the probability
 that $x$ is *strictly* between 0.65 and 0.70?
 
-We can use our usual formula for interval probabilities to get:
+We can use our usual formula for [interval probabilities](#interval-probabilities)
+to get:
 \begin{align*}
   \Pr(0.65 < x < 0.70) &= \underbrace{\Pr(0.65 < x \leq 0.70)}_{=F_x(0.70)-F_x(0.65)}
     - \underbrace{\Pr(x = 0.70)}_{=0} \\
@@ -334,7 +335,8 @@ whether the random variable is continuous or discrete.
 The ***uniform*** distribution is a continuous probability distribution that is
 usually written:
   $$x \sim U(L,H)$$
-where $L$ and $H$ are numbers such that $L < H$.
+where $L$ and $H$ are numbers such that $L < H$.  It is also sometimes written
+$x \sim Uniform(L,H)$.
 
 The $U(0,1)$ distribution is also known as the ***standard uniform***
 distribution.
@@ -460,7 +462,8 @@ of weapons and other resources, or the results of a particular player action.
 
 The ***normal distribution*** is typically written as:
   $$ x \sim N(\mu,\sigma^2)$$ 
-where $\mu$ and $\sigma^2 \geq 0$ are numbers.
+where $\mu$ and $\sigma^2 \geq 0$ are numbers.  It is also sometimes written
+as $x \sim Normal(\mu, \sigma^2)$.
 
 The normal distribution is also called the ***Gaussian*** distribution, and the
 $N(0,1)$ distribution is called the ***standard normal*** distribution.
@@ -587,7 +590,7 @@ We can standardize any random variable, but standardization is particularly
 convenient for normal random variables.  If $x$ has a normal distribution,
 then its standardized value $z$ has the standard normal distribution:
   \begin{align}
-    x \sim N(\mu, \sigma^2) &\Rightarrow z \sim N\left(\mu-\mu, \left(\frac{1}{\sigma}\right)^2 \sigma^2\right) \\
+    x \sim N(\mu, \sigma^2) &\Rightarrow z \sim N\left(\frac{\mu-\mu}{\sigma}, \left(\frac{1}{\sigma}\right)^2 \sigma^2\right) \\
       &\Rightarrow z \sim N(0,1)
   \end{align}
 The standard normal distribution is so useful that we have special symbol for
@@ -595,7 +598,7 @@ its PDF:
   $$\phi(a) = \frac{1}{\sqrt{2\pi}} e^{-\frac{a^2}{2}}$$
 and its CDF:
   $$\Phi(a) = \int_{-\infty}^a \phi(b)db$$
-$\phi$ is the lower-case Greek letter *phi*, and $\Phi$ is the upper-case *phi*.
+$\phi$ is the lower-case Greek letter *phi*, and $\Phi$ is the upper-case *Phi*.
 
 We can take advantage of standardization to express the CDF of any normal
 random variable in terms of the standard normal CDF. That is, suppose that:
@@ -662,31 +665,39 @@ joint distribution in each graph.
 
 ```{r JointIsNotMarginal, fig.cap = "*x and y are drawn from a different joint distribution in each graph.*"}
 simdata <- tibble(x = rnorm(100),
-                  y0 = x^2,
                   y1 = rnorm(100),
                   y2 = (-x+0.5*y1)/sqrt(1.25),
-                  y3 = x)
-p0 <- ggplot(data = simdata, mapping = aes(x = x)) +
-  geom_point(aes(y=y0),col="blue") +
-  xlab("x") +
-  ylab("y")
+                  y3 = x,
+                  y4 = x^2)
 p1 <- ggplot(data = simdata, mapping = aes(x = x)) +
   geom_point(aes(y=y1),col="blue") +
+  labs(tag = "A") +
   xlab("x") +
   ylab("y")
 p2 <- ggplot(data = simdata, mapping = aes(x = x)) +
   geom_point(aes(y=y2),col="blue") +
+  labs(tag = "B") +
   xlab("x") +
   ylab("y")
 p3 <- ggplot(data = simdata, mapping = aes(x = x)) +
   geom_point(aes(y=y3),col="blue") +
+  labs(tag = "C") +
   xlab("x") +
   ylab("y")
-plot_grid(p0,p1,p2,p3,ncol=2,nrow=2)
+p4 <- ggplot(data = simdata, mapping = aes(x = x)) +
+  geom_point(aes(y=y4),col="blue") +
+  labs(tag = "D") +
+  xlab("x") +
+  ylab("y")
+plot_grid(p1,p2,p3,p4,ncol=2,nrow=2)
 ```
 
 As you can see, the relationship between the two variables differs in each of
-these cases.
+these cases: graph A shows two seemingly unrelated variables, graph B shows two
+variables with a negative relationship, graph C shows two variables with a 
+strong positive relationship, and graph D shows two variables with a strong but
+nonlinear relationship. We will learn some terminology to describe these four
+relationships.
 :::
 
 The joint distribution of any two *discrete* random random variables can be fully
@@ -699,63 +710,63 @@ underlying outcome.
 **The joint PDF in roulette**
 
 In our roulette example, both $y_{Red}$ and $y_{14}$ depend on the original
-outcome $b$. For convenience, I have created a table below that shows every
-value of $b$ in the sample space, its probability, and the associated values
+outcome $\omega$. For convenience, I have created a table below that shows every
+value of $\omega$ in the sample space, its probability, and the associated values
 of $y_{Red}$ and $y_{14}$.
 
-| $b$ | $\Pr(b)$ | Color | $y_{Red}$ | $y_{14}$ |
-|:----|:--------:|:-----:|:---------:|:--------:|
-|  0  |  1/37    | Green |    -1     |   -1     |
-|  1  |  1/37    | Red   |     1     |   -1     |
-|  2  |  1/37    | Black |    -1     |   -1     |
-|  3  |  1/37    | Red   |     1     |   -1     |
-|  4  |  1/37    | Black |    -1     |   -1     |
-|  5  |  1/37    | Red   |     1     |   -1     |
-|  6  |  1/37    | Black |    -1     |   -1     |
-|  7  |  1/37    | Red   |     1     |   -1     |
-|  8  |  1/37    | Black |    -1     |   -1     |
-|  9  |  1/37    | Red   |     1     |   -1     |
-| 10  |  1/37    | Black |    -1     |   -1     |
-| 11  |  1/37    | Black |    -1     |   -1     |
-| 12  |  1/37    | Red   |     1     |   -1     |
-| 13  |  1/37    | Black |    -1     |   -1     |
-| 14  |  1/37    | Red   |     1     |   35     |
-| 15  |  1/37    | Black |    -1     |   -1     |
-| 16  |  1/37    | Red   |     1     |   -1     |
-| 17  |  1/37    | Black |    -1     |   -1     |
-| 18  |  1/37    | Red   |     1     |   -1     |
-| 19  |  1/37    | Red   |     1     |   -1     |
-| 20  |  1/37    | Black |    -1     |   -1     |
-| 21  |  1/37    | Red   |     1     |   -1     |
-| 22  |  1/37    | Black |    -1     |   -1     |
-| 23  |  1/37    | Red   |     1     |   -1     |
-| 24  |  1/37    | Black |    -1     |   -1     |
-| 25  |  1/37    | Red   |     1     |   -1     |
-| 26  |  1/37    | Black |    -1     |   -1     |
-| 27  |  1/37    | Red   |     1     |   -1     |
-| 28  |  1/37    | Black |    -1     |   -1     |
-| 29  |  1/37    | Black |    -1     |   -1     |
-| 30  |  1/37    | Red   |     1     |   -1     |
-| 31  |  1/37    | Black |    -1     |   -1     |
-| 32  |  1/37    | Red   |     1     |   -1     |
-| 33  |  1/37    | Black |    -1     |   -1     |
-| 34  |  1/37    | Red   |     1     |   -1     |
-| 35  |  1/37    | Black |    -1     |   -1     |
-| 36  |  1/37    | Red   |     1     |   -1     |
+| $\omega$ | $\Pr(\omega)$ | Color | $y_{Red}$ | $y_{14}$ |
+|:---------|:-------------:|:-----:|:---------:|:--------:|
+|  0       |  1/37         | Green |    -1     |   -1     |
+|  1       |  1/37         | Red   |     1     |   -1     |
+|  2       |  1/37         | Black |    -1     |   -1     |
+|  3       |  1/37         | Red   |     1     |   -1     |
+|  4       |  1/37         | Black |    -1     |   -1     |
+|  5       |  1/37         | Red   |     1     |   -1     |
+|  6       |  1/37         | Black |    -1     |   -1     |
+|  7       |  1/37         | Red   |     1     |   -1     |
+|  8       |  1/37         | Black |    -1     |   -1     |
+|  9       |  1/37         | Red   |     1     |   -1     |
+| 10       |  1/37         | Black |    -1     |   -1     |
+| 11       |  1/37         | Black |    -1     |   -1     |
+| 12       |  1/37         | Red   |     1     |   -1     |
+| 13       |  1/37         | Black |    -1     |   -1     |
+| 14       |  1/37         | Red   |     1     |   35     |
+| 15       |  1/37         | Black |    -1     |   -1     |
+| 16       |  1/37         | Red   |     1     |   -1     |
+| 17       |  1/37         | Black |    -1     |   -1     |
+| 18       |  1/37         | Red   |     1     |   -1     |
+| 19       |  1/37         | Red   |     1     |   -1     |
+| 20       |  1/37         | Black |    -1     |   -1     |
+| 21       |  1/37         | Red   |     1     |   -1     |
+| 22       |  1/37         | Black |    -1     |   -1     |
+| 23       |  1/37         | Red   |     1     |   -1     |
+| 24       |  1/37         | Black |    -1     |   -1     |
+| 25       |  1/37         | Red   |     1     |   -1     |
+| 26       |  1/37         | Black |    -1     |   -1     |
+| 27       |  1/37         | Red   |     1     |   -1     |
+| 28       |  1/37         | Black |    -1     |   -1     |
+| 29       |  1/37         | Black |    -1     |   -1     |
+| 30       |  1/37         | Red   |     1     |   -1     |
+| 31       |  1/37         | Black |    -1     |   -1     |
+| 32       |  1/37         | Red   |     1     |   -1     |
+| 33       |  1/37         | Black |    -1     |   -1     |
+| 34       |  1/37         | Red   |     1     |   -1     |
+| 35       |  1/37         | Black |    -1     |   -1     |
+| 36       |  1/37         | Red   |     1     |   -1     |
 
 We can construct the joint PDF by simply adding up over all possible outcomes.
 
 There is one outcome ($b=14$) in which both red and 14 win, and it has
 probability $1/37$:
   \begin{align}
-    f_{red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
-      &= \Pr(b \in \{14\}) = 1/37
+    f_{Red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
+      &= \Pr(\omega \in \{14\}) = 1/37
   \end{align}
 There are 17 outcomes in which red wins and 14 loses, and each has probability
 $1/37$:
   \begin{align}
-    f_{red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
-      &= \Pr\left(b \in \left\{
+    f_{Red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
+      &= \Pr\left(\omega \in \left\{
         \begin{gathered}
           1,3,5,7,9,12,16,18,19,21,\\
           23,25,27,30,32,34,36
@@ -765,8 +776,8 @@ $1/37$:
 There are 19 outcomes in which both red and 14 lose, and each has probability
 $1/37$:
   \begin{align}
-    f_{red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
-      &= \Pr\left(b \in \left\{
+    f_{Red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
+      &= \Pr\left(\omega \in \left\{
         \begin{gathered}
           0,2,4,6,7,10,11,13,15,17, \\
           20,22,24,26,28,31,33,35
@@ -785,7 +796,7 @@ Therefore, the joint PDF of $y_{Red}$ and $y_{14}$ is:
       \end{cases} \nonumber
 \end{align}
 Creating and using this table is something of a "brute force" approach: it is
-time consuming but requires little thought and will always get the right
+time consuming, but requires little thought and will always get the right
 answer. You may be able to figure out a quicker approach.
 :::
 
@@ -804,8 +815,8 @@ $$f_{x,y}(a,b) = \frac{\partial F_{x,y}(a,b)}{\partial a \partial b}$$
 ### Marginal distributions
 
 When two random variables have a joint distribution, we call the probability
-distribution of random variable its **marginal distribution**.  Both marginal
-distributions are part of the joint distribution:
+distribution of each individual random variable its **marginal distribution**.
+Both marginal distributions are part of the joint distribution:
 \begin{align}
   \Pr(x \in A) &= \Pr(x \in A \cap y \in \mathbb{R}) \\
   \Pr(y \in A) &= \Pr(x \in \mathbb{R} \cap y \in A)
@@ -865,11 +876,20 @@ Note that this is the same PDF we found in an earlier chapter.
 While you can always derive the two marginal distributions from the joint
 distribution, you cannot derive the joint distribution from the two marginal
 distributions.  A given pair of marginal distributions is typically consistent
-with an infinite number of joint distributions. For example, the last three joint
-distributions shown in Figure \@ref(fig:JointIsNotMarginal) all depict random
+with an infinite number of joint distributions. 
+
+
+::: example
+**Joint distributions with identical marginal distributions**
+
+Graphs A, B and C in Figure \@ref(fig:JointIsNotMarginal) all depict random
 variables with the same marginal distribution (both $x$ and $y$ have the
-standard normal distribution in all three graphs) but very different joint
+$N(0,1)$ distribution in all three graphs) but very different joint
 distributions.
+
+The joint distribution describes both the individual variables *and* their
+relationship.
+:::
 
 ::: example
 **Two joint distributions with identical marginal distributions**
@@ -1072,9 +1092,9 @@ together.
   - Greater variability of $x$ and $y$.
   - Stronger (positive or negative) relationship between $x$ and $y$.
 
-For example, the first two scatter plots in Figure \@ref(fig:JointIsNotMarginal)
-show cases with zero covariance, the third shows a case with negative
-covariance, and the fourth shows a case with positive covariance.
+For example, graphs A and D in Figure \@ref(fig:JointIsNotMarginal)
+show cases with zero covariance, graph B shows a case with negative
+covariance, and graph C shows a case with positive covariance.
 
 ::: example
 **Calculating the covariance from the joint PDF**
@@ -1138,7 +1158,7 @@ result it is easy to prove that:
    $$cov(x,y) = cov(y,x)$$
    just like $xy = yx$.
 2. The variance is also a covariance:
-   $$var(x) = cov(x,x)$$
+   $$cov(x,x) = var(x)$$
    just like $xx = x^2$.
 3. Covariances pass through sums:
    $$cov(x,y+z) = cov(x,y) + cov(x,z)$$
@@ -1217,10 +1237,10 @@ For example, suppose $x$ and $y$ are distances measured in kilometers and we
 convert them to miles. This change of units will affect $cov(x,y)$ but will
 not affect $corr(x,y)$.
 
-Returning to the scatter plots in Figure \@ref(fig:JointIsNotMarginal), the
-first two scatter plots show cases with zero correlation, the third shows a
-case with negative correlation, and the fourth shows a case with positive
-correlation.  The correlation in the fourth case is exactly equal to one,
+Returning to the scatter plots in Figure \@ref(fig:JointIsNotMarginal), graphs
+A and D show cases with zero correlation, graph B shows a
+case with negative correlation, and graph C shows a case with positive
+correlation.  The correlation in graph C is exactly equal to one,
 as $y$ is an exact linear function of $x$.
 
 [^601]: More precisely, either or both of $\sigma_x$ and $\sigma_y$ could be zero.
@@ -1240,7 +1260,7 @@ variables implies that their conditional and marginal distributions are the
 same:
   $$\Pr(x \in A| y \in B) = \Pr(x \in A)$$
   $$\Pr(y \in A| x \in B) = \Pr(y \in A)$$
-The first graph in Figure \@ref(fig:JointIsNotMarginal) shows an example of
+Graph A in Figure \@ref(fig:JointIsNotMarginal) shows an example of
 what independent random variables look like in data: a cloud of unrelated points.
   
 Independence also means that the joint and conditional distributions can be
@@ -1273,17 +1293,16 @@ or correlation of zero.
 ::: example
 **Zero covariance does not imply independent**
 
-The first two scatter plots in Figure \@ref(fig:JointIsNotMarginal) show cases
+Graphs A and D in Figure \@ref(fig:JointIsNotMarginal) both show cases
 in which the covariance/correlation between $x$ and $y$ is exactly zero.  
-But $x$ and $y$ are only independent in the second scatter plot.  In the first
-scatter plot, there is clearly some kind of relationship between $x$ and $y$
-(in fact $y = x^2$) so they cannot be independent.
+But $x$ and $y$ are only independent in graph A.  In Graph D, there is clearly
+some kind of relationship between $x$ and $y$ (in fact $y = x^2$).  They
+are not independent.
 
 Intuitively, covariance can be interpreted as a measure of the *linear*
 relationship between two variables.  When variables have a nonlinear
-relationship as in the first scatter plot of Figure 
-\@ref(fig:JointIsNotMarginal) above, the covariance will not necessarily
-detect any relationship.
+relationship as in Graph D of Figure \@ref(fig:JointIsNotMarginal) above, the
+covariance will not necessarily detect any relationship.
 :::
 
 ## Chapter review {-#review-more-on-random-variables}
