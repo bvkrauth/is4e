@@ -124,7 +124,8 @@ typically covered in your Principles of Macroeconomics course.
   - "non-institutionalized" excludes people in prison, hospitals, 
     nursing homes, etc.
   - "working-age" excludes those under age 15.
-  - People living on reserve are also not covered by the LFS.
+  - People living in First Nations reserves and some other Indigenous settlements
+    are also not covered by the LFS.
 - The LFS population is grouped into three categories:
   - **Employed**: worked for pay or profit in the previous week, or had
     a job and was absent (e.g. due to illness or vacation).
@@ -247,25 +248,25 @@ Canadian employment data:
 1. Create a project folder on your computer.
    - It will contain all of your data and analysis for this project.
    - Give it a brief, clear, and portable name (call it
-      "employment-nov-2020").
+      `employment-nov-2020`).
 2. Create two sub-folders inside your project folder.
-   - One will contain the original data (call it "raw-data").
-   - One will contain archived versions of the data. (call it "archive").
+   - One will contain the original data (call it `raw-data`).
+   - One will contain archived versions of the data. (call it `archive`).
 2. Obtain the source data.
    - Download the file
      [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
    - Put it in the `raw-data` folder.
    - Do not change the file name.
 3. Document the provenance of all data sources.
-   - Create a text file called "readme.txt".
+   - Create a text file called `readme.txt`.
    - Put it in the `raw-data` folder.
    - Enter information in this file about the provenance of the
      `CanEmpNov20.xlsx` file.
 4. Create a master version and working copy.
    - Make two copies of the `CanEmpNov20.xlsx` file.
    - Put them in the main project folder (`employment-nov-2020`).
-   - One will be your original master version (call it "CanEmpNov20Clean.xlsx").
-   - One will be your working copy (call it "CanEmpNov20-working.xlsx").
+   - One will be your original master version (call it `CanEmpNov20Clean.xlsx`).
+   - One will be your working copy (call it `CanEmpNov20-working.xlsx`).
 :::
 
 We will return to these principles later as we complete our data cleaning
@@ -384,10 +385,10 @@ addresses.
   the user to the address
   https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703.
 
-Statistics Canada will probably reorganize its website and move the original
-document at some point in the future.  At that point, the original
-URL will stop working. But the DOI will continue working because Statistics
-Canada will (hopefully) update the DOI entry for that document with the new URL.
+At some point in the future, Statistics Canada will reorganize its website and
+move the original document. When this happens, the original URL will stop
+working, but the DOI will continue working as long as Statistics Canada
+updates the DOI entry for the document.
 :::
 
 ### Observations and identifiers
@@ -432,8 +433,8 @@ ID variables have several common characteristics:
    - ***Constructed by formula*** from other information.
 3. They can be defined by an ***explicit combination***
    (a new ID variable is constructed) of other identifiers, or an
-   ***implicit combination*** of those identifiers (no new variable is
-   constructed).
+   ***implicit combination*** (no new variable is constructed) of those
+    identifiers .
 
 It's OK for an ID variable to be nearly-but-not-exactly identical to some other
 variable. For example a Canadian data set might have both a **Province**
@@ -450,8 +451,8 @@ and linked using various ID variables:
 - Each person at SFU (faculty, staff or student) has a unique
   16-digit ID number that is arbitrarily/sequentially assigned.
 - Each computing account at SFU has a unique (text) user name that is also
-  used as an email address. Some user names are constructed according to rules,
-  but those rules have not been applied consistently over the years so we can
+  used as an email address. Some rules are used to construct user names, but
+  those rules have not been applied consistently over the years so we can
   think of user names as arbitrarily assigned.
 - Each academic program at SFU has a standardized 2-letter to 4-letter program
   code. For example, the program code for economics is ECON. The full list of
@@ -513,14 +514,15 @@ We will add these two variables while cleaning our data.
 **Names, IDs, and probabilistic matching**
 
 Occasionally a data set will not have a standardized ID variable, and our only
-option is to match observations based on a proper name.  For example, each
-student in BC grades K to 12 is assigned an ID number called a PEN while each
-person in the healthcare system is assigned a different ID number called a PHN.
-There is no direct way to match PEN and PHN, so we have to match education and
-health records on a combination of proper names and other information such as
-date of birth.  Matches made this way are called "probabilistic" matches,
-meaning (roughly) that the records probably describe the same person but might
-not.
+option is to match observations based on a proper name.  For example, the
+government of British Columbia assigns each student in grades K to 12 an ID
+number called a Personal Education Number (PEN) while each person in the
+healthcare system is assigned a different ID number called a Personal Health
+Number (PHN). There is no direct way to match PEN and PHN, so we have to match
+education and health records on a combination of proper names and other
+information such as date of birth.  Matches made this way are called
+"probabilistic" matches, meaning (roughly) that the records probably describe
+the same person but might not.
 :::
 
 ### Planning {#cleaning-plan}
@@ -614,10 +616,9 @@ cells.  Cell formatting characteristics include:
 - Cell borders
 - Number format (will be discussed in a later section)
 
-The procedure for modifying a cell's format is straightforward if you
-regularly use Microsoft Word or similar applications.  You select
-the cell(s) you are interested in modifying, then you go through the
-menus to choose the modifications.
+The procedure for modifying a cell's format is straightforward: select
+the cell(s) you are interested in modifying, then go through the menus to choose
+the modifications.
 
 ::: example
 **Changing cell size**
@@ -632,7 +633,7 @@ We can solve this problem by making column B wider.  There are three ways of
 doing this:
 
 - *From the menu*: Select any cell in column B, and then select
-  `Home > Format > Cell Width...`.  A dialog box will appear that allows you
+  `Home > Format > Column Width...`.  A dialog box will appear that allows you
   to enter your preferred width. Try a few numbers there until you get a column
   width that you like.
 - *With the mouse*: Move your cursor to the line between column headers B
@@ -640,9 +641,9 @@ doing this:
   ![cursor](bin/cell width change.png){height=16pt}.
   Click on the mouse and drag the cursor to resize the column until you get a
   column width that you like.
-- *Auto-fit* (this is what I usually do):  Move your cursor to the line between
-  column headers B and C, and double-click.  The column width will automatically
-  adjust to fit the data.
+- *Auto-fit* (this is what I usually do):  Select *all* of column B by clicking on
+  the "B", and then select  `Home > Format > Column Width...`.  You can also do
+  this by double-clicking on the line between column headers B and C.
 
 You can follow similar procedures to adjust the row height.
 :::
@@ -979,24 +980,25 @@ Suppose we want to add a new variable for the (natural) log of population:
 3. We have two options for calculating the natural log of cell C2 in this
    cell:
 
-   *Direct entry:* Read the documentation, figure out that the correct formula
+   *Direct entry*: Read the documentation, figure out that the correct formula
    is `=LN(C2)`and enter that formula in cell K2.
 
-   *Built-in Excel tools* This is probably unnecessary for a function as simple
+   *Built-in Excel tools*: This is probably unnecessary for a function as simple
    as `LN()`, but can be very helpful with more complex functions.
 
    a. Follow the steps in the previous example to reach the `Function Arguments`
       dialog box for the `LN` function:  
       ![function arguments dialog box](bin/FunctionArguments.png)
    b. Click in the entry box labeled `Number`.
-   c. Either enter the text `C2` here or click on cell C2. The dialog box
-      will display the value in cell C2 (`3588700`) as well as the calculated
-      value for the log of cell C2 (`15.0933058`).
+   c. Either enter the text `C2` here or select cell C2 with the mosue. The
+      dialog box will display the value in cell C2 (`3588700`) as well as the
+      calculated value for the log of cell C2 (`15.0933058`).
    d. Select `OK`.
 
 4. Save your working copy.
 
-You will see that cell K2 now contains `=LN(C2)` which displays as `15.0933`. 
+You will see that cell K2 now contains the formula `=LN(C2)` which displays as
+`15.0933`. 
 :::
 
 ::: {.fyi data-latex=""}
@@ -1228,7 +1230,7 @@ format are typically accurate up to the 15th decimal place.
 
 However, Excel displays the results of these calculations according to the
 cell's ***numeric display format***, which typically rounds to much fewer
-decimal places. Remember that We can always change the display format of a
+decimal places. Remember that we can always change the display format of a
 cell or group of cells without changing the cell contents.
 
 ::: example
@@ -1566,7 +1568,8 @@ Text files can be read and modified using a simple program called a
   - MacOS has a built in text editor called *TextEdit*.
 
 In addition, there are numerous other text editors that are more powerful and
-include useful features like color-coding, spell checking, and autocorrect:
+include useful features like color-coding, spell checking, and autocorrect.
+Many of them are free:
 
   - I use *Notepad++* which is powerful, easy to use, and available at no charge
     from https://notepad-plus-plus.org/. Notepad++ is only available for
@@ -1595,10 +1598,10 @@ text editors installed:
 ### CSV files {#csv-files}
 
 The most commonly-used export format for Excel is called the
-***comma-separated values*** or ***CSV*** file. CSV is a standardized format
-that is very useful for representing tables of data. It is simple,
+***comma-separated values*** or ***CSV*** file. CSV is a standardized text
+format that is very useful for representing tables of data. It is simple,
 platform-independent, human-readable, compact, and secure. Every major
-statistical analyisis application can read CSV files, as can many other
+statistical analysis application can read CSV files, as can many other
 applcations.
 
 You can save any worksheet in an Excel workbook as a CSV file.
@@ -1716,17 +1719,17 @@ To update your master version:
    You can compare your working copy to my master version at
 [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
 
-2. If you like, achive your current master version by renaming it and moving
-   it to the `archives` sub-folder.
+2. Archive your current master version by renaming it and moving it to the
+   `archives` sub-folder.
 
    - This is optional since your current master version is identical to the
      source data.
 
-3. Copy the current working copy to the master version by either:
+3. Set your current working copy as the master version.
 
-   - Selecting `File > Save As` in Excel to save the open file under another
-     name.
-   - Closing Excel and copying, pasting, and renaming the working copy file.
+   - *In Excel*: You can select `File > Save As` to save the open file under
+     another name.
+   - *Outside of Excel*: You can copy, paste, and rename the working copy.
 
 You should now have two identical cleaned data sets (one master file and one
 working copy), one raw data set (in the `raw-data` subfolder), and possibly

@@ -639,7 +639,9 @@ ggplot(data = EmpData,
                      y = UnempPct)) + 
   geom_line() 
 ```
+
 and a histogram:
+
 ```{r ggplotHistogram2}
 ggplot(data = EmpData,
        mapping = aes(x = UnempPct)) + 
@@ -855,7 +857,7 @@ ggplot(data = EmpData,
 ```
 :::
 
-## Visualization and prediction
+## Visualization and prediction {#visualization-and-prediction}
 
 Bivariate summary statistics like the covariance and correlation provide a
 simple way of characterizing the relationship between any two numeric variables.
@@ -863,11 +865,10 @@ Frequency tables, cross tabulations, and conditional averages allow us to gain a
 greater understanding of the relationship between two discrete or categorical
 variables, or between a discrete/categorical variable and a continuous variable.
 
-In order to develop a detailed understanding of the relationship between two
-continuous variables (or discrete variables with many values), we need to
-develop some additional methods.  The methods that we will explore in this
-course are primarily graphical.  You will learn more about the underlying
-numerical methods in later courses.
+Another approach is to visualize the relationship between the variables, or to
+predict the value of one variable based on the value of the other variable.
+The methods that we will explore in this section are primarily graphical. You will 
+learn more about the underlying numerical methods in later courses.
 
 ### Scatter plots 
 
@@ -947,7 +948,7 @@ ggplot(data = RoundedEmpData,
 ```
 
 As you can see the jittered rounded data (small blue dots) more accurately
-reflects the original unrounded data than the rounded data (large red dots).
+reflects the original unrounded data than the rounded data (large orange dots).
 :::
 
 #### Using color as a third dimension
@@ -1090,12 +1091,13 @@ ggplot(data = EmpData,
 ```
 
 As you can see, the binned scatterplot tends to be smooth when there 
-are only a few bins, and jagged when there are many bins.  This reflects a
-trade-off between bias (too few bins may lead us to miss important 
-patterns in the data) and variance (too many bins may lead us to
-see patterns in the data that aren't really part of the DGP).
+are only a few bins, and jagged when there are many bins.  
 :::
 
+If we think of binned scatterplots and conditional averages as predictions,
+there is a trade-off between bias (too few bins may lead us to miss important 
+patterns in the data) and variance (too many bins may lead us to
+see patterns in the data that aren't really part of the DGP).
 
 ### Smoothing
 
@@ -1176,7 +1178,6 @@ result, linear regression is the most important tool in applied econometrics,
 and you will spend much of your next econometrics course learning to use it.
 
 
-
 ## Chapter review {-#review-using-r}
 
 As we have seen, we can do many of the same things in Excel and R.  R is
@@ -1209,7 +1210,9 @@ hope this course has given you a strong base for your further studies.
 Answers can be found in the [appendix](#answers-using-r).
 
 **GOAL #1: Use the pipe operator**
+
 **GOAL #2: Use the mutate function to add or change a variable**
+
 **GOAL #3: Use the filter, select, and arrange functions to modify a data table**
 
 1. Starting with the data table `EmpData`:
@@ -1225,7 +1228,9 @@ Answers can be found in the [appendix](#answers-using-r).
    e. Give the resulting data table the name `PPData`.
 
 **GOAL #4: Calculate a univariate statistic in R**
+
 **GOAL #5: Construct a table of summary statistics in R**
+
 **GOAL #6: Recognize and handle missing data problems in R**
 
 2. Starting with the `PPData` data table you created in question (1) above:
@@ -1262,7 +1267,6 @@ Answers can be found in the [appendix](#answers-using-r).
 
 7. Using the `PPData` data set, create a time series graph of the employment
    rate.
-
 
 **GOAL #12: Distinguish between pairwise and casewise deletion of missing values**
 

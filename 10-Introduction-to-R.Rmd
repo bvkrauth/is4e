@@ -176,8 +176,7 @@ print("Hello world!")
 print("Goodbye world?")
 ```
 In addition to the `Source` button, there is another button marked `Run`. 
-Pressing this button will also run the script, but the results will not be
-displayed.
+Pressing this button will run the script one line at a time.
 :::
 
 ### R Markdown
@@ -320,21 +319,37 @@ In the menu:
 - You can select `Session > Restart R` to clear the memory and restart the
   current R session.
 
+::: {.warning data-latex=""}
+**Never save your workspace**
+
 I would also like to highlight a "feature" that is not at all useful and should
 be avoided. When you close R or RStudio, you will often get a warning message
 that looks something like this:
-   ![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
+
+![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
 
 If you choose "Save", R will save the current state of its memory and re-load
 it next time you start R. This may seem like it would be helpful, but it is
 actually bad. We care about reproducibility, so we want R to do exactly the same
 thing every time we use it. We do not want R's actions to depend on something
 we did a few days ago. So *NEVER CHOOSE "Save" HERE*.
+:::
 
 ## The R language
 
-Next, we will learn some basic features of the R language.  Open RStudio and go
-to the console window so we can enter commands and see what they do.
+Next, we will learn some basic features of the R language. Learning a
+programming language is a lot like learning a regular language: learning the
+rules can be helpful, but it is also important to learn by doing.
+
+Each of the subsections in this section goes through a particular element of the
+R language.  As you go through each subsection, my recommendation is to:
+
+- Try out all of the examples.
+- If you aren't sure exactly how something works, modify the example to see what
+  happens.  Keep doing this until you understand.
+- Once you understand something, move on to the next subsection.
+
+Open RStudio and go to the console window.
 
 ### Comments
 
@@ -1031,11 +1046,21 @@ length(EmpData)
 ```
 :::
 
-In a later chapter, we will learn how to view other table properties such as
-summary statistics.
-
 ## Basic statistics in R
 
+Next we will learn a few simple commands for producing univariate summary
+statistics and graphs.  We will expand on these commands in Chapter \@ref(using-r).
+
+Before getting started, run the following code to clean the employment data:
+```{r CleanEmpData}
+# Clean EmpData
+EmpData <- EmpData %>%
+  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
+  mutate(UnempPct = 100*UnempRate) %>% 
+  mutate(LFPPct = 100*LFPRate)
+```
+Section \@ref(data-cleaning-in-r) in Chapter \@ref(using-r) will discuss data
+cleaning in more detail, and will derive this block of code.
 
 ### The summary function
 
@@ -1054,6 +1079,9 @@ Like `print()`, `summary()` is an example of a generic function. You can give it
 almost any R object as an argument, and it will return a summary of the object's
 contents. The exact information returned will depend on the object type.
 
+Section \@ref(data-analysis-in-r) in Chapter \@ref(using-r) will demonstrate
+additional R commands for univariate data analysis.
+
 ### Introduction to ggplot
 
 Although R has a built in plotting command called `plot()`, the Tidyverse also
@@ -1071,18 +1099,9 @@ syntax.
 **Two ggplot graphs**
 
 We will use ggplot to create two univariate graphs for the unemployment rate: 
-a time series (line) graph and a histogram.
-
-Before getting started, run the following code to clean the employment data:
-```{r CleanEmpData}
-# Clean EmpData
-EmpData <- EmpData %>%
-  mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>% 
-  mutate(UnempPct = 100*UnempRate) %>% 
-  mutate(LFPPct = 100*LFPRate)
-```
-The variable representing the unemployment rate is called **UnempPct** and the
-variable representing the month/year is called **MonthYr**.
+a time series (line) graph and a histogram.  The variable representing the
+unemployment rate is called **UnempPct** and the variable representing the
+month/year is called **MonthYr**.
 
 To make the time series (line) graph, execute the following code:
 ```{r ggplotTimeSeries}
@@ -1093,7 +1112,7 @@ ggplot(data = EmpData,
 ```
 
 
-To make the histograph, excute the following code:
+To make the histogram, excute the following code:
 ```{r ggplotHistogram}
 ggplot(data = EmpData,
        mapping = aes(x = UnempPct)) + 
@@ -1102,8 +1121,8 @@ ggplot(data = EmpData,
 
 :::
 
-Section ????
-
+Section \@ref(graphs-with-ggplot) in Chapter \@ref(using-r) will explore ggplot
+and its capabilities in greater detail.
 
 ## Chapter review {-#review-introduction-to-r}
 
@@ -1118,12 +1137,12 @@ language you end up coding in later.
 
 In this chapter, we learned how to run R programs whether in the console, in
 a script, or in an R Markdown document.  We also learned the main elements of
-the R language. We haven't learned how to do much of anything useful yet with
-data, but we will over the next few chapters.
+the R language, and a little bit of how to read and analyze data in R.
 
-In the next chapter, we will learn to use R to [clean](#data-cleaning-in-r)
-and [analyze](#data-analysis-in-r) data.  We will also learn a sophisticated R
-graphing package called[ggplot](#graphs-with-ggplot).
+In the next chapter, we will learn to use R to [clean](#data-cleaning-in-r),
+[analyze](#data-analysis-in-r) and [graph](#graphs-with-ggplot) data.  We will
+also learn some tools for 
+[visualization and prediction](#visualization-and-prediction)
 
 ::: {.fyi data-latex=""}
 **For more information on R**

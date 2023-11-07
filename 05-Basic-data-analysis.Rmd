@@ -49,7 +49,7 @@ January 1976 through January 2021.
 2. Download the file at
 [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx) and put it in your raw data subfolder.
 3. Make a working copy in your project folder.
-   - I called mine  `CanEmpHist_WC.xlsx`.
+   - I called mine  `CanEmpHist-working.xlsx`.
 4. Open your working copy. It will look something like this:  
 ![*Canadian employment data, 1976-2021*](bin/CanadaEmploymentHistorical.png)
 
@@ -216,6 +216,13 @@ You saw many of these words - standard deviation, percentile, median, etc. -
 in Chapter \@ref(random-variables), but I need to be clear on something: even
 though the names are the same, the concepts are *not* exactly the same.
 
+We start by introducing some notation.  We can think of our data set 
+$D_n = (x_1, x_2, \ldots, x_n)$ as a table of $n$ observations (rows),
+numbered by some sequential index $i$.  The value of our variable of interest
+in row $i$ is denoted by $x_i$; for example $x_1$ is the value of our variable
+for the observation in the first row,  $x_{10}$ is the value in the tenth row,
+etc.  We can then define various commonly-used statistics based on $D_n$:
+
 The ***count*** or ***sample size*** is the number $n$ of observations with
 valid (numeric) values for the variable.  It is calculated in Excel using the
 `COUNT()` function.
@@ -234,7 +241,9 @@ The ***sample minimum*** is the lowest value observed in the data, and the
 ***sample maximum*** is the highest value observed in the data.  They can be
 calculated in Excel using the `MIN()` and `MAX()` functions.
 
-The ***sample median*** is another measure of central tendency, and is defined:
+The ***sample median*** is another measure of central tendency, and is (roughly)
+a number that is above half of the observations and below the other half.
+Its more precise definition is: 
 \begin{align}
   \hat{m} &= \begin{cases}
     x_{[(n/2) + (1/2)]} & \textrm{if $n$ is odd} \\
@@ -250,10 +259,11 @@ you were probably taught to calculate medians in grade school. For example:
 
 It can be calculated in Excel using the `MEDIAN()` function.
 
-The ***sample 10th percentile*** is a number that is above 10\% of observations
-in the data, and the ***sample 90th percentile*** is a number that is above
-90\% of observations. Either can be calculated in Excel using the `PERCENTILE.INC()`
-function.  I will not ask you to calculate these by hand.
+The ***sample 10th percentile*** is (roughly) a number that is above 10\% of
+observations in the data, and the ***sample 90th percentile*** is a number
+that is above 90\% of observations. Either can be calculated in Excel using the `PERCENTILE.INC()`
+function.  I will not give you a precise definition or ask you to calculate
+sample percentiles by hand.
 
 Note that the sample average/median/percentiles/etc. describe
 *the values observed in a set of data*, and are calculated from that data set.
@@ -274,8 +284,9 @@ create a new blank worksheet and fill in the structure of the table.
 To set up the table:
 
 1. Create a new blank worksheet.
-   - You can do this by clicking on the !["+"](bin/AddWorksheetButton.png){height=16pt}
-     button at the bottom of the screen.
+   - You can do this by clicking on the
+     !["+"](bin/AddWorksheetButton.png){height=16pt} button at the bottom of the
+     screen.
 2. Rename the worksheet *Summary Statistics*.
    - You can do this by double-clicking on the tab for your new worksheet. A
      dialog box will open for you to enter the new name.
@@ -293,8 +304,8 @@ To fill in the variable name for column B:
 
 1. Go to cell B1. 
 2. Type `=` but *don't* hit `<enter>` yet.
-3. Select the tab for the *Data for Analysis* worksheet, and then select cell G1
-   in the *Data for Analysis* worksheet.
+3. Use your mouse to select the tab for the *Data for Analysis* worksheet, and
+   then select cell G1 in the *Data for Analysis* worksheet.
    - The formula bar now says `='Data for Analysis'!G1`
 4. Select `<enter>`. 
    - You should now be back in cell B1 in the Summary statistics worksheet.
@@ -483,7 +494,7 @@ should look like this:
 Note that I have included a political party (the NDP) that is not  observed in
 our data set.  We start by setting up the table:
 
-1. Create a new sheet named "Party control"
+1. Create a new sheet named *Party control*.
 2. Fill in the top row and first column as in the table above.
 
 Next we will fill in values for the **Count** column (B):
@@ -591,39 +602,49 @@ the table:
    - Enter the **From** and **To** values as decimals (0 to 1) and display 
      them as percentages (0% to 100%).
   
-Next, we fill in the first count in cell C2.  This will be a somewhat complex
-formula, so we will build it in stages:
+Next, we fill in counts in column C.  This will be a somewhat complex formula,
+so we will build it in stages.
 
-1. Let's start by counting the observations with UnempRate greater than zero:
+1. Let's start with cell C2.  We want this number to contain a count of all
+   observations in which the value of **UnempRate** is between the value in
+   cell A2 (0%) and the value in cell B2 (5%).
+2. First, let's use the `COUNTIFS()` function to count the number of
+   observations with **UnempRate** less than or equal to 5%.  The `COUNTIFS()`
+   function takes two arguments:
    - The `criteria_range1` value should be the data range for the UnempRate
-    variable, i.e, `'Data for Analysis'!G2:G542`.
-   - The `criteria1` value should be is the string ">0".
-   - So the formula should be `=COUNTIFS('Data for Analysis'!G2:G542, ">0")`
-2. Next, let's add the criterion that UnempRate is less than or equal to 5%.:
-   - The `criteria_range2` value should be the same as `criteria_range1`.
-   - The `criteria2` value should be is the string "<=0.05".
-   - So the formula should be 
-     `=COUNTIFS('Data for Analysis'!G2:G542, ">0", 'Data for Analysis'!G2:G542, "<=0.05")`.
-3. Finally, let's have the formula retrieve the `criteria1` and `criteria2`
-   values from cells A2 and B2.  
-   - This enhancement is not strictly required but it has two big advantages: 
-     (1) We will be able to copy this formula into other cells.
-     (2) We can change the bins in columns A and B, and the calculation 
-         will automatically adjust.
-   - We can use the `CONCAT()` function to construct the criteria:
-     - `CONCAT(">",A2)` will return ">0".
-     - `CONCAT("<=",B2)` will return "<=0.05".
-   - So the formula is
-     `=COUNTIFS('Data for Analysis'!G2:G542,CONCAT(">",A2),'Data for Analysis'!G2:G542,CONCAT("<=",B2))`.
-
-Cell C2 should now display the number of months  (zero) in which the Canadian
-unemployment rate was between 0% and 5%. To finish up the table: 
-
-4. Update the formula in cell C2 to use absolute references where appropriate.
-5. Copy the contents of cell C2 to cells C3:C6.
-6. Fill in the **Percentage** column (C) with the appropriate formula and change
+     variable, i.e, `'Data for Analysis'!G$2:G$542`. Note that I am using 
+     absolute references here so that the formula will be copied correctly
+     to other cells.
+   - The `criteria1` value should be the string "<=0.05".
+   - So the formula in cell C2 should be
+     `=COUNTIFS('Data for Analysis'!G$2:G$542, "<=0.05")`
+3. Next, let's modify the formula in cell C2 so that it only counts the
+   observations with **UnempRate** less than or equal to 5% *and* greater than
+   or equal to 0%.  We can do this by adding a second pair of arguments to
+   our `COUNTIFS()` function. The formula is:  
+     `=COUNTIFS('Data for Analysis'!G$2:G$542, "<= 0.05", 'Data for Analysis'!G$2:G$542, ">= 0.00")`.  If we give `COUNTIFS()` multiple criteria,
+   it will count the number of cases that meet *all* of the criteria.
+4. Next, let's modify the formula in cell C2 so that the literal numbers 0.00
+   and 0.05 are replaced with the contents of cells A2 and B2 respectively.
+   We can use the `CONCAT()` function to concatenate the text "<=" with
+   the number in the relevant cell.  For example if cell B2 contains the number
+   0.05, the formula `CONCAT("<= ",B2)` will return the text value `<= 0.05`.
+   The revised formula in cell C2 should now be:
+   `=COUNTIFS('Data for Analysis'!G$2:G$542, CONCAT("<= ",B2), 'Data for Analysis'!G$2:G$542, CONCAT(">= ",A2))`.
+5. The formula in cell C2 does what we wanted, so let's copy it to cell C3.
+   - The formula in cell C3 is `=COUNTIFS('Data for Analysis'!G$2:G$542, CONCAT("<= ",B3), 'Data for Analysis'!G$2:G$542, CONCAT(">= ",A3))`.
+   - Unfortunately, there is a problem. If there are any observations with an
+     unemployment rate *exactly* equal to 5%, it will be counted in cell C2 and 
+     again in cell C3.
+   - We can fix this issue by modifying the formula in cell C3 to 
+     `=COUNTIFS('Data for Analysis'!G$2:G$542, CONCAT("<= ",B3), 'Data for Analysis'!G$2:G$542, CONCAT("> ",A3))`.  Note that we do not want to modify
+     the formula in cell C2.
+6. We can finish up by copying the formula in cell C3 to cells C4:C6. You can
+   check your work by confirming that the total of cells C2:C6 adds up to the
+   total number of observations (541).
+7. Fill in the **Percentage** column (D) with the appropriate formula and change
    its display format to Percent.
-7. Make any other formatting changes you like, and save your working copy.
+8. Make any other formatting changes you like, and save your working copy.
 
 We now have our binned frequency table:  
 ![*Binned frequency table for* **UnempRate**](bin/UnemploymentBinnedFrequencyTable.png){width=50%}
@@ -706,10 +727,10 @@ We have our time series graph (it looks like the picture above).  Unfortunately,
 it has a line for *every* variable in our data source. We only want to plot
 one variable, so let's get rid of the others:
 
-1. Select `Design > Select Data` which will open the `Select Data Source`
+1. Select `Chart Design > Select Data` which will open the `Select Data Source`
    dialog box.
 2. Uncheck the check box next to every series in the "Legend Entries (Series)"
-   box except **UnempRate**:  
+   box except **UnempRate**, and then select `OK`:  
 ![*Time graph series of* **UnempRate**](bin/TimeSeriesGraphInitial.png){width=50%}
 
 This looks like the graph we want.
@@ -740,9 +761,9 @@ apply a few basic ideas:
    - Color is not always available to readers: Some readers are color
      blind, projectors often get colors "wrong", or your document 
      may get printed on a black-and-white printer.
-     - Always include non-color visual cues (for example dashed lines or
-       different points with varying shape) so that readers who cannot
-       distinguish color (for whatever reason) can tell different series apart.
+     - Always include non-color visual cues (for example, text labels) so that
+       readers who cannot distinguish color (for whatever reason) can tell
+       different series apart.
      - Consider using a color palette that is colorblind-friendly.
        - A simple way to do this is to avoid using red and green or blue and
          yellow as contrasting colors, since these are the two most common forms
@@ -872,8 +893,11 @@ category (the first column of the table) and variable (the other columns), and
 the length of each bar corresponds to its value. 
 
 As with our line graph, the current graph contains more information than we
-actually want - it shows the count *and* the percentage, and we really only
-need one of those.  
+actually want - it shows the count *and* the percentage (you can't see the
+percentage bars because the percentage is a much smaller number than the 
+count).  We really only need one of those.  We also may decide that the bars
+for NDP and "Transfer" ar irrelevant. We can get rid of this irrelevant
+information:
 
 1. Select the chart.
 2. Select `Chart Design > Select Data`.
@@ -1036,7 +1060,7 @@ axis a little easier to read and interpret.
 It would also be nice to modify the start and end points so that instead of the
 bins being 5.4-6.4%, 6.4-7.4%, etc. they were 5-6%, 6-7%, etc. Unfortunately,
 that does not seem to be possible in Excel. We can work around that limitation
-by creating the frequency table, and making a column/bar chart of that frequency
+by creating a binned frequency table, and making a column/bar chart of that
 table.
 :::
 
