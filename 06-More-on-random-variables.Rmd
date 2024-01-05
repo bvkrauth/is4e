@@ -75,9 +75,13 @@ harder, which is why we started with discrete random variables.
 **Labour force participation**
 
 The labour force participation rate is defined as:
-  $$(\textrm{LFP rate}) = \frac{(\textrm{labour force})}{(\textrm{population})} \times 100\%$$ 
+\begin{align}
+  (\textrm{LFP rate}) = \frac{(\textrm{labour force})}{(\textrm{population})} \times 100\%
+\end{align}
 It can be any number between 0\% and 100\%:
-  $$S_{LFP rate} = [0\%,100\%]$$
+\begin{align}
+  S_{LFP rate} = [0\%,100\%]
+\end{align}
 so it is a continuous random variable.
 :::
 
@@ -116,7 +120,9 @@ variables is also true for continuous ones.
 
 Suppose you round the labour force participation rate to the nearest percentage
 point.  The rounded LFP rate is a discrete random variable with support:
-  $$S_x = \{0\%, 1\%, \ldots 99\%, 100\% \}$$
+\begin{align}
+  S_x = \{0\%, 1\%, \ldots 99\%, 100\% \}
+\end{align}
 Alternatively, we could round to the nearest 1/100th of a percentage point,
 to the nearest 1/1,000,000th of a percentage point, etc. As we round to a
 higher and higher precision, the approximation gets closer and closer.
@@ -143,7 +149,9 @@ since an integral *is* a sum, or at least the limit of a sequence of sums.
 
 The CDF of a continuous random variable $x$ is defined exactly the same way as
 for the discrete case:
-  $$F_x(a) = \Pr(x \leq a)$$
+\begin{align}
+  F_x(a) = \Pr(x \leq a)
+\end{align}
 The only difference is how it looks. If you recall, the CDF of a discrete random
 variable takes on a stair-step form: increasing in discrete jumps at every point
 in the discrete support, and flat everywhere else. In contrast, the CDF of a
@@ -154,11 +162,21 @@ flat parts, but it never jumps.
 **The standard uniform distribution**
 
 Consider a random variable $x$ that has continuous support:
-$$S_x = [0, 1]$$
+\begin{align}
+  S_x = [0, 1]
+\end{align}
 and CDF:
-  $$F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}$$
+\begin{align}
+  F_x(a) = \Pr(x \leq a) = \begin{cases} 0 & a < 0 \\ a & a \in [0,1] \\1 & a > 1 \\ \end{cases}
+\end{align}
 This particular probability distribution is called the 
 ***standard uniform distribution*** and will be discussed in more detail later.
+
+Figure \@ref(fig:StdUniformCDF) shows the CDF of the standard uniform
+distribution.  As you can see, this CDF is smoothly increasing over the support
+between zero and one, and is flat everywhere else.
+:::
+
 
 ```{r StdUniformCDF, fig.cap = "*CDF for the standard uniform distribution*"}
 UniformDist <- tibble(a=seq(from=-2,to=2,length.out=100),
@@ -174,11 +192,6 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
        caption = "", 
        tag = "")
 ```
-
-Figure \@ref(fig:StdUniformCDF) shows the CDF of the standard uniform
-distribution.  As you can see, this CDF is smoothly increasing over the support
-between zero and one, and is flat everywhere else.
-:::
 
 Section \@ref(the-cdf) describes the properties of a CDF, and these properties
 apply to continuous random variables too. In addition, interval probabilities
@@ -219,7 +232,9 @@ continuous, the same does not hold for the PDF.
 
 Instead, the ***PDF of a continuous random variable*** $x$ is defined as as the
 slope or derivative of the CDF:
-  $$f_x(a) = \frac{d F_x(a)}{da}$$
+\begin{align}
+  f_x(a) = \frac{d F_x(a)}{da}
+\end{align}
 In other words, instead of the *amount* the CDF increases (jumps) at $a$, it is
 the *rate* at which it (smoothly) increases.
 
@@ -227,8 +242,13 @@ the *rate* at which it (smoothly) increases.
 **The PDF of the standard uniform distribution**
 
 The PDF of a standard uniform random variable is:
-  $$f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}$$
-which looks like this:  
+\begin{align}
+  f_x(a) = \begin{cases} 0 & a < 0 \\ 1 & a \in [0,1] \\ 0 & a > 1 \\ \end{cases}
+\end{align}
+Figure \@ref(fig:StdUniformPDF) shows the PDF of the standard uniform
+distribution. 
+:::
+
 ```{r StdUniformPDF, fig.cap = "*PDF for the standard uniform distribution*"}
 ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
   geom_step(col = "blue") +
@@ -240,7 +260,6 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
        caption = "", 
        tag = "")
 ```
-:::
 
 The PDF of a continuous random variable is a good way to visualize its
 probability distribution, and this is about the only way we will use
@@ -257,13 +276,13 @@ variable.
 :::
 
 Like the discrete PDF, the continuous PDF is always non-negative:
- \begin{equation*}
-   f_x(a) \geq 0 \qquad \textrm{for all $a \in \mathbb{R}$}
- \end{equation*}
+\begin{equation*}
+ f_x(a) \geq 0 \qquad \textrm{for all $a \in \mathbb{R}$}
+\end{equation*}
 and is strictly positive on the support:
- \begin{equation*}
-   f_x(a) > 0 \qquad \textrm{for all $a \in S_x$}
- \end{equation*}
+\begin{equation*}
+ f_x(a) > 0 \qquad \textrm{for all $a \in S_x$}
+\end{equation*}
 But unlike the discrete PDF, the continuous PDF is *not* a probability. In
 particular, it can be greater than one.
 
@@ -276,11 +295,17 @@ to one.
 
 Similarly, we can calculate probabilities from the continuous PDF by
 integrating:
-  $$\Pr(a < x < b) = \int_a^b f_x(v)dv$$
+\begin{align}
+  \Pr(a < x < b) = \int_a^b f_x(v)dv
+\end{align}
 which implies that the CDF can be derived from the PDF:
-  $$F_x(a) = \int_{-\infty}^a f_x(v)dv$$
+\begin{align}
+  F_x(a) = \int_{-\infty}^a f_x(v)dv
+\end{align}
 and that the PDF integrates to one:
-  $$\int_{-\infty}^{\infty} f_x(v)dv = 1$$
+\begin{align}
+  \int_{-\infty}^{\infty} f_x(v)dv = 1
+\end{align}
 Unless you have taken a course in integral calculus, you may have no idea what
 these formulas mean or how to solve them.  That's OK! All you need to know is
 that they *can* be solved.
@@ -320,7 +345,9 @@ an integral.
 **The expected value for a continuous random variable**
 
 When $x$ is continuous, its expected value is defined as:
-  $$E(x) = \int_{-\infty}^{\infty} af_x(a)da$$
+\begin{align}
+  E(x) = \int_{-\infty}^{\infty} af_x(a)da
+\end{align}
 Notice that this looks just like the definition for the discrete case, but with
 the sum replaced by an integral sign.
 :::
@@ -334,7 +361,9 @@ whether the random variable is continuous or discrete.
 
 The ***uniform*** distribution is a continuous probability distribution that is
 usually written:
-  $$x \sim U(L,H)$$
+\begin{align}
+  x \sim U(L,H)
+\end{align}
 where $L$ and $H$ are numbers such that $L < H$.  It is also sometimes written
 $x \sim Uniform(L,H)$.
 
@@ -344,9 +373,13 @@ distribution.
 ### The uniform PDF
 
 The uniform distribution has continuous support:
-  $$S_x = [L,H]$$
+\begin{align}
+  S_x = [L,H]
+\end{align}
 and continuous PDF:
-  $$f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}$$
+\begin{align}
+  f_x(a) = \begin{cases}\frac{1}{H-L} & a \in S_x \\ 0 & \textrm{otherwise} \\ \end{cases}
+\end{align}
 The uniform distribution can be interpreted as placing equal probability on all
 values between $L$ and $H$.
 
@@ -355,7 +388,10 @@ values between $L$ and $H$.
 
 Suppose that $x \sim U(2,5)$.
 
-Its support is the range of all values from 2 to 5, and its PDF looks like this:
+Its support is the range of all values from 2 to 5, and its PDF is depicted in
+Figure \@ref(fig:UniformPDF) below. 
+:::
+
 ```{r UniformPDF, fig.cap = "*PDF for the U(2,5) distribution*"}
 UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
@@ -370,21 +406,25 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=fa)) +
        caption = "", 
        tag = "")
 ```
-:::
+
 
 ### The uniform CDF
 
 The CDF of the $U(L,H)$ distribution is:
-  $$F_x(a) = \begin{cases}
+\begin{align}
+  F_x(a) = \begin{cases}
     0 & a \leq L \\ 
     \frac{a-L}{H-L} & L < a < H \\ 
     1 & a \geq H \\ 
-    \end{cases}$$
+    \end{cases}
+\end{align}
 
 ::: example
 **The CDF of the $U(2,5)$ distribution**
 
-If $x \sim U(2,5)$, its CDF looks like this:  
+Figure \@ref(fig:UniformCDF) shows the CDF of the $U(2,5)$ distribution.
+:::
+
 ```{r UniformCDF, fig.cap = "*CDF for the U(2,5) distribution*"}
 UniformDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=punif(seq(from=-6,to=6,length.out=100),min=2,max=5),
@@ -399,17 +439,20 @@ ggplot(data=UniformDist,mapping=aes(x=a,y=Fa)) +
        caption = "", 
        tag = "")
 ```
-:::
 
 ### Quantiles {#uniform-quantiles}
 
 Like any other random variable, we can calculate the quantiles of a uniform
 random variable by inverting the CDF. That is:
-  $$F_x^{-1}(q) = L + q(H-L)$$
+\begin{align}
+  F_x^{-1}(q) = L + q(H-L)
+\end{align}
 is the $q$ quantile of a $U(L,H)$ random variable.
 
 The median of $x \sim U(L,H)$ is:
-  $$Med(x) = F_x^{-1}(0.5) = 0.5(L+H)$$
+\begin{align}
+  Med(x) = F_x^{-1}(0.5) = 0.5(L+H)
+\end{align}
 i.e., the midpoint of the support.
 
 ### Expected values {#uniform-mean-and-variance}
@@ -429,7 +472,9 @@ when they are difficult to calculate.
 Any linear function of a uniform random variable also has a uniform
 distribution. That is, if $x \sim U(L,H)$ and $y = a + bx$ where^[if $b <0$,
 then $y \sim U(a + bH, a + bL)$.] $b > 0$, then:
-  $$y \sim U(a + bL, a + bH)$$
+\begin{align}
+  y \sim U(a + bL, a + bH)
+\end{align}
 Nonlinear functions of a uniform random variable are generally not uniform.
 
 ::: {.fyi data-latex=""}
@@ -461,7 +506,9 @@ of weapons and other resources, or the results of a particular player action.
 ## The normal distribution {#normal-and-standard-normal}
 
 The ***normal distribution*** is typically written as:
-  $$ x \sim N(\mu,\sigma^2)$$ 
+\begin{align}
+  x \sim N(\mu,\sigma^2)
+\end{align}
 where $\mu$ and $\sigma^2 \geq 0$ are numbers.  It is also sometimes written
 as $x \sim Normal(\mu, \sigma^2)$.
 
@@ -480,11 +527,14 @@ central limit theorem in much more detail later.
 
 The $N(\mu,\sigma^2)$ distribution is a continuous distribution with support 
 $S_x = \mathbb{R}$ and PDF:
-$$f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}$$
+\begin{align}
+  f_x(a) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(a-\mu)^2}{2\sigma}}
+\end{align}
 The Excel function `NORM.DIST()` can be used to calculate this PDF.
 
 The $N(\mu,\sigma^2)$ distribution is bell-shaped and symmetric around $\mu$,
-with the "spread" of the distribution depending on the value of $\sigma^2$:  
+with the "spread" of the distribution depending on the value of $\sigma^2$. 
+
 ```{r NormalPDF, fig.cap = "*PDF for several normal distributions*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
                       Fa=pnorm(seq(from=-6,to=6,length.out=100)),
@@ -547,10 +597,11 @@ The median of a $N(\mu,\sigma^2)$ random variable is $\mu$.
 
 Integral calculus is required to calculate the mean, variance and standard
 deviation of the normal distribution, so I report them below for reference:
-  $$E(x) = \mu$$
-  $$var(x) = \sigma^2$$
-  $$sd(x) = \sigma$$
-
+\begin{align}
+  E(x) &= \mu \\
+  var(x) &= \sigma^2 \\
+  sd(x) &= \sigma
+\end{align}  
 
 ### Functions of a normal
 
@@ -560,9 +611,13 @@ $b$.
 
 Normal random variables have an additional property: any linear function of a
 normal random variable is also normal. That is, if:
-  $$x \sim N(\mu,\sigma^2)$$
+\begin{align}
+  x \sim N(\mu,\sigma^2)
+\end{align}
 Then for any constants $a$ and $b$:
-  $$a + bx \sim N(a + b\mu, b^2\sigma^2)$$
+\begin{align}
+  a + bx \sim N(a + b\mu, b^2\sigma^2)
+\end{align}
 Nonlinear functions of a normal random variable are generally *not* normal.
 
 ::: {.fyi data-latex=""}
@@ -583,30 +638,38 @@ analysis and would be covered in a more advanced course.
 
 We earlier defined the standardized version of a random variable $x$ as the
 following linear function of $x$:
-  $$z = \frac{x-E(x)}{sd(x)}$$
+\begin{align}
+  z = \frac{x-E(x)}{sd(x)}
+\end{align}
 and showed that $E(z) = 0$ and $var(z) = sd(z) = 1$.
 
 We can standardize any random variable, but standardization is particularly
 convenient for normal random variables.  If $x$ has a normal distribution,
 then its standardized value $z$ has the standard normal distribution:
-  \begin{align}
-    x \sim N(\mu, \sigma^2) &\Rightarrow z \sim N\left(\frac{\mu-\mu}{\sigma}, \left(\frac{1}{\sigma}\right)^2 \sigma^2\right) \\
-      &\Rightarrow z \sim N(0,1)
-  \end{align}
+\begin{align}
+  x \sim N(\mu, \sigma^2) &\Rightarrow z \sim N\left(\frac{\mu-\mu}{\sigma}, \left(\frac{1}{\sigma}\right)^2 \sigma^2\right) \\
+    &\Rightarrow z \sim N(0,1)
+\end{align}
 The standard normal distribution is so useful that we have special symbol for
 its PDF:
-  $$\phi(a) = \frac{1}{\sqrt{2\pi}} e^{-\frac{a^2}{2}}$$
+\begin{align}
+  \phi(a) = \frac{1}{\sqrt{2\pi}} e^{-\frac{a^2}{2}}
+\end{align}
 and its CDF:
-  $$\Phi(a) = \int_{-\infty}^a \phi(b)db$$
+\begin{align}
+  \Phi(a) = \int_{-\infty}^a \phi(b)db
+\end{align}
 $\phi$ is the lower-case Greek letter *phi*, and $\Phi$ is the upper-case *Phi*.
 
 We can take advantage of standardization to express the CDF of any normal
 random variable in terms of the standard normal CDF. That is, suppose that:
-  $$x \sim N(\mu, \sigma^2)$$
+\begin{align}
+  x \sim N(\mu, \sigma^2)
+\end{align}
 Then we can prove that its CDF is:
-  \begin{align}
-    F_x(a) &= \Phi\left(\frac{a-\mu}{\sigma}\right)
-  \end{align}
+\begin{align}
+  F_x(a) &= \Phi\left(\frac{a-\mu}{\sigma}\right)
+\end{align}
 The standard normal CDF is available as a built-in function in every statistical
 package including Excel and R, so we can use this result to calculate the CDF
 for any normally distributed random variable.
@@ -618,19 +681,25 @@ The result that any normal random variable $x \sim N(\mu,\sigma^2)$ has CDF
 $\Phi\left(\frac{a-\mu}{\sigma}\right)$ can be proved as follows.
 
 First, define:
-  $$z = \frac{x - \mu}{\sigma}$$
+\begin{align}
+  z = \frac{x - \mu}{\sigma}
+\end{align}
 Since $z$ is a linear function of $x$, it is also normally distributed:
-  $$z \sim N\left(\frac{\mu-\mu}{\sigma}, 
-                  \left(\frac{1}{\sigma}\right)^2 \sigma^2\right)$$
+\begin{align}
+  z \sim N\left(\frac{\mu-\mu}{\sigma}, 
+                  \left(\frac{1}{\sigma}\right)^2 \sigma^2\right)
+\end{align}
 or equivalently:
-  $$z \sim N(0,1)$$
+\begin{align}
+  z \sim N(0,1)
+\end{align}
 Then the CDF of $x$ is:
-  \begin{align}
-    F_x(a) &= \Pr\left(x \leq a\right) \\
-      &= \Pr\left( \frac{x-\mu}{\sigma} \leq \frac{a-\mu}{\sigma}\right)\\
-      &= \Pr\left( z \leq \frac{a-\mu}{\sigma}\right) \\ 
-      &= \Phi\left(\frac{a-\mu}{\sigma}\right)
-  \end{align}
+\begin{align}
+  F_x(a) &= \Pr\left(x \leq a\right) \\
+    &= \Pr\left( \frac{x-\mu}{\sigma} \leq \frac{a-\mu}{\sigma}\right)\\
+    &= \Pr\left( z \leq \frac{a-\mu}{\sigma}\right) \\ 
+    &= \Phi\left(\frac{a-\mu}{\sigma}\right)
+\end{align}
 :::
 
 ## Multiple random variables
@@ -648,7 +717,9 @@ variables is conceptually straightforward but will be skipped.
 Let $x$ and $y$ be two random variables defined in terms of the same underlying
 random outcome. Their ***joint probability distribution*** assigns a value to
 all joint probabilities of the form:
-  $$\Pr(x \in A \cap y \in B)$$
+\begin{align}
+  \Pr(x \in A \cap y \in B)
+\end{align}
 for any sets $A, B \subset \mathbb{R}$.
 
 The joint distribution is the key to talking about $x$, $y$ and how they are
@@ -662,6 +733,14 @@ independence - can be defined in terms of the joint distribution.
 The scatter plots in Figure \@ref(fig:JointIsNotMarginal) below depict
 simulation results for a pair of random variables $(x,y)$, with a different
 joint distribution in each graph.
+
+As you can see, the relationship between the two variables differs in each of
+these cases: graph A shows two seemingly unrelated variables, graph B shows two
+variables with a negative relationship, graph C shows two variables with a 
+strong positive relationship, and graph D shows two variables with a strong but
+nonlinear relationship. We will learn some terminology to describe these four
+relationships.
+:::
 
 ```{r JointIsNotMarginal, fig.cap = "*x and y are drawn from a different joint distribution in each graph.*"}
 simdata <- tibble(x = rnorm(100),
@@ -692,17 +771,12 @@ p4 <- ggplot(data = simdata, mapping = aes(x = x)) +
 plot_grid(p1,p2,p3,p4,ncol=2,nrow=2)
 ```
 
-As you can see, the relationship between the two variables differs in each of
-these cases: graph A shows two seemingly unrelated variables, graph B shows two
-variables with a negative relationship, graph C shows two variables with a 
-strong positive relationship, and graph D shows two variables with a strong but
-nonlinear relationship. We will learn some terminology to describe these four
-relationships.
-:::
 
 The joint distribution of any two *discrete* random random variables can be fully
 described by their ***joint PDF***:
-  $$f_{x,y}(a,b) = \Pr(x = a \cap y = b)$$
+\begin{align}
+  f_{x,y}(a,b) = \Pr(x = a \cap y = b)
+\end{align}
 The joint PDF can be calculated from the probability distribution of the
 underlying outcome.
 
@@ -758,32 +832,32 @@ We can construct the joint PDF by simply adding up over all possible outcomes.
 
 There is one outcome ($b=14$) in which both red and 14 win, and it has
 probability $1/37$:
-  \begin{align}
-    f_{Red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
-      &= \Pr(\omega \in \{14\}) = 1/37
-  \end{align}
-There are 17 outcomes in which red wins and 14 loses, and each has probability
-$1/37$:
-  \begin{align}
-    f_{Red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
-      &= \Pr\left(\omega \in \left\{
-        \begin{gathered}
+\begin{align}
+  f_{Red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
+    &= \Pr(\omega \in \{14\}) = 1/37
+\end{align}
+There are 17 outcomes (count them in the table above) in which red wins and 14 
+loses, and each has probability $1/37$:
+\begin{align}
+  f_{Red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
+    &= \Pr\left(\omega \in \left\{
+      \begin{gathered}
           1,3,5,7,9,12,16,18,19,21,\\
           23,25,27,30,32,34,36
-        \end{gathered}\right\}\right)  \\
-      &= 17/37
-  \end{align}
+      \end{gathered}\right\}\right)  \\
+    &= 17/37
+\end{align}
 There are 19 outcomes in which both red and 14 lose, and each has probability
 $1/37$:
-  \begin{align}
-    f_{Red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
-      &= \Pr\left(\omega \in \left\{
+\begin{align}
+  f_{Red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
+    &= \Pr\left(\omega \in \left\{
         \begin{gathered}
           0,2,4,6,7,10,11,13,15,17, \\
           20,22,24,26,28,31,33,35
         \end{gathered}\right\}\right)  \\
-      &= 19/37
-  \end{align}
+    &= 19/37
+\end{align}
 There are no other outcomes, so all other combinations have probability zero.
 
 Therefore, the joint PDF of $y_{Red}$ and $y_{14}$ is:
@@ -797,7 +871,7 @@ Therefore, the joint PDF of $y_{Red}$ and $y_{14}$ is:
 \end{align}
 Creating and using this table is something of a "brute force" approach: it is
 time consuming, but requires little thought and will always get the right
-answer. You may be able to figure out a quicker approach.
+answer. You may be able to figure out a quicker approach, which is also fine.
 :::
 
 ::: {.fyi data-latex=""}
@@ -805,18 +879,22 @@ answer. You may be able to figure out a quicker approach.
 
 The joint distribution of any two (discrete or continuous) random variables can
 be fully described by their joint CDF:
-$$F_{x,y}(a,b) = \Pr(x \leq a \cap y \leq b)$$
+\begin{align}
+  F_{x,y}(a,b) = \Pr(x \leq a \cap y \leq b)
+\end{align}
 
 Similarly, the joint distribution of any two continuous random variables can be
 fully described by their (continuous) joint PDF:
-$$f_{x,y}(a,b) = \frac{\partial F_{x,y}(a,b)}{\partial a \partial b}$$
+\begin{align}
+  f_{x,y}(a,b) = \frac{\partial F_{x,y}(a,b)}{\partial a \partial b}
+\end{align}
 :::
 
 ### Marginal distributions
 
 When two random variables have a joint distribution, we call the probability
 distribution of each individual random variable its **marginal distribution**.
-Both marginal distributions are part of the joint distribution:
+Both marginal distributions can be derived from the joint distribution:
 \begin{align}
   \Pr(x \in A) &= \Pr(x \in A \cap y \in \mathbb{R}) \\
   \Pr(y \in A) &= \Pr(x \in \mathbb{R} \cap y \in A)
@@ -954,7 +1032,9 @@ from their joint PDF:
 
 The ***conditional distribution*** of a random variable $y$ given another random
 variable $x$ assigns values to all conditional probabilities of the form:
-  $$\Pr(y \in A| x \in B) = \frac{\Pr(y \in A \cap x \in B)}{\Pr(x \in B)}$$
+\begin{align}
+  \Pr(y \in A| x \in B) = \frac{\Pr(y \in A \cap x \in B)}{\Pr(x \in B)}
+\end{align}
 Since a conditional probability is just the ratio of the joint probability 
 to the marginal probability, the conditional distribution can always be derived
 from the joint distribution.
@@ -1025,31 +1105,37 @@ A similar result applies to joint, conditional and marginal PDFs.
 **Other ways of deriving a conditional distribution**
 
 We can describe any conditional distribution with the conditional CDF:
-  $$F_{x|y}(a,b) = \Pr(x \leq a|y=b)$$
+\begin{align}
+  F_{x|y}(a,b) = \Pr(x \leq a|y=b)
+\end{align}
 We can also describe the conditional distribution of one continuous random
 variable given another with the continuous conditional PDF:
-  \begin{align}
-    f_{x|y}(a,b) &= \frac{\partial}{\partial a}F_{x|y}(a,b) \\
-      &= \frac{f_{x,y}(a,b)}{f_y(b)}
-  \end{align}
+\begin{align}
+  f_{x|y}(a,b) &= \frac{\partial}{\partial a}F_{x|y}(a,b) \\
+    &= \frac{f_{x,y}(a,b)}{f_y(b)}
+\end{align}
 :::
 
 
 ### Functions of multiple random variables {#multiple-functions}
 
 Suppose we have two random variables $x$ and $y$ and we use them to construct
-a third random variable $z = g(x,y)$.  What can we say about the probability
+a third random variable $z = h(x,y)$.  What can we say about the probability
 distribution of $z$?
 
 1. It has a well-defined probability distribution, PDF, CDF, expected value,
    etc. all of which can be derived from the joint distribution of $x$ and $y$.
 2. If $z$ is a *linear* function of $x$ and $y$, its expected value is a linear
    function of $E(x)$ and $E(y)$:
-    $$E(a + bx + cy) = a + bE(x) + cE(y)$$
+   \begin{align}
+     E(a + bx + cy) = a + bE(x) + cE(y)
+   \end{align}
 3. If $z$ is a nonlinear function of $x$ and $y$ we typically cannot express its
    expected value as a function of $E(x)$ and $E(y)$.  For example:
-   $$E(xy) \neq E(x)E(y)$$
-   $$E(x/y) \neq E(x)/E(y)$$
+   \begin{align}
+     E(xy) &\neq E(x)E(y) \\
+     E(x/y) &\neq E(x)/E(y)
+   \end{align}
 
 Note that these results are very similar to what we found earlier for a function
 of a single random variable.
@@ -1058,7 +1144,9 @@ of a single random variable.
 **Multiple bets in roulette**
 
 Suppose Al bets \$100 on red and \$10 on 14. His net profit will be:
-  $$y_{Al} = 100*y_{Red} + 10*y_{14}$$
+\begin{align}
+  y_{Al} = 100*y_{Red} + 10*y_{14}
+\end{align}
 which has expected value:
   \begin{align}
     E(y_{Al}) &= E(100 y_{Red} + 10 y_{14}) \\
@@ -1072,7 +1160,9 @@ game.
 ### Covariance {#population-covariance}
 
 The ***covariance*** of two random variables $x$ and $y$ is defined as:
-  $$\sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]$$
+\begin{align}
+  \sigma_{xy} = cov(x,y) = E[(x-E(x))*(y-E(y))]
+\end{align}
 The covariance can be interpreted as a measure of how $x$ and $y$ tend to move
 together.
 
@@ -1100,19 +1190,21 @@ covariance, and graph C shows a case with positive covariance.
 **Calculating the covariance from the joint PDF**
 
 The covariance of $y_{Red}$ and $y_{14}$ is:
-  \begin{align}
-    cov(y_{Red},y_{14}) &= \begin{aligned}[t]
-        & (1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
-        &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
-        &+ (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
-        \end{aligned} \\
-      &\approx 0.999 
-    \end{align}
+\begin{align}
+  cov(y_{Red},y_{14}) &= \begin{aligned}[t]
+      & (1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
+      &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
+      &+ (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
+      \end{aligned} \\
+    &\approx 0.999 
+\end{align}
 That is, the returns from a bet on red and a bet on 14 are positively related.
 :::
 
 As with the variance, we can derive an alternative formula for the covariance:
-  $$cov(x,y) = E(xy) - E(x)E(y)$$
+\begin{align}
+  cov(x,y) = E(xy) - E(x)E(y)
+\end{align}
 Again, this formula is often easier to calculate than using the original
 definition.
 
@@ -1130,11 +1222,11 @@ The expected value of $y_{Red}y_{14}$ is:
       &= 1
 \end{align}
 So the covariance is:
-  \begin{align}
-    cov(y_{Red},y_{14}) &= E(y_{Red}y_{14}) - E(y_{Red})E(y_{14}) \\
-      &= 1 - (-0.027)*(-0.027) \\
-      &\approx 0.999 
-    \end{align}
+\begin{align}
+  cov(y_{Red},y_{14}) &= E(y_{Red}y_{14}) - E(y_{Red})E(y_{14}) \\
+    &= 1 - (-0.027)*(-0.027) \\
+    &\approx 0.999 
+\end{align}
 which is the same result as we calculated earlier.
 :::
 
@@ -1142,12 +1234,12 @@ which is the same result as we calculated earlier.
 **Deriving the alternate formula**
 
 The alternate formula for the covariance can be derived as follows:
-  \begin{align}
-    cov(x,y) &= E((x-E(x))(y-E(y))) \\
-      &= E(xy - yE(x) - xE(y) + E(x)E(y)) \\
-      &= E(xy) - E(y)E(x) - E(x)E(y) + E(x)E(y)) \\
-      &= E(xy) - E(x)E(y)
-  \end{align}
+\begin{align}
+  cov(x,y) &= E((x-E(x))(y-E(y))) \\
+    &= E(xy - yE(x) - xE(y) + E(x)E(y)) \\
+    &= E(xy) - E(y)E(x) - E(x)E(y) + E(x)E(y)) \\
+    &= E(xy) - E(x)E(y)
+\end{align}
 :::
 
 The key to understanding the covariance is that it is the expected value of a
@@ -1155,16 +1247,24 @@ The key to understanding the covariance is that it is the expected value of a
 result it is easy to prove that:
 
 1. Order does not matter:
-   $$cov(x,y) = cov(y,x)$$
+   \begin{align}
+     cov(x,y) = cov(y,x)
+   \end{align}
    just like $xy = yx$.
 2. The variance is also a covariance:
-   $$cov(x,x) = var(x)$$
+   \begin{align}
+     cov(x,x) = var(x)
+   \end{align}
    just like $xx = x^2$.
 3. Covariances pass through sums:
-   $$cov(x,y+z) = cov(x,y) + cov(x,z)$$
+   \begin{align}
+     cov(x,y+z) = cov(x,y) + cov(x,z)
+   \end{align}
    just like $x(y+z) = xy + xz$.
 4. Constants can be factored out of covariances:
-   $$cov(x,a+by) = b \, cov(x,y)$$
+   \begin{align}
+     cov(x,a+by) = b \, cov(x,y)
+   \end{align}
    just like $x(a+by) = ax + bxy$
 
 These results can be combined in various ways.
@@ -1201,7 +1301,9 @@ $x$ and $y$, or the covariance of any two such functions.
 
 The ***correlation coefficient*** of two random variables $x$ and $y$ is defined
 as:
-  $$\rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$
+\begin{align}
+  \rho_{xy} = corr(x,y) = \frac{cov(x,y)}{\sqrt{var(x)var(y)}} = \frac{\sigma_{xy}}{\sigma_x\sigma_y}
+\end{align}
 Like the covariance, the correlation describes the strength of a (linear) 
 relationship between $x$ and $y$.  But it is re-scaled in a way that makes it
 more convenient for some purposes.
@@ -1210,12 +1312,12 @@ more convenient for some purposes.
 **Correlation in roulette**
 
 The correlation of $y_{Red}$ and $y_{14}$ is:
-  \begin{align}
-    corr(y_{Red},y_{14}) 
+\begin{align}
+  corr(y_{Red},y_{14}) 
     &= \frac{cov(y_{Red},y_{14})}{\sqrt{var(y_{Red})*var(y_{14})}} \\
      &\approx \frac{0.999}{\sqrt{1.0*34.1}} \\
      &\approx 0.17
-  \end{align}
+\end{align}
 :::
 
 The covariance and correlation always have the same sign since standard
@@ -1224,14 +1326,20 @@ correlation is scale-invariant.
 
 1. The correlation always lies between -1 and 1.
 2. The correlation is unchanged by any re-scaling or change in units.  That is:
-   $$corr(ax,by) = corr(x,y)$$
+   \begin{align}
+     corr(ax,by) = corr(x,y)
+   \end{align}
    for any positive^[More generally,
    $corr(ax+b,cy+d) = sign(a)\,sign(b)\,corr(x,y)$ for any (positive or
    negative) constants $a,b,c,d$.] constants $a$ and $b$.
 3. The correlation of $x$ with itself is always:
-   $$corr(x,x) = 1$$
+   \begin{align}
+     corr(x,x) = 1
+   \end{align}
    and the correlation of $x$ with $-x$ is always:
-   $$corr(x,-x) = -1$$
+   \begin{align}
+     corr(x,-x) = -1
+   \end{align}
 
 For example, suppose $x$ and $y$ are distances measured in kilometers and we
 convert them to miles. This change of units will affect $cov(x,y)$ but will
@@ -1252,22 +1360,28 @@ undefined (zero divided by zero).
 We say that the random variables $x$ and $y$ are ***independent*** if every
 event defined in terms of $x$ is independent of every event defined in terms of
 $y$.  That is:
-  $$\Pr(x \in A \cap y \in B) = \Pr(x \in A)\Pr(y \in B)$$
+\begin{align}
+  \Pr(x \in A \cap y \in B) = \Pr(x \in A)\Pr(y \in B)
+\end{align}
 for any sets $A, B \subset \mathbb{R}$.
 
 As we earlier found for independence of two events, independence of two random
 variables implies that their conditional and marginal distributions are the
 same:
-  $$\Pr(x \in A| y \in B) = \Pr(x \in A)$$
-  $$\Pr(y \in A| x \in B) = \Pr(y \in A)$$
+\begin{align}
+  \Pr(x \in A| y \in B) &= \Pr(x \in A) \\
+  \Pr(y \in A| x \in B) &= \Pr(y \in A)
+\end{align}
 Graph A in Figure \@ref(fig:JointIsNotMarginal) shows an example of
 what independent random variables look like in data: a cloud of unrelated points.
   
 Independence also means that the joint and conditional distributions can be
 derived from the marginal distributions.  When $x$ and $y$ are both discrete,
 this implication can be expressed in terms of PDFs:
-  $$f_{x,y}(a,b) = f_x(a)f_y(b)$$
-  $$f_{y|x}(a,b) = f_y(a)$$
+\begin{align}
+  f_{x,y}(a,b) &= f_x(a)f_y(b) \\
+  f_{y|x}(a,b) &= f_y(a)
+\end{align}
 As with independence of events, this will be very handy in simplifying the
 analysis.  But remember: independence is an *assumption* that we can only make
 when it's reasonable to do so.
@@ -1337,14 +1451,19 @@ review that example, we have:
 In addition, let $b = I(t=12)$ be an indicator of whether a bet on "Boxcars"
 wins. Since it is an indicator variable $b$ has the $Bernoulli(p)$ distribution
 with $p = 1/36$, so it has mean:
-  $$E(b) = p = 1/36$$
+\begin{align}
+  E(b) = p = 1/36 \nonumber
+\end{align}
 and variance:
-  $$var(b) = p(1-p) = 1/36*35/36 \approx 0.027 $$
+\begin{align}
+  var(b) = p(1-p) = 1/36*35/36 \approx 0.027 \nonumber
+\end{align}
 
 
 **GOAL #1: Interpret the CDF and PDF of a continuous random variable**
 
 1. The figure below shows the PDF and CDF of a random variable $x$.
+
    ```{r goal1}
    simdata <- tibble(a = seq(-3,40,len=200),
                      f = dchisq(a,df=4),
@@ -1473,9 +1592,9 @@ and variance:
 14. We can find the correlation from the covariance, but we can also find the
     covariance from the correlation.  For example, suppose we already know that
     \begin{align}
-      E(t) &= 7 \\
-      var(t) &\approx 5.83  \\
-      corr(b,t) &\approx 0.35
+      E(t) &= 7 \nonumber \\
+      var(t) &\approx 5.83  \nonumber \\
+      corr(b,t) &\approx 0.35 \nonumber
     \end{align}
     Using this information and the values of $E(b)$ and $var(b)$ implied by the
     fact that $b \sim Bernoulli(1/36)$

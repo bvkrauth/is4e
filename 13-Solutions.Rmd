@@ -89,19 +89,19 @@ This appendix provides solutions to all end-of-chapter practice problems.
    relevant conditions.
    a. Yo wins whenever $r+w = 11$.
       \begin{align}
-        Yo &= \{(5,6),(6,5)\}
+        YoWins &= \{(5,6),(6,5)\}
       \end{align}
    b. Snake eyes wins when $r+w = 2$:
       \begin{align}
-        SnakeEyes = \{(1,1)\}
+        SnakeEyesWins = \{(1,1)\}
       \end{align}
    c. Boxcars wins when $r+w = 12$:
       \begin{align}
-        Boxcars = \{(6,6)\}
+        BoxcarsWins = \{(6,6)\}
       \end{align}
    d. Field wins when $r+w \in \{2,3,4,9,10,11,12\}$:
       \begin{align}
-        Field &= \left\{\begin{aligned}
+        FieldWins &= \left\{\begin{aligned}
            & (1,1),(1,2),(1,3), \\
            & (2,1),(2,2), \\
            & (3,1),(3,6), \\
@@ -123,26 +123,26 @@ This appendix provides solutions to all end-of-chapter practice problems.
     probabilities of its elementary events.
     a. The probability a bet on Yo wins is:
        \begin{align}
-         \Pr(Yo) &= \Pr(\{(5,6),(6,5)\}) \\
+         \Pr(YoWins) &= \Pr(\{(5,6),(6,5)\}) \\
            &= \Pr(\{(5,6)\}) + \Pr(\{(6,5)\}) \\
            &= 2/36 \\
            &\approx 0.056
        \end{align}
     b. The probability a bet on Snake eyes wins is:
        \begin{align}
-         \Pr(SnakeEyes) &= \Pr(\{(1,1)\}) \\
+         \Pr(SnakeEyesWins) &= \Pr(\{(1,1)\}) \\
            &= 1/36 \\
            &\approx 0.028
        \end{align}
     c. The probability a bet on Boxcars wins is:
        \begin{align}
-         \Pr(Boxcars) &= \Pr(\{(6,6)\}) \\
+         \Pr(BoxcarsWins) &= \Pr(\{(6,6)\}) \\
            &= 1/36 \\
            &\approx 0.028
        \end{align}
     d. The probability a bet on Field wins is:
        \begin{align}
-         \Pr(Field) &= \Pr\left(\left\{\begin{aligned}
+         \Pr(FieldWins) &= \Pr\left(\left\{\begin{aligned}
              & (1,1),(1,2),(1,3), \\
              & (2,1),(2,2), \\
              & (3,1),(3,6), \\
@@ -158,14 +158,14 @@ This appendix provides solutions to all end-of-chapter practice problems.
     of the two events:
     a. The joint probability is:
        \begin{align}
-         \Pr(Yo \cap Boxcars)
+         \Pr(YoWins \cap BoxcarsWins)
             &= \Pr(\{(5,6),(6,5)\} \cap \{(6,6)\}) \\
             &= \Pr(\emptyset) \\
             &= 0
        \end{align}
     b. The joint probability is:
        \begin{align}
-         \Pr(Yo \cap Field)
+         \Pr(YoWins \cap FieldWins)
            &= \Pr\left(\{(5,6),(6,5)\} \cap \left\{\begin{aligned}
              & (1,1),(1,2),(1,3), \\
              & (2,1),(2,2), \\
@@ -180,7 +180,7 @@ This appendix provides solutions to all end-of-chapter practice problems.
        \end{align}
     c. The joint probability is:
        \begin{align}
-        \Pr(Yo \cap Boxcars^C)
+        \Pr(YoWins \cap BoxcarsWins^C)
             &= \Pr(\{(5,6),(6,5)\} \cap \{(6,6)\}^C) \\
             &= \Pr(\{(5,6),(6,5)\}) \\
             &= 2/36 \\
@@ -190,36 +190,36 @@ This appendix provides solutions to all end-of-chapter practice problems.
     the probability of the event we are conditioning on:
     a. The conditional probability is:
        \begin{align}
-         \Pr(Yo | Boxcars)
-            &= \frac{Pr(Yo \cap Boxcars)}{\Pr(Boxcars)} \\
+         \Pr(YoWins | BoxcarsWins)
+            &= \frac{Pr(YoWins \cap BoxcarsWins)}{\Pr(BoxcarsWins)} \\
             &= \frac{0}{1/36} \\
             &= 0
         \end{align}
     b. The conditional probability is:
        \begin{align}
-         \Pr(Yo | Field)
-            &= \frac{Pr(Yo \cap Field)}{\Pr(Field)} \\
+         \Pr(YoWins | FieldWins)
+            &= \frac{Pr(YoWins \cap FieldWins)}{\Pr(FieldWins)} \\
             &= \frac{2/36}{16/36} \\
             &= 0.125
         \end{align}
     c. The conditional probability is:
        \begin{align}
-         \Pr(Yo | Boxcars^C)
-            &= \frac{Pr(Yo \cap Boxcars^C)}{\Pr(Boxcars^C)} \\
+         \Pr(YoWins | BoxcarsWins^C)
+            &= \frac{Pr(YoWins \cap BoxcarsWins^C)}{\Pr(BoxcarsWins^C)} \\
             &= \frac{2/36}{1-1/36} \\
             &\approx 0.057
         \end{align}
     d. The conditional probability is:
        \begin{align}
-         \Pr(Field | Yo)
-            &= \frac{Pr(Field \cap Yo)}{\Pr(Yo)} \\
+         \Pr(FieldWins | YoWins)
+            &= \frac{Pr(FieldWins \cap YoWins)}{\Pr(YoWins)} \\
             &= \frac{2/36}{2/36} \\
             &= 1
         \end{align}
     e. The conditional probability is:
        \begin{align}
-         \Pr(Boxcars | Yo)
-            &= \frac{Pr(Boxcars \cap Yo)}{\Pr(Yo)} \\
+         \Pr(BoxcarsWins | YoWins)
+            &= \frac{Pr(BoxcarsWins \cap Yo)}{\Pr(Yo)} \\
             &= \frac{0}{2/36} \\
             &= 0
         \end{align}
@@ -227,7 +227,7 @@ This appendix provides solutions to all end-of-chapter practice problems.
 16. Statements (b) and (c) are true.
 17. The probability that Pass wins is:
     \begin{align*}
-      \Pr(Pass) &= \Pr(Pass|c = 2)\Pr(c = 2) + \cdots + \Pr(Pass|c = 12)\Pr(c = 12) \nonumber \\
+      \Pr(PassWins) &= \Pr(PassWins|c = 2)\Pr(c = 2) + \cdots + \Pr(PassWins|c = 12)\Pr(c = 12) \nonumber \\
           &= \begin{aligned}[t]
              & (0 \times 1/36) + (0 \times 2/36) + (3/9 \times 3/36) \\
              & + (4/10 \times 4/36) + (5/11 \times 5/36) + (1 \times 6/36) \\
@@ -244,10 +244,10 @@ This appendix provides solutions to all end-of-chapter practice problems.
     play Pass.
 18. The conditional return probabilities are:
     \begin{align*}
-      \Pr(Return|Body) &= \frac{\Pr(Body|Return)\Pr(Return)}{\Pr(Body)} \\
+      \Pr(Return|BodyHit) &= \frac{\Pr(BodyHit|Return)\Pr(Return)}{\Pr(BodyHit)} \\
         &= \frac{0.7 \times 0.8}{0.6} \\
         &\approx 0.93 \\
-      \Pr(Return|Engine) &= \frac{\Pr(Engine|Return)\Pr(Return)}{\Pr(Engine)} \\
+      \Pr(Return|EngineHit) &= \frac{\Pr(EngineHit|Return)\Pr(Return)}{\Pr(EngineHit)} \\
         &= \frac{0.1 \times 0.8}{0.6} \\
         &\approx 0.13
     \end{align*}
@@ -394,11 +394,13 @@ This appendix provides solutions to all end-of-chapter practice problems.
     \end{align}
 12. The standard deviation is just the square root of the variance.
     a. The standard deviation is:
-       $$sd(y) = \sqrt{var(y)} \approx \sqrt{0.0525} \approx 0.229$$
+       \begin{align}
+         sd(y) = \sqrt{var(y)} \approx \sqrt{0.0525} \approx 0.229
+       \end{align}
     b. The standard deviation is:
-      \begin{align}2
-        sd(r) &= \sqrt{var(r)} = \sqrt{2.92} \approx 1.71
-      \end{align}
+       \begin{align}
+         sd(r) &= \sqrt{var(r)} = \sqrt{2.92} \approx 1.71
+       \end{align}
 13. The key here is to apply the formulas for the expected value and variance 
     of a linear function of a random variable.
     a. The expected value is:
@@ -461,27 +463,41 @@ This appendix provides solutions to all end-of-chapter practice problems.
 16. The Bernoulli distribution describes any random variable (like $y$) that
     has a binary $\{0,1\}$ support.
     a. $y$ has the $Bernouili(p)$ distribution with $p=1/18$, or
-      $$y \sim Bernoulli(1/18)$$
+       \begin{align}
+         y \sim Bernoulli(1/18)
+       \end{align}
     b. In the Bernoulli distribution $E(y)=p =1/18$.
     c. In the Bernoulli distribution, $var(y) = p*(1-p) = 1/18 * 17/18 \approx 0.525$.
 17. The binomial distribution describes any random variable that describes the
     number of times an event happens in a fixed number of independent trials.
     a. $Y_{10}$ has the binomial distribution with $n=10$ and $p=1/18$.  We can
        also write that as:
-       $$Y_{10} \sim Binomial(10,1/18)$$
+       \begin{align}
+         Y_{10} \sim Binomial(10,1/18)
+       \end{align}
     b. For the Binomial distribution we have:
-       $$E(Y_{10}) = np = 10*1/18 \approx 0.556$$
+       \begin{align}
+         E(Y_{10}) = np = 10*1/18 \approx 0.556
+       \end{align}
     c. For the binomial distribution we have:
-       $$var(Y_{10}) = np(1-p) = 10*1/18*17/18 \approx 0.525$$
+       \begin{align}
+         var(Y_{10}) = np(1-p) = 10*1/18*17/18 \approx 0.525
+       \end{align}
     d. The Excel formula for $\Pr(Y_{10} = 0)$ would be
        `=BINOM.DIST(0,10,1/18,FALSE)` which produces the result
-       $$\Pr(Y_{10} = 0) \approx 0.565$$
+       \begin{align}
+         \Pr(Y_{10} = 0) \approx 0.565
+       \end{align}
     e. The Excel formula for $\Pr(Y_{10} \leq 10/16)$ would be
        `=BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result:
-        $$\Pr(Y_{10} \leq 10/16) \approx 0.565$$
+       \begin{align}
+         \Pr(Y_{10} \leq 10/16) \approx 0.565
+       \end{align}
     f. The Excel formula for $\Pr(Y_{10} > 10/16)$ would be
        `=1-BINOM.DIST(10/16,10,1/18,TRUE)` which produces the result:
-       $$\Pr(Y_{10} > 10/16) \approx 0.435$$
+       \begin{align}
+         \Pr(Y_{10} > 10/16) \approx 0.435
+       \end{align}
 
 ## **5** Basic data analysis with Excel {-#answers-basic-data-analysis}
 
@@ -637,7 +653,7 @@ This appendix provides solutions to all end-of-chapter practice problems.
            &= \Pr(t = 11 \cap t \neq 12) \\
            &= \Pr(t = 11)  \\
            &= f_t(11) \\
-           &= 1/18 \
+           &= 1/18 \\
            &\approx 0.056
        \end{align}
     d. The joint PDF is:
@@ -814,7 +830,9 @@ This appendix provides solutions to all end-of-chapter practice problems.
 1. Since we have a random sample, the joint PDF is just a product of the
    marginal PDFs.
    a. The support is just the set of all possible combinations: 
-      $$S_{D_n} = \{(1,1),(1,2),(2,1),(2,2)\}$$
+      \begin{align}
+        S_{D_n} = \{(1,1),(1,2),(2,1),(2,2)\}
+      \end{align}
    b. Since we have a random sample, the joint PDF is the product of the
       marginal PDFs: 
       \begin{align}
@@ -1170,15 +1188,21 @@ This appendix provides solutions to all end-of-chapter practice problems.
 [Click here to see the problems](#problems-inference)
 
 1. The null is:
-     $$H_0: \beta = 0$$
+   \begin{align}
+     H_0: \beta = 0
+   \end{align}
    and the alternative is:
-     $$H_w: \beta \neq 0$$
+   \begin{align}
+     H_w: \beta \neq 0
+   \end{align}
 2. Test statistics need to possess characteristics (a), (d), and (e).
 3. In this setting:
    a. $x_i$ must have a normal distribution.
    b. The asymptotic distribution is $N(0,1)$
 4. The expression is:
-    $$t = \frac{\bar{x}-\mu_1}{\hat{\sigma}_x/\sqrt{n}} + \frac{\mu_1-\mu_0}{\hat{\sigma}_x/\sqrt{n}}$$
+   \begin{align}
+     t = \frac{\bar{x}-\mu_1}{\hat{\sigma}_x/\sqrt{n}} + \frac{\mu_1-\mu_0}{\hat{\sigma}_x/\sqrt{n}}
+   \end{align}
 5. This question is about calculating the size given the critical values.
    a. The size is:
       \begin{align}

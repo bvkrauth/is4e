@@ -86,7 +86,7 @@ that is operating the game, including operators of casinos, lotteries, sports
 betting, and online games of chance. The house generally exists for one purpose:
 making money. As a result, every game and every bet the house offers is designed
 to make nearly-certain profits for the house and nearly-certain losses for the
-players. The house advantage is typically quite small - less than 5\% or in many
+players. The house advantage is typically quite small - less than 5\% in many
 popular casino games -  but it is *always* positive.
 
 Over the course of the semester, we will use the tools of probability and
@@ -130,7 +130,9 @@ to include every possible value for the outcome.
 
 The sample space for a game of roulette can be defined as the set of all numbers
 the ball can land on:
-   $$\Omega = \{0,1,2,\ldots,36\}$$
+  \begin{align}
+    \Omega = \{0,1,2,\ldots,36\}
+  \end{align}
 This sample space has $|\Omega| = 37$ elements.
 
 Alternatively, we could define the sample space for the game as the set of all
@@ -155,7 +157,9 @@ any variable name we like.
 These roulette events are well-defined for our sample space: 
 
 - Ball lands on 14:
-  $$\omega \in 14Wins = \{14\}$$
+  \begin{align}
+    \omega \in 14Wins = \{14\}
+  \end{align}
 - Ball lands on a red number:
   \begin{align}
     \omega \in RedWins &= \left\{\begin{aligned}
@@ -171,7 +175,9 @@ These roulette events are well-defined for our sample space:
       \end{aligned}\right\}
   \end{align}
 - Ball lands on one of the first 12 numbers:
-   $$\omega \in First12Wins = \{1,2,3,4,5,6,7,8,9,10,11,12\}$$
+  \begin{align}
+    \omega \in First12Wins = \{1,2,3,4,5,6,7,8,9,10,11,12\}
+  \end{align}
 
 You can see many other bets on the table such as "Even", "Odd", "1 to 18" and so
 on.  We can define an event for each of these bets, or for any other combination
@@ -246,12 +252,18 @@ All valid probability distributions must obey the following three conditions,
 which are sometimes called the ***axioms of probability***:
 
 1. ***Non-negativity***: The probability of an event cannot be negative:
-   $$\Pr(A) \geq 0$$
+  \begin{align}
+    \Pr(A) \geq 0
+  \end{align}
 2. ***Unit measure***: One of the outcomes in the sample space must happen:
-   $$\Pr(\Omega) = 1$$
+  \begin{align}
+    \Pr(\Omega) = 1
+  \end{align}
 3. ***Additivity***: For any two *disjoint* events $A$ and $B$, the probability
    that either $A$ or $B$ happens is the sum of their individual probabilities:
-   $$\Pr(A \cup B) = \Pr(A) + \Pr(B)$$
+   \begin{align}
+     \Pr(A \cup B) = \Pr(A) + \Pr(B)
+   \end{align}
 
 The first two axioms are straightforward.  The additivity axiom is a little
 trickier because we need to confirm that the events are disjoint before we
@@ -288,14 +300,23 @@ Let $A$ and $B$ be two (not necessarily disjoint) events.  Then our three axioms
 of probability imply several additional rules:
 
 - ***Upper bound rule***: The probability of an event cannot be greater than
-   one:
-   $$\Pr(A) \leq 1$$
+  one:
+  \begin{align}
+    \Pr(A) \leq 1
+  \end{align}
 - ***Complement rule***: The probability of an event *not* happening is:
-   $$\Pr(A^C) = 1 - \Pr(A)$$
+  \begin{align}
+    \Pr(A^C) = 1 - \Pr(A)
+  \end{align}
 - ***Empty event rule***: The probability of nothing happening is zero:
-   $$\Pr(\emptyset) = 0$$
-- ***Implied event rule***: Implied events have higher probability:
-   $$A \subset B \implies \Pr(A) \leq \Pr(B)$$
+  \begin{align}
+    \Pr(\emptyset) = 0
+  \end{align}
+- ***Implied event rule***: An event cannot have higher probability than another
+   event it implies:
+   \begin{align}
+     A \subset B \implies \Pr(A) \leq \Pr(B)
+   \end{align}
 - ***Subadditivity rule***: The probability of either $A$ or $B$ happening is:
   \begin{align}
     \Pr(A \cup B) &= \Pr(A) + \Pr(B) - \Pr(A \cap B) \\
@@ -319,32 +340,51 @@ We can use our derived probability rules in various ways:
   \end{align}
 - We know that 14 is a red number, so $14Wins$ implies $RedWins$.  We can use
   the implied event rule to determine that:
-  $$\Pr(14Wins) \leq \Pr(RedWins)$$
+  \begin{align}
+    \Pr(14Wins) \leq \Pr(RedWins)
+  \end{align}
 - We earlier determined that the events $RedWins$ and $14Wins$ are not
   disjoint, and so we could not apply the additivity axiom directly to find
   $\Pr(RedWins \cup 14Wins)$. However, we can use
   the subadditivity rule to find an upper bound on the probability:
-  $$\Pr(RedWins \cup 14Wins) \leq \Pr(RedWins) + \Pr(14Wins)$$
+  \begin{align}
+    \Pr(RedWins \cup 14Wins) \leq \Pr(RedWins) + \Pr(14Wins)
+  \end{align}
   or to calculate the exact probability:
-  $$\Pr(RedWins \cup 14Wins) = \Pr(RedWins) + \Pr(14Wins) - \Pr(RedWins \cap 14Wins)$$
+  \begin{align}
+    \Pr(RedWins \cup 14Wins) = \Pr(RedWins) + \Pr(14Wins) - \Pr(RedWins \cap 14Wins)
+  \end{align}
 :::
 
-
-### Calculating probabilities
+### Calculating probabilities {#calculating-probabilities}
 
 To calculate probabilities, we use information or assumptions about the random
 process, and then apply the axioms and derived rules.
 
 Since this is an introductory course, our sample space will usually contain a
 finite number of outcomes, as in our roulette example.  In that case,
-probability calculations can be made in two simple steps:
+probability calculations can be made in three simple steps:
 
-1. Find the probability of each elementary event.
-2. To find the probability of a specific event, just add up the probabilities
-   of its elementary events.
+1. List the outcomes (elementary events) that imply our event of interest.
+2. Calculate the probability of each outcome, based on information or
+   assumptions about the random process.
+3. Add up the probabilities.
 
-Finding the probability of each elementary event usually requires us to
-understand something about the random process itself.
+The reason this works is because the elementary events are disjoint, so we can
+apply the additivity axiom.
+
+We can summarize this procedure with a formula:
+\begin{align}
+  \Pr(A) &= \sum_{s \in A} \Pr(\omega = s)
+\end{align}
+or equivalently:
+\begin{align}
+  \Pr(A) &= \sum_{s \in \Omega} \Pr(\omega = s)I(s \in A)
+\end{align}
+If you are unfamiliar with the notation here, please refer to the sections on
+[summations](#summations) and [the indicator function](#the-indicator-function)
+in the Math Review Appendix. These formulas might look intimidating, but they
+are easy to implement in practice.
 
 ::: example
 **Elementary event probabilities for a fair roulette game**
@@ -357,23 +397,32 @@ Let's assume that the roulette wheel is "fair" in this sense. Note that fairness
 is just an assumption, and may not actually be true. Later on, we will use data
 and statistics to evaluate whether a roulette wheel is *actually* fair.
 
-Assuming each elementary event has the same probability, let that probability
-be:
-   $$p = \Pr(\omega = 0) = \Pr(\omega = 1) = \cdots = \Pr(\omega = 36)$$
-To find the correct value of $p$ we use the axioms of probability:
+The assumption of fairness implies that each elementary event has the same
+probability, so let that probability be:
+\begin{align}
+  p = \Pr(\omega = 0) = \Pr(\omega = 1) = \cdots = \Pr(\omega = 36)
+\end{align}
+We can then use the axioms of probability to find the correct value of $p$:
 
 - By the unit measure axiom, one of the outcomes will happen:
-   $$\Pr(\Omega) = 1$$
+  \begin{align}
+    \Pr(\Omega) = 1
+  \end{align}
 - Since the elementary events are disjoint, the additivity axiom implies that:
-   $$\underbrace{\Pr(\Omega))}_{1} = \underbrace{\Pr(\{0\})}_{p} + \underbrace{\Pr(\{1\})}_{p} + \cdots + \underbrace{\Pr(\{36\})}_{p}$$
+  \begin{align}
+    \underbrace{\Pr(\Omega))}_{1} = \underbrace{\Pr(\{0\})}_{p} + \underbrace{\Pr(\{1\})}_{p} + \cdots + \underbrace{\Pr(\{36\})}_{p}
+  \end{align}
 - Since there are 37 elementary events, we can rewrite this equation as:
-   $$1 = 37p$$
+  \begin{align}
+    1 = 37p
+  \end{align}
 - We can then solve for $p$ to get:
-   $$p = 1/37 \approx 0.027$$
+  \begin{align}
+    p = 1/37 \approx 0.027
+  \end{align}
 That is, each of the 37 elementary events have a probability of $1/37$ or about
 2.7\%.
 :::
-
 
 ::: {.warning data-latex=""}
 **Equal probability is an assumption**
@@ -390,22 +439,26 @@ and "Usain Bolt wins" - but it would be unreasonable to think that these two
 outcomes have equal probability.
 :::
 
-Once we have the probabilities of each elementary event, calculating any other
-probability is just a matter of adding up.
+Once we have the probabilities of each elementary event, any other probability
+can be calculated by simple addition.
 
 ::: example
 **Event probabilities for a fair roulette game**
 
 In the roulette example, the probability of any event $A$ is just the number of
 outcomes in $A$ times the probability of each outcome $1/37$:
-   $$ \Pr(A) = |A|*1/37$$
+\begin{align}
+  \Pr(A) = |A|*1/37
+\end{align}
 The notation $|A|$ just means the size of (number of elements in) the set $A$.
 
 For example:
-$$\Pr(\omega = 25) = |\{25\}|*1/37 = 1/37 \approx 0.027$$
-$$\Pr(RedWins) = |RedWins|*1/37 = 18/37 \approx 0.486$$
-$$\Pr(EvenWins) = |EvenWins|*1/37 = 18/37 \approx 0.486$$
-$$\Pr(First12Wins) = |First12Wins|*1/37 = 12/37 \approx 0.324$$
+\begin{align}
+  \Pr(\omega = 25) &= |\{25\}|*1/37 = 1/37 \approx 0.027 \\
+  \Pr(RedWins) &= |RedWins|*1/37 = 18/37 \approx 0.486 \\
+  \Pr(EvenWins) &= |EvenWins|*1/37 = 18/37 \approx 0.486 \\
+  \Pr(First12Wins) &= |First12Wins|*1/37 = 12/37 \approx 0.324
+\end{align}
 :::
 
 This procedure works when our sample space contains a finite number of outcomes.
@@ -461,7 +514,9 @@ dealing with this scenario.
 
 The ***joint probability*** of two events $A$ *and* $B$ is the probability that
 they *both* happen:
-  $$\Pr(A \cap B)$$
+\begin{align}
+  \Pr(A \cap B)
+\end{align}
 Remember that the intersection ($\cap$) of $A$ and $B$ is the set of all
 outcomes that are in both $A$ and $B$.
 
@@ -476,26 +531,26 @@ Suppose that Al has bet on Red, and Betty has bet on Even. They agree to get
 married tonight if they both win.  How likely is this to happen?
 
 The events "Al wins" and "Betty wins" can be defined:
-  \begin{align}
-    AlWins = RedWins &= \left\{\begin{aligned}
-      & 1,3,5,7,9,12,14,16,18, \\
-      & 19,21,23,25,27,30,32,34,36 \\
-      \end{aligned}\right\} \\
-    BettyWins = EvenWins &= \left\{\begin{aligned}
-      & 2,4,6,8,10,12,14,16,18, \\
-      & 20,22,24,26,28,30,32,34,36 \\
-      \end{aligned}\right\}
-  \end{align}
+\begin{align}
+  AlWins = RedWins &= \left\{\begin{aligned}
+    & 1,3,5,7,9,12,14,16,18, \\
+    & 19,21,23,25,27,30,32,34,36 \\
+    \end{aligned}\right\} \\
+  BettyWins = EvenWins &= \left\{\begin{aligned}
+    & 2,4,6,8,10,12,14,16,18, \\
+    & 20,22,24,26,28,30,32,34,36 \\
+    \end{aligned}\right\}
+\end{align}
 Note that zero doesn't count as an even number in roulette (if it did, the
 player would have an advantage over the house).
 
 This event "Al and Betty both win" is just the intersection of $AlWins$ and
 $BettyWins$ so this joint probability is:
-  \begin{align}
-    \Pr(AlWins \cap BettyWins) &= \Pr(\{12,14,16,18,30,32,34,36\}) \\
-      &= 8/37 \\
-      &\approx 0.216
-  \end{align}
+\begin{align}
+  \Pr(AlWins \cap BettyWins) &= \Pr(\{12,14,16,18,30,32,34,36\}) \\
+    &= 8/37 \\
+    &\approx 0.216
+\end{align}
 So there is a 21.6\% chance that Al and Betty will get married tonight (assuming
 they follow through on their plan, of course).
 :::
@@ -507,7 +562,9 @@ derived rules of probability described in Section \@ref(probabilities).
 
 The ***conditional probability*** of an event $A$ ***given*** another event $B$
 is defined as:
-   $$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)}$$
+\begin{align}
+  \Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)}
+\end{align}
 The conditional probability answers the question: if we already know that $B$ is
 true, what are the chances that $A$ is true?
 
@@ -555,15 +612,21 @@ significantly.
 
 We say that two events $A$ and $B$ are ***independent*** if their joint
 probability is just the two individual probabilities multiplied together:
-  $$\Pr(A \cap B) = \Pr(A)\Pr(B)$$
+\begin{align}
+  \Pr(A \cap B) = \Pr(A)\Pr(B)
+\end{align}
 We sometimes express independence using the notation $A \bot B$.
 
 The definition of independence is not very intuitive, but we can clarify it by
 doing a little math.  Consider two independent events $A$ and $B$ that have
 nonzero[^301] probability.  Then by the definition of independence:
-  $$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A)$$
+\begin{align}
+  \Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A)
+\end{align}
 By the same reasoning, independence of $A$ and $B$ implies that:
-  $$\Pr(B|A) = \Pr(B)$$
+\begin{align}
+  \Pr(B|A) = \Pr(B)
+\end{align}
 In other words, knowing that one of these events are true tells you nothing
 useful about whether the other the other event is true.
 
@@ -601,13 +664,13 @@ After 3 games:
 
 What is the probability of each of these events?  Since we can assume that each
 game's outcome is independent, this is an easy problem:
-  \begin{align}
-    \Pr(y = \$800) &= \Pr(RedWins_1 \cap RedWins_2 \cap RedWins_3) \\
+\begin{align}
+  \Pr(y = \$800) &= \Pr(RedWins_1 \cap RedWins_2 \cap RedWins_3) \\
       &= \Pr(RedWins_1) \times \Pr(RedWins_2) \times \Pr(RedWins_3) (\#eq:indep) \\
       &= (18/37) \times (18/37) \times (18/37) \approx 0.115 \\
-    \Pr(y = \$0) &= 1 - \Pr(y = \$800) \\
+  \Pr(y = \$0) &= 1 - \Pr(y = \$800) \\
       &\approx 0.885 \\
-  \end{align}
+\end{align}
 So we have an 11.5\% chance of winning big, and an 88.5\% chance of going broke.
 
 Very important: equation \@ref(eq:indep) only follows from the previous equation
@@ -625,9 +688,13 @@ specific reason to assume otherwise.
 
 Consider the events "Red wins" and "Even wins" within a single roulette game.
 We earlier showed that the unconditional probability that Red wins is:
-  $$\Pr(RedWins) = 18/37 \approx 0.486$$
+\begin{align}
+  \Pr(RedWins) = 18/37 \approx 0.486
+\end{align}
 and that the conditional probability that Red wins given that Even wins is:
-   $$\Pr(RedWins|EvenWins) = 8/18 \approx 0.444$$
+\begin{align}
+  \Pr(RedWins|EvenWins) = 8/18 \approx 0.444
+\end{align}
 Since $0.44 \neq 0.486$, these two events are *not* independent.
 :::
 
@@ -648,7 +715,9 @@ there are two important derived rules for conditional probabilities. The first
 is called the ***law of total probability***, and is a rule for determining
 unconditional probabilities from conditional probabilities:
 
-  $$\Pr(A) = \Pr(A|B)\Pr(B) + \Pr(A|B^c)\Pr(B^c)$$
+\begin{align}
+  \Pr(A) = \Pr(A|B)\Pr(B) + \Pr(A|B^c)\Pr(B^c)
+\end{align}
 
 The law of total probability allows us to create a set of scenarios, calculate
 probabilities under each scenario, and then add them up. It  is useful when we
@@ -668,12 +737,12 @@ you will not have a flush, but still have a win probability you estimate to be 3
 Given this information, what are your overall chances of winning?
 
 The answer can be calculated using the law of total probability:
-  \begin{align}
-    \Pr(Win) &= \Pr(Win|Hearts)\Pr(Hearts) 
-              + \Pr(Win|Hearts^c)\Pr(Hearts^c) \\
-      &= 0.9*0.25 + 0.3*0.75 \\
-      &= 0.45
-  \end{align}
+\begin{align}
+  \Pr(Win) &= \Pr(Win|Hearts)\Pr(Hearts) 
+            + \Pr(Win|Hearts^c)\Pr(Hearts^c) \\
+    &= 0.9*0.25 + 0.3*0.75 \\
+    &= 0.45
+\end{align}
 So you have a 45\% chance of winning. 
 :::
 
@@ -681,7 +750,9 @@ So you have a 45\% chance of winning.
 
 The second is ***Bayes' law***, which is a rule for determining conditional
 probabilities:
-  $$\Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}$$
+\begin{align}
+  \Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}
+\end{align}
 Bayes' law is particularly useful in evaluating evidence, because it allows us
 to restate one conditional probability in terms of another. That is, we are
 interested in whether a statement $A$ is true or false given our observation
@@ -689,7 +760,7 @@ $B$, and Bayes' law allows us to state this conditional probability in terms of
 the probability of observing $B$ when $A$ is true.
 
 ::: example
-**False positives in medical testing**
+**Bayes' law in medical testing**
 
 When someone is tested for a disease, the test comes back either "positive"
 (the person has the disease) or "negative" (the person does not have the
@@ -702,13 +773,19 @@ let the event $Sick$ mean that this patient actually has the disease.
 
 The *sensitivity* of the test is a sick patient's probability of testing
 positive:
-   $$\Pr(Positive|Sick) = sens$$
+\begin{align}
+  \Pr(Positive|Sick) = sens
+\end{align}
 the *specificity* of the test is a healthy patient's probability of testing
 negative:
-   $$\Pr(Positive^c|Sick^c) = spec$$
+\begin{align}
+  \Pr(Positive^c|Sick^c) = spec
+\end{align}
 and the *prevalence* of the disease is the probability that a given patient has
 it:
-   $$\Pr(Sick) = prev$$
+\begin{align}
+  \Pr(Sick) = prev
+\end{align}
 Suppose that a patient has tested positive.  Given this information, what is the
 probability that he has the disease, i.e. what is the value of
 $\Pr(Sick|Positive)$?
@@ -717,7 +794,9 @@ This is a classic probability question, as it makes use of Bayes' law and the
 law of total probability, and it has obvious practical importance.
 
 Since we want a conditional probability, we start by stating Bayes' law:
-   $$\Pr(Sick|Positive) = \frac{\Pr(Positive|Sick)\Pr(Sick)}{\Pr(Positive)}$$
+\begin{align}
+  \Pr(Sick|Positive) = \frac{\Pr(Positive|Sick)\Pr(Sick)}{\Pr(Positive)}
+\end{align}
 Bayes' law will allow us to calculate $\Pr(Sick|Positive)$ if we can find
 the components of the right side of this equation. 
 
@@ -726,26 +805,33 @@ to find $\Pr(Positive)$.
 
 Since $\Pr(Positive)$ is an unconditional probability, we can use the law of total
 probability:
-   $$\Pr(Positive) = \underbrace{\Pr(Positive|Sick)}_{sens}
-              \underbrace{\Pr(Sick)}_{prev} 
-            + \underbrace{\Pr(Positive|Sick^c)}_{1-spec}
-              \underbrace{\Pr(Sick^c)}_{1-prev}$$
+\begin{align}
+  \Pr(Positive) &= \underbrace{\Pr(Positive|Sick)}_{sens}
+    \underbrace{\Pr(Sick)}_{prev} 
+    + \underbrace{\Pr(Positive|Sick^c)}_{1-spec}
+      \underbrace{\Pr(Sick^c)}_{1-prev}
+\end{align}
 Plugging these results into our formula we get:
-   $$\Pr(Sick|Positive) = = \frac{sens*prev}{sens*prev + (1-spec)(1-prev)}$$
+\begin{align}
+  \Pr(Sick|Positive) = = \frac{sens*prev}{sens*prev + (1-spec)(1-prev)}
+\end{align}
 which is the result we need.
 
 Now, let's try this out with some numbers.  Suppose that the test is quite good
 in the sense that sick people always test positive $(sens=1)$ and healthy 
 people almost always test negative $(spec = 0.99)$.
 
-*Case #1*: Suppose the disease itself is fairly common ($d = 0.10$).  Then a patient
-who tests positive is likely to have the disease:
-  $$\Pr(Sick|Positive) = \frac{1*0.1}{1*0.1 + (1-0.99)*(1-0.1)} \approx 0.917$$
+*Case #1*: Suppose the disease itself is fairly common ($prev = 0.10$).  Then a
+patient who tests positive is likely to have the disease:
+\begin{align}
+  \Pr(Sick|Positive) = \frac{1*0.1}{1*0.1 + (1-0.99)*(1-0.1)} \approx 0.917
+\end{align}
    
-*Case #2*: Suppose the disease itself is quite rare ($d = 0.001$).  Then even a 
-patient who tests positive is unlikely to have the disease:
-   $$\Pr(Sick|Positive) = \frac{1*0.001}{1*0.001 + (1-0.99)*(1-0.001)} \approx 0.091$$
-
+*Case #2*: Suppose the disease itself is quite rare ($prev = 0.001$).  Then even
+a patient who tests positive is unlikely to have the disease:
+\begin{align}
+  \Pr(Sick|Positive) = \frac{1*0.001}{1*0.001 + (1-0.99)*(1-0.001)} \approx 0.091
+\end{align}
 In other words, the exact same test has a very different interpretation
 depending on the prevalence of the disease: when the disease is common, a
 positive test result means a 91.7% chance of having the disease, and when the
@@ -790,14 +876,14 @@ random outcomes that take the form of a number.
 
 Answers can be found in the [appendix](#answers-probability).
 
-Most of these practice problems will be based on the casino game of *craps*.
-Craps is played with a pair of 6-sided dice. 
+Most of the practice problems for this chapter are based on the casino game of [craps](https://en.wikipedia.org/wiki/Craps).
 
-Players take turns rolling the dice, and the player currently rolling the dice
-is called the "shooter".  There are various bets - pass, don't pass, come, don't
-come, field, place, buy - that can be placed on the results of multiple rolls of
-the dice.  These bets and their probability calculations can be quite complex,
-so we will focus on "single roll" bets.
+Craps is played with a pair of 6-sided dice. Players take turns rolling the
+dice, and the player currently rolling the dice is called the "shooter".  There
+are various bets - pass, don't pass, come, don't come, field, place, buy - that
+can be placed on the results of multiple rolls of the dice.  These bets and
+their probability calculations can be quite complex, so we will focus on
+a few "single roll" bets:
 
 - A bet on "Snake Eyes" wins if the total showing on the dice is 2.
 - A bet on "Yo" wins if the total showing on the dice is 11.
@@ -823,37 +909,37 @@ white die is showing 4.
    b. Find the cardinality of $\Omega$.
 
 2. Using enumeration, define the following events:
-   a. Yo wins.
-   b. Snake eyes wins.
-   c. Boxcars wins.
-   d. Field wins.
+   a. Yo wins ($YoWins$).
+   b. Snake eyes wins ($SnakeEyesWins$).
+   c. Boxcars wins ($BoxcarsWins$).
+   d. Field wins ($FieldWins$).
 
 **GOAL #2: Use set theory to define and manipulate events**
 
 3. Which of the following statements are true?
-   a. The events "Yo wins" and "Boxcars wins" are identical.
-   b. The events "Yo wins" and $(r,w) = (5,6)$ are identical.
-   c. The events "Boxcars wins" and $(r,w) = (6,6)$ are identical.
+   a. The events $YoWins$ and $BoxcarsWins$ are identical.
+   b. The events $YoWins$ and $(r,w) = (5,6)$ are identical.
+   c. The events $BoxcarsWins$ and $(r,w) = (6,6)$ are identical.
 
 4. Which of the following statements are true?
-   a. The events "Yo wins" and "Boxcars wins" are disjoint.
-   b. The events "Yo wins" and "Field wins" are disjoint.
-   c. The events "Yo wins" and "Boxcars loses" are disjoint.
-   d. The events "Yo wins" and "Field loses" are disjoint.
+   a. The events $YoWins$ and $BoxcarsWins$ are disjoint.
+   b. The events $YoWins$ and $FieldWins$ are disjoint.
+   c. The events $YoWins$ and $BoxcarsLoses$ are disjoint.
+   d. The events $YoWins$ and $FieldLoses$ are disjoint.
 
 5. Which of the following statements are true?
-   a. The event "Yo wins" implies the event "Boxcars wins."
-   b. The event "Yo wins" implies the event "Boxcars loses."
-   c. The event "Yo wins" implies the event "Field wins."
-   d. The event "Yo wins" implies the event "Field loses."
+   a. The event $YoWins$ implies the event $BoxcarsWins$.
+   b. The event $YoWins$ implies the event $BoxcarsLoses$.
+   c. The event $YoWins$ implies the event $FieldWins$.
+   d. The event $YoWins$ implies the event $FieldLoses$.
 
 6. Which of the following are elementary events?
-   a. Yo wins.
-   b. Yo loses.
-   c. Boxcars wins.
-   d. Boxcars loses.
-   e. Field wins.
-   f. Field loses.
+   a. $YoWins$.
+   b. $YoLoses$.
+   c. $BoxcarsWins$.
+   d. $BoxcarsLoses$.
+   e. $FieldWins$.
+   f. $FieldLoses$.
 
 **GOAL #3: Apply the axioms and derived rules of probability**
 
@@ -907,16 +993,16 @@ white die is showing 4.
 **GOAL #5: Calculate joint and conditional probabilities**
 
 13. Calculate each of the following joint probabilities:
-    a. $\Pr(\textrm{Yo wins} \cap \textrm{Boxcars wins})$
-    b. $\Pr(\textrm{Yo wins} \cap \textrm{Field wins})$
-    c. $\Pr(\textrm{Yo wins} \cap \textrm{Boxcars loses})$
+    a. $\Pr(YoWins \cap BoxcarsWins)$
+    b. $\Pr(YoWins \cap FieldWins)$
+    c. $\Pr(YoWins \cap BoxcarsLoses)$
 
 14. Calculate each of the following conditional probabilities:
-    a. $\Pr(\textrm{Yo wins} | \textrm{Boxcars wins})$
-    b. $\Pr(\textrm{Yo wins} | \textrm{Field wins})$
-    c. $\Pr(\textrm{Yo wins} | \textrm{Boxcars loses})$
-    d. $\Pr(\textrm{Field wins} | \textrm{Yo wins})$
-    e. $\Pr(\textrm{Boxcars wins} | \textrm{Yo wins})$
+    a. $\Pr(YoWins | BoxcarsWins)$
+    b. $\Pr(YoWins | FieldWins)$
+    c. $\Pr(YoWins | BoxcarsLoses)$
+    d. $\Pr(FieldWins | YoWins)$
+    e. $\Pr(BoxcarsWins | YoWins)$
 
 15. Which of the following pairs of events are independent?
     a. Yo wins and Boxcars wins.
@@ -948,43 +1034,53 @@ white die is showing 4.
     and the game continues until the shooter rolls either a 5 (Pass wins) or a
     7 (Pass loses).
 
-    Let $c$ be the value of the come out roll, and let the event $Pass$ include
-    every outcome in which Pass wins.  The table below reports both the
+    Let $c$ be the value of the come out roll, and let the event $PassWins$
+    include every outcome in which Pass wins.  The table below reports both the
     probability of each value of the come out roll, and the probability that
     pass wins for each value of the come out roll.
 
-    |Come out ($c$) | Probability ($\Pr(c)$) | Win probability $\Pr(Pass|c)$ |
-    |:--------------|:----------------------:|:-----------------------------:|
-    |  2            |   1/36                 |      0                        |
-    |  3            |   2/36                 |      0                        |
-    |  4            |   3/36                 |    3/9                        |
-    |  5            |   4/36                 |   4/10                        |
-    |  6            |   5/36                 |   5/11                        |
-    |  7            |   6/36                 |      1                        |
-    |  8            |   5/36                 |   5/11                        |
-    |  9            |   4/36                 |   4/10                        |
-    | 10            |   3/36                 |    3/9                        |
-    | 11            |   2/36                 |      1                        |
-    | 12            |   1/36                 |      0                        |
+    |Come out ($c$) | $\Pr(c)$ | Win probability $\Pr(PassWins|c)$ |
+    |:--------------|:--------:|:---------------------------------:|
+    |  2            |   1/36   |      0                            |
+    |  3            |   2/36   |      0                            |
+    |  4            |   3/36   |    3/9                            |
+    |  5            |   4/36   |   4/10                            |
+    |  6            |   5/36   |   5/11                            |
+    |  7            |   6/36   |      1                            |
+    |  8            |   5/36   |   5/11                            |
+    |  9            |   4/36   |   4/10                            |
+    | 10            |   3/36   |    3/9                            |
+    | 11            |   2/36   |      1                            |
+    | 12            |   1/36   |      0                            |
 
-    Use the Law of Total Probability to calculate $\Pr(Pass)$, the probability
-    that a bet on Pass wins.
+    Use the Law of Total Probability to calculate $\Pr(PassWins)$, the
+    probability that a bet on Pass wins.
 
 18. During World War II, the statistician Abraham Wald worked in a research
     group analyzing bullet damage on returning planes in order to assess risks.
-    Suppose that planes can be hit on the engine (event $Engine$) or on the
-    body (event $Body$)^[Note that it is possible for a plane to be hit in both
-    places, or to not be hit at all.  So these two events are not necessarily
-    disjoint, complements, or independent.] and that planes can either return
-    safely (event $Return$) or crash. In addition, suppose that:
+    Suppose that planes can be hit on the engine (event $EngineHit$) or on the
+    body (event $BodyHit$)^[Note that it is possible for a plane to be hit in
+    both places, or to not be hit at all.  So these two events are not
+    necessarily disjoint, complements, or independent.] and that planes can
+    either return safely (event $Return$) or crash (event $Return^C$). In
+    addition, suppose that:
 
     - A plane is equally likely to be hit in the engine or on the body:
-      $$\Pr(Engine) = \Pr(Body) = 0.6$$
+      \begin{align}
+        \Pr(EngineHit) = \Pr(BodyHit) = 0.6
+      \end{align}
     - Many of the returning planes show body damage:
-      $$\Pr(Body|Return) = 0.7$$
+      \begin{align}
+        \Pr(BodyHit|Return) = 0.7
+      \end{align}
     - Few of the returning planes show engine damage:
-      $$\Pr(Engine|Return) = 0.1$$
+      \begin{align}
+        \Pr(EngineHit|Return) = 0.1
+      \end{align}
     - Most of the planes return:
-      $$\Pr(Return) = 0.8$$
-
-    Calculate $\Pr(Return|Body)$ and $\Pr(Return|Engine)$.
+      \begin{align}
+        \Pr(Return) = 0.8
+      \end{align}
+    
+    Based on this information, calculate $\Pr(Return|BodyHit)$ and
+    $\Pr(Return|EngineHit)$.

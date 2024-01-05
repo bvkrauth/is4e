@@ -164,7 +164,8 @@ The data can be found in the file
 Open the file
 [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
 in Excel.  The file should look something like this:
-![Excel screenshot](bin/EmploymentData.png)
+
+![](bin/EmploymentData.png)
 
 Note that three of the key employment variables (**Population**, **Employed**,
 and **Unemployed**) are in the data set, but the other ones are not. We will
@@ -326,9 +327,11 @@ steps in cleaning data is rearranging it from a messy format to a tidy format.
 Open your working copy of the employment data file in Excel.  As you can see,
 this Excel workbook contains three worksheets:
 
-- The worksheet *Employment Nov 2020* is our main data table:
-   ![Excel screenshot](bin/EmploymentData.png) 
-   It is in tidy format:
+The worksheet *Employment Nov 2020* is our main data table:
+
+![Excel screenshot](bin/EmploymentData.png) 
+It is in tidy format:
+
   - There is a single rectangular table starting in cell A1.
   - Each row represents a Canadian province.
   - Canadian provinces are the unit of observation.
@@ -336,10 +339,13 @@ this Excel workbook contains three worksheets:
   - The top row shows brief but clear names for each variable.
   - The provinces are listed in alphabetical order, but the interpretation of
     the table would not change if they were listed in some other order.
-- The worksheet *Raw data* is the original data table as I downloaded it from
-  Statistics Canada:  
-   ![Excel screenshot](bin/RawEmploymentData.png)
-  It is messy in various ways:
+
+The worksheet *Raw data* is the original data table as I downloaded it from
+Statistics Canada:  
+
+![Excel screenshot](bin/RawEmploymentData.png)
+It is messy in various ways:
+
   - The table starts in cell A6 rather than cell A1.
   - Variables (Population, Labour Force, etc.) are in rows rather than columns.
   - Observations (the unit of observation is the province-month) are in both
@@ -348,15 +354,18 @@ this Excel workbook contains three worksheets:
     that says what province it describes, but we know that it describes Nova
     Scotia because it comes after row 16 (which does say it describes Nova
     Scotia).  As a result, the order of rows is very important.
-- The worksheet *Source* describes the provenance of the data:  
-   ![Excel screenshot](bin/Source.png)
-   It is not a data table, just a few lines of text.
-   - There is a text description of the data, provided by Statistics Canada.
-   - There are also two URLs linking to the original data source.  Copy and
-     paste either of them into your browser to see what the original data
-     source looks like.
-   - There should also be some information on the date of access, but there
-     currently isn't.
+
+The worksheet *Source* describes the provenance of the data:  
+
+![Excel screenshot](bin/Source.png)
+It is not a data table, just a few lines of text.
+
+  - There is a text description of the data, provided by Statistics Canada.
+  - There are also two URLs linking to the original data source.  Copy and
+    paste either of them into your browser to see what the original data
+    source looks like.
+  - There should also be some information on the date of access, but there
+    currently isn't.
 
 We will do all of our edits to the *Employment Nov 2020* worksheet, and will
 leave both *Raw data* and *Source* alone.
@@ -1406,12 +1415,12 @@ computer, for several reasons:
    - 2020/11/1
    - etc.
 - Conventions vary across cultures and organizations:
-  - in some places 11/1 means November 1 and in others it means January 11.
+  - In some places, 11/1 means November 1 and in others it means January 11.
 - We want to be able to sort and rank in time order rather than alphabetical
   order:
-  - January 10, 2020 should come before December 10, 2020.
+  - January 10, 2020 is before December 10, 2020 and after December 10, 2019.
 - We want to be able to add and subtract dates and times:
-  - January 4, 2021 comes 5 days after December 30, 2020.
+  - January 4, 2021 is 5 days after December 30, 2020.
   - 11:30 pm on December 31, 2020 is 45 minutes before 12:15 am on January 1,
     2021
 - We want to handle time zones, daylight savings time, leap years, and
@@ -1421,6 +1430,7 @@ Finally, we want to deal with these complexities in a way that is perfectly
 accurate when needed, but is simple in normal usage. As you might imagine,
 this is not easy. Each application has its own rules for
 handling dates and times, but there are some standards that have developed.
+
 Excel handles dates and times as follows:
 
 1. Dates are *stored* as the number of days elapsed since some base date or
@@ -1435,13 +1445,13 @@ Excel handles dates and times as follows:
 3. When you enter text into a cell that looks like a date, Excel does
    several things behind the scenes:
    - Excel guesses the date format you are using.
-   - Following that guess, Excel converts your text into its internal
-     storage form (days since base date).
+   - Following that guess, Excel converts your text into its storage format
+     (days since base date).
    - Excel changes the display format to what Excel thinks it should be.
      This format is based on your location settings, and may differ from
      what you have typed in.
 
-Most of the time, this system works seamlessly and you don't even notice it.
+This system works seamlessly most of the time.
 
 ::: example
 **How dates are stored and displayed**
@@ -1496,8 +1506,9 @@ or address these problems.
 ::: {.fyi data-latex=""}
 **Excel dates and genetics**
 
-Excel's handling of dates caused a significant unanticipated problem in the the
-field of human genetics, where it is a widely used tool.
+Excel is a widely used tool in the scientific field of human genetics, and its
+handling of dates caused a significant unanticipated problem in genetics 
+research.
 
 Each gene has a standard abbreviation like "TCEA1" or "CTCF" assigned by a
 scientific body called the HUGO Gene Nomenclature Committee (HGNC).
@@ -1537,7 +1548,7 @@ also a function `NOW(.)` that returns the current date and time.
 
 Deep down, every file on your computer is just a long sequence of binary
 numbers: zeros and ones.  In order to obtain any useful information from a file,
-we need to know its ***file format***. A file format is just a list of rules
+we need to know its ***file format***. A file format is just a set of rules
 for interpreting the sequence of zeros and ones, much like a language is a set
 of rules for interpreting the sounds that come out of people's mouths. You can
 often infer a file's format from its extension (the part of the file name after
@@ -1604,9 +1615,9 @@ text editors installed:
 The most commonly-used export format for Excel is called the
 ***comma-separated values*** or ***CSV*** file. CSV is a standardized text
 format that is very useful for representing tables of data. It is simple,
-platform-independent, human-readable, compact, and secure. Every major
+platform-independent, human-readable, compact, and (mostly) secure. Every major
 statistical analysis application can read CSV files, as can many other
-applcations.
+applications.
 
 You can save any worksheet in an Excel workbook as a CSV file.
 
@@ -1619,15 +1630,17 @@ To export the *Employment Nov 2020* worksheet to a CSV file:
 2. Select `File > Save As` from the menu, then select the button marked
    `Browse`.
 3. This will produce the `Save As` dialog box which looks something like this:
+
    ![Save As dialog box](bin/save-as-dialog-box.png)
-4. Click on the `Save as type` drop-down box, and select 
-   "CSV (Comma delimited)(*.csv)". 
-   - Note that this will change the file extension from `.xlsx` to `.csv`.
-5. Adjust the destination folder if you want, then select `Save`.
-6. You may get a warning that looks like this:
+   Click on the `Save as type` drop-down box, and select 
+   `CSV (Comma delimited)(*.csv)`. Note that this will change the file extension
+   from `.xlsx` to `.csv`.
+4. Adjust the destination folder if you want, then select `Save`.
+5. You may get a warning that looks like this:
+
    ![CSV warning message](bin/CsVWarningMessage.png)
    Select `OK`.
-8. Close Excel.
+6. Close Excel.
 
 You now have a CSV file.
 :::
@@ -1650,8 +1663,8 @@ To view the exact contents of the CSV file we have created, open it in a text
 editor.
 
 The file will look something like this:
-![CSV viewed as a text file](bin/CSVAsText.png)
 
+![CSV viewed as a text file](bin/CSVAsText.png)
 As you can see, the CSV file contains text based on the data in your
 worksheet. Each line is a row in the worksheet, and cells are delimited by
 commas.  A few other things to notice:
@@ -1675,8 +1688,8 @@ workbook. You can do this either by double-clicking on both files, or you can
 start Excel and use its menus to find and open the files.
 
 Your CSV file will look something like this:
-![CSV viewed in Excel](bin/CSVInExcel.png)
 
+![CSV viewed in Excel](bin/CSVInExcel.png)
 We can compare this worksheet to the original Excel workbook from which it was
 exported. They are similar, but there are several important differences:
 
@@ -1720,8 +1733,8 @@ To update your master version:
 
 1. Check your working copy for mistakes and incomplete work.
 
-   You can compare your working copy to my master version at
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
+   You can compare your working copy to my master version at  
+   [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
 
 2. Archive your current master version by renaming it and moving it to the
    `archives` sub-folder.

@@ -8,11 +8,11 @@ random variables. The next step is to bring these concepts together, and apply
 the theoretical tools of probability and random variables to statistics
 calculated from data.
 
-This chapter will develop the theory of mathematical statistics, which is one in
-which each statistic is treated as the outcome of a random data generating
-process.  We will also explore one of the most important uses of statistics: to
-***estimate*** or guess at the value at, some unknown feature of the data
-generating process.
+This chapter will develop the theory of mathematical statistics, which treats
+our data set and each statistic calculated from the data as the outcome of a
+random data generating process.  We will also explore one of the most important
+uses of statistics: to ***estimate*** or guess at the value at, some unknown
+feature of the data generating process.
 
 ::: {.goals data-latex=""}
 ***Chapter goals***
@@ -63,6 +63,9 @@ from data to infer or predict other quantities that are *not* in the data.
    ***causal*** or ***counterfactual*** inferences.
    - Counterfactual inferences are predictions about the data would have been
      different under other (counterfactual) circumstances.
+   - Economic fundamentals like supply and demand curves are primarily
+     counterfactual because they describe how much would have been bought or
+     sold at *each* price (not just the equilibrium price).
    - Causal inferences are inferences about the underlying mechanism that
      produced the data.
    - For example, labour economists are often interested in whether and how much
@@ -98,14 +101,15 @@ access to a data set of past results, we can use that data set to:
 
 1. *estimate* the win probability of various bets.
    - This application will be covered in the current chapter.
-2. *test* the hypothesis that the game is fair.
+2. *test* the claim that the game is fair.
    - This application will be covered in the chapter on
      [statistical inference](#statistical-inference)
 
 This approach will be particularly useful for games like poker or blackjack that
 are more complex and/or involve human decision making. The win probability in
 blackjack depends on the skill of the player, so the house advantage can vary
-across players.
+depending on who is playing, whether they are distracted or intoxicated, and
+various other human factors.
 :::
 
 ## Data and the data generating process
@@ -126,7 +130,9 @@ methods described in the chapter on
 Suppose we have a data set $D_n$ providing the result of $n$ independent games
 of roulette.  Let $b_i$ be the number the ball lands on in game $i$, and let
 $x_i$ be the result of a bet on red:
-  $$x_i = \begin{cases} 1 & \textrm{if Red wins game } i \\ 0 & \textrm{if Red loses game } i \\ \end{cases}$$
+\begin{align}
+  x_i = \begin{cases} 1 & \textrm{if Red wins game } i \\ 0 & \textrm{if Red loses game } i \\ \end{cases}
+\end{align}
 Suppose our data set has observations from two games ($n = 2$). Then
 $D_2 = (x_1,x_2)$ where $x_1$ is the result from the first game and $x_2$ is the
 result from the second game.  For example, suppose red loses the first game and
@@ -149,7 +155,9 @@ exact DGP is usually unknown, but we usually have some information about it.
 **The DGP for the roulette data**
 
 The support of our roulette data set includes four possible values:
-  $$S_D = \{(0,0), (0,1), (1,0), (1,1)\}$$
+\begin{align}
+  S_D = \{(0,0), (0,1), (1,0), (1,1)\}
+\end{align}
 The DGP is just the joint PDF of $D_n$, which we can calculate for each value in
 the support:
 \begin{align}
@@ -168,8 +176,9 @@ the support:
   f_D(a,b) &= 0 \qquad \textrm{otherwise}
 \end{align}
 where $p = \Pr(x_i = 1)$ is the unknown probability that a bet on red wins.
+:::
 
-While it is feasible to calculate the DGP for this very small data set, it
+While it is feasible to calculate the DGP for a very small data set, it
 quickly becomes impractical^[To get an idea what I mean by "impractical", the
 support of $D_n$ has $|S_x|^n$ possible values, where $|S_x|$ is the number of
 values in the support of $x_i$ and $n$ is the sample size. If our roulette data
@@ -179,7 +188,6 @@ $2^{100} \approx 1.3 \times 10^30$ (that's a one followed by 30 zeros) different
 combinations.] to do so as the number of observations increase. Fortunately, we
 don't usually need to calculate the DGP.  We just need to know that it *could*
 be calculated.
-:::
 
 ### Simple random sampling
 
@@ -188,7 +196,8 @@ In most applications, we can simplify the DGP by assuming that $D_n$ is
 ***simple random sample*** from a large ***population***. A simple random sample
 has two features:
 
-1. The observations are **independent**: Each $x_i$ is independent of the others.
+1. The observations are **independent**: Each $x_i$ is an independent random
+   variable.
 2. The observations are **identically distributed**: Each $x_i$ has the same
    (unknown) marginal distribution.
 
@@ -205,7 +214,7 @@ obvious, but what does it mean to say we have a "random sample" from a
      select cases from a list.
 3. Collect data from every case in our sample.
 
-It will turn out that a moderately-sized random sample provides surprisingly
+It turns out that a moderately-sized random sample provides surprisingly
 accurate information on the underlying population.
 
 [^602]: As a technical matter, the assumption of independence requires
@@ -224,7 +233,9 @@ Therefore, this data set satisfies the criteria for a simple random sample.
 :::
 
 The joint PDF of a simple random sample can be written:
-  $$\Pr(D_n = (a_1,a_2,\ldots,a_n)) = f_x(a_1)f_x(a_2)\ldots f_x(a_n)$$
+\begin{align}
+  \Pr(D_n = (a_1,a_2,\ldots,a_n)) = f_x(a_1)f_x(a_2)\ldots f_x(a_n)
+\end{align}
 where $f_x(a) = \Pr(x_i = a)$ is just the marginal PDF of a single observation.
 Independence allows us to write the joint PDF as the product of the marginal
 PDFs for each observation, and identical distribution allows us to use the same
@@ -466,7 +477,9 @@ other letters to talk about specific statistics.
 **Roulette wins**
 
 In our two-observation roulette data, the total number of wins is:
-  $$R = x_1 + x_2$$
+\begin{align}
+  R = x_1 + x_2
+\end{align}
 Since this is a number calculated from our data, it is a statistic.
 
 Since the observations are independent draws from the $Bernoulli(p)$
@@ -483,11 +496,17 @@ reproduced below for convenience:
 - The ***count*** or ***sample size*** is just the number of valid observations
   in the data ($n$).
 - The ***sample average*** is:
-  $$\bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$$
+  \begin{align}
+    \bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i
+  \end{align}
 - The ***sample variance*** is:
-  $$sd_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$$
+  \begin{align}
+    sd_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2
+  \end{align}
 - The ***sample standard deviation*** is:
-  $$sd_x = \sqrt{sd_x^2}$$
+  \begin{align}
+    sd_x = \sqrt{sd_x^2}
+  \end{align}
   Note: The conventional notation for the sample standard deviation is 
   $s_x$; I am using $sd_x$ because I am already using $s$ to represent
   a general statistic.
@@ -509,10 +528,14 @@ Given a particular bin, we can define:
 
 - The ***sample frequency*** or ***relative sample frequency*** of bin $B$ is
   the proportion of cases in which $x_i$ is in $B$:
-  $$\hat{f}_B = \frac{1}{n} \sum_{i=1}^n I(x_i \in B)$$
+  \begin{align}
+    \hat{f}_B = \frac{1}{n} \sum_{i=1}^n I(x_i \in B)
+  \end{align}
 - The ***absolute sample frequency*** of bin $B$ is the *number* of cases in
   which $x_i$ is in $B$:
-  $$n \hat{f}_B = \sum_{i=1}^n I(x_i \in B)$$
+  \begin{align}
+    n \hat{f}_B = \sum_{i=1}^n I(x_i \in B)
+  \end{align}
 
 We can then construct each cell in a frequency table by choosing the appropriate
 bin. 
@@ -526,9 +549,10 @@ distribution that can be derived from the DGP.
 ::: example
 **The sampling distribution of the sample average in the roulette data**
 
-Returning to our two-observation roulette data, the sample average
-is:
-  $$\bar{x} = \frac{1}{2} (x_1 + x_2)$$
+Returning to our two-observation roulette data, the sample average is:
+\begin{align}
+  \bar{x} = \frac{1}{2} (x_1 + x_2)
+\end{align}
 Since there are four possible values of $(x_1,x_2)$ we can determine the
 sampling distribution of the sample average by enumeration.
 
@@ -552,9 +576,11 @@ Therefore the sampling distribution of $\bar{x}$ can be described by the PDF:
 
 Unfortunately, most statistics typically have sampling distributions that are 
 quite difficult to calculate for the same reason the DGP is quite difficult to
-calculate: there are just too many possible values.
+calculate: there are just too many possible values. Again, the important part
+is to understand what a sampling distribution is, that every statistic has one,
+and that it depends on the (usually unknown) DGP.
 
-### The mean of a statistic {#the-mean-of-a-statistic}
+### The mean {#the-mean-of-a-statistic}
 
 If our statistic has a probability distribution, it (usually) has a mean and
 variance as well.
@@ -609,19 +635,22 @@ In the two-observation roulette data, the variance of the sample average is:
       &= \frac{var(x_i)}{2}
   \end{align}
 
-Notice that $var(\bar{x}_n) < var(x_i)$.
+Notice that $var(\bar{x}_n) < var(x_i)$. Averages are typically less variable
+than the thing they are averaging.
 :::
 
-In general, the variance of the sample average in a random sample of size $n$
-is:
-  $$var(\bar{x}_n) = \frac{\sigma_x^2}{n}$$
+In general, we can prove that the sample average in a random sample of size $n$
+has variance:
+\begin{align}
+  var(\bar{x}_n) = \frac{\sigma_x^2}{n}
+\end{align}
 where $\sigma_x^2 = var(x_i)$. Similarly the standard deviation of the sample
 average in a random sample of size $n$ is $\sigma_x/\sqrt{n}$.
 
 ## Estimation {#estimation}
 
-Statistics are often used to estimate, or guess the value of, some unknown 
-feature of the population or DGP.
+One of the most important uses of statistics is to estimate, or guess the value of, some unknown feature of the population or DGP. Anyone can make a guess,
+but using data to make accurate guesses requires some attention to the details.
 
 ### Parameters
 
@@ -646,7 +675,8 @@ But we do not know the true DGP, and so we do not know the value of $\mu$.
 Sometimes a single parameter completely describes the DGP:
 
 - In our roulette data set, the joint distribution of the data depends only on
-  the (known) sample size $n$ and the single parameter $p = \Pr(\textrm{Red wins})$.
+  the (known) sample size $n$ and the single (unknown) parameter
+  $p = \Pr(\textrm{Red wins})$.
   
 Sometimes a group of parameters completely describe the DGP:
 
@@ -701,7 +731,9 @@ specific to their purpose of representing the unknown parameter of interest.
 
 Let $\hat{\theta}_n$ be a statistic we are using as an estimator of some
 parameter of interest $\theta$.  We can define its ***sampling error*** as:
-  $$err(\hat{\theta}_n) = \hat{\theta}_n - \theta$$
+\begin{align}
+  err(\hat{\theta}_n) = \hat{\theta}_n - \theta
+\end{align}
 In principle, we want $\hat{\theta}_n$ to be a good estimator of $\theta$, i.e.,
 we want the sampling error to be as close to zero as possible.  
 
@@ -720,7 +752,8 @@ parameter, and a bad estimator of another parameter.
 
 ### Bias 
 
-In choosing an estimator, we can consider several criteria.
+Since any statistic can be used to estimate any parameter, we need to choose
+one. In choosing an estimator, we can consider several criteria.
 
 The first is the ***bias*** of the estimator, which is defined as its expected
 sampling error:
@@ -743,17 +776,17 @@ Consider a random sample of size $n$ on the random variable $x_i$ with unknown
 mean $\mu_x = E(x_i)$.
 
 The sample average is an unbiased estimator of $\mu_x$ since:
-  \begin{align}
-    bias(\bar{x}_n) &= E(\bar{x}_n) - \mu_x \\
-      &= \mu_x - \mu_x \\
-      &= 0
-  \end{align}
+\begin{align}
+  bias(\bar{x}_n) &= E(\bar{x}_n) - \mu_x \\
+    &= \mu_x - \mu_x \\
+    &= 0
+\end{align}
 The first observation is also an unbiased estimator of $\mu_x$ since:
-  \begin{align}
-    bias(x_1) &= E(x_1) - \mu_x \\
-      &= \mu_x - \mu_x \\
-      &= 0
-  \end{align}
+\begin{align}
+  bias(x_1) &= E(x_1) - \mu_x \\
+    &= \mu_x - \mu_x \\
+    &= 0
+\end{align}
 This example illustrates a general principle: there is rarely exactly one
 unbiased estimator.  There are either none, or many.
 :::
@@ -808,7 +841,9 @@ median, for reasons we will discuss soon.
 If there are multiple unbiased estimators available for a given parameter, we
 need to apply a second criterion to choose one.  A natural second criterion is
 the ***variance*** of the estimator:
-  $$var(\hat{\theta}_n) = E[(\hat{\theta}_n-(E(\hat{\theta}_n))^2]$$
+\begin{align}
+  var(\hat{\theta}_n) = E[(\hat{\theta}_n-(E(\hat{\theta}_n))^2]
+\end{align}
 Why do we care about the variance? A low variance means that $\hat{\theta}_n$
 is usually close to its own expected value.  If $\hat{\theta}_n$ is unbiased,
 then that means it is also close to $\theta$. So low variance is preferable to
@@ -829,9 +864,13 @@ $x_1$ are both unbiased estimators of $\mu_x$.  We can select the "better"
 estimator by applying the MVUE criterion.
 
 The variance of the sample average is:
-  $$var(\bar{x}_n) = \sigma_x^2/n$$
+\begin{align}
+  var(\bar{x}_n) = \sigma_x^2/n
+\end{align}
 and the variance of the first observation estimator is:
-  $$var(x_1) = \sigma_x^2$$
+\begin{align}
+  var(x_1) = \sigma_x^2
+\end{align}
 Since $\bar{x}_n$ has lower variance for all $n > 1$, it is the preferred
 estimator of these two unbiased estimators under the MVUE criterion.
 :::
@@ -878,7 +917,7 @@ We could increase the sample size and reduce the variance by including
 observations from people who are *almost* 35 years old. We have many
 options, including:
 
-  - Average earnings of the  10 33 year olds in our data.
+  - Average earnings of the  10 35 year olds in our data.
   - Average earnings of the  30 34-36 year olds in our data.
   - Average earnings of the 100 30-39 year olds in our data.
   - Average earnings of the 800  0-80 year olds in our data. 
@@ -908,9 +947,13 @@ with the lowest MSE.
 **The MSE of the sample mean and first observation estimators**
 
 The mean squared error of the sample average is:
-  $$MSE(\bar{x}_n) = var(\bar{x}_n) + [bias(\bar{x}_n)]^2 = \frac{\sigma_x^2}{n} + 0^2 = \frac{\sigma_x^2}{n}$$
+\begin{align}
+  MSE(\bar{x}_n) = var(\bar{x}_n) + [bias(\bar{x}_n)]^2 = \frac{\sigma_x^2}{n} + 0^2 = \frac{\sigma_x^2}{n}
+\end{align}
 and the mean squared error of the first observation estimator is:
-  $$MSE(x_1) = \sigma_x^2$$
+\begin{align}
+  MSE(x_1) = \sigma_x^2
+\end{align}
 The sample average is the preferred estimator by the MSE criterion, so in this
 case we get the same result as applying the MVUE criterion.
 :::
@@ -942,7 +985,8 @@ models and then selecting the model that performs best in cross-validation.
 
 Parameter estimates are typically reported along with their
 ***standard errors***.  The standard error of a statistic is an estimate of its
-standard deviation.
+standard deviation, so it gives a rough idea of how accurate the estimate is
+likely to be.
 
 The first step in constructing a standard error is to find the actual standard
 deviation of the statistic, in terms of (probably unknown) parameters of the
@@ -976,11 +1020,15 @@ Consider a random sample of size $n$ on the random variable $x_i$ with unknown
 mean $\mu_x = E(x_i)$ and unknown variance $\sigma_x^2 = var(x_i)$.
 
 The sample variance is an unbiased estimator of the population variance:
-  $$E(sd_x^2) = \sigma_x^2 = var(x_i)$$
+\begin{align}
+  E(sd_x^2) = \sigma_x^2 = var(x_i)
+\end{align}
 This is not hard to prove, but I will skip it for now.
 
 Unfortunately, the square root is not a linear function:
-  $$E(sd_x) = E(\sqrt{sd_x^2}) \neq \sqrt{E(sd_x^2)} = \sigma_x$$
+\begin{align}
+  E(sd_x) = E(\sqrt{sd_x^2}) \neq \sqrt{E(sd_x^2)} = \sigma_x
+\end{align}
 so the sample standard deviation is a biased estimator of the population
 standard deviation.  Even so, the bias is typically small and so this is the
 estimator we typically use.
@@ -993,7 +1041,9 @@ Finally, we substitute to get the formula for the standard error.
 
 The usual standard error for the sample average in a random sample of size $n$
 is:
-  $$se(\bar{x}_n) = \frac{sd_x}{\sqrt{n}}$$
+\begin{align}
+  se(\bar{x}_n) = \frac{sd_x}{\sqrt{n}}
+\end{align}
 where $sd_x$ is the sample standard deviation.
 :::
 
@@ -1054,7 +1104,9 @@ Let $s_n$ be some statistic calculated from $D_n$; we can also think
 of it as part of an infinite sequence $(s_1,s_2,\ldots)$.
 
 We say that $s_n$ ***converges in probability***  to some constant $c$ if:
-  $$\lim_{n \rightarrow \infty} \Pr( |s_n - c| < \epsilon) = 1$$
+\begin{align}
+  \lim_{n \rightarrow \infty} \Pr( |s_n - c| < \epsilon) = 1
+\end{align}
 for any positive number $\epsilon > 0$.
 
 Intuitively, what this means is that for a sufficiently large $n$ 
@@ -1062,7 +1114,9 @@ Intuitively, what this means is that for a sufficiently large $n$
 (the $\Pr(\cdot) = 1$ part) very close to $c$ (the $|s_n-c| < \epsilon$ part).
 
 We have a compact way of writing convergence in probability:
-  $$w_n \rightarrow^p c$$
+\begin{align}
+  w_n \rightarrow^p c
+\end{align}
 means that $w_n$ converges in probability to $c$. 
 
 Having defined our terms we can now state the law of large numbers.
@@ -1070,7 +1124,9 @@ Having defined our terms we can now state the law of large numbers.
 **LAW OF LARGE NUMBERS**: Let $\bar{x}_n$ be the sample average 
 from a random sample of size $n$ on the random variable $x_i$ with
 mean $E(x_i) = \mu_x$. Then:
-  $$\bar{x}_n \rightarrow^p \mu_x$$
+\begin{align}
+  \bar{x}_n \rightarrow^p \mu_x
+\end{align}
 :::
 
 One way of understanding the law of large numbers is to look at our earlier
@@ -1108,15 +1164,15 @@ payout.
 Sometimes insurance companies do lose money, and even go bankrupt. The usual
 cause of this is a big systemic event like a natural disaster, pandemic or
 financial crisis that affects everyone.  Here the independence needed for the
-LLN does not apply, and an insurance company can take substantial losses.  For
-example, several insurance companies in Florida went bankrupt in 2022 as a
-result of property damage claims from Hurricane Ian.
+LLN does not apply, and an insurance company can take losses that substantially 
+exceed its gains.  For example, several insurance companies in Florida went
+bankrupt in 2022 as a result of property damage claims from Hurricane Ian.
 
 Casinos can also face non-independent risks, for example in sports betting where
 many players are betting on the same outcome. Casinos typically address this by
-using different betting rules: they take a fixed percentage (sometimes called
-the "vigorish" or "vig") of the total amount bet, and pay the rest out to the
-winners.
+using different betting rules: rather than promising a fixed payout to winners,
+they take a fixed percentage (sometimes called the "vigorish" or "vig") of the
+total amount bet, and pay the rest out to the winners.
 :::
 
 ### Consistent estimation
@@ -1140,14 +1196,17 @@ For example:
   population quantile.
 
 Similar results can be found for most other commonly-used estimators and
-sampling schemes.
+sampling schemes. The reason for this is an advanced result called Slutsky's
+theorem.
 
 ::: {.fyi data-latex=""}
 **Consistency and Slutsky's theorem**
 
 More formally, we say that $\hat{\theta}_n$ is a consistent estimator of
 $\theta$ if:
-  $$\hat{\theta}_n \rightarrow^P \theta$$
+\begin{align}
+  \hat{\theta}_n \rightarrow^P \theta
+\end{align}
 As said earlier, most commonly-used estimators are consistent.
 
 The key to demonstrating this property is a result called
@@ -1156,7 +1215,9 @@ large numbers applies to a statistic $s_n$, it also applies to $g(s_n)$ for
 any continuous function $g(\cdot)$.
 
 **SLUTSKY THEOREM**: Let $g(\cdot)$ be a continuous function. Then:
-  $$s_n \rightarrow^p c \implies g(s_n) \rightarrow^p g(c)$$
+\begin{align}
+  s_n \rightarrow^p c \implies g(s_n) \rightarrow^p g(c)
+\end{align}
 
 Almost all commonly-used estimators can be written as a continuous function of
 one or more sample averages, and almost all parameters can be written as a
@@ -1373,9 +1434,13 @@ Answers can be found in the [appendix](#answers-statistics).
 14. Suppose you have a random sample of size $n=2$ on the random variable 
     $x$ with mean $E\left(x\right)=\mu$ and variance $var(x_i)=\sigma^2$. Two
     potential estimators of $\mu$ are the sample average:
-      $$\bar{x} = \frac{x_1 + x_2}{2}$$
+    \begin{align}
+      \bar{x} = \frac{x_1 + x_2}{2}
+    \end{align}
     and the last observation:
-     $$x_2$$
+    \begin{align}
+      x_2
+    \end{align}
     a. Are these estimators biased or unbiased?
     b. Find $var(\bar{x})$.
     c. Find $var(x_2)$.

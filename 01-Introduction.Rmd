@@ -79,9 +79,9 @@ an organization that has data and wants money.
 
 This course will not qualify you for those jobs - they typically require a
 graduate degree - but it is a first step in that direction, and there are
-many other good jobs where at least data analysis skills are a big asset.
+many other good jobs where data analysis skills are a big asset.
 So you should take this course as a lucrative investment opportunity, and not
-just a requirement for the economics major.
+just a requirement for your major.
 
 ::: {.economics data-latex=""}
 **Be the Mona Lisa**
@@ -91,18 +91,22 @@ are driven by supply and demand.  In the labour market, your skills and effort
 are the product, and you are the seller. Like all sellers, you want your
 product to be expensive.  This requires that you have skills that are both:
 
-- Useful (high demand)
+- Wanted by employers (high demand)
 - Uncommon (low supply)
 
-In other words, you need to be like the Mona Lisa. If your skills are useful but
-common (like water), or rare but useless (like my one-of-a-kind drawing of the
-Mona Lisa) your labour will sell at a low price.  If your skills are common
-and useless (like garbage), your labour may not sell at any price.
+For example, consider these four objects:
 
-|             |          High demand                       |                 Low demand                    |
-|-------------|:------------------------------------------:|:---------------------------------------------:|
-| Low supply  | <img src="bin/MonaLisa.png" width="100" /> | <img src="bin/BadMonaLisa.png" width="100" /> |
-| High supply | <img src="bin/Water.png" width="100" />    | <img src="bin/Garbage.png" width="200" />     |
+![The Mona Lisa](bin/MonaLisa.png){width=20%}
+![Water](bin/Water.png){width=20%}
+![Bad Mona Lisa](bin/BadMonaLisa.png){width=20%}
+![Garbage](bin/Garbage.png){width=30%}  
+Which one has a high price?
+
+To have a well-paid career, you need to be like the Mona Lisa. If your skills
+are useful but common (like water), or rare but useless (like my one-of-a-kind
+but not particularly good drawing of the Mona Lisa) your labour will sell at a
+low price.  If your skills are common and useless (like garbage), your labour
+may not sell at any price.
 
 The combined ability to analyze data in a sophisticated way, and to explain the
 results in written or oral presentation, is an extremely useful and uncommon

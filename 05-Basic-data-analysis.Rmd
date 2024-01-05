@@ -6,7 +6,8 @@ it in tables, and visualizing it in charts.
 
 This chapter will demonstrate the use of Excel to construct ***univariate***
 statistics and charts, i.e., statistics and charts that describe a single
-variable.
+variable. Later chapters will describe some ***multivariate*** methods
+that can be used to describe the relationship between two or more variables.
 
 ::: {.goals data-latex=""}
 **Chapter goals**
@@ -37,7 +38,9 @@ To prepare for this chapter, please review the chapter on
 
 ## Viewing large data files
 
-The first step in any data analysis is to literally look at the data.
+The first step in any data analysis is to literally look at the data. It is easy
+to miss obvious problems or surprising patterns if you just dive right into
+calculations.
 
 ::: example
 **Historical employment data for Canada**
@@ -80,19 +83,19 @@ includes the following variables:
   calculated as a proportion and displayed as a percentage.  Note that this
   variable is blank for the first 12 months of the data set.
 
-Note that this data set covers over 500 months, and is much larger than the
-single month of data we cleaned earlier.
+This data set covers over 500 months, and is much larger than the single month
+of data we cleaned earlier.
 :::
 
 Most data sets of interest are very large.  For example, surveys from
-Statistics Canada can have hundreds of observations and hundreds of thousands of
-variables, and companies and governments often work with transactions-level data
-that includes millions of observations. Humans are smart, but not smart enough
-to fully understand a large data set without some kind of simplification or
-"dimension reduction." Instead of trying to directly interpret thousands or
-millions of numbers, we will need to calculate and view a relatively small
-number of ***statistics*** based on the data.  A statistic is just a number
-calculated from data.
+Statistics Canada can have hundreds of variables and hundreds of thousands of
+observations, and companies and governments often work with transactions-level
+data that includes millions or even billions of observations. Humans are smart,
+but not smart enough to fully understand a large data set without some kind of
+simplification or "dimension reduction." Instead of trying to directly interpret
+thousands or millions of numbers, we will need to calculate and view a
+relatively small number of ***statistics*** based on the data.  A statistic is
+just a number calculated from data.
 
 But before we calculate statistics for our data set, we can use a few Excel
 tools - sorting, filtering and freezing - to view selected parts of our
@@ -189,13 +192,10 @@ freeze any number of rows and columns.
 
 ## Summary statistics
 
-We will start by calculating some commonly-used ***univariate*** statistics, 
+Next, we We will calculate some commonly-used ***univariate*** statistics, 
 which are statistics that describe a single variable in isolation. In Section
 \@ref(univariate-graphs-in-excel) we will construct some commonly-used
 univariate graphs.
-
-Multivariate statistics describe the relationships among multiple variables,
-and will be covered in later chapters.
 
 A table of ***summary statistics*** reports various univariate statistics for
 each variable in our data set.  For example, our table of summary statistics
@@ -229,12 +229,16 @@ valid (numeric) values for the variable.  It is calculated in Excel using the
 
 The ***sample average*** is a measure of central tendency in data, and is
 calculated:
-  $$\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$$
+\begin{align}
+  \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i
+\end{align}
 or in Excel using the `AVERAGE()` function.
 
 The ***sample standard deviation*** is a measure of variation in the data,
 and is calculated:
-  $$sd_x = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2}$$
+\begin{align}
+  \hat{sd}_x = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2}
+\end{align}
 or in Excel using the `STDEV.S()` function.
 
 The ***sample minimum*** is the lowest value observed in the data, and the
@@ -334,7 +338,9 @@ To fill in the statistics for column B:
    unemployment rate in cell B4.
    - There is another built-in Excel function called `STDEV.P()` that uses a
      slightly different formula for the standard deviation:
-     $$sd_x^p = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2}$$
+     \begin{align}
+       sd_x^p = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2}
+     \end{align}
      We will discuss the difference between these two statistics later.
 4. Use the `MIN()` function to report the minimum unemployment rate in cell B5.
 5. Use the `PERCENTILE.INC()` function to report the 10th percentile of the
@@ -421,21 +427,19 @@ To make the display formatting a little nicer:
    - Leave the counts as they are.
    - Display the unemployment rate, LFP rate and population growth rate in
      percentages, rounded to one decimal place.
-4. We now have a nice table of summary statistics:
-   ![*Table of summary statistics*](bin/SummaryStatisticsTable.png){width=50%}
-   
-   that we could put into a Word or PowerPoint document, and share with an
-   audience. Feel free to play around with colors, fonts, etc. to improve
-   upon this table.
+4. We now have a nice table of summary statistics that we could put into a Word
+   or PowerPoint document, and share with an audience:
+
+   ![*Table of summary statistics*](bin/SummaryStatisticsTable.png)
+   Feel free to play around with colors, fonts, etc. to improve upon this table.   
 5. Once you have the table you like, save your working copy.
 
 :::
 
 ## Frequency tables
 
-Another way of looking at a single variable is to construct a
-***frequency table***.  A frequency table describes how often 
-each value appears in the data.
+Another way of describing a single variable is a ***frequency table***.  A
+frequency table describes how often different values appear in the data.
 
 ### Simple frequency tables
 
@@ -671,8 +675,8 @@ Excel calls graphs ***charts***.  Excel charts have three main components:
 1. The ***data source***.  This is the table containing the data used to
    construct the graph.
    - The individual columns in the data source are called ***series***.
-2. The ***chart type***.  There are many chart types in Excel, but the ones we
-   will use are:
+2. The ***chart type***.  There are many chart types in Excel, but we will use
+   just a few:
    - ***Line*** graphs have categories on the horizontal axis, and the value of
      a variable/series on the vertical axis.  Values are depicted by a line
      connecting the values of the series at each category.
@@ -749,18 +753,18 @@ Tufte and studies how best to visually convey information. A full discussion of
 data visualization is beyond the scope of this course, but we can talk about and
 apply a few basic ideas:
 
-1. The information provided should be clear.
-2. All necessary information should be provided.
-3. Repeated, irrelevant or misleading elements (what Tufte calls "chartjunk")
-   should be removed.
-4. Related information should be visually "close" and required eye movement
-   should be minimized.
-5. Color and formatting should be used to simplify interpretation rather than to
-   complicate it.
-5. Accessibility should be taken into account.  For example:
+1. **Clarity**: Make all information provided clear to the reader.
+2. **Completeness**: Provide all necessary information.
+3. **Simplicity**: Remove all repeated, irrelevant or misleading elements
+    (what Tufte calls "chartjunk").
+4. **Closeness**: Minimize eye movement by keeping related information visually
+   "close."
+5. **Reinforce**: Use color and formatting to reinforce interpretation rather
+   than to complicate it.
+5. **Accessibility**: Take reader needs into account.  For example:
    - Color is not always available to readers: Some readers are color
      blind, projectors often get colors "wrong", or your document 
-     may get printed on a black-and-white printer.
+     may be printed on a black-and-white printer.
      - Always include non-color visual cues (for example, text labels) so that
        readers who cannot distinguish color (for whatever reason) can tell
        different series apart.
@@ -846,7 +850,10 @@ axis to start at 5%, but decided not to.
 
 There is no strict rule for whether to include zero, but we can consider the
 general principle described earlier: our graph should be informative and not
-misleading. 
+misleading. For example, setting the vertical axis to run from 0% to 100% (the
+theoretical range for the unemployment rate) would be misleading because it
+would flatten out the line graph and lead the reader to mistakenly conclude
+that the unemployment rate does not vary much.
 
 ::: {.fyi data-latex=""}
 **For further reading**
@@ -960,7 +967,7 @@ Our final graph looks like this:
 One of the keys to effective bar graph design is to keep the graph simple and
 clean, and to avoid "chartjunk."
 
-First, bar graphs should *always* start at zero.  The size of the bar is meant
+Bar graphs should *always* start at zero.  The size of the bar is meant
 to visually represent the value of the variable it is depicting. Using any
 origin other than zero can cause relative sizes to be misleading.
 

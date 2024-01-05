@@ -6,6 +6,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       tidy = FALSE,
                       collapse = TRUE)
 library("tidyverse")
+library("gridExtra")
 EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```
 
@@ -279,7 +280,8 @@ In contrast, R allows you to have three separate files or groups of files
      the data and another to analyze it.
    - The code for my own research projects is often split into 10 or more
      separate files, plus a "master" file that runs them all in the correct
-     order.
+     order. Running the full sequence takes a few hours, and doing this allows
+     me to work on one part of the project without having to re-run everything.
 3. Your **cleaned data** and **results**
    - Treat them as temporary output files.
    - You should be able to regenerate them from the source data at any time by
@@ -633,7 +635,7 @@ shortly.
 **Syntax for two ggplot graphs**
 
 In Section \@ref(introduction-to-ggplot), we used ggplot to create a line graph:
-```{r ggplotTimeSeries2}
+```{r ggplotTimeSeries3, eval=FALSE}
 ggplot(data = EmpData,
        mapping = aes(x = MonthYr, 
                      y = UnempPct)) + 
@@ -642,7 +644,7 @@ ggplot(data = EmpData,
 
 and a histogram:
 
-```{r ggplotHistogram2}
+```{r ggplotHistogram3, eval=FALSE}
 ggplot(data = EmpData,
        mapping = aes(x = UnempPct)) + 
   geom_histogram()
@@ -666,7 +668,20 @@ To review the syntax of these two commands:
   plot.
     - The `geom_histogram()` geometry says to produce a histogram.
     - The `geom_line()` geometry says to produce a line.
+The results of these two commands are depicted in Figure \@ref(fig:ggplotBasic)
+below.
 :::
+
+```{r ggplotBasic, echo=FALSE, fig.cap="*Some basic ggplot graphs*"}
+p1 <- ggplot(data = EmpData,
+             mapping = aes(x = MonthYr,
+                           y = UnempPct)) + 
+  geom_line() 
+p2 <- ggplot(data = EmpData,
+             mapping = aes(x = UnempPct)) + 
+  geom_histogram(bins=30)
+grid.arrange(p1,p2,ncol=2)
+```
 
 ### Modifying a graph
 
@@ -677,10 +692,6 @@ improve upon it in various ways.
 
 You can use `labs()` to add titles, subtitles, alt text, etc.  You can also use
 `xlab()` and `ylab()` to change the axis titles.
-
-:::example
-**Modifying titles and labels**
-
 
 ```{r ggplotTitles}
 ggplot(data = EmpData,
@@ -695,14 +706,10 @@ ggplot(data = EmpData,
   xlab("") +
   ylab("Unemployment rate, %")
 ```
-:::
 
 #### Color 
 
 You can change the color of any geometric element using the `col=` argument.
-
-::: example
-**Using colors**
 
 ```{r ggplotColor}
 ggplot(data = EmpData,
@@ -710,7 +717,6 @@ ggplot(data = EmpData,
            y = UnempPct)) + 
   geom_line(col = "darkorange")
 ```
-:::
 
 Colors can be given in ordinary English (or local language) words like "red"
 or "blue." There are hundreds of built in color names including "beige",
@@ -722,9 +728,6 @@ format.
 Some geometric elements, such as the bars in a histogram, also have a
 ***fill*** color.
 
-:::example
-**Setting the fill color***
-
 ```{r ggplotFill}
 ggplot(data = EmpData,
        aes(x = UnempPct)) + 
@@ -734,16 +737,13 @@ ggplot(data = EmpData,
 
 As you can see, the `col=` argument sets the color for the exterior of each bar,
 and the `fill=` argument sets the color for the interior.
-:::
 
 ### Adding graph elements 
 
 We can include multiple geometries in the same graph.
 
-::: example
-**Including multiple lines**
-
-We can include lines for both unemployment and labour force participation:
+For example, we can include lines in our time series graph for both unemployment
+and labour force participation:
 ```{r ggplotTwoLines}
 ggplot(data = EmpData,
        aes(x = MonthYr, 
@@ -761,17 +761,11 @@ A few things to note here:
   label to tell the reader which line is which.  We will need to fix that.
 - The vertical axis is labeled **UnempPct** which is the name of one of the
   variables but not the other. We will need to fix that.
-:::
 
 When including multiple elements, we may need to add information clarify what
 element describes.  We can add a legend, but it is better (and friendlier to
 the color-blind) to just label the lines. We can use the `geom_text` geometry
 to do this:
-
-:::example
-**Using `geom_text()` to add text**
-
-Label each line by adding a `geom_text()` geometry.
 
 ```{r ggplotAddText}
 ggplot(data = EmpData,
@@ -794,14 +788,9 @@ Note that we used color to reinforce the relationship between the label and
 text, and we used the `x=` and `y=` arguments to place the text in a particular
 location.  You will usually need to try out a few locations to get something
 that works.
-:::
 
 Finally, we can combine all of these elements.
 
-::: example
-**Fancy graphs**
-
-The graphs below combine all of the features described above:
 ```{r ggplotFancyHistogram}
 # Use RGB codes to exactly match the color scheme of this book
 AstroBlue <- "#002D62"
@@ -855,7 +844,6 @@ ggplot(data = EmpData,
   xlab("") +
   ylab("Percent")
 ```
-:::
 
 ## Visualization and prediction {#visualization-and-prediction}
 
@@ -878,13 +866,9 @@ vertical ($y$) axis represents the other variable, and each point represents an
 observation. In some sense, the scatter plot shows everything you can show about
 the relationship between the two variables, since it shows every observation. 
 
-Scatter plots can be created in R using the `geom_point()` geometry.
-
-::: example
-**Creating a scatter plot**
-
-The code below creates a scatter plot with the Candian unemployment rate on the
-horizontal axis, and the LFP rate on the vertical axis.
+Scatter plots can be created in R using the `geom_point()` geometry. For
+example, the code below creates a scatter plot with the Candian unemployment
+rate on the horizontal axis, and the LFP rate on the vertical axis.
 ```{r ScatterPlot}
 ggplot(data = EmpData,
        aes(x = UnempPct,
@@ -896,7 +880,6 @@ Note that the scatter plot is consistent with the negative relationship between
 the two variables indicated by the correlation we calculated earlier 
 (`r cor(EmpData$UnempRate,EmpData$LFPRate)`).  At the same time, it is clear
 that this negative relationship is not very strong.
-:::
 
 #### Jittering
 
@@ -904,9 +887,6 @@ If both of our variables are truly continuous, each point represents a single
 observation.  But if both variables are actually discrete, points can "stack"
 on top of each other.  In that case, the same point can represent multiple
 observations, leading to a misleading scatter plot.
-
-::: example
-**A scatter plot with discrete variables**
 
 For example, suppose we had rounded our unemployment and LFP data to the nearest
 percent:
@@ -928,15 +908,11 @@ ggplot(data = RoundedEmpData,
 
 As you can see from the graph, the scatter plot is misleading: there are 541
 observations in the data set represented by only 40 points.
-:::
 
 A common solution to this problem is to ***jitter*** the data by adding a small
 amount of random noise so that every observation is at least a little different
 and appears as a single point.  We can use the `geom_jitter()` geometry to
 create a jittered scatter plot.
-
-::: example
-**A "jittered" scatter plot with discrete variables**
 
 ```{r ScatterPlotJittered}
 ggplot(data = RoundedEmpData,
@@ -949,16 +925,12 @@ ggplot(data = RoundedEmpData,
 
 As you can see the jittered rounded data (small blue dots) more accurately
 reflects the original unrounded data than the rounded data (large orange dots).
-:::
 
 #### Using color as a third dimension
 
 We can use color to add a third dimension to the data.  That is, we can 
 color-code points based on a third variable by including it as part of the
 plot's aesthetic.
-
-:::example
-**Using color to add a third dimension**
 
 We can use color to represent a third variable:
 
@@ -977,14 +949,9 @@ ggplot(data = EmpData,
   geom_point()
 ```
 
-:::
-
 As we discussed earlier, you want to make sure your graph can be read by a
 reader who is color blind or is printing in black and white. So we can use 
 shapes in addition to color.
-
-::: example
-**Using shapes to add a third dimension**
 
 ```{r UsingShapes}
 ggplot(data = EmpData,
@@ -994,7 +961,6 @@ ggplot(data = EmpData,
            shape = Party)) + 
   geom_point()
 ```
-:::
 
 We might also want to change the color scheme, since the most common form of 
 color blindness is the inability to distinguish red and green.
@@ -1008,7 +974,7 @@ less satisfactory results.
 
 ### Binned averages
 
-We earlier used pivot table to construct a
+We earlier used an Excel Pivot Table to construct a
 [conditional average](#conditional-averages) of the variable $y_i$
 (**UnempRate** in the example) for each value of some discrete variable $x_i$
 (**PrimeMinister** in the example).
@@ -1022,9 +988,6 @@ This kind of plot is called a ***binned scatterplot***.
 Binned scatterplots are not difficult to do in R but the code is quite a bit
 more complex than you are used to.  As a result, I will not ask you to be able
 to produce binned scatter plots, I will only ask you to interpret them.  
-
-::: example
-**A binned scatter plot**
 
 Here is my binned scatter plot with 20 bins:
 ```{r BinnedScatterPlot, echo = TRUE}
@@ -1043,14 +1006,10 @@ ggplot(data = EmpData,
                    size = 0.5, 
                    geom = 'line')
 ```
-:::
 
 The number of bins is an important choice. More bins allows us to find more 
 complex patterns in the relationship.  But more bins also means fewer
 observations per bin, which means more noise (variance) in our estimates.
-
-::: example
-**How many bins?**
 
 The graph below includes the original binned scatter plot based on 20 bins
 (orange), and adds a line based on 4 bins (dark blue) and a line based on 100
@@ -1092,7 +1051,6 @@ ggplot(data = EmpData,
 
 As you can see, the binned scatterplot tends to be smooth when there 
 are only a few bins, and jagged when there are many bins.  
-:::
 
 If we think of binned scatterplots and conditional averages as predictions,
 there is a trade-off between bias (too few bins may lead us to miss important 
@@ -1111,9 +1069,6 @@ beyond the scope of this course.
 
 Fortunately, smoothing is easy to do in R using the `geom_smooth()` geometry.
 
-::: example
-**Using `geom_smooth()` to add a smooth curve**
-
 ```{r SmoothedRegression}
 ggplot(data = EmpData,
        aes(x = UnempRate,
@@ -1126,7 +1081,6 @@ Notice that by default, the graph includes both the fitted line and a 95\%
 confidence interval (the shaded area around the line).  Also note that the
 confidence interval is narrow in the middle (where there is a lot of data) and
 wide in the ends (where there is less data).
-:::
 
 ### Linear regression
 
@@ -1136,9 +1090,6 @@ regression calculates the straight line that fits the data best.
 
 You can include a linear regression line in your plot by adding the 
 `method=lm` argument to the `geom_smooth()` geometry.
-
-::: example
-**Using `geom_smooth()` to add a linear curve**
 
 ```{r LinearRegression}
 ggplot(data = EmpData,
@@ -1162,7 +1113,6 @@ ggplot(data = EmpData,
 As you can see, the two fits are quite similar for unemployment rates below
 12%, but diverge quite a bit above that level.  This is inevitable, because the
 smooth fit becomes steeper, but linear fit *can't* do that.
-:::
 
 Linear regression is much more restrictive than smoothing, but has several
 important advantages:
@@ -1176,7 +1126,6 @@ variables and a reasonably large data set.  The advantages of linear regression
 become overwhelming when you have more than two variables to work with. As a
 result, linear regression is the most important tool in applied econometrics,
 and you will spend much of your next econometrics course learning to use it.
-
 
 ## Chapter review {-#review-using-r}
 

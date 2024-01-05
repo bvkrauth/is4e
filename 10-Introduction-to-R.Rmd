@@ -53,8 +53,8 @@ you take it) ECON 334.
 ## A brief tour of RStudio
 
 Start the program RStudio. You should see something that looks like this:
-![RStudio screen shot](bin/Rstudio.png)
 
+![RStudio screen shot](bin/Rstudio.png)  
 You may wonder what the difference is between R and RStudio.
 
 R is a programming language designed for statistical analysis along with the
@@ -325,8 +325,7 @@ In the menu:
 I would also like to highlight a "feature" that is not at all useful and should
 be avoided. When you close R or RStudio, you will often get a warning message
 that looks something like this:
-
-![Save workspace dialog box](bin/RSaveWorkspace.png){width=30%}
+![*Save workspace dialog box*](bin/RSaveWorkspace.png){width=30%}
 
 If you choose "Save", R will save the current state of its memory and re-load
 it next time you start R. This may seem like it would be helpful, but it is
@@ -433,13 +432,13 @@ sqrt(4+5)
 This expression has a side effect.  It causes R to plot a histogram of 100
 random numbers from the $N(0,1)$ distribution.
 
-```{r SideEffectExample}
+```{r SideEffectExample1, eval = FALSE}
 hist(rnorm(100))
 ```
-
 Although we call it a "side effect", the side effect is often the main purpose
 of the expression.
 :::
+
 
 ### Variables and assignment
 
@@ -869,11 +868,10 @@ available online from the
 
 Before you can use any package, two steps must be followed:
 
-1. The package needs to be ***installed*** on your computer using the 
-   `install.packages()` function. 
+1. ***Install*** the package on your computer using the `install.packages()`
+   function. 
    - This only needs to be done *once* for each package.
-2. The package needs to be ***loaded*** into memory using the `library()` 
-   function.
+2. ***Load*** the package into memory using the `library()` function.
    - This needs to be done in *every* R session.
 
 Once the package is installed and loaded, you can use its functions and other
@@ -967,8 +965,7 @@ types:
 - `read_tsv()` for tab-delimited files.
 - `read_delim()` for files delimited using any other character.
 
-Base R function has a similar function called `read.csv()`, but `read_csv()` is
-preferable for various reasons.
+Base R has a similar function called `read.csv()`, but the Tidyverse function `read_csv()` is preferable for various reasons.
 :::
 
 ### Viewing a data table
@@ -1103,23 +1100,36 @@ a time series (line) graph and a histogram.  The variable representing the
 unemployment rate is called **UnempPct** and the variable representing the
 month/year is called **MonthYr**.
 
-To make the time series (line) graph, execute the following code:
-```{r ggplotTimeSeries}
+To make the time series (line) graph in Figure \@ref(fig:ggplotTimeSeries2)
+below, execute the following code:
+```{r ggplotTimeSeries1, eval=FALSE}
 ggplot(data = EmpData,
        mapping = aes(x = MonthYr, 
                      y = UnempPct)) + 
   geom_line() 
 ```
 
-
-To make the histogram, excute the following code:
-```{r ggplotHistogram}
+To make the histogram in Figure \@ref(fig:ggplotHistogram2) below, execute the 
+following code:
+```{r ggplotHistogram1, eval=FALSE}
 ggplot(data = EmpData,
        mapping = aes(x = UnempPct)) + 
   geom_histogram()
 ```
-
 :::
+
+```{r ggplotTimeSeries2, echo=FALSE, fig.cap="*A time series graph created in ggplot*"}
+ggplot(data = EmpData,
+       mapping = aes(x = MonthYr, 
+                     y = UnempPct)) + 
+  geom_line() 
+```
+
+```{r ggplotHistogram2, echo=FALSE, fig.cap="*A histogram created in ggplot*"}
+ggplot(data = EmpData,
+       mapping = aes(x = UnempPct)) + 
+  geom_histogram(bins=30)
+```
 
 Section \@ref(graphs-with-ggplot) in Chapter \@ref(using-r) will explore ggplot
 and its capabilities in greater detail.

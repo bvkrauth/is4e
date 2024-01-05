@@ -43,10 +43,10 @@ To prepare for this chapter, please review the chapter on
 and [basic data analysis with Excel](#basic-data-analysis-with-excel).
 Then create a project folder and download the following four data files:
 
-> [https://bookdown.org/bkrauth/IS4E/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)
-> [https://bookdown.org/bkrauth/IS4E/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
-> <a href="sampledata/CountryCodes.txt" download>https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt</a>
-> [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
+- [https://bookdown.org/bkrauth/IS4E/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)
+- [https://bookdown.org/bkrauth/IS4E/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
+- <a href="sampledata/CountryCodes.txt" download>https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt</a>
+- [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
 
 The third file may display in your browser rather than downloading like the other 
 files.  If that happens, you can right-click on the link above and select 
@@ -100,11 +100,12 @@ constructed to help with linking the GDP and tax data (more about this below).
 :::
 
 [^801]: I should mention that the Tax Foundation is not an entirely neutral 
-organization - it generally supports lower taxes - and so my use of their
+organization - it generally advocates lower taxes - and so my use of their
 data here should not be taken as expressing any particular opinion on their
-policy views. It is not unusual for useful data to come from politically-motivated 
-sources; for many years the best data on tobacco prices and taxes came from
-the Tobacco Institute, a tobacco industry lobbying group (https://en.wikipedia.org/wiki/Tobacco_Institute).    
+policy views. It is not unusual for useful data to come from
+non-neutral sources; for many years the best data on tobacco prices
+and taxes came from the Tobacco Institute, a tobacco industry lobbying group
+(https://en.wikipedia.org/wiki/Tobacco_Institute).    
 
 ## More on data files {#more-on-data-file-formats}
 
@@ -148,8 +149,8 @@ For example, Excel's original `.xls` files were binary files in a proprietary
 format whose details were only known only by Microsoft. Its current `.xlsx`
 files are (zipped) text files in an open format whose details are published
 [here](https://docs.microsoft.com/en-us/openspecs/office_file_formats/ms-offfflp/885c7947-17de-490b-840d-91231a031383). Microsoft did not move from proprietary
-to open formats just to be nice; their incentives changed as a result of 
-technological advances, and they responded by changing their behavior.
+to open formats just to be nice; technological progress changed their economic
+incentives, and they responded by changing their behavior.
 
 If you are interested in learning more about the economics of strategic
 interaction among business, you should consider taking a course in what
@@ -195,8 +196,8 @@ You can open fixed-width text files in Excel using the *Text Import Wizard*.
 
 Open the file [CountryCodes.txt](sampledata/CountryCodes.txt) in a text editor.
 It will look like this:
-   ![Fixed format file in Notepad](bin/FFinNotepad.png){width=50%} 
 
+![Fixed format file in Notepad](bin/FFinNotepad.png){width=50%}  
 This is a fixed format file in which the CountryName variable starts on the 1st
 character of each line and the CountryCode variable starts on the 36th
 character.
@@ -507,7 +508,8 @@ Since we need to match both country and year, we will need to use the
      that column contains the **pop** variable (`8`).
    - `Range_lookup` should be `FALSE`.
 4. Make the cell references absolute where needed, which will result in the
-   formula `=VLOOKUP(CONCAT($A2,"2019"),Data!$A$2:$H$12811,8,FALSE)`.
+   formula:  
+   `=VLOOKUP(CONCAT($A2,"2019"),Data!$A$2:$H$12811,8,FALSE)`.
 5. Copy/paste or fill the formula to the remaining cells in column K.
 
 We can also create another variable whose variable is the country's population
@@ -625,13 +627,13 @@ statistic for a subset of observations that satisfy a set of criteria:
 - `COUNTIFS()` calculates the *number* of observations meeting the criteria.
   - We used `COUNTIFS()` to construct a frequency table in Chapter
     \@ref(basic-data-analysis-with-excel).
-- `AVERAGEIFS()` calculate the *average* of a variable for those observations
+- `AVERAGEIFS()` calculates the *average* of a variable for those observations
   that meet the criteria.
-- `SUMIFS()` calculate the *sum* of a variable for those observations that meet
+- `SUMIFS()` calculates the *sum* of a variable for those observations that meet
   the criteria.
-- `MINIFS()` calculate the *minimum* of a variable for those observations that
+- `MINIFS()` calculates the *minimum* of a variable for those observations that
   meet the criteria.
-- `MAXIFS()` calculate the *maximum* of a variable for those observations that
+- `MAXIFS()` calculates the *maximum* of a variable for those observations that
   meet the criteria.
 
 These functions can all be used to construct summary statistics (as in Chapter
