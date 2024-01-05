@@ -659,7 +659,7 @@ field.
 ::: example
 **The law of total probability in poker**
 
-Suppose you are playing [Texas hold'em poker](https://en.wikipedia.org/wiki/Texas_hold_'em)
+Suppose you are playing [Texas hold'em poker](https://en.wikipedia.org/wiki/Texas_hold_%27em)
 with a few friends, and the hand has one card left to deal (the "river"). If
 the last card has a heart on it (event $Hearts$, 25\% probability) you will
 have a flush and win the hand with a probability you estimate to be 90\%.
