@@ -189,10 +189,14 @@ you did earlier.  Without reproducibility, you may not remember where you found
 the data, what you have done with it, or what it means.  The interested reader
 might also be your coworkers, your boss, or your clients.
 
+<p style="max-width: 50%; float: right;">
+![A simple workflow for version control](bin/VCWorkflow.png)
+*A simple workflow for version control.*</p>
 Reproducibility requires that we treat our data with care.  In particular, we
 treat the various things we do with our data as part of a repeated sequence
-of steps called a ***workflow***.  Your data analysis workflow should have
-three key features:
+of steps called a ***workflow***.
+
+Your data analysis workflow should have three key features:
 
 1. Document the ***provenance*** or original source for all data.
    - When downloading data files, document the original URL and date of access.
