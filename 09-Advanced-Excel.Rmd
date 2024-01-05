@@ -45,12 +45,13 @@ Then create a project folder and download the following four data files:
 
 - [https://bookdown.org/bkrauth/IS4E/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)
 - [https://bookdown.org/bkrauth/IS4E/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
-- <a href="sampledata/CountryCodes.txt" download>https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt</a>
 - [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
+- [https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
 
-The third file may display in your browser rather than downloading like the other 
-files.  If that happens, you can right-click on the link above and select 
-`Save link as` to save the file on your computer.
+Depending on your browser settings, the last file may display in your browser
+rather than downloading like the other  files.  If that happens, you can
+right-click on the link above and select  `Save link as` to save the file on
+your computer.
 
 ::: {.economics data-latex=""}
 **Data on long-run economic growth**

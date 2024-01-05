@@ -1525,7 +1525,7 @@ the chance of losing money becomes very close to 100%.
 :::
 
 The mean and variance of a binomial random variable are:
-\end{align}
+\begin{align}
   E(x) &= np \\
   var(x) &= np(1-p)
 \end{align}

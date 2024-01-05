@@ -40,7 +40,7 @@ elements cannot be repeated.
 
 We have several ways of defining or describing sets. The simplest is
 ***enumeration***, which means you just list the elements:
-\begin{align
+\begin{align}
   A &= \{1,2,3\} \\
   B &= \{Avocado, Banana\}
 \end{align}
@@ -480,9 +480,9 @@ The index set can be infinite:
 \end{align}
 The summation can be of any expression that depends on the index:
 \begin{align}
-  \sum_{i=1}^3 \ln(x_i) &= \ln(x_1) + \ln(x_2) + \ln(x_3) \\
+  \sum_{i=1}^3 \ln x_i &= \ln x_1 + \ln x_2 + \ln x_3 \\
   \sum_{j=1}^3 \beta^j &= \beta + \beta^2 + \beta^3
-\end{align}  
+\end{align}
 But the expression does not have to vary with the index:
 \begin{align}
   \sum_{i=1}^3 2x &= 2x + 2x + 2x = 6x \\
@@ -490,7 +490,8 @@ But the expression does not have to vary with the index:
 \end{align}
 We can use multiple summation operators in an expression:
 \begin{align}
-  \sum_{j=1}^2 \sum_{i=1}^2 x_iy_j = \sum_{j=1}^2 (x_1y_j + x_2y_j) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2
+  \sum_{j=1}^2 \sum_{i=1}^2 x_iy_j &= \sum_{j=1}^2 (x_1y_j + x_2y_j) \\
+    &= x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2
 \end{align}
 The summation operator looks fancy, but remember it is just a concise way
 of describing a sum. If you are ever struggling with understanding a summation,
