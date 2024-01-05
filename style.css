@@ -7,7 +7,7 @@ Light orange #F4911E
 
 /* -----------div tips------------- */
 
-  .goals, .fyi, .sfu, .economics, .note {
+  .goals, .fyi, .sfu, .economics, .warning, .note {
     padding: 1em;
     margin: 1em 0;
     padding-left: 100px;
@@ -22,6 +22,10 @@ Light orange #F4911E
 
 div.economics {
   background-image: url("bin/economics.png");
+}
+
+div.warning {
+  background-image: url("bin/Warning.png");
 }
 
 div.example {

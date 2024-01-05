@@ -7,7 +7,7 @@ into simple ones, combining data from multiple tables into a single table,
 modifying existing variables, and creating new variables.  In this course,
 we will do most of our data cleaning using Excel.
 
-This chapter will develop both both some principles of data cleaning and the
+This chapter will develop some principles of data cleaning as well as the
 basic Excel tools needed to implement them. The best way to learn data skills
 is by working on a real data project, so will also apply this knowledge by
 using Excel to clean a real data set.
@@ -57,7 +57,6 @@ Start Excel. Your screen should look something like this:
 
 When giving instructions, it is necessary to refer to various elements of
 Excel's user interface by name:
-
 ![Excel UI elements](bin/ExcelUIElements.png)
 
 - The ***menu bar*** is at the top of the screen:  
@@ -96,15 +95,16 @@ Excel's user interface by name:
 - Below the worksheet is a row of ***worksheet tabs***:  
   ![tabs](bin/Excel tabs.jpg)
   - Each tab corresponds to a worksheet. In this example, there is a single
-    worksheet named *Book 1*.
+    worksheet named *Book1*.
   - Click on a tab to switch to that worksheet.
   - Double-click on a tab to change its name.
+  - Right-click on a tab to access additional options.
   - Click on the "+" button to add a new worksheet.
 
 Excel is used to modify and display ***workbooks***, which are collections
-of one or more worksheets. Each Excel workbook is stored in a single file.
-In Windows, these files normally have the `.xlsx` extension but older files
-sometimes have the `.xls` extension instead.
+of one or more worksheets. Each Excel workbook is stored on your computer in a
+single file. In Windows, these files normally have the `.xlsx` extension but
+older files sometimes have the `.xls` extension instead.
 
 ### Application: Canadian employment data
 
@@ -124,7 +124,8 @@ typically covered in your Principles of Macroeconomics course.
   - "non-institutionalized" excludes people in prison, hospitals, 
     nursing homes, etc.
   - "working-age" excludes those under age 15.
-  - People living on reserve are also not covered by the LFS.
+  - People living in First Nations reserves and some other Indigenous settlements
+    are also not covered by the LFS.
 - The LFS population is grouped into three categories:
   - **Employed**: worked for pay or profit in the previous week, or had
     a job and was absent (e.g. due to illness or vacation).
@@ -162,9 +163,9 @@ The data can be found in the file
 
 Open the file
 [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
-in Excel.  You can do this by either double-clicking on it, or by using
-`File > Open` from Excel's menu.  The file should look something like this:
-![Excel screenshot](bin/EmploymentData.png)
+in Excel.  The file should look something like this:
+
+![](bin/EmploymentData.png)
 
 Note that three of the key employment variables (**Population**, **Employed**,
 and **Unemployed**) are in the data set, but the other ones are not. We will
@@ -179,7 +180,7 @@ we go through the application.
 
 ### Reproducibility {#data-management}
 
-When analyzing data it is important for the results of your analysis to be
+When analyzing data, it is important for the results of your analysis to be
 ***reproducible***. Reproducibility means that an interested reader should be
 able to figure out exactly how you got your results, and should be able to
 generate those results themselves.
@@ -189,10 +190,14 @@ you did earlier.  Without reproducibility, you may not remember where you found
 the data, what you have done with it, or what it means.  The interested reader
 might also be your coworkers, your boss, or your clients.
 
+<p style="max-width: 50%; float: right;">
+![A simple workflow for version control](bin/VCWorkflow.png)
+*A simple workflow for version control.*</p>
 Reproducibility requires that we treat our data with care.  In particular, we
 treat the various things we do with our data as part of a repeated sequence
-of steps called a ***workflow***.  Your data analysis workflow should have
-three key features:
+of steps called a ***workflow***.
+
+Your data analysis workflow should have three key features:
 
 1. Document the ***provenance*** or original source for all data.
    - When downloading data files, document the original URL and date of access.
@@ -248,25 +253,25 @@ Canadian employment data:
 1. Create a project folder on your computer.
    - It will contain all of your data and analysis for this project.
    - Give it a brief, clear, and portable name (call it
-      "employment-nov-2020").
+      `employment-nov-2020`).
 2. Create two sub-folders inside your project folder.
-   - One will contain the original data (call it "raw-data").
-   - One will contain archived versions of the data. (call it "archive").
+   - One will contain the original data (call it `raw-data`).
+   - One will contain archived versions of the data. (call it `archive`).
 2. Obtain the source data.
    - Download the file
      [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
    - Put it in the `raw-data` folder.
    - Do not change the file name.
 3. Document the provenance of all data sources.
-   - Create a text file called "readme.txt".
+   - Create a text file called `readme.txt`.
    - Put it in the `raw-data` folder.
    - Enter information in this file about the provenance of the
      `CanEmpNov20.xlsx` file.
 4. Create a master version and working copy.
    - Make two copies of the `CanEmpNov20.xlsx` file.
    - Put them in the main project folder (`employment-nov-2020`).
-   - One will be your original master version (call it "CanEmpNov20Clean.xlsx").
-   - One will be your working copy (call it "CanEmpNov20-working.xlsx").
+   - One will be your original master version (call it `CanEmpNov20Clean.xlsx`).
+   - One will be your working copy (call it `CanEmpNov20-working.xlsx`).
 :::
 
 We will return to these principles later as we complete our data cleaning
@@ -322,9 +327,11 @@ steps in cleaning data is rearranging it from a messy format to a tidy format.
 Open your working copy of the employment data file in Excel.  As you can see,
 this Excel workbook contains three worksheets:
 
-- The worksheet *Employment Nov 2020* is our main data table:
-   ![Excel screenshot](bin/EmploymentData.png) 
-   It is in tidy format:
+The worksheet *Employment Nov 2020* is our main data table:
+
+![Excel screenshot](bin/EmploymentData.png) 
+It is in tidy format:
+
   - There is a single rectangular table starting in cell A1.
   - Each row represents a Canadian province.
   - Canadian provinces are the unit of observation.
@@ -332,10 +339,13 @@ this Excel workbook contains three worksheets:
   - The top row shows brief but clear names for each variable.
   - The provinces are listed in alphabetical order, but the interpretation of
     the table would not change if they were listed in some other order.
-- The worksheet *Raw data* is the original data table as I downloaded it from
-  Statistics Canada:  
-   ![Excel screenshot](bin/RawEmploymentData.png)
-  It is messy in various ways:
+
+The worksheet *Raw data* is the original data table as I downloaded it from
+Statistics Canada:  
+
+![Excel screenshot](bin/RawEmploymentData.png)
+It is messy in various ways:
+
   - The table starts in cell A6 rather than cell A1.
   - Variables (Population, Labour Force, etc.) are in rows rather than columns.
   - Observations (the unit of observation is the province-month) are in both
@@ -344,15 +354,18 @@ this Excel workbook contains three worksheets:
     that says what province it describes, but we know that it describes Nova
     Scotia because it comes after row 16 (which does say it describes Nova
     Scotia).  As a result, the order of rows is very important.
-- The worksheet *Source* describes the provenance of the data:  
-   ![Excel screenshot](bin/Source.png)
-   It is not a data table, just a few lines of text.
-   - There is a text description of the data, provided by Statistics Canada.
-   - There are also two URLs linking to the original data source.  Copy and
-     paste either of them into your browser to see what the original data
-     source looks like.
-   - There should also be some information on the date of access, but there
-     currently isn't.
+
+The worksheet *Source* describes the provenance of the data:  
+
+![Excel screenshot](bin/Source.png)
+It is not a data table, just a few lines of text.
+
+  - There is a text description of the data, provided by Statistics Canada.
+  - There are also two URLs linking to the original data source.  Copy and
+    paste either of them into your browser to see what the original data
+    source looks like.
+  - There should also be some information on the date of access, but there
+    currently isn't.
 
 We will do all of our edits to the *Employment Nov 2020* worksheet, and will
 leave both *Raw data* and *Source* alone.
@@ -385,10 +398,10 @@ addresses.
   the user to the address
   https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703.
 
-Statistics Canada will probably reorganize its website and move the original
-document at some point in the future.  At that point, the original
-URL will stop working. But the DOI will continue working because Statistics
-Canada will (hopefully) update the DOI entry for that document with the new URL.
+At some point in the future, Statistics Canada will reorganize its website and
+move the original document. When this happens, the original URL will stop
+working, but the DOI will continue working as long as Statistics Canada
+updates the DOI entry for the document.
 :::
 
 ### Observations and identifiers
@@ -433,8 +446,8 @@ ID variables have several common characteristics:
    - ***Constructed by formula*** from other information.
 3. They can be defined by an ***explicit combination***
    (a new ID variable is constructed) of other identifiers, or an
-   ***implicit combination*** of those identifiers (no new variable is
-   constructed).
+   ***implicit combination*** (no new variable is constructed) of those
+    identifiers .
 
 It's OK for an ID variable to be nearly-but-not-exactly identical to some other
 variable. For example a Canadian data set might have both a **Province**
@@ -451,8 +464,8 @@ and linked using various ID variables:
 - Each person at SFU (faculty, staff or student) has a unique
   16-digit ID number that is arbitrarily/sequentially assigned.
 - Each computing account at SFU has a unique (text) user name that is also
-  used as an email address. Some user names are constructed according to rules,
-  but those rules have not been applied consistently over the years so we can
+  used as an email address. Some rules are used to construct user names, but
+  those rules have not been applied consistently over the years so we can
   think of user names as arbitrarily assigned.
 - Each academic program at SFU has a standardized 2-letter to 4-letter program
   code. For example, the program code for economics is ECON. The full list of
@@ -514,14 +527,15 @@ We will add these two variables while cleaning our data.
 **Names, IDs, and probabilistic matching**
 
 Occasionally a data set will not have a standardized ID variable, and our only
-option is to match observations based on a proper name.  For example, each
-student in BC grades K to 12 is assigned an ID number called a PEN while each
-person in the healthcare system is assigned a different ID number called a PHN.
-There is no direct way to match PEN and PHN, so we have to match education and
-health records on a combination of proper names and other information such as
-date of birth.  Matches made this way are called "probabilistic" matches,
-meaning (roughly) that the records probably describe the same person but might
-not.
+option is to match observations based on a proper name.  For example, the
+government of British Columbia assigns each student in grades K to 12 an ID
+number called a Personal Education Number (PEN) while each person in the
+healthcare system is assigned a different ID number called a Personal Health
+Number (PHN). There is no direct way to match PEN and PHN, so we have to match
+education and health records on a combination of proper names and other
+information such as date of birth.  Matches made this way are called
+"probabilistic" matches, meaning (roughly) that the records probably describe
+the same person but might not.
 :::
 
 ### Planning {#cleaning-plan}
@@ -615,10 +629,9 @@ cells.  Cell formatting characteristics include:
 - Cell borders
 - Number format (will be discussed in a later section)
 
-The procedure for modifying a cell's format is straightforward if you
-regularly use Microsoft Word or similar applications.  You select
-the cell(s) you are interested in modifying, then you go through the
-menus to choose the modifications.
+The procedure for modifying a cell's format is straightforward: select
+the cell(s) you are interested in modifying, then go through the menus to choose
+the modifications.
 
 ::: example
 **Changing cell size**
@@ -633,7 +646,7 @@ We can solve this problem by making column B wider.  There are three ways of
 doing this:
 
 - *From the menu*: Select any cell in column B, and then select
-  `Home > Format > Cell Width...`.  A dialog box will appear that allows you
+  `Home > Format > Column Width...`.  A dialog box will appear that allows you
   to enter your preferred width. Try a few numbers there until you get a column
   width that you like.
 - *With the mouse*: Move your cursor to the line between column headers B
@@ -641,9 +654,9 @@ doing this:
   ![cursor](bin/cell width change.png){height=16pt}.
   Click on the mouse and drag the cursor to resize the column until you get a
   column width that you like.
-- *Auto-fit* (this is what I usually do):  Move your cursor to the line between
-  column headers B and C, and double-click.  The column width will automatically
-  adjust to fit the data.
+- *Auto-fit* (this is what I usually do):  Select *all* of column B by clicking on
+  the "B", and then select  `Home > Format > Column Width...`.  You can also do
+  this by double-clicking on the line between column headers B and C.
 
 You can follow similar procedures to adjust the row height.
 :::
@@ -980,24 +993,25 @@ Suppose we want to add a new variable for the (natural) log of population:
 3. We have two options for calculating the natural log of cell C2 in this
    cell:
 
-   *Direct entry:* Read the documentation, figure out that the correct formula
+   *Direct entry*: Read the documentation, figure out that the correct formula
    is `=LN(C2)`and enter that formula in cell K2.
 
-   *Built-in Excel tools* This is probably unnecessary for a function as simple
+   *Built-in Excel tools*: This is probably unnecessary for a function as simple
    as `LN()`, but can be very helpful with more complex functions.
 
    a. Follow the steps in the previous example to reach the `Function Arguments`
       dialog box for the `LN` function:  
       ![function arguments dialog box](bin/FunctionArguments.png)
    b. Click in the entry box labeled `Number`.
-   c. Either enter the text `C2` here or click on cell C2. The dialog box
-      will display the value in cell C2 (`3588700`) as well as the calculated
-      value for the log of cell C2 (`15.0933058`).
+   c. Either enter the text `C2` here or select cell C2 with the mosue. The
+      dialog box will display the value in cell C2 (`3588700`) as well as the
+      calculated value for the log of cell C2 (`15.0933058`).
    d. Select `OK`.
 
 4. Save your working copy.
 
-You will see that cell K2 now contains `=LN(C2)` which displays as `15.0933`. 
+You will see that cell K2 now contains the formula `=LN(C2)` which displays as
+`15.0933`. 
 :::
 
 ::: {.fyi data-latex=""}
@@ -1229,7 +1243,7 @@ format are typically accurate up to the 15th decimal place.
 
 However, Excel displays the results of these calculations according to the
 cell's ***numeric display format***, which typically rounds to much fewer
-decimal places. Remember that We can always change the display format of a
+decimal places. Remember that we can always change the display format of a
 cell or group of cells without changing the cell contents.
 
 ::: example
@@ -1401,12 +1415,12 @@ computer, for several reasons:
    - 2020/11/1
    - etc.
 - Conventions vary across cultures and organizations:
-  - in some places 11/1 means November 1 and in others it means January 11.
+  - In some places, 11/1 means November 1 and in others it means January 11.
 - We want to be able to sort and rank in time order rather than alphabetical
   order:
-  - January 10, 2020 should come before December 10, 2020.
+  - January 10, 2020 is before December 10, 2020 and after December 10, 2019.
 - We want to be able to add and subtract dates and times:
-  - January 4, 2021 comes 5 days after December 30, 2020.
+  - January 4, 2021 is 5 days after December 30, 2020.
   - 11:30 pm on December 31, 2020 is 45 minutes before 12:15 am on January 1,
     2021
 - We want to handle time zones, daylight savings time, leap years, and
@@ -1416,6 +1430,7 @@ Finally, we want to deal with these complexities in a way that is perfectly
 accurate when needed, but is simple in normal usage. As you might imagine,
 this is not easy. Each application has its own rules for
 handling dates and times, but there are some standards that have developed.
+
 Excel handles dates and times as follows:
 
 1. Dates are *stored* as the number of days elapsed since some base date or
@@ -1430,13 +1445,13 @@ Excel handles dates and times as follows:
 3. When you enter text into a cell that looks like a date, Excel does
    several things behind the scenes:
    - Excel guesses the date format you are using.
-   - Following that guess, Excel converts your text into its internal
-     storage form (days since base date).
+   - Following that guess, Excel converts your text into its storage format
+     (days since base date).
    - Excel changes the display format to what Excel thinks it should be.
      This format is based on your location settings, and may differ from
      what you have typed in.
 
-Most of the time, this system works seamlessly and you don't even notice it.
+This system works seamlessly most of the time.
 
 ::: example
 **How dates are stored and displayed**
@@ -1491,8 +1506,9 @@ or address these problems.
 ::: {.fyi data-latex=""}
 **Excel dates and genetics**
 
-Excel's handling of dates caused a significant unanticipated problem in the the
-field of human genetics, where it is a widely used tool.
+Excel is a widely used tool in the scientific field of human genetics, and its
+handling of dates caused a significant unanticipated problem in genetics 
+research.
 
 Each gene has a standard abbreviation like "TCEA1" or "CTCF" assigned by a
 scientific body called the HUGO Gene Nomenclature Committee (HGNC).
@@ -1532,7 +1548,7 @@ also a function `NOW(.)` that returns the current date and time.
 
 Deep down, every file on your computer is just a long sequence of binary
 numbers: zeros and ones.  In order to obtain any useful information from a file,
-we need to know its ***file format***. A file format is just a list of rules
+we need to know its ***file format***. A file format is just a set of rules
 for interpreting the sequence of zeros and ones, much like a language is a set
 of rules for interpreting the sounds that come out of people's mouths. You can
 often infer a file's format from its extension (the part of the file name after
@@ -1567,7 +1583,8 @@ Text files can be read and modified using a simple program called a
   - MacOS has a built in text editor called *TextEdit*.
 
 In addition, there are numerous other text editors that are more powerful and
-include useful features like color-coding, spell checking, and autocorrect:
+include useful features like color-coding, spell checking, and autocorrect.
+Many of them are free:
 
   - I use *Notepad++* which is powerful, easy to use, and available at no charge
     from https://notepad-plus-plus.org/. Notepad++ is only available for
@@ -1596,11 +1613,11 @@ text editors installed:
 ### CSV files {#csv-files}
 
 The most commonly-used export format for Excel is called the
-***comma-separated values*** or ***CSV*** file. CSV is a standardized format
-that is very useful for representing tables of data. It is simple,
-platform-independent, human-readable, compact, and secure. Every major
-statistical analyisis application can read CSV files, as can many other
-applcations.
+***comma-separated values*** or ***CSV*** file. CSV is a standardized text
+format that is very useful for representing tables of data. It is simple,
+platform-independent, human-readable, compact, and (mostly) secure. Every major
+statistical analysis application can read CSV files, as can many other
+applications.
 
 You can save any worksheet in an Excel workbook as a CSV file.
 
@@ -1613,15 +1630,17 @@ To export the *Employment Nov 2020* worksheet to a CSV file:
 2. Select `File > Save As` from the menu, then select the button marked
    `Browse`.
 3. This will produce the `Save As` dialog box which looks something like this:
+
    ![Save As dialog box](bin/save-as-dialog-box.png)
-4. Click on the `Save as type` drop-down box, and select 
-   "CSV (Comma delimited)(*.csv)". 
-   - Note that this will change the file extension from `.xlsx` to `.csv`.
-5. Adjust the destination folder if you want, then select `Save`.
-6. You may get a warning that looks like this:
+   Click on the `Save as type` drop-down box, and select 
+   `CSV (Comma delimited)(*.csv)`. Note that this will change the file extension
+   from `.xlsx` to `.csv`.
+4. Adjust the destination folder if you want, then select `Save`.
+5. You may get a warning that looks like this:
+
    ![CSV warning message](bin/CsVWarningMessage.png)
    Select `OK`.
-8. Close Excel.
+6. Close Excel.
 
 You now have a CSV file.
 :::
@@ -1644,8 +1663,8 @@ To view the exact contents of the CSV file we have created, open it in a text
 editor.
 
 The file will look something like this:
-![CSV viewed as a text file](bin/CSVAsText.png)
 
+![CSV viewed as a text file](bin/CSVAsText.png)
 As you can see, the CSV file contains text based on the data in your
 worksheet. Each line is a row in the worksheet, and cells are delimited by
 commas.  A few other things to notice:
@@ -1669,8 +1688,8 @@ workbook. You can do this either by double-clicking on both files, or you can
 start Excel and use its menus to find and open the files.
 
 Your CSV file will look something like this:
-![CSV viewed in Excel](bin/CSVInExcel.png)
 
+![CSV viewed in Excel](bin/CSVInExcel.png)
 We can compare this worksheet to the original Excel workbook from which it was
 exported. They are similar, but there are several important differences:
 
@@ -1714,20 +1733,20 @@ To update your master version:
 
 1. Check your working copy for mistakes and incomplete work.
 
-   You can compare your working copy to my master version at
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
+   You can compare your working copy to my master version at  
+   [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
 
-2. If you like, achive your current master version by renaming it and moving
-   it to the `archives` sub-folder.
+2. Archive your current master version by renaming it and moving it to the
+   `archives` sub-folder.
 
    - This is optional since your current master version is identical to the
      source data.
 
-3. Copy the current working copy to the master version by either:
+3. Set your current working copy as the master version.
 
-   - Selecting `File > Save As` in Excel to save the open file under another
-     name.
-   - Closing Excel and copying, pasting, and renaming the working copy file.
+   - *In Excel*: You can select `File > Save As` to save the open file under
+     another name.
+   - *Outside of Excel*: You can copy, paste, and rename the working copy.
 
 You should now have two identical cleaned data sets (one master file and one
 working copy), one raw data set (in the `raw-data` subfolder), and possibly

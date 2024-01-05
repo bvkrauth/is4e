@@ -1,5 +1,6 @@
 \usepackage{booktabs}
 \usepackage{tcolorbox}
+\usepackage[margin=1in]{geometry}
 
 \definecolor{astroorange}{cmyk}{0, 0.53, 0.87, 0.08}
 \definecolor{astroblue}{cmyk}{1, 0.54, 0.0, 0.62}
@@ -24,6 +25,12 @@
 
 \newenvironment{sfu}{%
   \begin{tcolorbox}[colback=red!5!white,colframe=red!75!white,title=SFU]
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{warning}{%
+  \begin{tcolorbox}[colback=red!15!white,colframe=astroblue!75!white,title=WARNING]
 }{%
   \end{tcolorbox}
 }

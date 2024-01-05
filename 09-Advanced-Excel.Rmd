@@ -41,16 +41,17 @@ In this chapter, we will learn how to:
 To prepare for this chapter, please review the chapter on 
 [basic data cleaning with Excel](#basic-data-cleaning-with-excel)
 and [basic data analysis with Excel](#basic-data-analysis-with-excel).
-Then download the following four data files:
+Then create a project folder and download the following four data files:
 
-> [https://bookdown.org/bkrauth/IS4E/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)  
-> [https://bookdown.org/bkrauth/IS4E/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
-> [https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
-> [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
+- [https://bookdown.org/bkrauth/IS4E/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)
+- [https://bookdown.org/bkrauth/IS4E/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
+- [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
+- [https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
 
-The third file may display in your browser rather than downloading like the other 
-files.  If that happens, you can right-click on the link above and select 
-"Save link as" to save the file on your computer.
+Depending on your browser settings, the last file may display in your browser
+rather than downloading like the other  files.  If that happens, you can
+right-click on the link above and select  `Save link as` to save the file on
+your computer.
 
 ::: {.economics data-latex=""}
 **Data on long-run economic growth**
@@ -67,8 +68,8 @@ cross-country data set covering real GDP, population, and other macroeconomic
 variables. It has been used extensively by macroeconomists seeking to
 understand why some countries have more rapid economic growth than others.
 
-The current version of the PWT is available at https://www.ggdc.net/pwt and is
-built from two distinct data sources:
+The current version of the PWT is available at https://doi.org/10.34894/QT5BCC
+and is built from two distinct data sources:
 
 - National income data from each country's national statistical agency.
 - Systematic data comparing prices across countries, constructed by the
@@ -100,11 +101,12 @@ constructed to help with linking the GDP and tax data (more about this below).
 :::
 
 [^801]: I should mention that the Tax Foundation is not an entirely neutral 
-organization - it generally supports lower taxes - and so my use of their
-data here should not be taken as expressing an opinion on their policy 
-views. It is not unusual for useful data to come from politically-motivated 
-sources; for many years the best data on tobacco prices and taxes came from
-the Tobacco Institute, a tobacco industry lobbying group (https://en.wikipedia.org/wiki/Tobacco_Institute).    
+organization - it generally advocates lower taxes - and so my use of their
+data here should not be taken as expressing any particular opinion on their
+policy views. It is not unusual for useful data to come from
+non-neutral sources; for many years the best data on tobacco prices
+and taxes came from the Tobacco Institute, a tobacco industry lobbying group
+(https://en.wikipedia.org/wiki/Tobacco_Institute).    
 
 ## More on data files {#more-on-data-file-formats}
 
@@ -148,8 +150,8 @@ For example, Excel's original `.xls` files were binary files in a proprietary
 format whose details were only known only by Microsoft. Its current `.xlsx`
 files are (zipped) text files in an open format whose details are published
 [here](https://docs.microsoft.com/en-us/openspecs/office_file_formats/ms-offfflp/885c7947-17de-490b-840d-91231a031383). Microsoft did not move from proprietary
-to open formats just to be nice; their incentives changed as a result of 
-technological advances, and they responded by changing their behavior.
+to open formats just to be nice; technological progress changed their economic
+incentives, and they responded by changing their behavior.
 
 If you are interested in learning more about the economics of strategic
 interaction among business, you should consider taking a course in what
@@ -195,8 +197,8 @@ You can open fixed-width text files in Excel using the *Text Import Wizard*.
 
 Open the file [CountryCodes.txt](sampledata/CountryCodes.txt) in a text editor.
 It will look like this:
-   ![Fixed format file in Notepad](bin/FFinNotepad.png){width=50%} 
 
+![Fixed format file in Notepad](bin/FFinNotepad.png){width=50%}  
 This is a fixed format file in which the CountryName variable starts on the 1st
 character of each line and the CountryCode variable starts on the 36th
 character.
@@ -261,10 +263,26 @@ imported into Excel using the Text Import Wizard.
 
 ### Other formats
 
-Excel also has a wide variety of tools for obtaining data from various
-databases, online services, etc. We do not have time to explore all of these
-tools, but you can select `Data` from the menu bar and look around to see what
-is available.
+CSV and similar formats are useful for representing a single table. Text files
+can also be used to represent more complex data structures using newer open
+formats like JSON (JavaScript Object Notation) or XML (Extensible Markup
+Language).
+
+::: example
+**JSON and XML files**
+
+This is what our employment data looks like in JSON format (on left) and XML
+format (on right):
+
+![XML and JSON file in Notepad](bin/json-xml-example.png){width=80%}  
+Both JSON and XML are used extensively for computers and applications to
+transmit data to one another.
+:::
+
+Excel has a wide variety of tools for working with data in JSON, XML,
+commercial database formats, online services, etc. We do not have time to
+explore all of these tools, but you can select `Data` from the menu bar and look
+around to see what is available.
 
 ### Text to columns
 
@@ -446,7 +464,7 @@ add a country code to the tax data.
    - You can do that by selecting any cell in column A, and then selecting
      `Home > Insert > Insert Sheet Columns`
 4. Enter **CountryCode** in cell A1 to name the variable.
-5. Construct the appropriate formula in cell A2:
+5. Use `VLOOKUP()` to construct the appropriate formula in cell A2:
    - `Lookup_value` should be the country name of the current observation
      (`B2`).
    - `Table_array` should be the full table of country names and codes
@@ -480,7 +498,7 @@ Since we need to match both country and year, we will need to use the
 
 1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
 2. Enter **Pop2019** in cell K1 of *GrowthData* to name the variable.
-3. Enter the correct formula in cell K2:
+3. Use `VLOOKUP()` to enter the correct formula in cell K2:
    - `Lookup_value` should combine the country code (cell A2) with the year
      (2019), so it should be `CONCAT(A2,"2019")`.
    - `Table_array` should be the table in the *Data* worksheet containing the
@@ -491,7 +509,8 @@ Since we need to match both country and year, we will need to use the
      that column contains the **pop** variable (`8`).
    - `Range_lookup` should be `FALSE`.
 4. Make the cell references absolute where needed, which will result in the
-   formula `=VLOOKUP(CONCAT($A2,"2019"),Data!$A$2:$H$12811,8,FALSE)`.
+   formula:  
+   `=VLOOKUP(CONCAT($A2,"2019"),Data!$A$2:$H$12811,8,FALSE)`.
 5. Copy/paste or fill the formula to the remaining cells in column K.
 
 We can also create another variable whose variable is the country's population
@@ -589,13 +608,13 @@ We can do this using the `AVERAGEIFS()` function:
 2. Enter **AvgIShare** in cell M1 of *GrowthData* to name the variable.
 3. Construct the correct formula in cell M2 using the function `AVERAGEIFS()`:
    - `average_range` should be the full range of investment shares
-     (`Data!AO2:AO12811`)
+     (`Data!AP2:AP12811`)
    - `criteria_range` should be the full range of country codes
-     (`Data!A2:A12811`)
+     (`Data!B2:B12811`)
    - `criteria` should be the cell containing the country code of the current
      observation (`A2`)
 4. Adjust the formula to have the correct absolute references. The resulting
-   formula should be `=AVERAGEIFS(Data!AO$2:AO$12811,Data!A$2:A$12811,A2)`.
+   formula should be `=AVERAGEIFS(Data!AP$2:AP$12811,Data!B$2:B$12811,A2)`.
 5. Copy/paste or fill this formula into the remaining cells in column M.
 6. Save your working copy of `GrowthData_WC.xlsx`.
 
@@ -609,13 +628,13 @@ statistic for a subset of observations that satisfy a set of criteria:
 - `COUNTIFS()` calculates the *number* of observations meeting the criteria.
   - We used `COUNTIFS()` to construct a frequency table in Chapter
     \@ref(basic-data-analysis-with-excel).
-- `AVERAGEIFS()` calculate the *average* of a variable for those observations
+- `AVERAGEIFS()` calculates the *average* of a variable for those observations
   that meet the criteria.
-- `SUMIFS()` calculate the *sum* of a variable for those observations that meet
+- `SUMIFS()` calculates the *sum* of a variable for those observations that meet
   the criteria.
-- `MINIFS()` calculate the *minimum* of a variable for those observations that
+- `MINIFS()` calculates the *minimum* of a variable for those observations that
   meet the criteria.
-- `MAXIFS()` calculate the *maximum* of a variable for those observations that
+- `MAXIFS()` calculates the *maximum* of a variable for those observations that
   meet the criteria.
 
 These functions can all be used to construct summary statistics (as in Chapter
@@ -684,95 +703,6 @@ way we want.  For example, the formula:
 will return the square root of A1 if A1 is positive or zero, and a blank cell if
 A1 is negative.
 ::::
-
-### Protecting data
-
-One of the most common Excel problems occurs when someone unintentionally
-changes the data in a file. For example:
-
-- Your cat walks over your keyboard and overwrites the contents of a cell.
-- You break the rule about keeping the original data untouched, and make a
-  change that you later wish you hadn't made.
-
-The risk of unintentional changes is an unavoidable consequence of Excel's
-fundamental design: there is no separation between data and analysis.  This
-design feature has the positive implication that your data is always visible
-and accessible, but it comes at a cost.
-
-One way of avoiding this cost is to make a practice of making your original data
-"read only." Excel does this through the combined mechanisms of ***protecting***
-sheets and ***locking*** cells.  Protecting and locking work according to three
-rules:
-
-1. Each worksheet is either protected or unprotected.
-   - By default, all worksheets are unprotected.
-2. Each cell is either locked or unlocked.
-   - By default, all cells are locked.
-3. Any locked cell in any protected sheet cannot be edited. All other cells can
-   be edited.
-
-   | Cell/sheet status    | Sheet is protected | Sheet is unprotected    |
-   |----------------------|--------------------|-------------------------|
-   | **Cell is locked**   | Cannot edit cell   | Can edit cell (default) |
-   | **Cell is unlocked** | Can edit cell      | Can edit cell           |
-
-By default, you can edit any cell in any worksheet. But you can change this
-behavior by changing the cell and/or sheet status.
-
-::: example
-**Protecting an entire worksheet**
-
-The PWT data table *Data* contains original raw that we do not want changed. To
-prevent changes to that worksheet, we will want the worksheet to be *protected*
-and for all of its cells to be *locked*.  By default the worksheet is
-unprotected and all cells are locked, so all we need to do is protect the sheet:
-
-1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
-2. Right-click on the *Data* tab at the bottom of the page.  A menu will appear.
-3. Select `Protect Sheet`.  The Protect Sheet dialog box will provide several
-   options:  
-  ![Protect Sheet dialog box](bin/ProtectSheet.png){width=30%}  
-4. The default options are fine, so select `OK`.
-5. Save your working copy of `GrowthData_WC.xlsx`.
-   
-Now that you have protected the *Data* worksheet, try to edit any cell. You will
-get an error message.
-:::
-
-In many cases, you will only want to protect certain cells in a given sheet. To
-do this, remember the rules: all cells are initially locked and all worksheets
-are unprotected.  So we will need to unlock all cells except the ones we want
-locked, and then protect the sheet.
-
-::: example
-**Protecting part of a worksheet**
-
-Our working data in *GrowthData* includes a mix of raw data in columns A through
-N, and calculated data in the other columns.  To prevent changes to the raw
-data but not the calculated data, we will need the worksheet to be *protected*,
-columns A through N to be *locked*, and all other columns to be *unlocked*.
-By default, the sheet is unprotected and all cells are locked.  So we will need
-to unlock all of the columns after N, and then protect the sheet:
-
-1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
-2. Select all of the cells in the *GrowthData* worksheet by clicking on the 
-   ![Select all cells](bin/Excel select all cells.jpg){height=16pt} button.
-3. Unlock all of the cells by selecting `Home > Format > Lock Cell`.
-4. Lock columns A through N by selecting them, and then selecting 
-   `Home > Format > Lock Cell`.
-5. Protect the worksheet by selecting `Home > Format > Protect Sheet`
-6. The `Protect Sheet` dialog box will appear; select `OK`.
-6. Save your working copy of `GrowthData_WC.xlsx`.
-
-Note that you have to do it in this order since Excel will not let you unlock
-locked cells in a protected sheet.
-
-You will now get an error message if you try to edit any of the locked cells,
-but you can edit the unlocked cells in any way you like.
-:::
-
-You can remove protection from any worksheet by simply selecting 
-`Home > Format > Unprotect Sheet`.
 
 ### Data validation
 
@@ -867,6 +797,108 @@ To remove data validation from the **Pop2019** variable:
 You can confirm that data validation has been removed by entering an invalid
 value (Excel will now let you do this) or by adding validation circles (Excel
 will no longer show any).
+:::
+
+### Protecting data
+
+One of the most common Excel problems occurs when someone unintentionally
+changes the data in a file. For example:
+
+- Your cat walks over your keyboard and overwrites the contents of a cell.
+- You break the rule about keeping the original data untouched, and make a
+  change that you later wish you hadn't made.
+
+The risk of unintentional changes is an unavoidable consequence of Excel's
+fundamental design: there is no separation between data and analysis.  This
+design feature has the positive implication that your data is always visible
+and accessible, but it comes at a cost.
+
+One way of avoiding this cost is to make a practice of making your original data
+"read only." Excel does this through the combined mechanisms of ***protecting***
+sheets and ***locking*** cells.  Protecting and locking work according to three
+rules:
+
+1. Each worksheet is either protected or unprotected.
+   - By default, all worksheets are unprotected.
+2. Each cell is either locked or unlocked.
+   - By default, all cells are locked.
+3. Any locked cell in any protected sheet cannot be edited. All other cells can
+   be edited.
+
+   | Cell/sheet status    | Sheet is protected | Sheet is unprotected    |
+   |----------------------|--------------------|-------------------------|
+   | **Cell is locked**   | Cannot edit cell   | Can edit cell (default) |
+   | **Cell is unlocked** | Can edit cell      | Can edit cell           |
+
+By default, you can edit any cell in any worksheet. But you can change this
+behavior by changing the cell and/or sheet status.
+
+::: example
+**Protecting an entire worksheet**
+
+The PWT data table *Data* contains original raw that we do not want changed. To
+prevent changes to that worksheet, we will want the worksheet to be *protected*
+and for all of its cells to be *locked*.  By default the worksheet is
+unprotected and all cells are locked, so all we need to do is protect the sheet:
+
+1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
+2. Right-click on the *Data* tab at the bottom of the page.  A menu will appear.
+3. Select `Protect Sheet`.  The Protect Sheet dialog box will provide several
+   options:  
+  ![Protect Sheet dialog box](bin/ProtectSheet.png){width=30%}  
+4. The default options are fine, so select `OK`.
+5. Save your working copy of `GrowthData_WC.xlsx`.
+   
+Now that you have protected the *Data* worksheet, try to edit any cell. You will
+get an error message.
+:::
+
+In many cases, you will only want to protect certain cells in a given sheet. To
+do this, remember the rules: all cells are initially locked and all worksheets
+are unprotected.  So we will need to unlock all cells except the ones we want
+locked, and then protect the sheet.
+
+::: example
+**Protecting part of a worksheet**
+
+Our working data in *GrowthData* includes a mix of raw data in columns A through
+J, and calculated data in the other columns.  To prevent changes to the raw
+data but not the calculated data, we will need the worksheet to be *protected*,
+columns A through J to be *locked*, and all other columns to be *unlocked*.
+By default, the sheet is unprotected and all cells are locked.  So we will need
+to unlock all of the columns after N, and then protect the sheet:
+
+1. Open your working copy of `GrowthData_WC.xlsx` if it is not already open.
+2. Select all of the cells in the *GrowthData* worksheet by clicking on the 
+   ![Select all cells](bin/Excel select all cells.jpg){height=16pt} button.
+3. Unlock all of the cells by selecting `Home > Format > Lock Cell`.
+4. Lock columns A through J by selecting them, and then selecting 
+   `Home > Format > Lock Cell`.
+5. Protect the worksheet by selecting `Home > Format > Protect Sheet`
+6. The `Protect Sheet` dialog box will appear; select `OK`.
+6. Save your working copy of `GrowthData_WC.xlsx`.
+
+Note that you have to do it in this order since Excel will not let you unlock
+locked cells in a protected sheet.
+
+You will now get an error message if you try to edit any of the locked cells,
+but you can edit the unlocked cells in any way you like.
+:::
+
+You can remove protection from any worksheet by simply selecting 
+`Home > Format > Unprotect Sheet`.
+
+We are done with the growth data for now.  As always, be sure to save your
+working copy and update/create the master version of your cleaned data file.
+
+::: example
+**Finishing up**
+
+1. Save your working copy, and save again as the master version.
+   - I chose the file name `GrowthData.xlsx`.
+
+You can compare your work to my Excel file at
+[https://bookdown.org/bkrauth/IS4E/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
 :::
 
 ##  Pivot tables {#pivot-tables}
@@ -1182,21 +1214,6 @@ You can download the full set of Pivot Tables and associated charts  generated
 in this chapter at
 [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
 
-## Finishing up {#finishing-up-advanced-data-cleaning}
-
-As always, be sure to save your working copy and update/create the master
-version of your cleaned data file.
-
-::: example
-**Finishing up**
-
-1. Save your working copy, and save again as the master version.
-   - I chose the file name `GrowthData.xlsx`.
-
-You can compare your work to my Excel file at
-[https://bookdown.org/bkrauth/IS4E/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
-:::
-
 ## Chapter review {-#review-advanced-data-cleaning}
 
 The theme that connects the various topics of this chapter is that real data is
@@ -1240,7 +1257,7 @@ Answers can be found in the [appendix](#answers-advanced-data-cleaning).
 
 **GOAL #2: Describe and implement common data cleaning tasks**
 
-2. What is the purpose of each of the following:
+2. What is the purpose of each of the following?
    a. A crosswalk table
    b. Matching observations by keys
    c. Aggregating data by groups
@@ -1254,8 +1271,8 @@ Answers can be found in the [appendix](#answers-advanced-data-cleaning).
    d. You open a blank sheet, lock cells A1:C9 and protect the sheet.
 
 4. What will happen if you:
-   a. Add data validation to a column that contains invalid data.
-   b. Add data validation to a column, and then try to enter invalid data
+   a. Add data validation to a column that contains invalid data?
+   b. Add data validation to a column, and then try to enter invalid data?
 
 **GOAL #4: Construct and interpret frequency tables, cross-tabulations and conditional averages using Excel pivot tables**
 

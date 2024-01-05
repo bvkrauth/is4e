@@ -40,7 +40,7 @@ We will be switching back and forth between theory, data analysis and
 applications.  All three skill sets are valuable.
 :::
 
-Hopefully you are in this course because you are fascinated by statistics 
+Hopefully, you are in this course because you are fascinated by statistics 
 and can't wait to learn more about it.  But most of you are taking it because 
 it's a required course. So I'd like to motivate everyone to take this course
 as an opportunity to learn some very useful skills.
@@ -57,28 +57,31 @@ The context of this course is a world that is awash in data:
 - Employers maintain detailed personnel records. 
  
 These databases can be linked and analyzed in various ways, and many 
-of the world's most successful companies rely heavily on the innovative
+of the world's most successful organizations rely heavily on the innovative
 gathering and usage of data:
 
-- Google's core product (the search engine) is built on the 
+- Google's core product (its search engine) is built on the 
   innovative analysis of massive amounts of data.
-- Both Google and the major social media companies are based on providing
-  valuable "free" services in order to gather data on consumers that can then
-  be directly or indirectly sold to other businesses.
-- Amazon and other retailers use what is called A/B testing to fine-tune product
-  descriptions and set prices so as to maximize profits.
+- Google and the major social media companies operate a business model of 
+  providing valuable "free" services in order to gather data on consumers that
+  can then be directly or indirectly sold to other businesses.
+- Amazon and other retailers use sophisticated data analysis techniques like
+  machine learning and A/B testing to fine-tune product descriptions, generate
+  better recommendations, and set prices so as to maximize profits.
 
-Some of this data analysis is done by statisticians or computer scientists,
-but much of it is done by economists. For example, Amazon is the
-second-largest employer of PhD economists in the US 
-(after the Federal Reserve System). The average economist does not
+Much of this data analysis is done by statisticians or computer scientists,
+but a substantial amount is done by economists. For example, Amazon is the
+second-largest employer of PhD economists in the United States
+(after the U.S. Federal Reserve System). The average economist does not
 have a computer scientist's expertise on computers, or a business person's
 expertise on markets, but knows enough about both to be quite useful to
 an organization that has data and wants money.
 
 This course will not qualify you for those jobs - they typically require a
-graduate degree - but it is a first step in that direction. So you should take
-it as a lucrative investment opportunity.
+graduate degree - but it is a first step in that direction, and there are
+many other good jobs where data analysis skills are a big asset.
+So you should take this course as a lucrative investment opportunity, and not
+just a requirement for your major.
 
 ::: {.economics data-latex=""}
 **Be the Mona Lisa**
@@ -88,17 +91,22 @@ are driven by supply and demand.  In the labour market, your skills and effort
 are the product, and you are the seller. Like all sellers, you want your
 product to be expensive.  This requires that you have skills that are both:
 
-- Useful (high demand)
+- Wanted by employers (high demand)
 - Uncommon (low supply)
 
-In other words, you need to be like the Mona Lisa. If your skills are useful but
-common (like water), or rare but useless (like my one-of-a-kind drawing of the
-Mona Lisa) your labour will sell at a low price.
+For example, consider these four objects:
 
-|             |          High demand                       |                 Low demand                    |
-|-------------|:------------------------------------------:|:---------------------------------------------:|
-| Low supply  | <img src="bin/MonaLisa.png" width="100" /> | <img src="bin/BadMonaLisa.png" width="100" /> |
-| High supply | <img src="bin/Water.png" width="100" />    | <img src="bin/Garbage.png" width="200" />     |
+![The Mona Lisa](bin/MonaLisa.png){width=20%}
+![Water](bin/Water.png){width=20%}
+![Bad Mona Lisa](bin/BadMonaLisa.png){width=20%}
+![Garbage](bin/Garbage.png){width=30%}  
+Which one has a high price?
+
+To have a well-paid career, you need to be like the Mona Lisa. If your skills
+are useful but common (like water), or rare but useless (like my one-of-a-kind
+but not particularly good drawing of the Mona Lisa) your labour will sell at a
+low price.  If your skills are common and useless (like garbage), your labour
+may not sell at any price.
 
 The combined ability to analyze data in a sophisticated way, and to explain the
 results in written or oral presentation, is an extremely useful and uncommon
@@ -113,7 +121,7 @@ quite well.
 
 This textbook and course are constructed under the assumptions that:
 
-1. You have taken introductory microeconomics and introductory  macroeconomics.
+1. You have taken Principles of Microeconomics and Principles of Macroeconomics.
    -  Ideas from those courses will be used in applications and examples.
 2. You can do high-school level math including algebra and basic set theory and
    have taken or are currently taking an introductory calculus course.
@@ -137,7 +145,7 @@ will need to be proactive in asking for help.
 **ECON 233**
 
 ECON 233 is the first course in the two-course econometrics sequence that is
-required for all economics majors.  If you've never seen the word before,
+required for all economics majors at SFU.  If you've never seen the word before,
 "econometrics" just means statistics and data analysis for economics.
 
 All economics majors have the option of taking ECON 233 or BUS 232, so you may
@@ -150,9 +158,9 @@ ECON 333, but there are some key differences:
 - *Applications:* ECON 233 emphasizes economics applications, while BUS 232
   emphasizes business applications.
 
-ECON 233 is part of the Social Data and Analytics (SDA) minor; if you are an
-economics student and are interested in that minor you are recommended to take
-ECON 233.
+ECON 233 is also part of the Social Data and Analytics (SDA) minor; if you are
+an economics student and are interested in that minor you are recommended to
+take ECON 233.
 :::
 
 If you continue in an economics major, you will take at least one additional
@@ -183,8 +191,9 @@ this course, I would encourage you to take some of these course:
 - [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html)
   is an advanced course in statistics and econometrics that is part of our
   honours sequence. It gives you the opportunity and tools to write a serious
-  empirical research paper.  Non-honours students are eligible to take it if
-  they have a 3.0 CGPA and the course prerequisites.
+  empirical research paper. Students who are not in the honours program are
+  still eligible to take ECON 435 if they have a 3.0 CGPA and the course
+  prerequisites.
    
 I would also encourage you to take courses outside of the economics department,
 and to consider a 
@@ -213,10 +222,11 @@ not need R until [much later](#an-introduction-to-r), but it is best
 to get your system set up now.
 
 :::sfu
-**Canvas**
+**ECON 233 on Canvas**
 
-Course materials including the syllabus, lectures, and assignments are
-available at the course Canvas site https://canvas.sfu.ca/courses/73884.
+Course materials for ECON 233, including the syllabus, lectures, and
+assignments are available at the course Canvas site
+https://canvas.sfu.ca/courses/80851.
 :::
 
 ### Installing Microsoft Excel {#installing-microsoft-excel}
@@ -270,7 +280,7 @@ below.
 Both R and RStudio are open-source, and are available free of charge for both
 Windows and macOS. Installation instructions are available at:
 
-https://rstudio.com/products/rstudio/download/#download.
+https://posit.co/download/rstudio-desktop/#download.
 
 Be sure to install R first, then RStudio.
 

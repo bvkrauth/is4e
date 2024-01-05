@@ -40,17 +40,18 @@ elements cannot be repeated.
 
 We have several ways of defining or describing sets. The simplest is
 ***enumeration***, which means you just list the elements:
-$$A = \{1,2,3\}$$
-$$B = \{Avocado, Banana\}$$
-
+\begin{align}
+  A &= \{1,2,3\} \\
+  B &= \{Avocado, Banana\}
+\end{align}
 Notice that the list of elements is surrounded by curly brackets.
 
 A second way of defining a set is to use ***set-builder notation***. Set builder
 notation defines sets in terms of rules their elements must satisfy. For
 example:
-
-$$C = \{x \in B: x \textrm{ is yellow} \}$$
-
+\begin{align}
+  C = \{x \in B: x \textrm{ is yellow} \}
+\end{align}
 We read this as "$C$ is the set of all $x$ in the set $B$ such that $x$ is
 yellow." In other words:
 
@@ -59,7 +60,9 @@ yellow." In other words:
  - Lemons are not in set $C$ because they are not in set $B$.
 
 We sometimes leave the initial set implicit:
-   $$C = \{x: x \textrm{ is yellow} \}$$
+\begin{align}
+  C = \{x: x \textrm{ is yellow} \}
+\end{align}
 We would interpret this as saying that $C$ is the set of *everything* that is
 yellow. There are a few special sets defined by convention:
 
@@ -90,13 +93,17 @@ the number of elements it has.
 **Cardinality (size)**
 
 The integers ($\mathbb{Z}$) and real numbers ($\mathbb{R}$) are infinite sets:
-   $$|\mathbb{Z}| = \infty$$ 
-   $$|\mathbb{R}| = \infty$$ 
+\begin{align}
+  |\mathbb{Z}| &= \infty \\
+  |\mathbb{R}| &= \infty
+\end{align}
 
 These are finite sets:
-   $$|\{1,2,3\}| = 3$$
-   $$|\{Avocado\}| = 1$$
-   $$|\emptyset| = 0$$
+\begin{align}
+  |\{1,2,3\}| &= 3 \\
+  |\{Avocado\}| &= 1 \\
+  |\emptyset| &= 0 
+\end{align}
 In addition, $\{Avocado\}$ is a singleton.
 :::
 
@@ -115,53 +122,65 @@ related:
 **Set relationships**
 
 These sets are identical:
-   $$\{1,2\} = \{1,2\}$$
-   $$\{1,2\} = \{2,1\}$$
+\begin{align}
+  \{1,2\} &= \{1,2\} \\
+  \{1,2\} &= \{2,1\}
+\end{align}
 These sets are not identical:
-   $$\{1,2\} \neq \{1,2,3\}$$
-   $$\{1,2\} \neq \{1,3\}$$
+\begin{align}
+  \{1,2\} &\neq \{1,2,3\} \\
+  \{1,2\} &\neq \{1,3\}
+\end{align}
 These sets are disjoint:
-   $$\{1,2\} \textrm{ and } \{3,4\}$$
+\begin{align}
+  \{1,2\} \textrm{ and } \{3,4\}
+\end{align}
 These sets are not disjoint:
-   $$\{1,2,3\} \textrm{ and } \{3,4\}$$
+\begin{align}
+  \{1,2,3\} \textrm{ and } \{3,4\}
+\end{align}
 The first of these sets is a subset of the second set:
-   $$\{1,2\} \subset \{1,2\}$$
-   $$\{1,2\} \subset \{1,2,3\}$$
+\begin{align}
+  \{1,2\} &\subset \{1,2\} \\
+  \{1,2\} &\subset \{1,2,3\}
+\end{align}
 The first of these sets is not a subset of the second set:
-   $$\{1,2\} \not\subset \{1,3\}$$
+\begin{align}
+  \{1,2\} \not\subset \{1,3\}
+\end{align}
 :::
 
 We can also perform various mathematical operations on sets.
 
 - The ***intersection*** of $A$ and $B$ (usually written $A \cap B$) is the set
   of everything that is an element of both $A$ *and* $B$.
-   $$A \cap B = \{x: x \in A \textrm{ and } x \in B\}$$
+  \begin{align}
+    A \cap B = \{x: x \in A \textrm{ and } x \in B\}
+  \end{align}
 - The ***union*** of $A$ and $B$ (usually written $A \cup B$) is the set of
   everything that is in $A$ *or* $B$ (or both):
-      $$A \cup B = \{x: x \in A \textrm{ or } x \in B\}$$
-- The ***set difference*** between $A$ and $B$ is written as $B - A$ or 
-  $B \setminus A$ and defined as the set of everything 
-  in $B$ that is *not* in $A$:
-   $$ B - A = \{x \in B: x \notin A\}$$
-  We will not use the set difference, but it helps to define the complement,
-  which we will use.
+  \begin{align}
+    A \cup B = \{x: x \in A \textrm{ or } x \in B\}
+  \end{align}
 - The ***complement*** of $A$ is written $A'$, $\neg A$ or $A^c$, and is simply
   everything that is not in $A$:
-   $$ A^c = \mathbb{U} - A = \{x: x \notin A\}$$
+  \begin{align}
+    A^c = \{x: x \notin A\}
+  \end{align}
 
 ::: example
 **Set operations**
 
 Intersections take all common elements from the two sets:
-   $$\{1,2\} \cap \{3,4\} = \emptyset$$
-   $$\{1,2,3\} \cap \{3,4\} = \{3\}$$
+\begin{align}
+  \{1,2\} \cap \{3,4\} &= \emptyset \\
+  \{1,2,3\} \cap \{3,4\} &= \{3\}
+\end{align}
 Unions take all elements from the two sets:
-   $$\{1,2\} \cup \{3,4\} = \{1,2,3,4\}$$
-   $$\{1,2,3\} \cup \{3,4\} = \{1,2,3,4\}$$
-Set differences take elements out of the first set if they are in the second
-set:
-   $$\{1,2\} - \{3,4\} = \{1,2\}$$
-   $$\{1,2,3\} - \{3,4\} = \{1,2\}$$
+\begin{align}
+  \{1,2\} \cup \{3,4\} &= \{1,2,3,4\} \\
+  \{1,2,3\} \cup \{3,4\} &= \{1,2,3,4\}
+\end{align}
 The complement of a set is everything (in the universal set, whatever that is)
 else:
 
@@ -183,40 +202,57 @@ This is not a course on set theory, so I will simply list some of the most
 important rules for your reference. None of these rules is difficult to prove,
 and most of them should make intuitive sense to you.
 
-   - Non-negative cardinality: 
-      $$|A| \geq 0$$
+   - Non-negative cardinality:
+     \begin{align}
+       |A| \geq 0
+     \end{align}
    - Cardinality of unions: 
-      $$|A \cup B| = |A| + |B| -|A \cap B| \leq |A| + |B|$$
+     \begin{align}
+       |A \cup B| = |A| + |B| -|A \cap B| \leq |A| + |B|
+     \end{align}
    - Cardinality of intersections: 
-      $$|A \cap B| \leq min(|A|,|B|)$$
+     \begin{align}
+       |A \cap B| \leq min(|A|,|B|)
+     \end{align}
    - Commutative laws:
-      $$A \cup B = B \cup A$$
-      $$A \cap B = B \cap A$$
+     \begin{align}
+       A \cup B &= B \cup A \\
+       A \cap B &= B \cap A
+     \end{align}
    - Associative laws:
-      $$(A \cup B) \cup C = A \cup (B \cup C)$$
-      $$(A \cap B) \cap C = A \cap (B \cap C)$$
+     \begin{align}
+       (A \cup B) \cup C &= A \cup (B \cup C) \\
+       (A \cap B) \cap C &= A \cap (B \cap C)
+     \end{align}
    - Distributive laws:
-      $$A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
-      $$A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
+     \begin{align}
+       A \cup (B \cap C) &= (A \cup B) \cap (A \cup C) \\
+       A \cap (B \cup C) &= (A \cap B) \cup (A \cap C)
+     \end{align} 
    - Identity laws:
-      $$A \cup \emptyset = A$$
-      $$A \cap \mathbb{U} = A$$
-   - Complement laws:
-      $$A \cup A^c = \mathbb{U}$$
-      $$A \cap A^c = \emptyset$$
-      $$\mathbb{U}^c = \emptyset$$
-      $$\emptyset^c = \mathbb{U}$$
+     \begin{align}
+       A \cup \emptyset &= A \\
+       A \cap \mathbb{U} &= A
+     \end{align}
    - Double-complement law:
-      $$(A^c)^c = A$$
+     \begin{align}
+       (A^c)^c = A
+     \end{align}
    - Idempotent laws:
-      $$A \cup A = A$$
-      $$A \cap A = A$$
+     \begin{align}
+       A \cup A &= A \\
+       A \cap A &= A
+     \end{align}
    - Domination laws:
-      $$A \cup \mathbb{U} = \mathbb{U}$$
-      $$A \cap \emptyset = \emptyset$$
+     \begin{align}
+       A \cup \mathbb{U} &= \mathbb{U} \\
+       A \cap \emptyset &= \emptyset
+     \end{align}
    - DeMorgan's laws:
-      $$(A \cup B)^c = A^c \cap B^c$$
-      $$(A \cap B)^c = A^c \cup B^c$$
+     \begin{align}
+       (A \cup B)^c &= A^c \cap B^c \\
+       (A \cap B)^c &= A^c \cup B^c
+     \end{align}
 
 Notice that these rules generally come in pairs, with union and intersection
 switched. This duality is a general feature of set algebra.
@@ -229,7 +265,9 @@ switched. This duality is a general feature of set algebra.
 A ***function*** is a rule that matches ("maps") elements of one set (called the
 ***domain*** of the function) to elements of another set (called the ***range***
 of the function). We use the notation:
-   $$f: D \rightarrow R$$
+\begin{align}
+  f: D \rightarrow R
+\end{align}
 to declare that a particular function $f$ has domain $D$ and range $R$. 
 
 ::: example
@@ -272,13 +310,15 @@ We can also define a function by a mathematical expression, or we can just refer
 to a function without defining exactly what it is, just like we can talk about a
 variable $x$ or a set $A$ without assigning it a particular value.
 
-::: {.fyi data-latex=""}
+::: {.warning data-latex=""}
 **Function or multiplication?**
 
 Students sometimes confuse functions and multiplication because of the way we 
 conventionally write functions, students sometimes get confused. Suppose I write
 this:
-   $$z = f(x+y)$$
+\begin{align}
+  z = f(x+y)
+\end{align}
 There are two possible interpretations of this statement:
 
    1. $f$ is a number, so $z$ is equal to the number $f$ times the number
@@ -318,10 +358,12 @@ they allow us to express qualitative statements as quantitative variables.
 ::: example
 **Indicator functions**
 
-$$I(3 < 5) = 1$$
-$$I(3 = 5) = 0$$
-$$I(\textrm{Ottawa is the capital of Canada}) = 1$$
-$$I(\textrm{Ottawa is in Alberta}) = 0$$
+\begin{align}
+  I(3 < 5) = 1 \\
+  I(3 = 5) = 0 \\
+  I(\textrm{Ottawa is the capital of Canada}) = 1 \\
+  I(\textrm{Ottawa is in Alberta}) = 0
+\end{align}
 :::
 
 
@@ -336,11 +378,15 @@ $A \times B$, is the set of all ordered pairs of elements in the two sets.
 **Cartesian products**
 
 If $A = \{1,2\}$ and $B = \{3,4\}$ then:
-$$ A \times B = \{(1,3),(1,4),(2,3),(2,4)\}$$
+\begin{align}
+  A \times B = \{(1,3),(1,4),(2,3),(2,4)\}
+\end{align}
 :::
 
 A particularly important example of a Cartesian product is:
-   $$\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$$
+\begin{align}
+  \mathbb{R}^2 = \mathbb{R} \times \mathbb{R}
+\end{align}
 the set of ordered pairs of real numbers.  For example, $(0,3)$ and
 $(0.427,2000)$ are both elements of $\mathbb{R}^2$.
 
@@ -348,7 +394,9 @@ $(0.427,2000)$ are both elements of $\mathbb{R}^2$.
 
 We will also be interested in the set of ordered ***sequences*** of $n$ real 
 numbers (where $n$ is some positive integer):
-   $$\mathbb{R}^n = \mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R}$$
+\begin{align}
+  \mathbb{R}^n = \mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R}
+\end{align}
 We usually distinguish between sequences and sets by using parentheses for
 sequences and curly brackets for sets.
 
@@ -363,15 +411,21 @@ Like sets, sequences can be empty, finite, or infinite.
 **Sequences and sets**
 
 Order matters for sequences but not for sets:
-   $$\{1,2\} = \{2,1\}$$
-   $$(1,2) \neq (2,1)$$
+\begin{align}
+  \{1,2\} &= \{2,1\} \\
+  (1,2) &\neq (2,1)
+\end{align}
 Sequences can include repeated elements, but sets cannot:
-   $$\{1,3,1\} \textrm{ is not a valid set.}$$
-   $$(1,3,1) \textrm{ is a valid sequence.}$$
+\begin{align}
+  \{1,3,1\} \textrm{ is not a valid set.} \\
+  (1,3,1) \textrm{ is a valid sequence.}
+\end{align}
 Sequences have cardinality (size):
-   $$() \textrm{ is an empty sequence.}$$
-   $$(2,4,6) \textrm{ is a finite sequence.}$$
-   $$(2,4,6,\ldots) \textrm{ is an infinite sequence.}$$
+\begin{align}
+  () \textrm{ is an empty sequence.} \\
+  (2,4,6) \textrm{ is a finite sequence.} \\
+  (2,4,6,\ldots) \textrm{ is an infinite sequence.}
+\end{align}
 :::
 
 We usually number each element in a sequence. The number assigned to a given
@@ -383,8 +437,10 @@ We can define sequences by simple enumeration as in the examples above. These
 are a few other ways of defining a sequence:
 
  - As a sequence of variables with subscripts: 
-   $(x_1,x_2,x_3)$. We will usually use a variable as the subscript $x_i$ when
-   we want to talk about an arbitrary element of the sequence.
+   $(x_1,x_2,x_3)$. We will usually use a variable for the subscript when
+   we want to talk about an arbitrary element of the sequence; for example
+   the variable $x_i$ is the $i$th element in the sequence
+   $(x_1,x_2,x_3,\ldots)$.
  - As functions of other sequences: $y_i = \ln(x_i)$.
  - As functions of the index itself $x_i = a^i$
 
@@ -393,7 +449,9 @@ are a few other ways of defining a sequence:
 Many statistics we are calculating are constructed by adding up a sequence of
 numbers. It will be convenient to use the ***summation operator***, which looks
 like this:
-   $$\sum_{(\textrm{index}) \in (\textrm{set})} (\textrm{variable that depends on index})$$
+\begin{align}
+  \sum_{(\textrm{index}) \in (\textrm{set})}(\textrm{variable that depends on index})
+\end{align}
 Notice that an expression using the summation operator has several components:
 
    - The summation sign $\sum$.
@@ -406,22 +464,35 @@ Notice that an expression using the summation operator has several components:
 **Summations**
 
 $\sum_{i \in A}$ means we add up over all of the values in the set $A$:
-   $$\sum_{i \in \{1,2,3\}} x_i = x_1 + x_2 + x_3$$ 
+\begin{align}
+  \sum_{i \in \{1,2,3\}} x_i = x_1 + x_2 + x_3
+\end{align}
 
 $\sum_{i = start}^{end}$ means we add up over all of the integers between
 $start$ and $end$:
-   $$\sum_{i=1}^3 x_i = x_1 + x_2 + x_3$$ 
-   $$\sum_{i=1}^n x_i = x_1 + x_2 + \cdots + x_n$$
+\begin{align}
+  \sum_{i=1}^3 x_i &= x_1 + x_2 + x_3 \\
+  \sum_{i=1}^n x_i &= x_1 + x_2 + \cdots + x_n
+\end{align}
 The index set can be infinite:
-   $$\sum_{i=1}^{\infty} x_i = x_1 + x_2 + \cdots$$
+\begin{align}
+  \sum_{i=1}^{\infty} x_i = x_1 + x_2 + \cdots
+\end{align}
 The summation can be of any expression that depends on the index:
-   $$\sum_{i=1}^3 \ln(x_i) = \ln(x_1) + \ln(x_2) + \ln(x_3)$$
-   $$\sum_{j=1}^3 \beta^j = \beta + \beta^2 + \beta^3$$
+\begin{align}
+  \sum_{i=1}^3 \ln x_i &= \ln x_1 + \ln x_2 + \ln x_3 \\
+  \sum_{j=1}^3 \beta^j &= \beta + \beta^2 + \beta^3
+\end{align}
 But the expression does not have to vary with the index:
-   $$\sum_{i=1}^3 2x = 2x + 2x + 2x = 6x$$
-   $$\sum_{i=1}^3 3 = 3 + 3 + 3 = 9$$
+\begin{align}
+  \sum_{i=1}^3 2x &= 2x + 2x + 2x = 6x \\
+  \sum_{i=1}^3 3 &= 3 + 3 + 3 = 9
+\end{align}
 We can use multiple summation operators in an expression:
-   $$\sum_{j=1}^2 \sum_{i=1}^2 x_iy_j = \sum_{j=1}^2 (x_1y_j + x_2y_j) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$$ 
+\begin{align}
+  \sum_{j=1}^2 \sum_{i=1}^2 x_iy_j &= \sum_{j=1}^2 (x_1y_j + x_2y_j) \\
+    &= x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2
+\end{align}
 The summation operator looks fancy, but remember it is just a concise way
 of describing a sum. If you are ever struggling with understanding a summation,
 write it out.
@@ -430,25 +501,37 @@ write it out.
 You learned the basic properties of addition and multiplication in Grade 3:
 
 - Associative property: 
-   $$(a + b) + c = a + (b+c)$$
-   $$(ab)c = a(bc)$$
-- Commutative property: 
-   $$a + b = b + a$$
-   $$ab = ba$$
+  \begin{align}
+    (a + b) + c &= a + (b+c) \\
+    (ab)c &= a(bc) 
+  \end{align}
+- Commutative property:
+  \begin{align}
+    a + b &= b + a \\
+    ab &= ba 
+  \end{align}
 - Distributive property: 
-   $$a(b+c) = ab + ac$$
+  \begin{align}
+    a(b+c) = ab + ac
+  \end{align}
 
 An expressions using the summation operator describes a sum, so it also obeys
 these properties:
 
 - The associative and commutative properties allow you to switch any two
   summation operators:
-   $$\sum_{i \in A} \sum_{j \in B} x_iy_j = \sum_{j \in B} \sum_{i \in A}  x_iy_j$$
+  \begin{align}
+    \sum_{i \in A} \sum_{j \in B} x_iy_j = \sum_{j \in B} \sum_{i \in A}  x_iy_j
+  \end{align}
   and to take the summation operator "into" or "out of" a sum:
-   $$\sum_{i \in A} (x_i + y_i) = \left(\sum_{i \in A} x_i\right) + \left(\sum_{i \in A} y_i \right)$$ 
+  \begin{align}
+    \sum_{i \in A} (x_i + y_i) = \left(\sum_{i \in A} x_i\right) + \left(\sum_{i \in A} y_i \right)
+  \end{align}
 - The distributive property allows you to take any constant out of the summation 
-   operator:
-  $$\sum_{i=1}^n ax_i = a \sum_{i=1}^n x_i $$
+  operator:
+  \begin{align}
+    \sum_{i=1}^n ax_i = a \sum_{i=1}^n x_i
+  \end{align}
 
 We will use these three results later on.
 
@@ -465,11 +548,13 @@ as $i$ gets bigger and bigger.
 ::: example
 **Limits**
 
-$$ \lim (1,1,1,\ldots) = 1$$
-$$\lim\left(1,\frac{1}{2},\frac{1}{3},\ldots\right) = 0$$
-$$\lim(1,2,3,\ldots) = \infty$$
-$$\lim(-1,-2,-3,\ldots) = -\infty$$
-$$\lim(0,1,0,1,0,1,\ldots) \textrm{ does not exist}$$
+\begin{align}
+  \lim (1,1,1,\ldots) &= 1 \\
+  \lim\left(1,\frac{1}{2},\frac{1}{3},\ldots\right) &= 0 \\
+  \lim(1,2,3,\ldots) &= \infty \\
+  \lim(-1,-2,-3,\ldots) &= -\infty \\
+  \lim(0,1,0,1,0,1,\ldots) & \textrm{ does not exist}
+\end{align}
 :::
 
 You will learn or have learned the formal definition of a limit in your calculus
@@ -480,10 +565,14 @@ is provided below for your reference.
 **Definition of a limit**
 
 Let $(x_1,x_2,\ldots)$ be a sequence of infinite length.  We say that the number
-$c$ is the limit of this sequence: 
-   $$\lim_{i\rightarrow \infty} x_i = c$$
+$c$ is the limit of this sequence:
+\begin{align}
+  \lim_{i\rightarrow \infty} x_i = c
+\end{align}
 if for any $\delta > 0$ there exists an $N_{\delta}$ such that:
-   $$|x_i - c| < \delta \textrm{ for all } i > N_{\delta}$$
+\begin{align}
+  |x_i - c| < \delta \textrm{ for all } i > N_{\delta}
+\end{align}
 :::
 
 ## Chapter review {-#review-math-review}
