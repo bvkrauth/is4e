@@ -102,7 +102,7 @@ and useless (like garbage), your labour may not sell at any price.
 |             |          High demand                       |                 Low demand                    |
 |-------------|:------------------------------------------:|:---------------------------------------------:|
 | Low supply  | <img src="bin/MonaLisa.png" width="100" /> | <img src="bin/BadMonaLisa.png" width="100" /> |
-| High supply | <img src="bin/Water.png" width="1   00" />    | <img src="bin/Garbage.png" width="200" />     |
+| High supply | <img src="bin/Water.png" width="100" />    | <img src="bin/Garbage.png" width="200" />     |
 
 The combined ability to analyze data in a sophisticated way, and to explain the
 results in written or oral presentation, is an extremely useful and uncommon
