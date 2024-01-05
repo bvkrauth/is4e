@@ -261,10 +261,26 @@ imported into Excel using the Text Import Wizard.
 
 ### Other formats
 
-Excel also has a wide variety of tools for obtaining data from various
-databases, online services, etc. We do not have time to explore all of these
-tools, but you can select `Data` from the menu bar and look around to see what
-is available.
+CSV and similar formats are useful for representing a single table. Text files
+can also be used to represent more complex data structures using newer open
+formats like JSON (JavaScript Object Notation) or XML (Extensible Markup
+Language).
+
+::: example
+**JSON and XML files**
+
+This is what our employment data looks like in JSON format (on left) and XML
+format (on right):
+
+![XML and JSON file in Notepad](bin/json-xml-example.png){width=80%}  
+Both JSON and XML are used extensively for computers and applications to
+transmit data to one another.
+:::
+
+Excel has a wide variety of tools for working with data in JSON, XML,
+commercial database formats, online services, etc. We do not have time to
+explore all of these tools, but you can select `Data` from the menu bar and look
+around to see what is available.
 
 ### Text to columns
 
