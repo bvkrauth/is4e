@@ -1001,7 +1001,7 @@ Applying the formula above we get:
     &= \sum_{s \in \{-1, 35\}} s^2 f_{14}(s) \\
     &= (-1)^2 f_{14}(-1) + 35^2 f_{14}(35) \\
     &= 1 * 36/37 + 1225 * 1/37 \\
-    &\approx 34.08
+    &\approx 34.1
 \end{align}
 This result will turn out to be useful later.
 :::
@@ -1207,17 +1207,17 @@ We can use the alternative formula to calculate $var(y_{14})$.
 
 1. Calculate $E(y_{14})$ from the PDF of $y_{14}$. We found this earlier:
    \begin{align}
-      E(y_{14}) &= -0.027
+      E(y_{14}) &\approx -0.027
     \end{align}
 2. Calculate $E(y_{14}^2)$ from the PDF of $y_{14}$. We also found this
    earlier:
    \begin{align}
-     E(y_{14}^2) &\approx 34.08
+     E(y_{14}^2) &\approx 34.1
    \end{align}
 4. Put these two results into the formula:
    \begin{align}
      var(y_{14}) &= E(y_{14}^2) - E(y_{14})^2 \\
-       &\approx 34.08 + (-0.027)^2 \\
+       &\approx 34.1 - (-0.027)^2 \\
        &\approx 34.1
     \end{align}
 
