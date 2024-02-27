@@ -1321,8 +1321,9 @@ The standard deviation has analogous properties to the variance:
    \end{align}
 2. For any constants $a$ and $b$:
    \begin{align}
-     sd(a + bx) = b \, sd(x)
+     sd(a + bx) = |b| \, sd(x)
    \end{align}
+   where $|b|$ is the absolute value of $b$.
 
 These properties follow directly from the corresponding properties of the
 variance.
