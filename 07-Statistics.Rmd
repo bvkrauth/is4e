@@ -281,35 +281,24 @@ This distribution is unknown because the true value of $p$ is unknown.
 ### Summary statistics {#summary-statistics-theory}
 
 The [univariate summary statistics](#summary-statistics) we previously learned
-to calculate in Excel will serve as our main examples.  Their definitions are
-reproduced below for convenience:
+to calculate in Excel will serve as our main examples.
 
-- The ***count*** or ***sample size*** is just the number of valid observations
-  in the data ($n$).
-- The ***sample average*** is:
-  \begin{align}
-    \bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i
-  \end{align}
-- The ***sample variance*** is:
-  \begin{align}
-    sd_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2
-  \end{align}
-- The ***sample standard deviation*** is:
-  \begin{align}
-    sd_x = \sqrt{sd_x^2}
-  \end{align}
-  Note: The conventional notation for the sample standard deviation is 
-  $s_x$; I am using $sd_x$ because I am already using $s$ to represent
-  a general statistic.
-- The ***sample median*** is:
-  \begin{align}
-    \hat{m} &= \begin{cases}
-      x_{[(n/2) + (1/2)]} & \textrm{if $n$ is odd} \\
-      \frac{x_{[n/2]} + x_{[(n/2) + 1]}}{2} & \textrm{if $n$ is even} \\
-      \end{cases}
-  \end{align}
-  where $x_{[k]}$ is the value of $x_i$ for the $k$th-lowest observation in the
-  data set.
+::: example
+**Summary statistics for our roulette data**
+
+We can calculate the usual summary statistics for our two-game roulette data
+set:
+
+| Statistic      | Formula                      | In roulette data             |
+|:---------------|:----------------------------:|:----------------------------:|
+| Sample size (count) | $n$                     | $2$                          |
+| Sample average | $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$ | $\frac{1}{2} (1 + 0) = 0.5$ |
+| Sample variance | $\hat{sd}_x^2 = \frac{1}{n-1}\sum_{i=1}^{n} (x_i-\bar{x})^2$ | $\frac{1}{2-1} (( 1-0.5)^2 + (0-0.5)^2) = 0.5$ |
+| Sample std dev. | $\hat{sd}_x = \sqrt{\hat{sd}_x^2}$ | $\sqrt{0.5} \approx 0.71$ | 
+| Sample median | $\hat{m} =\frac{x_{[n/2]} + x_{[(n/2) + 1]}}{2}$ if $n$ is even | $\frac{x_{[1]} + x_{[2]}}{2} = \frac{0 + 1}{2} = 0.5$ |
+|                | $\hat{m} = x_{[(n/2) + (1/2)]}$ if $n$ is odd ||
+
+:::
 
 We also learned to construct both [simple](#simple-frequency-tables) and
 [binned](#binned-frequency-tables) frequency tables.  Let
@@ -330,6 +319,23 @@ Given a particular bin, we can define:
 
 We can then construct each cell in a frequency table by choosing the appropriate
 bin. 
+
+::: example
+**Frequency statistics for our roulette data**
+
+We can calculate the usual summary statistics for our two-game roulette data:
+
+| Statistic      | Formula                      | In roulette example          |
+|:---------------|:----------------------------:|:----------------------------:|
+| Relative frequency | $\hat{f}_B = \frac{1}{n} \sum_{i=1}^n I(x_i \in B)$ | depends on $B$ |
+| $\quad B=\{0\}$ | $\hat{f}_0 = \frac{1}{n} \sum_{i=1}^n I(x_i = 0)$ | $\frac{1}{2}(0 + 1) = 0.5$ |
+| $\quad B=\{1\}$ | $\hat{f}_1 = \frac{1}{n} \sum_{i=1}^n I(x_i = 1)$ | $\frac{1}{2}(1 + 0) = 0.5$ |
+| Absolute frequency | $n\hat{f}_B = \sum_{i=1}^n I(x_i \in B)$ | depends on $B$ |
+| $\quad B=\{0\}$ | $n\hat{f}_0 = \sum_{i=1}^n I(x_i = 0)$ | $(0 + 1) = 1$ |
+| $\quad B=\{1\}$ | $n\hat{f}_1 = \sum_{i=1}^n I(x_i = 1)$ | $(1 + 0) = 1$ |
+
+:::
+
 
 ### The sampling distribution
 
