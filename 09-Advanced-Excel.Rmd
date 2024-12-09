@@ -91,7 +91,7 @@ example, if the marginal tax rate is 30\% on taxable income below \$100,000 and
 income would pay 30\% on the first \$100,000 and 40\% on the remaining \$50,000
 for a total tax bill of \$50,000, or an average tax rate of 33\%.
 
-The data on the top marginal tax rate is obtained from the Tax Foundation[^801], 
+The data on the top marginal tax rate is obtained from the Tax Foundation[^901],
 a US-based policy and research organization. Our data set comes from Table 1 in
 their report "Taxing High Incomes: A Comparison of 41 Countries", available
 online at  https://taxfoundation.org/taxing-high-income-2019/. 
@@ -100,7 +100,7 @@ Finally, we have a "crosswalk" data file `CountryCodes.txt`that I have
 constructed to help with linking the GDP and tax data (more about this below). 
 :::
 
-[^801]: I should mention that the Tax Foundation is not an entirely neutral 
+[^901]: I should mention that the Tax Foundation is not an entirely neutral
 organization - it generally advocates lower taxes - and so my use of their
 data here should not be taken as expressing any particular opinion on their
 policy views. It is not unusual for useful data to come from
@@ -158,6 +158,90 @@ interaction among business, you should consider taking a course in what
 economists call "industrial organization" (e.g., SFU's third-year elective
 ECON 325).
 :::
+
+
+### Text files and text editors
+
+The most important general file format is the ***text file***. A text file
+contains a sequence of characters (letters, numbers, etc.). Almost all open
+file formats are built around text files.
+
+Text files can be read and modified using a simple program called a
+***text editor***. Every computer has at least one simple built-in text editor:
+
+  - Windows has a built in text editor called *Notepad*.
+  - MacOS has a built in text editor called *TextEdit*.
+
+In addition, there are numerous other text editors that are more powerful and
+include useful features like color-coding, spell checking, and autocorrect.
+Many of them are free:
+
+  - I use *Notepad++* which is powerful, easy to use, and available at no charge
+    from https://notepad-plus-plus.org/. Notepad++ is only available for
+    Windows.
+  - Microsoft's *VSCode* is popular with programmers, and is available at no
+    charge from https://code.visualstudio.com/. VSCode is available for Windows,
+    macOS, and many other platforms.
+
+There are also many tools available for comparing, combining, or otherwise
+processing text files.
+
+Files that are not text files are usually called ***binary*** files. Binary
+files are generally not human-readable.  If you try to open them with a
+text editor you will mostly see a bunch of odd-looking symbols.
+
+::: {.sfu data-latex=""}
+**Text editors in SFU campus labs**
+
+All general-purpose computer labs in the SFU Burnaby campus have the following
+text editors installed:
+
+- Windows: Notepad, Notepad++.
+- macOS: TextEdit, VSCode, BBEdit.
+:::
+
+### CSV files {#csv-files}
+
+In [Chapter 2](#saving-and-exporting-data), we exported an Excel worksheet to a
+CSV file, and then imported it back into Excel.
+
+So what is a CSV file? CSV files have the following features:
+
+- CSV file names usually have the `.csv` extension.
+- CSV files are text files.
+- Each CSV file represents a table of data.
+- Each line in the CSV file represents a row in the table.
+- The cells in each row are separated or ***delimited*** by commas.
+
+CSV files have a few other features, which are best understood by using a
+text editor to view the exact contents of an actual CSV file.
+
+
+::: example
+**Viewing a CSV file as text**
+
+Follow the instructions in Example \@ref(exm:exporting-a-csv-file) to export
+a CSV file using Excel, or download the file from
+[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.csv](sampledata/CanEmpNov20.csv).
+
+Open the file in a text editor of your choice. It will look something like this:
+
+![CSV viewed as a text file](bin/CSVAsText.png)
+As you can see, the CSV file contains text based on the data in your
+worksheet. Each line is a row in the worksheet, and cells are delimited by
+commas.  A few other things to notice:
+
+- There is no formatting information in the file.
+- There are no formulas, only values.
+- When the value in a cell contains a comma, the contents of the cell are
+  surrounded by quotes (`"`) so that the comma is not interpreted as the end
+  of the cell.
+
+:::
+
+You can also open any CSV file in Excel, and Excel will interpret the contents 
+of the file as a worksheet.
+
 
 ### Fixed-width files
 
