@@ -86,10 +86,10 @@ evidence:
 We can put those possibilities into a table, and make an assessment of what we
 might conclude from a given data set:
 
-| Win rate                |  Many games     |    Few games            |
+| Observed win rate       |  Many games     |    Just a few games     |
 |:------------------------|:---------------:|:-----------------------:|
-| Close to fair game rate | Probably fair   | Could be fair or unfair |
-| Far from fair game rate | Probably unfair | Could be fair or unfair |
+| Close to $48.6\%$       | Probably fair   | Could be fair or unfair |
+| Far from $48.6\%$       | Probably unfair | Could be fair or unfair |
 
 That is, we can make a fairly confident conclusion if we have a lot of evidence,
 and our conclusion depends on what the evidence shows. But if we do not have a
@@ -634,32 +634,60 @@ The p-value of a test is simple to calculate from the test statistic and its
 distribution under the null.  I won't go through that calculation here.
 :::
 
+
 ### Implementing and interpreting
 
+The steps taken above derive a test for a specific null hypothesis (a fair
+roulette game) for a specific sample size (100) and desired significance level
+(5\%). But the results can be generalized to a hypothesis test for any event
+probability.
+
+::: example
+**A general test for a single probability**
+
+We can generalize the test we have constructed so far to the case of the
+probability of any event:
+
+| Test component         |  Roulette example                    |General case               |
+|:-----------------------|:------------------------------------:|:-------------------------:|
+| Parameter              | $p_{red} = \Pr(\textrm{Red wins})$   | $p = \Pr(\textrm{event})$ |
+| Null hypothesis        | $H_0:p_{red} = 18/37$                | $H_0:p = p_0$             | 
+| Alternative hypothesis | $H_1: p_{red} \neq 18/37$            | $H_1: p \neq p_0$         | 
+| Test statistic         | $t = n\hat{f}_{red}$                 | $t = n\hat{f}_{\textrm{event}}$ | 
+| Null distribution      | $Binomial(100,18/37)$                | $Binomial(n,p_0)$         | 
+| Size/significance      | 5\% (0.05)                           | $\alpha$                  |
+| Critical value $c_L$   | 39                        | 2.5 percentile of $Binomial(n,p_0)$  |
+| Critical value $c_H$   | 58                        | 97.5 percentile of $Binomial(n,p_0)$ |
+| Decision               | Reject if $t \notin [39,58]$    | Reject if $t \notin [c_L,c_H]$ |
+:::
+
 So far, we have discussed how to construct a hypothesis test from scratch. But
-most of the time statisticians use off-the-shelf test statistics and critical
-values, so the main task of a person working with data is implementing the test.
+data analysts mostly use off-the-shelf test statistics and critical
+values. The main task of a person working with data is implementing the test.
 Here are the steps:
 
-1. Choose the null and alternative hypothesis.
+1. Choose your null and alternative hypotheses.
    - These depend on your research question, so you must choose them yourself.
-2. Choose the size of your test.
+2. Choose the desired size of your test.
    - In economics, it is usually 5\%.
 3. Construct or look up an appropriate test. A test consists of:
-   - A test statistic
-   - Critical values (for the chosen size)
+   - Your null and alternative hypotheses.
+   - A test statistic.
+   - Critical values (for your chosen size).
 4. Calculate the test statistic.
 5. Compare the test statistic to the critical values and make an accept/reject
    decision.
 
 Always remember that failing to reject the null does not mean the null is true.
 
+
 ::: example
 ***Implementing our roulette test***
 
 To review the roulette example, the null hypothesis is:
 \begin{align}
-  H_0: p_{red} = 18/37
+  H_0: p_{red} &= 18/37 \\
+  H_1: p_{red} &\neq 18/37
 \end{align}
 the test statistic is the absolute win frequency:
 \begin{align}
@@ -688,16 +716,18 @@ We are now ready to implement the test with data.  Consider two cases:
 
 Remember that failing to reject the null does not mean the null is true.  It
 is still possible that the game is unfair, we just don't have clear evidence
-that it is.
+that it is. We may need to collect more data to get clearer evidence and
+increase the power of our test.
 :::
 
 ## The Central Limit Theorem
 
-In order for a test statistic to work, its exact probability distribution must
-be known under the null hypothesis.  The example test in the previous section
-worked because it was based on a sample frequency, a statistic whose
-probability distribution is relatively easy to calculate.  Unfortunately, most
-statistics do not have a probability distribution that is easy to calculate.
+In order for a hypothesis test to work, the exact probability distribution of
+the test statistic must be known under the null hypothesis.  The example test in
+the previous section worked because it was based on a sample frequency, a
+statistic whose probability distribution is relatively easy to calculate.
+Unfortunately, most statistics do not have a probability distribution that is
+easy to calculate.
 
 Fortunately, we have a very powerful asymptotic result called the 
 ***Central Limit Theorem (CLT)***.  The CLT roughly says that we can approximate 
@@ -744,13 +774,15 @@ the probability distribution of $\bar{x}_n$ is approximately normal
 
   - In order for the CLT to apply, we need to standardize $\bar{x}_n$ so that it
     has constant mean (zero) and variance (one) as $n$ increases. That re-scaled
-    sample average is $z_n$.  
+    sample average is called $z_n$.  
   - In practice, we don't usually know $\mu_x$ or $\sigma_x$ so we can't
     calculate $z_n$ from data. Fortunately, there are some tricks for getting
     around this problem that we will talk about later.
 
 What about statistics other than the sample average?  Well it turns out that 
-Slutsky's theorem also extends to convergence in distribution.
+Slutsky's theorem also extends to convergence in distribution. In combination
+with the Central Limit Theorem, this means most statistics have an approximately
+normal distribution if the sample size is big enough.
 
 ::: {.fyi data-latex=""}
 **Slutsky's theorem for probability distributions**
@@ -840,9 +872,9 @@ The typical test statistic we use in this setting is called the
 \begin{align}
   t_n = \frac{\bar{x}_n - \mu_0}{sd_x/\sqrt{n}}
 \end{align}
-The idea here is that we take our estimate of the parameter ($\bar{x}_n$),
-subtract its expected value under the null ($\mu_0$), and divide by an estimate
-of its standard deviation ($sd_x/\sqrt{n}$).
+The idea here is that we take our parameter estimate ($\bar{x}_n$),
+subtract its expected value under the null ($\mu_0$), and divide by its 
+[standard error](#standard-errors) ($sd_x/\sqrt{n}$).
 
 ::: example
 ***The T statistic in roulette***
@@ -902,7 +934,7 @@ Let's take a look at the components of this expression:
 Recall that we need the probability distribution of $t_n$ to be known when $H_0$
 is true, and different when it is false.  The second criterion is clearly met,
 and the first criterion is met if we can find the probability distribution of
-$\frac{\bar{x}_n - \mu_x}{s_x/\sqrt{n}}$.
+$\frac{\bar{x}_n - \mu_x}{sd_x/\sqrt{n}}$.
 
 The frequency-based test we derived in Section \@ref(hypothesis-tests) is what
 statisticians call an exact test:
@@ -1260,8 +1292,8 @@ tests:
 ::: example
 **An exact confidence interval for the win probability**
 
-Calculating an exact confidence interval for $p_{red}$ is somewhat tricky to do
-by hand, but easy to do on a computer:
+Calculating an exact confidence interval for $p_{red}$ requires a computer. The
+details are beyond the scope of this course, but the procedure looks like this:
 
 1. Construct a grid of many values between 0 and 1.
 2. For each value $p_0$ in the grid, test the null hypothesis
