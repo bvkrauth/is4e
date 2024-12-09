@@ -218,14 +218,21 @@ statistic is valid or not.
 ::: example
 ***A test statistic for roulette***
 
-Since a fair game has win probability $18/37 \approx 0.486$ we would expect
-about 48 or 49 wins in 100 fair games.  So a natural test statistic for
-determining whether the game is fair is the number of wins:
+A natural test statistic for determining whether the game is fair is the number
+of wins for red:
 \begin{align}
   t_n = n\hat{f}_{red} = n\bar{x}_n =\sum_{i=1}^n x_i
 \end{align}
-Next we need to find the probability distribution of $t_n$ under the null, and
-under the alternative.
+Since a fair game has win probability $18/37 \approx 0.486$ we would expect
+about 48 or 49 wins in 100 fair games. 
+:::
+
+Once we have a proposed test statistic, we need to find its probability
+distribution under the null. Remember, this needs to be a specific probability
+distribution with no unknown parameters.
+
+::: example
+***The distribution under the null***
 
 We earlier learned about the binomial distribution, which is the distribution
 of the number of times an event with probability $p$ happens in $n$ independent
@@ -242,6 +249,14 @@ Under the null (when $H_0$ is true), $p_{red} = 18/37$ and so:
 Since this distribution does not involve any unknown parameters, our test
 statistic satisfies the requirement of having a *known* distribution under the
 null.
+:::
+
+The next step is to describe the probability distribution of the test statistic
+under the alternative. It's OK if this distribution includes unknown parameters,
+the key is to confirm that it is different from the distribution under the null.
+
+::: example
+***The distribution under the alternative***
 
 Under the alternative (when $H_1$ is true), $p_{red}$ can take on any value
 *other* than $18/37$.  The sample size is still $n=100$, so the distribution of
