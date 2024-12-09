@@ -254,7 +254,7 @@ known, since $p_{red}$ is not known.  But the distribution is *different* under
 the alternative, and that is what we require from our test statistic.
 :::
 
-### Critical values
+### Size and power
 
 After choosing a test statistic $t_n$ and determining its distribution under the
 null, the next step is to choose ***critical values***.  The critical values of
@@ -283,6 +283,24 @@ Given the test statistic and critical values:
 
 ![*We reject the null if the test statistic falls outside of the blue critical range above*](bin/reject.png)
 
+::: example
+***Proposed critical values for the win frequency***
+
+Suppose we pick the following critical values for our test:
+\begin{align}
+  c_L &= 45 \\
+  c_H &= 55
+\end{align}
+This means:
+
+- We reject the null of a fair game if red wins fewer than 45 games
+  $(t_n < c_L)$.
+- We reject the null of a fair game if red wins more than 55 games
+  $(t_n > c_H)$.
+
+Otherwise, we accept or fail to reject the null of a fair game.
+:::
+
 How do we choose critical values? You can think of critical values as setting a
 standard of evidence, so we need to balance two considerations:
 
@@ -292,16 +310,149 @@ standard of evidence, so we need to balance two considerations:
 - The probability of rejecting a true null is called the ***size*** or 
   ***significance*** of a test.
   - We do not want to reject true nulls, so size is bad.
-- There is always a trade off between power and size 
-  - A *narrower* critical range (higher $c_L$ or lower $c_H$) produces more
-    rejections, increasing both power (good) and size (bad).
-  - A *wider* critical range (lower $c_L$ or higher $c_H$) produces fewer
-    rejections, reducing both power (bad) and size (good).
   
-Given this trade off between power and size, we could construct some criterion
+The size of a test is a number:
+\begin{align}
+  size &= \Pr(\textrm{reject $H_0$}) \qquad \textrm{when $H_0$ is true}
+\end{align}
+and it is usually easy to calculate.
+
+::: example
+***The size of our proposed test***
+
+With our proposed critical values $(c_L,c_H) = (45,55)$, the probability of
+rejecting the null is:
+\begin{align}
+  \Pr(\textrm{reject $H_0$}) &= \Pr((t_n < 45) \cup (t_n > 55)) \\
+    &= \Pr(t_n < 45) + \Pr(t_n > 55) \\
+    &= \Pr(t_n \leq 44) + (1 - \Pr(t_n \leq 55)) \\
+    &= F_t(44) + (1 - F_t(55))
+\end{align}
+where $F_t(\cdot)$ is the CDF of $t_n$. We know this CDF when the null is true:
+\begin{align}
+  H_0 &\implies t_n \sim Binomial(100,18/37)
+\end{align}
+and we can calculate the binomial CDF in Excel using the `BINOM.DIST()`
+function.  The correct formulas are 
+`=BINOM.DIST(44,100,18/37,TRUE)` and `=BINOM.DIST(55,100,18/37,TRUE)`
+which produces:
+\begin{align}
+  \Pr(\textrm{reject $H_0$}) 
+    &= F_t(44) + (1 - F_t(55)) \\
+    &\approx 0.20 + (1 - 0.91)) \\
+    &\approx 0.29
+\end{align}
+So the size of this test is about 29\%. That is, if the game is fair we have 
+a 29\% chance of mistakenly concluding it is unfair.  This is a pretty high
+probability, suggesting we might need to choose different critical values.
+:::
+
+The power of a test is a function:
+\begin{align}
+  power(\theta) &= \Pr(\textrm{reject $H_0$}) \qquad \textrm{when $H_0$ is false}
+\end{align}
+and is more difficult to calculate.
+
+::: example
+***The power of our proposed test***
+
+With our proposed critical values $(c_L,c_H) = (45,55)$, the probability of
+rejecting the null is as we have already derived:
+\begin{align}
+  \Pr(\textrm{reject $H_0$}) &= F_t(44) + (1 - F_t(55))
+\end{align}
+When the null is false:
+\begin{align}
+  H_1 &\implies t_n \sim Binomial(100,p_{red}) \qquad \textrm{where $p_{red} \neq 18/37$}
+\end{align}
+The power of the test depends on the unknown true value of $p$, but we can
+calculate the power for any value of $p_{red}$. For example, let's pick
+$p_{red}=0.4$. Then:
+\begin{align}
+  power(0.7) &= F_t(44) + (1 - F_t(55)) \qquad \textrm{where $t_n \sim Binomial(100,0.4)$}
+\end{align}
+We can calculate these probabilities in Excel with the formulas:
+`=BINOM.DIST(44,100,0.4,TRUE)` and `=BINOM.DIST(55,100,0.4,TRUE)`
+which produces:
+\begin{align}
+  \Pr(\textrm{reject $H_0$}) 
+    &= F_t(44) + (1 - F_t(55)) \\
+    &\approx 0.821 + (1 - 0.999)) \\
+    &\approx 0.822
+\end{align}
+That is, if the true win probability is 40\%, the probability of rejecting the
+null of a fair game is about 82\%.
+:::
+
+We can calculate $power(\theta)$ for many values of $\theta$ and plot the result
+to get what is called a ***power curve***. Creating power curves is sometimes
+complex, and is beyond the scope of this course. But we can at least view and
+interpret a power curve.
+
+::: example
+***A power curve for our proposed test***
+
+We can calculate the power for any value of $p$ and plot the result as a power
+curve:
+```{r PowerCurveProposed, fig.cap = "*Power curve for proposed critical values*"}
+PowerCurveData <- tibble(theta = seq(0,1,length.out=380),
+                         power100 = pbinom(44,
+                                           100,
+                                           theta) +
+                           (1 - pbinom(55,
+                                       100,
+                                       theta)))
+ggplot(data = PowerCurveData,
+       mapping = aes(x = theta,y = power100)) +
+  geom_line(col="#002D62") +
+  xlab("true probability of winning") +
+  ylab("power") +
+  geom_vline(xintercept = 18/37,col="gray") +
+  labs(title = "Power curve for test of fair roulette wheel", 
+       subtitle = "Proposed critical values: cL = 45, cH = 55", 
+       caption = "H0: Pr(red wins) = 18/37", 
+       tag = "")
+```
+Most power curves look like this graph: power is low for values close to the
+null, and rises as we get further from the null. Power is a probability, so
+it never goes above one or below zero.
+:::
+
+
+When choosing critical values, there is always a trade off between power and
+size:
+
+- A *wider* critical range (lower $c_L$ or higher $c_H$) is more conservative:
+  - It produces fewer rejections.
+  - It has low power (bad).
+  - It has low size (good).
+- A *narrower* critical range (higher $c_L$ or lower $c_H$) is more aggressive:
+  - Produces more rejections.
+  - Has greater power (good).
+  - Has greater size (bad).
+
+The appropriate critical range depends on 
+
+::: example
+***Power and size for other critical values***
+
+If we use a wider critical range $(c_L,c_H) = (40,60)$, we can follow the same
+calculations as in the previous examples to find:
+\begin{align}
+  size &= 0.042 \\
+  power(0.4) &= 0.462
+\end{align}
+Using this wider critical range substantially reduces the probability of
+mistakenly rejecting a true null (from 29\% to 4\%) but this comes at a cost
+of reducing the probability of rejecting the null when it is false (e.g.,
+from 82\% to 46\% when $p=0.4$). 
+:::
+
+### Choosing critical values
+
+Given the trade off between power and size, we could construct some criterion
 that accounts for both (just like MSE includes both variance and bias) and
 choose critical values to maximize that criterion. But we don't do that.
-
 Instead, we follow a simple convention:
 
 1. Set the size to a fixed value $\alpha$.
@@ -309,8 +460,8 @@ Instead, we follow a simple convention:
      of 5\% ($\alpha = 0.05$).
    - Economists may use 1\% ($\alpha = 0.01$) when working with larger data sets
      or 10\% ($\alpha = 0.10$) when working with smaller data sets.
-   - The data sets in physics or genetics are much larger, and they use a much
-     lower conventional size.
+   - The data sets in physics or genetics are much larger, and their convention
+     is to use a much lower size.
 2. Calculate critical values that imply the desired size.  
    - With a size of 5\% $(\alpha = 0.05)$, we would:
      - Set $c_L$ to the 2.5 percentile (0.025 quantile) of the null
@@ -328,7 +479,7 @@ Note that we are dividing the size by two so we can put half on the lower tail
 of the null distribution and half on the upper tail.
 
 ::: example
-**Critical values for roulette**
+**5\% critical values for roulette**
 
 We earlier showed that the distribution of $t_n$ under the null is:
 \begin{align}
@@ -358,61 +509,24 @@ In other words we reject the null (at 5\% significance) that the roulette wheel
 is fair if red wins fewer than 39 games or more than 58 games.
 :::
 
-::: {.fyi data-latex=""}
-**A general test for a single probability**
-
-We can generalize the test we have constructed so far to the case of the
-probability of any event:
-
-| Test component         |  Roulette example                    |General case               |
-|:-----------------------|:------------------------------------:|:-------------------------:|
-| Parameter              | $p_{red} = \Pr(\textrm{Red wins})$   | $p = \Pr(\textrm{event})$ |
-| Null hypothesis        | $H_0:p_{red} = 18/37$                | $H_0:p = p_0$             | 
-| Alternative hypothesis | $H_1: p_{red} \neq 18/37$            |$H_1: p \neq p_0$          | 
-| Test statistic         | $t = n\hat{f}_{red}$                 | $t = n\hat{f}_{\textrm{event}}$ | 
-| Null distribution      | $Binomial(100,18/37)$                |$Binomial(n,p_0)$          | 
-| Critical value $c_L$   | 39                        | 2.5 percentile of $Binomial(n,p_0)$  |
-| Critical value $c_H$   | 58                        | 97.5 percentile of $Binomial(n,p_0)$ |
-| Decision               | Reject if $t \notin [39,58]$    | Reject if $t \notin [c_L,c_H]$ |
-:::
-
-### Size and power
-
-As mentioned above, the size of a test is the probability of rejecting a true
-null.  It is a single number, since the distribution of the test statistic
-is known when the null is true. It is determined by our choice of critical
-values, or more precisely we choose critical values to achieve a particular
-size.
-
-The power of a test is defined as the probability of rejecting the null when it
-is false, and is also determined by our choice of critical values. However,
-it is a *function* of the true parameter value $\theta$ rather than a single
-number:
-\begin{align}
-  power(\theta) = \Pr(\textrm{reject $H_0$})
-\end{align}
-The reason for this is that there is only one $\theta$ value that is consistent
-with the null, but there are many that are consistent with the alternative.
-
-In some cases, we can actually calculate the power function and plot it as a
-***power curve***. The details of power calculations are beyond the scope of
-this course, but we can at least view and interpret a power curve.
+If critical values are set to achieve a fixed size, the only way to get
+increased power is by collecting more data. ***Power analysis*** is often used b
+researchers to determine how much data to collect.  Each additional observation 
+collected increases power without increasing size, but each additional
+observation costs money. With limited resources, it is important to spend enough
+to get clear results, but not much more than that.
 
 ::: example
-**The power curve for roulette**
+**The power curve for the 5\% test**
 
-Power curves can be tricky to calculate, and I will not ask you to calculate
-them for this course.  But they can be calculated, and it is useful to see what
-they look like.
-
-Figure \@ref(fig:PowerCurves) below depicts the power curve for the roulette
+Figure \@ref(fig:PowerCurves) below depicts the power curve for the 5\%
 test we have just constructed; that is, we are testing the null that
 $p_{red} = 18/37$ at a 5\% size.  The blue line depicts the power curve for
 $n=100$ as in our example, while the orange line depicts the power curve for
 a smaller sample of size $n=20$. There are a few features I would like you to
 notice, all of which are common to most regularly used tests:
 
-- Power reaches its lowest value near the point $(18/37,0.05)$.
+- Power reaches its lowest value near[^801] the point $(18/37,0.05)$.
   Note that $18/37$ is the parameter value under the null, and $0.05$ is the
   size of the test. In other words:
   - The power of this test is typically greater than its size.
@@ -458,19 +572,22 @@ ggplot(data = PowerCurveData,
   ylab("power") +
   geom_text(label="n=100",x=0.7,y=0.8,col="#002D62") +
   geom_text(label="n=20",x=0.9,y=0.8,col="#EB6E1F") +
+  geom_text(label="p=18/37",x=0.55,y=1.0,col="gray") +
+  geom_text(label="power=0.05",x=0.1,y=0.1,col="gray") +
   geom_hline(yintercept = 0.05,col="gray") +
   geom_vline(xintercept = 18/37,col="gray") +
-  labs(title = "Power curve for test of fair roulette wheel", 
+  labs(title = "Power curve for 5% test of fair roulette wheel", 
        subtitle = "", 
        caption = "H0: Pr(red wins) = 18/37, significance = 0.05", 
        tag = "")
 ```
 
+[^801]: You may notice that the curves do not exactly cross the point
+$(18/37,0.05)$. This is because the binomial distribution is discrete, so it is
+not possible to achieve a size of exactly 5\%.
 
-Power analysis is often used by researchers to determine how much data to
-collect.  Each additional observation collected increases power but costs money.
-With limited resources, it is important to spend enough to get clear results,
-but not much more than that.
+
+
 
 ::: {.fyi data-latex=""}
 **P values**
