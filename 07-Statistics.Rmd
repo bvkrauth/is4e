@@ -241,224 +241,15 @@ Independence allows us to write the joint PDF as the product of the marginal
 PDFs for each observation, and identical distribution allows us to use the same
 marginal PDF for each observation.
 
-### Time series data
+Random sampling is at the core of basic statistical analysis for two reasons:
 
-***Time series*** data sets are constructed by repeatedly observing a variable
-(or several variables) at regularly-spaced points in time.  Our historical
-employment data set is an example of time series data, as are most other
-macroeconomic variables such as GDP, population, inflation, interest rates, etc.
+1. It is simple to implement.
+2. Results shown later in this chapter imply that a moderately-sized random
+   sample provides surprisingly accurate information on the underlying
+   population.
 
-Time series have several features that are inconsistent with the random sampling
-assumption:
-
-- They usually have clear *time trends*.  
-  - For example, Canada's real GDP has been steadily growing for as long as we
-    have data.
-  - This violates the assumption that observations are identically distributed
-    since the expected value changes from one year to the next.
-- They usually have clear recurring cyclical patterns or *seasonality*.  
-  - For example, unemployment in Canada is usually lower from September through
-    December.
-  - This violates the assumption that observations are identically distributed
-    since the expected value changes from one month to the next.
-- They usually exhibit what is called *autocorrelation*. 
-  - For example, shocks to the economy that affect GDP in one month or quarter
-    (think of COVID or a financial crisis) are likely to have a similar (if
-    smaller) effect on GDP in the next month or quarter.  
-  - This violates the assumption that observations are independent since values
-    in nearby time periods are related.
-
-We can calculate statistics for time series, and we already did in Chapter
-\@ref(basic-data-analysis-with-excel).  However, using time series data for
-rigorous statistical analysis and prediction requires more advanced techniques
-than we will learn in this course.
-
-::: {.sfu data-latex=""}
-**ECON 433**
-
-Our fourth-year course ECON 433 covers time series econometrics, with
-applications in macroeconomics and finance.
-:::
-
-### Other sampling models
-
-Not all useful data sets come from a simple random sample or a time series. For 
-example:
-
-- A ***stratified sample*** is collected by dividing the population into
-  *strata* (subgroups) based on some observable characteristics, and then randomly
-  sampling a predetermined number of cases within each strata. 
-  - Most professional surveys are constructed from stratified samples rather
-    than random samples.
-  - Stratified sampling is often combined with *oversampling* of some smaller
-    strata that are of particular interest. 
-    - The LFS oversamples residents of Prince Edward Island (PEI) because a
-      national random sample would not catch enough PEI residents to accurately
-      measure PEI's unemployment rate.
-    - Government surveys typically oversample disadvantaged groups..
-  - Stratified samples can usually be handled as if they were from a random
-    sample, with some adjustments.
-- A ***cluster sample*** is gathered by dividing the population into
-  ***clusters***, randomly selecting some of these clusters, and sampling cases
-  within the cluster.  
-  - Educational data sets are often gathered this way: we pick a random sample
-    of schools, and then collect data from each student within those schools.
-  - Cluster samples can usually be handled as if they were from a random sample,
-    with some adjustments.
-- A ***census*** gathers data on every case in the population. 
-  - For example, we might have data on all fifty US states, or all ten Canadian
-    provinces, or all of the countries of the world. 
-  - Data from administrative sources such as tax records or school records often
-    cover the entire population of interest as well. 
-  - Censuses are often treated as random samples from some hypothetical
-    population of "possible" cases.
-- A ***convenience sample*** is gathered by whatever method is convenient.
-  - For example, we might gather a survey from people who walk by, or we might
-    recruit our friends to participate in the survey.
-  - Convenience samples are the worst-case scenario; in many cases they simply
-    aren't usable for accurate statistical analysis.
- 
-Many data sets combine several of these elements.  For example, Canada's
-unemployment rate is calculated using data from the Labour Force Survey (LFS).
-The LFS is built from a stratified sample of the civilian non-institutionalized
-working-age population of Canada. There is also some clustering: the LFS will
-typically interview whole households, and will do some geographic clustering
-to save on travel costs. The LFS is gathered monthly, and the resulting
-unemployment rate is a time series.
-
-### Sample selection and representativeness
-
-Random samples and their close relatives have the feature that they are
-***representative*** of the population from which they are drawn. In a sense
-that will be made more clear over the next few chapters, any sufficiently large
-random sample tends to closely resemble the population.
-
-Unfortunately, a simple random sample is not always possible. Even if we are
-able to randomly select cases, we often run into the following problems:
-
-- ***Nonresponse*** occurs when a sampled individual refuses or is unable to
-  provide the information requested by the survey
-  - ***Survey-level*** nonresponse occurs when the sampled individual does not
-    answer any questions. 
-      - This can occur if the sampled individual cannot be found, refuses to
-        answer, or cannot answer (for example, is incapacitated due to illness
-        or disability).
-      - Recent response rates to telephone surveys have been around 9\%,
-        implying over 90\% of those contacted do not respond.
-  - ***Item-level*** nonresponse occurs when the sampled individual does not
-    answer a particular question.  
-    - This can occur if the respondent refuses to answer, or the question is not
-      applicable or has no valid answer.
-    - Item-level nonresponse is particularly common on sensitive questions
-      including income.
-- ***Censoring*** occurs when a particular quantity of interest cannot be
-  observed for a particular case.  Censored outcomes are extremely common in
-  economics, for example:
-    - In labour market analysis, we cannot observe the market wage for
-      individuals who are not currently employed. 
-    - In supply/demand analysis, we only observe quantity supplied and quantity
-      demanded at the current market price.
-
-When observations are subject to nonresponse or censoring, we must interpret the
-data carefully.
-
-::: example
-**Wald's airplanes**
-
-Abraham Wald was a Hungarian/American statistician and econometrician who made 
-important contributions to both the theory of statistical inference and the
-development of economic index numbers such as the Consumer Price Index. 
-
-Like many scientists of his time, he advised the US government during World War
-II. As part of his work, he was provided with data on combat damage received by
-airplanes, with the hopes that the data could be used to help make the planes
-more robust to damage. Planes can be reinforced with additional steel, but this
-is costly and makes them heavier and slower.
-
-The data looked something like this (this isn't the real data, just a
-visualization constructed for the example):
-
-<a title="Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept), CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg"><img width="256" alt="Survivorship-bias" src="bin/WaldPlane.png"></a>
-
-You will notice that most of the damage seems to be in the wings and in the
-middle of the fuselage (body), while there is little damage to the nose,
-engines, and back of the fuselage. You might think that means that the wings and
-middle fuselage are the areas that should be reinforced.
-
-Wald's team realized that this was wrong: the data were taken from planes
-*that returned*, which is not a random sample of planes that went out. Planes
-were probably shot in the nose, the engines, and the back of the fuselage just
-as often as anywhere else, but they did not appear often in the data because
-they crashed. Wald's insight led to a counter-intuitive policy recommendation:
-reinforce the parts of the plane that usually show the *least* damage.
-:::
-
-There are two basic solutions to nonresponse and censoring:
-
-- ***Reinterpretation***: we redefine the population so that our data
-  can be correctly interpreted as a random sample from that population.
-  - Abraham Wald's team made a distinction between a random sample of planes
-    that flew, and a random sample of planes that returned.
-  - Canadian survey data can be interpreted as a a random sample of Canadians
-    who answer surveys.
-- ***Imputation***: we assume or ***impute*** values for all missing quantities.
-  - Abraham Wald's team assumed that the distribution of damage was roughly
-    uniform across all planes that flew.
-  - We might assume that Canadians who do not respond to surveys would give
-    similar responses to those given by survey respondents.
-  - We might assume that Canadians who do not respond to surveys would give
-    similar responses to those given by survey respondents of the same age,
-    gender, and education.
-
-Like many real-world statistical issues, nonresponse and censoring do not have
-a purely technical solution.  Careful thought is required.  If we are imputing
-values, do we believe that our imputation method is reasonable?  If we are
-redefining the population, is the redefined population one we are interested
-in?  There are no clearly right answers to these questions, and sometimes our
-data are simply not good enough to answer our questions.
-
-::: {.fyi data-latex=""}
-**Nonresponse bias in US presidential elections**
-
-Going into both the 2016 and 2020 US presidential elections, polls indicated
-that the Democratic candidate had a substantial lead over the Republican
-candidate: 
-
-- Hillary Clinton led Donald Trump by 4-6\% nationally in 2016 
-- Joe Biden led Trump by 8\% nationally in 2020.  
-
-The actual vote was much closer:
-
-- Clinton won the popular vote (but lost the election) by 2\%
-- Biden won the popular vote (and won the election) by about 4.5\%.  
-
-The generally accepted explanation among pollsters for the clear disparity
-between polls and voting is systematic nonresponse: for some reason, Trump
-voters are less likely to respond to polls. Since most people do not respond to
-standard telephone polls any more (response rates are typically around 9\%),
-it does not take much difference in response rates to produce a large difference
-in responses.  For example, suppose that:
-
-- We call 1,000 voters
-- These voters are equally split, with 500 supporting Biden and 500
-  supporting Trump.
-- 10\% of Biden voters respond (50 voters)
-- 8\% of Trump voters respond (40 voters)
-
-The overall response rate is 9\% (similar to what we usually see in surveys),
-Biden has the support of $50/90 = 56\%$ of the respondents while Trump has the
-support of $40/90 = 44\%$.  Actual support is even, but the polls show a 12
-percentage point gap in support, entirely because of the small difference in
-response rates.
-
-Polling organizations employ statisticians who are well aware of this problem,
-and they made various adjustments after the 2016 election to address it. For
-example, most now weight their analysis by education, since more educated people
-tend to have a higher response rate. Unfortunately, the 2020 results indicate
-that this adjustment was not enough.  Some pollsters have argued that it makes
-more sense to just assume the nonresponse bias is 2-3\% and adjust the numbers
-by that amount directly.
-:::
+However, it is not the only possible sampling process. Alternatives to simple
+random sampling will be discussed later in this chapter.
 
 ## Statistics and their properties
 
@@ -1233,6 +1024,228 @@ consistency of an estimator in two steps:
 Actually doing that for a particular estimator is well beyond the scope of this
 course.  The important thing to know is that it can be done, and to have a
 clear idea what consistency means.
+:::
+
+## Beyond simple random sampling
+
+Statistical theory is built around simple random sampling, but many interesting
+data sets are built from more complex sampling procedures. This section
+describes a few of these procedures and their implications.
+
+### Time series data
+
+A ***time series*** data set is constructed by repeatedly observing a variable
+(or several variables) at multiple points in time.  Our historical
+employment data set is an example of time series data, as are most other
+macroeconomic variables such as GDP, population, inflation, interest rates, etc.
+
+Time series have several features that are inconsistent with the random sampling
+assumption:
+
+- They usually have clear *time trends*.  
+  - Example: Canada's real GDP has been steadily growing for over 100 years.
+  - This violates the assumption that observations are identically distributed
+    since the expected value changes over time.
+- They usually have clear recurring cyclical patterns or *seasonality*.  
+  - Example: Canada's unemployment rate is usually lower in December.
+  - This violates the assumption that observations are identically distributed
+    since the expected value changes from one month to the next.
+- They usually exhibit what is called *autocorrelation*. 
+  - Example: shocks to the economy (COVID, financial crises) have effects
+    that last more than a single month or quarter, causing values in nearby
+    time periods to be related to one another.
+  - This violates the assumption that observations are independent.
+
+We can calculate statistics for time series, and we already did in Chapter
+\@ref(basic-data-analysis-with-excel).  However, using time series data for
+rigorous statistical analysis and prediction requires more advanced techniques
+than we will learn in this course.
+
+::: {.sfu data-latex=""}
+**ECON 433**
+
+Our fourth-year course ECON 433 covers time series econometrics, with
+applications in macroeconomics and finance.
+:::
+
+### Other sampling models
+
+Some data sets are built from sampling that is not entirely random. For example:
+
+- A ***stratified sample*** is collected by dividing the population into
+  *strata* (subgroups) based on some observable characteristics, and then randomly
+  sampling a predetermined number of cases within each stratum. 
+  - Most professional surveys are constructed from stratified samples rather
+    than random samples.
+  - Stratified sampling is often combined with *oversampling* of some smaller
+    strata that are of particular interest. 
+    - The LFS oversamples residents of Prince Edward Island (PEI) because a
+      national random sample would not catch enough PEI residents to accurately
+      measure PEI's unemployment rate.
+    - Government surveys typically oversample disadvantaged groups..
+  - Stratified samples can usually be handled as if they were from a random
+    sample, with some adjustments.
+- A ***cluster sample*** is gathered by dividing the population into
+  ***clusters***, randomly selecting some of these clusters, and sampling cases
+  within the cluster.  
+  - Educational data sets are often gathered this way: we pick a random sample
+    of schools, and then collect data from each student within those schools.
+  - Cluster samples can usually be handled as if they were from a random sample,
+    with some adjustments.
+- A ***census*** gathers data on every case in the population. 
+  - For example, we might have data on all fifty US states, or all ten Canadian
+    provinces, or all of the countries of the world. 
+  - Data from administrative sources such as tax records or school records often
+    cover the entire population of interest as well. 
+  - Censuses are often treated as random samples from some imaginary
+    "super-population" of cases that *could* have occured.
+- A ***convenience sample*** is gathered by whatever method is convenient.
+  - For example, we might gather a survey from people who walk by, or we might
+    recruit our friends to participate in the survey.
+  - Convenience samples are the worst-case scenario; in many cases they simply
+    aren't usable for accurate statistical analysis.
+ 
+Many data sets combine several of these elements.  For example, Canada's
+unemployment rate is calculated using data from the Labour Force Survey (LFS).
+The LFS is built from a stratified sample of the civilian non-institutionalized
+working-age population of Canada. There is also some clustering: the LFS will
+typically interview whole households, and will do some geographic clustering
+to save on travel costs. The LFS is gathered monthly, and the resulting
+unemployment rate is a time series.
+
+### Sample selection and representativeness
+
+Random samples and their close relatives have the feature that they are
+***representative*** of the population from which they are drawn. In a sense
+that will be made more clear over the next few chapters, any sufficiently large
+random sample tends to closely resemble the population.
+
+Unfortunately, a simple random sample is not always possible. Even if we are
+able to randomly select cases, we often run into the following problems:
+
+- ***Nonresponse*** occurs when a sampled individual refuses or is unable to
+  provide the information requested by the survey
+  - ***Survey-level*** nonresponse occurs when the sampled individual does not
+    answer any questions. 
+      - This can occur if the sampled individual cannot be found, refuses to
+        answer, or cannot answer (for example, is incapacitated due to illness
+        or disability).
+      - Recent response rates to telephone surveys have been around 9\%,
+        implying over 90\% of those contacted do not respond.
+  - ***Item-level*** nonresponse occurs when the sampled individual does not
+    answer a particular question.  
+    - This can occur if the respondent refuses to answer, or the question is not
+      applicable or has no valid answer.
+    - Item-level nonresponse is particularly common on sensitive questions
+      like income, illegal or socially disapproved activity, alcohol and drug
+      use, etc.
+- ***Censoring*** occurs when a particular quantity of interest cannot be
+  observed for a particular case.  Censored outcomes are extremely common in
+  economics, for example:
+    - In labour market analysis, we cannot observe the market wage for
+      individuals who are not currently employed. 
+    - In supply/demand analysis, we only observe quantity supplied and quantity
+      demanded at the current market price.
+
+When observations are subject to nonresponse or censoring, we must interpret the
+data carefully.
+
+::: example
+**Wald's airplanes**
+
+Abraham Wald was a Hungarian/American statistician and econometrician who made 
+important contributions to both the theory of statistical inference and the
+development of economic index numbers such as the Consumer Price Index. 
+
+Like many scientists of his time, he assisted the US government's war effort
+during World War II. As part of his work, his team was provided with data on
+combat damage received by airplanes, with the hopes that the data could be used
+to help make the planes more robust to damage. Planes can be reinforced with
+additional steel, but this is costly and makes them heavier and slower.
+
+The data looked something like this (this isn't the real data, just a
+visualization constructed for the example):
+
+<a title="Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept), CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg"><img width="256" alt="Survivorship-bias" src="bin/WaldPlane.png"></a>
+
+You will notice that most of the damage seems to be in the wings and in the
+middle of the fuselage (body), while there is little damage to the nose,
+engines, and back of the fuselage. You might think that means that the wings and
+middle fuselage are the areas that should be reinforced.
+
+Wald's team realized that this was wrong: the damage data was collected from
+planes *that returned*, which is not a random sample of planes that went out.
+Planes were probably shot in the nose, the engines, and the back of the fuselage
+just as often as anywhere else, but they did not appear often in the data
+because they crashed. Wald's insight led to a counter-intuitive policy
+recommendation: reinforce the parts of the plane that usually show the *least*
+damage.
+:::
+
+There are two basic solutions to nonresponse and censoring:
+
+- ***Reinterpretation***: we redefine the population so that our data
+  can be correctly interpreted as a random sample from that population.
+  - Abraham Wald's team made a distinction between a random sample of planes
+    that flew, and a random sample of planes that returned.
+  - Canadian survey data can be interpreted as a a random sample of Canadians
+    who answer surveys.
+- ***Imputation***: we assume or ***impute*** values for all missing quantities.
+  - Abraham Wald's team used its domain knowledge to assume that the
+    distribution of damage was roughly uniform across all planes that flew.
+  - We might assume that Canadians who do not respond to surveys would give
+    similar responses to those given by survey respondents.
+  - We might assume that Canadians who do not respond to surveys would give
+    similar responses to those given by survey respondents of the same age,
+    gender, and education.
+
+Like many real-world statistical issues, nonresponse and censoring do not have
+a purely technical solution.  Careful thought and domain knowledge are both
+required.  If we are imputing values, do we believe that our imputation method
+is reasonable?  If we are redefining the population, is the redefined population
+one we care about?  There are no clearly right answers to these questions, and
+sometimes our data are simply not good enough to answer our questions.
+
+::: {.fyi data-latex=""}
+**Nonresponse bias in US presidential elections**
+
+Going into both the 2016 and 2020 US presidential elections, polls indicated
+that the Democratic candidate had a substantial lead over the Republican
+candidate: 
+
+- Hillary Clinton led Donald Trump by 4-6\% nationally in 2016 
+- Joe Biden led Trump by 8\% nationally in 2020.  
+
+The actual vote was much closer:
+
+- Clinton won the popular vote (but lost the election) by 2\%
+- Biden won the popular vote (and won the election) by about 4.5\%.  
+
+The generally accepted explanation among pollsters for the clear disparity
+between polls and voting is systematic nonresponse: for some reason, Trump
+voters are less likely to respond to polls. Since most people do not respond to
+standard telephone polls any more (response rates are typically around 9\%),
+it does not take much difference in response rates to produce a large difference
+in responses.  For example, suppose that:
+
+- We call 1,000 voters
+- These voters are equally split, with 500 supporting Biden and 500
+  supporting Trump.
+- 10\% of Biden voters respond (50 voters)
+- 8\% of Trump voters respond (40 voters)
+
+The overall response rate is $90/1000 = 9\%$ (similar to what we usually see in surveys),
+Biden has the support of $50/90 = 56\%$ of the respondents while Trump has the
+support of $40/90 = 44\%$.  Actual support is even, but the polls show a 12
+percentage point gap in support, entirely because of the small difference in
+response rates.
+
+Polling organizations employ statisticians who are well aware of this problem,
+and they made various adjustments after the 2016 election to address it. For
+example, most now weight their analysis by education, since more educated people
+tend to have a higher response rate. Unfortunately, the 2020 results indicate
+that this adjustment was not enough to produce accurate predictions, and the
+2024 results faced similar problems.
 :::
 
 ## Chapter review {-#review-statistics}
