@@ -1,5 +1,14 @@
 # Statistics {#statistics}
 
+```{r setup7, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      prompt = FALSE,
+                      tidy = TRUE,
+                      collapse = TRUE)
+library("tidyverse")
+library("cowplot")
+```
+
 In earlier chapters, we learned to use Excel to construct common
 [univariate statistics and charts](#basic-data-analysis-with-excel).  We also
 learned the basics of [probability theory](#probability-and-random-events), and
@@ -53,7 +62,7 @@ from data to infer or predict other quantities that are *not* in the data.
 
 1. Statistics Canada may conduct a survey of a few thousand Canadians, and
    use statistics based on that survey to ***infer*** how the other
-   38+ million Canadians would have responded to that survey.
+   40+ million Canadians would have responded to that survey.
    - This is the main application we will consider in this course.
 2. Wal-Mart may use historical sales data to ***predict*** how many chocolate
    bunnies it will sell this Easter.  It will then use this prediction to
@@ -61,8 +70,8 @@ from data to infer or predict other quantities that are *not* in the data.
    - We will talk a little about this kind of application.
 3. Economists and other researchers will often be interested in making
    ***causal*** or ***counterfactual*** inferences.
-   - Counterfactual inferences are predictions about the data would have been
-     different under other (counterfactual) circumstances.
+   - Counterfactual inferences are predictions about how the data would have
+     been different under other (counterfactual) circumstances.
    - Economic fundamentals like supply and demand curves are primarily
      counterfactual because they describe how much would have been bought or
      sold at *each* price (not just the equilibrium price).
@@ -78,9 +87,9 @@ from data to infer or predict other quantities that are *not* in the data.
 Anyone can make predictions, and almost anyone can calculate a few statistics
 in Excel.  The hard part is making *accurate* predictions, and selecting
 or constructing statistics that will tend to produce accurate predictions.
-
-In order to make consistently accurate predictions using data, we will need to
-construct a probabilistic model of the random process that generated the data.
+In order to do that, we will need to construct a probabilistic model that
+describes both the random process that generated the data and the process we
+follow to construct predictions from the data.
 
 ::: example
 **Using data to predict roulette outcomes**
@@ -95,9 +104,10 @@ knowledge:
 
 In addition, the game is simple enough that we can do all of the calculations.
 
-What if we do not know the structure of the game, are not sure the game is fair,
-or the game is too complicated to calculate the probabilities?  If we have
-access to a data set of past results, we can use that data set to:
+But what if we do not know the structure of the game, are not sure the game is
+fair, or the game is too complicated to calculate the probabilities?
+
+If we have access to a data set of past results, we can use that data set to:
 
 1. *estimate* the win probability of various bets.
    - This application will be covered in the current chapter.
@@ -107,99 +117,172 @@ access to a data set of past results, we can use that data set to:
 
 This approach will be particularly useful for games like poker or blackjack that
 are more complex and/or involve human decision making. The win probability in
-blackjack depends on the skill of the player, so the house advantage can vary
-depending on who is playing, whether they are distracted or intoxicated, and
-various other human factors.
+blackjack depends on choices made by the player, so the house advantage can vary
+depending on who is playing, their state of mind (are they distracted,
+intoxicated, or trying to show off?), and various other human factors.
 :::
 
 ## Data and the data generating process
 
-Suppose for the rest of this chapter that we have a ***data set*** or
-***sample*** called $D_n$. In most applications, it will be a tidy rectangular
-table with $n$ observations (rows) and $K$ numeric variables (columns).
-
-For this chapter, we will simplify by assuming that $K = 1$, i.e., that
-$D_n = (x_1,x_2,\ldots,x_n)$ contains $n$ observations on a single numeric
-variable $x_i$. This case will cover all of the univariate statistics and
-methods described in the chapter on
-[basic data analysis](#basic-data-analysis-with-excel).
+We will start by assuming for the rest of this chapter that we have a
+***data set*** or ***sample*** called $D_n$. In most applications, it will be
+a [tidy data set](#tidy-data) with $n$ observations (rows) and $K$ numeric
+variables (columns). For this chapter, we will further simplify by assuming that
+$K = 1$, i.e., that $D_n = (x_1,x_2,\ldots,x_n)$ contains $n$ observations on a
+single numeric variable $x_i$. This case will cover all of the univariate
+statistics and methods described in
+[Chapter 3: Basic data analysis with Excel](#basic-data-analysis-with-excel).
 
 ::: example
 **Data from two roulette games**
 
-Suppose we have a data set $D_n$ providing the result of $n$ independent games
-of roulette.  Let $b_i$ be the number the ball lands on in game $i$, and let
-$x_i$ be the result of a bet on red:
+Suppose we have a data set $D_n$ providing the result of $n = 2$ independent
+games of roulette.  Let $x_i$ be the result of a bet on red:
 \begin{align}
   x_i = \begin{cases} 1 & \textrm{if Red wins game } i \\ 0 & \textrm{if Red loses game } i \\ \end{cases}
 \end{align}
-Suppose our data set has observations from two games ($n = 2$). Then
-$D_2 = (x_1,x_2)$ where $x_1$ is the result from the first game and $x_2$ is the
-result from the second game.  For example, suppose red loses the first game and
-wins the second game. Then our data could be written in tabular form as:
+Then $D_n = (x_1,x_2)$ where $x_1$ is the result from the first game and $x_2$
+is the result from the second game.
+
+For example, suppose red wins the first game and loses the second game. Then our
+data could be written in a table as:
 
 | Game \# ($i$) | Result of bet on red ($x_i$) |
 |:--------------|:----------------------------:|
-|      1        |       0                      |
-|      2        |       1                      |
+|      1        |       1                      |
+|      2        |       0                      |
 
-or in a list as $D_2 = (0,1)$.
+or in a list as $D_n = (1,0)$.
+
+This is the simplest possible example, so we can learn the concepts with the
+least possible amount of arithmetic. To make sure you understand the examples
+in this chapter, re-do them with the *three*-game data set $D_n = (0,1,0)$.
 :::
 
-Our data set $D_n$ is a table or list of *numbers*, but we can also think of it
+### Data as random variables 
+
+Our data set $D_n$ is a table or list of *numbers*. We can also think of it
 as a set of *random variables* with an unknown joint PDF $f_D$.  This PDF is
-sometimes called the ***data generating process*** or DGP for the data set. The
-exact DGP is usually unknown, but we usually have some information about it.
+sometimes called the ***data generating process*** or DGP for the data set.
+
+This is the fundamental conceptual step in the entire course, so you should
+pause for a moment to make sure you understand it. We are thinking of our data
+set as two distinct things:
+
+1. The specific set of numbers in front of us.
+2. The outcome of some random process that generated those specific numbers this
+   time, but could easily have generated other numbers instead.
+
+The goal of statistical analysis is to use the specific set of numbers in front
+of us to learn something new about the random process that generated
+those specific numbers.
 
 ::: example
-**The DGP for the roulette data**
+**The DGP for our roulette data**
 
-The support of our roulette data set includes four possible values:
+The DGP of our two-game roulette data set is just the joint PDF of
+$D_n=(x_1,x_2)$:
+\begin{align}
+  f_D(a,b) &= \Pr(x_1 = a \cap x_2 = b)
+\end{align}
+where $a$ and $b$ are any real numbers.
+:::
+
+### The support of a data set 
+
+The support of the data set $D_n = (x_1,x_2,\ldots,x_n)$ is just the set of all
+length-$n$ sequences of numbers that can be constructed from the support of
+$x_i$. There are $|S_x|^n$ such sequences, where $S_x$ is the support of $x_i$.
+
+::: example
+**The support for our roulette data**
+
+Our two-game roulette data set has a discrete support that includes four
+possible values:
 \begin{align}
   S_D = \{(0,0), (0,1), (1,0), (1,1)\}
 \end{align}
-The DGP is just the joint PDF of $D_n$, which we can calculate for each value in
-the support:
+Note that the order matters here: the outcome $(0,1)$ (red loses game 1 and wins
+game 2) is a different outcome from $(1,0)$ (red wins game 1 and loses game 2).
+:::
+
+Most real-world data sets have enormous support. For example, our roulette data
+set is just about the simplest possible meaningful data set, but the support
+for a data set with 100 games would have 
+$2^{100} = 1,267,650,600,228,229,401,496,703,205,376$ distinct values. Most
+data sets we analyze have many more observations and many more variables than
+that, so their support would be even larger.
+
+### The DGP
+
+The exact DGP is usually unknown. But in many cases, we know something about
+the underlying process and can make some reasonable assumptions based on what
+we know. This can simplify the DGP in ways that will be helpful.
+
+::: example
+**Simplifying the DGP of our roulette data**
+
+The DGP for our two-game roulette data set involves four[^702] unknown joint
+probabilities. 
+
+[^702]: It might be more accurate to say it involves only three unknown
+probabilities. Since we know the probabilities will sum up to one, if we know
+three of the four we can calculate the fourth.
+
+Based on what we know about the game of roulette, we can reasonably assume that
+results of different games are independent and that red has the same win
+probability in each game. Then the DGP can be written:  
 \begin{align}
   f_D(0,0) &= \Pr(x_1 = 0 \cap x_2 = 0) \\
-    &= \Pr(x_1 = 0)\Pr(x_2 = 0) \\
-    &= (1-p)^2 \\
+           &= \Pr(x_1 = 0) *\Pr(x_2 = 0) \qquad \textrm{(by independence)}\\
+           &= (1-p)^2 \\
   f_D(0,1) &= \Pr(x_1 = 0 \cap x_2 = 1) \\
-    &= \Pr(x_1 = 0)\Pr(x_2 = 1) \\
-    &= (1-p)p \\
+           &= \Pr(x_1 = 0) *\Pr(x_2 = 1) \qquad \textrm{(by independence)}\\
+           &= (1-p)*p \\
   f_D(1,0) &= \Pr(x_1 = 1 \cap x_2 = 0) \\
-    &= \Pr(x_1 = 1)\Pr(x_2 = 0) \\
-    &= p(1-p) \\
+           &= \Pr(x_1 = 1) *\Pr(x_2 = 0) \qquad \textrm{(by independence)}\\
+           &= p*(1-p) \\
   f_D(1,1) &= \Pr(x_1 = 1 \cap x_2 = 1) \\
-    &= \Pr(x_1 = 1)\Pr(x_2 = 1) \\
-    &= p^2 \\
+           &= \Pr(x_1 = 1) *\Pr(x_2 = 1) \qquad \textrm{(by independence)}\\
+           &= p^2 \\
   f_D(a,b) &= 0 \qquad \textrm{otherwise}
 \end{align}
 where $p = \Pr(x_i = 1)$ is the unknown probability that a bet on red wins.
+
+Note that the DGP of $D_n$ is still unknown, but now it can be described in
+terms of a single unknown parameter $p$ rather than the full set of four unknown
+joint probabilities.
 :::
 
 While it is feasible to calculate the DGP for a very small data set, it
-quickly becomes impractical^[To get an idea what I mean by "impractical", the
-support of $D_n$ has $|S_x|^n$ possible values, where $|S_x|$ is the number of
-values in the support of $x_i$ and $n$ is the sample size. If our roulette data
-set had results from 100 games (this would still be a fairly small sample in
-economics), this would mean we need to calculate the joint PDF for 
-$2^{100} \approx 1.3 \times 10^30$ (that's a one followed by 30 zeros) different
-combinations.] to do so as the number of observations increase. Fortunately, we
-don't usually need to calculate the DGP.  We just need to know that it *could*
-be calculated.
+quickly becomes impractical to do so as the number of observations increase
+and the set of possibilities to consider becomes enormous. Fortunately, we
+rarely need to calculate the DGP.  We just need to understand that it *could* be
+calculated.
 
 ### Simple random sampling
 
-In most applications, we can simplify the DGP by assuming that $D_n$ is
+In most applications, we assume that $D_n$ is
 ***independent and identically distributed*** (IID) or a
 ***simple random sample*** from a large ***population***. A simple random sample
 has two features:
 
-1. The observations are **independent**: Each $x_i$ is an independent random
+1. All observations are **independent**: Each $x_i$ is an independent random
    variable.
-2. The observations are **identically distributed**: Each $x_i$ has the same
+2. All observations are **identically distributed**: Each $x_i$ has the same
    (unknown) marginal distribution.
+
+Random sampling dramatically simplifies the DGP. The joint PDF of a simple
+random sample can be written:
+\begin{align}
+  \Pr(D_n = (a_1,a_2,\ldots,a_n)) = f_x(a_1)f_x(a_2)\ldots f_x(a_n)
+\end{align}
+where $f_x(a) = \Pr(x_i = a)$ is just the marginal PDF of a single observation.
+Independence allows us to write the joint PDF as the product of the marginal
+PDFs for each observation, and identical distribution allows us to use the same
+marginal PDF for each observation. This reduces the number of unknown numbers
+in the DGP from $|S_x|^n$ (the support of $D_n$) to $|S_x|$
+(the support of $x$, which is much smaller).
 
 The reason we call this "independent and identically distributed" is hopefully
 obvious, but what does it mean to say we have a "random sample" from a
@@ -214,8 +297,8 @@ obvious, but what does it mean to say we have a "random sample" from a
      select cases from a list.
 3. Collect data from every case in our sample.
 
-It turns out that a moderately-sized random sample provides surprisingly
-accurate information on the underlying population.
+This process will generate a data set that is independent and identically
+distributed.
 
 [^602]: As a technical matter, the assumption of independence requires
   that we sample *with replacement*. This means we allow
@@ -226,20 +309,12 @@ accurate information on the underlying population.
 ::: example
 **Our roulette data is a random sample**
 
-Each observation $x_i$ in our roulette data is an independent random draw from
-the $Bernouilli(p)$ distribution where $p = \Pr(\textrm{Red wins})$.
+Each observation $x_i$ in our two-game roulette data set is an independent
+random draw from the $Bernouilli(p)$ distribution where
+$p = \Pr(\textrm{Red wins})$.
 
 Therefore, this data set satisfies the criteria for a simple random sample.
 :::
-
-The joint PDF of a simple random sample can be written:
-\begin{align}
-  \Pr(D_n = (a_1,a_2,\ldots,a_n)) = f_x(a_1)f_x(a_2)\ldots f_x(a_n)
-\end{align}
-where $f_x(a) = \Pr(x_i = a)$ is just the marginal PDF of a single observation.
-Independence allows us to write the joint PDF as the product of the marginal
-PDFs for each observation, and identical distribution allows us to use the same
-marginal PDF for each observation.
 
 Random sampling is at the core of basic statistical analysis for two reasons:
 
@@ -254,12 +329,12 @@ random sampling will be discussed later in this chapter.
 ## Statistics and their properties
 
 A ***statistic*** is just a number $s_n =s(D_n)$ that is calculated from the
-data. In general, each statistic is:
+data. In general, the value of any statistic is:
 
-  - Observed since $D_n$ is observed.
+  - Observed/known since the data set $D_n$ is observed/known.
   - A random variable with a probability distribution that is *well-defined* but
-    *unknown*.  This is because $D_n$ is a set of random variables with a
-    well-defined but unknown joint probability distribution.
+    *unknown*.  This is because the data set $D_n$ is a set of random variables
+    with the same characteristics.
 
 I will use $s_n$ to represent a generic statistic, but we will often use
 other letters to talk about specific statistics.
@@ -267,14 +342,24 @@ other letters to talk about specific statistics.
 ::: example
 **Roulette wins**
 
-In our two-observation roulette data, the total number of wins is:
+In our two-game roulette data set, the total number of wins is:
 \begin{align}
   R = x_1 + x_2
 \end{align}
 Since this is a number calculated from our data, it is a statistic.
 
-Since the observations are independent draws from the $Bernoulli(p)$
-distribution, the total number of wins has the $Binomial(2,p)$ distribution.
+We can think of $R$ as a specific value for our specific data set
+$D_n = (1,0)$:
+\begin{align}
+  R = 1 + 0 = 1
+\end{align}
+We can also think of it as a random variable whose value would have been
+different if the data were different. Since $x_1$ and $x_2$ are
+independent draws from the $Bernoulli(p)$ distribution, the total number of
+wins has a binomial distribution:
+\begin{align}
+  R \sim Binomial(2,p)
+\end{align}
 This distribution is unknown because the true value of $p$ is unknown.
 :::
 
@@ -337,20 +422,32 @@ We can calculate the usual summary statistics for our two-game roulette data:
 :::
 
 
+
+
 ### The sampling distribution
 
-Since the data itself is a collection of random variables, any statistic
-calculated from that data is also a random variable, with a probability
-distribution that can be derived from the DGP. 
+We call the probability distribution of a statistic its
+***sampling distribution***. In principle, the sampling distribution of any
+statistic can be directly derived from the DGP of its data. The sampling
+distribution is therefore:
+
+- Unknown since the DGP $f_D$ is unknown.
+- Fixed (non-random) since the DGP is a function $f_D$ and not a random
+  variable.
+
+In practice, the sampling distribution is difficult to calculate outside of a
+few simple examples. The important part is to understand what a sampling
+distribution is, that every statistic has one, and that it depends on the
+(usually unknown) DGP.
 
 ::: example
-**The sampling distribution of the sample average in the roulette data**
+**The sampling distribution of the sample average in our roulette data**
 
-Returning to our two-observation roulette data, the sample average is:
+In our two-game roulette data set, the sample average is:
 \begin{align}
   \bar{x} = \frac{1}{2} (x_1 + x_2)
 \end{align}
-Since there are four possible values of $(x_1,x_2)$ we can determine the
+Since there are four possible values of $(x_1,x_2)$, we can determine the
 sampling distribution of the sample average by enumeration.
 
 | Data ($D_2$) | Probability ($f_D$) | Sample Average ($\bar{x}$) |
@@ -360,69 +457,87 @@ sampling distribution of the sample average by enumeration.
 | $(1,0)$      | $p(1-p)$            | $0.5$                      |
 | $(1,1)$      | $p^2$               | $1.0$                      |
 
-Therefore the sampling distribution of $\bar{x}$ can be described by the PDF:
+Therefore, the sampling distribution of $\bar{x}$ in this data set can be
+described by the PDF:
 \begin{align}
-  f_{\bar{x}}(a) &= \begin{cases}
-    (1-p)^2 & \textrm{if $a=0$} \\
-    2p(1-p) & \textrm{if $a=0.5$} \\
-    p^2 & \textrm{if $a=1$} \\
-    0 & \textrm{otherwise} \\
-    \end{cases}
+  f_{\bar{x}}(a) \equiv Pr(\bar{x}=a) 
+    &= \begin{cases}
+       (1-p)^2 & \textrm{if $a=0$} \\
+       2p(1-p) & \textrm{if $a=0.5$} \\
+       p^2 & \textrm{if $a=1$} \\
+       0 & \textrm{otherwise} \\
+       \end{cases}
 \end{align}
+and the support of $\bar{x}$ is $S_{\bar{x}} = \{0,0.5,1\}$.
 :::
-
-Unfortunately, most statistics typically have sampling distributions that are 
-quite difficult to calculate for the same reason the DGP is quite difficult to
-calculate: there are just too many possible values. Again, the important part
-is to understand what a sampling distribution is, that every statistic has one,
-and that it depends on the (usually unknown) DGP.
 
 ### The mean {#the-mean-of-a-statistic}
 
-If our statistic has a probability distribution, it (usually) has a mean and
-variance as well.
+Since a statistic has a probability distribution, it has an expected value[^701]
+(mean).
+
+[^701]: All random variables we will see in this course will have an expected
+value, but it is possible for a random variable to have a well-defined PDF but
+not a well-defined expected value. For example, if $x \sim N(0,1)$, then $y=1/x$
+has this property.
+
 
 ::: example
 **The mean of the sample average in the roulette data**
 
-We can calculate the expected value of $\bar{x}$ in the two-observation roulette
-data directly from the PDF derived in the previous example:
+We can calculate the expected value of $\bar{x}$ in the two-game roulette
+data set directly from its PDF, which we derived in the previous example:
 \begin{align}
-  E(\bar{x}) &= 0 \times f_{\bar{x}}(0) + 0.5 \times f_{\bar{x}}(0.5) + 1 \times f_{\bar{x}}(1) \\
+  E(\bar{x}) &= \sum_{a \in S_{\bar{x}}} a f_{\bar{x}}(a) \\ 
+    &= 0 \times f_{\bar{x}}(0) + 0.5 \times f_{\bar{x}}(0.5) + 1 \times f_{\bar{x}}(1) \\
     &= 0 \times (1-p)^2 + 0.5 \times 2p(1-p) + 1.0 \times p^2 \\
     &= p
 \end{align}
-Notice that $E(x_i) = p$ as well.  This is a special case of a more general
-result that will be developed below.
 :::
 
 As mentioned earlier, it is often impractical or impossible to calculate the
-sampling distribution for a given statistic.  Fortunately, the mean is usually
-much easier to calculate.
+complete sampling distribution for a given statistic.  Fortunately, we do not
+always need the complete sampling distribution to calculate the mean.
 
-In particular, suppose we have a simple random sample of size $n$ on the random
-variable $x_i$ with unkown mean $E(x_i) = \mu_x$. Then the mean of the sample
-average is:
+::: {.example #mean-of-sample-average}
+**Another way to find the mean of the sample average**
+
+The sample average is just a sum, so in our two-game roulette data set:
+\begin{align}
+  E(\bar{x}) &= E\left(\frac{1}{2}(x_1 + x_2)\right)  \\
+             &= \frac{1}{2}\left(E(x_1) + E(x_2)\right) \qquad \textrm{by linearity} \\
+             &= \frac{1}{2} (p + p)  \quad \textrm{since $E(x_i)=p$} \\
+             &= p
+\end{align}
+Note that this is the same answer as we derived directly from the PDF.
+:::
+
+The results in Example \@ref(exm:mean-of-sample-average) can be generalized to
+apply to any sample average in a random sample. More specifically, suppose we
+have a simple random sample of size $n$ on the random variable $x_i$ with
+unknown mean $E(x_i) = \mu_x$. Then the expected value of the sample average is:
   \begin{align}
-    E(\bar{x}_n) &= E\left( \frac{1}{n} \sum_{i=1}^n x_i\right) \\
+    E(\bar{x}) &= E\left( \frac{1}{n} \sum_{i=1}^n x_i\right) \\
       &= \frac{1}{n} \sum_{i=1}^n E\left( x_i\right) \\
       &= \frac{1}{n} \sum_{i=1}^n \mu_x \\
       &= \mu_x
   \end{align}
-Notice that we took advantage of the fact that the sample average is a linear
-function of the $x_i$'s, so we can take the expected value "inside" of that
-function. This is an important and fairly general result in statistics -
-although we have derived it here for the specific case of a simple random
-sample, it applies for many other common sampling schemes.
+This is an important result in statistics, so you should follow it step-by-step
+to make sure you understand.  If you are struggling with it, look at the simple
+example first. The key is to recognize that the sample average is a sum, and
+so we can apply the linearity of the expected value. We have derived this result
+for the specific case of a simple random sample, but it applies for many other
+common sampling schemes.
 
 ### The variance {#the-variance-of-a-statistic}
 
-The variance of a statistic can also be calculated in many cases.
+Statistics also have a variance and a standard deviation, and they are often
+easy to calculate.
 
-::: example
+::: {.example #variance-of-sample-average}
 **The variance of the sample average in the roulette data**
 
-In the two-observation roulette data, the variance of the sample average is:
+In our two-game roulette data set, the variance of the sample average is:
   \begin{align}
     var(\bar{x}) &= var\left(\frac{1}{2}(x_1 + x_2)\right) \\
       &= \left(\frac{1}{2}\right)^2 var(x_1 + x_2) \\
@@ -432,47 +547,57 @@ In the two-observation roulette data, the variance of the sample average is:
       &= \frac{var(x_i)}{2}
   \end{align}
 
-Notice that $var(\bar{x}_n) < var(x_i)$. Averages are typically less variable
+Notice that $var(\bar{x}) < var(x_i)$. Averages are typically less variable
 than the thing they are averaging.
 :::
 
-In general, we can prove that the sample average in a random sample of size $n$
-has variance:
+The result in Example \@ref(exm:variance-of-sample-average) can be generalized
+to the variance of any sample average in a random on the random variable $x_i$
+with mean $E(x_i)=\mu_x$ and variance $var(x_i)=\sigma^2$. Then:
 \begin{align}
-  var(\bar{x}_n) = \frac{\sigma_x^2}{n}
+  var(\bar{x}) &= \frac{\sigma_x^2}{n} \\
+  sd(\bar{x}) &= \frac{\sigma_x}{\sqrt{n}}
 \end{align}
-where $\sigma_x^2 = var(x_i)$. Similarly the standard deviation of the sample
-average in a random sample of size $n$ is $\sigma_x/\sqrt{n}$.
+I won't ask you to prove this, but the proof is just a longer version of Example
+\@ref(exm:variance-of-sample-average) above.
+
+::: warning
+**Random variables, expected values, and statistics**
+
+Before proceeding, be sure you understand the distinction between:
+
+- The sample average $\bar{x}$ and the value of a single observation $x_i$.
+- The expected values $\mu_x = E(x_i)$ and $E(\bar{x})$.
+- The variances $\sigma_x^2 = var(x_i)$ and $var(\bar{x})$.
+
+One particularly common mistake is to confuse $\bar{x}$ and $\mu_x$.
+:::
+
 
 ## Estimation {#estimation}
 
-One of the most important uses of statistics is to estimate, or guess the value of, some unknown feature of the population or DGP. Anyone can make a guess,
-but using data to make accurate guesses requires some attention to the details.
+One of the most important uses of statistics is to estimate, or guess the value of, some unknown feature of the population or DGP. 
 
 ### Parameters
 
 A ***parameter*** is an unknown number $\theta = \theta(f_D)$ whose value
-depends on the DGP. In general, each parameter's value is:
+depends on the DGP. Since a parameter is constructed from the DGP, its
+value is:
 
-- Unobserved/unknown since its value depends on the unknown DGP $f_D$.
-- Fixed (not random) since the DGP $f_D$ is a fixed function and not a random
+- Unobserved/unknown since the DGP $f_D$ is unknown.
+- Fixed (not random) since the DGP $f_D$ is a function and not a random
   variable.
 
 I will use $\theta$ to represent a generic parameter, but we will often use
 other letters to talk about specific parameters.
-
-For example, we might have a random sample of size $n$ on the random variable
-$x_i$, and we can define the parameter $\mu = E(x_i)$. Like all expected values,
-$\mu$ is a number, and we could determine its value if we knew the true DGP.
-But we do not know the true DGP, and so we do not know the value of $\mu$.
 
 ::: example
 **Examples of parameters**
 
 Sometimes a single parameter completely describes the DGP:
 
-- In our roulette data set, the joint distribution of the data depends only on
-  the (known) sample size $n$ and the single (unknown) parameter
+- In our two-game roulette data set, the joint distribution of the data depends
+  only on the (known) sample size $n$ and the single (unknown) parameter
   $p = \Pr(\textrm{Red wins})$.
   
 Sometimes a group of parameters completely describe the DGP:
@@ -484,45 +609,61 @@ And sometimes a parameter only partially describes the DGP
 
 - If $x_i$ is a random sample from some unknown distribution with unknown mean
   $\mu_x = E(x_i)$, then $\mu_x$ is a parameter.
-- If $x_i$ is a random sample from some unknown distribution with unknown median
-  $m_x$, then $m_x$ is a parameter.
+- If $x_i$ is a random sample from some unknown distribution, then
+  $f_5 = \Pr(x = 5)$ is a parameter.
 :::
 
 Typically there will be particular parameters whose value we wish to know. Such
-a parameter is called a ***parameter of interest***. Our model may include other
+a parameter is called a ***parameter of interest***. The DGP may include other
 parameters, which are typically called *auxiliary parameters* or
 *nuisance parameters*. 
 
 ### Estimators
 
-An ***estimator*** is a statistic $\hat{\theta}_n = \hat{\theta}(D_n)$ that is
+An ***estimator*** is any statistic $\hat{\theta}_n = \hat{\theta}(D_n)$ that is
 used to ***estimate*** (guess at the value of) an unknown parameter of interest
-$\theta$.  Since it is a statistic constructed from $D_n$, an estimator is
-generally:
+$\theta$. Since an estimator is constructed from $D_n$, its value is:
 
-  - Observed since $D_n$ is observed.
-  - A random variable with a well-defined but unknown probability distribution.
+  - Observed/known since the data set $D_n$ is observed/known.
+  - A random variable with a well-defined but unknown probability distribution
+    since the data set $D_n$ also has those properties.
 
 I will use $\hat{\theta}$ to represent a generic estimator, but we will often
 use other notation to talk about specific estimators. The circumflex or "hat"
 $\hat{\,}$ notation is commonly used to identify an estimator.
 
 ::: example
-**Two estimators for the mean of a random sample**
+**Two estimators for the win probability**
 
-Suppose we have a random sample of size $n$ on the random variable $x_i$ with
-unknown mean $\mu_x = E(x_i)$ and unknown variance $\sigma_x^2 = var(x_i)$.
-We will consider two estimators for the unknown parameter $\mu_x$:
+Consider our two-game roulette data set $D_n = (x_1,x_2) = (0,1)$, and suppose
+our parameter of interest is the win probability $p$. I will propose two
+estimators for $p$:
 
-1. The sample average $\bar{x}_n$.
-2. The value of the first observation $x_1$.
+1. The sample average:
+   \begin{align}
+     \bar{x} &= \frac{1}{2} (x_1 + x_2) \\
+               &= \frac{1}{2} (0 + 1) \\
+               &= 0.5
+   \end{align}
+2. The value of the first observation:
+   \begin{align}
+     x_1 &= 1
+   \end{align}
 
-These are both statistics calculated from the data, so they are both valid
-estimators for $\mu_x$.
+These are both statistics calculated from the data, so they are both potential
+estimators for $p$.
 :::
 
-In addition to the usual properties of a statistic, estimators have properties
-specific to their purpose of representing the unknown parameter of interest.
+An estimator is just a guess; any statistic can be used as as an estimator of
+any parameter. But we need to pick a specific guess, and we want our guess to
+be an accurate one. So we will need some kind of ***criterion*** that allows
+us to compare different statistics and choose the statistic that represents
+the "best" estimator of a particular parameter.
+
+Intuitively, a good estimator is one that is unlikely to be very different from
+the true value of the unknown parameter.  We can quantify "unlikely" and
+"very different" more precisely by introducing the concepts of sampling error,
+bias, and mean squared error.
 
 ### Sampling error
 
@@ -534,70 +675,90 @@ parameter of interest $\theta$.  We can define its ***sampling error*** as:
 In principle, we want $\hat{\theta}_n$ to be a good estimator of $\theta$, i.e.,
 we want the sampling error to be as close to zero as possible.  
 
-There are several major complications to keep in mind:
+Since the sampling error depends on *both* the estimator $\hat{\theta}_n$ and
+the true parameter value $\theta$, its value is:
 
-1. Since $\hat{\theta}_n$ is a random variable with a probability distribution,
-   $err(\hat{\theta}_n)$ is also a random variable with a probability
-   distribution.
-2. Since the value of $\theta$ is unknown, the value of $err(\hat{\theta}_n)$
-   is also unknown.
+1. Unknown/unobservable since $\theta$ is unknown.
+2. Random since $\hat{\theta}_n$ is random.
 
 Always remember that $err(\hat{\theta}_n)$ is not an inherent property of the
 statistic - it depends on the relationship between the statistic and the
 parameter of interest. A given statistic may be a good estimator of one
 parameter, and a bad estimator of another parameter.
 
+::: example
+**Sampling error for our two estimators**
+
+The sampling error for our two estimators is:
+\begin{align}
+  err(\bar{x}) &= \bar{x} - p \\
+               &= 0.5 - p \\
+  err(x_1) &= x_1 - p \\
+               &= 1 - p \\
+\end{align}
+Notice that these are random variables but we do not know their values
+since they depend on the unknown parameter $p$.
+:::
+
 ### Bias 
 
-Since any statistic can be used to estimate any parameter, we need to choose
-one. In choosing an estimator, we can consider several criteria.
-
-The first is the ***bias*** of the estimator, which is defined as its expected
-sampling error:
+The ***bias*** of an estimator is defined as its expected sampling error:
 \begin{align}
   bias(\hat{\theta}_n) &= E(err(\hat{\theta}_n)) \\
     &= E(\hat{\theta}_n - \theta) \\
     &= E(\hat{\theta}_n) - \theta
 \end{align}
-Note that bias is a property of the sampling error, so it is always defined
-relative to the parameter we wish to estimate, and is not an inherent property
-of the statistic.
-
 Ideally we would want $bias(\hat{\theta}_n)$ to be zero, in which case we would
 say that $\hat{\theta}_n$ is an ***unbiased*** estimator of $\theta$.
 
 ::: example
-**Two unbiased estimators of the mean**
+**Two unbiased estimators**
 
-Consider a random sample of size $n$ on the random variable $x_i$ with unknown
-mean $\mu_x = E(x_i)$.
-
-The sample average is an unbiased estimator of $\mu_x$ since:
+In our two-game roulette data, the bias of the sample average as an estimator
+of $p$ is:
 \begin{align}
-  bias(\bar{x}_n) &= E(\bar{x}_n) - \mu_x \\
-    &= \mu_x - \mu_x \\
+  bias(\bar{x}) &= E(\bar{x}) - p \\
+    &= p - p \\
     &= 0
 \end{align}
-The first observation is also an unbiased estimator of $\mu_x$ since:
+and the bias of the first observation is:
 \begin{align}
-  bias(x_1) &= E(x_1) - \mu_x \\
-    &= \mu_x - \mu_x \\
+  bias(x_1) &= E(x_1) - p \\
+    &= p - p \\
     &= 0
 \end{align}
-This example illustrates a general principle: there is rarely exactly one
-unbiased estimator.  There are either none, or many.
+Therefore, both of these estimators are unbiased. This example illustrates a
+general principle: there is rarely exactly one unbiased estimator.  There are
+either none, or many.
 :::
 
+More generally, suppose we have a random sample of size $n$ on some
+random variable $x_i$ with mean $E(x_i) = \mu_x$.  We earlier showed in this
+case that:
+\begin{align}
+  E(\bar{x}) &= \mu_x
+\end{align}
+So the sample average $\bar{x}$ is an unbiased estimator of $\mu_x$:
+\begin{align}
+  bias(\bar{x}) &= E((\bar{x}) - E(x_i) \\
+      &= \mu_x - \mu_x \\
+      &= 0
+\end{align}
+This is true for any random sample and any random variable $x_i$.
+
 If the bias is nonzero, we would say that $\hat{\theta}_n$ is a ***biased***
-estimator of $\theta$.
+estimator of $\theta$. In general, the exact amount of bias of a particular
+biased estimator is hard to know - it typically depends on the unknown true DGP.
+But sometimes we can say something about its direction, or about how it relates
+to specific parameters of the DGP.
 
 ::: example
 **A biased estimator of the median**
 
-Consider our two-observation roulette data, and suppose we are interested in
-estimating the median of $x_i$. Applying our
-[definition of the median](#the-median) from an earlier chapter,
-the median of $x_i$ would be:
+Consider our two-game roulette data set, and suppose we wish to estimate the
+(population) median of $x_i$. Applying our
+[definition of the median](#the-median) from an earlier chapter, the median of
+$x_i$ is:
 \begin{align}
   m &= \begin{cases}
     0 & \textrm{if $p \leq 0.5$} \\
@@ -625,8 +786,28 @@ So its bias as an estimator of $m$ is:
       p-1 & \textrm{if $p > 0.5$} \\
       \end{cases}
 \end{align}
-This is nonzero (unless $p$ is zero or one), so the sample median is a biased
-estimator of the median in this case.
+The figure below shows the true population median (in blue), the expected value
+of the sample median (in orange), and the bias (in red).  As you can see, the
+bias is nonzero for most values of $p$, but its direction and magnitude vary.
+```{r medex, fig.cap = "*The sample median is a biased estimator*"}
+medex <- tibble(p=seq(from=0,to=1,length.out=400),
+                      m=as.integer(p > 0.5),
+                      bias=p-m)
+ggplot(data=medex,mapping=aes(x=p,y=m)) +
+  geom_step(col = "navy",linewidth=1) +
+  geom_line(aes(y=p),col="darkorange",alpha=0.4,linewidth=2) +
+  geom_line(aes(y=bias),col="red",linetype=2,linewidth=1) +
+  geom_text(x=0.43,y=0.9,col="navy",label="Median") +
+  geom_text(x=0.83,y=0.6,col="darkorange",label="E(sample median)") +
+  geom_text(x=0.6,y=-0.25,col="red",label="Bias") +
+  xlab("Win probability (p)") +
+  ylab("") +
+  labs(title = "The sample median is a biased estimator", 
+       subtitle = "Two-game roulette example", 
+       caption = "", 
+       tag = "")
+```
+
 
 This result applies more generally: the sample median is typically a biased
 estimator of the median. It is still the most commonly-used estimator for the
@@ -635,62 +816,71 @@ median, for reasons we will discuss soon.
 
 ### Variance and the MVUE
 
-If there are multiple unbiased estimators available for a given parameter, we
-need to apply a second criterion to choose one.  A natural second criterion is
-the ***variance*** of the estimator:
+We usually prefer unbiased estimators to biased estimators, but that isn't
+enough to pick an estimator. In general, if we can find one unbiased estimator
+there are usually many others. So we need to apply at least one more criterion.
+
+A natural second criterion is the ***variance*** of the estimator:
 \begin{align}
   var(\hat{\theta}_n) = E[(\hat{\theta}_n-(E(\hat{\theta}_n))^2]
 \end{align}
-Why do we care about the variance? A low variance means that $\hat{\theta}_n$
-is usually close to its own expected value.  If $\hat{\theta}_n$ is unbiased,
-then that means it is also close to $\theta$. So low variance is preferable to
-high variance, at least when comparing unbiased estimators.
+Why do we care about the variance? 
+
+- If $\hat{\theta}_n$ is unbiased, then $E(\hat{\theta}_n)=\theta$.
+- Lower variance means that $\hat{\theta}_n$ is typically closer to
+  $E(\hat{\theta}_n)$.
+
+Therefore, among unbiased estimators, lower-variance estimators are preferable
+because they are typically closer to the true parameter value. We can put this
+idea into a formal criterion which is called the "MVUE".
 
 The ***minimum variance unbiased estimator*** (MVUE) of a parameter is the
 unbiased estimator with the lowest variance, and the ***MVUE criterion*** for
 choosing an estimator says to choose the MVUE.
 
 ::: example
-**The variance of two estimators of the mean**
+**The variance of two unbiased estimators**
 
-Suppose we have a random sample of size $n > 1$ on the random variable $x_i$
-with unknown mean $\mu_x = E(x_i)$ and unknown variance $\sigma_x^2 = var(x_i)$.
+Returning to our two-game roulette data set, we earlier showed that the sample
+average $\bar{x}$ and the first observation $x_1$ are both unbiased estimators
+of $p$.  We can select the "better" estimator by applying the MVUE criterion.
 
-We earlier showed that the sample average $\bar{x}_n$ and the first observation
-$x_1$ are both unbiased estimators of $\mu_x$.  We can select the "better"
-estimator by applying the MVUE criterion.
-
-The variance of the sample average is:
+The first step is to calculate the variances, which we did in an earlier
+example:
 \begin{align}
-  var(\bar{x}_n) = \sigma_x^2/n
+  var(\bar{x}) = \frac{var(x_i)}{2}
 \end{align}
 and the variance of the first observation estimator is:
 \begin{align}
-  var(x_1) = \sigma_x^2
+  var(x_1) = var(x_i)
 \end{align}
-Since $\bar{x}_n$ has lower variance for all $n > 1$, it is the preferred
-estimator of these two unbiased estimators under the MVUE criterion.
+The second step is to compare the variances. Since $var(\bar{x}) < var(x_1)$,
+and both estimators are unbiased, we can say that $\bar{x}$ is the preferred
+estimator by the MVUE criterion.
 :::
 
 ### Mean squared error
 
-Unfortunately, once we move beyond the simple case of the sample average, we run
-into several complications:
+Once we move beyond the simple case of the sample average, we run
+into two major complications:
 
-The first complication is that an unbiased estimator may not exist for a
-particular parameter of interest. If there is no unbiased estimator, there is no
-MVUE. So we need some other way of choosing an estimator.  
+1. *No unbiased estimator*: An unbiased estimator may not exist for a particular
+   parameter of interest.
 
-::: example
-**The sample median**
+   - For example, there is no unbiased estimator of the median, or of any other
+     quantile.
+   - If there is no unbiased estimator, there is no MVUE.
+   - So we need some other way of choosing an estimator.  
 
-There is no generally unbiased estimator of the median of a random variable with
-unknown distribution.
-:::
+2. *Bias/variance trade-off*: Sometimes we have both an unbiased estimator with
+   high variance and another estimator with much lower variance but just a
+   little bit of bias.
+   
+   - A detailed example of this case is provided below. 
+   - Here, the unbiased estimator is the MVUE.
+   - But we may not be happy with this choice if the bias is small enough and
+     the variance of the unbiased estimator is large enough.
 
-The second complication is that we often have access to an unbiased estimator
-and a biased estimator with lower variance. Depending on the details, the biased
-estimator may be clearly preferable to the unbiased estimator.
 
 ::: example
 **The relationship between age and earnings**
@@ -719,9 +909,11 @@ options, including:
   - Average earnings of the 100 30-39 year olds in our data.
   - Average earnings of the 800  0-80 year olds in our data. 
 
-By widening the age range, these averages will have lower variance but will
+Widening the age range will reduce the variance of these averages, but will
 introduce bias (since they have added people that are not exactly like
-35-year-olds).
+our target population of 35-year-olds). It is not clear which age range will
+tend to produce the most accurate estimator of the parameter of interest
+(average earnings of 35 year olds in Canada).
 :::
 
 This set of issues implies that we need a criterion that:
@@ -734,22 +926,37 @@ The ***mean squared error*** of an estimator is defined as the expected value
 of the squared sampling error:
 \begin{align}
   MSE(\hat{\theta}_n) &= E[err(\hat{\theta}_n)^2] \\
-    &= E[(\hat{\theta}_n-\theta)^2] \\
-    &= var(\hat{\theta}_n) + [bias(\hat{\theta}_n)]^2
+    &= E[(\hat{\theta}_n-\theta)^2] 
 \end{align}
 and the ***MSE criterion*** says to choose the (biased or unbiased) estimator
 with the lowest MSE.
 
-::: example
-**The MSE of the sample mean and first observation estimators**
-
-The mean squared error of the sample average is:
+While this is the definition of MSE, we can derive a handy formula:
 \begin{align}
-  MSE(\bar{x}_n) = var(\bar{x}_n) + [bias(\bar{x}_n)]^2 = \frac{\sigma_x^2}{n} + 0^2 = \frac{\sigma_x^2}{n}
+  MSE(\hat{\theta}_n) &= var(\hat{\theta}_n) + [bias(\hat{\theta}_n)]^2
+\end{align}
+This is the formula we will usually use to calculate MSE.  A few things to note
+about this formula:
+
+1. Both bias and variance enter into the formula.  So all else equal, we prefer
+   less biased estimators, and lower variance estimators.
+2. The bias is squared, meaning both positive and negative bias are treated as
+   equally bad.
+
+
+
+
+::: example
+**The MSE for our two estimators**
+
+Returning to our two-game roulette data set, the mean squared error of the
+sample average is:
+\begin{align}
+  MSE(\bar{x}) = var(\bar{x}) + [bias(\bar{x})]^2 = \frac{var(x_i)}{2} + 0^2 = \frac{var(x_i)}{n}
 \end{align}
 and the mean squared error of the first observation estimator is:
 \begin{align}
-  MSE(x_1) = \sigma_x^2
+  MSE(x_1) = var(x_1) + [bias(x_1)]^2 = var(x_i) + 0^2 = var(x_i)
 \end{align}
 The sample average is the preferred estimator by the MSE criterion, so in this
 case we get the same result as applying the MVUE criterion.
@@ -775,7 +982,8 @@ unknown DGP and cannot be calculated.  So why do we bother talking about them?
    
 Cross-validation is a critical element of most machine learning techniques,
 which typically work by estimating a very large number of complex prediction
-models and then selecting the model that performs best in cross-validation.
+models and then selecting the model that performs best (by the MSE criterion)
+in cross-validation.
 :::
 
 ### Standard errors
@@ -793,42 +1001,43 @@ DGP.
 **The standard deviation of the average in a random sample**
 
 Consider a random sample of size $n$ on the random variable $x_i$ with unknown
-mean $\mu_x = E(x_i)$ and unknown variance $\sigma_x^2 = var(x_i)$.
+mean $\mu_x = E(x_i)$ and unknown variance $\sigma_x^2 = var(x_i)$, and suppose
+we want to find the standard deviation of the sample average $\bar{x}$.
 
-We earlier showed that the variance of the sample average $\bar{x}_n$ was:
+We earlier showed that the variance of the sample average in a random sample
+is:
 \begin{align}
-  var(\bar{x}_n) &= \frac{var(x_i)}{n} \\
+  var(\bar{x}) &= \frac{var(x_i)}{n} \\
     &= \frac{\sigma_x^2}{n} \\
 \end{align}
-and so its standard deviation is:
+So its standard deviation is:
 \begin{align}
-  sd(\bar{x}_n) &= \frac{\sigma_x}{\sqrt{n}}
+  sd(\bar{x}) &= \frac{\sigma_x}{\sqrt{n}}
 \end{align}
 The sample size $n$ is known, but the standard deviation $\sigma_x$ is
-unknown.  So we will need to estimate it in order to estimate $sd(\bar{x}_n)$.
+unknown.  So we will need to estimate it in order to estimate $sd(\bar{x})$.
 :::
 
 The next step is to find suitable estimators for any unknown parameter values.
 
 ::: example
-**An unbiased estimator of the variance**
+**Estimating the standard deviation**
 
-Consider a random sample of size $n$ on the random variable $x_i$ with unknown
-mean $\mu_x = E(x_i)$ and unknown variance $\sigma_x^2 = var(x_i)$.
-
-The sample variance is an unbiased estimator of the population variance:
+In a random sample, the sample variance is an unbiased estimator of the
+corresponding population variance:
 \begin{align}
   E(sd_x^2) = \sigma_x^2 = var(x_i)
 \end{align}
 This is not hard to prove, but I will skip it for now.
 
-Unfortunately, the square root is not a linear function:
+Unfortunately, the sample *standard deviation* is a slightly biased estimator
+of the population standard deviation.  This is because the square root is not
+a linear function:
 \begin{align}
   E(sd_x) = E(\sqrt{sd_x^2}) \neq \sqrt{E(sd_x^2)} = \sigma_x
 \end{align}
-so the sample standard deviation is a biased estimator of the population
-standard deviation.  Even so, the bias is typically small and so this is the
-estimator we typically use.
+However, the bias is typically small and there is no available unbiased
+estimator. So this is the estimator we typically use.
 :::
 
 Finally, we substitute to get the formula for the standard error.
@@ -839,15 +1048,43 @@ Finally, we substitute to get the formula for the standard error.
 The usual standard error for the sample average in a random sample of size $n$
 is:
 \begin{align}
-  se(\bar{x}_n) = \frac{sd_x}{\sqrt{n}}
+  se(\bar{x}) = \frac{sd_x}{\sqrt{n}}
 \end{align}
 where $sd_x$ is the sample standard deviation.
+:::
+
+This procedure works in a wide variety of settings, and it is typically done
+automatically by statistical applications.
+
+::: example
+**The standard error in the roulette data**
+
+We can use these results to calculate the standard error for $\bar{x}$ in our
+two-game roulette data set.  First, our general result above applies:
+\begin{align}
+  se(\bar{x}) = \frac{sd_x}{\sqrt{n}}
+\end{align}
+We have two observations ($n=2$) and we calculated the sample standard deviation
+$(sd_x = \sqrt{0.5} \approx 0.71)$ earlier, so we can get the standard error
+by plugging in these values:
+\begin{align}
+  se(\bar{x}) &= \frac{0.71}{\sqrt{2}} \\
+      &= 0.5
+\end{align}
+Following a similar procedure, the standard deviation of the first-observation
+estimator is $sd(x_i) = \sigma_x$ and so its standard error is:
+\begin{align}
+  se(x_1) &= sd_x \\
+    &= 0.71
+\end{align}
+Notice that the first-observation estimator has a higher standard error.
 :::
 
 Standard errors are useful as a data-driven measure of how variable a particular
 statistic or estimator is likely to be.  We will also use them more formally
 as part of formulas for hypothesis testing and other
 [statistical inference procedures](#statistical-inference).
+
 
 ## The law of large numbers
 
@@ -952,11 +1189,15 @@ the same business. An insurance company operates just like a casino. Each of us
 faces a small risk of a catastrophic cost: a house that burns down, a car
 accident leading to serious injury, etc. Insurance companies collect a little
 bit of money from each of us, and pay out a lot of money to the small number of
-people who have claims. Although the context is quite different, the underlying
-economics are identical to those of a casino: the insurance company prices its
-products so that its revenues exceed its expected payout, and takes on a large
-number of independent risks to ensure that its revenues exceed its actual
-payout.
+people who have claims. In other words, you are betting your car insurance
+company that you will have an acccident, you are betting your health insurance
+company that you will need medical care, and you are betting your life insurance
+company that you will die.
+
+Although the context is quite different, the underlying economics are identical
+to those of a casino: the insurance company prices its products so that its
+revenues exceed its expected payout, and then takes on a large number of
+independent risks to ensure that its revenues exceed its actual payout.
 
 Sometimes insurance companies do lose money, and even go bankrupt. The usual
 cause of this is a big systemic event like a natural disaster, pandemic or
@@ -968,7 +1209,7 @@ bankrupt in 2022 as a result of property damage claims from Hurricane Ian.
 Casinos can also face non-independent risks, for example in sports betting where
 many players are betting on the same outcome. Casinos typically address this by
 using different betting rules: rather than promising a fixed payout to winners,
-they take a fixed percentage (sometimes called the "vigorish" or "vig") of the
+they keep a fixed percentage (sometimes called the "vigorish" or "vig") of the
 total amount bet, and pay the rest out to the winners.
 :::
 
@@ -1253,6 +1494,8 @@ tend to have a higher response rate. Unfortunately, the 2020 results indicate
 that this adjustment was not enough to produce accurate predictions, and the
 2024 results faced similar problems.
 :::
+
+
 
 ## Chapter review {-#review-statistics}
 
