@@ -1571,47 +1571,6 @@ you know that translations are never perfect.  Similarly, importing and
 exporting data can result in the loss or unintentional modification of
 information in the original data source.
 
-### Text files and text editors
-
-The most important file format is the ***text file***. A text file contains a
-sequence of characters (letters, numbers, etc.). 
-
-Text files can be read and modified using a simple program called a
-***text editor***. Every computer has at least one simple built-in text editor:
-
-  - Windows has a built in text editor called *Notepad*.
-  - MacOS has a built in text editor called *TextEdit*.
-
-In addition, there are numerous other text editors that are more powerful and
-include useful features like color-coding, spell checking, and autocorrect.
-Many of them are free:
-
-  - I use *Notepad++* which is powerful, easy to use, and available at no charge
-    from https://notepad-plus-plus.org/. Notepad++ is only available for
-    Windows.
-  - Microsoft's *VSCode* is popular with programmers, and is available at no
-    charge from https://code.visualstudio.com/. VSCode is available for Windows,
-    macOS, and many other platforms.
-
-There are also many tools available for comparing, combining, or otherwise
-processing text files.
-
-Files that are not text files are usually called ***binary*** files. Binary
-files are generally not human-readable.  If you try to open them with a
-text editor you will mostly see a bunch of odd-looking symbols.
-
-::: {.sfu data-latex=""}
-**Text editors in SFU campus labs**
-
-All general-purpose computer labs in the SFU Burnaby campus have the following
-text editors installed:
-
-- Windows: Notepad, Notepad++.
-- macOS: TextEdit, VSCode, BBEdit.
-:::
-
-### CSV files {#csv-files}
-
 The most commonly-used export format for Excel is called the
 ***comma-separated values*** or ***CSV*** file. CSV is a standardized text
 format that is very useful for representing tables of data. It is simple,
@@ -1621,8 +1580,8 @@ applications.
 
 You can save any worksheet in an Excel workbook as a CSV file.
 
-::: example
-**Creating a CSV file in Excel**
+::: {.example #exporting-a-csv-file}
+**Exporting a CSV file in Excel**
 
 To export the *Employment Nov 2020* worksheet to a CSV file:
 
@@ -1635,7 +1594,8 @@ To export the *Employment Nov 2020* worksheet to a CSV file:
    Click on the `Save as type` drop-down box, and select 
    `CSV (Comma delimited)(*.csv)`. Note that this will change the file extension
    from `.xlsx` to `.csv`.
-4. Adjust the destination folder if you want, then select `Save`.
+4. Change the file name to `CanEmpNov20.csv`, adjust the destination folder if
+   you want, then select `Save`.
 5. You may get a warning that looks like this:
 
    ![CSV warning message](bin/CsVWarningMessage.png)
@@ -1645,47 +1605,15 @@ To export the *Employment Nov 2020* worksheet to a CSV file:
 You now have a CSV file.
 :::
 
-So what is a CSV file? CSV files have the following features:
-
-- CSV file names usually have the `.csv` extension.
-- CSV files are text files.
-- Each CSV file represents a table of data.
-- Each line in the CSV file represents a row in the table.
-- The cells in each row are separated or ***delimited*** by commas.
-
-CSV files have a few other features, which are best understood by using a
-text editor to view the exact contents of an actual CSV file.
-
-::: example
-**Viewing a CSV file as text**
-
-To view the exact contents of the CSV file we have created, open it in a text
-editor.
-
-The file will look something like this:
-
-![CSV viewed as a text file](bin/CSVAsText.png)
-As you can see, the CSV file contains text based on the data in your
-worksheet. Each line is a row in the worksheet, and cells are delimited by
-commas.  A few other things to notice:
-
-- There is no formatting information in the file.
-- There are no formulas, only values.
-- When the value in a cell contains a comma, the contents of the cell are
-  surrounded by quotes (`"`) so that the comma is not interpreted as the end
-  of the cell.
-
-:::
-
-You can also open any CSV file in Excel, and Excel will interpret the contents 
-of the file as a worksheet.
+You can also import CSV files that have been created with Excel, or by some
+other program.
 
 ::: example
 **Viewing a CSV file in Excel**
 
-Use Excel to open both your CSV file and your current working copy of the XLSX
-workbook. You can do this either by double-clicking on both files, or you can
-start Excel and use its menus to find and open the files.
+Use Excel to open the CSV file you have just created. You can
+do this either by double-clicking on the file, or you can start Excel and use
+its menus to find and open the files.
 
 Your CSV file will look something like this:
 
@@ -1717,7 +1645,8 @@ information is not lost in the translation between formats.
 
 There are many commonly-used data file formats other than Excel and CSV. 
 Section \@ref(more-on-data-file-formats) in Chapter \@ref(advanced-data-cleaning)
-discusses some of these formats and how to work with them in Excel.
+discusses some of these formats and how to work with them in Excel. It also
+discusses CSV files in greater detail.
 
 ## Finishing up {#finishing-up}
 
