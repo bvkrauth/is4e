@@ -226,7 +226,7 @@ to get your system set up now.
 
 Course materials for ECON 233, including the syllabus, lectures, and
 assignments are available at the course Canvas site
-https://canvas.sfu.ca/courses/80851.
+https://canvas.sfu.ca/courses/87847.
 :::
 
 ### Installing Microsoft Excel {#installing-microsoft-excel}
