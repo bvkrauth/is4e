@@ -386,10 +386,16 @@ values between $L$ and $H$.
 ::: example
 **The PDF of the $U(2,5)$ distribution**
 
-Suppose that $x \sim U(2,5)$.
+Suppose that $x \sim U(2,5)$. Then its support is the range of all values
+from 2 to 5, and its PDF is:
+\begin{align}
+  f_x(a) = \begin{cases}
+      \frac{1}{3} & 2 < a < 5 \\ 
+      0 & \textrm{otherwise} \\ 
+      \end{cases}
+\end{align}
+which is depicted in Figure \@ref(fig:UniformPDF) below. 
 
-Its support is the range of all values from 2 to 5, and its PDF is depicted in
-Figure \@ref(fig:UniformPDF) below. 
 :::
 
 ```{r UniformPDF, fig.cap = "*PDF for the U(2,5) distribution*"}
@@ -422,7 +428,15 @@ The CDF of the $U(L,H)$ distribution is:
 ::: example
 **The CDF of the $U(2,5)$ distribution**
 
-Figure \@ref(fig:UniformCDF) shows the CDF of the $U(2,5)$ distribution.
+The CDF of the $U(2,5)$ distribution is:
+\begin{align}
+  F_x(a) = \begin{cases}
+    0 & a \leq 2 \\ 
+    \frac{a-2}{3} & 2 < a < 5 \\ 
+    1 & a \geq 5 \\ 
+    \end{cases}
+\end{align}
+and is depicted in Figure \@ref(fig:UniformCDF).
 :::
 
 ```{r UniformCDF, fig.cap = "*CDF for the U(2,5) distribution*"}
@@ -455,6 +469,16 @@ The median of $x \sim U(L,H)$ is:
 \end{align}
 i.e., the midpoint of the support.
 
+::: example
+**Quantiles of the $U(2,5)$ distribution**
+
+The quantile function of the $U(2,5)$ distribution is:
+\begin{align}
+  F^{-1}_x(q) = 2 + 3q
+\end{align}
+and the median is $F^{-1}_x(0.5) = 3.5$.
+:::
+
 ### Expected values {#uniform-mean-and-variance}
 
 Integral calculus is required to calculate the mean, variance and standard
@@ -467,6 +491,18 @@ deviation of the uniform distribution, so I report them below for reference:
 This is one advantage of using standard distributions: you can look up results
 when they are difficult to calculate.
 
+
+::: example
+**Expected values of the $U(2,5)$ distribution**
+
+The mean, variance, and standard deviation of the $U(2,5)$ distribution is:
+\begin{align}
+  E(x)   &= 0.5*(2+5) = 3.5 \\
+  var(x) &= \frac{(5-2)^2}{12} = 0.75 \\
+  sd(x)  &= \sqrt{0.75} = 0.866
+\end{align}
+:::
+
 ### Functions of a uniform {#uniform-functions}
 
 Any linear function of a uniform random variable also has a uniform
@@ -476,6 +512,18 @@ then $y \sim U(a + bH, a + bL)$.] $b > 0$, then:
   y \sim U(a + bL, a + bH)
 \end{align}
 Nonlinear functions of a uniform random variable are generally not uniform.
+
+::: example
+**Linear functions of a $U(2,5)$ random variable**
+
+Suppose that $x \sim U(2,5)$. Then:
+\begin{align}
+  2x   &\sim U(4,10)  \\
+  x + 1 &\sim U(3,6) \\
+  2x + 2 &\sim U(6,12)
+\end{align}
+:::
+
 
 ::: {.fyi data-latex=""}
 **Uniform distributions in video games**
