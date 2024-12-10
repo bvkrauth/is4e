@@ -1800,13 +1800,4 @@ If you aren't sure, try it out in Excel and see what happens.
 
 **GOAL #8: Use Excel to import and export CSV files**
 
-9. Suppose you import the following CSV file in Excel:
-   ```
-   Name,Year of birth,Year of death
-   "Mary, Queen of Scots",1542,1547
-   Mary I,1516,1558
-   Elizabeth I,1533,1603
-   ```
-   a. How many rows and columns does the worksheet have?
-   b. What are the contents of cell B1?
-   c. What are the contents of cell C3?
+

@@ -60,11 +60,6 @@ This appendix provides solutions to all end-of-chapter practice problems.
    b. `=TODAY()+100`
    c. `=TODAY()-DATE(1969,11,20)` - using my birthday; yours will obviously be
       different.
-9. You can confirm these answers by creating the CSV file and opening it 
-   in Excel.
-   a. The worksheet will have 4 rows and 3 columns.
-   b. Cell B1 will contain the string "Mary, Queen of Scots".
-   c. Cell C3 will contain the number 1603.
 
 ## **3** Probability and random events {-#answers-probability}
 
@@ -1387,7 +1382,12 @@ This appendix provides solutions to all end-of-chapter practice problems.
    a. Fixed width 
    b. Space or tab delimited
    c. CSV 
-2. Here are my descriptions, yours may be somewhat different:
+2. You can confirm these answers by creating the CSV file and opening it 
+   in Excel.
+   a. The worksheet will have 4 rows and 3 columns.
+   b. Cell B1 will contain the string "Mary, Queen of Scots".
+   c. Cell C3 will contain the number 1603.
+3. Here are my descriptions, yours may be somewhat different:
    a. A crosswalk table is a data table we can use to translate variables that
       are expressed in one way into another way.  For example, we might use a
       crosswalk table to translate country names into standardized country
@@ -1399,11 +1399,11 @@ This appendix provides solutions to all end-of-chapter practice problems.
    c. Aggregating data by groups allows us to group observations according to a
       common characteristic, and describe those groups using data calculated
       from the individual observations.
-3. You can edit cell A1 under scenarios (a) and (c).
-4. If you do this:
+4. You can edit cell A1 under scenarios (a) and (c).
+5. If you do this:
    a. Nothing will happen, but you can ask Excel to mark invalid data.
    b. Excel will not allow you to enter invalid data.
-5. The tables are
+6. The tables are
    a. Simple frequency table
    b. Conditional average
    c. Crosstab
