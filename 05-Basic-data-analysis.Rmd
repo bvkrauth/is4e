@@ -108,7 +108,7 @@ the value in one or more of the columns.  Since order does not matter
 with tidy data, we can sort in whatever way we like without changing
 the content of our data.
 
-::: {.fyi data-latex=""}
+::: warning
 Before sorting data, always make sure that the order of rows does not convey
 important information.
 :::
