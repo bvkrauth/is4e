@@ -865,28 +865,48 @@ Either method will work.
 :::
 
 ```{r RouletteQuantiles, fig.cap = "*Deriving quantiles from the CDF*"}
-ggplot(data = RouletteCDF, mapping = aes(x = a)) +
+ggplot(data = filter(RouletteCDF,a<=20), mapping = aes(x = a)) +
   geom_step(aes(y=Fr), col = "red") +
   xlab("a") +
   ylab("F(a)") +
-  geom_text(x = 20, 
-            y = 0.9, 
-            label = "F_r(a)", 
-            col = "red") +
-  geom_text(mapping=aes(x = 5.5, y = 0.25),
-            label = "0.25 quantile = 0",
-            col = "blue") +
-  geom_text(x = 6.0, 
-            y = 0.5, 
-            label = "0.5 quantile = 0",
-            col = "blue") +
-  geom_text(x = 6.5, 
-            y = 0.75, 
-            label = "0.75 quantile = 1",
-            col = "blue") +
-  geom_segment(x=-10,xend=0,y=0.25,yend=0.25,col="blue",linetype = "dashed") +
-  geom_segment(x=-10,xend=0,y=0.5,yend=0.5,col="blue",linetype = "dashed") +
-  geom_segment(x=-10,xend=1,y=0.75,yend=0.75,col="blue",linetype = "dashed") +
+  annotate("text",
+           x = 17, 
+           y = 0.9, 
+           label = "F_r(a)", 
+           col = "red") +
+  annotate("text",
+           x = 5.5,
+           y = 0.25,
+           label = "0.25 quantile = 0",
+           col = "blue") +
+  annotate("text",
+           x = 6.0, 
+           y = 0.5, 
+           label = "0.5 quantile = 0",
+           col = "blue") +
+  annotate("text",
+           x = 6.5, 
+           y = 0.75, 
+           label = "0.75 quantile = 1",
+           col = "blue") +
+  geom_segment(x=-10,
+               xend=0,
+               y=0.25,
+               yend=0.25,
+               col="blue",
+               linetype = "dashed") +
+  geom_segment(x=-10,
+               xend=0,
+               y=0.5,
+               yend=0.5,
+               col="blue",
+               linetype = "dashed") +
+  geom_segment(x=-10,
+               xend=1,
+               y=0.75,
+               yend=0.75,
+               col="blue",
+               linetype = "dashed") +
   labs(title = "Cumulative distribution function (CDF)", 
        subtitle = "Roulette - indicator for red wins (r)", 
        caption = "", 
