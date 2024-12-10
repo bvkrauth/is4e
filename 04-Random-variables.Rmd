@@ -930,8 +930,9 @@ ggplot(data = RouletteQuant, mapping = aes(x = a)) +
   ylab("value of r at this quantile") +
   geom_text(x = 0.8, 
             y = 0.9, 
-            label = "q_r(a)", 
-            col = "red") +
+            label = "{F^{-1}}(quantile)",
+            col = "red",
+            parse = TRUE) +
   labs(title = "Quantile function (inverse CDF)", 
        subtitle = "Roulette - indicator for red wins (r)", 
        caption = "", 
