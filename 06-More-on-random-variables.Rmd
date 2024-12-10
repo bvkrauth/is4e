@@ -121,7 +121,7 @@ variables is also true for continuous ones.
 Suppose you round the labour force participation rate to the nearest percentage
 point.  The rounded LFP rate is a discrete random variable with support:
 \begin{align}
-  S_x = \{0\%, 1\%, \ldots 99\%, 100\% \}
+  S_{roundedLFP} = \{0\%, 1\%, \ldots 99\%, 100\% \}
 \end{align}
 Alternatively, we could round to the nearest 1/100th of a percentage point,
 to the nearest 1/1,000,000th of a percentage point, etc. As we round to a
