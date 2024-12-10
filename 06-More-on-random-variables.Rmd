@@ -728,8 +728,8 @@ analysis and would be covered in a more advanced course.
 
 ### Standardized normals
 
-We earlier defined the standardized version of a random variable $x$ as the
-following linear function of $x$:
+We earlier defined the [standardized](#standardization) version of a random
+variable $x$ as the following linear function of $x$:
 \begin{align}
   z = \frac{x-E(x)}{sd(x)}
 \end{align}
