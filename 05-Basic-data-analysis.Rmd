@@ -192,7 +192,7 @@ freeze any number of rows and columns.
 
 ## Summary statistics
 
-Next, we We will calculate some commonly-used ***univariate*** statistics, 
+Next, we will calculate some commonly-used ***univariate*** statistics, 
 which are statistics that describe a single variable in isolation. In Section
 \@ref(univariate-graphs-in-excel) we will construct some commonly-used
 univariate graphs.
