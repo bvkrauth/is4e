@@ -634,12 +634,33 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=Fa)) +
        tag = "")
 ```
 
+::: example
+**The CDF of a normal random variable**
+
+Suppose $x \sim N(2,9)$, and we would like to calculate $\Pr(x \leq 1)$. We
+can use the Excel formula `=NORM.DIST(1,2,3,TRUE)` to get:
+\begin{align}
+  \Pr(x \leq 1) &\approx 0.37
+\end{align}
+:::
+
 ### Quantiles {#normal-quantiles}
 
 Quantiles of the normal distribution can be calculated using the Excel function
 `NORM.INV()`.
 
 The median of a $N(\mu,\sigma^2)$ random variable is $\mu$.
+
+::: example
+**Quantiles of a normal random variable**
+
+Suppose $x \sim N(2,9)$.  The median of $x$ is $\mu = 2$, and its 25th
+percentile is:
+\begin{align}
+  F^{-1}(0.25) &\approx -0.023
+\end{align}
+which we can calculate using the Excel formula `=NORM.INV(0.25,2,3)`.
+:::
 
 ### Expected values {#normal-means}
 
@@ -650,6 +671,18 @@ deviation of the normal distribution, so I report them below for reference:
   var(x) &= \sigma^2 \\
   sd(x) &= \sigma
 \end{align}  
+
+::: example
+**Expected values of a normal random variable**
+
+Suppose $x \sim N(2,9)$.  Then:
+\begin{align}
+  E(x) &= \mu = 2 \\
+  var(x) &= \sigma^2 = 9 \\
+  sd(x) &= \sigma = 3
+\end{align}  
+:::
+
 
 ### Functions of a normal
 
@@ -667,6 +700,17 @@ Then for any constants $a$ and $b$:
   a + bx \sim N(a + b\mu, b^2\sigma^2)
 \end{align}
 Nonlinear functions of a normal random variable are generally *not* normal.
+
+::: example
+**Linear functions of a normal random variable**
+
+Suppose $x \sim N(2,9)$. Then:
+\begin{align}
+  x + 1 &\sim N(3, 9) \\
+  2x &\sim N(4, 36) \\
+  -2x &\sim N(-4, 36)
+\end{align}
+:::
 
 ::: {.fyi data-latex=""}
 **Other distributions based on the normal**
@@ -721,6 +765,18 @@ Then we can prove that its CDF is:
 The standard normal CDF is available as a built-in function in every statistical
 package including Excel and R, so we can use this result to calculate the CDF
 for any normally distributed random variable.
+
+::: example
+**Obtaining normal probabilities**
+
+Suppose $x \sim N(2,9)$. To find $Pr(x \leq 1)$, we can standardize $x$ and 
+use the standard normal CDF:
+\begin{align}
+  \Pr(x \leq 1) &= \Phi\left(\frac{1-2}{\sqrt{9}}\right) \\
+    &= \Phi(-0.333)
+\end{align}
+We can then use Excel's `NORM.S.DIST()` function (the formula will be `=NORM.S.DIST(-0.333,TRUE)`) to get $\Pr(x \leq 1) \approx 0.37$.
+:::
 
 ::: {.fyi data-latex=""}
 **The normal and standard normal CDF**
@@ -790,12 +846,14 @@ nonlinear relationship. We will learn some terminology to describe these four
 relationships.
 :::
 
+
+
 ```{r JointIsNotMarginal, fig.cap = "*x and y are drawn from a different joint distribution in each graph.*"}
 simdata <- tibble(x = rnorm(100),
                   y1 = rnorm(100),
                   y2 = (-x+0.5*y1)/sqrt(1.25),
                   y3 = x,
-                  y4 = x^2)
+                  y4 = x^2-1)
 p1 <- ggplot(data = simdata, mapping = aes(x = x)) +
   geom_point(aes(y=y1),col="blue") +
   labs(tag = "A") +
