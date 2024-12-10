@@ -761,7 +761,7 @@ closely related interpretations:
   to the actual (not-yet-known) value.  The median and mode are also used for
   prediction; the best prediction method depends on what you mean by "as close
   as possible":
-  - The mode is is the most likely to be *exactly* correct (prediction error
+  - The mode is the most likely to be *exactly* correct (prediction error
     of zero).
   - The median tends to produce the lowest *absolute* prediction error.
   - The expected value tends to produce the lowest *squared* prediction error.
