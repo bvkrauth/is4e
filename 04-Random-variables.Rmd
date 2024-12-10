@@ -1310,12 +1310,6 @@ square root of its variance:
 \end{align}
 The standard deviation is just another way of describing the variability of $x$.  
 
-In some sense, the variance and standard deviation are interchangeable since
-they are so closely related.  The standard deviation has the advantage that it
-is expressed in the same units as the underlying random variable, while the
-variance is expressed in the square of those units.  This makes the standard
-deviation somewhat easier to interpret.
-
 ::: example
 **Standard deviation in roulette**
 
@@ -1361,6 +1355,21 @@ the standard deviation of $y_{Red}$ :
       &\approx 1.0
   \end{align}
 As expected, this is the same answer we found in the previous example.
+:::
+
+In some sense, the variance and standard deviation are interchangeable since
+they are so closely related.  The standard deviation has the advantage that it
+is expressed in the same units as the underlying random variable, while the
+variance is expressed in the square of those units.  This makes the standard
+deviation somewhat easier to interpret.
+
+::: example
+**Interpreting the standard deviation of $y_{Red}$ and $y_{14}$**
+
+Standard deviations are like variance, but they are measured in the same units
+as the underlying variable: that is the standard deviation of net income from
+a bet on red is \$1, and the standard deviation of net income from a bet on red
+is \$5.80.
 :::
 
 
