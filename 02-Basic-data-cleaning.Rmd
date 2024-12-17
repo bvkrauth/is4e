@@ -897,9 +897,9 @@ plus the value in cell E2.
 
 As discussed earlier, it is important to distinguish between the *contents* of a
 cell and how those contents are *displayed*. For example, the true contents of
-cell H2 in our example above are the formula `= D2 + E2` but the cell shows the
-number  `2,493,300`. If you change the number in cell D2 or cell E2, the number
-shown in cell H2 will adjust accordingly.
+cell H2 in our example above are the formula `= D2 + E2` but the cell displays
+the number  `2,493,300`. If you change the number in cell D2 or cell E2, the
+number displayed in cell H2 will adjust accordingly.
 
 Formulas can use the results from other formulas, as shown in the example below.
 
@@ -1106,15 +1106,11 @@ numbers are increased by $d$ units.
 For example, suppose cell B5 contains the formula `=A1`.  If we copy the
 contents of this cell to other cells, we get:
 
-|  Cell  | Formula |
-|:-------|:-------:|
-|   B5   | =A1     |
-|   B6   | =A2     |
-|   B7   | =A3     |
-|   C5   | =B1     |
-|   D5   | =C1     |
-|   C6   | =B2     |
-|   D7   | =C3     |
+|       | B   | C   | D   |
+|:------|:---:|:---:|:---:|
+|   5   | =A1 | =B1 | =C1 |
+|   6   | =A2 | =B2 | =C2 |
+|   7   | =A3 | =B3 | =C3 |
 
 This is usually exactly what we want Excel to do. 
 
@@ -1368,7 +1364,8 @@ function.  This function takes three arguments:
 
 An ***indicator*** variable is the numerical version of a logical variable: it
 takes on the value 1 if a particular statement is true, and 0 if the statement
-is false.  
+is false. We will use indicator variables regularly; they are discussed in
+more detail in the [math review appendix](#the-indicator-function).
 
 To create an indicator variable for low labour force participation:
 
@@ -1521,7 +1518,8 @@ field used data that was affected by this problem.
 
 Unfortunately, it is too late to "fix" Excel to keep this from happening. Any
 change to its behavior would "break" Excel in thousands of other applications
-that rely on its current behavior. 
+that rely on its current behavior. Excel has added an option to turn off
+this kind of automatic conversion, but the default behavior remains the same.
 
 When you can't fix a problem in a computer application, you need to find a
 ***workaround***: a modification to how you use the application that avoids or
