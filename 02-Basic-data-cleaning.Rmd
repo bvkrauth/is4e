@@ -1800,4 +1800,11 @@ If you aren't sure, try it out in Excel and see what happens.
 
 **GOAL #8: Use Excel to import and export CSV files**
 
-
+9. Download the file
+   [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx)
+   and open it in Excel.
+   a. Export the file to a CSV file named `CanEmpHist.csv`.
+   b. Close Excel.
+   c. Open both `CanEmpHist.xlsx` and `CanEmpHist.csv` in Excel.
+   d. Compare the original worksheet in `CanEmpHist.xlsx` with the worksheet
+      in `CanEmpHist.csv`.  How are they different?

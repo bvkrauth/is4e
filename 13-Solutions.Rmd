@@ -60,6 +60,22 @@ This appendix provides solutions to all end-of-chapter practice problems.
    b. `=TODAY()+100`
    c. `=TODAY()-DATE(1969,11,20)` - using my birthday; yours will obviously be
       different.
+9. If you ran into trouble doing this, review the section on
+   [saving and exporting data](saving-and-exporting-data).
+   a. Note that there are actually multiple options for exporting CSV files,
+      including "CSV UTF-8", "CSV (comma delimited)", "CSV (Macintosh)" and
+      "CSV (MS-DOS)". These all have tiny differences in how the data is
+      stored, but any of them will work for our purposes.
+   b. Note that it is important to close Excel here.  Saving the worksheet as a
+      CSV file involves the loss of information, but Excel will hold onto that
+      information until you close the file.
+   c. Note that Excel usually makes itself the default application for CSV
+      files, so you can open them in Excel directly or by double-clicking on
+      them.
+   d. The worksheets differ in many ways:
+      - The *Raw data* worksheet is not in the CSV file.
+      - The formatting (e.g. the boldface in the top row) is gone.
+      - Columns E, F, G, and H contain values rather than formulas.
 
 ## **3** Probability and random events {-#answers-probability}
 
