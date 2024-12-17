@@ -1003,7 +1003,7 @@ Suppose we want to add a new variable for the (natural) log of population:
       dialog box for the `LN` function:  
       ![function arguments dialog box](bin/FunctionArguments.png)
    b. Click in the entry box labeled `Number`.
-   c. Either enter the text `C2` here or select cell C2 with the mosue. The
+   c. Either enter the text `C2` here or select cell C2 with the mouse. The
       dialog box will display the value in cell C2 (`3588700`) as well as the
       calculated value for the log of cell C2 (`15.0933058`).
    d. Select `OK`.
