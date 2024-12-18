@@ -248,26 +248,26 @@ folder.
 **Setting up a project folder**
 
 To set up a project folder for the cleaning and analysis of the November 2020
-Canadian employment data:
+Canadian employment data, follow these steps:
 
-1. Create a project folder on your computer.
+1. *Create a project folder* on your computer.
    - It will contain all of your data and analysis for this project.
    - Give it a brief, clear, and portable name (call it
       `employment-nov-2020`).
-2. Create two sub-folders inside your project folder.
+2. *Create sub-folders* inside your project folder.
    - One will contain the original data (call it `raw-data`).
    - One will contain archived versions of the data. (call it `archive`).
-2. Obtain the source data.
+2. *Obtain the source data*.
    - Download the file
      [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
    - Put it in the `raw-data` folder.
    - Do not change the file name.
-3. Document the provenance of all data sources.
+3. *Document the provenance of all data sources*.
    - Create a text file called `readme.txt`.
    - Put it in the `raw-data` folder.
    - Enter information in this file about the provenance of the
      `CanEmpNov20.xlsx` file.
-4. Create a master version and working copy.
+4. *Create a master version and working copy*.
    - Make two copies of the `CanEmpNov20.xlsx` file.
    - Put them in the main project folder (`employment-nov-2020`).
    - One will be your original master version (call it `CanEmpNov20Clean.xlsx`).
@@ -558,18 +558,18 @@ should preserve flexibility in case we want to use the data for other purposes.
 Following the template above, we can construct a simple data cleaning plan for
 the employment data:
 
-1. *Convert all data into tidy-format tables*
+1. *Convert all data into tidy-format tables*.
 
    Our employment data table is already in tidy format, so no action is
    required.
 
-2. *Select or construct a unique ID variable for each table*
+2. *Select or construct a unique ID variable for each table*.
 
    As discussed earlier, the province name is not an ideal ID variable so we
    will construct two alternative ID variables: an arbitrary/sequential number
    and the two-letter postal abbreviation.
 
-3. *Find and address problems in existing variables*
+3. *Find and address problems in existing variables*.
 
    The only problem I see in the current data is in cell B8, which is supposed
    to display the population of Ontario but instead shows "########". We will
@@ -579,7 +579,7 @@ the employment data:
    problems, we would ideally fix them by creating new-and-improved versions of
    these variables rather than directly editing the existing variables.
 
-4. *Create new variables that may be useful*
+4. *Create new variables that may be useful*.
 
    We will want to construct new variables for:
 
@@ -1656,20 +1656,20 @@ the master version.
 ::: example
 **Finishing up**
 
-To update your master version:
+To update your master version, follow these steps:
 
-1. Check your working copy for mistakes and incomplete work.
+1. *Check your working copy* for mistakes and incomplete work.
 
    You can compare your working copy to my master version at  
    [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
 
-2. Archive your current master version by renaming it and moving it to the
+2. *Archive your current master version* by renaming it and moving it to the
    `archives` sub-folder.
 
    - This is optional since your current master version is identical to the
      source data.
 
-3. Set your current working copy as the master version.
+3. *Make your current working copy the master version*.
 
    - *In Excel*: You can select `File > Save As` to save the open file under
      another name.
@@ -1678,6 +1678,19 @@ To update your master version:
 You should now have two identical cleaned data sets (one master file and one
 working copy), one raw data set (in the `raw-data` subfolder), and possibly
 one archived data set (in the `archives` subfolder).
+:::
+
+::: {.fyi data-latex=""}
+**How often should you update your master version?**
+
+Your master version should be updated regularly, but it should only be updated
+after a new feature has been completed and checked for errors. But what if you
+are halfway through adding a feature, and need to stop work for the day?
+
+Making your updates both frequent and complete may require a modification to how
+your work habits: plan your work before you do it, divide big features into
+smaller features, work on one feature at a time, and avoid starting tasks
+you don't have time to finish.
 :::
 
 ## Chapter review {-#review-basic-data-cleaning-with-excel}

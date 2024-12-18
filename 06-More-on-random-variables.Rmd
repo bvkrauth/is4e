@@ -769,13 +769,39 @@ for any normally distributed random variable.
 ::: example
 **Obtaining normal probabilities**
 
-Suppose $x \sim N(2,9)$. To find $Pr(x \leq 1)$, we can standardize $x$ and 
-use the standard normal CDF:
-\begin{align}
-  \Pr(x \leq 1) &= \Phi\left(\frac{1-2}{\sqrt{9}}\right) \\
-    &= \Phi(-0.333)
-\end{align}
-We can then use Excel's `NORM.S.DIST()` function (the formula will be `=NORM.S.DIST(-0.333,TRUE)`) to get $\Pr(x \leq 1) \approx 0.37$.
+Suppose $x \sim N(2,9)$, and we want to find $F_x(1) = \Pr(x \leq 1)$.
+
+Excel has two built-in functions for the normal distribution:
+
+- `NORM.DIST()` calculates the PDF or CDF for any normal random distribution.
+- `NORM.S.DIST()` calculates the PDF or CDF for the standard normal distribution.
+
+The easiest way to calculate our probability is with `NORM.DIST()`, using the
+formula `=NORM.DIST(1,2,3,TRUE)`, which yields $F_x(1) \approx 0.37$.
+
+We can also calculate our probability using only the standard normal CDF
+(`NORM.S.DIST()`) by following these steps:
+
+1. *Write down the formula*, substituting in the correct variable names.
+   \begin{align}
+     F_x(1) &= \Phi\left(\frac{1-\mu}{\sigma}\right)
+   \end{align}
+2. *Find parameter values* and substitute. In this case $\mu=2$ and
+   $\sigma^2=9$, so:
+   \begin{align}
+     F_x(1) &= \Phi\left(\frac{1-2}{3}\right) \\
+       &= \Phi\left(-0.333\right)
+   \end{align}
+3. *Use the standard normal CDF* in Excel or R to calculate the value. In this
+   case, the formula in Excel would be `=NORM.S.DIST(-0.333,TRUE)` which
+   produces:
+   \begin{align}
+     F_x(1) &\approx 0.37
+   \end{align}
+
+You may wonder why we bother with these steps when we could have just used
+`NORM.DIST()` to get the same (correct) answer. The short answer is that working
+with the standard normal distribution is a skill that is useful later.
 :::
 
 ::: {.fyi data-latex=""}
@@ -889,10 +915,12 @@ underlying outcome.
 ::: example
 **The joint PDF in roulette**
 
-In our roulette example, both $y_{Red}$ and $y_{14}$ depend on the original
-outcome $\omega$. For convenience, I have created a table below that shows every
-value of $\omega$ in the sample space, its probability, and the associated values
-of $y_{Red}$ and $y_{14}$.
+We can derive any joint PDF from the probability distribution of the underlying
+outcome. In our roulette example, both $y_{Red}$ and $y_{14}$ depend on the original
+outcome $\omega$, so we can find the joint PDF by following these steps:
+
+1. *Create a table of outcomes* that includes each outcome in the sample space,
+   its probability, and the associated value of our random variables:
 
 | $\omega$ | $\Pr(\omega)$ | Color | $y_{Red}$ | $y_{14}$ |
 |:---------|:-------------:|:-----:|:---------:|:--------:|
@@ -934,49 +962,51 @@ of $y_{Red}$ and $y_{14}$.
 | 35       |  1/37         | Black |    -1     |   -1     |
 | 36       |  1/37         | Red   |     1     |   -1     |
 
-We can construct the joint PDF by simply adding up over all possible outcomes.
+2. *Add up over outcomes* to find the joint PDF.
 
-There is one outcome ($b=14$) in which both red and 14 win, and it has
-probability $1/37$:
-\begin{align}
-  f_{Red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
-    &= \Pr(\omega \in \{14\}) = 1/37
-\end{align}
-There are 17 outcomes (count them in the table above) in which red wins and 14 
-loses, and each has probability $1/37$:
-\begin{align}
-  f_{Red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
-    &= \Pr\left(\omega \in \left\{
-      \begin{gathered}
-          1,3,5,7,9,12,16,18,19,21,\\
-          23,25,27,30,32,34,36
-      \end{gathered}\right\}\right)  \\
-    &= 17/37
-\end{align}
-There are 19 outcomes in which both red and 14 lose, and each has probability
-$1/37$:
-\begin{align}
-  f_{Red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
-    &= \Pr\left(\omega \in \left\{
-        \begin{gathered}
-          0,2,4,6,7,10,11,13,15,17, \\
-          20,22,24,26,28,31,33,35
-        \end{gathered}\right\}\right)  \\
-    &= 19/37
-\end{align}
-There are no other outcomes, so all other combinations have probability zero.
+   - There is one outcome ($b=14$) in which both red and 14 win, and it has
+     probability $1/37$:
+     \begin{align}
+       f_{Red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
+         &= \Pr(\omega \in \{14\}) = 1/37
+     \end{align}
+   - There are 17 outcomes (count them in the table above) in which red wins and
+     14 loses, and each has probability $1/37$:
+     \begin{align}
+       f_{Red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
+         &= \Pr\left(\omega \in \left\{
+            \begin{gathered}
+              1,3,5,7,9,12,16,18,19,21,\\
+              23,25,27,30,32,34,36
+            \end{gathered}\right\}\right)  \\
+         &= 17/37
+     \end{align}
+   - There are 19 outcomes in which both red and 14 lose, and each has
+     probability $1/37$:
+     \begin{align}
+       f_{Red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
+         &= \Pr\left(\omega \in \left\{
+            \begin{gathered}
+              0,2,4,6,7,10,11,13,15,17, \\
+              20,22,24,26,28,31,33,35
+            \end{gathered}\right\}\right)  \\
+         &= 19/37
+     \end{align}
+  - There are no other outcomes, so all other combinations have probability
+    zero.
+3. *Summarize results* using case notation:  
+   \begin{align}
+     f_{Red,14}(a,b)
+       &= \begin{cases}
+            19/37 & \textrm{if $a = -1$ and $b = -1$} \\
+            17/37 & \textrm{if $a = 1$ and $b = -1$} \\
+            1/37 & \textrm{if $a = 1$ and $b = 35$} \\
+            0 & \textrm{otherwise} \\
+          \end{cases} \nonumber
+   \end{align}
 
-Therefore, the joint PDF of $y_{Red}$ and $y_{14}$ is:
-\begin{align}
-  f_{Red,14}(a,b) &= \begin{cases}
-      19/37 & \textrm{if $a = -1$ and $b = -1$} \\
-      17/37 & \textrm{if $a = 1$ and $b = -1$} \\
-      1/37 & \textrm{if $a = 1$ and $b = 35$} \\
-      0 & \textrm{otherwise} \\
-      \end{cases} \nonumber
-\end{align}
-Creating and using this table is something of a "brute force" approach: it is
-time consuming, but requires little thought and will always get the right
+Creating and using the table here is something of a "brute force" approach: it
+is time consuming, but requires little thought and will always get the right
 answer. You may be able to figure out a quicker approach, which is also fine.
 :::
 
@@ -1032,28 +1062,43 @@ We earlier found the joint PDF of $y_{Red}$ and $y_{14}$:
       0 & \textrm{otherwise} \\
       \end{cases} \nonumber
 \end{align}
-Then the marginal PDF of $y_{Red}$ is:
-\begin{align}
-  f_{red}(a) &= \sum_{b \in \{-1,35\}} f_{red,14}(a,b) \\
-    &= f_{red,14}(a,-1) + f_{red,14}(a,35) \\
-\end{align}
-Plugging in values in the support of $y_{Red}$ we get:
-\begin{align}
-  f_{red}(-1) &= f_{red,14}(-1,-1) + f_{red,14}(-1,35) \\
-    &= 19/37 + 0 \\
-    &= 19/37 \\
-  f_{red}(1) &= f_{red,14}(1,-1) + f_{red,14}(1,35) \\
-    &= 17/37 + 1/37 \\
-    &= 18/37
-\end{align}
-Which we can summarize with:
-\begin{align}
-  f_{red}(a) &= \begin{cases}
-    19/37 & \textrm{if $a = -1$} \\
-    18/37 & \textrm{if $a = 1$} \\
-    0 & \textrm{otherwise} \\
-    \end{cases}
-\end{align}
+Then we can find the marginal PDF of $y_{Red}$ by following these steps:
+
+1. *Write down the formula*, substituting correct variable names:
+   \begin{align}
+     f_{red}(a)
+       &= \sum_{b \in S_b} f_{red,14}(a,b)
+   \end{align}
+2. *Find the support* and substitute:
+   \begin{align}
+     f_{red}(a)
+       &= \sum_{b \in \{-1,35\}} f_{red,14}(a,b)
+   \end{align}
+3. *Expand out the summation*:
+   \begin{align}
+     f_{red}(a)
+       &= f_{red,14}(a,-1) + f_{red,14}(a,35)
+   \end{align}
+4. *Find the joint PDF* values and substitute:
+   \begin{align}
+     f_{red}(-1)
+       &= \underbrace{f_{red,14}(-1,-1)}_{19/37}
+          + \underbrace{f_{red,14}(-1,35)}_{0} \\
+       &= 19/37 \\
+     f_{red}(1)
+       &= \underbrace{f_{red,14}(1,-1)}_{17/37} 
+          + \underbrace{f_{red,14}(1,35)}_{1/37} \\
+       &= 18/37
+   \end{align}
+5. *Summarize results* using case notation:
+   \begin{align}
+     f_{red}(a)
+       &= \begin{cases}
+            19/37 & \textrm{if $a = -1$} \\
+            18/37 & \textrm{if $a = 1$} \\
+            0 & \textrm{otherwise} \\
+          \end{cases}
+   \end{align}
 Note that this is the same PDF we found in an earlier chapter.
 :::
 
@@ -1159,26 +1204,38 @@ formulas.
 ::: example
 **Conditional PDFs in roulette**
 
-The conditional PDF of the player's net profit from a bet on red given the
-net profit for a bet on 14 is:
-\begin{align}
-  f_{red|14}(a,b) &= \Pr(y_{Red} = a| y_{14} = b) \\
-    &= \frac{f_{red,14}(a,b)}{f_{14}(b)} \\
-    &= \begin{cases}
-      (19/37)/(36/37) & \textrm{if $a = -1$ and $b = -1$} \\
-      (17/37)/(36/37) & \textrm{if $a = 1$ and $b = -1$} \\
-      (1/37)/(1/37) & \textrm{if $a = 1$ and $b = 35$} \\
-      0 & \textrm{otherwise} \\
-      \end{cases} \\
-    &= \begin{cases}
-      19/36 & \textrm{if $a = -1$ and $b = -1$} \\
-      17/36 & \textrm{if $a = 1$ and $b = -1$} \\
-      1 & \textrm{if $a = 1$ and $b = 35$} \\
-      0 & \textrm{otherwise} \\
-      \end{cases}
-\end{align}
-The conditional PDF of the player's net profit for a bet on 14 given the net
-profit for a bet on red is:
+We can find conditional PDF of the player's net profit from a bet on red given
+the net profit for a bet on 14 by following these steps:
+
+1. *Write down the formula*, substituting correct variable names:
+   \begin{align}
+     f_{red|14}(a,b)
+       &= \Pr(y_{Red} = a| y_{14} = b) \\
+       &= \frac{f_{red,14}(a,b)}{f_{14}(b)}
+   \end{align}
+2. *Find the joint PDF* and substitute:
+   \begin{align}
+     f_{red|14}(a,b)
+       &= \begin{cases}
+            (19/37)/(36/37) & \textrm{if $a = -1$ and $b = -1$} \\
+            (17/37)/(36/37) & \textrm{if $a = 1$ and $b = -1$} \\
+            (1/37)/(1/37) & \textrm{if $a = 1$ and $b = 35$} \\
+            0 & \textrm{otherwise} \\
+          \end{cases}
+   \end{align}
+3. *Summarize results* using case notation:
+   \begin{align}
+     f_{red|14}(a,b)
+       &= \begin{cases}
+            19/36 & \textrm{if $a = -1$ and $b = -1$} \\
+            17/36 & \textrm{if $a = 1$ and $b = -1$} \\
+            1 & \textrm{if $a = 1$ and $b = 35$} \\
+            0 & \textrm{otherwise} \\
+          \end{cases}
+   \end{align}
+
+Following the same procedure, the conditional PDF of the player's net profit for
+a bet on 14 given the net profit for a bet on red is:
 \begin{align}
   f_{14|red}(a,b) &= \Pr(y_{14} = a| y_{Red} = b) \\
     &= \frac{f_{red,14}(b,a)}{f_{red}(b)} \\
@@ -1295,14 +1352,50 @@ covariance, and graph C shows a case with positive covariance.
 ::: example
 **Calculating the covariance from the joint PDF**
 
-The covariance of $y_{Red}$ and $y_{14}$ is:
-\begin{align}
-  cov(y_{Red},y_{14}) &= \begin{aligned}[t]
-      & (1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
-      &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
-      &+ (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
-      \end{aligned} \\
-    &\approx 0.999 
+The covariance of $y_{Red}$ and $y_{14}$ can be calculated from the PDF by
+following these steps:
+
+1. *Write down the formula*, substituting the correct variable names:
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= E\left(\left(y_{Red} - E(y_{Red}) \right)
+                 \left(y_{14} - E(y_{14})  \right)\right)
+   \end{align}
+2. *Apply the expected value formula*, keeping the expected values inside the
+   formula as-is:
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= \sum_{a \in S_{Red}, b \in S_{14}}
+             E\left(\left(a - E(y_{Red}) \right)
+                 \left(b - E(y_{14})  \right)\right)
+   \end{align}
+3. *Find the support* and substitute:
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= \sum_{a \in \{-1,1\}, b \in \{-1,35\}}
+             E\left(\left(a - E(y_{Red}) \right)
+                 \left(b - E(y_{14})  \right)\right)
+   \end{align}
+4. *Expand out the summation*
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= \begin{aligned}[t]
+            & (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
+            &+ (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,35)}_{0} \\ 
+            &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
+            &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
+          \end{aligned}
+   \end{align}
+5. *Find the expected values and joint PDF* and substitute:
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= \begin{aligned}[t]
+            & (-1+0.027)(-1+0.027)*19/37 \\
+            & (-1+0.027)(35+0.027)*0 \\
+            & (1+0.027)(-1+0.027)*17/37 \\
+            & (1+0.027)(35+0.027)*1/37 \\
+          \end{aligned} \\
+       &\approx 0.999
 \end{align}
 That is, the returns from a bet on red and a bet on 14 are positively related.
 :::

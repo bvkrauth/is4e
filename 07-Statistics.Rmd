@@ -839,30 +839,33 @@ unbiased estimator with the lowest variance, and the ***MVUE criterion*** for
 choosing an estimator says to choose the MVUE.
 
 ::: example
-**The variance of two unbiased estimators**
+**The MVUE for roulette**
 
-Returning to our two-game roulette data set, we earlier showed that the sample
-average $\bar{x}$ and the first observation $x_1$ are both unbiased estimators
-of $p$.  We can select the "better" estimator by applying the MVUE criterion.
+Returning to our two-game roulette data set and two proposed estimators
+($\bar{x}$ and $x_1$), we can find the MVUE by following these steps:
 
-The first step is to calculate the variances, which we did in an earlier
-example:
-\begin{align}
-  var(\bar{x}) = \frac{var(x_i)}{2}
-\end{align}
-and the variance of the first observation estimator is:
-\begin{align}
-  var(x_1) = var(x_i)
-\end{align}
-The second step is to compare the variances. Since $var(\bar{x}) < var(x_1)$,
-and both estimators are unbiased, we can say that $\bar{x}$ is the preferred
-estimator by the MVUE criterion.
+1. *Calculate the bias* of each proposed estimator. We calculated this earlier:
+   \begin{align}
+     bias(\bar{x}) &= 0 \\
+     bias(x_1) &= 0
+   \end{align}
+2. *Calculate the variance* of each proposed estimator. We calculated this
+   earlier:
+   \begin{align}
+     var(\bar{x}) &= \frac{var(x_i)}{2} \\
+     var(x_1)     &= var(x_i)
+   \end{align}
+3. *Choose the unbiased estimator with the lowest variance*, if there is an
+   unbiased estimator.
+   - Both estimators are unbiased.
+   - The sample average $\bar{x}$ has lower variance $var(\bar{x}) < var(x_1)$. 
+   - Therefore $\bar{x}$ is the MVUE.
 :::
 
 ### Mean squared error
 
 Once we move beyond the simple case of the sample average, we run
-into two major complications:
+into two major complications with the MVUE criterion:
 
 1. *No unbiased estimator*: An unbiased estimator may not exist for a particular
    parameter of interest.
@@ -938,28 +941,41 @@ While this is the definition of MSE, we can derive a handy formula:
 This is the formula we will usually use to calculate MSE.  A few things to note
 about this formula:
 
-1. Both bias and variance enter into the formula.  So all else equal, we prefer
-   less biased estimators, and lower variance estimators.
+1. Both bias and variance enter into the formula.  So all else equal, the MSE
+   criterion still favors less biased estimators and lower variance estimators.
 2. The bias is squared, meaning both positive and negative bias are treated as
    equally bad.
-
-
-
 
 ::: example
 **The MSE for our two estimators**
 
-Returning to our two-game roulette data set, the mean squared error of the
-sample average is:
-\begin{align}
-  MSE(\bar{x}) = var(\bar{x}) + [bias(\bar{x})]^2 = \frac{var(x_i)}{2} + 0^2 = \frac{var(x_i)}{n}
-\end{align}
-and the mean squared error of the first observation estimator is:
-\begin{align}
-  MSE(x_1) = var(x_1) + [bias(x_1)]^2 = var(x_i) + 0^2 = var(x_i)
-\end{align}
-The sample average is the preferred estimator by the MSE criterion, so in this
-case we get the same result as applying the MVUE criterion.
+Returning to our two-game roulette data set, we can apply the MSE criterion to
+choose between our proposed estimators by following these steps:
+
+1. *Calculate bias and variance* for each estimator. We have already done this:
+   \begin{align}
+     bias(\bar{x}) &= 0 \\ 
+     bias(x_1) &= 0 \\ 
+     var(\bar{x}) &= \frac{var(x_i)}{2} \\
+     var(x_1)     &= var(x_i)
+   \end{align}
+2. *Calculate MSE* using the variance/bias formula:
+   \begin{align}
+     MSE(\bar{x})
+       &= var(\bar{x}) + [bias(\bar{x})]^2 \\ 
+       &= \frac{var(x_i)}{2} + [0]^2 \\ 
+       &= \frac{var(x_i)}{2} \\
+     MSE(x_1)
+       &= var(x_1) + [bias(x_1)]^2 \\ 
+       &= var(x_i) + [0]^2 \\ 
+       &= var(x_i)
+   \end{align}
+3. *Choose the estimator with the lowest MSE*. In this case, 
+   $MSE(\bar{x}) < MSE(x_1)$ so $\bar{x}$ is the preferred estimator by the
+   MSE criterion.
+
+Note that in this example, the sample average is the preferred estimator by both
+the MVUE criterion and the MSE criterion. But that will not always be the case.
 :::
 
 The MSE criterion allows us to choose a biased estimator with low variance over

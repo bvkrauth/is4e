@@ -335,28 +335,33 @@ and it is usually easy to calculate.
 ::: example
 ***The size of our proposed test***
 
-With our proposed critical values $(c_L,c_H) = (45,55)$, the probability of
-rejecting the null is:
-\begin{align}
-  \Pr(\textrm{reject $H_0$}) &= \Pr((t_n < 45) \cup (t_n > 55)) \\
-    &= \Pr(t_n < 45) + \Pr(t_n > 55) \\
-    &= \Pr(t_n \leq 44) + (1 - \Pr(t_n \leq 55)) \\
-    &= F_t(44) + (1 - F_t(55))
-\end{align}
-where $F_t(\cdot)$ is the CDF of $t_n$. We know this CDF when the null is true:
-\begin{align}
-  H_0 &\implies t_n \sim Binomial(100,18/37)
-\end{align}
-and we can calculate the binomial CDF in Excel using the `BINOM.DIST()`
-function.  The correct formulas are 
-`=BINOM.DIST(44,100,18/37,TRUE)` and `=BINOM.DIST(55,100,18/37,TRUE)`
-which produces:
-\begin{align}
-  \Pr(\textrm{reject $H_0$}) 
-    &= F_t(44) + (1 - F_t(55)) \\
-    &\approx 0.20 + (1 - 0.91)) \\
-    &\approx 0.29
-\end{align}
+With our proposed critical values $(c_L,c_H) = (45,55)$, we can calculate the
+size of our test by following these steps:
+
+1. *Find the probability of rejecting the null* as a function of the
+   (potentially unknown) CDF of the test statistic:
+   \begin{align}
+     \Pr(\textrm{reject $H_0$}) &= \Pr((t_n < 45) \cup (t_n > 55)) \\
+       &= \Pr(t_n < 45) + \Pr(t_n > 55) \\
+       &= \Pr(t_n \leq 44) + (1 - \Pr(t_n \leq 55)) \\
+       &= F_t(44) + (1 - F_t(55))
+   \end{align}
+   where $F_t(\cdot)$ is the CDF of $t_n$.
+2. *Find the CDF under the null* and substitute: When the null is true, we know
+   that:
+   \begin{align}
+     H_0 &\implies t_n \sim Binomial(100,18/37)
+   \end{align}
+   and we can calculate this CDF in Excel using the `BINOM.DIST()` function. The
+   correct formula for $F_t(44)$ is  `=BINOM.DIST(44,100,18/37,TRUE)` and the
+   formula for $F_t(55)$ is `=BINOM.DIST(55,100,18/37,TRUE)` which produces:
+   \begin{align}
+     \Pr(\textrm{reject $H_0$}) 
+       &= F_t(44) + (1 - F_t(55)) \\
+       &\approx 0.20 + (1 - 0.91)) \\
+       &\approx 0.29
+   \end{align}
+
 So the size of this test is about 29\%. That is, if the game is fair we have 
 a 29\% chance of mistakenly concluding it is unfair.  This is a pretty high
 probability, suggesting we might need to choose different critical values.
@@ -371,32 +376,39 @@ and is more difficult to calculate.
 ::: example
 ***The power of our proposed test***
 
-With our proposed critical values $(c_L,c_H) = (45,55)$, the probability of
-rejecting the null is as we have already derived:
-\begin{align}
-  \Pr(\textrm{reject $H_0$}) &= F_t(44) + (1 - F_t(55))
-\end{align}
-When the null is false:
-\begin{align}
-  H_1 &\implies t_n \sim Binomial(100,p_{red}) \qquad \textrm{where $p_{red} \neq 18/37$}
-\end{align}
-The power of the test depends on the unknown true value of $p$, but we can
-calculate the power for any value of $p_{red}$. For example, let's pick
-$p_{red}=0.4$. Then:
-\begin{align}
-  power(0.7) &= F_t(44) + (1 - F_t(55)) \qquad \textrm{where $t_n \sim Binomial(100,0.4)$}
-\end{align}
-We can calculate these probabilities in Excel with the formulas:
-`=BINOM.DIST(44,100,0.4,TRUE)` and `=BINOM.DIST(55,100,0.4,TRUE)`
-which produces:
-\begin{align}
-  \Pr(\textrm{reject $H_0$}) 
-    &= F_t(44) + (1 - F_t(55)) \\
-    &\approx 0.821 + (1 - 0.999)) \\
-    &\approx 0.822
-\end{align}
-That is, if the true win probability is 40\%, the probability of rejecting the
-null of a fair game is about 82\%.
+With our proposed critical values $(c_L,c_H) = (45,55)$, we can also find the
+power of our test by following these steps:
+
+1. *Find the probability of rejecting the null* as a function of the
+   (potentially unknown) CDF of the test statistic. We already did this:
+   \begin{align}
+     \Pr(\textrm{reject $H_0$})
+       &= F_t(44) + (1 - F_t(55))
+   \end{align}
+   where $F_t(\cdot)$ is the CDF of $t_n$.
+2. *Pick a parameter value* for which you wish to calculate power. For example,
+   let's pick $p_{red}=0.4$.
+3. *Find the CDF for the chosen parameter value* and substitute. In general,
+   \begin{align}
+     H_1 &\implies t_n \sim Binomial(100,p_{red}) \qquad \textrm{where $p_{red} \neq 18/37$}
+   \end{align}
+   and for our chosen parameter value $p_{red}=0.4$
+   \begin{align}
+     p_{red}=0.4 &\implies t_n \sim Binomial(100,0.4)
+   \end{align}
+   We can calculate these probabilities in Excel using the `=BINOM.DIST()`
+   function. The formula for $F_t(44)$ is `=BINOM.DIST(44,100,0.4,TRUE)` and
+   the formula for $F_t(55)$ is `=BINOM.DIST(55,100,0.4,TRUE)` which produces:
+   \begin{align}
+     power(0.4)
+       &= \Pr(\textrm{reject $H_0$}) \\
+       &= F_t(44) + (1 - F_t(55)) \\
+       &\approx 0.821 + (1 - 0.999)) \\
+       &\approx 0.822
+   \end{align}
+
+That is, if the true win probability is 40\%, the probability of rejecting
+the null of a fair game is about 82\%.
 :::
 
 We can calculate $power(\theta)$ for many values of $\theta$ and plot the result
@@ -467,17 +479,19 @@ from 82\% to 46\% when $p=0.4$).
 
 Given the trade off between power and size, we could construct some criterion
 that accounts for both (just like MSE includes both variance and bias) and
-choose critical values to maximize that criterion. But we don't do that.
+choose critical values to maximize that criterion. But we don't do that,
+in part because power is tough to calculate.
+
 Instead, we follow a simple convention:
 
-1. Set the size to a fixed value $\alpha$.
+1. *Set the size* to a fixed value $\alpha$.
    - The convention in economics and most other social sciences is to use a size
      of 5\% ($\alpha = 0.05$).
    - Economists may use 1\% ($\alpha = 0.01$) when working with larger data sets
      or 10\% ($\alpha = 0.10$) when working with smaller data sets.
    - The data sets in physics or genetics are much larger, and their convention
      is to use a much lower size.
-2. Calculate critical values that imply the desired size.  
+2. *Find critical values* that imply the desired size.  
    - With a size of 5\% $(\alpha = 0.05)$, we would:
      - Set $c_L$ to the 2.5 percentile (0.025 quantile) of the null
        distribution.
@@ -524,12 +538,12 @@ In other words we reject the null (at 5\% significance) that the roulette wheel
 is fair if red wins fewer than 39 games or more than 58 games.
 :::
 
-If critical values are set to achieve a fixed size, the only way to get
-increased power is by collecting more data. ***Power analysis*** is often used b
-researchers to determine how much data to collect.  Each additional observation 
-collected increases power without increasing size, but each additional
-observation costs money. With limited resources, it is important to spend enough
-to get clear results, but not much more than that.
+Since critical values are set to achieve a fixed size, the only way to
+increase power is by collecting more data. ***Power analysis*** is often used
+by researchers to determine how much data to collect.  Each additional
+observation collected increases power without increasing size, but each
+additional observation costs money. With limited research funding, it is
+important to spend enough to get clear results, but not much more than that.
 
 ::: example
 **The power curve for the 5\% test**
