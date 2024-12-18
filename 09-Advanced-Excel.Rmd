@@ -161,9 +161,24 @@ ECON 325).
 
 ### Text files and text editors
 
-The most important general file format is the ***text file***. A text file
-contains a sequence of characters (letters, numbers, etc.). Almost all open
-file formats are built around text files.
+The most important open file format is the ***text file***. A text file
+contains a sequence of characters (letters, numbers, etc.). Almost all other open file formats are
+built around text files.
+
+::: fyi
+**Text file encoding**
+
+Deep down, everything on a computer is binary. So text files are actually binary
+files that are "encoded" according to a published standard that translates
+between sequences of binary numbers and sequences of characters. The modern
+standard is called UTF-8 (or sometimes Unicode), which itself is built on an
+older standard called ASCII. Most existing files on your computer are either
+ASCII or UTF-8. UTF-8 was designed to be backwards-compatible with
+ASCII, so most programs can handle either encoding seamlessly. You may
+occasionally run into problems if your file has non-Western or unusual
+characters; in that case, knowing there are two standards can help you figure
+out what is going on.
+:::
 
 Text files can be read and modified using a simple program called a
 ***text editor***. Every computer has at least one simple built-in text editor:
@@ -332,7 +347,9 @@ delimiter:
   "Elizabeth I" 1533 1603
    ```
 
-- ***Tab-delimited*** text files use a tab character as the delimiter.
+- ***Tab-delimited*** text files use a tab character as the delimiter. It is
+  hard to distinguish space-delimited and tab-delimited files unless your
+  text editor is set to display tabs and spaces differently.
 
 - ***Whitespace-delimited*** text files use some combination of tabs and spaces
    as the delimiter.
@@ -359,7 +376,8 @@ format (on right):
 
 ![XML and JSON file in Notepad](bin/json-xml-example.png){width=80%}  
 Both JSON and XML are used extensively for computers and applications to
-transmit data to one another.
+transmit data to one another. They allow for more complex data structures
+than CSV, at a cost of being less readable for humans.
 :::
 
 Excel has a wide variety of tools for working with data in JSON, XML,

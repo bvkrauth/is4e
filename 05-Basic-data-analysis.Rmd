@@ -759,8 +759,8 @@ apply a few basic ideas:
     (what Tufte calls "chartjunk").
 4. **Closeness**: Minimize eye movement by keeping related information visually
    "close."
-5. **Reinforce**: Use color and formatting to reinforce interpretation rather
-   than to complicate it.
+5. **Reinforcement**: Use color and formatting to reinforce interpretation
+   rather than to complicate it.
 5. **Accessibility**: Take reader needs into account.  For example:
    - Color is not always available to readers: Some readers are color
      blind, projectors often get colors "wrong", or your document 
@@ -769,9 +769,9 @@ apply a few basic ideas:
        readers who cannot distinguish color (for whatever reason) can tell
        different series apart.
      - Consider using a color palette that is colorblind-friendly.
-       - A simple way to do this is to avoid using red and green or blue and
-         yellow as contrasting colors, since these are the two most common forms
-         of colorblindness.
+       - A simple way to do this is to avoid using red and green as contrasting
+         colors, since this is the most common form of colorblindness
+         (blue/yellow colorblindness is also common).
        - The geographer Cynthia Brewer has developed a set of
          colorblind-friendly palettes known as ColorBrewer.  They are available
          at https://colorbrewer2.org/. 

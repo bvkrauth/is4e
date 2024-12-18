@@ -1584,12 +1584,12 @@ probability of winning exactly 25 times:
 \begin{align}
   \Pr(WIN50 = 25) \approx 0.11
 \end{align}
-we can use the Excel formula `= BINOM.DIST(25,50,18/37,TRUE)` to
+We can use the Excel formula `= BINOM.DIST(25,50,18/37,TRUE)` to
 calculate the probability of winning 25 times or less:
 \begin{align}
   \Pr(WIN50 \leq 25) \approx 0.63
 \end{align}
-and we can use the Excel formula `= 1 - BINOM.DIST(25,50,18/37,TRUE)` to
+Finally, we can use the Excel formula `= 1 - BINOM.DIST(25,50,18/37,TRUE)` to
 calculate the probability of winning more than 25 times:
 \begin{align}
   \Pr(WIN50 > 25) = 1 - \Pr(WIN50 \leq 25) \approx 0.37

@@ -1286,7 +1286,7 @@ Suppose we have two random variables $x$ and $y$ and we use them to construct
 a third random variable $z = h(x,y)$.  What can we say about the probability
 distribution of $z$?
 
-1. It has a well-defined probability distribution, PDF, CDF, expected value,
+1. $z$ has a well-defined probability distribution, PDF, CDF, expected value,
    etc. all of which can be derived from the joint distribution of $x$ and $y$.
 2. If $z$ is a *linear* function of $x$ and $y$, its expected value is a linear
    function of $E(x)$ and $E(y)$:

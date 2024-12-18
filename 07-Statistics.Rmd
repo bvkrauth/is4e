@@ -198,7 +198,8 @@ $x_i$. There are $|S_x|^n$ such sequences, where $S_x$ is the support of $x_i$.
 **The support for our roulette data**
 
 Our two-game roulette data set has a discrete support that includes four
-possible values:
+possible values corresponding to the four possible length-2 sequences that
+can be constructed from $S_x = \{0,1\}$:
 \begin{align}
   S_D = \{(0,0), (0,1), (1,0), (1,1)\}
 \end{align}
@@ -223,7 +224,7 @@ we know. This can simplify the DGP in ways that will be helpful.
 **Simplifying the DGP of our roulette data**
 
 The DGP for our two-game roulette data set involves four[^702] unknown joint
-probabilities. 
+probabilities, one for each element of the support.
 
 [^702]: It might be more accurate to say it involves only three unknown
 probabilities. Since we know the probabilities will sum up to one, if we know
@@ -613,7 +614,7 @@ And sometimes a parameter only partially describes the DGP
   $f_5 = \Pr(x = 5)$ is a parameter.
 :::
 
-Typically there will be particular parameters whose value we wish to know. Such
+Typically there will be specific parameters whose value we wish to know. Such
 a parameter is called a ***parameter of interest***. The DGP may include other
 parameters, which are typically called *auxiliary parameters* or
 *nuisance parameters*. 
@@ -630,7 +631,9 @@ $\theta$. Since an estimator is constructed from $D_n$, its value is:
 
 I will use $\hat{\theta}$ to represent a generic estimator, but we will often
 use other notation to talk about specific estimators. The circumflex or "hat"
-$\hat{\,}$ notation is commonly used to identify an estimator.
+$\hat{\,}$ notation is commonly used to identify an estimator; for example,
+$\hat{\mu}$ may be used to represent an estimator of the parameter $\mu$ and
+$\hat{\sigma}$ may be used to represent an estimator of the parameter $\sigma$
 
 ::: example
 **Two estimators for the win probability**
@@ -654,11 +657,11 @@ These are both statistics calculated from the data, so they are both potential
 estimators for $p$.
 :::
 
-An estimator is just a guess; any statistic can be used as as an estimator of
-any parameter. But we need to pick a specific guess, and we want our guess to
-be an accurate one. So we will need some kind of ***criterion*** that allows
-us to compare different statistics and choose the statistic that represents
-the "best" estimator of a particular parameter.
+An estimator is just a rule for making guesses; any statistic can be used as as
+an estimator of any parameter. But we need to pick a specific guess, and we want
+our guess to be an accurate one. So we will need some kind of ***criterion***
+that allows us to compare different statistics and choose the statistic that
+represents the "best" estimator of a particular parameter.
 
 Intuitively, a good estimator is one that is unlikely to be very different from
 the true value of the unknown parameter.  We can quantify "unlikely" and
@@ -709,7 +712,17 @@ The ***bias*** of an estimator is defined as its expected sampling error:
     &= E(\hat{\theta}_n) - \theta
 \end{align}
 Ideally we would want $bias(\hat{\theta}_n)$ to be zero, in which case we would
-say that $\hat{\theta}_n$ is an ***unbiased*** estimator of $\theta$.
+say that $\hat{\theta}_n$ is an ***unbiased*** estimator of $\theta$. 
+
+Since it depends on $E(\hat{\theta}_n)$ and $\theta$, the bias is generally:
+
+- Unobserved/unknown since $E(\hat{\theta}_n)$ and $\theta$ both depend on 
+  the DGP
+- Fixed/nonrandom since $E(\hat{\theta}_n)$ and $\theta$ are numbers and not
+  random variables
+
+Although the bias is *generally* unknown, there are some important cases in
+which we can prove that it is zero.
 
 ::: example
 **Two unbiased estimators**
@@ -747,9 +760,9 @@ So the sample average $\bar{x}$ is an unbiased estimator of $\mu_x$:
 This is true for any random sample and any random variable $x_i$.
 
 If the bias is nonzero, we would say that $\hat{\theta}_n$ is a ***biased***
-estimator of $\theta$. In general, the exact amount of bias of a particular
-biased estimator is hard to know - it typically depends on the unknown true DGP.
-But sometimes we can say something about its direction, or about how it relates
+estimator of $\theta$. The exact amount of bias of a particular biased estimator
+is usually hard to know because it depends on the unknown true DGP. But
+we can sometimes say something about its direction, or about how it relates
 to specific parameters of the DGP.
 
 ::: example
@@ -1319,10 +1332,11 @@ assumption:
     time periods to be related to one another.
   - This violates the assumption that observations are independent.
 
-We can calculate statistics for time series, and we already did in Chapter
-\@ref(basic-data-analysis-with-excel).  However, using time series data for
+We can calculate statistics for time series - we already did in Chapter
+\@ref(basic-data-analysis-with-excel) - and they can be used to describe the
+underlying DGP under certain conditions. However, using time series data for
 rigorous statistical analysis and prediction requires more advanced techniques
-than we will learn in this course.
+and terminology than we will learn in this course.
 
 ::: {.sfu data-latex=""}
 **ECON 433**
@@ -1347,14 +1361,14 @@ Some data sets are built from sampling that is not entirely random. For example:
       measure PEI's unemployment rate.
     - Government surveys typically oversample disadvantaged groups..
   - Stratified samples can usually be handled as if they were from a random
-    sample, with some adjustments.
+    sample, with some adjustments like weighting to account for oversampling.
 - A ***cluster sample*** is gathered by dividing the population into
   ***clusters***, randomly selecting some of these clusters, and sampling cases
   within the cluster.  
   - Educational data sets are often gathered this way: we pick a random sample
     of schools, and then collect data from each student within those schools.
   - Cluster samples can usually be handled as if they were from a random sample,
-    with some adjustments.
+    with some adjustments like slightly different formulas for standard errors.
 - A ***census*** gathers data on every case in the population. 
   - For example, we might have data on all fifty US states, or all ten Canadian
     provinces, or all of the countries of the world. 
@@ -1376,15 +1390,16 @@ typically interview whole households, and will do some geographic clustering
 to save on travel costs. The LFS is gathered monthly, and the resulting
 unemployment rate is a time series.
 
-### Sample selection and representativeness
+### Missing data and sample selection
 
 Random samples and their close relatives have the feature that they are
-***representative*** of the population from which they are drawn. In a sense
-that will be made more clear over the next few chapters, any sufficiently large
-random sample tends to closely resemble the population.
+***representative*** of the population from which they are drawn. That is,
+the law of large numbers implies that any sufficiently large random sample
+tends to closely resemble the population.
 
 Unfortunately, a simple random sample is not always possible. Even if we are
-able to randomly select cases, we often run into the following problems:
+able to randomly select cases, we often run into various forms of missing
+data from those cases:
 
 - ***Nonresponse*** occurs when a sampled individual refuses or is unable to
   provide the information requested by the survey
@@ -1445,7 +1460,7 @@ recommendation: reinforce the parts of the plane that usually show the *least*
 damage.
 :::
 
-There are two basic solutions to nonresponse and censoring:
+There are two basic solutions to missing data:
 
 - ***Reinterpretation***: we redefine the population so that our data
   can be correctly interpreted as a random sample from that population.

@@ -224,12 +224,14 @@ Your data analysis workflow should have three key features:
    - Create a ***working copy*** of each file you plan to edit.
      - There should be exactly one working copy of each file.
      - You can edit the working copy.
-   - Each time you complete a step in your project, make your current
+   - Each time you add a ***feature*** to your project, make your current
      working copy the ***master version*** of that file.
      - There should be exactly one master version of each file.
      - The master version represents the project at its most-advanced
        stage; i.e., the file you would send to your boss to show how your work
        is going. It should not include any half-finished work.
+     - A feature is a discrete and identifiable enhancement to the project: a
+       new variable, a new table or chart, etc.
      - The master version should not be directly edited, but should regularly be
        replaced with the current working copy.
    - You can also have ***archived versions***.
