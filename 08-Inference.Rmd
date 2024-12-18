@@ -649,7 +649,7 @@ distribution under the null.  I won't go through that calculation here.
 :::
 
 
-### Implementing and interpreting
+### Implementation
 
 The steps taken above derive a test for a specific null hypothesis (a fair
 roulette game) for a specific sample size (100) and desired significance level
@@ -677,8 +677,10 @@ probability of any event:
 
 So far, we have discussed how to construct a hypothesis test from scratch. But
 data analysts mostly use off-the-shelf test statistics and critical
-values. The main task of a person working with data is implementing the test.
-Here are the steps:
+values that have been developed by professional statisticians. 
+
+The main task of a person working with data is ***implementing*** the test
+and ***interpreting*** the results:
 
 1. Choose your null and alternative hypotheses.
    - These depend on your research question, so you must choose them yourself.
@@ -688,12 +690,12 @@ Here are the steps:
    - Your null and alternative hypotheses.
    - A test statistic.
    - Critical values (for your chosen size).
-4. Calculate the test statistic.
+4. Calculate the test statistic based on your data.
 5. Compare the test statistic to the critical values and make an accept/reject
    decision.
-
-Always remember that failing to reject the null does not mean the null is true.
-
+6. Interpret your findings.
+   - Remember that failing to reject the null does not mean the null is true.
+     It usually means the evidence is inconclusive on whether the null is true.
 
 ::: example
 ***Implementing our roulette test***
@@ -736,10 +738,10 @@ increase the power of our test.
 
 ## The Central Limit Theorem
 
-In order for a hypothesis test to work, the exact probability distribution of
-the test statistic must be known under the null hypothesis.  The example test in
-the previous section worked because it was based on a sample frequency, a
-statistic whose probability distribution is relatively easy to calculate.
+In a hypothesis test, the exact probability distribution of the test statistic
+must be known under the null hypothesis.  The example test in the previous
+section worked because it was based on a sample frequency, a statistic whose
+probability distribution (binomial) is relatively easy to calculate.
 Unfortunately, most statistics do not have a probability distribution that is
 easy to calculate.
 
@@ -828,7 +830,7 @@ a single example in detail, we now move on to the most common application
 of statistical inference: constructing hypothesis tests and confidence intervals
 on the mean in a random sample.
 
-Let $D = (x_1,\ldots,x_n)$ be a random sample of size $n$ on some random
+Let $D_n = (x_1,\ldots,x_n)$ be a random sample of size $n$ on some random
 variable $x_i$ with unknown mean $E(x_i) = \mu_x$ and variance
 $var(x_i) = \sigma_x^2$.  Let the sample average be
 $\bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$, let the sample variance be
@@ -972,7 +974,9 @@ approximating an exact test:
   3. ***Asymptotic test***: Use the Central Limit Theorem to get an approximate
      probability distribution for the test statistic.
 
-We will explore both of those options.
+We will explore both of these options. If the distinction between exact,
+parametric, and asymptotic tests is not clear, read ahead and then come back
+here.
 
 ### Asymptotic critical values
 
@@ -981,7 +985,7 @@ Theorem tells us that:
 \begin{align}
   \frac{\bar{x}_n - \mu_x}{\sigma_x/\sqrt{n}} \rightarrow^D N(0,1)
 \end{align}
-Under the null our test statistic looks just like this, but with the sample
+Under the null, our test statistic looks just like this, but with the sample
 standard deviation $sd_x$ in place of the population standard deviation 
 $\sigma_x$.  It turns out that Slutsky's theorem allows us to make this
 substitution, and it can be proved that:
@@ -1011,16 +1015,21 @@ ggplot(data=simdata,
        tag = "")
 ```
 
-Therefore, if we want a test that has the ***asymptotic size*** of 5\%, we can
-use Excel or R to calculate critical values based on the standard normal
-distribution. In Excel, the function would be `NORM.INV()` or `NORM.S.INV()`,
+Therefore, if we want a test that has the ***asymptotic size*** of 5\%, the
+critical values should be:
+
+\begin{align}
+  c_L &= 2.5 \textrm{ percentile of $N(0,1)$ distribution} \\
+  c_H &= 97.5 \textrm{ percentile of $N(0,1)$ distribution}
+\end{align}
+We can use Excel or R to calculate these critical values. In Excel, the function would be `NORM.INV()` or `NORM.S.INV()`,
 and the formulas would be:
 
 - $c_L$: `=NORM.S.INV(0.025)` or `=NORM.INV(0.025,0,1)`.
 - $c_H$: `=NORM.S.INV(0.975)` or `=NORM.INV(0.975,0,1)`.
 
-The calculations below were done in R:
-```{r AsymptoticCriticalValues}
+In R, the code would be:
+```{r AsymptoticCriticalValues, echo=TRUE}
   cat("cL = 2.5 percentile of N(0,1) = ",
       round(qnorm(0.025),3),
       "\n")
@@ -1084,7 +1093,7 @@ When the null is true, the test statistic
 $t_n = \frac{\bar{x}-\mu_0}{s_x/\sqrt{n}}$ has the Student's T distribution with
 $n-1$ degrees of freedom:
 \begin{align}
-  t_n \sim T_{n-1}
+  (H_0:\mu_x = \mu_0) \qquad \implies \qquad t_n \sim T_{n-1}
 \end{align}
 and when the null is false, it has a different distribution which is sometimes
 called the "noncentral T distribution."
@@ -1122,8 +1131,8 @@ ggplot(data = simdata,
 Having found our test statistic and its distribution under the null,  we can
 calculate our critical values:
 \begin{align}
-  c_L &= 2.5 \textrm{ percentile of } T_{n-1} \\
-  c_H &= 97.5 \textrm{ percentile of } T_{n-1}
+  c_L &= 2.5 \textrm{ percentile of the $T_{n-1}$ distribution}  \\
+  c_H &= 97.5 \textrm{ percentile of the $T_{n-1}$ distribution}
 \end{align}
 We can obtain these percentiles using Excel or R. In Excel, the relevant
 function is `T.INV`.
@@ -1230,8 +1239,17 @@ practice?
 As a result, statisticians typically recommend using the T test for smaller
 samples (less than 30 or so), and then using whichever test is more convenient
 with larger samples.  Most data sets in economics have well over 30
-observations, so economists tend to use asymptotic tests unless they have a very
+observations[^802], so economists tend to use asymptotic tests unless they have a very
 small sample.
+
+[^802]: You will sometimes see old textbooks or internet resources treat 30 as
+some kind of "magic number" at which statistical analysis somehow moves from
+invalid to valid, or at which the central limit theorem or law of large numbers
+applies. But this is not the case, it is only the sample size at which the 5\%
+critical values for the $T$ and $N(0,1)$ distributions are approximately the
+same. But it is entirely possible that *both* distributions poorly
+approximate the true distribution of the test statistic, in which case a
+sample of size 30 only guarantees they provide equally poor approximations.
 
 ::: example
 **Choosing a test for roulette**
@@ -1262,15 +1280,19 @@ rule out $\theta = \theta_0$ for a single value of $\theta_0$, they say nothing
 about other values very close to $\theta_0$.
 
 For example, suppose you are a medical researcher trying to measure the effect
-of a particular treatment. Let $\theta$ be the true effect, and suppose that you
-have tested the null hypothesis that the treatment has no effect ($\theta = 0$).
+of a particular cancer treatment. Let $\theta$ be the true effect, and suppose
+that you have tested the null hypothesis that the treatment has no effect
+($\theta = 0$).
 
 - If you reject this null, you have concluded that the effect has *some* effect.
-  However, that does not rule out the possibility that the effect is
-  *very small*.
+  - This does not rule out the possibility that the effect is *very small*.
+  - If the treatment is very costly or has harmful side effects, you may not
+    want to use it even if it has a small positive effect.
 - If you fail to reject this null, you cannot rule out the possibility that the
-  treatment has *no* effect.  However, this does not rule out the possibility
-  that the effect is *very large*.
+  treatment has *no* effect.  
+  - This does not rule out the possibility that the effect is *very large*.
+  - If the treatment is very cheap, or the prognosis without treatment is very
+    poor, you may want to use it even if you cannot be sure it has an effect.
 
 One solution to this would be to do a hypothesis test for every possible value
 of $\theta$, and classify them into values that were rejected and not rejected.
@@ -1302,6 +1324,9 @@ tests:
 - The 99\% confidence interval includes all values that cannot be rejected at a
   1\% level of significance.
   - It is *wider* than the 95\% confidence interval.
+
+Confidence intervals can be constructed using exact tests, asymptotic tests,
+or parametric tests.
 
 ::: example
 **An exact confidence interval for the win probability**
@@ -1342,7 +1367,7 @@ that we have a fair game is not very strong.
 
 ### Confidence intervals for the mean
 
-Confidence intervals for the mean are very easy to calculate. Again, we
+Asymptotic confidence intervals for the mean are very easy to calculate. Again, we
 construct them by inverting the hypothesis test.
 
 Pick any $\mu_0$.  We would fail to reject the null hypothesis
@@ -1354,16 +1379,21 @@ To summarize, we fail to reject the null if:
 \begin{align}
   c_L < \sqrt{n}\frac{\bar{x}-\mu_0}{sd_x} < c_H
 \end{align}
-The next step is to solve for $\mu_0$, which produces:
+The next step is to solve[^803] for $\mu_0$:
 \begin{align}
   \left(\bar{x} - c_H \frac{sd_x}{\sqrt{n}}\right) < \mu_0 < \left(\bar{x} - c_L \frac{sd_x}{\sqrt{n}}\right)
 \end{align}
-All that remains is to choose a confidence/size level, and decide whether to use
-a parametric or asymptotic test.
+All that remains is to choose a confidence/size level, decide whether to use
+a parametric or asymptotic test, and calculate critical values.
 
-If we are using the asymptotic approximation to construct a 95\% confidence
-interval, then the 5\% asymptotic critical values are $c_L = -1.96$ and
-$c_H \approx 1.96$. So the 95\% confidence interval consists of all
+[^803]: If you do not remember the rules for algebra with inequalities, they
+        are just like for equality, but the inequality switches sides whenever
+        both sides are multiplied or divided by a negative number.  For example,
+        if $a < b$, then $-a > -b$.
+
+If we wish to construct a 95\% confidence interval using an asymptotic test,
+then the 5\% asymptotic critical values are $c_L = -1.96$ and
+$c_H \approx 1.96$. So the 95\% asymptotic confidence interval consists of all
 $\mu_0$ such that:
 \begin{align}
   \left(\bar{x} - 1.96 \frac{sd_x}{\sqrt{n}}\right) < \mu_0 < \left(\bar{x} - (-1.96) \frac{sd_x}{\sqrt{n}}\right)
@@ -1432,7 +1462,7 @@ These parametric confidence intervals are slightly wider than the asymptotic
 confidence intervals derived earlier in this section.
 :::
 
-In the end, it doesn't matter much whether you base your confidence intervals
+In the end, it rarely matters much whether you base your confidence intervals
 on an exact, parametric or asymptotic test. Again this makes sense: the goal
 here is to assess the strength of the evidence in a given data set, so any two
 reasonable approaches should yield similar results most of the time.
