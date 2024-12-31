@@ -1562,7 +1562,7 @@ It has discrete support $S_x = \{0,1,2,\ldots,n\}$ and its PDF is:
     \end{cases}
 \end{align}
 You do not need to memorize or even understand this formula.  The Excel function 
-`BINOMDIST()` can be used to calculate the PDF or CDF of the binomial
+`BINOM.DIST()` can be used to calculate the PDF or CDF of the binomial
 distribution, and the function `BINOM.INV()` can be used to calculate its
 quantiles.
 
