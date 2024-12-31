@@ -336,8 +336,7 @@ percentile is 0.75, etc.
 
 ### Expected values {#continuous-expected-values}
 
-The expected value also has the same [interpretation](#the-expected-value) and
-[properties](#properties-of-the-expected-value) whether the random variable
+The expected value also has the same [interpretation and properties](#the-expected-value) whether the random variable
 is continuous or discrete. The definition is slightly different, and includes
 an integral.
 
@@ -580,8 +579,10 @@ $S_x = \mathbb{R}$ and PDF:
 \end{align}
 The Excel function `NORM.DIST()` can be used to calculate this PDF.
 
-The $N(\mu,\sigma^2)$ distribution is bell-shaped and symmetric around $\mu$,
-with the "spread" of the distribution depending on the value of $\sigma^2$. 
+Figure \@ref(fig:NormalPDF) below shows the PDF of the $N(\mu,\sigma^2)$
+distribution for various values of $\mu$ and $\sigma$.  As the figure shows,
+the Normal PDF is bell-shaped and symmetric around $\mu$, with the "spread" of
+the distribution depending on the value of $\sigma^2$. 
 
 ```{r NormalPDF, fig.cap = "*PDF for several normal distributions*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
@@ -611,7 +612,9 @@ is no simple closed-form expression for this CDF, but it is easy to calculate
 with a computer.  The Excel function `NORM.DIST()` can be used to calculate this
 CDF.
 
-The normal CDF is S-shaped, running smoothly from nearly-zero to nearly-one.
+Figure \@ref(fig:NormalCDF) below shows the CDF of the $N(\mu,\sigma^2)$
+distribution for various values of $\mu$ and $\sigma$.  As the figure shows, the
+Normal CDF is S-shaped, running smoothly from nearly-zero to nearly-one.
 
 ```{r NormalCDF, fig.cap = "*CDF for several normal distributions*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
@@ -1621,7 +1624,7 @@ covariance will not necessarily detect any relationship.
 ## Chapter review {-#review-more-on-random-variables}
 
 Over the course of this chapter and the previous ones on
-[probability](#probability) and [simple random variables](#random-variables),
+[probability](#probability-and-random-events) and [simple random variables](#random-variables),
 we have learned the basic terminology and tools for working with random
 variables: PDFs, CDFs, and expected values. You should work hard and do as many
 practice problems as you can, as a clear understanding of random variables will

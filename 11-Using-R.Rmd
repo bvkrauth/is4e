@@ -41,7 +41,7 @@ In this chapter, we will learn how to:
 14. Construct and interpret a smoothed-mean or linear regression plot in R.
 :::
 
-To prepare for this chapter, review the [introduction to R](#introduction-to-r).
+To prepare for this chapter, review the [introduction to R](#an-introduction-to-r).
 Then open RStudio, load the Tidyverse, and read in our employment data:
 
 ```{r ReadEmpDataFromCSV_11, eval=FALSE}

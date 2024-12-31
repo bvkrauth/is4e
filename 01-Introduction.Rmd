@@ -221,7 +221,7 @@ We will use Excel [right away](#basic-data-cleaning-with-excel).  We will
 not need R until [much later](#an-introduction-to-r), but it is best
 to get your system set up now.
 
-:::sfu
+::: {.sfu data-latex=""}
 **ECON 233 on Canvas**
 
 Course materials for ECON 233, including the syllabus, lectures, and

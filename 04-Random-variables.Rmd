@@ -45,7 +45,7 @@ In this chapter, we will learn how to:
 :::
 
 To prepare for this chapter, please review the chapter on
-[probability and random events](#probability) and the section on 
+[probability and random events](#probability-and-random-events) and the section on 
 [sequences and summations](#sequences-and-summations) in the math appendix.
 
 ## Defining a random variable {#introduction-to-random-variables}
@@ -1014,7 +1014,7 @@ directly from the underlying outcome $\omega$.
   y_{Red} &= \begin{cases}  
       1 & \textrm{ if } \omega \in RedWins \\
       -1 & \textrm{ if } \omega \in RedWins^c 
-      \end{cases} \\
+      \end{cases}
 \end{align}
 
 Alternatively, we can define it in terms of the random variable $b$, or of the

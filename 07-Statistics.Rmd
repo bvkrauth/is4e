@@ -799,9 +799,15 @@ So its bias as an estimator of $m$ is:
       p-1 & \textrm{if $p > 0.5$} \\
       \end{cases}
 \end{align}
-The figure below shows the true population median (in blue), the expected value
-of the sample median (in orange), and the bias (in red).  As you can see, the
-bias is nonzero for most values of $p$, but its direction and magnitude vary.
+Figure \@ref(fig:medex) below shows the true population median (in blue), the
+expected value of the sample median (in orange), and the bias (in red). As you
+can see, the bias is nonzero for most values of $p$, but its direction and
+magnitude vary.
+
+This result applies more generally: the sample median is typically a biased
+estimator of the median. It is still the most commonly-used estimator for the
+median, for reasons we will discuss soon.
+:::
 ```{r medex, fig.cap = "*The sample median is a biased estimator*"}
 medex <- tibble(p=seq(from=0,to=1,length.out=400),
                       m=as.integer(p > 0.5),
