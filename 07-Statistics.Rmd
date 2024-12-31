@@ -828,10 +828,6 @@ ggplot(data=medex,mapping=aes(x=p,y=m)) +
 ```
 
 
-This result applies more generally: the sample median is typically a biased
-estimator of the median. It is still the most commonly-used estimator for the
-median, for reasons we will discuss soon.
-:::
 
 ### Variance and the MVUE
 
