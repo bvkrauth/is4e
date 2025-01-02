@@ -91,7 +91,7 @@ example, if the marginal tax rate is 30\% on taxable income below \$100,000 and
 income would pay 30\% on the first \$100,000 and 40\% on the remaining \$50,000
 for a total tax bill of \$50,000, or an average tax rate of 33\%.
 
-The data on the top marginal tax rate is obtained from the Tax Foundation[^801], 
+The data on the top marginal tax rate is obtained from the Tax Foundation[^901],
 a US-based policy and research organization. Our data set comes from Table 1 in
 their report "Taxing High Incomes: A Comparison of 41 Countries", available
 online at  https://taxfoundation.org/taxing-high-income-2019/. 
@@ -100,7 +100,7 @@ Finally, we have a "crosswalk" data file `CountryCodes.txt`that I have
 constructed to help with linking the GDP and tax data (more about this below). 
 :::
 
-[^801]: I should mention that the Tax Foundation is not an entirely neutral 
+[^901]: I should mention that the Tax Foundation is not an entirely neutral
 organization - it generally advocates lower taxes - and so my use of their
 data here should not be taken as expressing any particular opinion on their
 policy views. It is not unusual for useful data to come from
@@ -158,6 +158,104 @@ interaction among business, you should consider taking a course in what
 economists call "industrial organization" (e.g., SFU's third-year elective
 ECON 325).
 :::
+
+### Text files and text editors
+
+The most important open file format is the ***text file***. A text file
+contains a sequence of characters (letters, numbers, etc.). Almost all other open file formats are
+built around text files.
+
+::: fyi
+**Text file encoding**
+
+Deep down, everything on a computer is binary. So text files are actually binary
+files that are "encoded" according to a published standard that translates
+between sequences of binary numbers and sequences of characters. The modern
+standard is called UTF-8 (or sometimes Unicode), which itself is built on an
+older standard called ASCII. Most existing files on your computer are either
+ASCII or UTF-8. UTF-8 was designed to be backwards-compatible with
+ASCII, so most programs can handle either encoding seamlessly. You may
+occasionally run into problems if your file has non-Western or unusual
+characters; in that case, knowing there are two standards can help you figure
+out what is going on.
+:::
+
+Text files can be read and modified using a simple program called a
+***text editor***. Every computer has at least one simple built-in text editor:
+
+  - Windows has a built in text editor called *Notepad*.
+  - MacOS has a built in text editor called *TextEdit*.
+
+In addition, there are numerous other text editors that are more powerful and
+include useful features like color-coding, spell checking, and autocorrect.
+Many of them are free:
+
+  - I use *Notepad++* which is powerful, easy to use, and available at no charge
+    from https://notepad-plus-plus.org/. Notepad++ is only available for
+    Windows.
+  - Microsoft's *VSCode* is popular with programmers, and is available at no
+    charge from https://code.visualstudio.com/. VSCode is available for Windows,
+    macOS, and many other platforms.
+
+There are also many tools available for comparing, combining, or otherwise
+processing text files.
+
+Files that are not text files are usually called ***binary*** files. Binary
+files are generally not human-readable.  If you try to open them with a
+text editor you will mostly see a bunch of odd-looking symbols.
+
+::: {.sfu data-latex=""}
+**Text editors in SFU campus labs**
+
+All general-purpose computer labs in the SFU Burnaby campus have the following
+text editors installed:
+
+- Windows: Notepad, Notepad++.
+- macOS: TextEdit, VSCode, BBEdit.
+:::
+
+### CSV files {#csv-files}
+
+In [Chapter 2](#saving-and-exporting-data), we exported an Excel worksheet to a
+CSV file, and then imported it back into Excel.
+
+So what is a CSV file? CSV files have the following features:
+
+- CSV file names usually have the `.csv` extension.
+- CSV files are text files.
+- Each CSV file represents a table of data.
+- Each line in the CSV file represents a row in the table.
+- The cells in each row are separated or ***delimited*** by commas.
+
+CSV files have a few other features, which are best understood by using a
+text editor to view the exact contents of an actual CSV file.
+
+
+::: example
+**Viewing a CSV file as text**
+
+Follow the instructions in Example \@ref(exm:exporting-a-csv-file) to export
+a CSV file using Excel, or download the file from
+[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.csv](sampledata/CanEmpNov20.csv).
+
+Open the file in a text editor of your choice. It will look something like this:
+
+![CSV viewed as a text file](bin/CSVAsText.png)
+As you can see, the CSV file contains text based on the data in your
+worksheet. Each line is a row in the worksheet, and cells are delimited by
+commas.  A few other things to notice:
+
+- There is no formatting information in the file.
+- There are no formulas, only values.
+- When the value in a cell contains a comma, the contents of the cell are
+  surrounded by quotes (`"`) so that the comma is not interpreted as the end
+  of the cell.
+
+:::
+
+You can also open any CSV file in Excel, and Excel will interpret the contents 
+of the file as a worksheet.
+
 
 ### Fixed-width files
 
@@ -249,7 +347,9 @@ delimiter:
   "Elizabeth I" 1533 1603
    ```
 
-- ***Tab-delimited*** text files use a tab character as the delimiter.
+- ***Tab-delimited*** text files use a tab character as the delimiter. It is
+  hard to distinguish space-delimited and tab-delimited files unless your
+  text editor is set to display tabs and spaces differently.
 
 - ***Whitespace-delimited*** text files use some combination of tabs and spaces
    as the delimiter.
@@ -276,7 +376,8 @@ format (on right):
 
 ![XML and JSON file in Notepad](bin/json-xml-example.png){width=80%}  
 Both JSON and XML are used extensively for computers and applications to
-transmit data to one another.
+transmit data to one another. They allow for more complex data structures
+than CSV, at a cost of being less readable for humans.
 :::
 
 Excel has a wide variety of tools for working with data in JSON, XML,
@@ -1255,28 +1356,39 @@ Answers can be found in the [appendix](#answers-advanced-data-cleaning).
       Betty,32
       ```
 
+2. Suppose you import the following CSV file in Excel:
+   ```
+   Name,Year of birth,Year of death
+   "Mary, Queen of Scots",1542,1547
+   Mary I,1516,1558
+   Elizabeth I,1533,1603
+   ```
+   a. How many rows and columns does the worksheet have?
+   b. What are the contents of cell B1?
+   c. What are the contents of cell C3?
+
 **GOAL #2: Describe and implement common data cleaning tasks**
 
-2. What is the purpose of each of the following?
+3. What is the purpose of each of the following?
    a. A crosswalk table
    b. Matching observations by keys
    c. Aggregating data by groups
 
 **GOAL #3: Describe and use Excel data management tools**
 
-3. Under which of these scenarios can you edit cell A1?
+4. Under which of these scenarios can you edit cell A1?
    a. You open a blank sheet.
    b. You open a blank sheet, and protect the sheet.
    c. You open a blank sheet, unlock cells A1:C9 and protect the sheet.
    d. You open a blank sheet, lock cells A1:C9 and protect the sheet.
 
-4. What will happen if you:
+5. What will happen if you:
    a. Add data validation to a column that contains invalid data?
    b. Add data validation to a column, and then try to enter invalid data?
 
 **GOAL #4: Construct and interpret frequency tables, cross-tabulations and conditional averages using Excel pivot tables**
 
-5. The following tables are based on 2019 data for Canadians aged 25-34.
+6. The following tables are based on 2019 data for Canadians aged 25-34.
    Classify each of these tables as simple frequency tables, crosstabs, or
    conditional averages:
    a. 

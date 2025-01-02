@@ -66,7 +66,7 @@ casino and are tasked with determining whether the casino is running a fair
 game.
 
 Before getting caught up in math, let's think about how we might assess
-evidence: 
+evidence:
 
 1. A fair game implies a particular win probability for each bet.
    - For example, the win probability for a bet on red will be
@@ -86,10 +86,10 @@ evidence:
 We can put those possibilities into a table, and make an assessment of what we
 might conclude from a given data set:
 
-| Win rate                |  Many games     |    Few games            |
+| Observed win rate       |  Many games     |    Just a few games     |
 |:------------------------|:---------------:|:-----------------------:|
-| Close to fair game rate | Probably fair   | Could be fair or unfair |
-| Far from fair game rate | Probably unfair | Could be fair or unfair |
+| Close to $48.6\%$       | Probably fair   | Could be fair or unfair |
+| Far from $48.6\%$       | Probably unfair | Could be fair or unfair |
 
 That is, we can make a fairly confident conclusion if we have a lot of evidence,
 and our conclusion depends on what the evidence shows. But if we do not have a
@@ -218,14 +218,21 @@ statistic is valid or not.
 ::: example
 ***A test statistic for roulette***
 
-Since a fair game has win probability $18/37 \approx 0.486$ we would expect
-about 48 or 49 wins in 100 fair games.  So a natural test statistic for
-determining whether the game is fair is the number of wins:
+A natural test statistic for determining whether the game is fair is the number
+of wins for red:
 \begin{align}
   t_n = n\hat{f}_{red} = n\bar{x}_n =\sum_{i=1}^n x_i
 \end{align}
-Next we need to find the probability distribution of $t_n$ under the null, and
-under the alternative.
+Since a fair game has win probability $18/37 \approx 0.486$ we would expect
+about 48 or 49 wins in 100 fair games.
+:::
+
+Once we have a proposed test statistic, we need to find its probability
+distribution under the null. Remember, this needs to be a specific probability
+distribution with no unknown parameters.
+
+::: example
+***The distribution under the null***
 
 We earlier learned about the binomial distribution, which is the distribution
 of the number of times an event with probability $p$ happens in $n$ independent
@@ -242,6 +249,14 @@ Under the null (when $H_0$ is true), $p_{red} = 18/37$ and so:
 Since this distribution does not involve any unknown parameters, our test
 statistic satisfies the requirement of having a *known* distribution under the
 null.
+:::
+
+The next step is to describe the probability distribution of the test statistic
+under the alternative. It's OK if this distribution includes unknown parameters,
+the key is to confirm that it is different from the distribution under the null.
+
+::: example
+***The distribution under the alternative***
 
 Under the alternative (when $H_1$ is true), $p_{red}$ can take on any value
 *other* than $18/37$.  The sample size is still $n=100$, so the distribution of
@@ -254,7 +269,7 @@ known, since $p_{red}$ is not known.  But the distribution is *different* under
 the alternative, and that is what we require from our test statistic.
 :::
 
-### Critical values
+### Size and power
 
 After choosing a test statistic $t_n$ and determining its distribution under the
 null, the next step is to choose ***critical values***.  The critical values of
@@ -264,7 +279,7 @@ a test are two numbers $c_L$ and $c_H$ (where $c_L < c_H$) such that:
    is true.
 2. $t_n$ has a *lower* probability of being between $c_L$ and $c_H$ when the
    alternative is true.
-  
+
 The range of values from $c_L$ to $c_H$ is called the ***critical range*** of
 our test.
 
@@ -283,35 +298,268 @@ Given the test statistic and critical values:
 
 ![*We reject the null if the test statistic falls outside of the blue critical range above*](bin/reject.png)
 
+::: example
+***Proposed critical values for the win frequency***
+
+Suppose we pick the following critical values for our test:
+\begin{align}
+  c_L &= 45 \\
+  c_H &= 55
+\end{align}
+This means:
+
+- We reject the null of a fair game if red wins fewer than 45 games
+  $(t_n < c_L)$.
+- We reject the null of a fair game if red wins more than 55 games
+  $(t_n > c_H)$.
+
+Otherwise, we accept or fail to reject the null of a fair game.
+:::
+
 How do we choose critical values? You can think of critical values as setting a
 standard of evidence, so we need to balance two considerations:
 
 - The probability of rejecting a false null is called the ***power*** of the
   test.
   - We want to reject false nulls, so power is good.
-- The probability of rejecting a true null is called the ***size*** or 
+- The probability of rejecting a true null is called the ***size*** or
   ***significance*** of a test.
   - We do not want to reject true nulls, so size is bad.
-- There is always a trade off between power and size 
-  - A *narrower* critical range (higher $c_L$ or lower $c_H$) produces more
-    rejections, increasing both power (good) and size (bad).
-  - A *wider* critical range (lower $c_L$ or higher $c_H$) produces fewer
-    rejections, reducing both power (bad) and size (good).
-  
-Given this trade off between power and size, we could construct some criterion
+
+The size of a test is a number:
+\begin{align}
+  size &= \Pr(\textrm{reject $H_0$}) \qquad \textrm{when $H_0$ is true}
+\end{align}
+and it is usually easy to calculate.
+
+::: example
+***The size of our proposed test***
+
+With our proposed critical values $(c_L,c_H) = (45,55)$, we can calculate the
+size of our test by following these steps:
+
+1. *Find the probability of rejecting the null* as a function of the
+   (potentially unknown) CDF of the test statistic:
+   \begin{align}
+     \Pr(\textrm{reject $H_0$}) &= \Pr((t_n < 45) \cup (t_n > 55)) \\
+       &= \Pr(t_n < 45) + \Pr(t_n > 55) \\
+       &= \Pr(t_n \leq 44) + (1 - \Pr(t_n \leq 55)) \\
+       &= F_t(44) + (1 - F_t(55))
+   \end{align}
+   where $F_t(\cdot)$ is the CDF of $t_n$.
+2. *Find the CDF under the null* and substitute: When the null is true, we know
+   that:
+   \begin{align}
+     H_0 &\implies t_n \sim Binomial(100,18/37)
+   \end{align}
+   and we can calculate this CDF in Excel using the `BINOM.DIST()` function. The
+   correct formula for $F_t(44)$ is  `=BINOM.DIST(44,100,18/37,TRUE)` and the
+   formula for $F_t(55)$ is `=BINOM.DIST(55,100,18/37,TRUE)` which produces:
+   \begin{align}
+     \Pr(\textrm{reject $H_0$})
+       &= F_t(44) + (1 - F_t(55)) \\
+       &\approx 0.20 + (1 - 0.91)) \\
+       &\approx 0.29
+   \end{align}
+   In R, the function for the binomial CDF is `pbinom()` and the code would be:
+   ```{r proposed_size, echo = TRUE}
+   pbinom(44,100,18/37) + 1 - pbinom(55,100,18/37)
+   ```
+
+So the size of this test is about 29\%. That is, if the game is fair we have
+a 29\% chance of mistakenly concluding it is unfair.  This is a pretty high
+probability, suggesting we might need to choose different critical values.
+:::
+
+The power of a test is a function:
+\begin{align}
+  power(\theta) &= \Pr(\textrm{reject $H_0$}) \qquad \textrm{when $H_0$ is false}
+\end{align}
+and is more difficult to calculate.
+
+::: example
+***The power of our proposed test***
+
+With our proposed critical values $(c_L,c_H) = (45,55)$, we can also find the
+power of our test by following these steps:
+
+1. *Find the probability of rejecting the null* as a function of the
+   (potentially unknown) CDF of the test statistic. We already did this:
+   \begin{align}
+     \Pr(\textrm{reject $H_0$})
+       &= F_t(44) + (1 - F_t(55))
+   \end{align}
+   where $F_t(\cdot)$ is the CDF of $t_n$.
+2. *Pick a parameter value* for which you wish to calculate power. For example,
+   let's pick $p_{red}=0.4$.
+3. *Find the CDF for the chosen parameter value* and substitute. In general,
+   \begin{align}
+     H_1 &\implies t_n \sim Binomial(100,p_{red}) \qquad \textrm{where $p_{red} \neq 18/37$}
+   \end{align}
+   and for our chosen parameter value $p_{red}=0.4$
+   \begin{align}
+     p_{red}=0.4 &\implies t_n \sim Binomial(100,0.4)
+   \end{align}
+   We can calculate these probabilities in Excel using the `=BINOM.DIST()`
+   function. The formula for $F_t(44)$ is `=BINOM.DIST(44,100,0.4,TRUE)` and
+   the formula for $F_t(55)$ is `=BINOM.DIST(55,100,0.4,TRUE)` which produces:
+   \begin{align}
+     power(0.4)
+       &= \Pr(\textrm{reject $H_0$}) \\
+       &= F_t(44) + (1 - F_t(55)) \\
+       &\approx 0.821 + (1 - 0.999)) \\
+       &\approx 0.822
+   \end{align}
+   In R, the code would be:
+   ```{r proposed_power, echo = TRUE}
+   pbinom(44,100,0.4) + 1 - pbinom(55,100,0.4)
+   ```
+
+That is, if the true win probability is 40\%, the probability of rejecting
+the null of a fair game is about 82\%.
+:::
+
+We can calculate $power(\theta)$ for many values of $\theta$ and plot the result
+to get what is called a ***power curve***. Creating power curves is sometimes
+complex, and is beyond the scope of this course. But we can at least view and
+interpret a power curve.
+
+::: example
+***A power curve for our proposed test***
+
+We can calculate the power for any value of $p$ and plot the result as a power
+curve: Most power curves look like Figure \@ref(fig:PowerCurveProposed) below:
+power is low for values close to the null, and rises as we get further from the
+null. Power is a probability, so it never goes above one or below zero.
+:::
+
+
+```{r PowerCurveProposed, fig.cap = "*Power curve for proposed critical values*"}
+size4455 <- pbinom(44, 100, 18/37) +
+  (1 - pbinom(55,100,18/37))
+PowerCurveData <- tibble(theta = seq(0,1,length.out=380),
+                         power = pbinom(44,
+                                        100,
+                                        theta) +
+                           (1 - pbinom(55,
+                                       100,
+                                       theta)),
+                         size = size4455)
+ggplot(data = PowerCurveData,
+       mapping = aes(x = theta,y = power)) +
+  geom_line(col="#002D62") +
+  geom_text(x=0.03,y=0.95,col="#002D62",label="power") +
+  geom_hline(yintercept=size4455, linetype="dashed", col="#002D62") +
+  geom_text(x=0.08,y=0.33,col="#002D62",
+            label=paste("size = ", format(size4455,digits=2))) +
+  geom_vline(xintercept = 18/37,col="gray") +
+  geom_text(label="p=18/37",x=0.55,y=1.0,col="gray") +
+  xlab("true probability of winning") +
+  ylab("probability of rejecting null") +
+  labs(title = "Power curve for test of fair roulette wheel",
+       subtitle = "Proposed critical values: cL = 45, cH = 55",
+       caption = "H0: Pr(red wins) = 18/37",
+       tag = "")
+```
+
+
+
+
+When choosing critical values, there is always a trade off between power and
+size:
+
+- A *wider* critical range (lower $c_L$ or higher $c_H$) is more conservative:
+  - It produces fewer rejections.
+  - It has low power (bad).
+  - It has low size (good).
+- A *narrower* critical range (higher $c_L$ or lower $c_H$) is more aggressive:
+  - Produces more rejections.
+  - Has greater power (good).
+  - Has greater size (bad).
+
+The appropriate critical range depends on how we view this trade off: are we
+more concerned about the risk of rejecting a true null, or failing to reject
+a false null?
+
+::: example
+***Power and size for other critical values***
+
+If we use a wider critical range $(c_L,c_H) = (40,60)$, we can follow the same
+calculations as in the previous examples to find:
+\begin{align}
+  size &\approx 0.042 \\
+  power(0.4) &\approx 0.462
+\end{align}
+Using this wider critical range substantially reduces the probability of
+mistakenly rejecting a true null (from 29\% to 4\%) but this comes at a cost
+of reducing the probability of rejecting the null when it is false (e.g.,
+from 82\% to 46\% when $p=0.4$).
+
+Figure \@ref(fig:PowerCurveComparison) shows the full power curve for this
+critical range. As the figure shows, the wider critical range has lower size, but at a cost of lower power for every value of the win probability.
+:::
+
+```{r PowerCurveComparison, fig.cap = "*Power curve comparison*"}
+size4455 <- pbinom(44, 100, 18/37) +
+  (1 - pbinom(55, 100, 18/37))
+size4060 <- pbinom(40, 100, 18/37) +
+  (1 - pbinom(60, 100, 18/37))
+PowerCurveData <- tibble(theta = seq(0,1,length.out=380),
+                         power4455 = pbinom(44,
+                                           100,
+                                           theta) +
+                           (1 - pbinom(55,
+                                       100,
+                                       theta)),
+                         power4060 = pbinom(40,
+                                           100,
+                                           theta) +
+                           (1 - pbinom(60,
+                                       100,
+                                       theta)),
+                         size4455 = size4455,
+                         size4060 = size4060)
+ggplot(data = PowerCurveData,
+       mapping = aes(x = theta,y = power4455)) +
+  geom_line(col="#002D62") +
+  geom_text(x=0.55,y=0.9,col="#002D62",label="(44,55)") +
+  geom_line(aes(y = power4060),
+                col="darkorange") +
+  geom_text(x=0.6,y=0.11,col="darkorange",label="(40,60)") +
+  geom_hline(yintercept=size4455, linetype="dashed", col="#002D62") +
+  geom_text(x=0.08,y=0.33,col="#002D62",
+            label=paste("size = ", format(size4455,digits=2))) +
+  geom_hline(yintercept=size4060, linetype="dashed", col="darkorange") +
+  geom_text(x=0.08,y=0.1,col="darkorange",
+            label=paste("size = ", format(size4060,digits=1))) +
+  geom_vline(xintercept = 18/37,col="gray") +
+  geom_text(label="p=18/37",x=0.55,y=1.0,col="gray") +
+  xlab("true probability of winning") +
+  ylab("probability of rejecting null") +
+  labs(title = "Power curve for test of fair roulette wheel",
+       subtitle = "Proposed critical values: (40,60) versus (45,55)",
+       caption = "H0: Pr(red wins) = 18/37",
+       tag = "")
+```
+
+
+### Choosing critical values
+
+Given the trade off between power and size, we could construct some criterion
 that accounts for both (just like MSE includes both variance and bias) and
-choose critical values to maximize that criterion. But we don't do that.
+choose critical values to maximize that criterion. But we don't do that,
+in part because power is tough to calculate.
 
 Instead, we follow a simple convention:
 
-1. Set the size to a fixed value $\alpha$.
+1. *Set the size* to a fixed value $\alpha$.
    - The convention in economics and most other social sciences is to use a size
      of 5\% ($\alpha = 0.05$).
    - Economists may use 1\% ($\alpha = 0.01$) when working with larger data sets
      or 10\% ($\alpha = 0.10$) when working with smaller data sets.
-   - The data sets in physics or genetics are much larger, and they use a much
-     lower conventional size.
-2. Calculate critical values that imply the desired size.  
+   - The data sets in physics or genetics are much larger, and their convention
+     is to use a much lower size.
+2. *Find critical values* that imply the desired size.
    - With a size of 5\% $(\alpha = 0.05)$, we would:
      - Set $c_L$ to the 2.5 percentile (0.025 quantile) of the null
        distribution.
@@ -328,7 +576,7 @@ Note that we are dividing the size by two so we can put half on the lower tail
 of the null distribution and half on the upper tail.
 
 ::: example
-**Critical values for roulette**
+**5\% critical values for roulette**
 
 We earlier showed that the distribution of $t_n$ under the null is:
 \begin{align}
@@ -345,8 +593,8 @@ function you would use is `BINOM.INV()`
 - The formula to calculate $c_L$ is `=BINOM.INV(100,18/37,0.025)`
 - The formula to calculate $c_H$ is `=BINOM.INV(100,18/37,0.975)`
 
-The calculations below were done in R:
-```{r BinomialCriticalValues}
+In R, the function would be `qbinom()` and the code would be:
+```{r BinomialCriticalValues, echo = TRUE}
 cat("2.5 percentile of binomial(100,18/37) =",
     qbinom(0.025,100,18/37),
     "\n")
@@ -359,60 +607,54 @@ is fair if red wins fewer than 39 games or more than 58 games.
 :::
 
 ::: {.fyi data-latex=""}
-**A general test for a single probability**
+**P values**
 
-We can generalize the test we have constructed so far to the case of the
-probability of any event:
+The convention of always using a 5\% significance level for hypothesis tests is
+somewhat arbitrary and has some negative unintended consequences:
 
-| Test component         |  Roulette example                    |General case               |
-|:-----------------------|:------------------------------------:|:-------------------------:|
-| Parameter              | $p_{red} = \Pr(\textrm{Red wins})$   | $p = \Pr(\textrm{event})$ |
-| Null hypothesis        | $H_0:p_{red} = 18/37$                | $H_0:p = p_0$             | 
-| Alternative hypothesis | $H_1: p_{red} \neq 18/37$            |$H_1: p \neq p_0$          | 
-| Test statistic         | $t = n\hat{f}_{red}$                 | $t = n\hat{f}_{\textrm{event}}$ | 
-| Null distribution      | $Binomial(100,18/37)$                |$Binomial(n,p_0)$          | 
-| Critical value $c_L$   | 39                        | 2.5 percentile of $Binomial(n,p_0)$  |
-| Critical value $c_H$   | 58                        | 97.5 percentile of $Binomial(n,p_0)$ |
-| Decision               | Reject if $t \notin [39,58]$    | Reject if $t \notin [c_L,c_H]$ |
+  1. Sometimes a test statistic falls just below or just above the critical
+     value, and small changes in the analysis can change a result from reject
+     to cannot-reject.
+  2. In many fields, unsophisticated researchers and journal editors
+     misinterpret "cannot reject the null" as "the null is true."
+
+One common response to these issues is to report what is called the
+***p-value*** of a test.  The p-value of a test is defined as the significance
+level at which one would switch from rejecting to not-rejecting the null. For
+example:
+
+- If the p-value is 0.43 (43\%) we would not reject the null at 10\%, 5\%, or
+  1\%.
+- If the p-value is 0.06 (6\%) we would reject the null at 10\% but not at 5\%
+  or 1\%.
+- If the p-value is 0.02 (2\%) we would reject the null at 10\% and 5\% but not
+  at 1\%.
+- If the p-value is 0.001 (0.1\%) we would reject the null at 10\%, 5\%, and
+  1\%.
+
+The p-value of a test is simple to calculate from the test statistic and its
+distribution under the null.  I won't go through that calculation here.
 :::
 
-### Size and power
 
-As mentioned above, the size of a test is the probability of rejecting a true
-null.  It is a single number, since the distribution of the test statistic
-is known when the null is true. It is determined by our choice of critical
-values, or more precisely we choose critical values to achieve a particular
-size.
+### Increasing power
 
-The power of a test is defined as the probability of rejecting the null when it
-is false, and is also determined by our choice of critical values. However,
-it is a *function* of the true parameter value $\theta$ rather than a single
-number:
-\begin{align}
-  power(\theta) = \Pr(\textrm{reject $H_0$})
-\end{align}
-The reason for this is that there is only one $\theta$ value that is consistent
-with the null, but there are many that are consistent with the alternative.
-
-In some cases, we can actually calculate the power function and plot it as a
-***power curve***. The details of power calculations are beyond the scope of
-this course, but we can at least view and interpret a power curve.
+Since critical values are set to achieve a fixed size, the only way to
+increase power is by collecting more data.
 
 ::: example
-**The power curve for roulette**
+**The power curve for the 5\% test**
 
-Power curves can be tricky to calculate, and I will not ask you to calculate
-them for this course.  But they can be calculated, and it is useful to see what
-they look like.
-
-Figure \@ref(fig:PowerCurves) below depicts the power curve for the roulette
+Figure \@ref(fig:PowerCurves) below depicts the power curve for the 5\%
 test we have just constructed; that is, we are testing the null that
 $p_{red} = 18/37$ at a 5\% size.  The blue line depicts the power curve for
 $n=100$ as in our example, while the orange line depicts the power curve for
-a smaller sample of size $n=20$. There are a few features I would like you to
-notice, all of which are common to most regularly used tests:
+a smaller sample of size $n=20$ and the purple line depicts the power
+curve for a larger sample size of size $n=300$. There are a few features
+I would like you to notice, all of which are common to most regularly used
+tests:
 
-- Power reaches its lowest value near the point $(18/37,0.05)$.
+- Power reaches its lowest value near[^801] the point $(18/37,0.05)$.
   Note that $18/37$ is the parameter value under the null, and $0.05$ is the
   size of the test. In other words:
   - The power of this test is typically greater than its size.
@@ -422,10 +664,12 @@ notice, all of which are common to most regularly used tests:
   - We are more likely to detect unfairness in a game that is *very* unfair than
     when in one that is *a little* unfair.
 - Power also increases with the sample size;
-  - The blue line ($n = 100$) is above the orange line ($n = 20$).
+  - The purple line ($n = 300$) is above the blue line ($n = 100$), which
+    is above the orange line ($n = 20$).
   - As $n \rightarrow \infty$, power goes to one for every value in the
     alternative.  A test with this desirable property is called a
     ***consistent*** test.
+You can ignore the dashed lines for the moment.
 :::
 
 ```{r PowerCurves, fig.cap = "*Power curves for the roulette example*"}
@@ -440,6 +684,16 @@ PowerCurveData <- tibble(theta = seq(0,1,length.out=380),
                                               18/37),
                                        20,
                                        theta)),
+                         power300 = pbinom(qbinom(0.025,
+                                                 300,
+                                                 18/37),
+                                          300,
+                                          theta) +
+                             (1 - pbinom(qbinom(0.975,
+                                              300,
+                                              18/37),
+                                       300,
+                                       theta)),
                          power100 = pbinom(qbinom(0.025,
                                                   100,
                                                   18/37),
@@ -450,84 +704,120 @@ PowerCurveData <- tibble(theta = seq(0,1,length.out=380),
                                               18/37),
                                        100,
                                        theta)))
-ggplot(data = PowerCurveData, 
+ggplot(data = PowerCurveData,
        mapping = aes(x = theta,y = power20)) +
   geom_line(col="#EB6E1F") +
   geom_line(aes(y = power100), col="#002D62") +
+  geom_line(aes(y = power300), col="purple") +
   xlab("true probability of winning") +
-  ylab("power") +
-  geom_text(label="n=100",x=0.7,y=0.8,col="#002D62") +
-  geom_text(label="n=20",x=0.9,y=0.8,col="#EB6E1F") +
+  ylab("probability of rejecting null") +
+  geom_text(label="n=100",x=0.7,y=0.85,col="#002D62") +
+  geom_text(label="n=300",x=0.45,y=0.85,col="purple") +
+  geom_text(label="n=20",x=0.9,y=0.85,col="#EB6E1F") +
+  geom_text(label="p=18/37",x=0.55,y=1.0,col="gray") +
+  geom_text(label="size=0.05",x=0.1,y=0.1,col="gray") +
+  geom_hline(yintercept = 0.8,col="purple", linetype="dashed") +
+  geom_vline(xintercept = 0.4,col="purple", linetype="dashed") +
   geom_hline(yintercept = 0.05,col="gray") +
   geom_vline(xintercept = 18/37,col="gray") +
-  labs(title = "Power curve for test of fair roulette wheel", 
-       subtitle = "", 
-       caption = "H0: Pr(red wins) = 18/37, significance = 0.05", 
+  labs(title = "Power curve for 5% test of fair roulette wheel",
+       subtitle = "Varying sample sizes",
+       caption = "H0: Pr(red wins) = 18/37, significance = 0.05",
        tag = "")
 ```
 
+[^801]: You may notice that the curves do not exactly cross the point
+$(18/37,0.05)$. This is because the binomial distribution is discrete, so it is
+not possible to achieve a size of exactly 5\%.
 
-Power analysis is often used by researchers to determine how much data to
-collect.  Each additional observation collected increases power but costs money.
-With limited resources, it is important to spend enough to get clear results,
-but not much more than that.
 
-::: {.fyi data-latex=""}
-**P values**
+***Power analysis*** is often used by researchers to determine how much
+data to collect.  Each additional observation collected increases power
+without increasing size, but each additional observation costs money.
+With limited research funding, it is important to spend enough to get clear
+results, but not much more than that.
 
-The convention of always using a 5\% significance level for hypothesis tests is
-somewhat arbitrary and has some negative unintended consequences:
+::: example
+**How many observations do we need?**
 
-  1. Sometimes a test statistic falls just below or just above the critical
-     value, and small changes in the analysis can change a result from reject
-     to cannot-reject.
-  2. In many fields, unsophisticated researchers and journal editors
-     misinterpret "cannot reject the null" as "the null is true."
-    
-One common response to these issues is to report what is called the 
-***p-value*** of a test.  The p-value of a test is defined as the significance
-level at which one would switch from rejecting to not-rejecting the null. For
-example:
+We can use the power curve to decide how much data to collect. For example,
+we might ask "how many observations do I need to have an 80\% chance
+of rejecting the null of a fair game $(p = 18/37 \approx 0.486)$ when the
+true win probability is 40\% $(p = 0.4)$?"
 
-- If the p-value is 0.43 (43\%) we would not reject the null at 10\%, 5\%, or
-  1\%.
-- If the p-value is 0.06 (6\%) we would reject the null at 10\% but not at 5\%
-  or 1\%.
-- If the p-value is 0.02 (2\%) we would reject the null at 10\% and 5\% but not
-  at 1\%.
-- If the p-value is 0.001 (0.1\%) we would reject the null at 10\%, 5\%, and
-  1\%.
-  
-The p-value of a test is simple to calculate from the test statistic and its
-distribution under the null.  I won't go through that calculation here.
+In Figure \@ref(fig:PowerCurves), this means the power curve would need to be
+above the point where the two dashed purple lines intersect. This represents
+the point where $power(0.4) = 0.8$.
+
+- A sample size of 20 is not big enough, as the orange power curve for
+  $n=20$ is below this point.
+- A sample size of 100 is not big enough, as the blue power curve for
+  $n=100$ is below this point.
+- A sample size of 300 is more than big enough, as the purple power
+  curve for $n=300$ is above this point.
+
+So the minimum sample size needed to achieve our goal of $power(0.4) \geq 0.8$
+is somewhere between 100 and 300. I've done the calculation, and the precise
+number is 251.
 :::
 
-### Implementing and interpreting
+
+
+### Implementation
+
+The steps taken above derive a test for a specific null hypothesis (a fair
+roulette game) for a specific sample size (100) and desired significance level
+(5\%). But the results can be generalized to a hypothesis test for any event
+probability.
+
+::: example
+**A general test for a single probability**
+
+We can generalize the test we have constructed so far to the case of the
+probability of any event:
+
+| Test component         |  Roulette example                    |General case               |
+|:-----------------------|:------------------------------------:|:-------------------------:|
+| Parameter              | $p_{red} = \Pr(\textrm{Red wins})$   | $p = \Pr(\textrm{event})$ |
+| Null hypothesis        | $H_0:p_{red} = 18/37$                | $H_0:p = p_0$             |
+| Alternative hypothesis | $H_1: p_{red} \neq 18/37$            | $H_1: p \neq p_0$         |
+| Test statistic         | $t = n\hat{f}_{red}$                 | $t = n\hat{f}_{\textrm{event}}$ |
+| Null distribution      | $Binomial(100,18/37)$                | $Binomial(n,p_0)$         |
+| Size/significance      | 5\% (0.05)                           | $\alpha$                  |
+| Critical value $c_L$   | 39                        | 2.5 percentile of $Binomial(n,p_0)$  |
+| Critical value $c_H$   | 58                        | 97.5 percentile of $Binomial(n,p_0)$ |
+| Decision               | Reject if $t \notin [39,58]$    | Reject if $t \notin [c_L,c_H]$ |
+:::
 
 So far, we have discussed how to construct a hypothesis test from scratch. But
-most of the time statisticians use off-the-shelf test statistics and critical
-values, so the main task of a person working with data is implementing the test.
-Here are the steps:
+data analysts mostly use off-the-shelf test statistics and critical
+values that have been developed by professional statisticians.
 
-1. Choose the null and alternative hypothesis.
+The main task of a person working with data is ***implementing*** the test
+and ***interpreting*** the results:
+
+1. Choose your null and alternative hypotheses.
    - These depend on your research question, so you must choose them yourself.
-2. Choose the size of your test.
+2. Choose the desired size of your test.
    - In economics, it is usually 5\%.
 3. Construct or look up an appropriate test. A test consists of:
-   - A test statistic
-   - Critical values (for the chosen size)
-4. Calculate the test statistic.
+   - Your null and alternative hypotheses.
+   - A test statistic.
+   - Critical values (for your chosen size).
+4. Calculate the test statistic based on your data.
 5. Compare the test statistic to the critical values and make an accept/reject
    decision.
-
-Always remember that failing to reject the null does not mean the null is true.
+6. Interpret your findings.
+   - Remember that failing to reject the null does not mean the null is true.
+     It usually means the evidence is inconclusive on whether the null is true.
 
 ::: example
 ***Implementing our roulette test***
 
 To review the roulette example, the null hypothesis is:
 \begin{align}
-  H_0: p_{red} = 18/37
+  H_0: p_{red} &= 18/37 \\
+  H_1: p_{red} &\neq 18/37
 \end{align}
 the test statistic is the absolute win frequency:
 \begin{align}
@@ -556,19 +846,21 @@ We are now ready to implement the test with data.  Consider two cases:
 
 Remember that failing to reject the null does not mean the null is true.  It
 is still possible that the game is unfair, we just don't have clear evidence
-that it is.
+that it is. We may need to collect more data to get clearer evidence and
+increase the power of our test.
 :::
 
 ## The Central Limit Theorem
 
-In order for a test statistic to work, its exact probability distribution must
-be known under the null hypothesis.  The example test in the previous section
-worked because it was based on a sample frequency, a statistic whose
-probability distribution is relatively easy to calculate.  Unfortunately, most
-statistics do not have a probability distribution that is easy to calculate.
+In a hypothesis test, the exact probability distribution of the test statistic
+must be known under the null hypothesis.  The example test in the previous
+section worked because it was based on a sample frequency, a statistic whose
+probability distribution (binomial) is relatively easy to calculate.
+Unfortunately, most statistics do not have a probability distribution that is
+easy to calculate.
 
-Fortunately, we have a very powerful asymptotic result called the 
-***Central Limit Theorem (CLT)***.  The CLT roughly says that we can approximate 
+Fortunately, we have a very powerful asymptotic result called the
+***Central Limit Theorem (CLT)***.  The CLT roughly says that we can approximate
 the entire probability distribution of the sample average $\bar{x}_n$ by a
 normal distribution if the sample size is sufficiently large.
 
@@ -593,7 +885,7 @@ for every $a \in \mathbb{R}$.
 Convergence in distribution means we can approximate the actual CDF $F_n(\cdot)$
 of $s_n$ with its limit $F(\cdot)$.  As with most approximations, this is useful
 whenever $F_n(\cdot)$ is difficult to calculate and $F(\cdot)$ is easy to
-calculate. 
+calculate.
 
 We can now state the theorem:
 
@@ -607,18 +899,20 @@ Then $z_n \rightarrow^D z \sim N(0,1)$.
 :::
 
 Fundamentally, the Central Limit Theorem means that if $n$ is big enough then
-the probability distribution of $\bar{x}_n$ is approximately normal 
+the probability distribution of $\bar{x}_n$ is approximately normal
 *no matter what the original distribution of $x_i$ looks like*.
 
   - In order for the CLT to apply, we need to standardize $\bar{x}_n$ so that it
     has constant mean (zero) and variance (one) as $n$ increases. That re-scaled
-    sample average is $z_n$.  
+    sample average is called $z_n$.
   - In practice, we don't usually know $\mu_x$ or $\sigma_x$ so we can't
     calculate $z_n$ from data. Fortunately, there are some tricks for getting
     around this problem that we will talk about later.
 
-What about statistics other than the sample average?  Well it turns out that 
-Slutsky's theorem also extends to convergence in distribution.
+What about statistics other than the sample average?  Well it turns out that
+Slutsky's theorem also extends to convergence in distribution. In combination
+with the Central Limit Theorem, this means most statistics have an approximately
+normal distribution if the sample size is big enough.
 
 ::: {.fyi data-latex=""}
 **Slutsky's theorem for probability distributions**
@@ -626,10 +920,10 @@ Slutsky's theorem also extends to convergence in distribution.
 We earlier stated Slutsky's theorem for convergence in probability, which
 says that any continuous function of a statistic that converges in probability
 also converges in probability. We also said that most commonly-used
-statistics  - sample variance and standard deviation, sample frequencies, 
-sample median and quantiles/percentiles, etc. - can be expressed as continuous 
+statistics  - sample variance and standard deviation, sample frequencies,
+sample median and quantiles/percentiles, etc. - can be expressed as continuous
 functions of a set of sample averages.  This means that the Law of Large Numbers
-can be applied to these statistics, which implies that they are all consistent 
+can be applied to these statistics, which implies that they are all consistent
 estimators.
 
 There is also a version of Slutsky's theorem for convergence in distribution:
@@ -650,7 +944,7 @@ a single example in detail, we now move on to the most common application
 of statistical inference: constructing hypothesis tests and confidence intervals
 on the mean in a random sample.
 
-Let $D = (x_1,\ldots,x_n)$ be a random sample of size $n$ on some random
+Let $D_n = (x_1,\ldots,x_n)$ be a random sample of size $n$ on some random
 variable $x_i$ with unknown mean $E(x_i) = \mu_x$ and variance
 $var(x_i) = \sigma_x^2$.  Let the sample average be
 $\bar{x}_n = \frac{1}{n} \sum_{i=1}^n x_i$, let the sample variance be
@@ -658,18 +952,41 @@ $sd_x^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2$ and let the sample
 standard deviation be $sd_x = \sqrt{sd_x^2}$.
 
 ::: example
-**The mean and sample average in the roulette data**
+**The mean and variance in the roulette data**
+
+In our roulette data, the random variable $x_i$ has the Bernoulli
+distribution:
+\begin{align}
+  x_i &\sim Bernoulli(p_{red})
+\end{align}
+where $p_{red}$ is the win probability. We can calculate the mean and
+variance of $x_i$ directly, or we can look up results for the
+Bernoulli distribution to get:
+\begin{align}
+  \mu_x &= E(x_i) = p_{red} \\
+  \sigma_x^2 &= var(x_i) = p_{red} -p_{red}^2
+\end{align}
+so any hypothesis about $p_{red}$ can also be expressed as a hypothesis
+about  $\mu_x$.
+
+Similarly, the sample average is also the win frequency:
+\begin{align}
+  \bar{x}_n &= \frac{1}{n} \sum_{i=1}^{n} x_i
+             = \frac{\textrm{number of wins}}{\textrm{number of games}}
+\end{align}
+and we can show that the sample variance can be written:
+\begin{align}
+  sd_x^2
+    &= \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x}_n)^2
+    =  \frac{n}{n-1}
+        \left(
+          \bar{x}_n -\bar{x}_n^2
+          \right)
+\end{align}
 
 Previously, we developed an exact frequency-based test for the fairness of a
-roulette table.  We can also fit that research question into the mean-based
-framework of this section.
-
-In our roulette data, the expected value of $x_i$ is also the win probability:
-\begin{align}
-  \mu_x &= E(x_i) = p_{red}
-\end{align}
-so any hypothesis about $p_{red}$ can also be expressed equivalently in terms of
-$\mu_x$. Similarly, the sample average is also the win frequency.
+roulette table.  We can also use these results to fit that research question
+into the mean-based framework of this section.
 :::
 
 ### The null and alternative hypotheses
@@ -708,25 +1025,25 @@ The typical test statistic we use in this setting is called the
 \begin{align}
   t_n = \frac{\bar{x}_n - \mu_0}{sd_x/\sqrt{n}}
 \end{align}
-The idea here is that we take our estimate of the parameter ($\bar{x}_n$),
-subtract its expected value under the null ($\mu_0$), and divide by an estimate
-of its standard deviation ($sd_x/\sqrt{n}$).
+The idea here is that we take our parameter estimate ($\bar{x}_n$),
+subtract its expected value under the null ($\mu_0$), and divide by its
+[standard error](#standard-errors) ($sd_x/\sqrt{n}$).
 
 ::: example
 ***The T statistic in roulette***
 
-*Case 1*: Red wins in 35 of 100 games, implying that $\bar{x} = 0.35$ and
+*Case 1*: Red wins in 35 of 100 games, implying that $\bar{x}_n = 0.35$ and
 $sd_x \approx 0.479$. So the T statistic for our test is:
 \begin{align}
-  t_n &= \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}} \\
+  t_n &= \frac{\bar{x}_n-\mu_0}{sd_x/\sqrt{n}} \\
     &\approx \frac{0.35 - 18/37}{0.479/\sqrt{100}} \\
     &\approx -2.84
 \end{align}
 
-*Case 2*: Red wins in 40 of the 100 games, implying that $\bar{x} = 0.40$ and
+*Case 2*: Red wins in 40 of the 100 games, implying that $\bar{x}_n = 0.40$ and
 $sd_x \approx 0.492$. So the T statistic for our test is:
 \begin{align}
-  t_n &= \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}} \\
+  t_n &= \frac{\bar{x}_n-\mu_0}{sd_x/\sqrt{n}} \\
     &\approx \frac{0.40 - 18/37}{0.492/\sqrt{100}} \\
     &\approx -1.75
 \end{align}
@@ -770,15 +1087,15 @@ Let's take a look at the components of this expression:
 Recall that we need the probability distribution of $t_n$ to be known when $H_0$
 is true, and different when it is false.  The second criterion is clearly met,
 and the first criterion is met if we can find the probability distribution of
-$\frac{\bar{x}_n - \mu_x}{s_x/\sqrt{n}}$.
+$\frac{\bar{x}_n - \mu_x}{sd_x/\sqrt{n}}$.
 
 The frequency-based test we derived in Section \@ref(hypothesis-tests) is what
 statisticians call an exact test:
 
   1. ***Exact test***: Use the actual finite-sample distribution of the test
      statistic under the null to derive critical values.
-     
-An exact test was possible in this case because the structure of the problem 
+
+An exact test was possible in this case because the structure of the problem
 implied that the win count must have a binomial distribution. Unfortunately, an
 exact test based on the T statistic is only possible if we know the exact
 probability distribution of $x_i$, and can then use that probability
@@ -794,7 +1111,29 @@ approximating an exact test:
   3. ***Asymptotic test***: Use the Central Limit Theorem to get an approximate
      probability distribution for the test statistic.
 
-We will explore both of those options.
+We will explore both of these options. If the distinction between exact,
+parametric, and asymptotic tests is not clear, read ahead and then come back
+here.
+
+::: example
+***An exact test for the T statistic?***
+
+With a lot of work, we *could* derive the exact distribution of the
+T statistic in our roulette example. This is because we know the
+exact distribution $x_i \sim Bernoulli(18/37)$ under the null, and
+could use that information to derive the distribution of any
+statistic based on $x_i$.
+
+But we won't do that here, for two reasons:
+
+1. It would be difficult, and we want something easy.
+2. The roulette data is a special case, and we want something that will
+   work more generally.
+
+So we will pretend we do not know an exact test is possible, and proceed
+with approximate tests.
+:::
+
 
 ### Asymptotic critical values
 
@@ -803,8 +1142,8 @@ Theorem tells us that:
 \begin{align}
   \frac{\bar{x}_n - \mu_x}{\sigma_x/\sqrt{n}} \rightarrow^D N(0,1)
 \end{align}
-Under the null our test statistic looks just like this, but with the sample
-standard deviation $sd_x$ in place of the population standard deviation 
+Under the null, our test statistic looks just like this, but with the sample
+standard deviation $sd_x$ in place of the population standard deviation
 $\sigma_x$.  It turns out that Slutsky's theorem allows us to make this
 substitution, and it can be proved that:
 \begin{align}
@@ -825,24 +1164,30 @@ ggplot(data=simdata,
        mapping = aes(x= x,
                      y= tinf)) +
   geom_line() +
-  xlab("value") +
-  ylab("PDF of t_n") +
-  labs(title = "Asymptotic distribution (PDF) of t_n under null", 
-       subtitle = "", 
-       caption = "", 
+  geom_text(label="N(0,1)",x=1.1,y=0.35,col="black") +
+  xlab("value (a)") +
+  ylab("PDF f(a)") +
+  labs(title = "Approximate distribution (PDF) of t_n under null",
+       subtitle = "Asymptotic test",
+       caption = "",
        tag = "")
 ```
 
-Therefore, if we want a test that has the ***asymptotic size*** of 5\%, we can
-use Excel or R to calculate critical values based on the standard normal
-distribution. In Excel, the function would be `NORM.INV()` or `NORM.S.INV()`,
+Therefore, if we want a test that has the ***asymptotic size*** of 5\%, the
+critical values should be:
+
+\begin{align}
+  c_L &= 2.5 \textrm{ percentile of $N(0,1)$ distribution} \\
+  c_H &= 97.5 \textrm{ percentile of $N(0,1)$ distribution}
+\end{align}
+We can use Excel or R to calculate these critical values. In Excel, the function would be `NORM.INV()` or `NORM.S.INV()`,
 and the formulas would be:
 
 - $c_L$: `=NORM.S.INV(0.025)` or `=NORM.INV(0.025,0,1)`.
 - $c_H$: `=NORM.S.INV(0.975)` or `=NORM.INV(0.975,0,1)`.
 
-The calculations below were done in R:
-```{r AsymptoticCriticalValues}
+In R, the function would be `qnorm()` and the code would be:
+```{r AsymptoticCriticalValues, echo=TRUE}
   cat("cL = 2.5 percentile of N(0,1) = ",
       round(qnorm(0.025),3),
       "\n")
@@ -861,12 +1206,12 @@ roulette test are $c_L = -1.96$ and $c_H = 1.96$. We have also calculated the
 T statistic for each of our two cases:
 
 *Case 1*: Red wins 35 of the 100 games, and the test statistic is
-$t_n \approx -2.84$. This is *outside* of the critical range, so we *reject* the
-null of a fair game.
+$t_n \approx -2.84$. This is *outside* of the critical range $(-1.96,1.96)$,
+so we *reject* the null of a fair game.
 
 *Case 2*: Red wins 40 of the 100 games, and the test statistic is
-$t_n \approx -1.75$. This is *inside* of the critical range, so we 
-*fail to reject* the null of a fair game.
+$t_n \approx -1.75$. This is *inside* of the critical range $(-1.96,1.96)$,
+so we  *fail to reject* the null of a fair game.
 :::
 
 ### Parametric critical values
@@ -874,7 +1219,7 @@ $t_n \approx -1.75$. This is *inside* of the critical range, so we
 Most economic data comes in sufficiently large samples that the asymptotic
 distribution of $t_n$ is a reasonable approximation and the asymptotic test
 works well. But occasionally we have samples that are small enough that it
-doesn't.  
+doesn't.
 
 Another option is to assume that the $x_i$ variables are normally distributed:
 \begin{align}
@@ -887,8 +1232,9 @@ $x_i$ is normally distributed is not necessarily appropriate in every setting.
 ::: example
 **Normality in the roulette data?**
 
-In our roulette data, $x_i$ has a discrete support and could not possibly
-be normally distributed. But we will ignore that for the moment.
+In our roulette data, $x_i$ has the discrete support $\{0,1\}$ and could
+not possibly be normally distributed. But we will ignore that for the
+moment.
 :::
 
 The null distribution of the test statistic
@@ -896,17 +1242,17 @@ $t_n = \frac{\bar{x}-\mu_0}{s_x/\sqrt{n}}$ under these particular assumptions
 was derived in the 1920's by William Sealy Gosset, a statistician working at the
 Guinness brewery.  To avoid getting in trouble at work (Guinness did not want to
 give away trade secrets) Gosset published under the pseudonym "Student".  As a
-result, the family of distributions he derived is called
-"Student's T distribution". Gosset's calculations are beyond the scope of this
-course.  But you should understand that the distribution of this particular
-test statistic *can* be derived once we assume normality of the $x_i$, and to
-know how to calculate its quantiles or critical values using Excel.
+result, the family of distributions he derived is called "Student's T
+distribution". Gosset's calculations are beyond the scope of this
+course.  But you should understand the basic idea: the distribution of the T
+statistic (or any other statistic based on $x_i$) under the null *can* be
+derived once we assume a specific distribution for $x_i$.
 
 When the null is true, the test statistic
 $t_n = \frac{\bar{x}-\mu_0}{s_x/\sqrt{n}}$ has the Student's T distribution with
 $n-1$ degrees of freedom:
 \begin{align}
-  t_n \sim T_{n-1}
+  (H_0:\mu_x = \mu_0) \qquad \implies \qquad t_n \sim T_{n-1}
 \end{align}
 and when the null is false, it has a different distribution which is sometimes
 called the "noncentral T distribution."
@@ -917,7 +1263,7 @@ statistician would say the distribution has "fatter tails").  As $n$ increases,
 the extreme values become less common and the $T_{n-1}$ distribution converges
 to the $N(0,1)$ distribution as predicted by the Central Limit Theorem.
 
-```{r TDistribution, fig.cap = "*Exact distribution of t_n under the null*"}
+```{r TDistribution, fig.cap = "*Distribution of t_n under the null, parametric test*"}
 simdata <- tibble(x = seq(-3,3,length.out = 100),
                   t5 = dt(x,df=4),
                   t10 = dt(x,df=9),
@@ -929,37 +1275,38 @@ ggplot(data = simdata,
   geom_line(aes(y = t10), col = "blue") +
   geom_line(aes(y = t30), col = "maroon") +
   geom_line(aes(y = tinf), col = "black") +
-  geom_text(label="n = infinity (N(0,1) distribution)",x=1.2,y=0.4,col="black") +
+  geom_text(label="n -> infinity (N(0,1) distribution)",x=1.2,y=0.4,col="black") +
   geom_text(label="n = 5 (T_4 distribution)",x=2.5,y=0.1,col="orange") +
   geom_text(label="n = 10 (T_9 distribution)",x=2.1,y=0.2,col="blue") +
   geom_text(label="n = 30 (T_29 distribution)",x=1.7,y=0.3,col="maroon") +
-  xlab("value") +
-  ylab("PDF") +
-  labs(title = "Exact distribution (PDF) of t_n under null", 
-       subtitle = "", 
-       caption = "(x assumed to be normally distributed)", 
+  xlab("value (a)") +
+  ylab("PDF f(a)") +
+  labs(title = "Distribution (PDF) of t_n under null",
+       subtitle = "Parametric test: exact if parametric assumption is true, approximate if not",
+       caption = "(x assumed to be normally distributed)",
        tag = "")
 ```
 
 Having found our test statistic and its distribution under the null,  we can
 calculate our critical values:
 \begin{align}
-  c_L &= 2.5 \textrm{ percentile of } T_{n-1} \\
-  c_H &= 97.5 \textrm{ percentile of } T_{n-1}
+  c_L &= 2.5 \textrm{ percentile of the $T_{n-1}$ distribution}  \\
+  c_H &= 97.5 \textrm{ percentile of the $T_{n-1}$ distribution}
 \end{align}
-We can obtain these percentiles using Excel or R. In Excel, the relevant
-function is `T.INV`.
+We can obtain these percentiles using Excel or R. The relevant function in
+Excel is `T.INV` and the relevant function in R is `qt()`.
 
 ::: example
 **Calculating critical values for the $T$ distribution**
 
-If we have $n = 5$ observations, then:
+If we have $n = 5$ observations, then we can calculate critical values in
+Excel:
 
 - We would calculate $c_L$ by the formula `=T.INV(0.025,5-1)`.
 - We would calculate $c_H$ by the formula `=T.INV(0.975,5-1)`.
 
-The results (calculated below using R) would be:
-```{r T4CriticalValues}
+or in R:
+```{r T4CriticalValues , echo = TRUE}
   cat("cL = 2.5 percentile of T_4 = ",
       round(qt(0.025,df=4),3),
       "\n")
@@ -995,8 +1342,9 @@ The results (calculated below using R) would be:
       round(qt(0.975,df=999),3),
       "\n")
 ```
-Notice that with 1,000 observations the finite-sample critical values are nearly
-identical to the asymptotic critical values.
+Notice that with 1,000 observations the parametric critical values are nearly
+identical to the asymptotic critical values. That is, the normality assumption
+matters less and less as the sample size increases.
 :::
 
 Once we have calculated critical values, all that remains is to implement the
@@ -1025,12 +1373,12 @@ We can then calculate critical values for a 5\% test:
 We can then apply these to our two cases:
 
 *Case 1*: Red wins in 35 of the 100 games, and the test statistic is
-$t_n \approx -2.84$. This is *outside* of the critical range, so we *reject*
-the null of a fair game.
+$t_n \approx -2.84$. This is *outside* of the critical range $(-1.98,1.98)$, so
+we *reject* the null of a fair game.
 
 *Case 2*: Red wins in 40 of the 100 games, the test statistic is
-$t_n \approx -1.75$. This is *inside* of the critical range, so we 
-*fail to reject* the null of a fair game.
+$t_n \approx -1.75$. This is *inside* of the critical range $(-1.98,1.98)$, so
+we  *fail to reject* the null of a fair game.
 :::
 
 ### Choosing a test
@@ -1052,8 +1400,17 @@ practice?
 As a result, statisticians typically recommend using the T test for smaller
 samples (less than 30 or so), and then using whichever test is more convenient
 with larger samples.  Most data sets in economics have well over 30
-observations, so economists tend to use asymptotic tests unless they have a very
+observations[^802], so economists tend to use asymptotic tests unless they have a very
 small sample.
+
+[^802]: You will sometimes see old textbooks or internet resources treat 30 as
+some kind of "magic number" at which statistical analysis somehow moves from
+invalid to valid, or at which the central limit theorem or law of large numbers
+applies. But this is not the case, it is only the sample size at which the 5\%
+critical values for the $T$ and $N(0,1)$ distributions are approximately the
+same. But it is entirely possible that *both* distributions poorly
+approximate the true distribution of the test statistic, in which case a
+sample of size 30 only guarantees they provide equally poor approximations.
 
 ::: example
 **Choosing a test for roulette**
@@ -1084,15 +1441,19 @@ rule out $\theta = \theta_0$ for a single value of $\theta_0$, they say nothing
 about other values very close to $\theta_0$.
 
 For example, suppose you are a medical researcher trying to measure the effect
-of a particular treatment. Let $\theta$ be the true effect, and suppose that you
-have tested the null hypothesis that the treatment has no effect ($\theta = 0$).
+of a particular cancer treatment. Let $\theta$ be the true effect, and suppose
+that you have tested the null hypothesis that the treatment has no effect
+($\theta = 0$).
 
 - If you reject this null, you have concluded that the effect has *some* effect.
-  However, that does not rule out the possibility that the effect is
-  *very small*.
+  - This does not rule out the possibility that the effect is *very small*.
+  - If the treatment is very costly or has harmful side effects, you may not
+    want to use it even if it has a small positive effect.
 - If you fail to reject this null, you cannot rule out the possibility that the
-  treatment has *no* effect.  However, this does not rule out the possibility
-  that the effect is *very large*.
+  treatment has *no* effect.
+  - This does not rule out the possibility that the effect is *very large*.
+  - If the treatment is very cheap, or the prognosis without treatment is very
+    poor, you may want to use it even if you cannot be sure it has an effect.
 
 One solution to this would be to do a hypothesis test for every possible value
 of $\theta$, and classify them into values that were rejected and not rejected.
@@ -1114,7 +1475,7 @@ or a 90\% confidence interval when we have very little data.
 
 How do we calculate confidence intervals? It turns out to be entirely
 straightforward: confidence intervals can be constructed by inverting hypothesis
-tests: 
+tests:
 
 - The 95\% confidence interval includes all values that cannot be rejected at a
   5\% level of significance.
@@ -1125,11 +1486,14 @@ tests:
   1\% level of significance.
   - It is *wider* than the 95\% confidence interval.
 
+Confidence intervals can be constructed using exact tests, asymptotic tests,
+or parametric tests.
+
 ::: example
 **An exact confidence interval for the win probability**
 
-Calculating an exact confidence interval for $p_{red}$ is somewhat tricky to do
-by hand, but easy to do on a computer:
+Calculating an exact confidence interval for $p_{red}$ requires a computer. The
+details are beyond the scope of this course, but the procedure looks like this:
 
 1. Construct a grid of many values between 0 and 1.
 2. For each value $p_0$ in the grid, test the null hypothesis
@@ -1164,7 +1528,7 @@ that we have a fair game is not very strong.
 
 ### Confidence intervals for the mean
 
-Confidence intervals for the mean are very easy to calculate. Again, we
+Asymptotic confidence intervals for the mean are very easy to calculate. Again, we
 construct them by inverting the hypothesis test.
 
 Pick any $\mu_0$.  We would fail to reject the null hypothesis
@@ -1176,16 +1540,21 @@ To summarize, we fail to reject the null if:
 \begin{align}
   c_L < \sqrt{n}\frac{\bar{x}-\mu_0}{sd_x} < c_H
 \end{align}
-The next step is to solve for $\mu_0$, which produces:
+The next step is to solve[^803] for $\mu_0$:
 \begin{align}
   \left(\bar{x} - c_H \frac{sd_x}{\sqrt{n}}\right) < \mu_0 < \left(\bar{x} - c_L \frac{sd_x}{\sqrt{n}}\right)
 \end{align}
-All that remains is to choose a confidence/size level, and decide whether to use
-a parametric or asymptotic test.
+All that remains is to choose a confidence/size level, decide whether to use
+a parametric or asymptotic test, and calculate critical values.
 
-If we are using the asymptotic approximation to construct a 95\% confidence
-interval, then the 5\% asymptotic critical values are $c_L = -1.96$ and
-$c_H \approx 1.96$. So the 95\% confidence interval consists of all
+[^803]: If you do not remember the rules for algebra with inequalities, they
+        are just like for equality, but the inequality switches sides whenever
+        both sides are multiplied or divided by a negative number.  For example,
+        if $a < b$, then $-a > -b$.
+
+If we wish to construct a 95\% confidence interval using an asymptotic test,
+then the 5\% asymptotic critical values are $c_L = -1.96$ and
+$c_H \approx 1.96$. So the 95\% asymptotic confidence interval consists of all
 $\mu_0$ such that:
 \begin{align}
   \left(\bar{x} - 1.96 \frac{sd_x}{\sqrt{n}}\right) < \mu_0 < \left(\bar{x} - (-1.96) \frac{sd_x}{\sqrt{n}}\right)
@@ -1254,7 +1623,7 @@ These parametric confidence intervals are slightly wider than the asymptotic
 confidence intervals derived earlier in this section.
 :::
 
-In the end, it doesn't matter much whether you base your confidence intervals
+In the end, it rarely matters much whether you base your confidence intervals
 on an exact, parametric or asymptotic test. Again this makes sense: the goal
 here is to assess the strength of the evidence in a given data set, so any two
 reasonable approaches should yield similar results most of the time.
@@ -1318,15 +1687,15 @@ Answers can be found in the [appendix](#answers-inference).
       under the null?
    b. What is the asymptotic distribution of $t$?
 
-4. Consider the setting from problem 3 above, and suppose that the true value of 
-   $\mu$ is some number $\mu_1 \neq \mu_0$.  Write an expression describing $t$ 
+4. Consider the setting from problem 3 above, and suppose that the true value of
+   $\mu$ is some number $\mu_1 \neq \mu_0$.  Write an expression describing $t$
    as the sum of (a) a random variable that has the $T_{n-1}$ distribution
    and (b) a random variable that is proportional to $\mu_1-\mu_0$.
 
 **GOAL #4: Find the size/significance of a simple test**
 
 5. Suppose that we have a random sample of size $n=14$ on the random variable
-   $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis 
+   $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis
    $H_0: \mu = 0$.  Suppose we use the standard t-statistic:
    \begin{align}
      t = \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}}
@@ -1347,7 +1716,7 @@ Answers can be found in the [appendix](#answers-inference).
 **GOAL #5: Find critical values for a test of given size**
 
 6. Suppose that we have a random sample of size $n=18$ on the random variable
-   $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis 
+   $x_i \sim N(\mu,\sigma^2)$.  We wish to test the null hypothesis
    $H_0: \mu = 0$.  Suppose we use the standard t-statistic:
    \begin{align}
      t = \frac{\bar{x}-\mu_0}{sd_x/\sqrt{n}}

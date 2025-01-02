@@ -41,7 +41,7 @@ In this chapter, we will learn how to:
 14. Construct and interpret a smoothed-mean or linear regression plot in R.
 :::
 
-To prepare for this chapter, review the [introduction to R](#introduction-to-r).
+To prepare for this chapter, review the [introduction to R](#an-introduction-to-r).
 Then open RStudio, load the Tidyverse, and read in our employment data:
 
 ```{r ReadEmpDataFromCSV_11, eval=FALSE}
@@ -105,9 +105,9 @@ function *after* the `%>%`.
 The pipe operator does not add any functionality to R; anything you can do with
 it can also be done without it.  But it addresses a common problem: we often 
 want to perform multiple transformations on a data set, but doing so in the
-usual functional language can lead to code that is quite difficult to read. The
-pipe operator can be used to create much more readable code, as we will see in
-the examples below.
+usual functional language can lead to code that is highly nested and difficult
+to read. The pipe operator can be used to create much more readable code, as we
+will see in the examples below.
 
 ### Mutate
 
@@ -315,8 +315,8 @@ statistics.
 ### Univariate statistics 
 
 The R function `mean()` calculates the sample average of any numeric vector.
-There are also functions to calculate variance, standard deviation, and other
-summary statistics.
+There are also functions to calculate the sample variance or standard
+deviation, the sample median, and many other summary statistics.
 
 ::: example
 **Univariate statistics for a single variable**
@@ -541,10 +541,11 @@ variables.  As you can see:
 
 Just like with univariate statistics, we can exclude missing values when
 calculating a covariance or correlation matrix.  However, there are two
-slightly different ways to exclude missing values from a data table:
+slightly different ways to exclude missing values from a data table with
+multiple columns/variables:
 
 1. ***Pairwise deletion***: when calculating the covariance or correlation of
-   two variables, exclude observations with a missing values for either of
+   two variables, exclude observations with a missing value for either of
    *those two* variables.
 2. ***Casewise*** or ***listwise deletion***: when calculating the covariance or
    correlation of two variables, exclude observations with a missing value for
@@ -624,7 +625,7 @@ The `ggplot` function has a non-standard syntax:
     - The `data` argument tells R which data set (tibble) will be used.
     - the `mapping` argument describes the main ***aesthetics*** of the graph,
       i.e., the relationship in the data we will be graphing.
-- The rest of the command is one or more statements separated by a `+` sign.
+- The rest of the command is one or more expressions separated by a `+` sign.
   These are called ***geometries*** and are graph elements to be included in the
   plot.
 
@@ -731,8 +732,8 @@ Some geometric elements, such as the bars in a histogram, also have a
 ```{r ggplotFill}
 ggplot(data = EmpData,
        aes(x = UnempPct)) + 
-  geom_histogram(col = "darkorange",
-                 fill = "navyblue")
+  geom_histogram(col = "darkorchid",
+                 fill = "chartreuse")
 ```
 
 As you can see, the `col=` argument sets the color for the exterior of each bar,
@@ -932,7 +933,8 @@ We can use color to add a third dimension to the data.  That is, we can
 color-code points based on a third variable by including it as part of the
 plot's aesthetic.
 
-We can use color to represent a third variable:
+We can use color to represent a third variable, whether it is continuous or 
+discrete. ggplot  can usually tell the difference:
 
 ```{r ScatterPlotColorCoded}
 # Party is discrete/categorical, so each value is represented by a distinct color
@@ -951,7 +953,8 @@ ggplot(data = EmpData,
 
 As we discussed earlier, you want to make sure your graph can be read by a
 reader who is color blind or is printing in black and white. So we can use 
-shapes in addition to color.
+shapes in addition to color.  We may also want to modify the color scheme
+since red-green is the most common form of color blindness.
 
 ```{r UsingShapes}
 ggplot(data = EmpData,
@@ -959,11 +962,10 @@ ggplot(data = EmpData,
            y = LFPPct,
            col = Party,
            shape = Party)) + 
+  scale_color_manual(values=c("deepskyblue", "red", "gray")) +
   geom_point()
 ```
 
-We might also want to change the color scheme, since the most common form of 
-color blindness is the inability to distinguish red and green.
 
 ::: {.fyi data-latex=""}
 **Scatter plots in Excel**
@@ -1003,7 +1005,7 @@ ggplot(data = EmpData,
   stat_summary_bin(fun = 'mean', 
                    bins = 20,
                    col = "darkorange",
-                   size = 0.5, 
+                   linewidth = 0.5, 
                    geom = 'line')
 ```
 
@@ -1023,17 +1025,17 @@ ggplot(data = EmpData,
   stat_summary_bin(fun = 'mean', 
                    bins = 4,
                    col = "navyblue",
-                   size = 0.75, 
+                   linewidth = 0.75, 
                    geom = 'line') +
   stat_summary_bin(fun = 'mean', 
                    bins = 20,
                    col = "darkorange",
-                   size = 0.75, 
+                   linewidth = 0.75, 
                    geom = 'line') +
   stat_summary_bin(fun = 'mean', 
                    bins = 100,
                    col = "lightblue",
-                   size = 1.0, 
+                   linewidth = 1.0, 
                    geom = 'line') +
   geom_text(x = 13.8,
             y = 64.1,
@@ -1123,7 +1125,7 @@ important advantages:
 
 These advantages are not particularly important in this case, with only two
 variables and a reasonably large data set.  The advantages of linear regression
-become overwhelming when you have more than two variables to work with. As a
+become much larger when you have more than two variables to work with. As a
 result, linear regression is the most important tool in applied econometrics,
 and you will spend much of your next econometrics course learning to use it.
 

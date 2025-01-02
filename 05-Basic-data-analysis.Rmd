@@ -108,7 +108,7 @@ the value in one or more of the columns.  Since order does not matter
 with tidy data, we can sort in whatever way we like without changing
 the content of our data.
 
-::: {.fyi data-latex=""}
+::: warning
 Before sorting data, always make sure that the order of rows does not convey
 important information.
 :::
@@ -192,7 +192,7 @@ freeze any number of rows and columns.
 
 ## Summary statistics
 
-Next, we We will calculate some commonly-used ***univariate*** statistics, 
+Next, we will calculate some commonly-used ***univariate*** statistics, 
 which are statistics that describe a single variable in isolation. In Section
 \@ref(univariate-graphs-in-excel) we will construct some commonly-used
 univariate graphs.
@@ -759,8 +759,8 @@ apply a few basic ideas:
     (what Tufte calls "chartjunk").
 4. **Closeness**: Minimize eye movement by keeping related information visually
    "close."
-5. **Reinforce**: Use color and formatting to reinforce interpretation rather
-   than to complicate it.
+5. **Reinforcement**: Use color and formatting to reinforce interpretation
+   rather than to complicate it.
 5. **Accessibility**: Take reader needs into account.  For example:
    - Color is not always available to readers: Some readers are color
      blind, projectors often get colors "wrong", or your document 
@@ -769,9 +769,9 @@ apply a few basic ideas:
        readers who cannot distinguish color (for whatever reason) can tell
        different series apart.
      - Consider using a color palette that is colorblind-friendly.
-       - A simple way to do this is to avoid using red and green or blue and
-         yellow as contrasting colors, since these are the two most common forms
-         of colorblindness.
+       - A simple way to do this is to avoid using red and green as contrasting
+         colors, since this is the most common form of colorblindness
+         (blue/yellow colorblindness is also common).
        - The geographer Cynthia Brewer has developed a set of
          colorblind-friendly palettes known as ColorBrewer.  They are available
          at https://colorbrewer2.org/. 

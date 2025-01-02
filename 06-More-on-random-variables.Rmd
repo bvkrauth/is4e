@@ -121,7 +121,7 @@ variables is also true for continuous ones.
 Suppose you round the labour force participation rate to the nearest percentage
 point.  The rounded LFP rate is a discrete random variable with support:
 \begin{align}
-  S_x = \{0\%, 1\%, \ldots 99\%, 100\% \}
+  S_{roundedLFP} = \{0\%, 1\%, \ldots 99\%, 100\% \}
 \end{align}
 Alternatively, we could round to the nearest 1/100th of a percentage point,
 to the nearest 1/1,000,000th of a percentage point, etc. As we round to a
@@ -336,8 +336,7 @@ percentile is 0.75, etc.
 
 ### Expected values {#continuous-expected-values}
 
-The expected value also has the same [interpretation](#the-expected-value) and
-[properties](#properties-of-the-expected-value) whether the random variable
+The expected value also has the same [interpretation and properties](#the-expected-value) whether the random variable
 is continuous or discrete. The definition is slightly different, and includes
 an integral.
 
@@ -386,10 +385,16 @@ values between $L$ and $H$.
 ::: example
 **The PDF of the $U(2,5)$ distribution**
 
-Suppose that $x \sim U(2,5)$.
+Suppose that $x \sim U(2,5)$. Then its support is the range of all values
+from 2 to 5, and its PDF is:
+\begin{align}
+  f_x(a) = \begin{cases}
+      \frac{1}{3} & 2 < a < 5 \\ 
+      0 & \textrm{otherwise} \\ 
+      \end{cases}
+\end{align}
+which is depicted in Figure \@ref(fig:UniformPDF) below. 
 
-Its support is the range of all values from 2 to 5, and its PDF is depicted in
-Figure \@ref(fig:UniformPDF) below. 
 :::
 
 ```{r UniformPDF, fig.cap = "*PDF for the U(2,5) distribution*"}
@@ -422,7 +427,15 @@ The CDF of the $U(L,H)$ distribution is:
 ::: example
 **The CDF of the $U(2,5)$ distribution**
 
-Figure \@ref(fig:UniformCDF) shows the CDF of the $U(2,5)$ distribution.
+The CDF of the $U(2,5)$ distribution is:
+\begin{align}
+  F_x(a) = \begin{cases}
+    0 & a \leq 2 \\ 
+    \frac{a-2}{3} & 2 < a < 5 \\ 
+    1 & a \geq 5 \\ 
+    \end{cases}
+\end{align}
+and is depicted in Figure \@ref(fig:UniformCDF).
 :::
 
 ```{r UniformCDF, fig.cap = "*CDF for the U(2,5) distribution*"}
@@ -455,6 +468,16 @@ The median of $x \sim U(L,H)$ is:
 \end{align}
 i.e., the midpoint of the support.
 
+::: example
+**Quantiles of the $U(2,5)$ distribution**
+
+The quantile function of the $U(2,5)$ distribution is:
+\begin{align}
+  F^{-1}_x(q) = 2 + 3q
+\end{align}
+and the median is $F^{-1}_x(0.5) = 3.5$.
+:::
+
 ### Expected values {#uniform-mean-and-variance}
 
 Integral calculus is required to calculate the mean, variance and standard
@@ -467,6 +490,18 @@ deviation of the uniform distribution, so I report them below for reference:
 This is one advantage of using standard distributions: you can look up results
 when they are difficult to calculate.
 
+
+::: example
+**Expected values of the $U(2,5)$ distribution**
+
+The mean, variance, and standard deviation of the $U(2,5)$ distribution is:
+\begin{align}
+  E(x)   &= 0.5*(2+5) = 3.5 \\
+  var(x) &= \frac{(5-2)^2}{12} = 0.75 \\
+  sd(x)  &= \sqrt{0.75} = 0.866
+\end{align}
+:::
+
 ### Functions of a uniform {#uniform-functions}
 
 Any linear function of a uniform random variable also has a uniform
@@ -476,6 +511,18 @@ then $y \sim U(a + bH, a + bL)$.] $b > 0$, then:
   y \sim U(a + bL, a + bH)
 \end{align}
 Nonlinear functions of a uniform random variable are generally not uniform.
+
+::: example
+**Linear functions of a $U(2,5)$ random variable**
+
+Suppose that $x \sim U(2,5)$. Then:
+\begin{align}
+  2x   &\sim U(4,10)  \\
+  x + 1 &\sim U(3,6) \\
+  2x + 2 &\sim U(6,12)
+\end{align}
+:::
+
 
 ::: {.fyi data-latex=""}
 **Uniform distributions in video games**
@@ -532,8 +579,10 @@ $S_x = \mathbb{R}$ and PDF:
 \end{align}
 The Excel function `NORM.DIST()` can be used to calculate this PDF.
 
-The $N(\mu,\sigma^2)$ distribution is bell-shaped and symmetric around $\mu$,
-with the "spread" of the distribution depending on the value of $\sigma^2$. 
+Figure \@ref(fig:NormalPDF) below shows the PDF of the $N(\mu,\sigma^2)$
+distribution for various values of $\mu$ and $\sigma$.  As the figure shows,
+the Normal PDF is bell-shaped and symmetric around $\mu$, with the "spread" of
+the distribution depending on the value of $\sigma^2$. 
 
 ```{r NormalPDF, fig.cap = "*PDF for several normal distributions*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
@@ -551,7 +600,7 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
   xlab("a") +
   ylab("f(a)") +
   labs(title = "Probability density function (PDF)", 
-       subtitle = "", 
+       subtitle = "Several normal distributions", 
        caption = "", 
        tag = "")
 ```
@@ -563,7 +612,9 @@ is no simple closed-form expression for this CDF, but it is easy to calculate
 with a computer.  The Excel function `NORM.DIST()` can be used to calculate this
 CDF.
 
-The normal CDF is S-shaped, running smoothly from nearly-zero to nearly-one.
+Figure \@ref(fig:NormalCDF) below shows the CDF of the $N(\mu,\sigma^2)$
+distribution for various values of $\mu$ and $\sigma$.  As the figure shows, the
+Normal CDF is S-shaped, running smoothly from nearly-zero to nearly-one.
 
 ```{r NormalCDF, fig.cap = "*CDF for several normal distributions*"}
 NormalDist <- tibble(a=seq(from=-6,to=6,length.out=100),
@@ -579,12 +630,22 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=Fa)) +
   geom_text(x=1,y=0.3,col="red",label="N(1,1)") +
   geom_text(x=-3.2,y=0.13,col="purple",label="N(0,2)") +
   xlab("a") +
-  ylab("f(a)") +
+  ylab("F(a)") +
   labs(title = "Cumulative distribution function (CDF)", 
-       subtitle = "", 
+       subtitle = "Several normal distributions", 
        caption = "", 
        tag = "")
 ```
+
+::: example
+**The CDF of a normal random variable**
+
+Suppose $x \sim N(2,9)$, and we would like to calculate $\Pr(x \leq 1)$. We
+can use the Excel formula `=NORM.DIST(1,2,3,TRUE)` to get:
+\begin{align}
+  \Pr(x \leq 1) &\approx 0.37
+\end{align}
+:::
 
 ### Quantiles {#normal-quantiles}
 
@@ -592,6 +653,17 @@ Quantiles of the normal distribution can be calculated using the Excel function
 `NORM.INV()`.
 
 The median of a $N(\mu,\sigma^2)$ random variable is $\mu$.
+
+::: example
+**Quantiles of a normal random variable**
+
+Suppose $x \sim N(2,9)$.  The median of $x$ is $\mu = 2$, and its 25th
+percentile is:
+\begin{align}
+  F^{-1}(0.25) &\approx -0.023
+\end{align}
+which we can calculate using the Excel formula `=NORM.INV(0.25,2,3)`.
+:::
 
 ### Expected values {#normal-means}
 
@@ -602,6 +674,18 @@ deviation of the normal distribution, so I report them below for reference:
   var(x) &= \sigma^2 \\
   sd(x) &= \sigma
 \end{align}  
+
+::: example
+**Expected values of a normal random variable**
+
+Suppose $x \sim N(2,9)$.  Then:
+\begin{align}
+  E(x) &= \mu = 2 \\
+  var(x) &= \sigma^2 = 9 \\
+  sd(x) &= \sigma = 3
+\end{align}  
+:::
+
 
 ### Functions of a normal
 
@@ -620,6 +704,17 @@ Then for any constants $a$ and $b$:
 \end{align}
 Nonlinear functions of a normal random variable are generally *not* normal.
 
+::: example
+**Linear functions of a normal random variable**
+
+Suppose $x \sim N(2,9)$. Then:
+\begin{align}
+  x + 1 &\sim N(3, 9) \\
+  2x &\sim N(4, 36) \\
+  -2x &\sim N(-4, 36)
+\end{align}
+:::
+
 ::: {.fyi data-latex=""}
 **Other distributions based on the normal**
 
@@ -636,8 +731,8 @@ analysis and would be covered in a more advanced course.
 
 ### Standardized normals
 
-We earlier defined the standardized version of a random variable $x$ as the
-following linear function of $x$:
+We earlier defined the [standardized](#standardization) version of a random
+variable $x$ as the following linear function of $x$:
 \begin{align}
   z = \frac{x-E(x)}{sd(x)}
 \end{align}
@@ -673,6 +768,44 @@ Then we can prove that its CDF is:
 The standard normal CDF is available as a built-in function in every statistical
 package including Excel and R, so we can use this result to calculate the CDF
 for any normally distributed random variable.
+
+::: example
+**Obtaining normal probabilities**
+
+Suppose $x \sim N(2,9)$, and we want to find $F_x(1) = \Pr(x \leq 1)$.
+
+Excel has two built-in functions for the normal distribution:
+
+- `NORM.DIST()` calculates the PDF or CDF for any normal random distribution.
+- `NORM.S.DIST()` calculates the PDF or CDF for the standard normal distribution.
+
+The easiest way to calculate our probability is with `NORM.DIST()`, using the
+formula `=NORM.DIST(1,2,3,TRUE)`, which yields $F_x(1) \approx 0.37$.
+
+We can also calculate our probability using only the standard normal CDF
+(`NORM.S.DIST()`) by following these steps:
+
+1. *Write down the formula*, substituting in the correct variable names.
+   \begin{align}
+     F_x(1) &= \Phi\left(\frac{1-\mu}{\sigma}\right)
+   \end{align}
+2. *Find parameter values* and substitute. In this case $\mu=2$ and
+   $\sigma^2=9$, so:
+   \begin{align}
+     F_x(1) &= \Phi\left(\frac{1-2}{3}\right) \\
+       &= \Phi\left(-0.333\right)
+   \end{align}
+3. *Use the standard normal CDF* in Excel or R to calculate the value. In this
+   case, the formula in Excel would be `=NORM.S.DIST(-0.333,TRUE)` which
+   produces:
+   \begin{align}
+     F_x(1) &\approx 0.37
+   \end{align}
+
+You may wonder why we bother with these steps when we could have just used
+`NORM.DIST()` to get the same (correct) answer. The short answer is that working
+with the standard normal distribution is a skill that is useful later.
+:::
 
 ::: {.fyi data-latex=""}
 **The normal and standard normal CDF**
@@ -742,12 +875,14 @@ nonlinear relationship. We will learn some terminology to describe these four
 relationships.
 :::
 
+
+
 ```{r JointIsNotMarginal, fig.cap = "*x and y are drawn from a different joint distribution in each graph.*"}
 simdata <- tibble(x = rnorm(100),
                   y1 = rnorm(100),
                   y2 = (-x+0.5*y1)/sqrt(1.25),
                   y3 = x,
-                  y4 = x^2)
+                  y4 = x^2-1)
 p1 <- ggplot(data = simdata, mapping = aes(x = x)) +
   geom_point(aes(y=y1),col="blue") +
   labs(tag = "A") +
@@ -783,10 +918,12 @@ underlying outcome.
 ::: example
 **The joint PDF in roulette**
 
-In our roulette example, both $y_{Red}$ and $y_{14}$ depend on the original
-outcome $\omega$. For convenience, I have created a table below that shows every
-value of $\omega$ in the sample space, its probability, and the associated values
-of $y_{Red}$ and $y_{14}$.
+We can derive any joint PDF from the probability distribution of the underlying
+outcome. In our roulette example, both $y_{Red}$ and $y_{14}$ depend on the original
+outcome $\omega$, so we can find the joint PDF by following these steps:
+
+1. *Create a table of outcomes* that includes each outcome in the sample space,
+   its probability, and the associated value of our random variables:
 
 | $\omega$ | $\Pr(\omega)$ | Color | $y_{Red}$ | $y_{14}$ |
 |:---------|:-------------:|:-----:|:---------:|:--------:|
@@ -828,49 +965,51 @@ of $y_{Red}$ and $y_{14}$.
 | 35       |  1/37         | Black |    -1     |   -1     |
 | 36       |  1/37         | Red   |     1     |   -1     |
 
-We can construct the joint PDF by simply adding up over all possible outcomes.
+2. *Add up over outcomes* to find the joint PDF.
 
-There is one outcome ($b=14$) in which both red and 14 win, and it has
-probability $1/37$:
-\begin{align}
-  f_{Red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
-    &= \Pr(\omega \in \{14\}) = 1/37
-\end{align}
-There are 17 outcomes (count them in the table above) in which red wins and 14 
-loses, and each has probability $1/37$:
-\begin{align}
-  f_{Red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
-    &= \Pr\left(\omega \in \left\{
-      \begin{gathered}
-          1,3,5,7,9,12,16,18,19,21,\\
-          23,25,27,30,32,34,36
-      \end{gathered}\right\}\right)  \\
-    &= 17/37
-\end{align}
-There are 19 outcomes in which both red and 14 lose, and each has probability
-$1/37$:
-\begin{align}
-  f_{Red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
-    &= \Pr\left(\omega \in \left\{
-        \begin{gathered}
-          0,2,4,6,7,10,11,13,15,17, \\
-          20,22,24,26,28,31,33,35
-        \end{gathered}\right\}\right)  \\
-    &= 19/37
-\end{align}
-There are no other outcomes, so all other combinations have probability zero.
+   - There is one outcome ($b=14$) in which both red and 14 win, and it has
+     probability $1/37$:
+     \begin{align}
+       f_{Red,14}(1,35) &= \Pr(y_{Red}=1 \cap y_{14} = 35) \\
+         &= \Pr(\omega \in \{14\}) = 1/37
+     \end{align}
+   - There are 17 outcomes (count them in the table above) in which red wins and
+     14 loses, and each has probability $1/37$:
+     \begin{align}
+       f_{Red,14}(1,-1) &= \Pr(y_{Red} = 1 \cap y_{14} = -1) \\
+         &= \Pr\left(\omega \in \left\{
+            \begin{gathered}
+              1,3,5,7,9,12,16,18,19,21,\\
+              23,25,27,30,32,34,36
+            \end{gathered}\right\}\right)  \\
+         &= 17/37
+     \end{align}
+   - There are 19 outcomes in which both red and 14 lose, and each has
+     probability $1/37$:
+     \begin{align}
+       f_{Red,14}(-1,-1) &= \Pr(y_{Red} = -1 \cap y_{14} = -1) \\
+         &= \Pr\left(\omega \in \left\{
+            \begin{gathered}
+              0,2,4,6,7,10,11,13,15,17, \\
+              20,22,24,26,28,31,33,35
+            \end{gathered}\right\}\right)  \\
+         &= 19/37
+     \end{align}
+  - There are no other outcomes, so all other combinations have probability
+    zero.
+3. *Summarize results* using case notation:  
+   \begin{align}
+     f_{Red,14}(a,b)
+       &= \begin{cases}
+            19/37 & \textrm{if $a = -1$ and $b = -1$} \\
+            17/37 & \textrm{if $a = 1$ and $b = -1$} \\
+            1/37 & \textrm{if $a = 1$ and $b = 35$} \\
+            0 & \textrm{otherwise} \\
+          \end{cases} \nonumber
+   \end{align}
 
-Therefore, the joint PDF of $y_{Red}$ and $y_{14}$ is:
-\begin{align}
-  f_{Red,14}(a,b) &= \begin{cases}
-      19/37 & \textrm{if $a = -1$ and $b = -1$} \\
-      17/37 & \textrm{if $a = 1$ and $b = -1$} \\
-      1/37 & \textrm{if $a = 1$ and $b = 35$} \\
-      0 & \textrm{otherwise} \\
-      \end{cases} \nonumber
-\end{align}
-Creating and using this table is something of a "brute force" approach: it is
-time consuming, but requires little thought and will always get the right
+Creating and using the table here is something of a "brute force" approach: it
+is time consuming, but requires little thought and will always get the right
 answer. You may be able to figure out a quicker approach, which is also fine.
 :::
 
@@ -926,28 +1065,43 @@ We earlier found the joint PDF of $y_{Red}$ and $y_{14}$:
       0 & \textrm{otherwise} \\
       \end{cases} \nonumber
 \end{align}
-Then the marginal PDF of $y_{Red}$ is:
-\begin{align}
-  f_{red}(a) &= \sum_{b \in \{-1,35\}} f_{red,14}(a,b) \\
-    &= f_{red,14}(a,-1) + f_{red,14}(a,35) \\
-\end{align}
-Plugging in values in the support of $y_{Red}$ we get:
-\begin{align}
-  f_{red}(-1) &= f_{red,14}(-1,-1) + f_{red,14}(-1,35) \\
-    &= 19/37 + 0 \\
-    &= 19/37 \\
-  f_{red}(1) &= f_{red,14}(1,-1) + f_{red,14}(1,35) \\
-    &= 17/37 + 1/37 \\
-    &= 18/37
-\end{align}
-Which we can summarize with:
-\begin{align}
-  f_{red}(a) &= \begin{cases}
-    19/37 & \textrm{if $a = -1$} \\
-    18/37 & \textrm{if $a = 1$} \\
-    0 & \textrm{otherwise} \\
-    \end{cases}
-\end{align}
+Then we can find the marginal PDF of $y_{Red}$ by following these steps:
+
+1. *Write down the formula*, substituting correct variable names:
+   \begin{align}
+     f_{red}(a)
+       &= \sum_{b \in S_b} f_{red,14}(a,b)
+   \end{align}
+2. *Find the support* and substitute:
+   \begin{align}
+     f_{red}(a)
+       &= \sum_{b \in \{-1,35\}} f_{red,14}(a,b)
+   \end{align}
+3. *Expand out the summation*:
+   \begin{align}
+     f_{red}(a)
+       &= f_{red,14}(a,-1) + f_{red,14}(a,35)
+   \end{align}
+4. *Find the joint PDF* values and substitute:
+   \begin{align}
+     f_{red}(-1)
+       &= \underbrace{f_{red,14}(-1,-1)}_{19/37}
+          + \underbrace{f_{red,14}(-1,35)}_{0} \\
+       &= 19/37 \\
+     f_{red}(1)
+       &= \underbrace{f_{red,14}(1,-1)}_{17/37} 
+          + \underbrace{f_{red,14}(1,35)}_{1/37} \\
+       &= 18/37
+   \end{align}
+5. *Summarize results* using case notation:
+   \begin{align}
+     f_{red}(a)
+       &= \begin{cases}
+            19/37 & \textrm{if $a = -1$} \\
+            18/37 & \textrm{if $a = 1$} \\
+            0 & \textrm{otherwise} \\
+          \end{cases}
+   \end{align}
 Note that this is the same PDF we found in an earlier chapter.
 :::
 
@@ -1053,26 +1207,38 @@ formulas.
 ::: example
 **Conditional PDFs in roulette**
 
-The conditional PDF of the player's net profit from a bet on red given the
-net profit for a bet on 14 is:
-\begin{align}
-  f_{red|14}(a,b) &= \Pr(y_{Red} = a| y_{14} = b) \\
-    &= \frac{f_{red,14}(a,b)}{f_{14}(b)} \\
-    &= \begin{cases}
-      (19/37)/(36/37) & \textrm{if $a = -1$ and $b = -1$} \\
-      (17/37)/(36/37) & \textrm{if $a = 1$ and $b = -1$} \\
-      (1/37)/(1/37) & \textrm{if $a = 1$ and $b = 35$} \\
-      0 & \textrm{otherwise} \\
-      \end{cases} \\
-    &= \begin{cases}
-      19/36 & \textrm{if $a = -1$ and $b = -1$} \\
-      17/36 & \textrm{if $a = 1$ and $b = -1$} \\
-      1 & \textrm{if $a = 1$ and $b = 35$} \\
-      0 & \textrm{otherwise} \\
-      \end{cases}
-\end{align}
-The conditional PDF of the player's net profit for a bet on 14 given the net
-profit for a bet on red is:
+We can find conditional PDF of the player's net profit from a bet on red given
+the net profit for a bet on 14 by following these steps:
+
+1. *Write down the formula*, substituting correct variable names:
+   \begin{align}
+     f_{red|14}(a,b)
+       &= \Pr(y_{Red} = a| y_{14} = b) \\
+       &= \frac{f_{red,14}(a,b)}{f_{14}(b)}
+   \end{align}
+2. *Find the joint PDF* and substitute:
+   \begin{align}
+     f_{red|14}(a,b)
+       &= \begin{cases}
+            (19/37)/(36/37) & \textrm{if $a = -1$ and $b = -1$} \\
+            (17/37)/(36/37) & \textrm{if $a = 1$ and $b = -1$} \\
+            (1/37)/(1/37) & \textrm{if $a = 1$ and $b = 35$} \\
+            0 & \textrm{otherwise} \\
+          \end{cases}
+   \end{align}
+3. *Summarize results* using case notation:
+   \begin{align}
+     f_{red|14}(a,b)
+       &= \begin{cases}
+            19/36 & \textrm{if $a = -1$ and $b = -1$} \\
+            17/36 & \textrm{if $a = 1$ and $b = -1$} \\
+            1 & \textrm{if $a = 1$ and $b = 35$} \\
+            0 & \textrm{otherwise} \\
+          \end{cases}
+   \end{align}
+
+Following the same procedure, the conditional PDF of the player's net profit for
+a bet on 14 given the net profit for a bet on red is:
 \begin{align}
   f_{14|red}(a,b) &= \Pr(y_{14} = a| y_{Red} = b) \\
     &= \frac{f_{red,14}(b,a)}{f_{red}(b)} \\
@@ -1123,7 +1289,7 @@ Suppose we have two random variables $x$ and $y$ and we use them to construct
 a third random variable $z = h(x,y)$.  What can we say about the probability
 distribution of $z$?
 
-1. It has a well-defined probability distribution, PDF, CDF, expected value,
+1. $z$ has a well-defined probability distribution, PDF, CDF, expected value,
    etc. all of which can be derived from the joint distribution of $x$ and $y$.
 2. If $z$ is a *linear* function of $x$ and $y$, its expected value is a linear
    function of $E(x)$ and $E(y)$:
@@ -1189,14 +1355,50 @@ covariance, and graph C shows a case with positive covariance.
 ::: example
 **Calculating the covariance from the joint PDF**
 
-The covariance of $y_{Red}$ and $y_{14}$ is:
-\begin{align}
-  cov(y_{Red},y_{14}) &= \begin{aligned}[t]
-      & (1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
-      &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
-      &+ (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
-      \end{aligned} \\
-    &\approx 0.999 
+The covariance of $y_{Red}$ and $y_{14}$ can be calculated from the PDF by
+following these steps:
+
+1. *Write down the formula*, substituting the correct variable names:
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= E\left(\left(y_{Red} - E(y_{Red}) \right)
+                 \left(y_{14} - E(y_{14})  \right)\right)
+   \end{align}
+2. *Apply the expected value formula*, keeping the expected values inside the
+   formula as-is:
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= \sum_{a \in S_{Red}, b \in S_{14}}
+             E\left(\left(a - E(y_{Red}) \right)
+                 \left(b - E(y_{14})  \right)\right)
+   \end{align}
+3. *Find the support* and substitute:
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= \sum_{a \in \{-1,1\}, b \in \{-1,35\}}
+             E\left(\left(a - E(y_{Red}) \right)
+                 \left(b - E(y_{14})  \right)\right)
+   \end{align}
+4. *Expand out the summation*
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= \begin{aligned}[t]
+            & (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,-1)}_{19/37} \\
+            &+ (-1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(-1,35)}_{0} \\ 
+            &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(-1-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,-1)}_{17/37} \\ 
+            &+ (1-\underbrace{E(y_{Red})}_{\approx -0.027})(35-\underbrace{E(y_{14})}_{\approx -0.027})\underbrace{f_{red,14}(1,35)}_{1/37}\\
+          \end{aligned}
+   \end{align}
+5. *Find the expected values and joint PDF* and substitute:
+   \begin{align}
+     cov(y_{Red},y_{14})
+       &= \begin{aligned}[t]
+            & (-1+0.027)(-1+0.027)*19/37 \\
+            & (-1+0.027)(35+0.027)*0 \\
+            & (1+0.027)(-1+0.027)*17/37 \\
+            & (1+0.027)(35+0.027)*1/37 \\
+          \end{aligned} \\
+       &\approx 0.999
 \end{align}
 That is, the returns from a bet on red and a bet on 14 are positively related.
 :::
@@ -1422,7 +1624,7 @@ covariance will not necessarily detect any relationship.
 ## Chapter review {-#review-more-on-random-variables}
 
 Over the course of this chapter and the previous ones on
-[probability](#probability) and [simple random variables](#random-variables),
+[probability](#probability-and-random-events) and [simple random variables](#random-variables),
 we have learned the basic terminology and tools for working with random
 variables: PDFs, CDFs, and expected values. You should work hard and do as many
 practice problems as you can, as a clear understanding of random variables will

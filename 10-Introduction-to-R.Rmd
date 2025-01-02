@@ -323,7 +323,7 @@ In the menu:
 **Never save your workspace**
 
 I would also like to highlight a "feature" that is not at all useful and should
-be avoided. When you close R or RStudio, you will often get a warning message
+be avoided. When you close R or RStudio, you may get a warning message
 that looks something like this:
 ![*Save workspace dialog box*](bin/RSaveWorkspace.png){width=30%}
 
@@ -825,11 +825,11 @@ Note that:
 ## Packages and the Tidyverse
 
 R has many useful built-in functions and features.  But one of its most useful
-features is how easy it can be extended by users, and the fact that it has a
+features is how easily it can be extended by users, and the fact that it has a
 large user community who have provided ***packages*** of useful new functions
 and data.
 
-There are thousands of packages available online.  We will use a particularly
+There are thousands of packages available online.  We will use a popular and
 useful package called the ***Tidyverse***.
 
 ::: {.fyi data-latex=""}
@@ -872,7 +872,7 @@ Before you can use any package, two steps must be followed:
    function. 
    - This only needs to be done *once* for each package.
 2. ***Load*** the package into memory using the `library()` function.
-   - This needs to be done in *every* R session.
+   - This needs to be done in *every* R session in which the package is used.
 
 Once the package is installed and loaded, you can use its functions and other
 features.
@@ -934,16 +934,17 @@ EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData
 library("tidyverse")
 EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```
-As you can see, R guesses each variable's data type, and reports its guess. It
-is always a good idea to review this output and make sure that everything is the
-way that we want it:
+As you can see, R guesses each variable's data type, and reports its guess. The
+guesses are usually good, but you can override them if not. It is always a good
+idea to review this output and make sure that everything is the way that we want
+it:
 
 - The numeric variables are all stored as `col_double()`.
-  - This means double-precision (64 bit) real number
+  - This means [double-precision](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) (64 bit) real number.
   - This is what we want.
 - The text variables **Party** and **PrimeMinister** are both stored as
   `col_character()`.
-  - This means character or text string
+  - This means character or text string.
   - This is what we want.
 - The **MonthYr** variable is also stored as `col_character()`.
   - This is *not* what we want.
