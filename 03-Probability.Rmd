@@ -135,10 +135,10 @@ the ball can land on:
   \end{align}
 This sample space has $|\Omega| = 37$ elements.
 
-Alternatively, we could define the sample space for the game as the set of all
-positive integers, all integers, or all real numbers.  As long as the sample
-space includes the 37 specific numbers in $\{0,1,2,\ldots,36\}$, we will be
-OK.
+Like the outcome, the sample space is something we choose.  We could have
+defined the sample space for the game as the set of all positive integers, all
+integers, or all real numbers.  As long as the sample space includes the 37
+specific numbers in $\{0,1,2,\ldots,36\}$, we will be OK.
 :::
 
 Next, we define a set of ***events*** that we are interested in. We can think of
@@ -427,15 +427,19 @@ That is, each of the 37 elementary events have a probability of $1/37$ or about
 ::: {.warning data-latex=""}
 **Equal probability is an assumption**
 
-In our roulette example, all elementary events have the same probability. Do
-all random processes have this property? No.
+In our roulette example, all elementary events have the same probability. Is
+this the case for all random processes? No.
 
 Equal probability makes the math easy, and applies to some specific cases like
 roulette or dice games, so we often use those cases in examples when teaching
 basic probability theory.  But equal probability does not apply to random
 processes in general.  For example, suppose I run in a race against 11-time
-world sprinting champion Usain Bolt. There are two possible outcomes - "I win"
-and "Usain Bolt wins" - but it would be unreasonable to think that these two
+world sprinting champion Usain Bolt. There are two possible outcomes:
+
+- I win the race
+- Usain Bolt wins the race
+
+but it would be unreasonable to think that these two
 outcomes have equal probability.
 :::
 
@@ -494,21 +498,21 @@ election.
 
 We are often interested in how one event is related to another. For example:
 
- - Poker or blackjack players can place bets after viewing their cards. So
-   they may be interested in predicting the probability they will win the game
-   based on the cards that they have.
- - Political analysts often want to predict the winner of an election based on
-   partial results.
- - Financial analysts often want to forecast a company's earnings under
+ - Poker or blackjack players can place additional bets after viewing their
+   cards. So they want to predict their chances of winning based on the cards
+   that they have.
+ - News organizations want to predict the winner of an election before all
+   votes have been counted.
+ - Financial analysts want to forecast a company's earnings under
    different market scenarios.
- - Economists often want to predict future economic conditions based on data
+ - Economists want to predict future economic conditions based on data
    about current conditions.
- - Doctors often want to predict the effectiveness of a particular treatment
+ - Doctors want to predict the effectiveness of a particular treatment
    based on test results and patient characteristics.
 
-In all of these cases, we know that a particular event has happened and want
-the probability of some other event. This section will develop some tools for
-dealing with this scenario.
+In all of these cases, we know that a particular random event has happened and
+want the probability of some other random event. This section will develop tools
+for dealing with this scenario.
 
 ### Joint probabilities {#joint-probabilities}
 

@@ -224,12 +224,14 @@ Your data analysis workflow should have three key features:
    - Create a ***working copy*** of each file you plan to edit.
      - There should be exactly one working copy of each file.
      - You can edit the working copy.
-   - Each time you complete a step in your project, make your current
+   - Each time you add a ***feature*** to your project, make your current
      working copy the ***master version*** of that file.
      - There should be exactly one master version of each file.
      - The master version represents the project at its most-advanced
        stage; i.e., the file you would send to your boss to show how your work
        is going. It should not include any half-finished work.
+     - A feature is a discrete and identifiable enhancement to the project: a
+       new variable, a new table or chart, etc.
      - The master version should not be directly edited, but should regularly be
        replaced with the current working copy.
    - You can also have ***archived versions***.
@@ -248,26 +250,26 @@ folder.
 **Setting up a project folder**
 
 To set up a project folder for the cleaning and analysis of the November 2020
-Canadian employment data:
+Canadian employment data, follow these steps:
 
-1. Create a project folder on your computer.
+1. *Create a project folder* on your computer.
    - It will contain all of your data and analysis for this project.
    - Give it a brief, clear, and portable name (call it
       `employment-nov-2020`).
-2. Create two sub-folders inside your project folder.
+2. *Create sub-folders* inside your project folder.
    - One will contain the original data (call it `raw-data`).
    - One will contain archived versions of the data. (call it `archive`).
-2. Obtain the source data.
+2. *Obtain the source data*.
    - Download the file
      [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
    - Put it in the `raw-data` folder.
    - Do not change the file name.
-3. Document the provenance of all data sources.
+3. *Document the provenance of all data sources*.
    - Create a text file called `readme.txt`.
    - Put it in the `raw-data` folder.
    - Enter information in this file about the provenance of the
      `CanEmpNov20.xlsx` file.
-4. Create a master version and working copy.
+4. *Create a master version and working copy*.
    - Make two copies of the `CanEmpNov20.xlsx` file.
    - Put them in the main project folder (`employment-nov-2020`).
    - One will be your original master version (call it `CanEmpNov20Clean.xlsx`).
@@ -558,18 +560,18 @@ should preserve flexibility in case we want to use the data for other purposes.
 Following the template above, we can construct a simple data cleaning plan for
 the employment data:
 
-1. *Convert all data into tidy-format tables*
+1. *Convert all data into tidy-format tables*.
 
    Our employment data table is already in tidy format, so no action is
    required.
 
-2. *Select or construct a unique ID variable for each table*
+2. *Select or construct a unique ID variable for each table*.
 
    As discussed earlier, the province name is not an ideal ID variable so we
    will construct two alternative ID variables: an arbitrary/sequential number
    and the two-letter postal abbreviation.
 
-3. *Find and address problems in existing variables*
+3. *Find and address problems in existing variables*.
 
    The only problem I see in the current data is in cell B8, which is supposed
    to display the population of Ontario but instead shows "########". We will
@@ -579,7 +581,7 @@ the employment data:
    problems, we would ideally fix them by creating new-and-improved versions of
    these variables rather than directly editing the existing variables.
 
-4. *Create new variables that may be useful*
+4. *Create new variables that may be useful*.
 
    We will want to construct new variables for:
 
@@ -897,9 +899,9 @@ plus the value in cell E2.
 
 As discussed earlier, it is important to distinguish between the *contents* of a
 cell and how those contents are *displayed*. For example, the true contents of
-cell H2 in our example above are the formula `= D2 + E2` but the cell shows the
-number  `2,493,300`. If you change the number in cell D2 or cell E2, the number
-shown in cell H2 will adjust accordingly.
+cell H2 in our example above are the formula `= D2 + E2` but the cell displays
+the number  `2,493,300`. If you change the number in cell D2 or cell E2, the
+number displayed in cell H2 will adjust accordingly.
 
 Formulas can use the results from other formulas, as shown in the example below.
 
@@ -1003,7 +1005,7 @@ Suppose we want to add a new variable for the (natural) log of population:
       dialog box for the `LN` function:  
       ![function arguments dialog box](bin/FunctionArguments.png)
    b. Click in the entry box labeled `Number`.
-   c. Either enter the text `C2` here or select cell C2 with the mosue. The
+   c. Either enter the text `C2` here or select cell C2 with the mouse. The
       dialog box will display the value in cell C2 (`3588700`) as well as the
       calculated value for the log of cell C2 (`15.0933058`).
    d. Select `OK`.
@@ -1106,15 +1108,11 @@ numbers are increased by $d$ units.
 For example, suppose cell B5 contains the formula `=A1`.  If we copy the
 contents of this cell to other cells, we get:
 
-|  Cell  | Formula |
-|:-------|:-------:|
-|   B5   | =A1     |
-|   B6   | =A2     |
-|   B7   | =A3     |
-|   C5   | =B1     |
-|   D5   | =C1     |
-|   C6   | =B2     |
-|   D7   | =C3     |
+|       | B   | C   | D   |
+|:------|:---:|:---:|:---:|
+|   5   | =A1 | =B1 | =C1 |
+|   6   | =A2 | =B2 | =C2 |
+|   7   | =A3 | =B3 | =C3 |
 
 This is usually exactly what we want Excel to do. 
 
@@ -1368,7 +1366,8 @@ function.  This function takes three arguments:
 
 An ***indicator*** variable is the numerical version of a logical variable: it
 takes on the value 1 if a particular statement is true, and 0 if the statement
-is false.  
+is false. We will use indicator variables regularly; they are discussed in
+more detail in the [math review appendix](#the-indicator-function).
 
 To create an indicator variable for low labour force participation:
 
@@ -1521,7 +1520,8 @@ field used data that was affected by this problem.
 
 Unfortunately, it is too late to "fix" Excel to keep this from happening. Any
 change to its behavior would "break" Excel in thousands of other applications
-that rely on its current behavior. 
+that rely on its current behavior. Excel has added an option to turn off
+this kind of automatic conversion, but the default behavior remains the same.
 
 When you can't fix a problem in a computer application, you need to find a
 ***workaround***: a modification to how you use the application that avoids or
@@ -1571,47 +1571,6 @@ you know that translations are never perfect.  Similarly, importing and
 exporting data can result in the loss or unintentional modification of
 information in the original data source.
 
-### Text files and text editors
-
-The most important file format is the ***text file***. A text file contains a
-sequence of characters (letters, numbers, etc.). 
-
-Text files can be read and modified using a simple program called a
-***text editor***. Every computer has at least one simple built-in text editor:
-
-  - Windows has a built in text editor called *Notepad*.
-  - MacOS has a built in text editor called *TextEdit*.
-
-In addition, there are numerous other text editors that are more powerful and
-include useful features like color-coding, spell checking, and autocorrect.
-Many of them are free:
-
-  - I use *Notepad++* which is powerful, easy to use, and available at no charge
-    from https://notepad-plus-plus.org/. Notepad++ is only available for
-    Windows.
-  - Microsoft's *VSCode* is popular with programmers, and is available at no
-    charge from https://code.visualstudio.com/. VSCode is available for Windows,
-    macOS, and many other platforms.
-
-There are also many tools available for comparing, combining, or otherwise
-processing text files.
-
-Files that are not text files are usually called ***binary*** files. Binary
-files are generally not human-readable.  If you try to open them with a
-text editor you will mostly see a bunch of odd-looking symbols.
-
-::: {.sfu data-latex=""}
-**Text editors in SFU campus labs**
-
-All general-purpose computer labs in the SFU Burnaby campus have the following
-text editors installed:
-
-- Windows: Notepad, Notepad++.
-- macOS: TextEdit, VSCode, BBEdit.
-:::
-
-### CSV files {#csv-files}
-
 The most commonly-used export format for Excel is called the
 ***comma-separated values*** or ***CSV*** file. CSV is a standardized text
 format that is very useful for representing tables of data. It is simple,
@@ -1621,8 +1580,8 @@ applications.
 
 You can save any worksheet in an Excel workbook as a CSV file.
 
-::: example
-**Creating a CSV file in Excel**
+::: {.example #exporting-a-csv-file}
+**Exporting a CSV file in Excel**
 
 To export the *Employment Nov 2020* worksheet to a CSV file:
 
@@ -1635,7 +1594,8 @@ To export the *Employment Nov 2020* worksheet to a CSV file:
    Click on the `Save as type` drop-down box, and select 
    `CSV (Comma delimited)(*.csv)`. Note that this will change the file extension
    from `.xlsx` to `.csv`.
-4. Adjust the destination folder if you want, then select `Save`.
+4. Change the file name to `CanEmpNov20.csv`, adjust the destination folder if
+   you want, then select `Save`.
 5. You may get a warning that looks like this:
 
    ![CSV warning message](bin/CsVWarningMessage.png)
@@ -1645,47 +1605,15 @@ To export the *Employment Nov 2020* worksheet to a CSV file:
 You now have a CSV file.
 :::
 
-So what is a CSV file? CSV files have the following features:
-
-- CSV file names usually have the `.csv` extension.
-- CSV files are text files.
-- Each CSV file represents a table of data.
-- Each line in the CSV file represents a row in the table.
-- The cells in each row are separated or ***delimited*** by commas.
-
-CSV files have a few other features, which are best understood by using a
-text editor to view the exact contents of an actual CSV file.
-
-::: example
-**Viewing a CSV file as text**
-
-To view the exact contents of the CSV file we have created, open it in a text
-editor.
-
-The file will look something like this:
-
-![CSV viewed as a text file](bin/CSVAsText.png)
-As you can see, the CSV file contains text based on the data in your
-worksheet. Each line is a row in the worksheet, and cells are delimited by
-commas.  A few other things to notice:
-
-- There is no formatting information in the file.
-- There are no formulas, only values.
-- When the value in a cell contains a comma, the contents of the cell are
-  surrounded by quotes (`"`) so that the comma is not interpreted as the end
-  of the cell.
-
-:::
-
-You can also open any CSV file in Excel, and Excel will interpret the contents 
-of the file as a worksheet.
+You can also import CSV files that have been created with Excel, or by some
+other program.
 
 ::: example
 **Viewing a CSV file in Excel**
 
-Use Excel to open both your CSV file and your current working copy of the XLSX
-workbook. You can do this either by double-clicking on both files, or you can
-start Excel and use its menus to find and open the files.
+Use Excel to open the CSV file you have just created. You can
+do this either by double-clicking on the file, or you can start Excel and use
+its menus to find and open the files.
 
 Your CSV file will look something like this:
 
@@ -1717,7 +1645,8 @@ information is not lost in the translation between formats.
 
 There are many commonly-used data file formats other than Excel and CSV. 
 Section \@ref(more-on-data-file-formats) in Chapter \@ref(advanced-data-cleaning)
-discusses some of these formats and how to work with them in Excel.
+discusses some of these formats and how to work with them in Excel. It also
+discusses CSV files in greater detail.
 
 ## Finishing up {#finishing-up}
 
@@ -1729,20 +1658,20 @@ the master version.
 ::: example
 **Finishing up**
 
-To update your master version:
+To update your master version, follow these steps:
 
-1. Check your working copy for mistakes and incomplete work.
+1. *Check your working copy* for mistakes and incomplete work.
 
    You can compare your working copy to my master version at  
    [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
 
-2. Archive your current master version by renaming it and moving it to the
+2. *Archive your current master version* by renaming it and moving it to the
    `archives` sub-folder.
 
    - This is optional since your current master version is identical to the
      source data.
 
-3. Set your current working copy as the master version.
+3. *Make your current working copy the master version*.
 
    - *In Excel*: You can select `File > Save As` to save the open file under
      another name.
@@ -1751,6 +1680,19 @@ To update your master version:
 You should now have two identical cleaned data sets (one master file and one
 working copy), one raw data set (in the `raw-data` subfolder), and possibly
 one archived data set (in the `archives` subfolder).
+:::
+
+::: {.fyi data-latex=""}
+**How often should you update your master version?**
+
+Your master version should be updated regularly, but it should only be updated
+after a new feature has been completed and checked for errors. But what if you
+are halfway through adding a feature, and need to stop work for the day?
+
+Making your updates both frequent and complete may require a modification to how
+your work habits: plan your work before you do it, divide big features into
+smaller features, work on one feature at a time, and avoid starting tasks
+you don't have time to finish.
 :::
 
 ## Chapter review {-#review-basic-data-cleaning-with-excel}
@@ -1871,13 +1813,11 @@ If you aren't sure, try it out in Excel and see what happens.
 
 **GOAL #8: Use Excel to import and export CSV files**
 
-9. Suppose you import the following CSV file in Excel:
-   ```
-   Name,Year of birth,Year of death
-   "Mary, Queen of Scots",1542,1547
-   Mary I,1516,1558
-   Elizabeth I,1533,1603
-   ```
-   a. How many rows and columns does the worksheet have?
-   b. What are the contents of cell B1?
-   c. What are the contents of cell C3?
+9. Download the file
+   [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx)
+   and open it in Excel.
+   a. Export the file to a CSV file named `CanEmpHist.csv`.
+   b. Close Excel.
+   c. Open both `CanEmpHist.xlsx` and `CanEmpHist.csv` in Excel.
+   d. Compare the original worksheet in `CanEmpHist.xlsx` with the worksheet
+      in `CanEmpHist.csv`.  How are they different?

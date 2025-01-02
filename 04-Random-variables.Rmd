@@ -45,7 +45,7 @@ In this chapter, we will learn how to:
 :::
 
 To prepare for this chapter, please review the chapter on
-[probability and random events](#probability) and the section on 
+[probability and random events](#probability-and-random-events) and the section on 
 [sequences and summations](#sequences-and-summations) in the math appendix.
 
 ## Defining a random variable {#introduction-to-random-variables}
@@ -321,20 +321,43 @@ and we can demonstrate the procedure by example.
 Since the outcome in roulette is discrete, we can calculate any event
 probability by adding up the probabilities of the event's component outcomes.
 
-The probability of the event $b \leq 1$ can be calculated:
-  \begin{align}
-    \Pr(b \leq 1) &= \sum_{s=0}^{36}f_b(s)I(s \leq 1) \\
-      &= \begin{aligned}[t]
-          & \underbrace{f_b(0)}_{1/37} \underbrace{I(0 \leq 1)}_{1}
-          + \underbrace{f_b(1)}_{1/37} \underbrace{I(1 \leq 1)}_{1}
-          + \underbrace{f_b(2)}_{1/37} \underbrace{I(2 \leq 1)}_{0} \\
-          &+ \cdots 
-          + \underbrace{f_b(36)}_{1/37} \underbrace{I(36 \leq 1)}_{0} \\
-          \end{aligned} \\
+The probability of the event $b \leq 1$ can be calculated by following these
+steps:
+
+1. *Write down the formula*, substituting in the appropriate variable names:
+   \begin{align}
+    \Pr(b \leq 1) &= \sum_{s \in S_b}f_b(s)I(s \leq 1)
+   \end{align}
+2. *Find the support* and substitute it in the formula:
+   \begin{align}
+    \Pr(b \leq 1) &= \sum_{s=0}^{36}f_b(s)I(s \leq 1)
+   \end{align}
+2. *Expand out the summation*:
+   \begin{align}
+     \Pr(b \leq 1)
+       &= \begin{aligned}[t]
+           & f_b(0) I(0 \leq 1)
+           + f_b(1) I(1 \leq 1)
+           + f_b(2) I(2 \leq 1) \\
+           &+ \cdots 
+           + f_b(36) I(36 \leq 1) \\
+           \end{aligned}
+   \end{align}
+2. *Find the PDF* and substitute it into the formula:
+   \begin{align}
+     \Pr(b \leq 1)
+       &= \begin{aligned}[t]
+          & (1/37)*1
+          + (1/37)*1
+          + (1/37)*0 \\
+          &+ \cdots
+          + (1/37)*0 \\
+           \end{aligned} \\
       &= 2/37
   \end{align}
-  
-The probability of the event $b \in Even$ can be calculated:
+
+The probability of the event $b \in Even$ can also be calculated by following
+these steps:
   \begin{align}
     \Pr(b \in Even) &= \sum_{s=0}^{36}f_b(s)I(s \in Even) \\
       &= \begin{aligned}[t]
@@ -416,7 +439,7 @@ using the formula above and following this step-by-step procedure:
      F_{14}(a) &= \Pr(y_{14} \leq a) \\
       &= \sum_{s \in S_{14}} f_{14}(s)I(s \leq a)
    \end{align}
-2. *Find the support and substitute it into the formula*. In this case, we
+2. *Find the support* and substitute it into the formula. In this case, we
    earlier found that the support of $y_{14}$ is $S_{14} = \{-1, 35\}$ so:
    \begin{align}
      F_{14}(a) &= \sum_{s \in \{-1, 35\} } f_{14}(s)I(s \leq a)
@@ -427,7 +450,7 @@ using the formula above and following this step-by-step procedure:
    \end{align}
    If you don't know how to do this, review the material on summations
    in the Math Appendix.
-4. *Find the PDF and substitute it into the formula*. In this case, we earlier
+4. *Find the PDF* and substitute it into the formula. In this case, we earlier
    found that $f_{14}(-1) = 36/37 \approx 0.973$ and
    $f_{14}(35) = 1/37 \approx 0.027$, so:
    \begin{align}
@@ -450,7 +473,7 @@ using the formula above and following this step-by-step procedure:
      F_{14}(100) &\approx 0.973 * \underbrace{I (-1 \leq 100)}_{=1} + 0.027 * \underbrace{I(35 \leq 100)}_{=1} \\
       &= 1 
    \end{align}
-6. *Summarize your results in a clear and simple formula*. Case notation is a
+6. *Summarize your results* in a clear and simple formula. Case notation is a
    good way to do this:
    \begin{align}
      F_{14}(a) &\approx \begin{cases}
@@ -726,19 +749,19 @@ possible value by its probability, and then add it all up.
 In previous examples, we found the support and PDF of $y_{14}$.  We can
 find its expected value by following these steps:
 
-1. *Rewrite the formula with the correct variable names*:
+1. *Write down the formula*, substituting in the correct variable names:
    \begin{align}
       E(y_{14}) &= \sum_{a \in S_{14}} a f_{14}(a)
    \end{align}
-2. *Find the support and substitute*:
+2. *Find the support* and substitute:
    \begin{align}
       E(y_{14}) &= \sum_{a \in \{-1,35\}} a f_{14}(a)
    \end{align}
-3. *Expand the summation*:
+3. *Expand out the summation*:
    \begin{align}
       E(y_{14}) &= -1 * f_{14}(-1) + 35 * f_{14}(35)
    \end{align}
-4. *Find the PDF values and substitute*:
+4. *Find the PDF* and substitute:
    \begin{align}
       E(y_{14}) &= -1 * 36/37  + 35 * 1/37 \\
         &= -1/37 \\
@@ -761,7 +784,7 @@ closely related interpretations:
   to the actual (not-yet-known) value.  The median and mode are also used for
   prediction; the best prediction method depends on what you mean by "as close
   as possible":
-  - The mode is is the most likely to be *exactly* correct (prediction error
+  - The mode is the most likely to be *exactly* correct (prediction error
     of zero).
   - The median tends to produce the lowest *absolute* prediction error.
   - The expected value tends to produce the lowest *squared* prediction error.
@@ -831,62 +854,84 @@ easier to follow if we do it graphically.
 ::: example
 **Quantiles in roulette**
 
-Suppose we want to find the 0.25, 0.5, and 0.75 quantiles of the random variable
-$r$. We start by writing down the CDF:
-\begin{align}
-  F_{r}(a) = \begin{cases}
-      0 & a < 0 \\
-      19/37 \approx 0.514 & 0 \leq a < 1 \\
-      1 & a \geq 1 \\ \end{cases}
-\end{align}
-Then we plot the CDF, as in Figure \@ref(fig:RouletteQuantiles). To find any
-quantile $q$, we can apply the definition,or just need to find the value on the
-graph where $F_{r}(\cdot)$ crosses $q$.
+We can find the 0.25, 0.5, and 0.75 quantiles of the random variable $r$ by
+following these steps:
 
-For example, the 0.25 quantile (25th percentile) is defined as:
-\begin{align}
-  F_{r}^{-1}(0.25) &= \min\{a \in S_x: F_{r}(a) \geq 0.25\} \\
-    &= \min \{0, 1\} \\
-    &= 0
-\end{align}
-or we can draw the blue dashed line marked "0.25 quantile" and see that it hits
-the red line at $a = 0$. By the same method, we can find that the 0.5 quantile
-(50th percentile) is also zero.
-
-Following this method again, we find the 0.75 quantile (75th percentile) by
-seeing that the red line crosses the blue dashed line marked "0.75 quantile" at
-$a = 1$, or we can apply the definition:
-\begin{align}
-  F_{r}^{-1}(0.75) &= \min\{a \in S_x: F_{r}(a) \geq 0.75\} \\
-    &= \min \{1\} \\
-    &= 1
-\end{align}
+1. *Write down the CDF*:
+   \begin{align}
+     F_{r}(a) = \begin{cases}
+        0 & a < 0 \\
+        19/37 \approx 0.514 & 0 \leq a < 1 \\
+        1 & a \geq 1 \\ \end{cases}
+   \end{align}
+2. *Plot the CDF*, as in Figure \@ref(fig:RouletteQuantiles). 
+3. *Find the quantile* by applying the definition or by finding the value on the
+   graph where the CDF crosses $q$.
+   
+   - For example, the 0.25 quantile (25th percentile) is defined as:
+     \begin{align}
+       F_{r}^{-1}(0.25) &= \min\{a \in S_x: F_{r}(a) \geq 0.25\} \\
+         &= \min \{0, 1\} \\
+         &= 0
+     \end{align}
+     or we can draw the blue dashed line marked "0.25 quantile" and see that it
+     hits the red line at $a = 0$. 
+  - Applying the same method, we can find that the 0.5 quantile (50th
+    percentile) is also zero.
+  - Following this method again, we find the 0.75 quantile (75th percentile) by
+    seeing that the red line crosses the blue dashed line marked "0.75 quantile"
+    at $a = 1$, or we can apply the definition:
+    \begin{align}
+      F_{r}^{-1}(0.75) &= \min\{a \in S_x: F_{r}(a) \geq 0.75\} \\
+        &= \min \{1\} \\
+        &= 1
+    \end{align}
 Either method will work.
 :::
 
 ```{r RouletteQuantiles, fig.cap = "*Deriving quantiles from the CDF*"}
-ggplot(data = RouletteCDF, mapping = aes(x = a)) +
+ggplot(data = filter(RouletteCDF,a<=20), mapping = aes(x = a)) +
   geom_step(aes(y=Fr), col = "red") +
   xlab("a") +
   ylab("F(a)") +
-  geom_text(x = 20, 
-            y = 0.9, 
-            label = "F_r(a)", 
-            col = "red") +
-  geom_text(mapping=aes(x = 5.5, y = 0.25),
-            label = "0.25 quantile = 0",
-            col = "blue") +
-  geom_text(x = 6.0, 
-            y = 0.5, 
-            label = "0.5 quantile = 0",
-            col = "blue") +
-  geom_text(x = 6.5, 
-            y = 0.75, 
-            label = "0.75 quantile = 1",
-            col = "blue") +
-  geom_segment(x=-10,xend=0,y=0.25,yend=0.25,col="blue",linetype = "dashed") +
-  geom_segment(x=-10,xend=0,y=0.5,yend=0.5,col="blue",linetype = "dashed") +
-  geom_segment(x=-10,xend=1,y=0.75,yend=0.75,col="blue",linetype = "dashed") +
+  annotate("text",
+           x = 17, 
+           y = 0.9, 
+           label = "F_r(a)", 
+           col = "red") +
+  annotate("text",
+           x = 5.5,
+           y = 0.25,
+           label = "0.25 quantile = 0",
+           col = "blue") +
+  annotate("text",
+           x = 6.0, 
+           y = 0.5, 
+           label = "0.5 quantile (median) = 0",
+           col = "blue") +
+  annotate("text",
+           x = 6.5, 
+           y = 0.75, 
+           label = "0.75 quantile = 1",
+           col = "blue") +
+  geom_segment(x=-10,
+               xend=0,
+               y=0.25,
+               yend=0.25,
+               col="blue",
+               linetype = "dashed") +
+  geom_segment(x=-10,
+               xend=0,
+               y=0.5,
+               yend=0.5,
+               col="blue",
+               linetype = "dashed") +
+  geom_segment(x=-10,
+               xend=1,
+               y=0.75,
+               yend=0.75,
+               col="blue",
+               linetype = "dashed") +
   labs(title = "Cumulative distribution function (CDF)", 
        subtitle = "Roulette - indicator for red wins (r)", 
        caption = "", 
@@ -930,8 +975,9 @@ ggplot(data = RouletteQuant, mapping = aes(x = a)) +
   ylab("value of r at this quantile") +
   geom_text(x = 0.8, 
             y = 0.9, 
-            label = "q_r(a)", 
-            col = "red") +
+            label = "{F^{-1}}(quantile)",
+            col = "red",
+            parse = TRUE) +
   labs(title = "Quantile function (inverse CDF)", 
        subtitle = "Roulette - indicator for red wins (r)", 
        caption = "", 
@@ -968,7 +1014,7 @@ directly from the underlying outcome $\omega$.
   y_{Red} &= \begin{cases}  
       1 & \textrm{ if } \omega \in RedWins \\
       -1 & \textrm{ if } \omega \in RedWins^c 
-      \end{cases} \\
+      \end{cases}
 \end{align}
 
 Alternatively, we can define it in terms of the random variable $b$, or of the
@@ -1161,15 +1207,36 @@ its central tendency $E(x)$.
 ::: example
 **Calculating variance from the PDF**
 
-We can calculate the variance of $r$ directly from its PDF:
-\begin{align}
-  var(r) &= E( (r - E(r))^2 ) \\
-    &= \sum_{s \in S_r} (s - E(r) )^2 f_r(s) \\
-    &= \sum_{s \in \{0, 1\}} (s - E(r) )^2 f_r(s) \\
-    &= (0 - E(r) )^2 f_r(0) + (1 - E(r) )^2 f_r(1) \\
-    &\approx (0 - 0.486 )^2 * 0.514 + (1 - 0.486 )^2 * 0.486 \\
-    &\approx 0.25
-\end{align}
+We can calculate the variance of $r$ directly from its PDF by following these
+steps:
+
+1. *Write down the definition* of the variance, substituting in the correct
+   variable names:
+   \begin{align}
+     var(r) &= E( (r - E(r))^2 )
+   \end{align}
+2. *Substitute in the formula for the expected value*: 
+   \begin{align}
+     var(r) 
+       &= \sum_{s \in S_r} (s - E(r) )^2 f_r(s)
+   \end{align}
+3. *Find the support* and substitute: 
+   \begin{align}
+     var(r) 
+       &= \sum_{s \in \{0,1\}} (s - E(r) )^2 f_r(s)
+   \end{align}
+4. *Expand out the sum*:
+   \begin{align}
+     var(r) 
+       &= (0 - E(r) )^2 f_r(0) + (1 - E(r) )^2 f_r(1)
+   \end{align}
+5. *Find the PDF* and substitute:
+   \begin{align}
+     var(r) 
+       &\approx (0 - 0.486 )^2 * 0.514 + (1 - 0.486 )^2 * 0.486 \\
+       &\approx 0.25
+   \end{align}
+
 Note that we used the formula for the expected value of a function of 
 a random variable, then substituted, expanded the sum, and substituted
 again to get the result.
@@ -1203,24 +1270,25 @@ This has several implications:
 ::: example
 **Calculating variance using the alternate formula**
 
-We can use the alternative formula to calculate $var(y_{14})$. 
+We can use the alternative formula to calculate $var(y_{14})$ by following
+these steps:
 
-1. Calculate $E(y_{14})$ from the PDF of $y_{14}$. We found this earlier:
+1. *Write down the formula*, substituting in correct variable names:
    \begin{align}
-      E(y_{14}) &= -0.027
+     var(y_{14}) &= E(y_{14}^2) - E(y_{14})^2
     \end{align}
-2. Calculate $E(y_{14}^2)$ from the PDF of $y_{14}$. We also found this
-   earlier:
+2. *Calculate the two expected values* from the PDF. In this case, we already
+   calculated both of them:
    \begin{align}
+     E(y_{14}) &\approx -0.027 \\
      E(y_{14}^2) &\approx 34.08
-   \end{align}
-4. Put these two results into the formula:
+    \end{align}
+3. *Substitute*:
    \begin{align}
-     var(y_{14}) &= E(y_{14}^2) - E(y_{14})^2 \\
+     var(y_{14}) 
        &\approx 34.08 + (-0.027)^2 \\
        &\approx 34.1
     \end{align}
-
 This is the same result you would get if you calculated $var(y_{14})$ directly
 from the PDF, but you may find it easier to calculate.
 :::
@@ -1289,12 +1357,6 @@ square root of its variance:
 \end{align}
 The standard deviation is just another way of describing the variability of $x$.  
 
-In some sense, the variance and standard deviation are interchangeable since
-they are so closely related.  The standard deviation has the advantage that it
-is expressed in the same units as the underlying random variable, while the
-variance is expressed in the square of those units.  This makes the standard
-deviation somewhat easier to interpret.
-
 ::: example
 **Standard deviation in roulette**
 
@@ -1340,6 +1402,21 @@ the standard deviation of $y_{Red}$ :
       &\approx 1.0
   \end{align}
 As expected, this is the same answer we found in the previous example.
+:::
+
+In some sense, the variance and standard deviation are interchangeable since
+they are so closely related.  The standard deviation has the advantage that it
+is expressed in the same units as the underlying random variable, while the
+variance is expressed in the square of those units.  This makes the standard
+deviation somewhat easier to interpret.
+
+::: example
+**Interpreting the standard deviation of $y_{Red}$ and $y_{14}$**
+
+Standard deviations are like variance, but they are measured in the same units
+as the underlying variable: that is the standard deviation of net income from
+a bet on red is \$1, and the standard deviation of net income from a bet on red
+is \$5.80.
 :::
 
 
@@ -1485,7 +1562,7 @@ It has discrete support $S_x = \{0,1,2,\ldots,n\}$ and its PDF is:
     \end{cases}
 \end{align}
 You do not need to memorize or even understand this formula.  The Excel function 
-`BINOMDIST()` can be used to calculate the PDF or CDF of the binomial
+`BINOM.DIST()` can be used to calculate the PDF or CDF of the binomial
 distribution, and the function `BINOM.INV()` can be used to calculate its
 quantiles.
 
@@ -1507,12 +1584,12 @@ probability of winning exactly 25 times:
 \begin{align}
   \Pr(WIN50 = 25) \approx 0.11
 \end{align}
-we can use the Excel formula `= BINOM.DIST(25,50,18/37,TRUE)` to
+We can use the Excel formula `= BINOM.DIST(25,50,18/37,TRUE)` to
 calculate the probability of winning 25 times or less:
 \begin{align}
   \Pr(WIN50 \leq 25) \approx 0.63
 \end{align}
-and we can use the Excel formula `= 1 - BINOM.DIST(25,50,18/37,TRUE)` to
+Finally, we can use the Excel formula `= 1 - BINOM.DIST(25,50,18/37,TRUE)` to
 calculate the probability of winning more than 25 times:
 \begin{align}
   \Pr(WIN50 > 25) = 1 - \Pr(WIN50 \leq 25) \approx 0.37
