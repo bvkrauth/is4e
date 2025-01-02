@@ -54,7 +54,7 @@ you take it) ECON 334.
 
 Start the program RStudio. You should see something that looks like this:
 
-![RStudio screen shot](bin/Rstudio.png)  
+![RStudio screen shot](bin/RStudioScreenshot.png)  
 You may wonder what the difference is between R and RStudio.
 
 R is a programming language designed for statistical analysis along with the

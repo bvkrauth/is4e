@@ -1047,7 +1047,7 @@ Applying the formula above we get:
     &= \sum_{s \in \{-1, 35\}} s^2 f_{14}(s) \\
     &= (-1)^2 f_{14}(-1) + 35^2 f_{14}(35) \\
     &= 1 * 36/37 + 1225 * 1/37 \\
-    &\approx 34.08
+    &\approx 34.1
 \end{align}
 This result will turn out to be useful later.
 :::
@@ -1383,8 +1383,9 @@ The standard deviation has analogous properties to the variance:
    \end{align}
 2. For any constants $a$ and $b$:
    \begin{align}
-     sd(a + bx) = b \, sd(x)
+     sd(a + bx) = |b| \, sd(x)
    \end{align}
+   where $|b|$ is the absolute value of $b$.
 
 These properties follow directly from the corresponding properties of the
 variance.
