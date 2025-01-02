@@ -907,7 +907,7 @@ ggplot(data = filter(RouletteCDF,a<=20), mapping = aes(x = a)) +
   annotate("text",
            x = 6.0, 
            y = 0.5, 
-           label = "0.5 quantile = 0",
+           label = "0.5 quantile (median) = 0",
            col = "blue") +
   annotate("text",
            x = 6.5, 

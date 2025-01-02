@@ -600,7 +600,7 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=fa)) +
   xlab("a") +
   ylab("f(a)") +
   labs(title = "Probability density function (PDF)", 
-       subtitle = "", 
+       subtitle = "Several normal distributions", 
        caption = "", 
        tag = "")
 ```
@@ -630,9 +630,9 @@ ggplot(data=NormalDist,mapping=aes(x=a,y=Fa)) +
   geom_text(x=1,y=0.3,col="red",label="N(1,1)") +
   geom_text(x=-3.2,y=0.13,col="purple",label="N(0,2)") +
   xlab("a") +
-  ylab("f(a)") +
+  ylab("F(a)") +
   labs(title = "Cumulative distribution function (CDF)", 
-       subtitle = "", 
+       subtitle = "Several normal distributions", 
        caption = "", 
        tag = "")
 ```
