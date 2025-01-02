@@ -1443,10 +1443,13 @@ combat damage received by airplanes, with the hopes that the data could be used
 to help make the planes more robust to damage. Planes can be reinforced with
 additional steel, but this is costly and makes them heavier and slower.
 
-The data looked something like this (this isn't the real data, just a
+The data looked something like this[^703] (this isn't the real data, just a
 visualization constructed for the example):
+![Survivorship-bias](bin/WaldPlane.png)
 
-<a title="Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept), CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg"><img width="256" alt="Survivorship-bias" src="bin/WaldPlane.png"></a>
+[^703]: Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept),
+CC BY-SA 4.0; https://creativecommons.org/licenses/by-sa/4.0/deed.en;, via
+Wikimedia Commons, https://commons.wikimedia.org/wiki/File:Survivorship-bias.svg.
 
 You will notice that most of the damage seems to be in the wings and in the
 middle of the fuselage (body), while there is little damage to the nose,
