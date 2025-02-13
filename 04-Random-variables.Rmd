@@ -1793,12 +1793,13 @@ wins.
        event $y = 1$.  Using earlier results, find $\Pr(W > 0)$.
 
 14. Suppose you bet \$1 on Yo in ten independent rolls. Your net winnings in 
-    that case will be $W_{10} = 16*Y_{10} - 10$.
-    a. Using earlier results, find $E(W_{10})$.
-    b. Using earlier results, find $var(W_{10})$.
+    that case will be $W_{10} = 16*Y_{10} - 10$, where $Y_{10}$ is the number
+    of times Yo wins in the 10 rolls.  Using your results from question 17
+    below:
+    a. Find $E(W_{10})$.
+    b. Find $var(W_{10})$.
     c. The event $W_{10} > 0$ (your net winnings are positive) is identical to
-       the event $Y_{10} > 10/16$.  Using earlier results, find
-       $\Pr(W_{10} > 0)$.
+       the event $Y_{10} > 10/16$.  Find $\Pr(W_{10} > 0)$.
 
 **GOAL #13: Standardize a random variable**
 
@@ -1815,8 +1816,8 @@ wins.
     b. Use standard results for this distribution to find $E(y)$
     c. Use standard results for this distribution to find $var(y)$
 
-17. Let $Y_{10}$ be the number of times in 10 dice rolls that a bet on "Yo"
-    wins.
+17. Let $Y_{10}$ be the number of times in 10 independent dice rolls that a bet
+    on "Yo" wins.
     a. What standard distribution describes $Y_{10}$?
     b. Use existing results for this distribution to find $E(Y_{10})$.
     c. Use existing results for this distribution to find $var(Y_{10})$.
