@@ -173,22 +173,22 @@ R more extensively, and you will go deeper into the theory.
 
 The second required course in the econometrics sequence for SFU economics
 majors is
-[ECON 333:Statistical Analysis of Economic Data](https://www.sfu.ca/students/calendar/2022/fall/courses/econ/333.html).
+[ECON 333:Statistical Analysis of Economic Data](https://www.sfu.ca/students/calendar/2026/spring/courses/econ/333.html).
 In ECON 333, you will learn a more advanced set of techniques including linear
 regression analysis and you will gain more experience with R.
 
 We also offer several related electives. If you find you enjoy and/or do well in
 this course, I would encourage you to take some of these course:
 
-- [ECON 334: Data Visualization and Economic Analysis](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/334.html) 
+- [ECON 334: Data Visualization and Economic Analysis](https://www.sfu.ca/students/calendar/2025/fall/courses/econ/334.html) 
   is an elective focusing on exploratory data analysis and visualization.
-- [ECON 335: Introduction to Causal Inference and Policy Evaluation](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/335.html)
+- [ECON 335: Introduction to Causal Inference and Policy Evaluation](https://www.sfu.ca/students/calendar/2026/spring/courses/econ/335.html)
   is an elective focusing on the problem of inferring cause-and-effect from
   economic data, and using data to forecast the effects of economic policies.
 - [ECON 433: Financial and Time Series Econometrics](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/433.html)
   is an advanced elective focusing on techniques for analyzing the kind of time
   series data that is used in macroeconomics and financial markets.
-- [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2021/spring/courses/econ/435.html)
+- [ECON 435: Econometric Methods](https://www.sfu.ca/students/calendar/2025/fall/courses/econ/435.html)
   is an advanced course in statistics and econometrics that is part of our
   honours sequence. It gives you the opportunity and tools to write a serious
   empirical research paper. Students who are not in the honours program are
@@ -197,9 +197,9 @@ this course, I would encourage you to take some of these course:
    
 I would also encourage you to take courses outside of the economics department,
 and to consider a 
-[Statistics minor](https://www.sfu.ca/students/calendar/2021/spring/programs/statistics/minor.html)
+[Statistics minor](https://www.sfu.ca/students/calendar/2026/spring/programs/statistics/minor.html)
 or the interdisciplinary
-[Social Data Analytics (SDA) minor](https://www.sfu.ca/students/calendar/2021/spring/programs/social-data-analytics/minor.html).
+[Social Data Analytics (SDA) minor](https://www.sfu.ca/students/calendar/2026/spring/programs/social-data-analytics/minor.html).
 :::
 
 ## Computer resources {#computer-resources}
@@ -244,7 +244,7 @@ SFU has a licensing agreement with Microsoft that allows its students
 free installation of the entire Microsoft Office suite, including Excel. 
 Installation instructions are available at:
 
-https://www.sfu.ca/itservices/technical/software/office365.html.
+https://www.sfu.ca/information-systems/services/software/microsoft-365/microsoft-365-apps/microsoft-office.html.
 
 Excel is also available in all campus computer labs.
 :::

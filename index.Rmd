@@ -15,7 +15,7 @@ description: A textbook for an introductory (first-year
 favicon: bin/favicon.ico
 cover-image: bin/logo.png
 site: bookdown::bookdown_site
-github-repo: https://github.com/bvkrauth/econ233
+github-repo: https://github.com/bvkrauth/is4e
 url: https://bookdown.org/bkrauth/IS4E/
 ---
 
@@ -45,9 +45,9 @@ strongly encouraged to contact me first so that I can inform you
 about any significant changes to the content.
 
 The book itself has been created using [Bookdown](https://bookdown.org/). Its
-source code is available at https://github.com/bvkrauth/econ233, and errors or
+source code is available at https://github.com/bvkrauth/is4e, and errors or
 typos can be reported to me at <bkrauth@sfu.ca> or
-https://github.com/bvkrauth/econ233/issues.
+https://github.com/bvkrauth/is4e/issues.
 
 
 ## Conventions of this book {-}

@@ -68,7 +68,7 @@ cross-country data set covering real GDP, population, and other macroeconomic
 variables. It has been used extensively by macroeconomists seeking to
 understand why some countries have more rapid economic growth than others.
 
-The current version of the PWT is available at https://doi.org/10.34894/QT5BCC
+The current version of the PWT is available at https://www.rug.nl/ggdc/productivity/pwt/?lang=en
 and is built from two distinct data sources:
 
 - National income data from each country's national statistical agency.
@@ -194,7 +194,8 @@ Many of them are free:
     from https://notepad-plus-plus.org/. Notepad++ is only available for
     Windows.
   - Microsoft's *VSCode* is popular with programmers, and is available at no
-    charge from https://code.visualstudio.com/. VSCode is available for Windows,
+    charge from https://code.visualstudio.com/.
+    VSCode is available for Windows,
     macOS, and many other platforms.
 
 There are also many tools available for comparing, combining, or otherwise

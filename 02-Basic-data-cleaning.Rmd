@@ -472,7 +472,7 @@ and linked using various ID variables:
 - Each academic program at SFU has a standardized 2-letter to 4-letter program
   code. For example, the program code for economics is ECON. The full list of
   program codes can be found at
-  https://www.sfu.ca/students/calendar/2023/spring/academic-programs.html.
+  https://www.sfu.ca/students/calendar/2026/spring/courses.html.
 - Each program assigns (mostly) arbitrary numeric course codes. For example
   the economics department has assigned the numeric course code 233 to its
   introductory statistics course.
