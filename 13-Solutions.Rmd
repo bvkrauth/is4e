@@ -61,7 +61,7 @@ This appendix provides solutions to all end-of-chapter practice problems.
    c. `=TODAY()-DATE(1969,11,20)` - using my birthday; yours will obviously be
       different.
 9. If you ran into trouble doing this, review the section on
-   [saving and exporting data](saving-and-exporting-data).
+   [saving and exporting data](#saving-and-exporting-data).
    a. Note that there are actually multiple options for exporting CSV files,
       including "CSV UTF-8", "CSV (comma delimited)", "CSV (Macintosh)" and
       "CSV (MS-DOS)". These all have tiny differences in how the data is

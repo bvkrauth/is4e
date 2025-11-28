@@ -22,7 +22,7 @@ In this chapter, we will learn how to:
 :::
 
 To prepare for this chapter, please review the sections on [Sets](#sets) and
-[Functions](#sets) in the [Math Review](#math-review) appendix.
+[Functions](#functions) in the [Math Review](#math-review) appendix.
 
 ## Randomness and uncertainty
 
