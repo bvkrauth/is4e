@@ -178,7 +178,7 @@ In ECON 333, you will learn a more advanced set of techniques including linear
 regression analysis and you will gain more experience with R.
 
 We also offer several related electives. If you find you enjoy and/or do well in
-this course, I would encourage you to take some of these course:
+this course, I would encourage you to take some of these courses:
 
 - [ECON 334: Data Visualization and Economic Analysis](https://www.sfu.ca/students/calendar/2025/fall/courses/econ/334.html) 
   is an elective focusing on exploratory data analysis and visualization.
@@ -194,10 +194,10 @@ this course, I would encourage you to take some of these course:
   empirical research paper. Students who are not in the honours program are
   still eligible to take ECON 435 if they have a 3.0 CGPA and the course
   prerequisites.
-   
+
 I would also encourage you to take courses outside of the economics department,
-and to consider a 
-[Statistics minor](https://www.sfu.ca/students/calendar/2026/spring/programs/statistics/minor.html)
+and to consider the [Concentration in Economic Data Analysis](https://www.sfu.ca/students/calendar/2026/spring/programs/economics/major/bachelor-of-arts.html) in the economics major, 
+the [Statistics minor](https://www.sfu.ca/students/calendar/2026/spring/programs/statistics/minor.html)
 or the interdisciplinary
 [Social Data Analytics (SDA) minor](https://www.sfu.ca/students/calendar/2026/spring/programs/social-data-analytics/minor.html).
 :::
