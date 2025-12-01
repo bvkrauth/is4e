@@ -103,8 +103,9 @@ and write it as if it were an ordinary variable.
 
 ### Implied probabilities {#probability-distributions}
 
-Since every random variable is a number, we can define its sample space as the
-set of real numbers $\mathbb{R}$. 
+Every random variable is a number, so its sample space is the set of real
+numbers $\mathbb{R}$. In some cases we *could* define its sample space more
+narrowly, but it is simpler if we avoid doing so.
 
 We can also define events for a random variable. For example, we can define
 events like:
@@ -1449,6 +1450,9 @@ We can also use our rules for linear functions of a random variable to get:
 That is, standardization rescales the variable to have a mean of zero and 
 a variance or standard deviation of one.
 
+- If $z = 0.5$, then $x$ is exactly half of a standard deviation above its mean.
+- If $z = -3$, then $x$ is exactly three standard deviations below its mean.
+
 Standardization is commonly used in fields like psychology or educational
 testing when a variable has no natural unit of measurement.
 
@@ -1484,11 +1488,10 @@ one standard deviation below the average score.
 
 ## Standard discrete distributions {#standard-distributions}
 
-In principle, there are an infinite number of possible probability
-distributions.  However, some probability distributions are common enough
-in applications that we have given them names. This provides a quick way to
-describe a particular distribution without writing out its full PDF, using the
-notation:
+In principle, the set of possible probability distributions is unlimited.
+However, some probability distributions are common enough in applications that
+we have given them names. This provides a quick way to describe a particular
+distribution without writing out its full PDF, using the notation:
 \begin{align}
   RandomVariable \sim DistributionName(Parameters)
 \end{align}
@@ -1499,7 +1502,7 @@ distribution, and $Parameters$ is a list of arguments (usually numbers)
 called ***parameters*** that provide additional information about the
 probability distribution.
 
-Using a standard distribution also allows us to establish the properties of a
+Using a standard distribution also allows us to find the properties of a
 commonly-used distribution once, and use those results every time we use that
 distribution.  In this section we will describe three standard distributions - 
 the Bernoulli, the binomial, and the discrete uniform - and their properties.
