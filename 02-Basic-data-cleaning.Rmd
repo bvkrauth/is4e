@@ -18,8 +18,8 @@ using Excel to clean a real data set.
 In this chapter, we will learn how to:
 
 1. Identify and implement the principles of reproducible research, including:
-   - Provenance
    - Portability
+   - Provenance
    - Version control
    - Tidy data
 2. Identify and use ID variables.
@@ -199,49 +199,53 @@ of steps called a ***workflow***.
 
 Your data analysis workflow should have three key features:
 
-1. Document the ***provenance*** or original source for all data.
-   - When downloading data files, document the original URL and date of access.
-   - You can add a small text file (usually called `README.txt`) that
-     explains the provenance and provides other relevant information.
-   - Keep an unmodified copy of all original data files, and avoid changing
-     their names.
-   - More generally, avoid directly editing data. Data storage is cheap, and
-     adding data is almost always preferable to changing or deleting it.
-2. Keep your data and analysis ***portable***. Data is
-   portable if it can be easily moved between operating systems, file formats,
-   and applications.
+1. Keep your data and analysis ***portable***.
+   - Data is portable if it can be easily moved between operating systems, file
+     formats, and applications.
    - Organize your work into clear projects, and keep all of the files for
-     a given project in a single ***project folder***.
+     a given project in a single ***project folder***. This allows you to share
+     your work with someone by giving them a copy of the project folder.
    - Give files and variables brief, informative, and portable names.
      - For example, stick to letters and numbers, and avoid using spaces,
        special characters, accents, etc.
      - Following a naming convention may help make your names more informative
        without making them too long.
-4. Use ***version control*** to manage and track changes to your files as you
+2. Document the ***provenance*** of all data used.
+   - Provenance is the full history of the data including its origin and all
+     subsequent changes.
+   - Keep an unmodified copy of all original data files, and avoid renaming
+     them.    
+   - When downloading data files, document the original URL and date of access.
+   - Create and maintain a document (usually a small text file called 
+     `README.txt`) that explains the provenance and provides other relevant
+     information.
+   - Avoid directly editing data. Data storage is cheap, and adding data is
+     almost always preferable to changing or deleting it.
+3. Use ***version control*** to manage and track changes to your files as you
    work. Version control systems can be very elaborate and use specialized
    software, but I will teach you a simple workflow that requires no additional
    tools:
    - Create a ***working copy*** of each file you plan to edit.
-     - There should be exactly one working copy of each file.
      - You can edit the working copy.
+     - There should be exactly one working copy of each file.
    - Each time you add a ***feature*** to your project, make your current
      working copy the ***master version*** of that file.
-     - There should be exactly one master version of each file.
+     - A feature is a discrete and identifiable enhancement to the project: a
+       new variable, a new table or chart, etc.
      - The master version represents the project at its most-advanced
        stage; i.e., the file you would send to your boss to show how your work
        is going. It should not include any half-finished work.
-     - A feature is a discrete and identifiable enhancement to the project: a
-       new variable, a new table or chart, etc.
      - The master version should not be directly edited, but should regularly be
        replaced with the current working copy.
+     - There should be exactly one master version of each file.
    - You can also have ***archived versions***.
-     - There can be as many archived versions as you like.
      - An archived version is a previous master version or working copy that
        you want to keep for reference.
      - Use some file naming convention to distinguish between archived versions.
        - You could number them sequentially (e.g., "archive-01").
        - Or you could use dates (e.g., "archive-20dec2022").
      - Archived versions should not be directly edited.
+     - There can be as many archived versions as you like.
 
 The first step in implementing these principles is usually to set up a project
 folder.
