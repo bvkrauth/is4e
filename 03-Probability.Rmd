@@ -178,6 +178,10 @@ These roulette events are well-defined for our sample space:
   \begin{align}
     \omega \in First12Wins = \{1,2,3,4,5,6,7,8,9,10,11,12\}
   \end{align}
+- Ball lands on any number:
+  \begin{align}
+    \omega \in \Omega = \{0,1,2,\ldots,36\}
+  \end{align}
 
 You can see many other bets on the table such as "Even", "Odd", "1 to 18" and so
 on.  We can define an event for each of these bets, or for any other combination
