@@ -212,9 +212,12 @@ might look like this:
 | 90th percentile |
 | Max             | *(maximum value observed)*  
 
+
+::: warning
 You saw many of these words - standard deviation, percentile, median, etc. - 
 in Chapter \@ref(random-variables), but I need to be clear on something: even
 though the names are the same, the concepts are *not* exactly the same.
+:::
 
 We start by introducing some notation.  We can think of our data set 
 $D_n = (x_1, x_2, \ldots, x_n)$ as a table of $n$ observations (rows),
@@ -269,6 +272,7 @@ that is above 90\% of observations. Either can be calculated in Excel using the 
 function.  I will not give you a precise definition or ask you to calculate
 sample percentiles by hand.
 
+::: warning
 Note that the sample average/median/percentiles/etc. describe
 *the values observed in a set of data*, and are calculated from that data set.
 The mean/median/percentiles we learned about in  Chapter \@ref(random-variables)
@@ -276,6 +280,7 @@ describe  *the probability distribution of a random variable* and are calculated
 from that probability distribution. As you might imagine, these two sets of
 concepts are distinct but related.  We will discuss how they are related in
 Chapter \@ref(statistics). For now, just keep in mind that they are distinct.
+:::
 
 ### Constructing the table
 
