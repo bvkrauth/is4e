@@ -3,7 +3,7 @@
 This repository contains the Bookdown source code for my online textbook
 *Introductory Statistics for Economics*.
 
-The book itself is currently published at https://bookdown.org/bkrauth/IS4E/.
+The book itself is currently published at https://bkrauth-is4e.share.connect.posit.cloud/.
 I have used it several times as the course textbook for my course
 ECON 233 at Simon Fraser University, but I continue to revise it.
 

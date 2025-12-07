@@ -50,7 +50,7 @@ January 1976 through January 2021.
 
 1. Set up a project folder.
 2. Download the file at
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx) and put it in your raw data subfolder.
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx) and put it in your raw data subfolder.
 3. Make a working copy in your project folder.
    - I called mine  `CanEmpHist-working.xlsx`.
 4. Open your working copy. It will look something like this:  
@@ -1109,7 +1109,7 @@ As we do when cleaning data, the final steps of a data analysis are to:
    - I chose the file name `CanEmpHistResults.xlsx`.
 
 You can download
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpHistResults.xlsx](sampledata/CanEmpHistResults.xlsx) if you want to check your work against mine. 
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpHistResults.xlsx](sampledata/CanEmpHistResults.xlsx) if you want to check your work against mine. 
 :::
 
 ## Chapter review {-#review-basic-data-analysis}

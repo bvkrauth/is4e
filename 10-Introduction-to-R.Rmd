@@ -979,7 +979,7 @@ The code below reads in the CSV file, and stores it in the object `EmpData`.
 # Load the Tidyverse if you have not already done so
 library("tidyverse")
 # You can directly read online data by giving read_csv() the URL.
-EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv")
 # You can also download the file and give read_csv() the local location
 # EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```

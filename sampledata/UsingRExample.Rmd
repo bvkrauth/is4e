@@ -20,7 +20,7 @@ Load the tidyverse and read in the data
 ```{r}
 library("tidyverse")
 EmpData <- read_csv("EmploymentData.csv")
-#EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+#EmpData <- read_csv("https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv")
 ```
 
 Then clean it

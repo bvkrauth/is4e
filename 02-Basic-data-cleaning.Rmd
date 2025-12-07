@@ -156,13 +156,13 @@ means that some workers have stopped looking for work.
 :::
 
 The data can be found in the file
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx).
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx).
 
 ::: example
 **Opening the employment data**
 
 Open the file
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
 in Excel.  The file should look something like this:
 
 ![](bin/EmploymentData.png)
@@ -265,7 +265,7 @@ Canadian employment data, follow these steps:
    - One will contain archived versions of the data. (call it `archive`).
 2. *Obtain the source data*.
    - Download the file
-     [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
+     [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
    - Put it in the `raw-data` folder.
    - Do not change the file name.
 3. *Document the provenance of all data sources*.
@@ -1570,7 +1570,7 @@ To update your master version, follow these steps:
 1. *Check your working copy* for mistakes and incomplete work.
 
    You can compare your working copy to my master version at
-   [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
+   [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
 
 2. (optional) *Archive your current master version* by renaming it and moving it
    to the `archives` sub-folder.
@@ -1828,7 +1828,7 @@ If you aren't sure, try it out in Excel and see what happens.
 **GOAL #8: Use Excel to import and export CSV files**
 
 9. Download the file
-   [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx)
+   [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx)
    and open it in Excel.
    a. Export the file to a CSV file named `CanEmpHist.csv`.
    b. Close Excel.

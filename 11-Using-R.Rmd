@@ -46,10 +46,10 @@ Then open RStudio, load the Tidyverse, and read in our employment data:
 
 ```{r ReadEmpDataFromCSV_11, eval=FALSE}
 library(tidyverse)
-EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv")
 ```
 
-If you prefer, you can download the employment data file from [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv](sampledata/EmploymentData.csv) and have R read it in locally:
+If you prefer, you can download the employment data file from [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv](sampledata/EmploymentData.csv) and have R read it in locally:
 
 ```{r ReadEmpDataFromCSV_local, eval=FALSE}
 library(tidyverse)
@@ -299,7 +299,7 @@ Create an R script called `EmpData.R` with the following code:
 # Load the Tidyverse
 library(tidyverse)
 # Load the data
-EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv")
 # Clean the data
 EmpData <- EmpData %>%
   mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>%

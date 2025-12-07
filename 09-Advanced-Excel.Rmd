@@ -43,10 +43,10 @@ To prepare for this chapter, please review the chapter on
 and [basic data analysis with Excel](#basic-data-analysis-with-excel).
 Then create a project folder and download the following four data files:
 
-- [https://bookdown.org/bkrauth/IS4E/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)
-- [https://bookdown.org/bkrauth/IS4E/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
-- [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
-- [https://bookdown.org/bkrauth/IS4E/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
+- [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/pwt100.xlsx](sampledata/pwt100.xlsx)
+- [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/TaxRates.xlsx](sampledata/TaxRates.xlsx)
+- [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.xlsx](sampledata/EmploymentData.xlsx).
+- [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CountryCodes.txt](sampledata/CountryCodes.txt)  
 
 Depending on your browser settings, the last file may display in your browser
 rather than downloading like the other  files.  If that happens, you can
@@ -237,7 +237,7 @@ text editor to view the exact contents of an actual CSV file.
 
 Follow the instructions in Example \@ref(exm:exporting-a-csv-file) to export
 a CSV file using Excel, or download the file from
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.csv](sampledata/CanEmpNov20.csv).
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20.csv](sampledata/CanEmpNov20.csv).
 
 Open the file in a text editor of your choice. It will look something like this:
 
@@ -1000,7 +1000,7 @@ working copy and update/create the master version of your cleaned data file.
    - I chose the file name `GrowthData.xlsx`.
 
 You can compare your work to my Excel file at
-[https://bookdown.org/bkrauth/IS4E/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/GrowthData.xlsx](sampledata/GrowthData.xlsx)
 :::
 
 ##  Pivot tables {#pivot-tables}
@@ -1314,7 +1314,7 @@ attractive and informative.
 
 You can download the full set of Pivot Tables and associated charts  generated
 in this chapter at
-[https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentDataPT.xlsx](sampledata/EmploymentDataPT.xlsx) 
 
 ## Chapter review {-#review-advanced-data-cleaning}
 

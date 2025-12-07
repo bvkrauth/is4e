@@ -38,7 +38,7 @@ tidy data, and credible inference. The only way to get all of these
 features was to write my own book.
 
 The book is available at no charge in HTML, PDF, and EPUB formats
-at https://bookdown.org/bkrauth/IS4E/. Usage is allowed under the
+at https://bkrauth-is4e.share.connect.posit.cloud/. Usage is allowed under the
 [MIT License](https://github.com/bvkrauth/is4e/blob/master/LICENSE).
 Instructors are welcome to assign it as a course textbook, but are
 strongly encouraged to contact me first so that I can inform you
