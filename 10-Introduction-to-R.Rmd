@@ -950,7 +950,7 @@ file, viewing it, and constructing a plan to clean it.
 
 We will work with the employment data.
 
-### Reading CSV files
+### Reading a CSV file
 
 Our first step will be reading the data.  The most commonly used data format is
 CSV, and the Tidyverse function to read in CSV files is called `read_csv()`.
