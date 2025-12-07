@@ -80,6 +80,47 @@ RStudio normally displays three or four open windows, each of which has tabs you
 can select to access different features. We will not use most of them, but some
 of them will be very handy indeed.
 
+::: {.fyi data-latex=""}
+**R or Python?**
+
+The general-purpose programming language Python is a popular alternative
+to R for serious statistical analysis. Python is also available at no
+cost, and has some important advantages over R:
+
+- Python is a general purpose programming language and is more widely
+  used for applications other than data cleaning and analysis.
+- Cutting-edge data science and machine learning tools are typically
+  developed in Python, though most are also available in R.
+- Because of this, Python skills look better on your resume.
+
+So why are we learning R?
+
+- Using Python for even the most basic data cleaning and analysis
+  requires the user to install and maintain various external packages:
+  NumPy for math, Pandas for data management, and Matplotlib for
+  graphs. These capabilities are built into R.
+- Configuring your Python installation and managing external packages
+  can be complex, and can distract
+
+My own experience is that the specific programming language you learn
+is not particularly important. I have written code in 
+[R](https://github.com/bvkrauth/rcr/tree/master/r/rcrbounds),
+[Python](https://github.com/bvkrauth/rcr/tree/master/python),
+[Fortran](https://github.com/bvkrauth/smle),
+[Stata](https://github.com/bvkrauth/fdk-gss),
+Basic, VBA, Pascal, assembly language, Gauss, Perl, SHAZAM, and EViews.
+Every language has its distinctive features, but translating from
+one language to another is usually easy if you have command of concepts
+like control flow statements (if-then branching, do-loops), functions,
+operators, array indexing, vector mathematics, data types, etc.
+
+My advice is to focus on building language-independent skills, and plan to
+take an introductory computer science course where you learn Python as a
+general-purpose language. Your experience with R will help you in that course,
+and your knowledge of R as a statistical package and Python as a language will
+prepare you well to use Python in data analysis.
+:::
+
 ### The console window
 
 Like most programming languages, R is designed to execute a series of commands
