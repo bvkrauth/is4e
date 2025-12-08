@@ -169,9 +169,9 @@ This is the fundamental conceptual step in the entire course, so you should
 pause for a moment to make sure you understand it. We are thinking of our data
 set as two distinct things:
 
-1. The specific set of numbers in front of us.
-2. The outcome of some random process that generated those specific numbers this
-   time, but could easily have generated other numbers instead.
+1. The specific table of numbers in front of us.
+2. The outcome of some random process (the DGP) that generated those specific
+   numbers this time, but could easily have generated other numbers instead.
 
 The goal of statistical analysis is to use the specific set of numbers in front
 of us to learn something new about the random process that generated

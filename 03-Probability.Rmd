@@ -178,6 +178,10 @@ These roulette events are well-defined for our sample space:
   \begin{align}
     \omega \in First12Wins = \{1,2,3,4,5,6,7,8,9,10,11,12\}
   \end{align}
+- Ball lands on any number:
+  \begin{align}
+    \omega \in \Omega = \{0,1,2,\ldots,36\}
+  \end{align}
 
 You can see many other bets on the table such as "Even", "Odd", "1 to 18" and so
 on.  We can define an event for each of these bets, or for any other combination
@@ -202,17 +206,17 @@ mathematical tools we use for sets.
 
 In our roulette example:
 
-- Two events are *identical* $(A = B)$ if they contain exactly the same outcomes:
+- Two events are ***identical*** $(A = B)$ if they contain exactly the same outcomes:
   - Suppose that Al and Betty both bet on 23. The events "Al wins"
     $(AlWins = \{23\})$ and "Betty wins" $(BettyWins = \{23\})$ are identical.
   - Intuitively, identical means they are just two different ways of describing
     the same event.
-- An event *implies* another event $(A \subset B)$ if all of its outcomes are
+- An event ***implies*** another event $(A \subset B)$ if all of its outcomes are
   also in the implied event:
   - The event $14Wins= \{14\}$  implies the event $RedWins$ since
     $14Wins \subset RedWins$.
   - When an event happens, any event it implies also happens.
-- Two events are *disjoint* $(A \cap B) = \emptyset$ if they share no outcomes:
+- Two events are ***disjoint*** $(A \cap B) = \emptyset$ if they share no outcomes:
   - The events $RedWins$ and $BlackWins$ are disjoint since
     $RedWins \cap BlackWins = \emptyset$.
   - Two disjoint events cannot both happen because there is no possible outcome
@@ -255,7 +259,7 @@ which are sometimes called the ***axioms of probability***:
   \begin{align}
     \Pr(A) \geq 0
   \end{align}
-2. ***Unit measure***: One of the outcomes in the sample space must happen:
+2. ***Unit measure***: The sample space includes all possible outcomes:
   \begin{align}
     \Pr(\Omega) = 1
   \end{align}
@@ -308,7 +312,8 @@ of probability imply several additional rules:
   \begin{align}
     \Pr(A^C) = 1 - \Pr(A)
   \end{align}
-- ***Empty event rule***: The probability of nothing happening is zero:
+- ***Empty event rule***: The probability of an empty (impossible) event is
+  zero:
   \begin{align}
     \Pr(\emptyset) = 0
   \end{align}
@@ -331,6 +336,14 @@ However, I will use these results so you should be familiar with them.
 
 We can use our derived probability rules in various ways:
 
+- The event "Red wins" and the event "Black wins" are disjoint
+  $(RedWins \cap BlackWins = \emptyset)$; it is not *logically* possible for both
+  red and black to win. The empty event rule implies that the *probability* that
+  red and black both win is:
+  \begin{align}
+    \Pr(RedWins \cap BlackWins) &= \Pr(\emptyset) \\
+      &= 0
+  \end{align}
 - The event "Red loses" is the complement of the event "Red wins." So if we know
   the probability that Red wins, we can use the complement rule to calculate the
   probability that Red loses:
@@ -352,9 +365,11 @@ We can use our derived probability rules in various ways:
   \end{align}
   or to calculate the exact probability:
   \begin{align}
-    \Pr(RedWins \cup 14Wins) = \Pr(RedWins) + \Pr(14Wins) - \Pr(RedWins \cap 14Wins)
+    \Pr(RedWins \cup 14Wins) &= \Pr(RedWins) + \Pr(14Wins) \\
+        & - \Pr(RedWins \cap 14Wins)
   \end{align}
 :::
+
 
 ### Calculating probabilities {#calculating-probabilities}
 
@@ -589,8 +604,7 @@ This question can be answered using the conditional probability:
     &= \frac{8/37}{18/37} \\
     &\approx 0.444
 \end{align}
-That is, Betty winning implies a reduced probability of Al winning (since
-$0.444 < 0.486$).
+That is, Al is less likely to win if Betty wins (since $0.444 < 0.486$).
 :::
 
 Conditional probabilities are not particularly useful in roulette, which is a
@@ -631,8 +645,8 @@ By the same reasoning, independence of $A$ and $B$ implies that:
 \begin{align}
   \Pr(B|A) = \Pr(B)
 \end{align}
-In other words, knowing that one of these events are true tells you nothing
-useful about whether the other the other event is true.
+When two events are independent, knowing that one event is true tells you
+nothing about whether the other event is true.
 
 [^301]: You may wonder: if it makes more sense to describe independence 
       in terms of conditional probabilities, why do we define it in 
@@ -691,15 +705,31 @@ specific reason to assume otherwise.
 **Independence within the same roulette game?**
 
 Consider the events "Red wins" and "Even wins" within a single roulette game.
-We earlier showed that the unconditional probability that Red wins is:
-\begin{align}
-  \Pr(RedWins) = 18/37 \approx 0.486
-\end{align}
-and that the conditional probability that Red wins given that Even wins is:
-\begin{align}
-  \Pr(RedWins|EvenWins) = 8/18 \approx 0.444
-\end{align}
-Since $0.44 \neq 0.486$, these two events are *not* independent.
+Are these events independent? We have two ways of answering this question:
+
+1. Compare joint probability with product of individual probabilities:
+   - We calculated the joint probability in an earlier example:
+     \begin{align}
+       \Pr(RedWins \cap EvenWins) = 8/37 \approx 0.216
+     \end{align}
+   - The product of the individual probabilities is:
+     \begin{align}
+       \Pr(RedWins) \times \Pr(EvenWins) = 18/37 \times 18/37 \approx 0.237
+     \end{align}
+   - Since $0.216 \neq 0.237$, these two events are *not* independent.
+2 .Compare conditional and unconditional probabilities:
+   - We calculated the conditional probability in an earlier example:
+     \begin{align}
+       \Pr(RedWins|EvenWins) = 8/18 \approx 0.444
+     \end{align}
+   - We also calculated the unconditional probability:
+     \begin{align}
+       \Pr(RedWins) = 18/37 \approx 0.486
+     \end{align}
+    - Since $0.44 \neq 0.486$, these two events are *not* independent.
+
+Either of these methods will work, so which one you use is strictly a matter of
+convenience.
 :::
 
 
@@ -733,21 +763,24 @@ field.
 **The law of total probability in poker**
 
 Suppose you are playing [Texas hold'em poker](https://en.wikipedia.org/wiki/Texas_hold_%27em)
-with a few friends, and the hand has one card left to deal (the "river"). If
-the last card has a heart on it (event $Hearts$, 25\% probability) you will
-have a flush and win the hand with a probability you estimate to be 90\%.
-If the last card does not have a heart on it (event $Hearts^c$, 75\% probability),
-you will not have a flush, but still have a win probability you estimate to be 30\%.
+with a few friends, and the hand has one card left to deal (the "river").
+
+- If the last card has a heart on it (event $Hearts$, 25\% probability) you will
+  have a flush and win the hand with a probability you estimate to be 90\%.
+- If the last card does not have a heart on it (event $Hearts^c$, 75\%
+  probability), you will not have a flush, but still have a win probability
+  you estimate to be 20\%.
+
 Given this information, what are your overall chances of winning?
 
 The answer can be calculated using the law of total probability:
 \begin{align}
   \Pr(Win) &= \Pr(Win|Hearts)\Pr(Hearts) 
             + \Pr(Win|Hearts^c)\Pr(Hearts^c) \\
-    &= 0.9*0.25 + 0.3*0.75 \\
-    &= 0.45
+    &= 0.9*0.25 + 0.2*0.75 \\
+    &= 0.375
 \end{align}
-So you have a 45\% chance of winning. 
+So you have a 37.5\% chance of winning.
 :::
 
 ### Bayes' law

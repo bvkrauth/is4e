@@ -8,7 +8,7 @@ library("tidyverse")
 
 ##### READ IN AND CLEAN DATA
 EmpData <- read_csv("sampledata/EmploymentData.csv")
-#EmpData <- read_csv("https://bookdown.org/bkrauth/BOOK/sampledata/EmploymentData.csv")
+#EmpData <- read_csv("https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv")
 # This is equivalent to names(EmpData)
 EmpData %>% names() %>% print()
 # This is equivalent to sqrt(2)

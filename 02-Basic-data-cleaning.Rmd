@@ -18,8 +18,8 @@ using Excel to clean a real data set.
 In this chapter, we will learn how to:
 
 1. Identify and implement the principles of reproducible research, including:
-   - Provenance
    - Portability
+   - Provenance
    - Version control
    - Tidy data
 2. Identify and use ID variables.
@@ -156,13 +156,13 @@ means that some workers have stopped looking for work.
 :::
 
 The data can be found in the file
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx).
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx).
 
 ::: example
 **Opening the employment data**
 
 Open the file
-[https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
+[https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
 in Excel.  The file should look something like this:
 
 ![](bin/EmploymentData.png)
@@ -199,49 +199,53 @@ of steps called a ***workflow***.
 
 Your data analysis workflow should have three key features:
 
-1. Document the ***provenance*** or original source for all data.
-   - When downloading data files, document the original URL and date of access.
-   - You can add a small text file (usually called `README.txt`) that
-     explains the provenance and provides other relevant information.
-   - Keep an unmodified copy of all original data files, and avoid changing
-     their names.
-   - More generally, avoid directly editing data. Data storage is cheap, and
-     adding data is almost always preferable to changing or deleting it.
-2. Keep your data and analysis ***portable***. Data is
-   portable if it can be easily moved between operating systems, file formats,
-   and applications.
+1. Keep your data and analysis ***portable***.
+   - Data is portable if it can be easily moved between operating systems, file
+     formats, and applications.
    - Organize your work into clear projects, and keep all of the files for
-     a given project in a single ***project folder***.
+     a given project in a single ***project folder***. This allows you to share
+     your work with someone by giving them a copy of the project folder.
    - Give files and variables brief, informative, and portable names.
      - For example, stick to letters and numbers, and avoid using spaces,
        special characters, accents, etc.
      - Following a naming convention may help make your names more informative
        without making them too long.
-4. Use ***version control*** to manage and track changes to your files as you
+2. Document the ***provenance*** of all data used.
+   - Provenance is the full history of the data including its origin and all
+     subsequent changes.
+   - Keep an unmodified copy of all original data files, and avoid renaming
+     them.    
+   - When downloading data files, document the original URL and date of access.
+   - Create and maintain a document (usually a small text file called 
+     `README.txt`) that explains the provenance and provides other relevant
+     information.
+   - Avoid directly editing data. Data storage is cheap, and adding data is
+     almost always preferable to changing or deleting it.
+3. Use ***version control*** to manage and track changes to your files as you
    work. Version control systems can be very elaborate and use specialized
    software, but I will teach you a simple workflow that requires no additional
    tools:
    - Create a ***working copy*** of each file you plan to edit.
-     - There should be exactly one working copy of each file.
      - You can edit the working copy.
+     - There should be exactly one working copy of each file.
    - Each time you add a ***feature*** to your project, make your current
      working copy the ***master version*** of that file.
-     - There should be exactly one master version of each file.
+     - A feature is a discrete and identifiable enhancement to the project: a
+       new variable, a new table or chart, etc.
      - The master version represents the project at its most-advanced
        stage; i.e., the file you would send to your boss to show how your work
        is going. It should not include any half-finished work.
-     - A feature is a discrete and identifiable enhancement to the project: a
-       new variable, a new table or chart, etc.
      - The master version should not be directly edited, but should regularly be
        replaced with the current working copy.
+     - There should be exactly one master version of each file.
    - You can also have ***archived versions***.
-     - There can be as many archived versions as you like.
      - An archived version is a previous master version or working copy that
        you want to keep for reference.
      - Use some file naming convention to distinguish between archived versions.
        - You could number them sequentially (e.g., "archive-01").
        - Or you could use dates (e.g., "archive-20dec2022").
      - Archived versions should not be directly edited.
+     - There can be as many archived versions as you like.
 
 The first step in implementing these principles is usually to set up a project
 folder.
@@ -261,7 +265,7 @@ Canadian employment data, follow these steps:
    - One will contain archived versions of the data. (call it `archive`).
 2. *Obtain the source data*.
    - Download the file
-     [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
+     [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20.xlsx](sampledata/CanEmpNov20.xlsx)
    - Put it in the `raw-data` folder.
    - Do not change the file name.
 3. *Document the provenance of all data sources*.
@@ -636,7 +640,7 @@ the cell(s) you are interested in modifying, then go through the menus to choose
 the modifications.
 
 ::: example
-**Changing cell size**
+**Changing cell width**
 
 As mentioned earlier, cell B8 (Ontario population) appears to contain "######"
 rather than a number. If you select this cell and look in the formula bar
@@ -644,21 +648,21 @@ you will see it actually does contain the number 12378900.  The reason
 that the cell displays "######" is that the cell is not wide enough to show
 the correct number.
 
-We can solve this problem by making column B wider.  There are three ways of 
+We can solve this problem by making column B wider.  There are several ways of
 doing this:
 
-- *From the menu*: Select any cell in column B, and then select
-  `Home > Format > Column Width...`.  A dialog box will appear that allows you
-  to enter your preferred width. Try a few numbers there until you get a column
-  width that you like.
+- *From the menu*: Select cell B8, or select the whole column by clicking on the
+   "B" at the top of the column.  Then you can either:
+   - Select `Home > Format > AutoFit Column Width` from the menu to make the
+     column exactly fit the data OR
+   - Select `Home > Format > Column Width...` to set the exact width.
 - *With the mouse*: Move your cursor to the line between column headers B
   and C until the cursor looks like this:
   ![cursor](bin/cell width change.png){height=16pt}.
-  Click on the mouse and drag the cursor to resize the column until you get a
-  column width that you like.
-- *Auto-fit* (this is what I usually do):  Select *all* of column B by clicking on
-  the "B", and then select  `Home > Format > Column Width...`.  You can also do
-  this by double-clicking on the line between column headers B and C.
+  Then you can either:
+  - Click on the mouse and drag the cursor to resize the column until you get a
+    column width that you like.
+  - Double-click on the mouse to auto-fit.
 
 You can follow similar procedures to adjust the row height.
 :::
@@ -774,7 +778,7 @@ that work well, but you will be glad you did it.
 
 Excel allows nearly anything in a variable name since it does not normally
 use the variable names in its calculations.  But good naming practices are
-still important since you may need to move data between programs.
+still important for portability.
 :::
 
 ### Fill and series {#fill-and-series}
@@ -906,7 +910,7 @@ number displayed in cell H2 will adjust accordingly.
 Formulas can use the results from other formulas, as shown in the example below.
 
 ::: example
-**Formulas that use other formulas**
+**Formulas can use other formulas**
 
 Let's add a column for the labour force participation rate. To remind you, this
 is the proportion or percentage of the population (column C) that is in the
@@ -914,119 +918,116 @@ labour force (column H).
 
 1. Enter **LFPRate** in cell I1 to name the variable.
 2. Enter `=H2/C2` in cell I2 to calculate the variable.
+3. Save your working copy.
+
+Notice that this formula uses cell H2, which itself contains a formula. It is
+often easier to check your work and spot problems if you break up complex
+formulas into steps like this.
+:::
+
+When building a formula, you can use the mouse to select the cells to use. You
+will find this feature useful when constructing formulas that rely on cells
+that are far away, or even in a different worksheet.
+
+::: example
+**Using the mouse to build formulas**
 
 Let's also add a column for the unemployment rate.  To remind you, this is the
 proportion or percentage of the labour force (column H) that is unemployed
 (column E).
 
-3. Enter **UnempRate** in cell J1 to name the variable.
-4. Enter `=E2/H2` in cell J2 to calculate the variable.
-5. Save your working copy.
+1. Enter **UnempRate** in cell J1 to name the variable.
+2. Select cell J2.
+3. Type `=` in cell J2, but do not hit the enter key yet.
+4. Select cell E2 with the cursor. You will see that the formula in cell J2 now
+   shows `=E2`
+5. Type `/`. Do not hit the enter key.
+6. Select cell H2. You will see that the formula in cell J2 now
+   shows `=E2/H2`
+7. Hit the enter key.
+8. Save your working copy.
 
-Notice that both of these formulas use cell H2, which itself contains a formula.
-It is often useful to break up a complex formula into steps like this, as it is
-easier to check your work and spot problems.
+Notice that Excel uses color-coding to help you out: cell E2 is the same color
+as the text `E2` in your formula, and cell H2 is the same color as the text
+`H2` in your formula
 :::
+
 
 ### Functions {#built-in-functions}
 
 Excel has about 500 built-in ***functions*** that we can use in formulas. Each
 function has a ***function name*** and a set of ***arguments*** whose values you
-can set.
-
-To use a function, you simply include its name and its arguments as
-part of the formula.  For example, the `SQRT()` function takes a single
-numeric argument and returns the square root of that argument. So if
-you enter `=SQRT(2)` in a cell, the cell will display `1.414`, the
-square root of 2.
-
-The first step in using a function is finding out the name and arguments
-of the function that does what you need. 
+can set. To use a function, you simply include its name and its arguments as
+part of the formula.
 
 ::: example
-**Finding a function**
+**The `LN()` function**
 
-Suppose we want to find the natural logarithm of a particular number. Excel
-probably has a built-in function for that, but we may not know its name or
-structure.
+The `LN()` function takes a single numerical argument `Number`, and returns
+the natural (base $e$) logarithm of that number.
 
-- *Google or other search engine*
+- If you enter `=LN(10)` in cell K2, it will display the natural logarithm of 10.
+- If you enter `=LN(C2)` in cell K2, it will display the natural logarithm of
+  whatever number is in cell C2.
 
-  Go to your favorite search engine and enter "Excel natural log". When I do
-  this, the top recommendation is for Microsoft's 
-  [online documentation](https://support.microsoft.com/en-us/office/ln-function-81fe1ed7-dac9-4acd-ba1d-07a142c6118f) 
-  for the `LN()` function. The documentation provides a description,
-  list of arguments, and a few examples.
-
-- *Built-in Excel tools*
-
-  Excel's built-in tools for finding and using functions can be helpful in
-  using more complex functions.
-
-   1. Click on the insert function button
-      ![insert function button](bin/Excel insert function button.jpg){height=16pt} 
-      to the left of the formula bar.
-   2. The `Insert Function` dialog box will appear:  
-      ![insert function dialog box](bin/InsertFunction.png)
-      It will show a long list of functions. You will want to narrow this list
-      down, and you have several options for doing so:
-      - Search: Enter `logarithm` in the `Search for a function` text box.
-      - Browse: Select `Math & Trig` from the `Or select a category`
-        drop-down box.
-   3. Once you have narrowed the list down, it is easy to find the
-      function you want (`LN`). Select `LN` from the `Select a function`
-      list box, and then select `OK`.You will now see the `Function Arguments`
-      dialog box for the `LN` function:  
-      ![function arguments dialog box](bin/FunctionArguments.png)
-   4. As the dialog box shows, the `LN` function takes one argument
-      (the number you want the log of).
+You can find its official documentation at
+<https://support.microsoft.com/en-us/office/ln-function-81fe1ed7-dac9-4acd-ba1d-07a142c6118f>.
 :::
 
-You can use the contents of other cells as arguments, or you can also
-use the result of another function.
+If you already know the name and arguments of the function you want to use, you
+can just type it in as part of your formula.  But Excel has several tools to
+make its functions easier to use.
 
 ::: example
-**A simple function**
+**Using the Insert Function button**
 
-Suppose we want to add a new variable for the (natural) log of population:
+Suppose that we want to add a new variable for the (natural) log of population,
+and we don't already know about the `LN()` function. Fortunately, we can use the
+Insert Function button to find our function and use it in a formula.
 
 1. Enter **LogPop** in cell K1 to give the variable a name.
 2. Select cell K2.
-3. We have two options for calculating the natural log of cell C2 in this
-   cell:
-
-   *Direct entry*: Read the documentation, figure out that the correct formula
-   is `=LN(C2)`and enter that formula in cell K2.
-
-   *Built-in Excel tools*: This is probably unnecessary for a function as simple
-   as `LN()`, but can be very helpful with more complex functions.
-
-   a. Follow the steps in the previous example to reach the `Function Arguments`
-      dialog box for the `LN` function:  
+3. Click on the Insert Function button
+   ![insert function button](bin/Excel insert function button.jpg){height=16pt}
+   to the left of the formula bar.
+4. The `Insert Function` dialog box will show a long list of functions:  
+   ![insert function dialog box](bin/InsertFunction.png)
+   You have two options for narrowing this list down:
+   - Search: Enter `logarithm` in the `Search for a function` text box.
+   - Browse: Select `Math & Trig` from the `Or select a category`
+     drop-down box.
+5. Select `LN` from the `Select a function` list box, and then select `OK`.
+   You will now see the `Function Arguments` dialog box for the `LN` function:  
       ![function arguments dialog box](bin/FunctionArguments.png)
-   b. Click in the entry box labeled `Number`.
-   c. Either enter the text `C2` here or select cell C2 with the mouse. The
-      dialog box will display the value in cell C2 (`3588700`) as well as the
-      calculated value for the log of cell C2 (`15.0933058`).
-   d. Select `OK`.
-
-4. Save your working copy.
+6. Click in the entry box labeled `Number`.
+7. Either enter the text `C2` here or select cell C2 with the mouse.
+   - Notice that the dialog box displays the value in cell C2 (`3588700`) as
+     well as the calculated value for its logarithm (`15.0933058`).
+8. Select `OK`.
+9. Save your working copy.
 
 You will see that cell K2 now contains the formula `=LN(C2)` which displays as
 `15.0933`. 
 :::
 
+In addition to the features built in to Excel, you can always use search engines
+or AI to find the function you need.  For example, you can Google "Excel
+function for logarithm" or "how to calculate the natural log in Excel."
+
 ::: {.fyi data-latex=""}
-**Advanced functions**
+**Advanced function capabilities**
 
-In addition to its many built-in functions, Excel can be extended to include
-additional functions as needed for more advanced users.
+Excel has many built-in functions, and can be extended to include additional
+functions as needed for more advanced users.
 
-1. You can create your own custom functions using the JavaScript or Visual
+1. You can
+   [create your own custom functions](https://support.microsoft.com/en-us/office/create-custom-functions-in-excel-2f06c10b-3622-40d6-a1b2-b6748ae8231f)
+   using the JavaScript or Visual
    Basic for Applications (VBA) programming languages. You can also use
    these languages to modify the user interface, automate repetitive tasks,
    and perform various other advanced tasks.
-2. You can install and use various add-in packages from Microsoft or other
+2. You can install and use various
+   [add-in packages](https://learn.microsoft.com/en-us/office/dev/add-ins/excel/excel-add-ins-overview) from Microsoft or other
    sources.  For example, Excel usually comes with an add-in called the
    *Analysis ToolPak* that provides additional functions and tools for use
    in statistical analysis.
@@ -1181,9 +1182,11 @@ absolute references:
 1. Go back to cell L2.
 2. Change `=SUM(C2:C11)` to `=SUM(C$2:C$11)`.
    - Notice that the value in *this* cell does not change.
+   - The `$` operator affects how a formula is copied, not how it is calculated.
 3. Copy/paste or fill cell L2 into cells L3:L11.
    - Notice that all cells in this column now contain the same formula
       (`=SUM(C$2:C$11)`) and display the same value (`31,275,600`).
+   - This is what we want.
 4. Save your working copy.
 
 This is what we want.
@@ -1258,11 +1261,12 @@ display format:
 1. Select cells I2:J11.
 2. Select `Home > Number Format` (it is a little drop down box that 
    currently displays `General`), and then select `Percentage`.
-3. Save your working copy.
+   - You will see that the cell now displays the rates in percentage, to two
+     decimal places.
+3. I think it would be more readable if we round to just one decimal
+   place.  To do that, select `Home > Decrease Decimal`.
+4. Save your working copy.
 
-You will see that the cell now displays the rates in percentage, to two decimal
-places.  I think it would be more readable if we round to just one decimal
-place.  To do that, select `Home > Decrease Decimal`.
 :::
 
 An important thing to understand here: all we have done is change how the
@@ -1529,26 +1533,83 @@ minimizes the effects of the problem. So the HGNC changed the names of these 27
 genes in  2020. For example, the gene MARCH2 is now called MARCHF2.
 :::
 
-In addition to dates, Excel can also handle date-time values such as 
-`11/1/2020  12:00:00 PM`.  
+In addition to dates, Excel can also handle time values such as `12 pm` and
+date-time values such as `11/1/2020  12:00:00 PM`.
 
 ::: {.fyi data-latex=""}
 **How Excel handles times**
 
-Excel treats times as partial days. For example, Excel will store 
-`11/1/2020  12:00:00 PM` as day number `44136.5`and 
-`11/1/2020  1:00:00 PM` as day number `44136.5416666667`. 
+Excel treats times as partial days. For example:
+
+- The time `12:00 pm` is stored as time `0.5`.
+- The time `1:00 pm` is stored as time `0.5416666667`.
+- The date-time `11/1/2020  12:00:00 PM` is stored as day `44136.5`.
+- The date-time `11/1/2020  1:00:00 PM` is stored as day `44136.5416666667`.
 
 There are also functions that work with date-time values.  For example, we have
 already seen the function `TODAY(.)` which returns the current date but there is
-also a function `NOW(.)` that returns the current date and time.
+also a function `NOW(.)` that returns the current date-time.
 :::
 
-## Saving and exporting data {#saving-and-exporting-data}
+## Data file management
 
-Deep down, every file on your computer is just a long sequence of binary
+At this point our data cleaning project is complete, and our data is ready for
+analysis. This is a good time to return to the version control concepts and
+workflow discussed in the section on [reproducibility](#data-management).
+
+### Version control, again
+
+We have added a complete new feature - a set of new variables - to our working
+copy, we should update the master version.
+
+::: example
+**Updating the master version**
+
+To update your master version, follow these steps:
+
+1. *Check your working copy* for mistakes and incomplete work.
+
+   You can compare your working copy to my master version at
+   [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
+
+2. (optional) *Archive your current master version* by renaming it and moving it
+   to the `archives` sub-folder.
+
+   - This step is not necessary in this case since your current master version
+     is identical to the source data.
+
+3. *Make your current working copy the master version*.
+
+   - *In Excel*: You can select `File > Save As` to save the open file under
+     another name.
+   - *Outside of Excel*: You can copy, paste, and rename the working copy.
+
+You should now have two identical cleaned data sets (one master file and one
+working copy), one raw data set (in the `raw-data` subfolder), and possibly
+one archived data set (in the `archives` subfolder).
+:::
+
+::: {.fyi data-latex=""}
+**How often should you update your master version?**
+
+Your master version should be updated regularly, but it should only be updated
+after a new feature has been completed and checked for errors. But what if you
+are halfway through adding a feature, and need to stop work for the day?
+
+Making your updates both frequent and complete may require a modification to how
+your work habits: plan your work before you do it, divide big features into
+smaller features, work on one feature at a time, and avoid starting tasks
+you don't have time to finish.
+:::
+
+### Saving and exporting data {#saving-and-exporting-data}
+
+Portability is also a key element of reproducibility. We may want to save our
+Excel data in a form that is easily read by other programs like R.
+
+Deep down, every file on a computer is just a long sequence of binary
 numbers: zeros and ones.  In order to obtain any useful information from a file,
-we need to know its ***file format***. A file format is just a set of rules
+we need to know its ***file format***. A file format is a set of rules
 for interpreting the sequence of zeros and ones, much like a language is a set
 of rules for interpreting the sounds that come out of people's mouths. You can
 often infer a file's format from its extension (the part of the file name after
@@ -1566,17 +1627,16 @@ to be used by many applications.
 
 File formats are like languages, and importing and exporting data in something
 other than the application's native format is like translating to or from
-a foreign language. If you have ever used Google Translate or similar tools,
-you know that translations are never perfect.  Similarly, importing and
-exporting data can result in the loss or unintentional modification of
-information in the original data source.
+a foreign language. People work most comfortably in their native language, and
+translations are never perfect. Similarly, applications work most comfortably
+with their native format, and importing and exporting data can result in the
+loss or unintentional modification of information in the original data source.
 
 The most commonly-used export format for Excel is called the
 ***comma-separated values*** or ***CSV*** file. CSV is a standardized text
 format that is very useful for representing tables of data. It is simple,
-platform-independent, human-readable, compact, and (mostly) secure. Every major
-statistical analysis application can read CSV files, as can many other
-applications.
+platform-independent, human-readable, compact, and (mostly) secure. CSV files
+are easily read by Excel, R, and many other applications.
 
 You can save any worksheet in an Excel workbook as a CSV file.
 
@@ -1609,7 +1669,7 @@ You can also import CSV files that have been created with Excel, or by some
 other program.
 
 ::: example
-**Viewing a CSV file in Excel**
+**Importing a CSV file into Excel**
 
 Use Excel to open the CSV file you have just created. You can
 do this either by double-clicking on the file, or you can start Excel and use
@@ -1648,52 +1708,6 @@ Section \@ref(more-on-data-file-formats) in Chapter \@ref(advanced-data-cleaning
 discusses some of these formats and how to work with them in Excel. It also
 discusses CSV files in greater detail.
 
-## Finishing up {#finishing-up}
-
-At this point our data cleaning project is complete, and our data is ready for
-analysis.  Returning to the version control concepts discussed in the section
-on [reproducibility](#data-management), the next step is to archive and update
-the master version.
-
-::: example
-**Finishing up**
-
-To update your master version, follow these steps:
-
-1. *Check your working copy* for mistakes and incomplete work.
-
-   You can compare your working copy to my master version at  
-   [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpNov20Clean.xlsx](sampledata/CanEmpNov20Clean.xlsx).
-
-2. *Archive your current master version* by renaming it and moving it to the
-   `archives` sub-folder.
-
-   - This is optional since your current master version is identical to the
-     source data.
-
-3. *Make your current working copy the master version*.
-
-   - *In Excel*: You can select `File > Save As` to save the open file under
-     another name.
-   - *Outside of Excel*: You can copy, paste, and rename the working copy.
-
-You should now have two identical cleaned data sets (one master file and one
-working copy), one raw data set (in the `raw-data` subfolder), and possibly
-one archived data set (in the `archives` subfolder).
-:::
-
-::: {.fyi data-latex=""}
-**How often should you update your master version?**
-
-Your master version should be updated regularly, but it should only be updated
-after a new feature has been completed and checked for errors. But what if you
-are halfway through adding a feature, and need to stop work for the day?
-
-Making your updates both frequent and complete may require a modification to how
-your work habits: plan your work before you do it, divide big features into
-smaller features, work on one feature at a time, and avoid starting tasks
-you don't have time to finish.
-:::
 
 ## Chapter review {-#review-basic-data-cleaning-with-excel}
 
@@ -1814,7 +1828,7 @@ If you aren't sure, try it out in Excel and see what happens.
 **GOAL #8: Use Excel to import and export CSV files**
 
 9. Download the file
-   [https://bookdown.org/bkrauth/IS4E/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx)
+   [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/CanEmpHist.xlsx](sampledata/CanEmpHist.xlsx)
    and open it in Excel.
    a. Export the file to a CSV file named `CanEmpHist.csv`.
    b. Close Excel.

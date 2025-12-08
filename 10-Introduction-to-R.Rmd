@@ -12,7 +12,8 @@ As we have seen, Excel is a useful tool for both
 [cleaning](#basic-data-cleaning-with-excel) and 
 [analyzing](#basic-data-analysis-with-excel) data. R is an application that has
 many of the same features as Excel, but is specially designed for statistical
-analysis. It is a little more complex, but more powerful in many important ways.
+analysis. It is a little more complex, but more powerful in many important 
+ways.
 
 This chapter will introduce you to some of the basic concepts of R and
 associated tools such as R Markdown, RStudio, and the Tidyverse.
@@ -55,14 +56,17 @@ you take it) ECON 334.
 Start the program RStudio. You should see something that looks like this:
 
 ![RStudio screen shot](bin/RStudioScreenshot.png)  
-You may wonder what the difference is between R and RStudio.
+You may wonder what the difference is between R and RStudio. R is two
+things:
 
-R is a programming language designed for statistical analysis along with the
-computer program that runs R commands.  RStudio is an
-*integrated development environment* (IDE) for R. It combines a set of useful
-tools for writing and running R code:
+- A programming language designed for statistical analysis
+- A computer application that runs R commands.  
 
-  - An interactive session of R (running in the "Console" window).
+RStudio is an *integrated development environment* (IDE) for R. It combines a
+set of useful tools for writing and running R code:
+
+  - An interactive session of the R application (running in the "Console" 
+    window).
   - A text editor for writing R code, with features like syntax highlighting,
     spell check, and command auto-complete.
   - Tools for managing files and packages used by R
@@ -73,12 +77,52 @@ tools for writing and running R code:
 and puts them in a single user-friendly interface.
 
 You can run commands and scripts in R itself, but without RStudio you won't have
-all these handy extra features. Most people these days use RStudio or another
-IDE.
+these extra features. Most people these days use RStudio or another IDE.
 
 RStudio normally displays three or four open windows, each of which has tabs you
 can select to access different features. We will not use most of them, but some
 of them will be very handy indeed.
+
+::: {.fyi data-latex=""}
+**R or Python?**
+
+The general-purpose programming language Python is a popular alternative
+to R for serious statistical analysis. Python is also available at no
+cost, and has some important advantages over R:
+
+- Python is a general purpose programming language and is more widely
+  used for applications other than data cleaning and analysis.
+- Cutting-edge data science and machine learning tools are typically
+  developed in Python, though most are also available in R.
+- Because of this, Python skills look better on your resume.
+
+So why are we learning R?
+
+- Using Python for even the most basic data cleaning and analysis
+  requires the user to install and maintain various external packages:
+  NumPy for math, Pandas for data management, and Matplotlib for
+  graphs. These capabilities are built into R.
+- Configuring your Python installation and managing external packages
+  can be complex and time consuming.
+
+My experience is that the specific programming language you learn
+is not particularly important. I have written code in 
+[R](https://github.com/bvkrauth/rcr/tree/master/r/rcrbounds),
+[Python](https://github.com/bvkrauth/rcr/tree/master/python),
+[Fortran](https://github.com/bvkrauth/smle),
+[Stata](https://github.com/bvkrauth/fdk-gss),
+Basic, VBA, Pascal, assembly language, Gauss, Perl, SHAZAM, and EViews.
+Every language has its distinctive features, but translating from
+one language to another is usually easy if you have command of concepts
+like control flow statements (if-then branching, do-loops), functions,
+operators, array indexing, vector mathematics, data types, etc.
+
+My advice is to focus on building language-independent skills, and plan to
+take an introductory computer science course where you learn Python as a
+general-purpose language. Your experience with R will help you in that course,
+and your knowledge of R as a statistical package and Python as a language will
+prepare you well to use Python in data analysis.
+:::
 
 ### The console window
 
@@ -324,7 +368,7 @@ In the menu:
 
 I would also like to highlight a "feature" that is not at all useful and should
 be avoided. When you close R or RStudio, you may get a warning message
-that looks something like this:
+that looks something like this:  
 ![*Save workspace dialog box*](bin/RSaveWorkspace.png){width=30%}
 
 If you choose "Save", R will save the current state of its memory and re-load
@@ -337,8 +381,8 @@ we did a few days ago. So *NEVER CHOOSE "Save" HERE*.
 ## The R language
 
 Next, we will learn some basic features of the R language. Learning a
-programming language is a lot like learning a regular language: learning the
-rules can be helpful, but it is also important to learn by doing.
+programming language is a lot like learning a regular language: it helps to
+know the rules, but you need to learn by doing.
 
 Each of the subsections in this section goes through a particular element of the
 R language.  As you go through each subsection, my recommendation is to:
@@ -408,8 +452,11 @@ an expression may cause R to:
 - Create or modify an object in R's memory.
 
 For example, the expression `print("Hello world")` returns the value 
-"Hello world" and (as a side effect) causes "Hello world" to be displayed on
-your screen.
+"Hello world" and (as a side effect) causes 
+```{r HelloWorld3, echo = FALSE}
+print("Hello world!")
+```
+to be displayed on your screen.
 
 Any valid R expression can be entered in the console window, in an R script, or
 in an R Markdown document.
@@ -909,12 +956,19 @@ file, viewing it, and constructing a plan to clean it.
 
 We will work with the employment data.
 
-### Reading CSV files
+### Reading a CSV file
 
 Our first step will be reading the data.  The most commonly used data format is
 CSV, and the Tidyverse function to read in CSV files is called `read_csv()`.
 It has one required argument: the name of the CSV file, either as a local file
-address or a URL.
+address or a URL. It returns an object called a data table or ***tibble***.
+A tibble is a Tidyverse object type that describes a table of tidy data.
+
+- Each row in the tibble represents an observation.
+- Each column represents a variable, and has a name.
+
+As a side effect, `read_csv()` also displays information about the tibble it
+has created.
 
 :::example
 **Reading a CSV file in R**
@@ -925,7 +979,7 @@ The code below reads in the CSV file, and stores it in the object `EmpData`.
 # Load the Tidyverse if you have not already done so
 library("tidyverse")
 # You can directly read online data by giving read_csv() the URL.
-EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv")
 # You can also download the file and give read_csv() the local location
 # EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```
@@ -934,10 +988,11 @@ EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData
 library("tidyverse")
 EmpData <- read_csv("sampledata/EmploymentData.csv")
 ```
-As you can see, R guesses each variable's data type, and reports its guess. The
-guesses are usually good, but you can override them if not. It is always a good
-idea to review this output and make sure that everything is the way that we want
-it:
+
+As you can see from the information displayed, R guesses each column's data
+type, and reports its guess. The guesses are usually good, but you can override
+them if not. It is always a good idea to review this output and make sure that
+everything is the way that we want it:
 
 - The numeric variables are all stored as `col_double()`.
   - This means [double-precision](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) (64 bit) real number.
@@ -970,18 +1025,6 @@ Base R has a similar function called `read.csv()`, but the Tidyverse function `r
 :::
 
 ### Viewing a data table
-
-The `read_csv()` function creates an object called a data table or ***tibble***.
-A tibble is a Tidyverse object type that describes a table of tidy data.
-
-- Each row in the tibble represents an observation.
-- Each column represents a variable, and has a name.
-
-The base R equivalent of a tibble is called a ***data frame***. Tibbles
-and data frames are interchangeable in most applications (in the language of
-object-oriented programming, the tibble class "inherits" from the data frame
-class), but tibbles have some additional features that make them work better
-with the Tidyverse.
 
 We have several ways of viewing the contents of a tibble. As with other objects,
 we can use the `print()` function.
@@ -1021,6 +1064,12 @@ and filter this table.  Unlike Excel, you cannot edit it here.
 
 ### Data table properties
 
+The base R equivalent of a tibble is called a ***data frame***. Tibbles
+and data frames are interchangeable in most applications (in the language of
+object-oriented programming, the tibble class "inherits" from the data frame
+class), but tibbles have some additional features that make them work better
+with the Tidyverse.
+
 There are several R functions available for exploring the properties of a data
 table.
 
@@ -1028,6 +1077,8 @@ table.
 - We can access any individual column using the `$` notation.
 - We can count the rows and columns with `nrow()` and `ncol()`, or we can use
   the `length()` function.
+
+These functions will also work with data frames.
 
 :::example
 **Viewing properties of a tibble**

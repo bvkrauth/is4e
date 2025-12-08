@@ -46,10 +46,10 @@ Then open RStudio, load the Tidyverse, and read in our employment data:
 
 ```{r ReadEmpDataFromCSV_11, eval=FALSE}
 library(tidyverse)
-EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv")
 ```
 
-If you prefer, you can download the employment data file from [https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv](sampledata/EmploymentData.csv) and have R read it in locally:
+If you prefer, you can download the employment data file from [https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv](sampledata/EmploymentData.csv) and have R read it in locally:
 
 ```{r ReadEmpDataFromCSV_local, eval=FALSE}
 library(tidyverse)
@@ -280,8 +280,9 @@ In contrast, R allows you to have three separate files or groups of files
      the data and another to analyze it.
    - The code for my own research projects is often split into 10 or more
      separate files, plus a "master" file that runs them all in the correct
-     order. Running the full sequence takes a few hours, and doing this allows
-     me to work on one part of the project without having to re-run everything.
+     order. Running the full sequence takes a few hours, and splitting them 
+     allows me to work on one part of the project without having to re-run 
+     everything whenever a change is made.
 3. Your **cleaned data** and **results**
    - Treat them as temporary output files.
    - You should be able to regenerate them from the source data at any time by
@@ -298,12 +299,17 @@ Create an R script called `EmpData.R` with the following code:
 # Load the Tidyverse
 library(tidyverse)
 # Load the data
-EmpData <- read_csv("https://bookdown.org/bkrauth/IS4E/sampledata/EmploymentData.csv")
+EmpData <- read_csv("https://bkrauth-is4e.share.connect.posit.cloud/sampledata/EmploymentData.csv")
 # Clean the data
 EmpData <- EmpData %>%
   mutate(MonthYr = as.Date(MonthYr, "%m/%d/%Y")) %>%
   mutate(UnempPct = 100*UnempRate) %>%
   mutate(LFPPct = 100*LFPRate)
+```
+
+You can now execute this script at any time by entering the command:
+```{r source_empdata, eval=FALSE}
+source("EmpData.R")
 ```
 :::
 
@@ -1038,15 +1044,15 @@ ggplot(data = EmpData,
                    linewidth = 1.0, 
                    geom = 'line') +
   geom_text(x = 13.8,
-            y = 64.1,
+            y = 64.2,
             label = "4 bins",
             col = "navyblue") +
   geom_text(x = 13.8,
             y = 62.5,
             label = "20 bins",
             col = "darkorange") +
-  geom_text(x = 13.8,
-            y = 60,
+  geom_text(x = 12.8,
+            y = 66,
             label = "100 bins",
             col = "lightblue")
 ```
@@ -1107,9 +1113,11 @@ ggplot(data = EmpData,
        aes(x = UnempPct,
            y = LFPPct)) + 
   geom_point(size = 0.5) +
-  geom_smooth(col = "darkorange") +
+  geom_smooth(col = "darkorange",
+              fill = "orange") +
   geom_smooth(method = "lm",
-              col = "navyblue")
+              col = "navyblue",
+              fill = "lightblue")
 ```
 
 As you can see, the two fits are quite similar for unemployment rates below
