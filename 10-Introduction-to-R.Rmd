@@ -103,9 +103,9 @@ So why are we learning R?
   NumPy for math, Pandas for data management, and Matplotlib for
   graphs. These capabilities are built into R.
 - Configuring your Python installation and managing external packages
-  can be complex, and can distract
+  can be complex and time consuming.
 
-My own experience is that the specific programming language you learn
+My experience is that the specific programming language you learn
 is not particularly important. I have written code in 
 [R](https://github.com/bvkrauth/rcr/tree/master/r/rcrbounds),
 [Python](https://github.com/bvkrauth/rcr/tree/master/python),
