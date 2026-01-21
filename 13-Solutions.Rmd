@@ -49,8 +49,8 @@ This appendix provides solutions to all end-of-chapter practice problems.
    d. `=D$2`
    e. `=SUM(D5:D13)`
    f. `=SUM($B$2:$B$10)`
-   g. `=SUM($B5,$B13)`
-   h. `=SUM(D$2,D$10)`
+   g. `=MAX($B5:$B13)`
+   h. `=MAX(D$2:D$10)`
 7. The formulas are:
    a. `=IF(A2<0.05,"Reject","Fail to reject")`
    b. `=CONCAT("A2 = ",A2)`
