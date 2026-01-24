@@ -121,7 +121,7 @@ This appendix provides solutions to all end-of-chapter practice problems.
            & (6,3),(6,4),(6,5),(6,6) \\
            \end{aligned}\right\}
        \end{align}
-3. Statements (b) and (c) are true.
+3. Statement (c) is true.
 4. Statements (a) and (d) are true. 
 5. Statements (b) and (c) are true.
 6. Event (c) is an elementary event.
