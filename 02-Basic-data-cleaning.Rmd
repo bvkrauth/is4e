@@ -1805,8 +1805,8 @@ Answers can be found in the [appendix](#answers-basic-data-cleaning-with-excel).
    d. `=B$2`
    e. `=SUM(B2:B10)`
    f. `=SUM($B$2:$B$10)`
-   g. `=SUM($B2,$B10)`
-   h. `=SUM(B$2,B$10)`
+   g. `=MAX($B2:$B10)`
+   h. `=MAX(B$2:B$10)`
 
 If you aren't sure, try it out in Excel and see what happens.
 

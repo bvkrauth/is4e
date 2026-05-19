@@ -49,8 +49,8 @@ This appendix provides solutions to all end-of-chapter practice problems.
    d. `=D$2`
    e. `=SUM(D5:D13)`
    f. `=SUM($B$2:$B$10)`
-   g. `=SUM($B5,$B13)`
-   h. `=SUM(D$2,D$10)`
+   g. `=MAX($B5:$B13)`
+   h. `=MAX(D$2:D$10)`
 7. The formulas are:
    a. `=IF(A2<0.05,"Reject","Fail to reject")`
    b. `=CONCAT("A2 = ",A2)`
@@ -121,7 +121,7 @@ This appendix provides solutions to all end-of-chapter practice problems.
            & (6,3),(6,4),(6,5),(6,6) \\
            \end{aligned}\right\}
        \end{align}
-3. Statements (b) and (c) are true.
+3. Statement (c) is true.
 4. Statements (a) and (d) are true. 
 5. Statements (b) and (c) are true.
 6. Event (c) is an elementary event.
