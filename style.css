@@ -103,3 +103,15 @@ li.appendix span, li.part span { /* for TOC part names */
   opacity: 1 !important;
   text-transform: uppercase;
 }
+
+@media screen and (max-width: 768px) {
+  .book .book-body {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .book .book-body table {
+    min-width: 100%;
+    width: max-content;
+  }
+}
