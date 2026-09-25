@@ -105,10 +105,13 @@ li.appendix span, li.part span { /* for TOC part names */
 }
 
 @media screen and (max-width: 768px) {
-  table {
-    display: block;
-    width: 100%;
+  .book .book-body {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .book .book-body table {
+    min-width: 100%;
+    width: max-content;
   }
 }
